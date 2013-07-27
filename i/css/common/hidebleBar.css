@@ -1,0 +1,26 @@
+.hidebleBarHandler {
+cursor: pointer;
+position: absolute;
+opacity: 0.7;
+}
+.hidebleBarHandler.hover {
+opacity: 1;
+}
+.hidebleBar {
+position: relative;
+}
+.hidebleBarHandler.vertical {
+width: 63px;
+height: 12px;
+top: -1px;
+}
+.hidebleBarHandler.vertical.up.show {
+height: 11px;
+}
+.hidebleBarHandler.vertical.down {
+background: url(/i/img/ngn/handler-down.png);
+}
+
+.hidebleBarHandler.vertical.up {
+background: url(/i/img/ngn/handler-up.png);
+}

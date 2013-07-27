@@ -1,0 +1,19 @@
+.type_imagedRadio .radio input {
+display: none;
+}
+.type_imagedRadio .radio {
+border: 1px solid #EFEFEF;
+border-radius: 4px;
+padding: 2px 4px;
+margin-right: 5px;
+margin-bottom: 5px;
+text-align: center;
+}
+.type_imagedRadio .radio:hover {
+background-color: #FFF4BF;
+border-color: #F1CA7E;
+}
+.type_imagedRadio .radio.selected {
+border-color: #CCC;
+background-color: #EFEFEF;
+}

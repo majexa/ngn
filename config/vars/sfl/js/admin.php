@@ -1,0 +1,28 @@
+<?php
+
+return [
+  'cp',
+  //'s2/js/common/submitTitles',
+  'i/js/ngn/Ngn.AdminPanel.js',
+  'treeEdit',
+  //'i/js/ngn/Ngn.ContextMenu.js',
+  //'i/js/ngn/Ngn.ContextMenuPages.js',
+  'i/js/ngn/Ngn.RequestFieldsSelect.js',
+  'i/js/ngn/Ngn.Dialog.NewPage.js',
+  //'i/js/ngn/Ngn.TreeEdit.Pages.js',
+  //'i/js/ngn/Ngn.TreeEdit.Pages.cp.js',
+  'i/js/ngn/Ngn.TreeEdit.Tags.js',
+  //'i/js/ngn/Ngn.ContextMenu.js',
+  //'i/js/firebug.js',
+  'i/js/ngn/Ngn.Items.Table.Pages.js',
+  'i/js/ngn/Ngn.cp.PagesInterface.js',
+  'i/js/ngn/Ngn.cp.DdItemsTable.js',
+  'i/js/ngn/Ngn.cp.DdItemsGroup.js',
+  'i/js/ngn/Ngn.cp.ResizeImages.js',
+  //'i/js/ngn/Ngn.FieldSetEdit.js',
+  //'i/js/ngn/Ngn.FieldSetsEdit.js',
+  'i/js/ngn/Ngn.initConfigManager.js',
+  'i/js/MooCountdown.js',
+  'partialJob',
+  'pageBlocks',
+];

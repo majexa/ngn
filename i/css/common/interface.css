@@ -1,0 +1,106 @@
+#globalLoader {
+visibility: hidden;
+width: 100%;
+height: 5px;
+background: url(/i/img/loader-horizontal.gif);
+border-bottom: 1px solid #555555;
+position: absolute;
+z-index: 999;
+}
+
+.hLoader {
+background-image: url(/i/img/loader-horizontal.gif);
+background-repeat: repeat-x;
+}
+
+.selectTrigger {
+cursor: default;
+border: 1px solid #CCCCCC;
+background-color: #FFFFFF;
+}
+.selectTrigger:hover .selectTriggerBtn {
+background-color: #FFEB9E;
+}
+.selectTriggerTextWrapper {
+float: left;
+}
+.selectTriggerText {
+padding: 3px 2px 2px 2px;
+white-space: nowrap;
+overflow: hidden;
+}
+.selectTriggerBtn {
+float: right;
+width: 16px;
+background: url(/i/img/black/arrow-down.png) no-repeat center right;
+border-left: 1px solid #CCCCCC;
+}
+.selectTriggerBtn {
+
+}
+.selectWrapper {
+border-top: 1px solid #CCCCCC;
+border-left: 1px solid #CCCCCC;
+border-right: 1px solid #CCCCCC;
+position: absolute;
+background: #FFFFFF;
+}
+.selectOption {
+padding: 2px;
+cursor: default;
+border-bottom: 1px solid #CCCCCC;
+}
+.selectOption:hover {
+background: #FFEB9E;
+}
+
+.nonActive {
+opacity: 0.4;
+cursor: default !important;
+/*progid: DXImageTransform.Microsoft.Alpha(opacity=40);*/
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);
+}
+a.nonActive {
+color: #666666 !important;
+}
+.drag, .move, .dragBox {
+cursor: url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move;
+}
+.dragBox {
+width: 15px;
+height: 21px;
+background: url(../../../i/img/black/drag-bg.gif);
+float: left;
+border: 1px solid #CCC;
+margin-left: 5px;
+display: block;
+background-color: #FFF;
+}
+.dragBox:hover {
+background-color: #FFD515;
+border-color: #555;
+}
+
+.fileDroppable {
+clear: both;
+width: 100%;
+padding: 10px;
+background: url(/i/img/black/drag-bg.gif);
+background-color: #FFD515;
+border: 1px solid #CCC;
+border-radius: 10px;
+}
+
+.fileProgress {
+margin: 2px 0;
+height: 3px;
+border: 1px solid #CCC;
+border-radius: 3px;
+background: #FFD505;
+}
+.uploadFiles {
+clear: both;
+padding-top: 7px;
+padding-bottom: 7px;
+font-weight: bold;
+}
