@@ -1,0 +1,74 @@
+/* SortTable */
+
+.itemsTable {
+margin-bottom: 5px; /* для совместимости с отступами в шаблоне "admin/pages/items/tile" */
+}
+.itemsTable li {
+padding: 0px;
+margin: 0px;
+}
+.itemsTable .t_tagsTreeMultiselect li,
+.itemsTable .t_tagsTreeSelect li{
+white-space: nowrap;
+}
+.itemsTable tr.move td {
+border-color: #EFC400;
+background-color: #FFF9DF;
+}
+.itemsTable th, .itemsTable td {
+text-align: left;
+vertical-align: top;
+border-bottom: 1px solid #CCCCCC;
+padding: 3px 15px 3px 0px;
+}
+.itemsTable table td {
+border: none;
+padding: 0px;
+}
+.itemsTable th, .itemsTableMenu {
+/*background-color: #F1F0DF;*/
+}
+.itemsTable th {
+font-weight: normal;
+font-size: 10px;
+}
+.itemsTableMenu {
+border-bottom: 1px solid #ccc;
+padding: 5px 12px;
+position: relative;
+}
+.itemsTableMenu a {
+display: inline-block;
+float: none;
+}
+.itemsTable td.tools {
+padding-left: 5px;
+}
+.itemsTable .iconBtn {
+margin-bottom: 0px;
+}
+/*======== pagination =========*/
+.itemsTableMenu .pNums {
+position: absolute;
+right: 0px;
+bottom: 0px;
+padding-right: 10px;
+}
+.itemsTableMenu .pNums a {
+background-color: #fff;
+margin: 0px !important;
+}
+
+/*======== нечто сомнительное ============*/
+.itemsTable td, .itemsTable th {
+padding: 3px 15px 3px 0px;
+border-bottom: 1px solid #CCCCCC;
+}
+.itemsTable p {
+margin-top: 0px;
+}
+.itemsTable.valign td {
+vertical-align: top;
+padding-top: 5px;
+padding-bottom: 5px;
+}

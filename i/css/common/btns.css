@@ -1,0 +1,153 @@
+/*-------- common buttons -----------*/
+
+a.btn {
+box-sizing: border-box;
+color: #000 !important;
+border: 1px solid #999;
+border-radius: 3px;
+box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+text-align: center;
+display: inline-block;
+text-decoration: none;
+outline: none;
+-webkit-touch-callout: none;
+-webkit-user-select: none;
+-khtml-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+a.btn.lrg {
+width: 30px;
+height: 30px;
+}
+a.btn.lrg i {
+margin-top: 6px;
+margin-left: 6px;
+}
+.btn.icon {
+margin-right: 0px;
+}
+a.btn:hover, b.btn {
+color: #000;
+text-decoration: none !important;
+}
+
+a.btn {
+border-color: #a9a89c;
+background: -webkit-linear-gradient(top, #f6f5e9, #d9d8c9);
+}
+a.btn:hover:not(.nonActive):not(.pushed), b.btn {
+background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
+}
+a.btn:active:not(.nonActive), a.btn.pushed {
+background: -webkit-linear-gradient(top, #d9d8c9, #cdccbe);
+box-shadow: inset 0 1px 2px rgba(121, 120, 112, 0.5);
+}
+
+.smIcons.btn {
+color: #000;
+height: auto;
+padding: 2px 7px 2px 5px;
+margin-right: 7px !important;
+}
+
+.btn > span, .btnFake > span {
+padding: 3px 7px 0px 7px;
+display: block;
+}
+b.btn {
+color: #FFF !important;
+}
+a.btn, b.btn, .btnFake {
+height: 22px;
+}
+
+/*
+a.btn.loading {
+background-image: url(/i/img/btn-loader.gif) !important;
+background-position: center center !important;
+background-repeat: no-repeat !important;
+}
+.iconsSet a.loading i, a.loading.iconsSet i, a.loading.iconBtn i {
+background: url(/i/img/black/loader.gif) no-repeat 0px 0px !important;
+}
+.iconsSet a.loading, a.loading.iconsSet, a.loading.iconBtn {
+color: #CCCCCC !important;
+}
+*/
+
+.apeform input[type=submit] {
+width: 220px;
+cursor: pointer;
+vertical-align: center;
+}
+
+.btn2, .btnSubmit {
+background: #555555;
+color: #FFFFFF;
+}
+.btn2 {
+border: 1px solid #FFFFFF;
+}
+.btnSubmit span {
+font-weight: bold;
+}
+a.btnSubmitLarge {
+width: 200px;
+height: 25px;
+text-decoration: none;
+margin-top: 5px;
+border-radius: 5px;
+font-size: 15px;
+}
+
+
+/*
+.pbt_userInfo .iconsSet {
+margin-top: 10px;
+}
+.pbt_userInfo .iconsSet a {
+width: 100%;
+text-align: left;
+}
+*/
+
+a.btn.new {
+border-color: #72BB00;
+background: #89DF00;
+}
+a:hover.btn.new {
+border-color: #89DF00;
+background: #9DFF00;
+}
+
+.hHandler {
+border: 1px solid;
+}
+.vHandler {
+border-left: 1px solid;
+border-right: 1px solid;
+}
+.hHandler, .vHandler {
+border-color: #DFDDC3/**/;
+}
+.hHandler:hover, .vHandler:hover {
+border-color: #CCCAB1;
+}
+.hHandler {
+box-sizing: border-box;
+cursor: s-resize;
+display: block;
+height: 11px;
+overflow: hidden;
+clear: both;
+width: 100%;
+background: #F1F0DF url(../../../i/img/handler/hHandler.png) no-repeat 50% 2px;
+}
+.vHandler {
+cursor: w-resize;
+background: #F1F0DF url(../../../i/img/handler/vHandler.png) no-repeat center center;
+width: 7px;
+height: 100px;
+}

@@ -1,0 +1,413 @@
+.goright {
+float: right;
+}
+
+.goleft {
+float: left;
+}
+
+.clear, .md-clear {
+clear: both;
+}
+
+.none {
+display: none;
+}
+
+.icon-button {
+cursor: pointer;
+background: transparent none no-repeat center center;
+width: 26px;
+height: 26px;
+}
+
+.alert-icon {
+background-image: url(../../../i/img/dialog/alert.png);
+}
+
+.confirm-icon {
+background-image: url(../../../i/img/dialog/info.png);
+}
+
+.prompt-icon {
+background-image: url(../../../i/img/dialog/info.png);
+}
+
+.image-button {
+cursor: pointer;
+background: transparent none no-repeat left center;
+margin-right: 10px;
+}
+
+/* advanced button 
+.image-button a {
+display: block;
+position: relative;
+height: 25px;
+width: 80px;
+margin: 0 10px 18px 0;
+text-align: center;
+
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+
+.image-button a,
+.image-button a:hover,
+a.gray:visited {
+color: #555;
+border-bottom: 4px solid #b2b1b1;
+background: #eee;
+background: #eee;
+background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#e2e2e2));
+background: -moz-linear-gradient(top,  #eee,  #e2e2e2);
+box-shadow: inset 1px 1px 0 #f5f5f5;
+}
+
+.image-button a:hover {
+background: #e2e2e2;
+background: -webkit-gradient(linear, left top, left bottom, from(#e2e2e2), to(#eee));
+background: -moz-linear-gradient(top,  #e2e2e2,  #eee);
+}
+
+.image-button a:before,
+.image-button a:after {
+content: '';
+position: absolute;
+left: -1px;
+height: 25px;
+width: 80px;
+bottom: -1px;
+
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+ 
+.image-button a:before {
+height: 23px;
+bottom: -4px;
+border-top: 0;
+
+-webkit-border-radius: 0 0 3px 3px;
+-moz-border-radius: 0 0 3px 3px;
+border-radius: 0 0 3px 3px;
+ 
+-webkit-box-shadow: 0 1px 1px 0px #bfbfbf;
+-moz-box-shadow: 0 1px 1px 0px #bfbfbf;
+box-shadow: 0 1px 1px 0px #bfbfbf;
+}
+.image-button a:before,
+.image-button a:after {
+border: 1px solid #cbcbcb;
+border-bottom: 1px solid #a5a5a5;
+}
+
+*/
+
+.image-button a,.image-button span.app-link {
+display: block;
+/*padding-left: 0px;*/
+text-decoration: none;
+}
+
+.dialog .iconsSet a {
+margin: 0px;
+}
+
+.date-button {
+background: url(../../i/../img/dialog/date.png) no-repeat center
+center;
+width: 22px;
+height: 24px;
+}
+
+.dialog {
+padding: 15px;
+margin: 0;
+position: fixed;
+top: 200px;
+/*background: transparent url(/library/public/dialog/images/b.png);*/
+border: 0px solid #888;
+}
+
+.mid-float-box {
+position: relative;
+border: 1px solid #4fa4ff;
+background: #bfdeff;
+border-radius: 7px;
+box-shadow: 0 0 50px #555;
+}
+.dialog a {
+color: #004eb8;
+}
+.dialog-footer a {
+color: #555555;
+text-decoration: none;
+}
+.dialog-footer a:hover {
+color: #000000;
+text-decoration: underline;
+}
+
+.dialog-title {
+background: #fff;
+color: #000;
+cursor: default;
+font-size: 16px;
+line-height: 31px;
+margin: 5px 5px 0;
+padding: 4px 8px 2px 8px;
+height: 31px;
+font-family: Georgia;
+position: relative;
+}
+
+.dialog-message {
+background: #fff;
+margin: 0 5px;
+padding: 8px;
+font-size: 100%;
+color: #333;
+/*max-height: 400px;*/
+overflow: none;
+}
+.dialog-scroll {
+overflow-y: auto;
+}
+
+.mav-no-title {
+margin-top: 5px;
+}
+
+.mav-no-footer {
+margin-bottom: 5px;
+}
+
+.mav-alert-msg {
+margin-left: 10px;
+}
+
+.mav-prompt-input {
+width: 330px;
+height: 25px;
+font-size: 100%;
+padding: 2px 0 0 2px;
+}
+
+.message-title {
+padding-bottom: 6px;
+margin-bottom: 6px;
+}
+
+.dialog-footer {
+background: #fff;
+margin: 0 5px 5px;
+}
+
+.dialog-footer .foot-wrap {
+border-top: 1px solid #ddd;
+background: #DEDCC7;
+padding: 7px 5px 9px 5px;
+height: 22px;
+}
+
+.dialog-footer .foot-wrap .image-button:first-child {
+margin-right: 3px;
+}
+
+.md-title-text {
+overflow: hidden;
+display: block;
+white-space: nowrap;
+text-align: center;
+padding-right: 25px;
+border-bottom: 1px #ccc dashed;
+}
+.dialog-tabs .md-title-text {
+border-bottom: 0px;
+}
+
+.md-closer {
+position: absolute;
+right: 7px;
+top: 3px;
+background-image: url(../../../i/img/dialog/cross.png);
+height: 30px;
+}
+
+.dialog-shade {
+border: 0;
+left: 0;
+top: 0;
+position: fixed;
+right: 0;
+bottom: 0;
+background: #000;
+opacity: 0.5;
+z-index: 10;
+}
+
+.mav-content {
+padding: 20px;
+}
+
+/* Убираем лишние бордюры у tinyMCE */
+.dialog table.mceLayout {
+border: 0 !important;
+}
+.dialog table.mceLayout tr.mceFirst td {
+border-top: 0 !important;
+}
+.dialog table.mceLayout tr.mceLast td {
+border-bottom: 0 !important;
+}
+.dialog-nopadding {
+padding: 0;
+}
+
+.dialog-tabs .md-title-text ul {
+margin: 0px;
+padding: 0px;
+}
+.dialog-tabs .md-title-text li {
+margin: 4px 2px 0px 0px;
+list-style: none;
+float: left;
+}
+.dialog-tabs .dialog-title {
+background-color: #FFEE9F;
+}
+.dialog-tabs .dialog-title .md-title-text ul {
+line-height: 1.1em;
+}
+.dialog-tabs .md-title-text a {
+border: 1px solid transparent;
+display: block;
+height: 27px;
+background-color: #DEDCC7;
+}
+.dialog-tabs .md-title-text li a {
+text-decoration: none;
+border-top-left-radius: 3px;
+border-top-right-radius: 3px;
+color: rgba(0, 0, 0, 0.5);
+}
+.dialog-tabs .md-title-text li.tab-selected a {
+background-color: #FFFFFF;
+border-bottom: 1px solid #FFFFFF;
+color: #000;
+}
+.dialog-tabs .md-title-text li a span {
+display: block;
+margin: 3px 10px 0px 10px;
+}
+.dialog-tabs input[type=text,type=password] {
+width: 98%;
+}
+
+.hgrp_subscribes .type_radio p,
+.hgrp_subscribes .type_radio span {
+display: inline-block !important;
+}
+
+.dialog-progress {
+height: 19px;
+margin: 7px 0px 5px 0px;
+background: url(../../../i/img/loader-flat.gif) no-repeat bottom center;
+}
+.dialog-progress.stopped {
+background: none;
+}
+.dialog-message-loader {
+text-align: center;
+}
+.dialog-loader-title {
+display: block;
+color: #FFFFFF;
+text-align: center;
+}
+
+.dialog-loading {
+padding: 8px 8px 15px 8px;
+}
+
+/* dialog apeform */
+
+.dialog .apeform input#oki[type="submit"] {
+margin-top: 5px;
+margin-bottom: 5px;
+}
+.dialog .apeform .element, .dialog .apeform h3 {
+padding-left: 8px;
+padding-right: 8px;
+}
+.apeform h3 {
+padding-bottom: 0px;
+margin-bottom: 0px;
+}
+.dialog .apeform .smIcons {
+margin-left: 5px;
+}
+
+.mav-center {
+text-align: center;
+}
+
+.dialog-footer.loading .foot-wrap, .dialog-message.loading {
+background-image: url(/i/img/loader-horizontal.gif);
+background-repeat: repeat-x;
+}
+.dialog-footer.loading .foot-wrap {
+background-position: 0px 32px;
+}
+.dialog-message.loading {
+background-position: bottom;
+}
+
+.dialog-addPhotos .btn2 {
+margin-bottom: 10px;
+}
+
+.dialog textarea { 
+resize: none;
+}
+
+.dialog .bHandle {
+height: 5px;
+cursor: n-resize;
+}
+.tab-menu a {
+font-size: 14px;
+}
+
+.textBefore, .textAfter {
+padding: 10px;
+}
+.textAfter {
+padding-top: 3px;
+padding-bottom: 1px;
+}
+.textBefore {
+background-color: #F1F0DF;
+border-bottom: 1px solid #CCC
+}
+.textBefore .textAfter {
+padding: 10px;
+}
+
+
+
+
+.dialog .vResizeHandler {
+height: 12px;
+position: absolute;
+bottom: -1px;
+width: 100%;
+background: url(/i/img/handler/hHandler.png) no-repeat center 3px;
+cursor: s-resize;
+}
+.vResize .dialog-footer, .vResize .dialog-message.mav-no-footer {
+margin-bottom: 12px;
+}

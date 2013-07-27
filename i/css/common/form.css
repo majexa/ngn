@@ -1,0 +1,413 @@
+/* Звездочки около названий полей */
+.apeform .reqStar {
+color: #FF0000;
+}
+
+.apeform td {
+vertical-align: top;
+border-bottom: 1px solid #CCCCCC;
+}
+
+.apeform #titlei, .apeform input[name=title], input.fldLarge {
+width: 100%;
+box-sizing: border-box;
+-webkit-box-sizing:border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+//height: 32px;
+font-size: 18px;
+font-family: Georgia;
+}
+.fieldFullWidth input[type=text] {
+width: 100%;
+}
+/* Обнуляем свойство для таблицы инструментов визуального редактора */
+.apeform table table {
+width: auto;
+}
+.apeform table table td {
+vertical-align: middle;
+border-bottom: none;
+padding: 0px;
+}
+
+/*--------- перенесено из design.css ------------- */
+.apeform table {
+width: 100%;
+}
+.apeform textarea {
+width: 100%;
+height: 30px;
+}
+.apeform a.btnSubmit {
+width: 200px;
+}
+.apeform p.label {
+margin: 2px 0px 3px 0px;
+}
+
+/*--------- Element ---------*/
+.apeform .element {
+padding: 5px;
+padding-right: 7px;
+position: relative;
+}
+.elNoPadding .apeform .element {
+padding: 0px;
+}
+
+.headerToggleClosed {
+padding-bottom: 5px; /* должно быть таким же как и отступ сверху элемента ".apeform .element" */
+}
+.apeform h3 {
+padding-left: 5px;
+font-size: 14px;
+}
+.apeform .staticText {
+padding: 0px 10px;
+}
+.apeform .element.row_ok {
+border-bottom: none;
+padding-top: 5px;
+}
+/* убираем отступ у кнопок */
+.apeform .element .iconsSet a {
+margin-bottom: 0px;
+}
+
+
+.apeform .type_tagsMultiselect div label,
+.apeform .type_multiselect div label {
+margin-right: 10px;
+}
+
+.apeform input[type=file] {
+float: left;
+margin-right: 10px;
+}
+.apeform .iconsSet {
+/*padding-top: 3px; сделать это более четким */
+}
+.apeform .iconsSet a {
+color: #999999;
+}
+.apeform .iconsSet a:hover {
+color: #000000;
+}
+
+
+.tagsTreeSelect ul {
+margin: 0px;
+}
+.tagsTreeSelect li {
+list-style: none;
+margin: 0px;
+}
+.tagsTreeSelect ul ul {
+margin-left: 15px;
+}
+
+
+.apeform .error {
+background: none;
+color: #8a1f11;
+padding: 0px;
+margin-bottom: 0px;
+border: 0px;
+}
+
+
+.consecutiveSelect .loader {
+background-position: bottom right;
+}
+.consecutiveSelect {
+float: left;
+padding-right: 20px;
+}
+.consecutiveSelect .arrow {
+float: left;
+margin-right: 3px;
+}
+.consecutiveSelect select {
+display: block;
+float: left;
+margin-right: 3px;
+}
+.type_ddCityRussia select {
+width: 150px;
+}
+
+
+
+.type_ddSlaveItemsSelect {
+display: none;
+}
+
+/* --------- multiText field ------------*/
+.type_multiText input {
+width: 400px;
+}
+.type_multiText .smIcons {
+margin-left: 5px;
+}
+.type_multiText .genRow {
+clear: both;
+}
+.type_multiText .genRow input {
+display: block;
+margin-bottom: 5px;
+float: left;
+}
+.type_multiText .add {
+display: block;
+clear: both;
+}
+
+
+
+/* --------- fieldSet ------------*/
+
+.fieldSet .element {
+float: left;
+padding-right: 0px;
+padding-bottom: 0px;
+}
+.fieldSet .element input[type=text] {
+width: 150px;
+}
+.fieldSet .bbtns a {
+float: none !important;
+display: inline-block;
+margin: 10px 10px 5px 5px;
+}
+.fieldSet a.bordered {
+margin: 5px 0px 0px 5px;
+}
+.fieldSet .hgrp {
+clear: both;
+}
+.fieldSet .rowNumber {
+display: inline-block;
+padding-right: 5px;
+}
+
+.type_submit:after {
+content: ".";
+display: block;
+height: 0;
+clear: both;
+visibility: hidden;
+}
+
+.apeform .colSet {
+display: table;
+}
+.apeform .colSet.colN2 .type_col {
+width: 50%;
+}
+.apeform .colSet.colN3 .type_col {
+width: 33%;
+}
+.apeform .colSet.colN4 .type_col {
+width: 25%;
+}
+.apeform .colSet.colN5 .type_col {
+width: 20%;
+}
+.apeform .type_col {
+display: table-cell;
+}
+
+.apeform .type_col, .apeform .type_co2 {
+border-left: 1px solid #CCCCCC;
+}
+.apeform .type_col:first-child {
+border-left: none;
+}
+.apeform .type_col .element:last-child {
+border-bottom: none;
+}
+
+/*----------------dropdownWin---------------*/
+.dropdownTitle {
+padding: 5px;
+border-bottom: 1px solid #CCCCCC;
+background-color: #FFEB8F;
+}
+.dropdownWin {
+position: absolute;
+border: 1px solid #CCCCCC;
+background: #FFFFFF;
+width: 270px;
+padding: 0px;
+overflow: nidden;
+}
+.dropdownBody {
+height: 200px;
+}
+
+/*----------------pageLink field element---------------*/
+.type_pageLink input {
+float: left;
+}
+.pageLinkPlaceholder {
+margin-left: 5px;
+padding-top: 2px;
+position: relative;
+float: left;
+}
+.pageLinkPlaceholder .iconBtn {
+z-index: 100;
+position: relative;
+
+}
+.pageLinkPlaceholder .iconBtn.over {
+/*border-bottom: 0px;
+padding-bottom: 1px;*/
+background-color: #FFEB8F;
+}
+
+.type_pageId .pageLinkPlaceholder {
+margin: 0px;
+}
+.type_pageId .pageIdTitle {
+padding: 5px 0px 0px !important;
+float: left;
+}
+
+
+.captcha {
+width: 160px;
+height: 80px;
+background: url(/i/img/black/loader.gif) center center no-repeat;
+}
+
+.longElement {
+height: 100px;
+overflow-y: scroll;
+}
+.longElement .checkbox {
+display: block;
+}
+
+.checkbox input, .radio input {
+margin-right: 5px;
+vertical-align: middle;
+}
+.radio input {
+margin-right: 3px;
+}
+.checkbox label, .radio label {
+vertical-align: middle;
+}
+
+.checkbox, .radio {
+padding-right: 15px;
+white-space: nowrap;
+display: inline-block;
+}
+.apeform .checkbox:hover label, .apeform .radio:hover label {
+border-bottom: 1px dotted #000;
+cursor: pointer;
+}
+
+.dropdownWin-pagesTree {
+color: #000000;
+}
+
+
+.fileNav {
+float: right;
+}
+.fileNav .thumb {
+margin-right: 0px;
+}
+
+textarea {
+display: block;
+box-sizing: border-box;
+-webkit-box-sizing:border-box;
+-moz-box-sizing: border-box;
+-ms-box-sizing: border-box;
+}
+
+.type_ddCity select {
+width: 100px;
+}
+
+.type_ddTagsMultiselect .help {
+margin-top: 5px;
+}
+
+/*
+.type_ddCityMultiselect {
+max-height: 200px;
+overflow-y: auto;
+width: 250px;
+}
+*/
+
+.elWisiwig {
+padding: 0px !important;
+}
+.elWisiwig .label {
+display: none;
+}
+
+
+.field-wrapper {
+position: relative;
+}
+.advice-wrapper {
+position: absolute;
+left: 7px;
+padding-top: 9px;
+display: inline-block;
+max-width: 300px;
+}
+.advice-wrapper .corner {
+background: url(/i/img/black/corner.png) no-repeat;
+top: 0px;
+left: 10px;
+width: 10px;
+height: 10px;
+position: absolute;
+}
+.validation-advice {
+clear: both;
+padding: 5px 10px;
+display: inline-block;
+border: 1px solid #FFBF00;
+border-radius: 5px;
+background: #FFF9DF;
+color: #555;
+box-shadow: 0 0 5px #FFC926;
+}
+
+input.fld, textarea, input[type=text], input[type=password] {
+border: 1px solid #BFBFBF;
+border-bottom: 1px solid #DFDFDF;
+border-right: 1px solid #DFDFDF;
+}
+input[type=text].active, input[type=password].active {
+background: #FFF4BF;
+color: #000000;
+}
+
+.longMultiselect .checkbox {
+display: block;
+}
+.longMultiselect .field-wrapper {
+height: 150px;
+overflow-y: auto;
+}
+
+.type_datetime input[type=text] {
+width: 25px;
+text-align: center;
+}
+
+.type_user input.ac {
+background: url(/i/img/icons/user.png) no-repeat 5px 5px;
+padding-left: 20px;
+}
