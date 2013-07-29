@@ -529,7 +529,11 @@ class Arr {
     foreach ($data as $k => $v) {
       if (!empty($v) and is_string($v) and Arr::unserializeble($v)) {
         $_v = $v;
-        $v = unserialize($v);
+        try {
+          $v = unserialize($v);
+        } catch (Exception $e) {
+          throw new Exception("Can not unserialize '$k'");
+        }
         if ($v === false) {
           throw new Exception('Error unserialization $v: "'.getPrr($_v).'"');
         }

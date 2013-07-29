@@ -49,7 +49,15 @@ class Items extends DbItems {
       LEFT JOIN pages ON {$this->table}.pageId=pages.id
     * */
     if ($this->strict and !$r) throw new Exception("Item table={$this->table} with id={$id} does not exists");
-    return empty($r) ? false : Arr::unserialize($r);
+    if (empty($r)) return false;
+    else {
+      try {
+        $r = Arr::unserialize($r);
+      } catch (Exception $e) {
+        throw new Exception($e->getMessage()." (item ID=$id)");
+      }
+      return $r;
+    }
   }
 
   protected function getItemCacheTags($id) {
