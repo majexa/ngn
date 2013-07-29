@@ -4,7 +4,7 @@ if (!defined('NGN_PATH')) die('NGN_PATH not defined'); // @LibStorageRemove
 define('LIB_PATH', NGN_PATH . '/lib');                  // @LibStorageRemove
 require_once LIB_PATH.'/core/common.func.php';
 
-setConstant('VENDORS_PATH', dirname(NGN_PATH).'/vendors'); // @LibStorageRemove
+setConstant('VENDORS_PATH', NGN_PATH.'/vendors'); // @LibStorageRemove
 
 define('CHARSET', 'UTF-8');
 define('DB_CHARSET', 'utf8');
@@ -29,8 +29,7 @@ spl_autoload_register(['Lib', 'required']);         // @LibStorageRemove
 
 Err::$show = true;
 
-if (!file_exists(VENDORS_PATH))                                 // @LibStorageRemove
-  die('Folder "'.VENDORS_PATH.'" does not exists (core/init)'); // @LibStorageRemove
+if (!file_exists(VENDORS_PATH)) die('Folder "'.VENDORS_PATH.'" does not exists (core/init)'); // @LibStorageRemove
 
 // Здесь ищем сторонние библиотеки
 define('INCL_PATH_DELIMITER', getOS() == 'win' ? ';' : ':');
