@@ -252,6 +252,13 @@ class Arr {
     return $r;
   }
 
+  static function filterBySubValues(array $arr, $resultKey, $filterKey, $filterValues) {
+    $filterValues = (array)$filterValues;
+    $r = [];
+    foreach ($arr as $v) if (in_array($v[$filterKey], $filterValues)) $r[] = $v[$resultKey];
+    return $r;
+  }
+
   static function filterFunc(array $arr, $func, $assoc = true) {
     $r = [];
     if ($assoc) {

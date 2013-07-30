@@ -3,6 +3,10 @@
 trait WsItemChanged {
 
   function __call($method, $args) {
+    if (Misc::hasPrefix('_', $method)) {
+      call_user_func_array([$this, $method], $args);
+      return;
+    }
     try {
       LogWriter::v('queue', [$method, $args]);
       call_user_func_array([$this, '_'.$method], $args);
