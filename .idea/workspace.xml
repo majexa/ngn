@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init/core.php" afterPath="$PROJECT_DIR$/init/core.php" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375170383655" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375173709116" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375119560795" ignored="false" />
     <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375172748918" ignored="false" />
@@ -63,7 +61,7 @@
       <file leaf-file-name="core.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/init/core.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.6703601">
+            <state line="21" column="33" selection-start="983" selection-end="983" vertical-scroll-proportion="0.19944598">
               <folding />
             </state>
           </provider>
@@ -159,7 +157,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ao" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ngn-env" />
     <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="PublishConfig" serverName="v107" serverId="31bc3293-ff66-4c01-bc34-46e34de41e84" autoUpload="true">
@@ -295,7 +293,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30118445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -308,7 +306,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25378788" sideWeight="0.6988156" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25378788" sideWeight="0.6988156" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -458,7 +456,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/init/core.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="36" selection-start="1294" selection-end="1294" vertical-scroll-proportion="0.6703601">
+        <state line="21" column="33" selection-start="983" selection-end="983" vertical-scroll-proportion="0.19944598">
           <folding />
         </state>
       </provider>
