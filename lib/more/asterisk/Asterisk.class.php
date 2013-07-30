@@ -38,7 +38,7 @@ CALL;
     LogWriter::str('addCall', $s);
     file_put_contents($tmpFile, $s);
     $file = '/var/spool/asterisk/outgoing/'.time().'-'.rand(100, 999).'.call';
-    `sudo chown user:user $tmpFile`;
+    //`sudo chown user:user $tmpFile`;
     `sudo mv $tmpFile $file`;
   }
 
