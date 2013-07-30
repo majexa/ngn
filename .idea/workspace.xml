@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php" afterPath="$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375173709116" ignored="false" />
@@ -72,7 +70,7 @@
       <file leaf-file-name="Asterisk.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="6" selection-start="1125" selection-end="1125" vertical-scroll-proportion="0.5761773">
+            <state line="36" column="6" selection-start="934" selection-end="934" vertical-scroll-proportion="0.38781163">
               <folding />
             </state>
           </provider>
@@ -475,7 +473,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="6" selection-start="1125" selection-end="1125" vertical-scroll-proportion="0.5761773">
+        <state line="36" column="6" selection-start="934" selection-end="934" vertical-scroll-proportion="0.38781163">
           <folding />
         </state>
       </provider>
