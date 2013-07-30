@@ -29,7 +29,7 @@ spl_autoload_register(['Lib', 'required']);         // @LibStorageRemove
 
 Err::$show = true;
 
-if (!file_exists(VENDORS_PATH)) die('Folder "'.VENDORS_PATH.'" does not exists (core/init)'); // @LibStorageRemove
+if (!file_exists(VENDORS_PATH)) die2('Folder "'.VENDORS_PATH.'" does not exists (core/init)'); // @LibStorageRemove
 
 // Здесь ищем сторонние библиотеки
 define('INCL_PATH_DELIMITER', getOS() == 'win' ? ';' : ':');
