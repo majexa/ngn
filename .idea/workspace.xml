@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php" afterPath="$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/FieldEDdCityMultiselect.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/FieldEDdCityMultiselect.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DdCityMultiselect.js" afterPath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DdCityMultiselect.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.Request.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.Request.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/queue/Queue.class.php" afterPath="$PROJECT_DIR$/lib/more/queue/Queue.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/vars/sfl/css/common.php" afterPath="$PROJECT_DIR$/config/vars/sfl/css/common.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/css/common/screen.css" afterPath="$PROJECT_DIR$/i/css/common/screen.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375214365572" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375252242115" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375119560795" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250019423" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375252245598" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375120438835" ignored="false" />
@@ -59,12 +49,14 @@
     <file path="/FieldEDdTagsTreeMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375214244541" ignored="false" />
     <file path="/DataManagerAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251511942" ignored="false" />
     <file path="/FieldEDdCityMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375215238885" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/tpl/kp/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375249812404" ignored="false" />
-    <file path="/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375249810848" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/tpl/kp/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251874456" ignored="false" />
+    <file path="/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251873999" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251118714" ignored="false" />
     <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251116063" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/hooks/dd/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250566372" ignored="false" />
     <file path="/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250408827" ignored="false" />
+    <file path="$PROJECT_DIR$/../formatron/lib/SubclientsFinder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375252280209" ignored="false" />
+    <file path="/DmfaDdTagsTreeMultiselectAc.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375252797974" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,10 +76,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="44" selection-start="4070" selection-end="4070" vertical-scroll-proportion="0.30038023">
+            <state line="161" column="44" selection-start="4070" selection-end="4070" vertical-scroll-proportion="-6.076923">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DmfaDdTagsTreeMultiselectAc.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="11" selection-start="132" selection-end="132" vertical-scroll-proportion="0.15769945">
               <folding />
             </state>
           </provider>
@@ -111,7 +112,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/init/core.php" />
         <option value="$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/FieldECheckbox.class.php" />
         <option value="$PROJECT_DIR$/config/vars/sfl/css/common.php" />
@@ -127,6 +127,7 @@
         <option value="$PROJECT_DIR$/lib/more/dd/FieldEDdCityMultiselect.class.php" />
         <option value="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DdCityMultiselect.js" />
         <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php" />
       </list>
     </option>
   </component>
@@ -465,19 +466,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/form/FormBase.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="472" column="3" selection-start="15376" selection-end="15376" vertical-scroll-proportion="0.33840305">
-          <folding>
-            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="109" column="18" selection-start="2759" selection-end="2766" vertical-scroll-proportion="-10.923077">
@@ -578,7 +566,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="44" selection-start="4070" selection-end="4070" vertical-scroll-proportion="0.30038023">
+        <state line="161" column="44" selection-start="4070" selection-end="4070" vertical-scroll-proportion="-6.076923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="11" selection-start="132" selection-end="132" vertical-scroll-proportion="0.15769945">
           <folding />
         </state>
       </provider>
