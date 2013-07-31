@@ -1,7 +1,6 @@
 <?php
 
 class Queue {
-use Options;
 
   protected $n, $channel, $exchange, $queue, $exName = 'exchange1', $queueName = 'exchange1';
 

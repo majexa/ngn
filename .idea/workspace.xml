@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php" afterPath="$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/FieldEDdCityMultiselect.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/FieldEDdCityMultiselect.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DdCityMultiselect.js" afterPath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DdCityMultiselect.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.Request.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.Request.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/queue/Queue.class.php" afterPath="$PROJECT_DIR$/lib/more/queue/Queue.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/vars/sfl/css/common.php" afterPath="$PROJECT_DIR$/config/vars/sfl/css/common.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/css/common/screen.css" afterPath="$PROJECT_DIR$/i/css/common/screen.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375173709116" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375214365572" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375119560795" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375172748918" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250019423" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375120438835" ignored="false" />
@@ -21,6 +33,38 @@
     <file path="/WsItemChanged.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375171683840" ignored="false" />
     <file path="$PROJECT_DIR$/../ao/site/lib/AoQueueActions.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375171736028" ignored="false" />
     <file path="/AoQueueActions.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375171729098" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/common-init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/scripts/web/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/run/siteStandAloneInit2.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmRemoteProjectDev.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176607152" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmServerConfigAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176611787" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmRemoteServerDev.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176618644" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProject.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176625811" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250632798" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/m/css/ks/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375202071684" ignored="false" />
+    <file path="/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375202065141" ignored="false" />
+    <file path="/CtrlKs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375201647198" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375187554242" ignored="false" />
+    <file path="/SflmFrontend.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375192270670" ignored="false" />
+    <file path="/common.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375192484875" ignored="false" />
+    <file path="/screen.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375193344704" ignored="false" />
+    <file path="/Sflm.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375193897755" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/tpl/ks/form.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375202023610" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/tpl/ks/pages/home.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375201912576" ignored="false" />
+    <file path="/form.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375202020676" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/tpl/ks/main.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375202112577" ignored="false" />
+    <file path="/CtrlCommon.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375203740042" ignored="false" />
+    <file path="/Ngn.Request.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375203956756" ignored="false" />
+    <file path="/FieldEDdTagsTreeMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375214244541" ignored="false" />
+    <file path="/DataManagerAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251511942" ignored="false" />
+    <file path="/FieldEDdCityMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375215238885" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/tpl/kp/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375249812404" ignored="false" />
+    <file path="/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375249810848" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251118714" ignored="false" />
+    <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251116063" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/hooks/dd/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250566372" ignored="false" />
+    <file path="/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250408827" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,46 +84,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DmfaDdItemsSelect.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/dd/DmfaDdItemsSelect.class.php">
+      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="17" selection-start="117" selection-end="117" vertical-scroll-proportion="-3.2692308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WsItemChanged.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/common/WsItemChanged.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="1" selection-start="463" selection-end="463" vertical-scroll-proportion="-2.9615386">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="core.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/init/core.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="33" selection-start="983" selection-end="983" vertical-scroll-proportion="-2.7692308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Asterisk.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="6" selection-start="934" selection-end="934" vertical-scroll-proportion="0.38781163">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="common.func.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="22" selection-start="1709" selection-end="1722" vertical-scroll-proportion="-4.4615383">
+            <state line="161" column="44" selection-start="4070" selection-end="4070" vertical-scroll-proportion="0.30038023">
               <folding />
             </state>
           </provider>
@@ -103,14 +111,26 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/core/Arr.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/core/Items.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/common/WsItemChanged.class.php" />
         <option value="$PROJECT_DIR$/init/core.php" />
         <option value="$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/form/FieldECheckbox.class.php" />
+        <option value="$PROJECT_DIR$/config/vars/sfl/css/common.php" />
+        <option value="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" />
+        <option value="$PROJECT_DIR$/i/css/common/screen.css" />
+        <option value="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php" />
+        <option value="$PROJECT_DIR$/i/js/ngn/Ngn.Request.js" />
+        <option value="$PROJECT_DIR$/more/tpl/admin/headers.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/tags/FieldEDdTagsTreeMultiselect.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/FieldEDdCityMultiselect.class.php" />
+        <option value="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DdCityMultiselect.js" />
+        <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
       </list>
     </option>
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -150,6 +170,64 @@
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ngn">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ngn">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="more">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="tpl">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ngn">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="more">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="tpl">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="admin">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="ngn">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="more">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -167,7 +245,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ngn-env" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sb" />
     <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
   <component name="PublishConfig" serverName="v107" serverId="31bc3293-ff66-4c01-bc34-46e34de41e84" autoUpload="true">
@@ -305,7 +383,7 @@
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30118445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30118445" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.68697125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -316,7 +394,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25378788" sideWeight="0.6988156" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25378788" sideWeight="0.31302875" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -387,93 +465,120 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/core/Items.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/form/FormBase.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="472" column="3" selection-start="15376" selection-end="15376" vertical-scroll-proportion="0.33840305">
+          <folding>
+            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1370955317238" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="18" selection-start="2759" selection-end="2766" vertical-scroll-proportion="-10.923077">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/sflm/Sflm.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="531" column="16" selection-start="13817" selection-end="13817" vertical-scroll-proportion="0.0">
+        <state line="37" column="18" selection-start="683" selection-end="683" vertical-scroll-proportion="-7.230769">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init/core.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="36" selection-start="1696" selection-end="1696" vertical-scroll-proportion="0.0">
+        <state line="286" column="0" selection-start="6079" selection-end="6079" vertical-scroll-proportion="-11.961538">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init/cli.php">
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="65" selection-end="65" vertical-scroll-proportion="0.0">
+        <state line="333" column="2" selection-start="10461" selection-end="10461" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/core/Items.class.php">
+    <entry file="file://$PROJECT_DIR$/more/tpl/admin/head.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="62" selection-start="1501" selection-end="1501" vertical-scroll-proportion="0.0">
+        <state line="6" column="20" selection-start="263" selection-end="263" vertical-scroll-proportion="0.18923934">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Request.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="531" column="16" selection-start="13817" selection-end="13817" vertical-scroll-proportion="0.0">
+        <state line="55" column="0" selection-start="1205" selection-end="1205" vertical-scroll-proportion="0.3079646">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init/cli.php">
+    <entry file="file://$PROJECT_DIR$/more/tpl/admin/headers.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="65" selection-end="65" vertical-scroll-proportion="0.12569316">
+        <state line="6" column="0" selection-start="322" selection-end="322" vertical-scroll-proportion="0.18923934">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DdTagsItems.class.php">
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DdCityMultiselect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="63" selection-start="2087" selection-end="2087" vertical-scroll-proportion="0.3697479">
+        <state line="1" column="2" selection-start="78" selection-end="78" vertical-scroll-proportion="0.03125">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/dd/DmfaDdItemsSelect.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/FieldEDdCityMultiselect.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="117" selection-end="117" vertical-scroll-proportion="-3.2692308">
+        <state line="11" column="67" selection-start="284" selection-end="284" vertical-scroll-proportion="0.36100388">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/common/WsItemChanged.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/FieldEDdTagsTreeMultiselect.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="1" selection-start="463" selection-end="463" vertical-scroll-proportion="-2.9615386">
+        <state line="11" column="0" selection-start="231" selection-end="231" vertical-scroll-proportion="0.3555133">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
+    <entry file="file://$PROJECT_DIR$/site/tpl/dd/tagsTreeMultiselect.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="22" selection-start="1709" selection-end="1722" vertical-scroll-proportion="-4.4615383">
+        <state line="0" column="20" selection-start="20" selection-end="20" vertical-scroll-proportion="-0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init/core.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="33" selection-start="983" selection-end="983" vertical-scroll-proportion="-2.7692308">
+        <state line="63" column="17" selection-start="1573" selection-end="1573" vertical-scroll-proportion="0.9369202">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/DdItems.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="6" selection-start="934" selection-end="934" vertical-scroll-proportion="0.38781163">
+        <state line="310" column="10" selection-start="9452" selection-end="9452" vertical-scroll-proportion="0.20152092">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site/tpl/dd/tagsTreeMultiselectInner.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="2" selection-start="526" selection-end="526" vertical-scroll-proportion="0.2908745">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="44" selection-start="4070" selection-end="4070" vertical-scroll-proportion="0.30038023">
           <folding />
         </state>
       </provider>

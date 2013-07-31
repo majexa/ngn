@@ -22,7 +22,7 @@ class DdItemsManager extends DbItemsManager {
   public $oImage;
 
   /**
-   * @var DdItemsPage
+   * @var DdItems
    */
   public $oItems;
 

@@ -1,6 +1,7 @@
 <?php
 
 return [
+  'i/css/common/screen.css',
   'i/css/common.css',
   'i/css/common/btns.css',
   'i/css/common/pageBlocks.css',

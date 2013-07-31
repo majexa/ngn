@@ -52,8 +52,6 @@ Ngn.Request.JSON = new Class({
   
   success: function(text){
     this.response.json = Ngn.JSON.decode(text, this.options.secure);
-    //c('JJJ');
-    //c(this.response.json);
 
     if (this.response.json === null) {
       this.onSuccess({});
