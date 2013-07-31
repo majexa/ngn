@@ -13,7 +13,19 @@ class SflmFrontend {
     Misc::checkEmpty($this->frontend, '$this->frontend');
     $this->sflm->version = $this->version();
     $this->paths = $this->getPathsCache();
+    if ($this->getLastPaths() != $this->getPaths()) {
+      $this->incrementVersion();
+      $this->storeLastPaths();
+    }
     $this->init();
+  }
+
+  protected function getLastPaths() {
+    return NgnCache::c()->load('sflmLastPaths'.$this->sflm->type.$this->frontend) ? : [];
+  }
+
+  protected function storeLastPaths() {
+    NgnCache::c()->save($this->getPaths(), 'sflmLastPaths'.$this->sflm->type.$this->frontend);
   }
 
   function getPathsCache() {

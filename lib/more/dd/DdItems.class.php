@@ -307,6 +307,7 @@ class DdItems extends Items {
     foreach (array_keys($item) as $fieldName) {
       if (empty($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
+      //if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselect') or FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
       if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
         $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
       }
