@@ -96,7 +96,7 @@ class Arr {
   }
 
   static function getValueByKey(array $arr, $k1, $v1) {
-    foreach ($arr as $v) {
+    foreach ($arr as &$v) {
       if ($v[$k1] == $v1) return $v;
     }
     return false;

@@ -284,8 +284,8 @@ use Options;
       else {
         if (JSON_DEBUG !== true) header('Content-type: application/json');
         if (is_string($this->json)) return $this->json;
-        $this->json['sflVersion']['js'] = Sflm::get('js')->version();
-        $this->json['sflVersion']['css'] = Sflm::get('css')->version();
+        //$this->json['sflVersion']['js'] = Sflm::get('js')->version();
+        //$this->json['sflVersion']['css'] = Sflm::get('css')->version();
         if ($this->actionDisabled) $this->json['actionDisabled'] = true;
         return json_encode($this->json);
       }
