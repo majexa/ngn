@@ -12,4 +12,8 @@ class SflmFrontendJs extends SflmFrontend {
     $this->classes->addClass($class);
   }
 
+  protected function code_____() {
+    return parent::code()."\nNgn.sflVersion = { js: '.$this->version().', css: '.Sflm::get('css', $this->frontend)->version().' };\n";
+  }
+
 }

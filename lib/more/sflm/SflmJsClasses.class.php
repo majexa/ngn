@@ -58,7 +58,6 @@ class SflmJsClasses {
   }
 
   function addClass($class) {
-    //prr("add class $class");
     if (in_array($class, $this->existingClasses)) return;
     if (!isset($this->classesPaths[$class])) throw new Exception("File for class '$class' does not exists");
     $c = file_get_contents($this->frontend->sflm->getAbsPath($this->classesPaths[$class]));
