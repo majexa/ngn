@@ -5,11 +5,11 @@ use LongJob;
 
   protected $items, $ddo;
 
-  function __construct(DdItems $items) {
+  function __construct($strName, DdItems $items) {
     $this->items = $items;
     $this->hasOutput = false;
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
-    $this->ddo = new Ddo($items->strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
+    $this->ddo = new Ddo($strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
     $this->ddo->text = true;
     $this->init();
   }
