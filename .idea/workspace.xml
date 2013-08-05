@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.cp.LongJob.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.cp.LongJob.js" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -115,6 +114,7 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDdItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375690222129" ignored="false" />
     <file path="/CtrlPageDdItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375690202940" ignored="false" />
     <file path="/DdXls.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375689356460" ignored="false" />
+    <file path="/Ngn.Form.El.DateRange.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375690929916" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,10 +143,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DdXls.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DdXls.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/dd/DdXls.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="62" selection-end="62" vertical-scroll-proportion="0.22077923">
+            <state line="7" column="0" selection-start="62" selection-end="62" vertical-scroll-proportion="-4.576923">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ngn.cp.LongJob.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.cp.LongJob.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="13" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ngn.DateRangeDialog.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.DateRangeDialog.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="20" selection-start="388" selection-end="388" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ngn.Form.El.DateRange.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="0" selection-start="1035" selection-end="1035" vertical-scroll-proportion="0.83152175">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ngn.Form.El.DialogSelect.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DialogSelect.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="0" selection-start="1808" selection-end="1808" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -179,8 +215,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php" />
         <option value="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" />
         <option value="$PROJECT_DIR$/lib/more/sflm/SflmJsClasses.class.php" />
         <option value="$PROJECT_DIR$/lib/more/sflm/SflmFrontendJs.class.php" />
@@ -195,6 +229,8 @@
         <option value="$PROJECT_DIR$/init/web.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" />
+        <option value="$PROJECT_DIR$/i/js/ngn/Ngn.cp.LongJob.js" />
+        <option value="$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js" />
       </list>
     </option>
   </component>
@@ -246,6 +282,116 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="i" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="i" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="i" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="i" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="i" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="form" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dateRange" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -503,26 +649,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontendJs.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="30" selection-start="257" selection-end="257" vertical-scroll-proportion="-9.153846" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/mail/SendEmail.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="58" selection-start="500" selection-end="500" vertical-scroll-proportion="-5.6923075" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/mail/phpmailer/PHPMailer.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="730" column="0" selection-start="20783" selection-end="20783" vertical-scroll-proportion="-18.923077" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/common/RouterCommon.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="6" selection-start="13" selection-end="13" vertical-scroll-proportion="-1.3076923" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/core/RouterManager.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="35" selection-start="373" selection-end="386" vertical-scroll-proportion="-9.153846" />
@@ -596,7 +722,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DdXls.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="62" selection-end="62" vertical-scroll-proportion="0.22077923">
+        <state line="7" column="0" selection-start="62" selection-end="62" vertical-scroll-proportion="-4.576923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DialogSelect.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="0" selection-start="1808" selection-end="1808" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.cp.LongJob.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.DateRangeDialog.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="20" selection-start="388" selection-end="388" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="0" selection-start="1035" selection-end="1035" vertical-scroll-proportion="0.83152175">
           <folding />
         </state>
       </provider>
