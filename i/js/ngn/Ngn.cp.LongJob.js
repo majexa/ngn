@@ -6,7 +6,7 @@ Ngn.cp.LongJob = new Class({
     completeText: function(r) {
       return 'Завершено';
     },
-    period: 5000
+    period: 2000
     //action: ''
   },
 
