@@ -28,7 +28,7 @@ class DdItems extends Items {
     $this->setTStampCond();
     if (!($items = parent::getItems())) return [];
     $this->extendItemsFilePaths($items);
-    //$this->extendItemsTags($items);
+    $this->extendItemsTags($items);
     $this->extendItemsUsers($items);
     $this->formatItemsText($items);
     $this->extendItemsNumberRange($items);
