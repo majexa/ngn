@@ -19,6 +19,7 @@ if (isset($_REQUEST['debugUri'])) {
 if (!is_file(WEBROOT_PATH.'/index.php'))
   die2('Dir "'.WEBROOT_PATH.'" or "index.php" not exists');
 
+/*
 if (IS_DEBUG and isset($_REQUEST['XDEBUG_PROFILE'])) {
   $file = glob('~/xdebug/*')[0];
   Dir::make(UPLOAD_PATH.'/temp');
@@ -26,6 +27,7 @@ if (IS_DEBUG and isset($_REQUEST['XDEBUG_PROFILE'])) {
   //tgz $file';
 
 }
+*/
 
 /*
 if (get_magic_quotes_gpc()) {
