@@ -233,7 +233,7 @@ use Options;
 
   protected function htmlHeaderGroupClose($elementDepth, $comments = '') {
     // Закрываем контейнер группы
-    if (!$this->headerOpened($elementDepth)) throw new Exception("Header depth={{$elementDepth}} alreay closed. ($comments). html: <pre>$f</pre>");
+    if (!$this->headerOpened($elementDepth)) return ''; // throw new Exception("Header depth={{$elementDepth}} alreay closed. ($comments).");
     if (!$this->isHeaderGroupTags) return '';
     $this->setHeaderOpened($elementDepth, false);
     return $this->templates['headerClose']."<!-- Close fields group depth={{$elementDepth}} ($comments) -->";

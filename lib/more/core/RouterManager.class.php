@@ -12,7 +12,7 @@ use Options;
   
   function router() {
     if (isset($this->req->params[0]) and in_array($this->req->params[0], ['s', 's2', 'c', 'c2'])) {
-      return new RouterScripts(['req' => $this->req]);
+      return O::gett('RouterScripts', (['req' => $this->req]));
     }
     elseif (isset($this->req->params[0]) and ($this->req->params[0] == 'admin' or $this->req->params[0] == 'god')) {
       return new AdminRouter(['req' => $this->req]);
