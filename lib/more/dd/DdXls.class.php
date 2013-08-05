@@ -3,21 +3,13 @@
 class DdXls {
 use LongJob;
 
-  /**
-   * @var DdItemsPage
-   */
-  protected $items;
+  protected $items, $ddo;
 
-  /**
-   * @var DdoPage
-   */
-  protected $ddo;
-
-  function __construct($strName, DdItems $items) {
+  function __construct(DdItems $items) {
     $this->items = $items;
     $this->hasOutput = false;
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
-    $this->ddo = new Ddo($strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
+    $this->ddo = new Ddo($items->strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
     $this->ddo->text = true;
     $this->init();
   }
