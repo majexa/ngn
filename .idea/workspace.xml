@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselect.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselect.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FormBase.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FormBase.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/RouterManager.class.php" afterPath="$PROJECT_DIR$/lib/more/core/RouterManager.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init/web.php" afterPath="$PROJECT_DIR$/init/web.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -140,10 +133,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DdXls.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DdXls.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/dd/DdXls.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="1" selection-start="1233" selection-end="1233" vertical-scroll-proportion="0.9369202">
+            <state line="42" column="1" selection-start="1233" selection-end="1233" vertical-scroll-proportion="-19.423077">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/init/web.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.73574144">
               <folding />
             </state>
           </provider>
@@ -181,8 +183,8 @@
         <option value="$PROJECT_DIR$/lib/more/form/FormBase.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdCrudAbstractCtrl.class.php" />
-        <option value="$PROJECT_DIR$/init/web.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" />
+        <option value="$PROJECT_DIR$/init/web.php" />
       </list>
     </option>
   </component>
@@ -568,16 +570,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/init/web.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/DdXls.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="32" selection-start="905" selection-end="905" vertical-scroll-proportion="0.4543726">
+        <state line="42" column="1" selection-start="1233" selection-end="1233" vertical-scroll-proportion="-19.423077">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/dd/DdXls.class.php">
+    <entry file="file://$PROJECT_DIR$/init/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="1" selection-start="1233" selection-end="1233" vertical-scroll-proportion="0.9369202">
+        <state line="30" column="0" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.73574144">
           <folding />
         </state>
       </provider>
