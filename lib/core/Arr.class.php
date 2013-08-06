@@ -86,7 +86,7 @@ class Arr {
     return $res;
   }
 
-  static function get_value(array $arr, $k1, $v1, $k2) {
+  static function getSubValue(array $arr, $k1, $v1, $k2) {
     foreach ($arr as $v) if (isset($v[$k1]) and isset($v[$k2]) and $v[$k1] == $v1) return $v[$k2];
     return false;
   }
@@ -95,19 +95,17 @@ class Arr {
     return isset($arr[$key]) ? $arr[$key] : false;
   }
 
-  static function getValueByKey(array $arr, $k1, $v1) {
-    foreach ($arr as &$v) {
-      if ($v[$k1] == $v1) return $v;
-    }
+  static function &getValueByKey(array &$arr, $k1, $v1) {
+    foreach ($arr as &$v) if ($v[$k1] == $v1) return $v;
     return false;
   }
 
-  static function first_key(array $arr) {
+  static function firstKey(array $arr) {
     foreach ($arr as $k => $v) return $k;
   }
 
   static function first(array $arr, $key = null) {
-    foreach ($arr as $k => $v) {
+    foreach ($arr as $v) {
       if ($key) return $v[$key];
       return $v;
     }
@@ -118,11 +116,6 @@ class Arr {
     $vv = false;
     foreach ($arr as $v) $vv = $v;
     return $vv;
-  }
-
-  static function last_key(array $arr) {
-    $keys = array_keys($arr);
-    return $keys[count($keys) - 1];
   }
 
   static function isEmpty($value) {
@@ -140,15 +133,6 @@ class Arr {
     }
   }
 
-  static function flip2(array $arr) {
-    foreach ($arr as $k => $v) {
-      foreach ($v as $v2) {
-        $arr2[$v2] = $k;
-      }
-    }
-    return $arr2;
-  }
-
   static function quote(array &$arr) {
     array_walk($arr, 'quoting');
     return $arr;
@@ -161,9 +145,9 @@ class Arr {
     }
   }
 
-  static function remove(&$arr, $_v) {
-    foreach ($arr as $k => $v) {
-      if ($v == $_v) {
+  static function remove(&$arr, $v) {
+    foreach ($arr as $k => $vv) {
+      if ($vv == $v) {
         unset($arr[$k]);
       }
     }
@@ -237,7 +221,7 @@ class Arr {
     return $r;
   }
 
-  static function filter_by_value(array $arr, $key, $value, $assoc = false, $ignore = false) {
+  static function filterByValue(array $arr, $key, $value, $assoc = false, $ignore = false) {
     $r = [];
     $value = (array)$value;
     foreach ($arr as $k => $v) {
@@ -310,7 +294,7 @@ class Arr {
     return [$prev, $next];
   }
 
-  static function str_replace($arr, $search, $replace) {
+  static function strReplace($arr, $search, $replace) {
     foreach ($arr as $k => $v) {
       $arr[$k] = str_replace($search, $replace, $v);
     }
@@ -574,21 +558,27 @@ class Arr {
     return $r;
   }
 
-  static function injectAfterBySubkey(array $array, $k, array $values, $subkey) {
+  /**
+   * @param   array
+   * @param   string  Ключ, с которым производиться сравнение ($k == $subkey)
+   * @param   array   Массив значений для вставки
+   * @param   string  Ключ, по которому производиться поиск
+   * @param   bool    Является ли $array ассоциативным массивом
+   * @return  array
+   */
+  static function injectAfterBySubkey(array $array, $k, array $values, $subkey, $assoc = true) {
     $r = [];
-    foreach ($array as $kk => $vv) {
-      $r[$kk] = $vv;
-      if (isset($vv[$subkey]) and $vv[$subkey] == $k) foreach ($values as $value) $r[$value[$subkey]] = $value;
-    }
-    return $r;
-  }
-
-  static function injectAfterBySubkey2(array $array, $k, array $values, $subkey) {
-    $r = [];
-    for ($i=0; $i<count($array); $i++) {
-      $r[] = $array[$i];
-      if (isset($array[$i][$subkey]) and $array[$i][$subkey] == $k) {
-        foreach ($values as $value) $r[] = $value;
+    if ($assoc) {
+      foreach ($array as $kk => $vv) {
+        $r[$kk] = $vv;
+        if (isset($vv[$subkey]) and $vv[$subkey] == $k) foreach ($values as $value) $r[$value[$subkey]] = $value;
+      }
+    } else {
+      for ($i=0; $i<count($array); $i++) {
+        $r[] = $array[$i];
+        if (isset($array[$i][$subkey]) and $array[$i][$subkey] == $k) {
+          foreach ($values as $value) $r[] = $value;
+        }
       }
     }
     return $r;

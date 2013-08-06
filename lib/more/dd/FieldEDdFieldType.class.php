@@ -12,7 +12,7 @@ class FieldEDdFieldType extends FieldESelect {
 
   function _html() {
     $s = '<table cellpadding="0" cellspacing="0" class="itemsTable">';
-    $checked = empty($this->options['value']) ? Arr::first_key($this->options['options']) : $this->options['value'];
+    $checked = empty($this->options['value']) ? Arr::firstKey($this->options['options']) : $this->options['value'];
     foreach ($this->options['options'] as $k => $v) {
       $type = DdFieldCore::getTypeData($k);
       $type['disable'] = [];

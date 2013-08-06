@@ -86,7 +86,7 @@ class VkVideoGrabber extends VkAuth {
       //return false;
     }
     $links = $m[1];
-    $links = Arr::str_replace($links, '#comments', '');
+    $links = Arr::strReplace($links, '#comments', '');
     $links = array_values(array_unique($links));
     
     // parse date create

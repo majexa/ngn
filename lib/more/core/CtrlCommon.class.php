@@ -580,7 +580,7 @@ use Options;
   /*
   protected function actionHtml2ajax($actionMethod) {
     $this->$actionMethod();
-    if (!($ajaxTpl = Arr::get_value($this->html2ajaxActions, 'action', $this->action, 'ajaxTpl')))
+    if (!($ajaxTpl = Arr::getSubValue($this->html2ajaxActions, 'action', $this->action, 'ajaxTpl')))
       throw new Exception(
         'ajaxTpl not defined in array $this->html2ajaxActions for action '.
         $this->action.': '.getPrr($this->html2ajaxActions));

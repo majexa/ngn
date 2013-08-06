@@ -26,7 +26,7 @@ class CtrlAdminDdo extends CtrlAdmin {
     $this->layouts = $this->settings->getLayouts();
     if (isset($this->req->params[3]) and isset($this->layouts[$this->req->params[3]])) $this->d['curLayoutName'] = $this->curLayoutName = $this->req->params[3];
     else
-      $this->d['curLayoutName'] = $this->curLayoutName = Arr::first_key($this->layouts);
+      $this->d['curLayoutName'] = $this->curLayoutName = Arr::firstKey($this->layouts);
   }
 
   function action_default() {
