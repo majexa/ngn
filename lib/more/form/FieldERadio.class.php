@@ -9,7 +9,7 @@ class FieldERadio extends FieldECheckbox {
   ];
   
   protected function initDefaultValue() {
-    $this->defaultValue = Arr::first_key($this->options['options']); 
+    $this->defaultValue = Arr::firstKey($this->options['options']);
   }
 
 }

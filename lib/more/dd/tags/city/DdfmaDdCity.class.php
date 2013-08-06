@@ -12,7 +12,7 @@ class DdfmaDdCity extends Ddfma {
       File::lines(__DIR__.'/city500'),
       File::lines(__DIR__.'/city100')
     ));
-    //$region = Arr::filter_by_value($region, 'region_id', 3160);
+    //$region = Arr::filterByValue($region, 'region_id', 3160);
     $this->proto = [
       'strName' => $this->strName,
       'groupName' => $name

@@ -61,9 +61,9 @@ class DdFields extends Fields {
   }
 
   protected function addFieldsWithFilter(array $fields) {
-    if (!$this->options['getSystem']) $fields = Arr::filter_by_value($fields, 'system', 0);
-    if (!$this->options['getDisallowed']) $fields = Arr::filter_by_value($fields, 'defaultDisallow', 0);
-    if (!$this->options['getVirtual']) $fields = Arr::filter_by_value($fields, 'virtual', 0, false, true);
+    if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0);
+    if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0);
+    if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, false, true);
     foreach ($fields as &$v) {
       $v = Arr::filterEmptyStrings($v);
       $v['dd'] = true;
@@ -85,7 +85,7 @@ class DdFields extends Fields {
   }
 
   function getType($name) {
-    $r = Arr::get_value($this->initFields, 'name', $name, 'type');
+    $r = Arr::getSubValue($this->initFields, 'name', $name, 'type');
     return $r;
   }
 
