@@ -64,10 +64,7 @@ class DdFields extends Fields {
     if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0);
     if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0);
     if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, false, true);
-    foreach ($fields as &$v) {
-      $v = Arr::filterEmptyStrings($v);
-      $v['dd'] = true;
-    }
+    foreach ($fields as &$v) $v = Arr::filterEmptyStrings($v);
     $this->addFields($fields);
   }
 
@@ -75,8 +72,9 @@ class DdFields extends Fields {
 
   function addField(array $v) {
     $v['strName'] = $this->strName;
+    $v['dd'] = true;
     if (isset($v['active'])) $v['active'] = 1;
-    foreach (['system', 'defaultDisallow', 'virtual'] as $k) if (isset($v[$k])) $v[$k] = 0;
+    foreach (['system', 'defaultDisallow', 'virtual'] as $k) if (!isset($v[$k])) $v[$k] = 0;
     parent::addField($v);
   }
 
