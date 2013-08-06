@@ -29,7 +29,7 @@ class CtrlAdminDdStructure extends CtrlAdmin {
     if ($this->im->requestUpdate($this->req->rq('id'))) {
       $this->redirect($this->tt->getPath(2));
     }
-    $this->d['form'] = $this->im->oForm->html();
+    $this->d['form'] = $this->im->form->html();
   }
   
   function action_new() {
@@ -37,7 +37,7 @@ class CtrlAdminDdStructure extends CtrlAdmin {
     if ($this->im->requestCreate()) {
       $this->redirect($this->tt->getPath(2));
     }
-    $this->d['form'] = $this->im->oForm->html();
+    $this->d['form'] = $this->im->form->html();
   }
   
   function action_delete() {

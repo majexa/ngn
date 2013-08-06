@@ -42,7 +42,7 @@ class FieldEDatetime extends FieldEDate {
   
   function _js() {
     return "
-    $('{$this->oForm->id}').getElements('.type_{$this->type}').each(function(el) {
+    $('{$this->form->id}').getElements('.type_{$this->type}').each(function(el) {
       new Ngn.DatePicker(el.getElement('input'), {
         pickerClass: 'datepicker_cp',
         timePicker: true

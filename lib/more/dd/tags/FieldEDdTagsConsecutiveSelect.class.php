@@ -20,7 +20,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
 
   protected function init() {
     parent::init();
-    $this->tags = DdTags::get($this->oForm->strName, $this->baseName);
+    $this->tags = DdTags::get($this->form->strName, $this->baseName);
   }
 
   protected function preparePostValue() {

@@ -29,7 +29,7 @@ class DdImageConverter {
         throw new Exception('self::$smW or self::$smH or self::$mdW or self::$mdH not defined');
     }  
     $oFields = O::get('DdFields', $strName);
-    $oIM = new DdItemsManagerPage(
+    $im = new DdItemsManagerPage(
       new DdItemsPage($pageId),
       new DdFormPage($oFields, $pageId)
     );
@@ -37,22 +37,22 @@ class DdImageConverter {
     foreach ($imageFields_ as $k => $v) {
       $imageFields[] = $v['name'];
     }
-    $oIM->imageSizes['smW'] = self::$smW;
-    $oIM->imageSizes['smH'] = self::$smH;
-    $oIM->imageSizes['mdW'] = self::$mdW;
-    $oIM->imageSizes['mdH'] = self::$mdH;
-    $oIM->getNonActive = true;
-    if (!$items = $oIM->oItems->getItems($pageId)) return;
+    $im->imageSizes['smW'] = self::$smW;
+    $im->imageSizes['smH'] = self::$smH;
+    $im->imageSizes['mdW'] = self::$mdW;
+    $im->imageSizes['mdH'] = self::$mdH;
+    $im->getNonActive = true;
+    if (!$items = $im->oItems->getItems($pageId)) return;
     foreach ($items as $k => $v) {
       foreach ($v as $fieldName => $v2) {
         if (in_array($fieldName, $imageFields)) {
-          $imagePath = $oIM->getFilePath($v['id'], $fieldName);
+          $imagePath = $im->getFilePath($v['id'], $fieldName);
           if (self::$type == 'small') {
-            $oIM->makeSmallThumbs(UPLOAD_PATH.'/'.$imagePath);
+            $im->makeSmallThumbs(UPLOAD_PATH.'/'.$imagePath);
           } elseif (self::$type == 'middle') {
-            $oIM->makeMiddleThumbs(UPLOAD_PATH.'/'.$imagePath);
+            $im->makeMiddleThumbs(UPLOAD_PATH.'/'.$imagePath);
           } else {
-            $oIM->makeThumbs(UPLOAD_PATH.'/'.$imagePath);
+            $im->makeThumbs(UPLOAD_PATH.'/'.$imagePath);
           }
         }
       }

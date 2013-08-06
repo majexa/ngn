@@ -7,27 +7,27 @@ abstract class ArrayAccesseble implements ArrayAccess, IteratorAggregate {
   }
 
   function getIterator() {
-    return new ArrayIterator($this->getArrayLink());
+    return new ArrayIterator($this->getArrayRef());
   }
 
   function offsetSet($offset, $value) {
     if (is_null($offset)) {
-      $this->getArrayLink()[] = $value;
+      $this->getArrayRef()[] = $value;
     } else {
-      $this->getArrayLink()[$offset] = $value;
+      $this->getArrayRef()[$offset] = $value;
     }
   }
   
   function offsetExists($offset) {
-    return isset($this->getArrayLink()[$offset]);
+    return isset($this->getArrayRef()[$offset]);
   }
   
   function offsetUnset($offset) {
-    unset($this->getArrayLink()[$offset]);
+    unset($this->getArrayRef()[$offset]);
   }
   
   function offsetGet($offset) {
-    return isset($this->getArrayLink()[$offset]) ? $this->getArrayLink()[$offset] : null;
+    return isset($this->getArrayRef()[$offset]) ? $this->getArrayRef()[$offset] : null;
   }
 
 }
