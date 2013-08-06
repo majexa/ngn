@@ -66,7 +66,7 @@ use Options;
     $this->initDefaultValue();
   }
 
-  protected function &getArrayLink() {
+  protected function &getArrayRef() {
     return $this->options;
   }
 

@@ -95,7 +95,12 @@ class Arr {
     return isset($arr[$key]) ? $arr[$key] : false;
   }
 
-  static function &getValueByKey(array &$arr, $k1, $v1) {
+  static function getValueByKey(array $arr, $k1, $v1) {
+    foreach ($arr as $v) if ($v[$k1] == $v1) return $v;
+    return false;
+  }
+
+  static function &getRefByKey(array &$arr, $k1, $v1) {
     foreach ($arr as &$v) if ($v[$k1] == $v1) return $v;
     return false;
   }
@@ -560,7 +565,7 @@ class Arr {
 
   /**
    * @param   array
-   * @param   string  Ключ, с которым производиться сравнение ($k == $subkey)
+   * @param   string  Значение, с которым производиться сравнение ($k == $v[$subkey])
    * @param   array   Массив значений для вставки
    * @param   string  Ключ, по которому производиться поиск
    * @param   bool    Является ли $array ассоциативным массивом

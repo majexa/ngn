@@ -1,9 +1,13 @@
 <?php
 
-abstract class ArrayAccesseble implements ArrayAccess {
+abstract class ArrayAccesseble implements ArrayAccess, IteratorAggregate {
 
-  protected function &getArrayLink() {
+  protected function &getArrayRef() {
     return $this->r;
+  }
+
+  function getIterator() {
+    return new ArrayIterator($this->getArrayLink());
   }
 
   function offsetSet($offset, $value) {
