@@ -98,9 +98,9 @@ class Form {
     if (!$this->isSubmitted() and !empty($this->options['defaultsFromReq'])) $this->defaultData = $this->req->r;
   }
 
-
   function isSubmitted() {
-    return !empty($this->req->p);
+    if (!$this->fromRequest) return true;
+    return (isset($this->req->p['formId']) and $this->req->p['formId'] == $this->id());
   }
 
   protected function elementExists($name) {
@@ -132,7 +132,9 @@ class Form {
   }
 
   function isSubmittedAndValid() {
-    return $this->isSubmitted() and $this->validate();
+    $this->setElementsDataDefault();
+    if (!$this->isSubmitted() or !$this->validate()) return false;
+    return true;
   }
 
   protected function dataParams() {
@@ -514,10 +516,6 @@ class Form {
    */
   public $fields;
 
-  public $options = [
-    'submitTitle' => 'Сохранить'
-  ];
-
   /**
    * Если флаг включен в форме будут выводится только обязательные поля
    *
@@ -554,6 +552,10 @@ class Form {
   }
 
   protected function init() {
+  }
+
+  protected function defineOptions() {
+    $this->options['submitTitle'] = 'Сохранить';
   }
 
   private function initFSBB() {
@@ -644,10 +646,7 @@ class Form {
       $fields = $this->fields->getRequired();
     }
     else {
-      // Здесь необходимо использовать getFieldsF, потому что она возвращает только видимые поля,
-      // без системных и скрытых. А по идее там осуществляются вские ненужные операции.. кажется
-      // + ещё права там проверяются
-      $fields = $this->fields->getFieldsF();
+      $fields = $this->fields->getFormFields();
     }
     foreach ($fields as $v) {
       if ($this->fields->isFileType($v['name'])) {
@@ -675,7 +674,6 @@ class Form {
    * @return  array
    */
   function setElementsData(array $defaultData = [], $reset = true) {
-    // pr($defaultData);
     $this->defaultData = $defaultData;
     $this->elementsData = $defaultData;
     if ($this->isSubmitted() and $this->fromRequest) $this->elementsData = $this->req->p;
@@ -705,10 +703,6 @@ class Form {
     $this->disableFormTag = $flag;
     $this->disableSubmit = $flag;
     $this->disableJs = $flag;
-  }
-
-  function getFields() {
-    return $this->fields->getFieldsF();
   }
 
   function fsbb() {
@@ -773,17 +767,6 @@ eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
     if (empty($this->visibilityConditions)) return '';
     foreach ($this->visibilityConditions as $v) $r[] = array_values($v);
     return '<div class="visibilityConditions" style="display:none">'.json_encode($r).'</div>';
-  }
-
-  function isSubmitted() {
-    if (!$this->fromRequest) return true;
-    return (isset($this->req->p['formId']) and $this->req->p['formId'] == $this->id());
-  }
-
-  function isSubmittedAndValid() {
-    $this->setElementsDataDefault();
-    if (!parent::isSubmittedAndValid()) return false;
-    return true;
   }
 
   // Функционал для апдейта данных через класс формы

@@ -48,7 +48,10 @@ use Options;
     return $this->fields;
   }
 
-  function getFieldsF() {
+  /**
+   * @return array Возвращает только те поля, что необходимо выводить в форме
+   */
+  function getFormFields() {
     return $this->getFields();
   }
   
