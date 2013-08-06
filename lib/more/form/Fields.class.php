@@ -3,7 +3,7 @@
 class Fields extends ArrayAccesseble {
 use Options;
 
-  protected function &getArrayLink() {
+  protected function &getArrayRef() {
     return $this->fields;
   }
 
