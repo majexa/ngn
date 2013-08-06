@@ -13,10 +13,10 @@ class FieldEFile extends FieldEFileBase {
   
   protected function init() {
     parent::init();
-    if ($this->oForm->fromRequest) {
-      $files = isset($this->oForm->options['files']) ?
-        $this->oForm->options['files'] :
-        $this->oForm->req->files;
+    if ($this->form->fromRequest) {
+      $files = isset($this->form->options['files']) ?
+        $this->form->options['files'] :
+        $this->form->req->files;
       $uploadedFileValue = null;
       if (!empty($files))
         $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
@@ -103,8 +103,8 @@ class FieldEFile extends FieldEFileBase {
     return (empty($this->options['value']) ? '' :
       '<div class="iconsSet fileNav">'.
         '<a href="'.$this->getCurrentValue().'" class="'.$this->options['currentFileClass'].'" target="_blank"><i></i> '.$this->options['currentFileTitle'].'</a>'.
-        ((!empty($this->oForm->options['deleteFileUrl']) and empty($this->options['required'])) ?
-          '<a href="'.$this->oForm->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="delete confirm" title="Удалить"><i></i></a>' :
+        ((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ?
+          '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="delete confirm" title="Удалить"><i></i></a>' :
           '').
       '</div>'
     );

@@ -39,12 +39,12 @@ class DdImporter {
    */
   static function importByData($pageId, $data) {
     $strName = Pages::getStrName($pageId);
-    $oIM = new DdItemsManagerPage(
+    $im = new DdItemsManagerPage(
       new DdItemsPage($pageId),
       new DdFormPage(new DdFields($strName), $pageId)
     );
     foreach ($data as $v) {
-      $oIM->create($v);
+      $im->create($v);
     }
   }
 

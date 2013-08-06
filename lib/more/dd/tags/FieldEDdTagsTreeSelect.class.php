@@ -12,13 +12,13 @@ DdFieldCore::registerType('ddTagsTreeSelect', [
 class FieldEDdTagsTreeSelect extends FieldEText {
 
   protected function getTags() {
-    return new DdTagsTagsTree(new DdTagsGroup($this->oForm->strName, $this->options['name']));
+    return new DdTagsTagsTree(new DdTagsGroup($this->form->strName, $this->options['name']));
   }
   
   function _html() {
     $tags = $this->getTags();
-    if (!empty($this->oForm->ctrl->userGroup)) {
-      $tags->getCond($this->oForm->strName)->addF('userGroupId', $this->oForm->ctrl->userGroup['id']);
+    if (!empty($this->form->ctrl->userGroup)) {
+      $tags->getCond($this->form->strName)->addF('userGroupId', $this->form->ctrl->userGroup['id']);
     }
     return Tt()->getTpl('dd/tagsTreeSelect', [
       'name' => $this->options['name'],

@@ -27,13 +27,13 @@ class CtrlCommonVkAuth extends CtrlCommon {
     $userId = DbModelCore::create('users', $d, true);
     Auth::loginByLogin($this->req->p['login']);
     if (($page = DbModelCore::get('pages', 'myProfile', 'controller')) !== false) {
-      $oIM = DdCore::getItemsManager($page['id'], [
+      $im = DdCore::getItemsManager($page['id'], [
         'staticId' => $userId * $page['id']
       ]);
-      if (isset($oIM->oForm->oFields->fields['image'])) {
+      if (isset($im->form->fields->fields['image'])) {
         $tempFile = TEMP_PATH.'/'.Misc::randString(10);
         O::get('Curl')->copy($imageUrl, $tempFile);
-        $oIM->create([
+        $im->create([
           'image' => [
             'tmp_name' => $tempFile
            ]

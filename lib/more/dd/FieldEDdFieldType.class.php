@@ -31,7 +31,7 @@ class FieldEDdFieldType extends FieldESelect {
 
   function _js() {
     return "
-new Ngn.cp.ddFieldType.Properties($('{$this->oForm->id()}'), '{$this->options['name']}');
+new Ngn.cp.ddFieldType.Properties($('{$this->form->id()}'), '{$this->options['name']}');
 ";
   }
 

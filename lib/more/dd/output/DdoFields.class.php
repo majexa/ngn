@@ -102,7 +102,7 @@ class DdoFields {
         'getVirtual' => false
       ];
     }
-    $this->oFields = new DdFields($strName, $opt);
+    $this->fields = new DdFields($strName, $opt);
     $this->layoutName = $layoutName;
     $this->settigns = $ddoSettings;
     if ($allowedFields) {
@@ -128,7 +128,7 @@ class DdoFields {
   ];
   
   function getFields() {
-    $fields = $this->oFields->getFields();
+    $fields = $this->fields->getFields();
     $fields += $this->extraVirtualFields;
     $_fields = [];
     foreach ($fields as $k => $v) {

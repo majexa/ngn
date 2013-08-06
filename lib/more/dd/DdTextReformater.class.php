@@ -3,8 +3,8 @@
 class DdTextReformater {
   
   static private function _copy($format) {
-    $oFormatText = new FormatText();
-    $oFormatText->allowedTagsConfigName = 'comments.allowedTags';
+    $formatText = new FormatText();
+    $formatText->allowedTagsConfigName = 'comments.allowedTags';
     foreach (db()->selectCol('SELECT name FROM dd_structures') as $strName) {
       $fieldNames = db()->selectCol(
         "SELECT name FROM dd_fields WHERE strName=? AND type='textarea'", $strName);
@@ -18,7 +18,7 @@ class DdTextReformater {
         $a = [];
         foreach ($fieldNames as $fieldName) {
           $a[$fieldName] = $row[$fieldName];
-          $a[$fieldName.'_f'] = $format ? $oFormatText->html($row[$fieldName]) : nl2br($row[$fieldName]);
+          $a[$fieldName.'_f'] = $format ? $formatText->html($row[$fieldName]) : nl2br($row[$fieldName]);
         }
         try {
           db()->query("UPDATE dd_i_$strName SET ?a WHERE id=?d", $a, $row['id']);

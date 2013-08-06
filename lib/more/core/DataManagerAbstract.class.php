@@ -17,7 +17,7 @@ abstract class DataManagerAbstract extends Options2 {
   /**
    * @var Form
    */
-  public $oForm;
+  public $form;
 
   /**
    * HTML сгенерированой формы
@@ -61,8 +61,8 @@ abstract class DataManagerAbstract extends Options2 {
   //protected $req;
 
   function __construct(Form $form, array $options = []) {
-    if (!is_object($form)) throw new Exception('$oForm is not object');
-    $this->oForm = $form;
+    if (!is_object($form)) throw new Exception('$form is not object');
+    $this->form = $form;
     $this->imageSizes = self::$defaultImageSizes;
     parent::__construct($options);
     $this->initTempId();
@@ -97,32 +97,32 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   /**
-   * �?спользуется в вызове из контроллера
+   * Используется в вызове из контроллера
    * Обрабатывает пользовательские данные, преобразовывая их с помощью класса формы
    *
    * @param  array  Данные по умолчанию
    */
   function requestCreate(array $default = []) {
-    $this->oForm->create = true;
+    $this->form->create = true;
     $this->initTinyInitJs();
     $this->setFormElementsData($default);
-    if ($this->oForm->isSubmittedAndValid()) {
+    if ($this->form->isSubmittedAndValid()) {
       return $this->makeCreate();
     }
     return false;
   }
 
   function create(array $data, $throwFormErrors = true) {
-    $this->oForm->fromRequest = false;
-    $this->oForm->create = true;
+    $this->form->fromRequest = false;
+    $this->form->create = true;
     $this->setFormElementsData($data);
-    if (!$this->oForm->validate()) {
-      if ($throwFormErrors) throw new Exception((IS_DEBUG ? get_class($this).': ' : '').$this->oForm->lastError.(IS_DEBUG ? '. data: '.getPrr($data) : '')); else return false;
+    if (!$this->form->validate()) {
+      if ($throwFormErrors) throw new Exception((IS_DEBUG ? get_class($this).': ' : '').$this->form->lastError.(IS_DEBUG ? '. data: '.getPrr($data) : '')); else return false;
     }
     $r = $this->makeCreate();
     if ($r === false and $throwFormErrors) {
-      if (!isset($this->oForm->lastError)) throw new EmptyException('$this->oForm->lastError');
-      throw new Exception($this->oForm->lastError.'. data: '.getPrr($data));
+      if (!isset($this->form->lastError)) throw new EmptyException('$this->form->lastError');
+      throw new Exception($this->form->lastError.'. data: '.getPrr($data));
     }
     return $r;
   }
@@ -165,7 +165,7 @@ abstract class DataManagerAbstract extends Options2 {
     $this->initTinyInitJs($id);
     $this->setFormElementsData($this->defaultData);
     $this->afterFormElementsInit();
-    if ($this->oForm->isSubmittedAndValid()) {
+    if ($this->form->isSubmittedAndValid()) {
       return $this->makeUpdate($id);
     }
     return false;
@@ -191,19 +191,19 @@ abstract class DataManagerAbstract extends Options2 {
 
   protected function setFormElementsData(array $data) {
     $this->beforeFormElementsInit();
-    $this->oForm->setElementsData($data);
+    $this->form->setElementsData($data);
   }
 
   function update($id, array $data, $throwFormErrors = true) {
-    $this->oForm->fromRequest = false;
+    $this->form->fromRequest = false;
     $this->setFormElementsData($data);
-    if ($this->oForm->hasErrors) {
-      if ($throwFormErrors) throw new Exception($this->oForm->lastError.'. data: '.getPrr($data)); else return false;
+    if ($this->form->hasErrors) {
+      if ($throwFormErrors) throw new Exception($this->form->lastError.'. data: '.getPrr($data)); else return false;
     }
     $r = $this->makeUpdate($id);
     if ($r === false and $throwFormErrors) {
-      if (!isset($this->oForm->lastError)) throw new EmptyException('$this->oForm->lastError');
-      throw new Exception($this->oForm->lastError.'. data: '.getPrr($data));
+      if (!isset($this->form->lastError)) throw new EmptyException('$this->form->lastError');
+      throw new Exception($this->form->lastError.'. data: '.getPrr($data));
     }
     return $r;
   }
@@ -231,7 +231,7 @@ abstract class DataManagerAbstract extends Options2 {
     try {
       // Данные необходимо обязательно получать из формы, т.к. обработка их происходит внутри
       // элементов полей. Форма будет возвращать единственно правильный вариант данных
-      $this->beforeUpdateData = $this->data = $this->oForm->getData();
+      $this->beforeUpdateData = $this->data = $this->form->getData();
       if ($this->beforeCreateAction) call_user_func($this->beforeCreateAction, $this);
       $this->addCreateData();
       $this->elementTypeAction('beforeCreateUpdate');
@@ -242,8 +242,8 @@ abstract class DataManagerAbstract extends Options2 {
       $id = $this->_create();
     } catch (NgnValidError $e) {
       $this->validError = $e;
-      if (get_class($e) == 'FormError') $this->oForm->getElement($e->elementName)->error($e->getMessage()); else
-        $this->oForm->globalError($e->getMessage());
+      if (get_class($e) == 'FormError') $this->form->getElement($e->elementName)->error($e->getMessage()); else
+        $this->form->globalError($e->getMessage());
       return false;
     }
     if (empty($id)) throw new Exception('id is empty. check what '.get_class($this).'::_create returns. create data: '.getPrr($this->data));
@@ -278,7 +278,7 @@ abstract class DataManagerAbstract extends Options2 {
     $this->id = $id;
     $this->beforeUpdateData = $this->getItemNonFormat($this->id);
     try {
-      $this->data = $this->oForm->getData();
+      $this->data = $this->form->getData();
       $this->fieldTypeAction('form2sourceFormat', $this->data);
       $this->form2sourceFormat();
       $this->replaceData();
@@ -287,7 +287,7 @@ abstract class DataManagerAbstract extends Options2 {
       $this->_update();
     } catch (NgnValidError $e) {
       $this->validError = $e;
-      $this->oForm->globalError($e->getMessage());
+      $this->form->globalError($e->getMessage());
       return false;
     }
     $this->elementTypeAction('afterCreateUpdate');
@@ -300,12 +300,12 @@ abstract class DataManagerAbstract extends Options2 {
   abstract protected function _updateField($id, $fieldName, $value);
 
   function updateField($id, $fieldName, $value) {
-    $this->oForm->oFields->fields = Arr::filterByKeys($this->oForm->oFields->fields, $fieldName);
+    $this->form->fields->fields = Arr::filterByKeys($this->form->fields->fields, $fieldName);
     $this->update($id, [$fieldName => $value]);
   }
 
   function updateData($id, $data) {
-    $this->oForm->oFields->fields = Arr::filterByKeys($this->oForm->oFields->fields, array_keys($data));
+    $this->form->fields->fields = Arr::filterByKeys($this->form->fields->fields, array_keys($data));
     $this->update($id, $data);
   }
 
@@ -329,7 +329,7 @@ abstract class DataManagerAbstract extends Options2 {
     try {
       Dir::remove($this->getAttachePath());
       $this->beforeDelete();
-      $this->oForm->setElementsData();
+      $this->form->setElementsData();
       $this->elementTypeAction('beforeDelete');
     } catch (Exception $e) {
       $this->_delete($id);
@@ -381,7 +381,7 @@ abstract class DataManagerAbstract extends Options2 {
    */
   protected function fieldTypeAction($method, array &$data) {
     foreach (array_keys($data) as $k) {
-      if (($fieldType = $this->oForm->oFields->getType($k)) === false) continue;
+      if (($fieldType = $this->form->fields->getType($k)) === false) continue;
       if (($o = $this->getDmfa($fieldType)) === false) continue;
       if (!method_exists($o, $method)) continue;
       if (($r = $o->$method($data[$k], $k, $data)) !== null) $data[$k] = $r;
@@ -391,7 +391,7 @@ abstract class DataManagerAbstract extends Options2 {
   protected function elementTypeAction($method) {
     $this->fieldTypeAction($method, $this->data);
     $method = 'el'.ucfirst($method);
-    foreach ($this->oForm->getElements() as $el) {
+    foreach ($this->form->getElements() as $el) {
       if (($o = $this->getDmfa($el->type)) === false) continue;
       if (!method_exists($o, $method)) continue;
       $o->$method($el);
@@ -412,7 +412,7 @@ abstract class DataManagerAbstract extends Options2 {
     if (!$tempId) {
       $tempId = isset($_POST['tempId']) ? $_POST['tempId'] : Misc::randString(8);
     }
-    $this->oForm->addHiddenField([
+    $this->form->addHiddenField([
       'name'  => 'tempId',
       'value' => $tempId
     ]);
@@ -514,7 +514,7 @@ abstract class DataManagerAbstract extends Options2 {
   function deleteFile($id, $fieldName) {
     $this->_updateField($id, $fieldName, '');
     $this->id = $id;
-    if (($dmfa = $this->getDmfa($this->oForm->oFields->fields[$fieldName]['type'])) !== false) {
+    if (($dmfa = $this->getDmfa($this->form->fields->fields[$fieldName]['type'])) !== false) {
       if (method_exists($dmfa, 'deleteAttaches')) $dmfa->deleteAttaches($fieldName);
     }
   }
@@ -523,18 +523,18 @@ abstract class DataManagerAbstract extends Options2 {
    * Только форма созданная из ДатаМенеджера может именть wisiwig-элементы с аттач-кнопками
    */
   protected function initTinyInitJs($itemId = null) {
-    if (!$this->oForm->hasAttachebleWisiwig()) return;
+    if (!$this->form->hasAttachebleWisiwig()) return;
     $opt = [
-      'parent'  => "$('{$this->oForm->id()}')",
+      'parent'  => "$('{$this->form->id()}')",
       'attachs' => 'true'
     ];
-    if (!$this->oForm->create) {
+    if (!$this->form->create) {
       $opt += ['attachIdTpl' => "'".$this->getTinyAttachItemId($itemId, '{fn}')."'"];
     } else {
       $opt += ['attachIdTpl' => "'".$this->getTinyAttachTempId('{fn}')."'"];
     }
     $opt = Arr::jsObj($opt, false);
-    $this->oForm->defaultElements[] = [
+    $this->form->defaultElements[] = [
       'type' => 'js',
       'js'   => '
 new Ngn.TinyInit($merge(
@@ -542,7 +542,7 @@ new Ngn.TinyInit($merge(
   '.$opt.'
 ));'
     ];
-    $this->oForm->tinyInitialized = true;
+    $this->form->tinyInitialized = true;
   }
 
   /**
@@ -554,7 +554,7 @@ new Ngn.TinyInit($merge(
    * Добавляет в объект формы опции для инициализации fancyUpload
    */
   protected function initTempUpload() {
-    $this->ut = UploadTemp::extendFormOptions($this->oForm);
+    $this->ut = UploadTemp::extendFormOptions($this->form);
   }
 
   /**

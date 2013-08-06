@@ -81,7 +81,7 @@ class UploadTemp extends Options2 {
   }
   
   static function extendFormOptions(Form $oF, $uploadUrl = null) {
-    if (!isset($oF->oFields)) throw new Exception('Call constructor first');
+    if (!isset($oF->fields)) throw new Exception('Call constructor first');
     $ut = new self([
       'formId' => $oF->id(),
       'multiple' => true

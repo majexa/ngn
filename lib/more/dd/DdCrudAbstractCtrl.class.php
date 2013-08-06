@@ -57,15 +57,15 @@ use ObjectProcessorCtrl;
 
   function action_json_new() {
     $im = $this->getIm();
-    $im->oForm->options['submitTitle'] = 'Создать';
+    $im->form->options['submitTitle'] = 'Создать';
     if ($im->requestCreate()) return;
-    $this->jsonFormAction($im->oForm);
+    $this->jsonFormAction($im->form);
   }
 
   function action_json_edit() {
     $im = $this->getIm();
     if ($im->requestUpdate($this->req['id'])) return;
-    $this->jsonFormAction($im->oForm);
+    $this->jsonFormAction($im->form);
   }
 
   function action_json_getItems() {

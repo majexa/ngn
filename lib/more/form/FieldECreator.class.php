@@ -21,9 +21,9 @@ class FieldECreator extends FieldEAbstract {
     foreach ($oFields->getFields() as $v) {
       $v['noRowHtml'] = true;
       $v['value'] = $oFields->isFileType($v['name']) ?
-         BracketName::getValue($this->oForm->defaultData, $v['name']) :
-         BracketName::getValue($this->oForm->elementsData, $v['name']);
-      $this->oForm->createElement($v);
+         BracketName::getValue($this->form->defaultData, $v['name']) :
+         BracketName::getValue($this->form->elementsData, $v['name']);
+      $this->form->createElement($v);
     }
   }
 
