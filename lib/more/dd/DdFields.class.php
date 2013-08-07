@@ -20,55 +20,43 @@ class DdFields extends Fields {
     parent::__construct([], $options);
   }
 
-  public $initFields = [];
-
-  protected function addDdFieldsToInit() {
-    $this->initFields = Arr::append($this->initFields, DbModelCore::collection('dd_fields', DbCond::get()->addF('strName', $this->strName)->setOrder('oid')));
-  }
-
   protected function init() {
     if ($this->options['getHidden']) {
       $this->options['getSystem'] = true;
       $this->options['getDisallowed'] = true;
     }
-    $this->initFields[] = [
+    $this->addField([
       'title'           => 'ID',
       'name'            => 'id',
       'type'            => 'integer',
       'system'          => true,
       'defaultDisallow' => true
-    ];
-    $this->addDdFieldsToInit();
-    $this->initFields[] = [
+    ]);
+    $this->addFields(DbModelCore::collection('dd_fields', DbCond::get()->addF('strName', $this->strName)->setOrder('oid')));
+    $this->addField([
       'title'           => 'Дата создания',
       'name'            => 'dateCreate',
       'type'            => 'datetime',
       'system'          => true,
       'defaultDisallow' => false
-    ];
-    $this->initFields[] = [
+    ]);
+    $this->addField([
       'title'           => 'Дата изменения',
       'name'            => 'dateUpdate',
       'type'            => 'datetime',
       'system'          => true,
       'defaultDisallow' => false
-    ];
-    $this->initFields();
+    ]);
   }
 
-  function initFields() {
-    $this->addFieldsWithFilter($this->initFields);
-  }
-
-  protected function addFieldsWithFilter(array $fields) {
+  function getFormFields() {
+    $fields = $this->fields;
     if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0);
     if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0);
     if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, false, true);
     foreach ($fields as &$v) $v = Arr::filterEmptyStrings($v);
-    $this->addFields($fields);
+    return $fields;
   }
-
-  protected function addInitFields() {}
 
   function addField(array $v) {
     $v['strName'] = $this->strName;
@@ -88,13 +76,13 @@ class DdFields extends Fields {
   }
 
   function getTagFields() {
-    return array_filter($this->getFields(), function(&$v) {
+    return array_filter($this->getFields(), function (&$v) {
       return DdTags::isTagType($v['type']);
     });
   }
 
   function getDateFields() {
-    return array_filter($this->getFields(), function(&$v) {
+    return array_filter($this->getFields(), function (&$v) {
       return ClassCore::hasAncestor(FieldCore::getClass($v['type']), 'FieldEDate');
     });
   }
@@ -105,7 +93,7 @@ class DdFields extends Fields {
    */
   function getFieldsByType($type) {
     $type = (array)$type;
-    return array_filter($this->getFields(), function($v) use ($type) {
+    return array_filter($this->getFields(), function ($v) use ($type) {
       return in_array($v['type'], $type);
     });
   }
