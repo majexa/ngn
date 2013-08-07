@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375784559192" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375870839020" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375796278827" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375797921714" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871655214" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375120438835" ignored="false" />
@@ -51,8 +49,8 @@
     <file path="/FieldEDdCityMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375215238885" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/kp/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251874456" ignored="false" />
     <file path="/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251873999" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864401498" ignored="false" />
-    <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864384317" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871910503" ignored="false" />
+    <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871907229" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/hooks/dd/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250566372" ignored="false" />
     <file path="/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250408827" ignored="false" />
     <file path="$PROJECT_DIR$/../formatron/lib/SubclientsFinder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375252280209" ignored="false" />
@@ -124,14 +122,14 @@
     <file path="/common.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375705271193" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/m/css/common/kp.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375705303329" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/srochnodengi/form.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375713520891" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PageBlockCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PageBlockCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871657486" ignored="false" />
     <file path="$PROJECT_DIR$/../shop/site/data/cache/zend_cache---shoppatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/stm/StmCss.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/stm/CtrlAdminStm.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/stm/StmCss.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871657486" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/stm/CtrlAdminStm.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871657486" ignored="false" />
     <file path="$PROJECT_DIR$/../myninja/site/data/cache/zend_cache---litcultpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
     <file path="$PROJECT_DIR$/../pickup/site/data/cache/zend_cache---litcultpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/priv/PagePriv.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/priv/PagePriv.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871657486" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375871657486" ignored="false" />
     <file path="$PROJECT_DIR$/../fpg/site/data/cache/zend_cache---litcultpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485674" ignored="false" />
     <file path="$PROJECT_DIR$/../sitedraw/site/data/cache/zend_cache---sitedrawpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485674" ignored="false" />
     <file path="$PROJECT_DIR$/../inetmap/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
@@ -221,6 +219,7 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlCommonPageTree.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/DdItemsManagerPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDdStatic.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="/CtrlPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375870867766" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,14 +242,8 @@
       <file leaf-file-name="Form.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/form/Form.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="624" column="0" selection-start="19315" selection-end="19315" vertical-scroll-proportion="-18.923077">
-              <folding>
-                <marker date="1375793372974" expanded="true" signature="514:525" placeholder="..." />
-                <marker date="1375793372974" expanded="true" signature="907:918" placeholder="..." />
-                <marker date="1375793372974" expanded="true" signature="11494:11506" placeholder="..." />
-                <marker date="1375793372974" expanded="true" signature="11598:11610" placeholder="..." />
-                <marker date="1375793372974" expanded="true" signature="13619:13634" placeholder="..." />
-              </folding>
+            <state line="624" column="0" selection-start="19315" selection-end="19315" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -258,7 +251,7 @@
       <file leaf-file-name="DdFields.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/dd/DdFields.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="96" selection-start="1637" selection-end="1652" vertical-scroll-proportion="-9.615385">
+            <state line="54" column="96" selection-start="1637" selection-end="1652" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -267,7 +260,7 @@
       <file leaf-file-name="Arr.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="-6.730769">
+            <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -276,7 +269,7 @@
       <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="-3.2692308">
+            <state line="65" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -285,7 +278,7 @@
       <file leaf-file-name="DdCore.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/more/dd/DdCore.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="5" selection-start="695" selection-end="695" vertical-scroll-proportion="0.2523191">
+            <state line="33" column="5" selection-start="695" selection-end="695" vertical-scroll-proportion="0.031539887">
               <folding />
             </state>
           </provider>
@@ -294,7 +287,7 @@
       <file leaf-file-name="Fields.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/form/Fields.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="3" selection-start="887" selection-end="887" vertical-scroll-proportion="-8.192307">
+            <state line="44" column="3" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -596,7 +589,7 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="31bc3293-ff66-4c01-bc34-46e34de41e84" server_name="v107">
       <method />
     </configuration>
     <list size="0" />
@@ -636,22 +629,22 @@
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2994924" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4822335" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2128788" sideWeight="0.5177665" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.5177665" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2994924" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4822335" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -722,9 +715,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="57" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="13" column="57" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/1.php">
@@ -743,9 +734,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/NgnArrayObject.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="3" selection-start="168" selection-end="168" vertical-scroll-proportion="-4.576923">
-          <folding />
-        </state>
+        <state line="7" column="3" selection-start="168" selection-end="168" vertical-scroll-proportion="-4.576923" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/ArrayAccesseble.class.php">
@@ -758,36 +747,25 @@
     <entry file="file://$PROJECT_DIR$/i/js/tiny_mce/tiny_mce.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="37" selection-start="433" selection-end="433" vertical-scroll-proportion="0.51224107">
-          <folding>
-            <marker date="1370955313974" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1370955313974" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1370955313974" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1370955313974" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/tiny_mce/plugins/media/js/media.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="0" selection-start="298" selection-end="298" vertical-scroll-proportion="0.2881356">
-          <folding>
-            <marker date="1370955311979" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/tiny_mce/classes/Formatter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="98" selection-end="98" vertical-scroll-proportion="0.18478261">
-          <folding />
-        </state>
+        <state line="6" column="0" selection-start="98" selection-end="98" vertical-scroll-proportion="0.18478261" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/phpFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="6" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.33274338">
-          <folding />
-        </state>
+        <state line="49" column="6" selection-start="1665" selection-end="1665" vertical-scroll-proportion="0.33274338" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DdItems.class.php">
@@ -799,48 +777,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/form/Fields.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="3" selection-start="887" selection-end="887" vertical-scroll-proportion="-8.192307">
+        <state line="44" column="3" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/form/Form.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="624" column="0" selection-start="19315" selection-end="19315" vertical-scroll-proportion="-18.923077">
-          <folding>
-            <marker date="1375793372974" expanded="true" signature="514:525" placeholder="..." />
-            <marker date="1375793372974" expanded="true" signature="907:918" placeholder="..." />
-            <marker date="1375793372974" expanded="true" signature="11494:11506" placeholder="..." />
-            <marker date="1375793372974" expanded="true" signature="11598:11610" placeholder="..." />
-            <marker date="1375793372974" expanded="true" signature="13619:13634" placeholder="..." />
-          </folding>
+        <state line="624" column="0" selection-start="19315" selection-end="19315" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DdFields.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="96" selection-start="1637" selection-end="1652" vertical-scroll-proportion="-9.615385">
+        <state line="54" column="96" selection-start="1637" selection-end="1652" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="-6.730769">
+        <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="-3.2692308">
+        <state line="65" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DdCore.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="5" selection-start="695" selection-end="695" vertical-scroll-proportion="0.2523191">
+        <state line="33" column="5" selection-start="695" selection-end="695" vertical-scroll-proportion="0.031539887">
           <folding />
         </state>
       </provider>
