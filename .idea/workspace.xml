@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Arr.class.php" afterPath="$PROJECT_DIR$/lib/core/Arr.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,7 +35,7 @@
     <file path="$PROJECT_DIR$/../kp/m/css/ks/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375331569398" ignored="false" />
     <file path="/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375714749003" ignored="false" />
     <file path="/CtrlKs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375332660907" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375796529416" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864276049" ignored="false" />
     <file path="/SflmFrontend.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375192270670" ignored="false" />
     <file path="/common.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375192484875" ignored="false" />
     <file path="/screen.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375193344704" ignored="false" />
@@ -48,12 +47,12 @@
     <file path="/CtrlCommon.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375203740042" ignored="false" />
     <file path="/Ngn.Request.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375203956756" ignored="false" />
     <file path="/FieldEDdTagsTreeMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375214244541" ignored="false" />
-    <file path="/DataManagerAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251511942" ignored="false" />
+    <file path="/DataManagerAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864589135" ignored="false" />
     <file path="/FieldEDdCityMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375215238885" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/kp/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251874456" ignored="false" />
     <file path="/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251873999" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375863788641" ignored="false" />
-    <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375863780115" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864401498" ignored="false" />
+    <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864384317" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/hooks/dd/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250566372" ignored="false" />
     <file path="/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250408827" ignored="false" />
     <file path="$PROJECT_DIR$/../formatron/lib/SubclientsFinder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375252280209" ignored="false" />
@@ -102,7 +101,7 @@
     <file path="/DmfaDdTagsTreeMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375360177558" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/onePageLandingInfo.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375439119398" ignored="false" />
     <file path="/onePageLandingInfo.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375439046105" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpInner.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375797930025" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpInner.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375867824059" ignored="false" />
     <file path="/CtrlKpInner.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375686846787" ignored="false" />
     <file path="$PROJECT_DIR$/../sd/lib/CtrlSdBlog.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375449650646" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpSendbids.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375522659392" ignored="false" />
@@ -112,7 +111,7 @@
     <file path="$PROJECT_DIR$/../kp/site/config/vars/amountLimits.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375687373829" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/CtrlCommonAsd2.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375686126995" ignored="false" />
     <file path="/CtrlCommonAsd2.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375686125825" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDdItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125405" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDdItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="/CtrlPageDdItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375690202940" ignored="false" />
     <file path="/DdXls.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375689356460" ignored="false" />
     <file path="/Ngn.Form.El.DateRange.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375690929916" ignored="false" />
@@ -128,11 +127,11 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PageBlockCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
     <file path="$PROJECT_DIR$/../shop/site/data/cache/zend_cache---shoppatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/stm/StmCss.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/stm/CtrlAdminStm.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125402" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/stm/CtrlAdminStm.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../myninja/site/data/cache/zend_cache---litcultpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
     <file path="$PROJECT_DIR$/../pickup/site/data/cache/zend_cache---litcultpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/priv/PagePriv.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485673" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../fpg/site/data/cache/zend_cache---litcultpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485674" ignored="false" />
     <file path="$PROJECT_DIR$/../sitedraw/site/data/cache/zend_cache---sitedrawpatchesDbPatcher" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776485674" ignored="false" />
     <file path="$PROJECT_DIR$/../inetmap/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
@@ -143,11 +142,11 @@
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample8/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="$PROJECT_DIR$/../livegrid/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="$PROJECT_DIR$/../sbosd/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/users/userData/CtrlPageUserData.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375786077038" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/users/userData/CtrlPageUserData.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample6/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="$PROJECT_DIR$/../ao/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="$PROJECT_DIR$/../sbosd/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/users/userData/_CtrlPageVUserData.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375786077038" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/users/userData/_CtrlPageVUserData.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample4/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/users/CtrlPageProfiles.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample4/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
@@ -176,11 +175,11 @@
     <file path="$PROJECT_DIR$/../ao/site/lib/CtrlCabinet.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785167663" ignored="false" />
     <file path="$PROJECT_DIR$/../sb-temp/lib/cpm/news/hooks/dd/initFields.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125397" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/cpm/store/StoreOrderFormBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125404" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlAdminPages.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228567" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlAdminPages.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/cpm/store/StoreOrderForm.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125402" ignored="false" />
     <file path="$PROJECT_DIR$/../autocall/site/lib/CtrlInterview.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124836" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/cpm/news/hooks/dd/initFields.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125403" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125404" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../autocall/site/lib/CtrlInterviews.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124834" ignored="false" />
     <file path="/Form.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375793363239" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124833" ignored="false" />
@@ -192,14 +191,14 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/module/PmiDd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125402" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/cpm/storeHp/DmfaStoreHpTags.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125402" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/FieldEPageLink.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125403" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/PageMetatagsItemsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125403" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/PageMetatagsItemsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/FieldEMultiDdFields.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125403" ignored="false" />
     <file path="$PROJECT_DIR$/../temp/test/lib/site/TestItemsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228568" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/FieldEListSlicesType.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125404" ignored="false" />
     <file path="$PROJECT_DIR$/../temp/test/lib/site/TestFieldSet.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228569" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/users/userGroup/CtrlPageVUserGroup.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125404" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/users/userGroup/CtrlPageVUserGroup.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/msgs/Msgs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125405" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/CtrlAdminPageBlocks.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125405" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/CtrlAdminPageBlocks.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/m/srochnodengi/include.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125405" ignored="false" />
     <file path="$PROJECT_DIR$/../sb-temp/lib/cpm/photo/SubPaPhotoImport.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228567" ignored="false" />
     <file path="$PROJECT_DIR$/../temp/test/lib/site/TestTinyImages.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228567" ignored="false" />
@@ -208,11 +207,20 @@
     <file path="$PROJECT_DIR$/../temp/test/lib/site/TestPmiPhotoalbum.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228568" ignored="false" />
     <file path="$PROJECT_DIR$/../temp/test/lib/site/estAlbum.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228568" ignored="false" />
     <file path="$PROJECT_DIR$/../temp/test/lib/site/TestPmiPhoto.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228568" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/DdItemsPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228569" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/DdItemsPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../myninja/site/lib/CtrlPageVCreateDemo.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228569" ignored="false" />
     <file path="$PROJECT_DIR$/../temp/test/lib/TestPmi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228570" ignored="false" />
     <file path="/DdFields.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375795151740" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375797580910" ignored="false" />
+    <file path="/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864258882" ignored="false" />
+    <file path="/CtrlPageDd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864704373" ignored="false" />
+    <file path="/DdCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864673119" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDdItemsMaster.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlAdminPageMeta.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/ProcessDynamicPageBlock.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlCommonPageTree.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/DdItemsManagerPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDdStatic.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -256,10 +264,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Arr.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Arr.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="0.33269963">
+            <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="-6.730769">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="65" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="-3.2692308">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DdCore.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/dd/DdCore.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="5" selection-start="695" selection-end="695" vertical-scroll-proportion="0.2523191">
               <folding />
             </state>
           </provider>
@@ -292,14 +318,12 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" />
         <option value="$PROJECT_DIR$/i/js/ngn/Ngn.cp.LongJob.js" />
         <option value="$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js" />
         <option value="$PROJECT_DIR$/init/core.php" />
         <option value="$PROJECT_DIR$/1.php" />
         <option value="$PROJECT_DIR$/lib/more/form/Fields.class.php" />
         <option value="$PROJECT_DIR$/lib/core/ArrayAccesseble.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/FormBase.class.php" />
         <option value="$PROJECT_DIR$/i/js/phpFunctions.js" />
         <option value="$PROJECT_DIR$/i/js/tiny_mce/classes/Formatter.js" />
@@ -308,6 +332,8 @@
         <option value="$PROJECT_DIR$/lib/more/form/Form.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" />
         <option value="$PROJECT_DIR$/lib/core/Arr.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/DdCore.class.php" />
       </list>
     </option>
   </component>
@@ -694,13 +720,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.DateRangeDialog.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="20" selection-start="388" selection-end="388" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="57" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
@@ -778,6 +797,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/form/Fields.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="3" selection-start="887" selection-end="887" vertical-scroll-proportion="-8.192307">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/form/Form.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="624" column="0" selection-start="19315" selection-end="19315" vertical-scroll-proportion="-18.923077">
@@ -791,20 +817,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/form/Fields.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="3" selection-start="887" selection-end="887" vertical-scroll-proportion="-8.192307">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DdFields.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="54" column="96" selection-start="1637" selection-end="1652" vertical-scroll-proportion="-9.615385">
@@ -814,7 +826,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="0.33269963">
+        <state line="98" column="48" selection-start="2889" selection-end="2889" vertical-scroll-proportion="-6.730769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="-3.2692308">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/DdCore.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="5" selection-start="695" selection-end="695" vertical-scroll-proportion="0.2523191">
           <folding />
         </state>
       </provider>
