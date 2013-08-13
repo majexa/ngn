@@ -77,7 +77,7 @@ use FormDbUnicCheck;
 
   protected function init() {
     parent::init();
-    if (!empty($this->oFields->fields['phone'])) $this->oFields->fields['phone']['options']['disabled'] = true;
+    if (!empty($this->fields->fields['phone'])) $this->fields->fields['phone']['options']['disabled'] = true;
     $this->initRole();
     $this->initSubscribe();
     $this->initMysite();

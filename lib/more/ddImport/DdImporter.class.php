@@ -5,15 +5,15 @@ class DdImporter {
   /**
    * @var DdItemsManagerPage
    */
-  protected $oIM;
+  protected $im;
   
   /**
    * @var DdImportDataReceiver
    */
   protected $oReceiver;
   
-  function __construct(DdItemsManagerPage $oIM, DdImportDataReceiver $oReceiver) {
-    $this->oIM = $oIM;
+  function __construct(DdItemsManagerPage $im, DdImportDataReceiver $oReceiver) {
+    $this->im = $im;
     $this->oReceiver = $oReceiver;
   }
   
@@ -33,7 +33,7 @@ class DdImporter {
         if (method_exists($this, $method))
           $v[$fieldName] = '';
       }      
-      $itemId = $this->oIM->create($v);
+      $itemId = $this->im->create($v);
       foreach (array_keys($_v) as $fieldName) {
         $value = trim($_v[$fieldName]);
         if (empty($value)) continue;
@@ -47,7 +47,7 @@ class DdImporter {
   }
   
   protected function tagsTreeSelectTagsCreate($value, $fieldName) {
-    $oTags = DdTags::get($this->oIM->oItems->strName, $fieldName);
+    $oTags = DdTags::get($this->im->oItems->strName, $fieldName);
     $tags = array_map('trim', explode('→', $value));
     $parentId = 0;
     foreach ($tags as $tag) {
@@ -61,18 +61,18 @@ class DdImporter {
     $tagIds = $this->tagsTreeSelectTagsCreate($value, $fieldName);
     //DdTags::items($this->dm->strName, $fieldName)->createByIds($itemId);
     DdTagsItems::createByIds(
-      $this->oIM->oItems->strName,
+      $this->im->oItems->strName,
       $fieldName,
       $itemId,
       $tagIds
     );
-    $this->oIM->oItems->update($itemId, [
+    $this->im->oItems->update($itemId, [
       $fieldName => $tagIds[count($tagIds)-1]
     ]);
   }
   
   protected function tagsTreeMultiselectTagsCreate($value, $fieldName) {
-    $oTags = DdTags::get($this->oIM->oItems->strName, $fieldName);
+    $oTags = DdTags::get($this->im->oItems->strName, $fieldName);
     $value = array_map('trim', explode(";", $value));
     foreach ($value as $n => $tags) {
       $tags = array_map('trim', explode('→', $tags));
@@ -88,7 +88,7 @@ class DdImporter {
   protected function f_tagsTreeMultiselect($value, $fieldName, $itemId) {
     $collectionTagIds = $this->tagsTreeMultiselectTagsCreate($value, $fieldName);
     DdTagsItems::createByIdsCollection(
-      $this->oIM->oItems->strName,
+      $this->im->oItems->strName,
       $fieldName,
       $itemId,
       $collectionTagIds
@@ -96,17 +96,17 @@ class DdImporter {
     $tagIds = [];
     foreach ($collectionTagIds as $_tagIds)
       $tagIds = Arr::append($tagIds, $_tagIds);
-    $this->oIM->oItems->update($itemId, [
+    $this->im->oItems->update($itemId, [
       $fieldName => serialize($tagIds)
     ]);
   }
   
   protected function f_tagsSelect($value, $fieldName, $itemId) {
     DdTagsItems::createByIds(
-      $this->oIM->oItems->strName,
+      $this->im->oItems->strName,
       $fieldName,
       $itemId,
-      [DdTags::get($this->oIM->oItems->strName, $fieldName)->create($value)]
+      [DdTags::get($this->im->oItems->strName, $fieldName)->create($value)]
     );
   }
   

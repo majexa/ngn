@@ -48,7 +48,7 @@ class CtrlAdminDdField extends CtrlAdmin {
 
   function action_new() {
     if ($this->im->requestCreate()) $this->redirect($this->tt->getPath(3));
-    $this->d['form'] = $this->im->oForm->html();
+    $this->d['form'] = $this->im->form->html();
     $this->setPageTitle('Создание поля структуры «'.$this->d['strData']['title'].'»');
   }
 
@@ -57,7 +57,7 @@ class CtrlAdminDdField extends CtrlAdmin {
     if ($this->im->requestUpdate($this->req->rq('id'))) {
       $this->redirect($this->tt->getPath(3));
     }
-    $this->d['form'] = $this->im->oForm->html();
+    $this->d['form'] = $this->im->form->html();
     $this->setPageTitle('Редактирование поля «'.$fieldData['title'].'» структуры «'.$this->d['strData']['title'].'»');
   }
 

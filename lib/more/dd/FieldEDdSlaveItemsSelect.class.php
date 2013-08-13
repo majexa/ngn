@@ -15,7 +15,7 @@ class FieldEDdSlaveItemsSelect extends FieldESelect {
 
   protected function init() {
     $this->options['options'] = ['' => '—'];
-    $oI = new DdItemsPage($this->oForm->masterPageId);
+    $oI = new DdItemsPage($this->form->masterPageId);
     foreach ($oI->getItems() as $id => $v)
       $this->options['options'][$id] = $v['title'];
     parent::init();

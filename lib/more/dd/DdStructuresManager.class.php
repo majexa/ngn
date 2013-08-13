@@ -4,7 +4,7 @@ class DdStructuresManager extends DbItemsManager {
 
   protected function afterFormElementsInit() {
     // убираем из списка текущую редактируемую структуру
-    if (($el = $this->oForm->getElement('filterStrName')) !== false) unset($el->options['options'][$this->defaultData['name']]);
+    if (($el = $this->form->getElement('filterStrName')) !== false) unset($el->options['options'][$this->defaultData['name']]);
   }
 
   function __construct() {

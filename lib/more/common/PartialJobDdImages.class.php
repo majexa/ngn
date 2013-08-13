@@ -13,7 +13,7 @@ class PartialJobDdImages extends PartialJob {
   /**
    * @var DdItemsManagerPage
    */
-  protected $oIM;
+  protected $im;
   
   /**
    * @param string  $strName
@@ -27,16 +27,16 @@ class PartialJobDdImages extends PartialJob {
     $this->pageId = $pageId;
     $this->w = $w;
     $this->h = $h;
-    $this->oIM = DdCore::getItemsManager($pageId);
+    $this->im = DdCore::getItemsManager($pageId);
     if ($type == 'sm') {
-      $this->oIM->imageSizes['smW'] = $w;
-      $this->oIM->imageSizes['smH'] = $h;
+      $this->im->imageSizes['smW'] = $w;
+      $this->im->imageSizes['smH'] = $h;
     } else {
-      $this->oIM->imageSizes['mdW'] = $w;
-      $this->oIM->imageSizes['mdH'] = $h;
+      $this->im->imageSizes['mdW'] = $w;
+      $this->im->imageSizes['mdH'] = $h;
     }
     $this->type = $type;
-    foreach (array_keys($this->oIM->oForm->oFields->getFieldsByAncestor('imagePreview')) as $name) {
+    foreach (array_keys($this->im->form->fields->getFieldsByAncestor('imagePreview')) as $name) {
       foreach (db()->selectCol(
       "SELECT $name FROM ".DdCore::table($strName)." WHERE pageId=?d", $pageId) as $image) {
         if (empty($image)) continue;
@@ -54,9 +54,9 @@ class PartialJobDdImages extends PartialJob {
   protected function makeJob($n) {
     $imagePath = $this->jobs[$n];
     if ($this->type == 'sm')
-      $this->oIM->makeSmallThumbs($imagePath);
+      $this->im->makeSmallThumbs($imagePath);
     else
-      $this->oIM->makeMiddleThumbs($imagePath);
+      $this->im->makeMiddleThumbs($imagePath);
   }
   
 }

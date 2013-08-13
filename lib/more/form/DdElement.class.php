@@ -9,7 +9,7 @@ trait DdElement {
   }
 
   protected function beforeInit() {
-    $this->strName = isset($this->oForm) ? $this->oForm->strName : Misc::checkEmpty($this->options['strName']);
+    $this->strName = isset($this->form) ? $this->form->strName : Misc::checkEmpty($this->options['strName']);
   }
 
 }

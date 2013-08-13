@@ -11,7 +11,7 @@ DdFieldCore::registerType('ddTagsMultiselect', [
 class FieldEDdTagsMultiselect extends FieldEMultiselect {
 
   protected function init() {
-    $this->options['options'] = Arr::get(DdTags::get($this->oForm->strName, $this->options['name'])->getTags(), 'title', 'id');
+    $this->options['options'] = Arr::get(DdTags::get($this->form->strName, $this->options['name'])->getTags(), 'title', 'id');
     parent::init();
   }
 

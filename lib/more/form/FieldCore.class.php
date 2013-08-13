@@ -7,8 +7,8 @@ class FieldCore {
   /**
    * @return FieldEAbstract
    */
-  static function get($type, array $options = [], FormBase $oForm = null) {
-    return O::get(self::FIELD_ELEMENT_CLASS_PREFIX.ucfirst($type), $options, $oForm);
+  static function get($type, array $options = [], Form $form = null) {
+    return O::get(self::FIELD_ELEMENT_CLASS_PREFIX.ucfirst($type), $options, $form);
   }
   
   static function getClass($type) {
