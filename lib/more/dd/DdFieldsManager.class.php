@@ -35,10 +35,10 @@ class DdFieldsManager extends DbItemsManager {
   protected function beforeFormElementsInit() {
     if (!empty($this->defaultData)) {
       $type = DdFieldCore::getTypeData($this->defaultData['type']);
-      if (!empty($type['disableTypeChange'])) unset($this->oForm->oFields->fields['type']);
+      if (!empty($type['disableTypeChange'])) unset($this->form->fields->fields['type']);
       if (!empty($type['fields'])) {
         foreach ($type['fields'] as &$v) $v['name'] = "settings[{$v['name']}]";
-        $this->oForm->oFields->fields = array_merge($this->oForm->oFields->fields, Arr::assoc($type['fields'], 'name'));
+        $this->form->fields->fields = array_merge($this->form->fields->fields, Arr::assoc($type['fields'], 'name'));
       }
     }
   }
@@ -108,7 +108,7 @@ class DdFieldsManager extends DbItemsManager {
   }
 
   protected function afterUpdate() {
-    if ($this->oForm->getElement('name')->valueChanged) {
+    if ($this->form->getElement('name')->valueChanged) {
       $this->renameImages($this->beforeUpdateData['name'], $this->data['name']);
       $this->renameDdo($this->beforeUpdateData['name'], $this->data['name']);
     }
@@ -122,7 +122,7 @@ class DdFieldsManager extends DbItemsManager {
       }
     }
     $this->updateFilter();
-    if ($this->oForm->getElement('type')->valueChanged) {
+    if ($this->form->getElement('type')->valueChanged) {
       $this->typeAction($this->data['type'], 'delete', $this->beforeUpdateData['name']);
       $this->typeAction($this->data['type'], 'updateCreate', $this->data['name']);
     }

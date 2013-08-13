@@ -6,7 +6,7 @@ class FieldEImagedRadio extends FieldERadio {
 
   function _js() {
     return <<<JS
-$('{$this->oForm->id()}').getElements('.type_{$this->type}').each(function(el) {
+$('{$this->form->id()}').getElements('.type_{$this->type}').each(function(el) {
   Ngn.frm.imagedRadio(el);
 });
 JS;

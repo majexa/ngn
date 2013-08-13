@@ -8,7 +8,7 @@ class FieldEJs extends FieldEAbstract {
   ];
   
   function _js() {
-    return str_replace('{formId}', "'".$this->oForm->id()."'", $this->options['js']);
+    return str_replace('{formId}', "'".$this->form->id()."'", $this->options['js']);
   }
 
 }

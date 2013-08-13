@@ -14,8 +14,8 @@ class FieldEImagePreview extends FieldEImage {
   
   protected function htmlNav() {
     if (empty($this->options['value'])) return '';
-    $deleteBtn = (!empty($this->oForm->options['deleteFileUrl']) and empty($this->options['required'])) ?
-      '<a href="'.$this->oForm->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="iconBtn noborder delete confirm" title="Удалить"><i></i></a>' :
+    $deleteBtn = (!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ?
+      '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="iconBtn noborder delete confirm" title="Удалить"><i></i></a>' :
       '';
     return
 '

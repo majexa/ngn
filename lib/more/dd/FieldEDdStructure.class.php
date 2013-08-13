@@ -17,7 +17,7 @@ class FieldEDdStructure extends FieldESelect {
 
   function _js() {
     return "
-$('{$this->oForm->id()}').getElements('.type_ddStructure select').each(function(eSelect){
+$('{$this->form->id()}').getElements('.type_ddStructure select').each(function(eSelect){
   eSelect.setStyles({
     'float': 'left',
     'margin-right': '5px'

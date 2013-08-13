@@ -24,7 +24,7 @@ use Options;
   /**
    * @var Form
    */
-  public $oForm;
+  public $form;
 
   public $valueChanged = false;
 
@@ -48,25 +48,25 @@ use Options;
   }
 
   function __construct(array $options = [], Form $form = null) {
-    $this->oForm = $form;
-    if ($this->oForm and ($class = $this->allowedFormClass())) {
-      if (!isset($this->oForm)) throw new Exception('$this->oForm must be defined');
-      if (!is_a($this->oForm, $class)) throw new Exception('Form object must be an instance of "'.$class.'" class');
+    $this->form = $form;
+    if ($this->form and ($class = $this->allowedFormClass())) {
+      if (!isset($this->form)) throw new Exception('$this->form must be defined');
+      if (!is_a($this->form, $class)) throw new Exception('Form object must be an instance of "'.$class.'" class');
     }
     // default options
     $this->options['depth'] = 0;
     $this->setOptions($options);
     if (method_exists($this, 'beforeInit')) $this->beforeInit();
     $this->init();
-    if ($this->oForm and !empty($this->options['name'])) {
-      if (!$this->oForm->req) die2($this->oForm->req);
-      $this->isPostValue = (BracketName::getValue($this->oForm->req->p, $this->options['name'], BracketName::modeFalse) !== false);
+    if ($this->form and !empty($this->options['name'])) {
+      if (!$this->form->req) die2($this->form->req);
+      $this->isPostValue = (BracketName::getValue($this->form->req->p, $this->options['name'], BracketName::modeFalse) !== false);
     }
     if ($this->isPostValue) $this->preparePostValue();
     $this->initDefaultValue();
   }
 
-  protected function &getArrayLink() {
+  protected function &getArrayRef() {
     return $this->options;
   }
 
@@ -99,12 +99,12 @@ use Options;
     if (isset($this->staticType)) $this->type = $this->staticType;
     else
       $this->type = lcfirst(Misc::removePrefix('FieldE', get_class($this)));
-    if ($this->oForm and $this->oForm->isSubmitted()) {
-      if ($this->oForm->create) {
+    if ($this->form and $this->form->isSubmitted()) {
+      if ($this->form->create) {
         $this->valueChanged = true;
       }
       else {
-        $defValue = BracketName::getValue($this->oForm->defaultData, $this->options['name']);
+        $defValue = BracketName::getValue($this->form->defaultData, $this->options['name']);
         // Если поле до поста было не пустым
         if ($defValue !== null and $defValue != $this->options['value']) {
           $this->valueChanged = true;
@@ -213,7 +213,7 @@ use Options;
     Sflm::get('js')->addLib("formEl/$this->type");
     Sflm::get('js')->addClass('Ngn.Form.El.'.ucfirst($this->type));
     Sflm::get('css')->addLib("i/css/formEl/$this->type.css");
-    return "\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->oForm->id()}, '{$this->type}');\n";
+    return "\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }
 
   public $errorBacktrace;

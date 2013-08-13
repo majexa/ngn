@@ -80,19 +80,19 @@ class UploadTemp extends Options2 {
     File::delete($this->tempFolder.'/'.$fileName);
   }
   
-  static function extendFormOptions(Form $oF, $uploadUrl = null) {
-    if (!isset($oF->oFields)) throw new Exception('Call constructor first');
+  static function extendFormOptions(Form $form, $uploadUrl = null) {
+    if (!isset($form->fields)) throw new Exception('Call constructor first');
     $ut = new self([
-      'formId' => $oF->id(),
+      'formId' => $form->id(),
       'multiple' => true
     ]);
     $files = Req::convertFiles($ut->getFiles());
-    if (!empty($files)) $oF->options['files'] = $files;
+    if (!empty($files)) $form->options['files'] = $files;
     if (!$uploadUrl) $uploadUrl = '/c2/uploadTemp';
-    $uploadUrl = Misc::addParam($uploadUrl, 'formId', $oF->id());
+    $uploadUrl = Misc::addParam($uploadUrl, 'formId', $form->id());
     $uploadUrl = Misc::addParam($uploadUrl, 'tempId', $ut->tempId);
     $uploadUrl = Misc::addParam($uploadUrl, 'fn', '{fn}');
-    $oF->options['uploadOptions'] = [
+    $form->options['uploadOptions'] = [
       'url' => $uploadUrl,
       'loadedFiles' => Arr::filterByKeys2($files, ['name', 'size'])
     ];
