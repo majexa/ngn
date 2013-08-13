@@ -101,7 +101,7 @@ class Arr {
   }
 
   static function &getRefByKey(array &$arr, $k1, $v1) {
-    foreach ($arr as &$v) if ($v[$k1] == $v1) return $v;
+    foreach ($arr as &$v) if (isset($v[$k1]) and $v[$k1] == $v1) return $v;
     return false;
   }
 
@@ -234,7 +234,8 @@ class Arr {
         if (in_array($v[$key], $value)) {
           $assoc ? $r[$k] = $v : $r[] = $v;
         }
-      } elseif ($ignore) {
+      }
+      elseif ($ignore) {
         $assoc ? $r[$k] = $v : $r[] = $v;
       }
     }
@@ -260,7 +261,7 @@ class Arr {
   }
 
   static function sliceFrom(array $arr, $n, $length = null) {
-    return array_slice($arr, $n, $length ?: count($arr));
+    return array_slice($arr, $n, $length ? : count($arr));
   }
 
   static function toOptions(array $arr, $key = null) {
@@ -315,7 +316,7 @@ class Arr {
 
   static protected function _js(array $array, $formatValue = true, array $_isArray = [true]) {
     self::$depth++;
-    $isArray = isset($_isArray[self::$depth-1]) ? $_isArray[self::$depth-1] : $_isArray[count($_isArray)-1];
+    $isArray = isset($_isArray[self::$depth - 1]) ? $_isArray[self::$depth - 1] : $_isArray[count($_isArray) - 1];
     if ($isArray) {
       $bracketO = '[';
       $bracketC = ']';
@@ -546,51 +547,33 @@ class Arr {
     return $data;
   }
 
-  static function injectAfter(array $array, $k, array $values, $assocKey = false) {
+  static function injectAfter(array $array, $afterKey, array $values, $assocKey = false) {
     $r = [];
     if ($assocKey) {
       foreach ($array as $kk => $vv) {
         $r[$kk] = $vv;
-        if ($kk == $k) foreach ($values as $value) $r[$value[$assocKey]] = $value;
+        if ($kk == $afterKey) foreach ($values as $value) $r[$value[$assocKey]] = $value;
       }
     }
     else {
       for ($i = 0; $i < count($array); $i++) {
         $r[] = $array[$i];
-        if ($i == $k) foreach ($values as $value) $r[] = $value;
+        if ($i == $afterKey) foreach ($values as $value) $r[] = $value;
       }
     }
     return $r;
   }
 
-  /**
-   * @param   array
-   * @param   string  Значение, с которым производиться сравнение ($k == $v[$subkey])
-   * @param   array   Массив значений для вставки
-   * @param   string  Ключ, по которому производиться поиск
-   * @param   bool    Является ли $array ассоциативным массивом
-   * @return  array
-   */
-  static function injectAfterBySubkey(array $array, $k, array $values, $subkey, $assoc = true) {
-    $r = [];
-    if ($assoc) {
-      foreach ($array as $kk => $vv) {
-        $r[$kk] = $vv;
-        if (isset($vv[$subkey]) and $vv[$subkey] == $k) foreach ($values as $value) $r[$value[$subkey]] = $value;
-      }
-    } else {
-      for ($i=0; $i<count($array); $i++) {
-        $r[] = $array[$i];
-        if (isset($array[$i][$subkey]) and $array[$i][$subkey] == $k) {
-          foreach ($values as $value) $r[] = $value;
-        }
-      }
-    }
-    return $r;
+  /*
+  static function placeAfter(array $array, $currentKey, $afterKey, $assocKey = false) {
+    $value = $array[$currentKey];
+    unset($array[$currentKey]);
+    return self::injectAfter($array, $afterKey, [$value], $assocKey);
   }
+  */
 
   static function replaceSubValue(array $arr, $key, $find, $replace) {
-    foreach ($arr as $k => $v) if ($v[$key] == $find) $v[$key] = $replace;
+    foreach ($arr as $v) if ($v[$key] == $find) $v[$key] = $replace;
     return $arr;
   }
 
