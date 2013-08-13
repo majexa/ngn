@@ -84,18 +84,53 @@ class Form {
   public $req;
 
   /**
-   * @param array/Fields $fields
+   * @var Fields
+   */
+  public $fields;
+
+  /**
+   * Если флаг включен в форме будут выводится только обязательные поля
+   *
+   * @var bool
+   */
+  public $onlyRequired = false;
+
+  public $disableSubmit = false;
+
+  /**
+   * @var FormSpamBotBlocker
+   */
+  public $fsbb;
+
+  public $nospam;
+
+  public $enableFSBB = true;
+
+  public $elementsData = [];
+
+  public $defaultData = [];
+
+  public $create = false;
+
+  static $counter = 1;
+
+  /**
+   * @param array/Fields
    * @param array $options
    */
   function __construct($fields, array $options = []) {
     if (is_array($fields)) $fields = new Fields($fields);
-    elseif (!is_a($fields, 'Fields')) throw new Exception("\$fields is not Fields type");
+    if (!is_a($fields, 'Fields')) throw new Exception("\$fields is not Fields type (".get_class($fields).")");
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);
     $this->req = empty($this->options['req']) ? O::get('Req') : $this->options['req'];
     $this->init();
-    if (!$this->isSubmitted() and !empty($this->options['defaultsFromReq'])) $this->defaultData = $this->req->r;
+  }
+
+  protected function getDefaultData() {
+    if (!$this->isSubmitted() and !empty($this->options['defaultsFromReq'])) return $this->req->r;
+    return $this->defaultData;
   }
 
   function isSubmitted() {
@@ -509,46 +544,23 @@ class Form {
     return $r;
   }
 
-  // ==========================
-
-  /**
-   * @var Fields
-   */
-  public $fields;
-
-  /**
-   * Если флаг включен в форме будут выводится только обязательные поля
-   *
-   * @var bool
-   */
-  public $onlyRequired = false;
-
-  public $disableSubmit = false;
-
-  /**
-   * @var FormSpamBotBlocker
-   */
-  public $fsbb;
-
-  public $nospam;
-
-  public $enableFSBB = true;
-
-  //public $enableCaptcha = false;
-
-  public $elementsData = [];
-
-  public $defaultData = [];
-
-  public $create = false;
-
-  static $counter = 1;
+  //protected $_id;
 
   /**
    * @return string Уникальный идентификатор формы
    */
   function id() {
-    return 'f'.md5(serialize($this->fields->fields));
+    return 'f'.md5(serialize($this->fields->getFields()));;
+    /*
+    if (isset($this->lastFields) and ($this->lastFields != $this->fields->getFields())) {
+      $ff = $this->fields->getFields();
+      foreach ($ff as $k => $v) if ($v != $this->lastFields[$k]) die2([$v, $this->lastFields[$k]]);
+      //die2([$this->lastFields, $this->fields->getFields()]);
+    }
+
+    $this->lastFields = $this->fields->getFields();
+    return $this->_id;
+    */
   }
 
   protected function init() {
@@ -586,6 +598,11 @@ class Form {
     if (!isset($data['name'])) throw new Exception('Name not defined in: '.getPrr($data));
     $data['type'] = 'hidden';
     $this->hiddenFieldsData[] = $data;
+  }
+
+  function addField(array $v, $after = false) {
+    if (isset($this->_id)) throw new Exception('Can not add fields after form ID was formed');
+    $this->fields->addField($v, $after);
   }
 
   protected $defaultElementsDefined = false;

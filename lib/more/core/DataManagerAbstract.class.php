@@ -117,7 +117,8 @@ abstract class DataManagerAbstract extends Options2 {
     $this->form->create = true;
     $this->setFormElementsData($data);
     if (!$this->form->validate()) {
-      if ($throwFormErrors) throw new Exception((IS_DEBUG ? get_class($this).': ' : '').$this->form->lastError.(IS_DEBUG ? '. data: '.getPrr($data) : '')); else return false;
+      if ($throwFormErrors) throw new Exception((IS_DEBUG ? get_class($this).': ' : '').$this->form->lastError.(IS_DEBUG ? '. data: '.getPrr($data) : ''));
+      else return false;
     }
     $r = $this->makeCreate();
     if ($r === false and $throwFormErrors) {
@@ -198,7 +199,8 @@ abstract class DataManagerAbstract extends Options2 {
     $this->form->fromRequest = false;
     $this->setFormElementsData($data);
     if ($this->form->hasErrors) {
-      if ($throwFormErrors) throw new Exception($this->form->lastError.'. data: '.getPrr($data)); else return false;
+      if ($throwFormErrors) throw new Exception($this->form->lastError.'. data: '.getPrr($data));
+      else return false;
     }
     $r = $this->makeUpdate($id);
     if ($r === false and $throwFormErrors) {
@@ -242,7 +244,8 @@ abstract class DataManagerAbstract extends Options2 {
       $id = $this->_create();
     } catch (NgnValidError $e) {
       $this->validError = $e;
-      if (get_class($e) == 'FormError') $this->form->getElement($e->elementName)->error($e->getMessage()); else
+      if (get_class($e) == 'FormError') $this->form->getElement($e->elementName)->error($e->getMessage());
+      else
         $this->form->globalError($e->getMessage());
       return false;
     }
@@ -375,8 +378,8 @@ abstract class DataManagerAbstract extends Options2 {
    * Вызывает статический метод класса FieldE[fieldType] и заменяет с помощью него значение
    * данных
    *
-   * @param  string        $method
-   * @param  array         $data
+   * @param  string $method
+   * @param  array $data
    * @param  integer/null  $id
    */
   protected function fieldTypeAction($method, array &$data) {
@@ -388,10 +391,13 @@ abstract class DataManagerAbstract extends Options2 {
     }
   }
 
+  protected $elementTypeActionProcessed = [];
+
   protected function elementTypeAction($method) {
     $this->fieldTypeAction($method, $this->data);
     $method = 'el'.ucfirst($method);
     foreach ($this->form->getElements() as $el) {
+      $this->elementTypeActionProcessed[] = $el['name'];
       if (($o = $this->getDmfa($el->type)) === false) continue;
       if (!method_exists($o, $method)) continue;
       $o->$method($el);
@@ -487,7 +493,8 @@ abstract class DataManagerAbstract extends Options2 {
     if (!isset($this->image)) $this->image = new Image();
     if ($this->smResizeType == 'resample') {
       $this->image->resampleAndSave($imageRoot, Misc::getFilePrefexedPath2($imageRoot, 'sm_'), $this->imageSizes['smW'], $this->imageSizes['smH']);
-    } else {
+    }
+    else {
       $this->image->resizeAndSave($imageRoot, Misc::getFilePrefexedPath2($imageRoot, 'sm_'), $this->imageSizes['smW'], $this->imageSizes['smH']);
     }
   }
@@ -497,7 +504,8 @@ abstract class DataManagerAbstract extends Options2 {
     if (!isset($this->image)) $this->image = new Image();
     if ($this->mdResizeType == 'resize') {
       $this->image->resizeAndSave($imageRoot, Misc::getFilePrefexedPath2($imageRoot, 'md_'), $this->imageSizes['mdW'], $this->imageSizes['mdH']);
-    } else {
+    }
+    else {
       $this->image->resampleAndSave($imageRoot, Misc::getFilePrefexedPath2($imageRoot, 'md_'), $this->imageSizes['mdW'], $this->imageSizes['mdH']);
     }
   }
@@ -530,7 +538,8 @@ abstract class DataManagerAbstract extends Options2 {
     ];
     if (!$this->form->create) {
       $opt += ['attachIdTpl' => "'".$this->getTinyAttachItemId($itemId, '{fn}')."'"];
-    } else {
+    }
+    else {
       $opt += ['attachIdTpl' => "'".$this->getTinyAttachTempId('{fn}')."'"];
     }
     $opt = Arr::jsObj($opt, false);

@@ -50,7 +50,7 @@ class DdFields extends Fields {
   }
 
   function getFormFields() {
-    $fields = $this->fields;
+    $fields = $this->getFields();
     if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0);
     if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0);
     if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, false, true);
@@ -58,12 +58,15 @@ class DdFields extends Fields {
     return $fields;
   }
 
-  function addField(array $v) {
+  protected $initFields = [];
+
+  function addField(array $v, $after = false) {
     $v['strName'] = $this->strName;
     $v['dd'] = true;
     if (isset($v['active'])) $v['active'] = 1;
     foreach (['system', 'defaultDisallow', 'virtual'] as $k) if (!isset($v[$k])) $v[$k] = 0;
-    parent::addField($v);
+    $this->initFields[$v['name']] = $v;
+    parent::addField($v, $after);
   }
 
   function exists($name) {
@@ -71,12 +74,11 @@ class DdFields extends Fields {
   }
 
   function getType($name) {
-    $r = Arr::getSubValue($this->initFields, 'name', $name, 'type');
-    return $r;
+    return isset($this->initFields[$name]) ? $this->initFields[$name]['type'] : false;
   }
 
   function getTagFields() {
-    return array_filter($this->getFields(), function (&$v) {
+    return array_filter($this->initFields, function (&$v) {
       return DdTags::isTagType($v['type']);
     });
   }

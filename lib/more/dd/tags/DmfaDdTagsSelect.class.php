@@ -3,7 +3,6 @@
 class DmfaDdTagsSelect extends DmfaDdTagsAbstract {
 
   function afterCreateUpdate($v, $k) {
-
     if (empty($v)) {
       $this->deleteTagItems($k);
     } else {
