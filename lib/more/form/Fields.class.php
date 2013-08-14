@@ -96,7 +96,8 @@ class Fields extends ArrayAccesseble {
   function addField(array $v, $after = false) {
     if (!isset($v['name'])) $v['name'] = 'fld'.$this->n;
     if (!isset($v['type'])) $v['type'] = 'text';
-    if ($after) $this->fields = Arr::injectAfter($this->fields, $after, [$v], 'name');
+    if (isset($this->fields[$v['name']])) unset($this->fields[$v['name']]);
+    if ($after) $this->fields = Arr::injectAfter($this->fields, $after, [$v], 'name', true);
     else $this->fields[$v['name']] = $v;
     $this->n++;
   }
