@@ -58,7 +58,7 @@ class DdFields extends Fields {
     return $fields;
   }
 
-  protected $initFields = [];
+  public $initFields = [];
 
   function addField(array $v, $after = false) {
     $v['strName'] = $this->strName;

@@ -102,6 +102,11 @@ class Fields extends ArrayAccesseble {
     $this->n++;
   }
 
+  function replaceField(array $field) {
+    Arr::checkEmpty($field, 'name');
+    foreach ($field as $k => $v) $this->fields[$field['name']][$k] = $v;
+  }
+
   function getFieldsByAncestor($ancestorType) {
     $fields = [];
     foreach ($this->getFields() as $k => $v) {
