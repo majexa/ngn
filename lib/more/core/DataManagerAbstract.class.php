@@ -398,7 +398,7 @@ abstract class DataManagerAbstract extends Options2 {
     $method = 'el'.ucfirst($method);
     foreach ($this->form->getElements() as $el) {
       $this->elementTypeActionProcessed[] = $el['name'];
-      if (($o = $this->getDmfa($el->type)) === false) continue;
+      if (($o = $this->getDmfa($this->form->fields->getType($el['name']))) === false) continue;
       if (!method_exists($o, $method)) continue;
       $o->$method($el);
     }
