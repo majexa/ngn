@@ -145,7 +145,7 @@ class Html {
   static function select($name, $options, $default = null, array $opts = []) {
     $dataTags = isset($opts['data']) ? ' '.Tt()->enum($opts['data'], '', '`data-`.$k.`="`.$v.`"`') : '';
     if (empty($opts['noSelectTag'])) {
-      $html = "<select name=\"$name\"".$dataTags.
+      $html = "\n<select name=\"$name\"".$dataTags.
         (!empty($opts['tagId']) ? ' id="'.$opts['tagId'].'"' : "").
         (!empty($opts['id']) ? ' id="'.$opts['id'].'"' : "").
         (!empty($opts['class']) ? ' class="'.$opts['class'].'"' : "").'>';
@@ -157,9 +157,9 @@ class Html {
     foreach ($options as $key => $val) {
       $k = $key;
       if (!empty($opts['defaultCaption'])) $k = $val;
-      $html .= "\t<option value=\"".$key."\"".($k == $default ? ' selected' : '').">$val</option>\r\n";
+      $html .= "\n\t<option value=\"".$key."\"".($k == $default ? ' selected' : '').">$val</option>";
     }
-    if (empty($opts['noSelectTag'])) $html .= "</select>\r\n";
+    if (empty($opts['noSelectTag'])) $html .= "\n</select>\n";
     return $html;
   }
 

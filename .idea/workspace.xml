@@ -2,13 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" afterPath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/Fields.class.php" afterPath="$PROJECT_DIR$/lib/more/form/Fields.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/common/Html.class.php" afterPath="$PROJECT_DIR$/lib/more/common/Html.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376472484552" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376485742606" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375878968563" ignored="false" />
     <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376403999718" ignored="false" />
@@ -37,7 +38,7 @@
     <file path="$PROJECT_DIR$/../kp/m/css/ks/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375331569398" ignored="false" />
     <file path="/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376372091908" ignored="false" />
     <file path="/CtrlKs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376389484712" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376475252101" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376485877150" ignored="false" />
     <file path="/SflmFrontend.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375192270670" ignored="false" />
     <file path="/common.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375192484875" ignored="false" />
     <file path="/screen.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375193344704" ignored="false" />
@@ -49,7 +50,7 @@
     <file path="/CtrlCommon.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375203740042" ignored="false" />
     <file path="/Ngn.Request.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375203956756" ignored="false" />
     <file path="/FieldEDdTagsTreeMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375214244541" ignored="false" />
-    <file path="/DataManagerAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376475146340" ignored="false" />
+    <file path="/DataManagerAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376484787263" ignored="false" />
     <file path="/FieldEDdCityMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375215238885" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/kp/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251874456" ignored="false" />
     <file path="/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251873999" ignored="false" />
@@ -167,7 +168,7 @@
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample2/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="/VkVideoGrabber.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776866539" ignored="false" />
     <file path="/core.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375777651937" ignored="false" />
-    <file path="/Fields.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376471399601" ignored="false" />
+    <file path="/Fields.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376485842945" ignored="false" />
     <file path="/1.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375781442804" ignored="false" />
     <file path="/ArrayAccesseble.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375782008333" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/stm/StmData.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375782037685" ignored="false" />
@@ -212,9 +213,9 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/DdItemsPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
     <file path="$PROJECT_DIR$/../myninja/site/lib/CtrlPageVCreateDemo.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228569" ignored="false" />
     <file path="$PROJECT_DIR$/../temp/test/lib/TestPmi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785228570" ignored="false" />
-    <file path="/DdFields.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376329065716" ignored="false" />
+    <file path="/DdFields.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376485752108" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376336006945" ignored="false" />
-    <file path="/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376475221429" ignored="false" />
+    <file path="/CtrlKpBase.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376485791388" ignored="false" />
     <file path="/CtrlPageDd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864704373" ignored="false" />
     <file path="/DdCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375864673119" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDdItemsMaster.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375865170812" ignored="false" />
@@ -267,7 +268,8 @@
     <file path="$PROJECT_DIR$/../kp/site/tpl/kp/home/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376396825502" ignored="false" />
     <file path="/CtrlCityclassDefault.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376397887733" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/test/testProject.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376472361285" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/TestKpNewOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376473980634" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/TestKpNewOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376484495422" ignored="false" />
+    <file path="/TestKpNewOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376484431217" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,16 +292,16 @@
       <file leaf-file-name="DdFields.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/dd/DdFields.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="19" selection-start="1907" selection-end="1907" vertical-scroll-proportion="-7.0">
+            <state line="53" column="0" selection-start="1471" selection-end="1471" vertical-scroll-proportion="-6.5384617">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DmfaDdTagsSelect.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsSelect.class.php">
+      <file leaf-file-name="Fields.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/form/Fields.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="99" selection-end="99" vertical-scroll-proportion="0.15769945">
+            <state line="107" column="3" selection-start="2442" selection-end="2442" vertical-scroll-proportion="0.031539887">
               <folding />
             </state>
           </provider>
@@ -308,7 +310,16 @@
       <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="404" column="0" selection-start="11087" selection-end="11087" vertical-scroll-proportion="-10.0">
+            <state line="400" column="0" selection-start="10912" selection-end="10912" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Html.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/more/common/Html.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="147" column="17" selection-start="5666" selection-end="5666" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -332,22 +343,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/more/form/TestForm.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/upload/UploadTemp.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/FieldsForm.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/FormFields.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdForm.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/gridFilters/DdGridFilters.class.php" />
         <option value="$PROJECT_DIR$/lib/more/core/ItemsManager.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" />
         <option value="$PROJECT_DIR$/lib/core/common.func.php" />
         <option value="$PROJECT_DIR$/lib/core/Arr.class.php" />
         <option value="$PROJECT_DIR$/lib/more/mail/SendEmail.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/form/Fields.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/Form.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsSelect.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/form/Fields.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/common/Html.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" />
       </list>
     </option>
   </component>
@@ -597,22 +608,22 @@
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2961083" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2951096" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42978004" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2219697" sideWeight="0.57022" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23030303" sideWeight="0.7038917" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42978004" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -681,11 +692,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/more/tpl/common/form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/core/CtrlCommon.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="613" column="6" selection-start="17211" selection-end="17211" vertical-scroll-proportion="0.032319393">
@@ -695,16 +701,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/queue/Queue.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="34" selection-start="2214" selection-end="2214" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="70" column="34" selection-start="2214" selection-end="2214" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/mail/SendEmail.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="0" selection-start="1501" selection-end="1501" vertical-scroll-proportion="-0.65384614">
-          <folding />
-        </state>
+        <state line="50" column="0" selection-start="1501" selection-end="1501" vertical-scroll-proportion="-0.65384614" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.UploadAttach.js">
@@ -730,9 +732,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/test/ProjectTestRunner.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="33" selection-start="242" selection-end="262" vertical-scroll-proportion="0.41001856">
-          <folding />
-        </state>
+        <state line="13" column="33" selection-start="242" selection-end="262" vertical-scroll-proportion="0.41001856" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/core/ItemsManager.class.php">
@@ -749,23 +749,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/form/Fields.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="102" column="3" selection-start="2287" selection-end="2287" vertical-scroll-proportion="0.5473098">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/form/Form.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="88" column="9" selection-start="2150" selection-end="2150" vertical-scroll-proportion="0.34980989">
-          <folding>
-            <marker date="1376474428171" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1376474428171" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1376474428171" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1376474428171" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1376474428171" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -776,23 +763,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsSelect.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="99" selection-end="99" vertical-scroll-proportion="0.15769945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/common/Html.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="17" selection-start="5666" selection-end="5666" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="404" column="0" selection-start="11087" selection-end="11087" vertical-scroll-proportion="-10.0">
+        <state line="400" column="0" selection-start="10912" selection-end="10912" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DdFields.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="19" selection-start="1907" selection-end="1907" vertical-scroll-proportion="-7.0">
+        <state line="53" column="0" selection-start="1471" selection-end="1471" vertical-scroll-proportion="-6.5384617">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsSelect.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/form/Fields.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="99" selection-end="99" vertical-scroll-proportion="0.15769945">
+        <state line="107" column="3" selection-start="2442" selection-end="2442" vertical-scroll-proportion="0.031539887">
           <folding />
         </state>
       </provider>
