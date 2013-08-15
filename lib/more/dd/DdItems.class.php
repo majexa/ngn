@@ -144,6 +144,8 @@ class DdItems extends Items {
     $this->extendItemNumberRange($item);
     //$this->extendItemDd($item);
     $this->extendItem($item);
+    $modelClass = 'DdItemF'.ucfirst($this->strName);
+    if (class_exists($modelClass)) $item = new $modelClass($item);
     return $item;
   }
 
