@@ -78,19 +78,6 @@ class CtrlAdminTags extends CtrlAdmin {
     $this->setPageTitle('Редактирование тэгов');
   }
 
-  /*
-  function action_list() {
-    $this->setPageTitle("Поле «{$this->d['field']['title']}»");
-    if ($this->tags->group->tree) {
-      $this->d['tpl'] = 'tags/listTree';
-    }
-    else {
-      $this->d['tags'] = $this->tags->getTags();
-      $this->d['tpl'] = 'tags/listFlat';
-    }
-  }
-  */
-
   protected function getGrid() {
     $group = DdTagsGroup::getById($this->groupId);
     return Items::grid([
@@ -133,26 +120,6 @@ class CtrlAdminTags extends CtrlAdmin {
     DdTags::rebuildParents();
     $this->redirect();
   }
-
-  /*
-  function action_new() {
-    $this->setPageTitle('Создание тэга для поля «<b>'.$this->d['field']['title'].'</b>» структуры «<b>'.$this->d['structure']['title'].'</b>»');
-  }
-
-  function action_edit() {
-    $this->d['tag'] = DbModelCore::get('tags', $this->req->rq('id'));
-  }
-
-  function action_update() {
-    $this->tags->update($this->req->rq('tagId'), ['title' => $this->req->rq('title')]);
-  }
-
-  function action_create() {
-    $this->tags->create(['title' => $this->req->rq('title')]);
-    $this->redirect($this->tt->getPath(3).'/list');
-  }
-
-  */
 
   function action_ajax_create() {
     $this->tags->create(['title' => $this->req->rq('title')]);

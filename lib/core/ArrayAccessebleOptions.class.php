@@ -8,6 +8,10 @@ use Options;
     $this->init();
   }
 
+  protected function &getArrayRef() {
+    return $this->options;
+  }
+
   function init() {}
 
 }
