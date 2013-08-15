@@ -34,12 +34,14 @@ class UsersEditForm extends UsersForm {
         'name'  => 'passBegin',
         'title' => 'Изменить пароль',
         'type'  => 'headerToggle'
-      ], [
+      ],
+      [
         'name'  => 'pass',
         'title' => 'Пароль',
         'help'  => 'Оставьте пустым, если не хотите менять',
         'type'  => 'password'
-      ], [
+      ],
+      [
         'type' => 'headerClose'
       ]
     ]);

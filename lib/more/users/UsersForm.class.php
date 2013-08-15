@@ -53,7 +53,7 @@ use FormDbUnicCheck;
       ], array_map(function($v) {
         $v['name'] = 'extra['.$v['name'].']';
         return $v;
-      }, (new DdFields(UsersCore::extraStrName, $this->extraFieldsOptions()))->fields));
+      }, (new DdFields(UsersCore::extraStrName, $this->extraFieldsOptions()))->getFormFields()));
     }
     return $fields;
   }

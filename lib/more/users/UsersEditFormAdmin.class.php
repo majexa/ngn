@@ -11,5 +11,4 @@ class UsersEditFormAdmin extends UsersEditForm {
     return ['getDisallowed' => true];
   }
 
-
 }
