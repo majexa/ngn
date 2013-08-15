@@ -453,8 +453,13 @@ class DdItems extends Items {
     $tags = DdTags::get($this->strName, $tagField);
     if (!$byId and $tags->group->tree) throw new Exception("Getting tags by name supportes only flat tags. '$tagField' is tree type tag.");
     $itemIds = [];
+    if (!$byId) {
+      foreach ($tagValues as &$v) {
+        $v = db()->selectCell("SELECT id FROM {$tags->group->table} WHERE strName=? AND name=?", $this->strName, $v);
+      }
+    }
     foreach ($tagValues as $v) {
-      $tag = $byId ? DbModelCore::get($tags->group->table, $v) : DbModelCore::get($tags->group->table, $v, 'name');
+      $tag = DbModelCore::get($tags->group->table, $v);
       if ($tag === false) throw new Exception('There is no such tag: '.$v);
       $itemIds = Arr::append($itemIds, DdTags::items($this->strName, $tagField)->getIdsByTagId($tag['id']));
     }
