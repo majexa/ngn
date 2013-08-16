@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/Ddo.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/Ddo.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js" afterPath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376553618256" ignored="false" />
@@ -105,7 +102,7 @@
     <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpInner.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376474220999" ignored="false" />
     <file path="/CtrlKpInner.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376403485913" ignored="false" />
     <file path="$PROJECT_DIR$/../sd/lib/CtrlSdBlog.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375449650646" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpSendbids.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376635284023" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpSendbids.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376636242260" ignored="false" />
     <file path="/CtrlKpSendbids.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376635266050" ignored="false" />
     <file path="/DdCrudAbstractCtrl.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375545979146" ignored="false" />
     <file path="/web.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375634156021" ignored="false" />
