@@ -336,7 +336,7 @@ use Options;
     return $html;
   }
 
-  protected function elsItem(array &$item) {
+  protected function elsItem(&$item) {
     $item['o'] = $this;
     $v['premoder'] = $this->premoder;
     return Tt()->getTpl($this->tplPathItem, $item);
