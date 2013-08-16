@@ -746,12 +746,9 @@ Form.Validator.addAllThese([
   ['validate-fullName', {
     errorMsg: 'неправильный формат имени',
     test: function(element) {
-      return true;
-      /*
-       if (!element.value) return true;
-       if (element.value.match(/^\S+\s+\S+\s+\S+$/i)) return true;
-       else return false;
-       */
+      //return true;
+      if (!element.value) return true;
+      if (element.value.match(/^\S+\s+\S+\s+\S+.*$/i)) return true; else return false;
     }
   }],
   ['validate-domain', {
