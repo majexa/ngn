@@ -3,8 +3,10 @@
 class AuthForm extends Form {
 
   protected function defineOptions() {
-    $this->options['name'] = 'auth';
-    $this->options['submitTitle'] = 'Войти';
+    return [
+      'name'        => 'auth',
+      'submitTitle' => 'Войти'
+    ];
   }
 
   function __construct(array $options = []) {
@@ -14,7 +16,8 @@ class AuthForm extends Form {
         'title'    => UserRegCore::getAuthLoginTitle(),
         'type'     => 'text',
         'required' => true
-      ], [
+      ],
+      [
         'name'     => 'authPass',
         'title'    => 'Пароль',
         'type'     => 'password',
@@ -29,7 +32,9 @@ class AuthForm extends Form {
     $data = $this->getData();
     if (!Auth::loginByRequest($data['authLogin'], $data['authPass'])) {
       if (in_array(Auth::$errors[0]['code'], [
-        Auth::ERROR_AUTH_NO_LOGIN, Auth::ERROR_AUTH_USER_NOT_ACTIVE, Auth::ERROR_EMPTY_LOGIN_OR_PASS
+        Auth::ERROR_AUTH_NO_LOGIN,
+        Auth::ERROR_AUTH_USER_NOT_ACTIVE,
+        Auth::ERROR_EMPTY_LOGIN_OR_PASS
       ])
       ) $this->getElement('authLogin')->error(Auth::$errors[0]['text']);
       else $this->getElement('authPass')->error(Auth::$errors[0]['text']);

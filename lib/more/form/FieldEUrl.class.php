@@ -3,7 +3,7 @@
 class FieldEUrl extends FieldEText {
 
   protected function defineOptions() {
-    $this->options['cssClass'] = 'validate-url';
+    return ['cssClass' => 'validate-url'];
   }
 
   function value() {

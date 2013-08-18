@@ -3,8 +3,9 @@
 class FieldEDdStaticStructure extends FieldESelect {
 
   protected function defineOptions() {
-    $this->options['options'] = ['' => '— '.LANG_NOTHING_SELECTED.' —'];
-    $this->options['options'] = Arr::get((new DdStructureItems)->getItems(), 'title', 'name');
+    return [
+      'options' => array_merge(['' => '— '.LANG_NOTHING_SELECTED.' —'], Arr::get((new DdStructureItems)->getItems(), 'title', 'name'))
+    ];
   }
 
 }

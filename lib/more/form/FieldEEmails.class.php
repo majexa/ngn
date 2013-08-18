@@ -3,12 +3,12 @@
 class FieldEEmails extends FieldETextarea {
 
   protected function defineOptions() {
-    $this->options['help'] = 'Через запятую';
+    return ['help' => 'Через запятую'];
   }
 
   protected function prepareValue() {
     if (!empty($this->options['value'])) {
-      $this->options['value'] = implode(', ', array_map(function($email) {
+      $this->options['value'] = implode(', ', array_map(function ($email) {
         return trim($email);
       }, explode(',', $this->options['value'])));
     }

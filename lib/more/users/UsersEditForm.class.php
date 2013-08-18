@@ -20,8 +20,7 @@ class UsersEditForm extends UsersForm {
   }
 
   protected function defineOptions() {
-    parent::defineOptions();
-    $this->options['submitTitle'] = 'Сохранить';
+    return array_merge(parent::defineOptions(), ['submitTitle' => 'Сохранить']);
   }
 
   protected function _getFields() {

@@ -3,7 +3,7 @@
 class FieldESiteControllers extends FieldESelect {
 
   protected function defineOptions() {
-    $this->options['options'] = PageControllersCore::getTitles();
+    return ['options' => PageControllersCore::getTitles()];
   }
 
 }

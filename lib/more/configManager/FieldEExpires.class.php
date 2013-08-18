@@ -3,7 +3,7 @@
 class FieldEExpires extends FieldESelect {
 
   protected function defineOptions() {
-    $this->options['options'] = [
+    return [
       60*60*24*1 => '1 день',
       60*60*24*2 => '2 дня',
       60*60*24*3 => '3 дня',

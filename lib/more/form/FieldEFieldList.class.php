@@ -9,8 +9,10 @@ DdFieldCore::registerType('fieldList', [
 class FieldEFieldList extends FieldEFieldSetAbstract {
 
   protected function defineOptions() {
-    $this->options['deleteTitle'] = 'Удалить поле';
-    $this->options['cleanupTitle'] = 'Очистить поле';
+    return [
+      'deleteTitle' => 'Удалить поле',
+      'cleanupTitle' => 'Очистить поле'
+    ];
   }
 
   protected function init() {

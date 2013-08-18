@@ -36,7 +36,7 @@ class Fields extends ArrayAccesseble {
   }
 
   protected function defineOptions() {
-    $this->options = [
+    return [
       'errorOnTypeNotExists' => false
     ];
   }

@@ -6,8 +6,10 @@ trait Options {
 
   public $options = [];
 
+  protected $optionsDefined;
+
   function setOptions(array $options) {
-    $this->defineOptions();
+    if (!$this->optionsDefined) $this->options = array_merge($this->options, $this->defineOptions());
     $this->optionsDefined = true;
     $this->options = array_merge($this->options, $options);
     foreach (static::$requiredOptions as $k)
@@ -15,6 +17,8 @@ trait Options {
         throw new Exception('Class "'.get_class($this).'": option "'.$k.'" does not exists');
   }
 
-  protected function defineOptions() {}
+  protected function defineOptions() {
+    return [];
+  }
 
 }

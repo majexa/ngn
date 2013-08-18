@@ -3,8 +3,7 @@
 abstract class AgiDigitAcceptAction extends AgiGetDigitAction {
 
   protected function defineOptions() {
-    parent::defineOptions();
-    $this->options['declineSound'] = "ivr/{$this->name}/decline";
+    return array_merge(parent::defineOptions(), ['declineSound' => "ivr/{$this->name}/decline"]);
   }
 
   protected function getAllowedDigits() {

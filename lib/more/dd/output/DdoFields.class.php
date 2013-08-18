@@ -75,7 +75,7 @@ class DdoFields {
   ];
 
   protected function defineOptions() {
-    $this->options = [
+    return [
       'getAll' => false,
       'allowed' => []
     ];

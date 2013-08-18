@@ -3,7 +3,7 @@
 class FieldEDdFields extends FieldESelect {
 
   protected function defineOptions() {
-    $this->options['options'] = DdFieldOptions::fields($this->form->strName);
+    return ['options' => DdFieldOptions::fields($this->form->strName)];
   }
 
 }

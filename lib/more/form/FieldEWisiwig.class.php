@@ -7,8 +7,7 @@ class FieldEWisiwig extends FieldETextarea {
   protected $staticType;
 
   function defineOptions() {
-    parent::defineOptions();
-    $this->options['rowClass'] = 'elWisiwig';
+    return array_merge(parent::defineOptions(), ['rowClass' => 'elWisiwig']);
   }
 
   protected function addRequiredCssClass() {

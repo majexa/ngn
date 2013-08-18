@@ -3,7 +3,7 @@
 class FieldEUser extends FieldEAutocompleter {
 
   protected function defineOptions() {
-    $this->options['help'] = 'Для поиска начните вводить email пользователя';
+    return ['help' => 'Для поиска начните вводить email пользователя'];
   }
 
   protected function validate2() {

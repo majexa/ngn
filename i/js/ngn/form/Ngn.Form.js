@@ -724,7 +724,7 @@ Form.Validator.addAllThese([
     }
   }],
   ['validate-num-max', {
-    errorMsg: 'слишком бьольшое число',
+    errorMsg: 'слишком большое число',
     test: function(element, props) {
       if (!element.get('value')) return true;
       var strict = typeOf(element.get('data-strict')) != 'null';

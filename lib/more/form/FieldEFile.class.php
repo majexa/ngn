@@ -7,8 +7,7 @@
 class FieldEFile extends FieldEFileBase {
 
   function defineOptions() {
-    parent::defineOptions();
-    $this->options['currentFileTitle'] = 'Текущий файл';
+    return array_merge(parent::defineOptions(), ['currentFileTitle' => 'Текущий файл']);
   }
 
   protected function init() {
@@ -25,9 +24,7 @@ class FieldEFile extends FieldEFileBase {
       $uploadedFileValue = !empty($this->options['value']) ? $this->options['value'] : null;
     }
     if ($uploadedFileValue !== null /* and empty($uploadedFileValue['error'])*/) {
-      empty($this->options['multiple']) ?
-        $this->process2Single($uploadedFileValue) :
-        $this->process2Multiple($uploadedFileValue);
+      empty($this->options['multiple']) ? $this->process2Single($uploadedFileValue) : $this->process2Multiple($uploadedFileValue);
     }
   }
 
@@ -83,8 +80,8 @@ class FieldEFile extends FieldEFileBase {
 
   protected function validate1() {
     if (empty($this->options['value']) and
-    empty($this->options['postValue']) and
-    !empty($this->options['required'])
+      empty($this->options['postValue']) and
+      !empty($this->options['required'])
     ) {
       $this->error = "Поле «".(empty($this->options['title']) ? $this->options['name'] : $this->options['title'])."» обязательно для заполнения";
     }

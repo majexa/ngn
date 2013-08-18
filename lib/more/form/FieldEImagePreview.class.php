@@ -3,9 +3,10 @@
 class FieldEImagePreview extends FieldEImage {
 
   function defineOptions() {
-    parent::defineOptions();
-    $this->options['currentFileClass'] = 'image lightbox';
-    $this->options['rowClass'] = 'elImagePreview';
+    return array_merge(parent::defineOptions(), [
+      'currentFileClass' => 'image lightbox',
+      'rowClass' => 'elImagePreview'
+    ]);
   }
   
   protected function getCurrentValue() {

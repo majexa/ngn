@@ -5,8 +5,10 @@ class FieldEMultiselect extends FieldESelect {
   static protected $dd = false;
 
   protected function defineOptions() {
-    $this->options['minNum'] = 0;
-    $this->options['maxNum'] = 0;
+    return [
+      'minNum' => 0,
+      'maxNum' => 0
+    ];
   }
 
   protected function init() {
