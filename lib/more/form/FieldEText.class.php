@@ -5,8 +5,7 @@ class FieldEText extends FieldEInput {
   public $inputType = 'text';
 
   protected function defineOptions() {
-    parent::defineOptions();
-    $this->options['maxlength'] = 255;
+    return ['maxlength' => 255];
   }
 
   protected function prepareValue() {

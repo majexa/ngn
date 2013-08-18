@@ -3,10 +3,12 @@
 class FieldEAdminModules extends FieldESelect {
 
   protected function defineOptions() {
-    $this->options['options'] = ['' => '—'];
     AdminModule::$forseListAllow = true;
-    $this->options['options'] += Arr::get(AdminModule::getModules(), 'title', 'name');
+    $r = [
+      'options' => array_merge(['' => '—'], Arr::get(AdminModule::getModules(), 'title', 'name'))
+    ];
     AdminModule::$forseListAllow = false;
+    return $r;
   }
 
 }

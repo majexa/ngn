@@ -3,8 +3,9 @@
 class FieldEConfigNames extends FieldESelect {
 
   protected function defineOptions() {
-    $this->options['options'] = ['' => '—'];
-    $this->options['options'] += SiteConfig::getTitles('vars');
+    return [
+      'options' => array_merge(['' => '—'], SiteConfig::getTitles('vars'))
+    ];
   }
 
 }

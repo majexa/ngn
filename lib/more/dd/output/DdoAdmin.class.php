@@ -3,7 +3,11 @@
 class DdoAdmin extends Ddo {
 
   protected function defineOptions() {
-    $this->options['fieldOptions']['getAll'] = true;
+    return [
+      'fieldOptions' => [
+        'getAll' => true
+      ]
+    ];
   }
 
   function initFields() {

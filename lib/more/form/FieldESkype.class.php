@@ -3,7 +3,9 @@
 class FieldESkype extends FieldEText {
 
   protected function defineOptions() {
-    $this->options['cssClass'] = 'validate-skype';
+    return [
+      'cssClass' => 'validate-skype'
+    ];
   }
 
 }

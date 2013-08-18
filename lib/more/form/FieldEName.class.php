@@ -3,7 +3,9 @@
 class FieldEName extends FieldEText {
 
   protected function defineOptions() {
-    $this->options['cssClass'] = 'validate-name';
+    return [
+      'cssClass' => 'validate-name'
+    ];
   }
   
   protected function validate2() {

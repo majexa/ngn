@@ -72,7 +72,7 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   protected function defineOptions() {
-    $this->options['strict'] = true;
+    return ['strict' => true];
   }
 
   protected function init() {

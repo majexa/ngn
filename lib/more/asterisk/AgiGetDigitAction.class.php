@@ -3,8 +3,7 @@
 abstract class AgiGetDigitAction extends AgiAction {
 
   protected function defineOptions() {
-    parent::defineOptions();
-    $this->options['repeatSound'] = "ivr/{$this->name}/repeat";
+    return array_merge(parent::defineOptions(), ['repeatSound' => "ivr/{$this->name}/repeat"]);
   }
 
   protected $attempts, $attemptsLimit = 3;
@@ -56,7 +55,8 @@ abstract class AgiGetDigitAction extends AgiAction {
     if ($digit !== false) {
       $this->agi->conlog("digitAction");
       $this->digitAction($digit);
-    } else {
+    }
+    else {
       $this->agi->conlog("wrongDigitAction");
       $this->wrongDigitAction();
     }

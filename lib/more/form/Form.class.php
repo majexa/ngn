@@ -567,7 +567,7 @@ class Form {
   }
 
   protected function defineOptions() {
-    $this->options['submitTitle'] = 'Сохранить';
+    return ['submitTitle' => 'Сохранить'];
   }
 
   private function initFSBB() {

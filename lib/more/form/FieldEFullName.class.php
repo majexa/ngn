@@ -3,7 +3,7 @@
 class FieldEFullName extends FieldEText {
 
   protected function defineOptions() {
-    $this->options['cssClass'] = 'validate-fullName';
+    return ['cssClass' => 'validate-fullName'];
   }
 
   protected function vlidate2() {

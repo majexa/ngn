@@ -3,8 +3,10 @@
 class FieldETime extends FieldEText {
 
   protected function defineOptions() {
-    $this->options['maxlength'] = 5;
-    $this->options['help'] = 'Формат: ЧЧ:ММ';
+    return [
+      'maxlength' => 5,
+      'help' => 'Формат: ЧЧ:ММ'
+    ];
   }
   
   protected $m;

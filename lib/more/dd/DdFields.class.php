@@ -8,10 +8,12 @@ class DdFields extends Fields {
   public $strName;
 
   protected function defineOptions() {
-    $this->options['getHidden'] = false;
-    $this->options['getSystem'] = false;
-    $this->options['getDisallowed'] = false;
-    $this->options['getVirtual'] = false;
+    return [
+      'getHidden'     => false,
+      'getSystem'     => false,
+      'getDisallowed' => false,
+      'getVirtual'    => false
+    ];
   }
 
   function __construct($strName, array $options = []) {

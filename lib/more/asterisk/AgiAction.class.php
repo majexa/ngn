@@ -4,7 +4,7 @@
  * Объекты класса AgiAction вызываются не из контекста сайта, поэтому констант сайта таких, как путь к конфигурации или настройки базы данных не существует. Поэтому связь с сайтом осуществляется через демон очереди и добавление заданий в эту очередь
  */
 abstract class AgiAction {
-use Options;
+  use Options;
 
   /**
    * @var Agi
@@ -12,9 +12,9 @@ use Options;
   protected $agi;
 
   protected function defineOptions() {
-    $this->options = [
-      'introSound'      => "ivr/{$this->name}/intro",
-      'okSound'         => "ivr/{$this->name}/ok"
+    return [
+      'introSound' => "ivr/{$this->name}/intro",
+      'okSound'    => "ivr/{$this->name}/ok"
     ];
   }
 
@@ -34,7 +34,8 @@ use Options;
     }
   }
 
-  protected function pickup() {}
+  protected function pickup() {
+  }
 
   abstract function action();
 

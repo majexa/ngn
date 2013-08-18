@@ -35,12 +35,9 @@ use Options;
   protected $useDefaultJs = false;
 
   protected function defineOptions() {
-    $this->options['required'] = false;
-    /**
-     * Описание полей:
-     * $this->options['rowClass'] = false;
-     *
-     */
+    return [
+      'required' => false
+    ];
   }
 
   protected function allowedFormClass() {

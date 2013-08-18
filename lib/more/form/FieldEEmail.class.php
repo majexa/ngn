@@ -3,8 +3,7 @@
 class FieldEEmail extends FieldEText {
 
   protected function defineOptions() {
-    parent::defineOptions();
-    $this->options['cssClass'] = 'validate-email';
+    return array_merge(parent::defineOptions(), ['cssClass' => 'validate-email']);
   }
 
   protected function validate2() {

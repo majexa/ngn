@@ -28,7 +28,7 @@ class NgnCache {
    * self::c()->load('key');
    * self::c()->save($data, 'key', array('tag_1', 'tag_2'));
    *
-   * @return Zend_Cache_Frontend_Core
+   * @return Zend_Cache_Core
    */
   static function c(array $frontendOptions = []) {
     if (defined('DATA_CACHE') and DATA_CACHE === false) $frontendOptions['caching'] = false;

@@ -36,7 +36,7 @@ use Options;
   }
 
   protected function defineOptions() {
-    $this->options['cacheTags'] = [];
+    return ['cacheTags' => []];
   }
 
   function __construct(DdItems $items, Ddo $ddo, array $options = []) {

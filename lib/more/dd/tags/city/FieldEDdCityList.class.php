@@ -11,8 +11,7 @@ DdFieldCore::registerType('ddCityList', [
 class FieldEDdCityList extends FieldEFieldList {
 
   protected function defineOptions() {
-    parent::defineOptions();
-    $this->options['fieldsType'] = 'ddCity';
+    return array_merge(parent::defineOptions(), ['fieldsType' => 'ddCity']);
   }
 
 }

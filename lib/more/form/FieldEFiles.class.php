@@ -3,8 +3,7 @@
 class FieldEFiles extends FieldEFileBase {
 
   function defineOptions() {
-    parent::defineOptions();
-    $this->options['currentFileTitle'] = 'Текущие файлы';
+    return array_merge(parent::defineOptions(), ['currentFileTitle' => 'Текущие файлы']);
   }
 
 }
