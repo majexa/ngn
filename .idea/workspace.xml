@@ -2,81 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/asterisk/AgiAction.class.php" afterPath="$PROJECT_DIR$/lib/more/asterisk/AgiAction.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/asterisk/AgiDigitAcceptAction.class.php" afterPath="$PROJECT_DIR$/lib/more/asterisk/AgiDigitAcceptAction.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/asterisk/AgiGetDigitAction.class.php" afterPath="$PROJECT_DIR$/lib/more/asterisk/AgiGetDigitAction.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/users/AuthForm.class.php" afterPath="$PROJECT_DIR$/lib/more/users/AuthForm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" afterPath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItemsCacher.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItemsCacher.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/output/DdoAdmin.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/output/DdoAdmin.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/output/DdoFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/output/DdoFields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/configManager/FieldEAdminModules.class.php" afterPath="$PROJECT_DIR$/lib/more/configManager/FieldEAdminModules.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/style/FieldEBorderSize.class.php" afterPath="$PROJECT_DIR$/lib/more/form/style/FieldEBorderSize.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEButton.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEButton.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/configManager/FieldEConfigNames.class.php" afterPath="$PROJECT_DIR$/lib/more/configManager/FieldEConfigNames.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/city/FieldEDdCityList.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/city/FieldEDdCityList.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/FieldEDdDateFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/FieldEDdDateFields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/FieldEDdFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/FieldEDdFields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/FieldEDdMultiFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/FieldEDdMultiFields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/FieldEDdOrder.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/FieldEDdOrder.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/FieldEDdStaticStructure.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/FieldEDdStaticStructure.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEEmail.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEEmail.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEEmails.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEEmails.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/configManager/FieldEExpires.class.php" afterPath="$PROJECT_DIR$/lib/more/configManager/FieldEExpires.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEFieldList.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEFieldList.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEFile.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEFile.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEFileBase.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEFileBase.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEFiles.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEFiles.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/style/FieldEFontFamily.class.php" afterPath="$PROJECT_DIR$/lib/more/form/style/FieldEFontFamily.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/style/FieldEFontSize.class.php" afterPath="$PROJECT_DIR$/lib/more/form/style/FieldEFontSize.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/style/FieldEFontStyle.class.php" afterPath="$PROJECT_DIR$/lib/more/form/style/FieldEFontStyle.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/style/FieldEFontWeight.class.php" afterPath="$PROJECT_DIR$/lib/more/form/style/FieldEFontWeight.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEFullName.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEFullName.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEHidden.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEHidden.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEHiddenWithRow.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEHiddenWithRow.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEImage.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEImage.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEImagePreview.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEImagePreview.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/configManager/FieldEMasterName.class.php" afterPath="$PROJECT_DIR$/lib/more/configManager/FieldEMasterName.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEMultiselect.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEMultiselect.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEName.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEName.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEPhone.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEPhone.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEProcent.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEProcent.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/users/FieldEProfileFields.class.php" afterPath="$PROJECT_DIR$/lib/more/users/FieldEProfileFields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/configManager/FieldESiteControllers.class.php" afterPath="$PROJECT_DIR$/lib/more/configManager/FieldESiteControllers.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldESkype.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldESkype.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/FieldETagFields.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/FieldETagFields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEText.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEText.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldETime.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldETime.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEUrl.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEUrl.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEUrls.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEUrls.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEUser.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEUser.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEWisiwig.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEWisiwig.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/Fields.class.php" afterPath="$PROJECT_DIR$/lib/more/form/Fields.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/Form.class.php" afterPath="$PROJECT_DIR$/lib/more/form/Form.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js" afterPath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/NgnCache.class.php" afterPath="$PROJECT_DIR$/lib/core/NgnCache.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Options.class.php" afterPath="$PROJECT_DIR$/lib/core/Options.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/upload/UploadTemp.class.php" afterPath="$PROJECT_DIR$/lib/more/form/upload/UploadTemp.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/users/UsersEditForm.class.php" afterPath="$PROJECT_DIR$/lib/more/users/UsersEditForm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/users/UsersForm.class.php" afterPath="$PROJECT_DIR$/lib/more/users/UsersForm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/users/UsersRegForm.class.php" afterPath="$PROJECT_DIR$/lib/more/users/UsersRegForm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/ClassCore.class.php" afterPath="$PROJECT_DIR$/lib/core/ClassCore.class.php" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376825760842" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375878968563" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826760038" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376887348517" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
-    <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376825956993" ignored="false" />
-    <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375120249167" ignored="false" />
-    <file path="/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375119001264" ignored="false" />
-    <file path="/DigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375119869096" ignored="false" />
-    <file path="$PROJECT_DIR$/../install/installer/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375535219398" ignored="false" />
+    <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846020974" ignored="false" />
+    <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376829636806" ignored="false" />
+    <file path="/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846922310" ignored="false" />
+    <file path="/DigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376829586000" ignored="false" />
+    <file path="$PROJECT_DIR$/../install/installer/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846926692" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375119016265" ignored="false" />
     <file path="$PROJECT_DIR$/../ao/site/lib/CtrlCommonAsd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124833" ignored="false" />
     <file path="/CtrlCommonAsd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376567901711" ignored="false" />
@@ -347,7 +287,7 @@
     <file path="/CtrlKpCards.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376594750660" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/kp/counters.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376639393577" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/nanofinans/main.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376643396518" ignored="false" />
-    <file path="/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376825822864" ignored="false" />
+    <file path="/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376832992202" ignored="false" />
     <file path="/Options.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826361475" ignored="false" />
     <file path="/*.regexp" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826868970" ignored="false" />
     <file path="/*.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826873526" ignored="false" />
@@ -453,6 +393,14 @@
     <file path="/FieldEFontFamilyCufon.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376829264775" ignored="false" />
     <file path="$PROJECT_DIR$/../sd/lib/FieldESvgSelect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376829299234" ignored="false" />
     <file path="/FieldESvgSelect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376829291468" ignored="false" />
+    <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanApiCached.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846037896" ignored="false" />
+    <file path="$PROJECT_DIR$/../install/installer/lib/ObjectCacher.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846037896" ignored="false" />
+    <file path="/ObjectCacher.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376845949849" ignored="false" />
+    <file path="/ClassCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376833417260" ignored="false" />
+    <file path="$PROJECT_DIR$/../install/installer/lib/objectCacherGen.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846452820" ignored="false" />
+    <file path="/objectCacherGen.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846350759" ignored="false" />
+    <file path="$PROJECT_DIR$/../install/installer/lib/InstallCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376845904961" ignored="false" />
+    <file path="/DigitaloceanApiCached.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376845944665" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -472,10 +420,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="NgnCache.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="NgnCache.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/core/NgnCache.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="0" selection-start="2184" selection-end="2184" vertical-scroll-proportion="0.9369202">
+            <state line="69" column="0" selection-start="2184" selection-end="2184" vertical-scroll-proportion="-19.423077">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassCore.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/core/ClassCore.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="185" column="56" selection-start="6247" selection-end="6247" vertical-scroll-proportion="0.39517626">
               <folding />
             </state>
           </provider>
@@ -508,7 +465,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/more/common/Html.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdFields.class.php" />
         <option value="$PROJECT_DIR$/lib/more/test/TestRunner.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/FieldEInteger.class.php" />
@@ -524,6 +480,7 @@
         <option value="$PROJECT_DIR$/lib/more/dd/Ddo.class.php" />
         <option value="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js" />
         <option value="$PROJECT_DIR$/lib/core/NgnCache.class.php" />
+        <option value="$PROJECT_DIR$/lib/core/ClassCore.class.php" />
       </list>
     </option>
   </component>
@@ -656,7 +613,7 @@
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
-  <component name="PublishConfig" serverName="v107" serverId="31bc3293-ff66-4c01-bc34-46e34de41e84" autoUpload="true">
+  <component name="PublishConfig" serverName="droplet - installer" serverId="d597f700-f73f-4679-a809-1b160ca3b69d" autoUpload="true">
     <servers>
       <server id="061154f2-0aa4-47d6-ba45-5cbb9680ee65">
         <serverdata>
@@ -914,11 +871,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/admin/CtrlAdmin.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="35" selection-start="1048" selection-end="1048" vertical-scroll-proportion="-9.730769" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/users/UsersEditFormAdmin.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="11" selection-start="203" selection-end="228" vertical-scroll-proportion="-6.5384617" />
@@ -1013,7 +965,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/NgnCache.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="0" selection-start="2184" selection-end="2184" vertical-scroll-proportion="0.9369202">
+        <state line="69" column="0" selection-start="2184" selection-end="2184" vertical-scroll-proportion="-19.423077">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/ClassCore.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="185" column="56" selection-start="6247" selection-end="6247" vertical-scroll-proportion="0.39517626">
           <folding />
         </state>
       </provider>

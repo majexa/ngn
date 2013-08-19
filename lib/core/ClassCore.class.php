@@ -181,8 +181,13 @@ class ClassCore {
     if (!is_a($obj, $class)) throw new Exception("Class '$obj' must be instance of '$class'");
   }
 
-  static function checkExistance($class) {
-    if (!class_exists($class)) throw new Exception("Class '$class' does not exists");
+  static function checkExistance($class, $method = null) {
+    if ($method) {
+      if (is_object($class)) $class = get_class($class);
+      if (!method_exists($class, $method)) throw new Exception("Method '$class::$method' does not exists");
+    } elseif (!class_exists($class)) {
+      throw new Exception("Class '$class' does not exists");
+    }
   }
 
   static function clon($obj) {
