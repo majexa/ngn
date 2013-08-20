@@ -1,9 +1,8 @@
 <?php
 
-class DdXls {
-use LongJob;
+class DdXls extends LongJobCycle {
 
-  protected $items, $ddo;
+  protected $items, $ddo, $fileName;
 
   function __construct($strName, DdItems $items) {
     $this->items = $items;
@@ -11,6 +10,7 @@ use LongJob;
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
     $this->ddo = new Ddo($strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
     $this->ddo->text = true;
+    $this->fileName = '/temp/admin/xls/'.$this->items->strName.'_'.date('d-m-Y_H-i-s').'.xls';
     $this->init();
   }
 
@@ -18,26 +18,25 @@ use LongJob;
   }
 
   protected function getItems() {
+    throw new Exception('+)!I(E*@(E@ BAD. REPEAT');
     return $this->items->getItems();
   }
 
-  function url() {
-    $fileName = '/temp/admin/xls/'.$this->items->strName.'_'.date('d-m-Y_H-i-s').'.xls';
-    $total = $this->items->count();
-    $step = 30;
-    $n = 0;
-    set_time_limit(0);
-    while (1) {
-      if (!$this->runner->status()) return; // если задача снята, выходим из цикла
-      $this->items->cond->setLimit("$n,$step");
-      $before = Misc::formatPrice(memory_get_usage());
-      $this->setPercentage(round($n / $total * 100));
-      $this->ddo->setItems($this->getItems())->xls(UPLOAD_PATH.$fileName, !(bool)$n);
-      LogWriter::str('ddxls', "QUEUE N={{$this->queueN}}. $n, ".($n + $step).' - '.$before.' - '.Misc::formatPrice(memory_get_usage()));
-      if ($n >= $total) break;
-      $n += $step;
-    }
-    return '/'.UPLOAD_DIR.$fileName;
+  protected function total() {
+    return $this->items->count();
+  }
+
+  protected function step() {
+    return 5;
+  }
+
+  protected function iteration() {
+    $this->items->cond->setLimit($this->n.','.$this->step());
+    $this->ddo->setItems($this->getItems())->xls(UPLOAD_PATH.$this->fileName, !(bool)$this->n);
+  }
+
+  protected function result() {
+    return '/'.UPLOAD_DIR.$this->fileName;
   }
 
 }

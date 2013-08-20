@@ -1,9 +1,9 @@
 <?php
 
-trait LongJob {
+trait LongJobbable {
 
   /**
-   * @var LongJobRunner
+   * @var LongJobState
    */
   public $runner = false;
 

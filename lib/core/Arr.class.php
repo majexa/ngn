@@ -35,6 +35,11 @@ class Arr {
     return $arr;
   }
 
+  static function dropN(array &$arr, $n) {
+    unset($arr[$n]);
+    return array_values($arr);
+  }
+
   static function dropBySubKeys(array $arr, $k, $v, $assoc = false) {
     $new = [];
     $v = (array)$v;
@@ -52,14 +57,6 @@ class Arr {
       if (!in_array($arr[$i], $arr3)) $arr2[] = $arr[$i];
     }
     return $arr = $arr2 ? $arr2 : [];
-  }
-
-  static function dropN(array &$arr, $n) {
-    $arr2 = [];
-    for ($i = 0; $i < count($arr); $i++) {
-      if ($i != $n) $arr2[] = $arr[$i];
-    }
-    $arr = $arr2;
   }
 
   static function dropCallback(array $arr, $func) {

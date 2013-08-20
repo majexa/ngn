@@ -60,12 +60,7 @@ class Queue {
     }, AMQP_AUTOACK);
   }
 
-  function processData($data) {
-    if (isset($data['jobId'])) {
-      LogWriter::str('longJob', 'queue job started');
-    }
-    LogWriter::v('processData', $data);
-    db()->disconnect();
+  protected function _processData($data) {
     if ($data['class'] == 'object') {
       $o = unserialize($data['object']);
       if (isset($data['jobId'])) {
@@ -82,14 +77,12 @@ class Queue {
         $r = (new $class)->{$data['method']}($data['data']);
       }
     }
-    if (isset($data['jobId'])) {
-      if (LongJobRunner::_status($data['jobId'])) {
-        // Если задача не отменена
-        LogWriter::str('longJob', "set status {$data['jobId']}. status=complete");
-        ProjMem::set($data['jobId'].'status', 'complete');
-        ProjMem::set($data['jobId'].'data', $r);
-      }
-    }
+    return $r;
+  }
+
+  function processData($data) {
+    db()->disconnect();
+    $r = $this->_processData($data);
     db()->disconnect();
     return $r;
   }

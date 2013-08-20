@@ -135,7 +135,7 @@ class DbCond {
 
   function _removeFilter($type, $key) {
     foreach ($this->filters[$type] as $n => $filter) {
-      if ($filter['key'] == $key) Arr::dropN($this->filters[$type], $n);
+      if ($filter['key'] == $key) $this->filters[$type] = Arr::dropN($this->filters[$type], $n);
     }
     $this->setFiltersCond($type);
     return $this;
