@@ -1,26 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/LongJobCore.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/LongJobCycle.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/test/LongJobFixture.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/LongJobObject.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/LongJobQueue.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/LongJobState.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/LongJobStates.class.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/queue/test/TestLongJob.class.php" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\lib\more\queue\LongJobRunner.class.php" afterPath="" />
-      <change type="MOVED" beforePath="C:\www\refactor\ngn\lib\more\queue\LongJob.class.php" afterPath="$PROJECT_DIR$/lib/more/queue/LongJobbable.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Arr.class.php" afterPath="$PROJECT_DIR$/lib/core/Arr.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/common/CtrlCommonErrors.class.php" afterPath="$PROJECT_DIR$/lib/more/common/CtrlCommonErrors.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/db/DbCond.class.php" afterPath="$PROJECT_DIR$/lib/core/db/DbCond.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdXls.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/queue/ProjectQueue.class.php" afterPath="$PROJECT_DIR$/lib/more/queue/ProjectQueue.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/queue/Queue.class.php" afterPath="$PROJECT_DIR$/lib/more/queue/Queue.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/common.func.php" afterPath="$PROJECT_DIR$/lib/core/common.func.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376981868539" ignored="false" />
