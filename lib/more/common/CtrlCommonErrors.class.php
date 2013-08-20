@@ -10,7 +10,7 @@ class CtrlCommonErrors extends CtrlCommon {
     $items = [];
     foreach ($this->errors()->get() as $v) {
       $items[] = [
-        'title'       => strip_tags($v['body']),
+        'title'       => $v['name'].': '.strip_tags($v['body']),
         'pubDate'     => date('r', $v['time']),
         'description' => "{$v['body']}<hr><pre>{$v['trace']}</pre>",
         'guid'        => md5($v['time'].$v['trace']),

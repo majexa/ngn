@@ -1,6 +1,6 @@
 <?php
 
-class ProjectQueue extends Queue {
+class ProjectQueue extends LongJobQueue {
 
   function __construct($projectKey = null) {
     if (!$projectKey and !defined('PROJECT_KEY')) throw new Exception("Define PROJECT_KEY constant or $projectKey");

@@ -41,7 +41,7 @@ function pr($var, $html = true, $trace = true) {
 }
 
 function prr($var, $html = true) {
-  pr($var, $html, true);
+  pr($var, $html, false);
 }
 
 function getPrr($v, $html = true) {
