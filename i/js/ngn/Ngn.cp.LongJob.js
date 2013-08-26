@@ -13,6 +13,7 @@ Ngn.cp.LongJob = new Class({
   initialize: function(options) {
     this.setOptions(options);
     this.status(function(r) {
+      if (!r) return;
       if (r.status == 'progress') this.startRequestCycle();
       else if (r.status == 'complete') {
         this.build();
