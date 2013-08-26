@@ -476,8 +476,8 @@
     <file path="$PROJECT_DIR$/../dns-server/install.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377443624956" ignored="false" />
     <file path="$PROJECT_DIR$/../dns-server/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377445332196" ignored="false" />
     <file path="/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377444631313" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377515372119" ignored="false" />
-    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377515343069" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377516905944" ignored="false" />
+    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377516773684" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377515394892" ignored="false" />
     <file path="/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377515256770" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -502,7 +502,7 @@
       <file leaf-file-name="Config.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="284" column="0" selection-start="8711" selection-end="8711" vertical-scroll-proportion="0.12927757">
+            <state line="281" column="17" selection-start="8634" selection-end="8634" vertical-scroll-proportion="0.032319393">
               <folding />
             </state>
           </provider>
@@ -936,7 +936,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="284" column="0" selection-start="8711" selection-end="8711" vertical-scroll-proportion="0.12927757">
+        <state line="281" column="17" selection-start="8634" selection-end="8634" vertical-scroll-proportion="0.032319393">
           <folding />
         </state>
       </provider>
