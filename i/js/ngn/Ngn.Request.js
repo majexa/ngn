@@ -2,11 +2,13 @@ Ngn.Request = new Class({
   Extends: Request,
   
   success: function(text, xml) {
-    if (text.contains('Error: '))
+    if (text.contains('Error: ')) {
+      return;
       new Ngn.Dialog.Error({
         width: 600,
         message: 'Ошибка запроса: '+this.options.url
       });
+    }
     this.parent(text, xml);
   }
 
