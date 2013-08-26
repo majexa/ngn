@@ -71,7 +71,7 @@ Ngn.Request.JSON = new Class({
   },
   
   failure: function(xhr) {
-    new Ngn.Dialog.Error({message: this.xhr.responseText + '<hr/>URL: ' + this.options.url});
+    //new Ngn.Dialog.Error({message: this.xhr.responseText + '<hr/>URL: ' + this.options.url});
     this.parent();
   }
   
