@@ -215,6 +215,12 @@ class Config {
     self::updateVar($file, $r);
   }
 
+  static function removeSubVar($file, $k, $v) {
+    $r = include $file;
+    unset($r[$k]);
+    self::updateVar($file, $r);
+  }
+
   /**
    * Возвращает массив с данными конфигурации
    *
