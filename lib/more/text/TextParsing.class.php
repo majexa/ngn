@@ -5,7 +5,7 @@ class TextParsing {
   static function stripComments($script) {
     $cleaned = '';
     $sc = $mc = $sq = $mq = false;
-    
+
     for ($i = 0; $i < strlen($script); $i++) {
       if ($mc) {
         if ($script{$i} == '*') {
@@ -15,75 +15,50 @@ class TextParsing {
           }
         }
         continue;
-      } else 
-        if ($sc) {
-          if ($script{$i} == "\n") {
-            $cleaned .= "\n";
-            $sc = false;
-          }
-          continue;
-        } else {
-          // this stuff is to avoid error with regular expressions and escaped slashed mostly:
-          if ($script{$i} ==
-             '\'' &&
-             (($script{$i -
-             1} ==
-             '\\' &&
-             $script{$i -
-             2} ==
-             '\\') ||
-             $script{$i -
-             1} !=
-             '\\') &&
-             ! $mq) {
-              $sq = ! $sq;
-          } else 
-            if ($script{$i} ==
-               '"' &&
-               (($script{$i -
-               1} ==
-               '\\' &&
-               $script{$i -
-               2} ==
-               '\\') ||
-               $script{$i -
-               1} !=
-               '\\') &&
-               ! $sq) {
-                $mq = ! $mq;
-            } else 
-              if (! $sq && ! $mq) {
-                if ($script{$i} == '/') {
-                  $i++;
-                  if ($script{$i} ==
-                     '*') {
-                      $mc = true;
-                    continue;
-                  } else 
-                    if ($script{$i} ==
-                       '/' &&
-                       $script{$i -
-                       2} !=
-                       '\\') {
-                        $sc = true;
-                      continue;
-                    } else {
-                      $i--;
-                    }
-                }
-              }
+      }
+      else if ($sc) {
+        if ($script{$i} == "\n") {
+          $cleaned .= "\n";
+          $sc = false;
         }
+        continue;
+      }
+      else {
+        // this stuff is to avoid error with regular expressions and escaped slashed mostly:
+        if ($script{$i} == '\'' && (($script{$i - 1} == '\\' && $script{$i - 2} == '\\') || $script{$i - 1} != '\\') && !$mq) {
+          $sq = !$sq;
+        }
+        else if ($script{$i} == '"' && (($script{$i - 1} == '\\' && $script{$i - 2} == '\\') || $script{$i - 1} != '\\') && !$sq) {
+          $mq = !$mq;
+        }
+        else if (!$sq && !$mq) {
+          if ($script{$i} == '/') {
+            $i++;
+            if ($script{$i} == '*') {
+              $mc = true;
+              continue;
+            }
+            else if ($script{$i} == '/' && $script{$i - 2} != '\\') {
+              $sc = true;
+              continue;
+            }
+            else {
+              $i--;
+            }
+          }
+        }
+      }
       $cleaned .= $script{$i};
     }
-    
+
     return $cleaned;
-  
+
   }
 
   static function stripComments3($script) {
     $cleaned = "";
     $sc = $mc = $sq = $mq = false;
-    
+
     for ($i = 0; $i < strlen($script); $i++) {
       if ($mc) {
         if ($script{$i} == '*') {
@@ -93,44 +68,41 @@ class TextParsing {
           }
         }
         continue;
-      } else 
-        if ($sc) {
-          if ($script{$i} == n) {
-            $cleaned .= n;
-            $sc = false;
-          }
-          continue;
-        } else {
-          if ($script{$i} == '\'') {
-            $sq = ! $sq;
-          } else 
-            if ($script{$i} == '"') {
-              $mq = ! $mq;
-            } else 
-              if (! $sq && ! $mq) {
-                if ($script{$i} == '/') {
-                  $i++;
-                  if ($script{$i} ==
-                     '*') {
-                      $mc = true;
-                    continue;
-                  } else 
-                    if ($script{$i} ==
-                       '/' &&
-                       $script{$i -
-                       2} !=
-                       '\\') {
-                        $sc = true;
-                      continue;
-                    } else {
-                      $i;
-                    }
-                }
-              }
+      }
+      else if ($sc) {
+        if ($script{$i} == n) {
+          $cleaned .= n;
+          $sc = false;
         }
+        continue;
+      }
+      else {
+        if ($script{$i} == '\'') {
+          $sq = !$sq;
+        }
+        else if ($script{$i} == '"') {
+          $mq = !$mq;
+        }
+        else if (!$sq && !$mq) {
+          if ($script{$i} == '/') {
+            $i++;
+            if ($script{$i} == '*') {
+              $mc = true;
+              continue;
+            }
+            else if ($script{$i} == '/' && $script{$i - 2} != '\\') {
+              $sc = true;
+              continue;
+            }
+            else {
+              $i;
+            }
+          }
+        }
+      }
       $cleaned .= $script{$i};
     }
-    
+
     $lines = explode(n, $cleaned);
     $nonBlankLines = [];
     foreach ($lines as $li) {
@@ -145,7 +117,7 @@ class TextParsing {
   static function stripComments2($script) {
     $cleaned = '';
     $sc = $mc = $sq = $mq = false;
-    
+
     for ($i = 0; $i < strlen($script); $i++) {
       if ($mc) {
         if ($script{$i} == '*') {
@@ -155,49 +127,48 @@ class TextParsing {
           }
         }
         continue;
-      } else 
-        if ($sc) {
-          if ($script{$i} == "\n") {
-            $sc = false;
-          }
-          continue;
-        } else {
-          if ($script{$i} == '\'') {
-            $sq = ! $sq;
-          } else 
-            if ($script{$i} == '"') {
-              $mq = ! $mq;
-            } else 
-              if (! $sq && ! $mq) {
-                if ($script{$i} == '/') {
-                  $i++;
-                  if ($script{$i} ==
-                     '*') {
-                      $mc = true;
-                    continue;
-                  } else 
-                    if ($script{$i} ==
-                       '/') {
-                        $sc = true;
-                      continue;
-                    }
-                }
-              }
+      }
+      else if ($sc) {
+        if ($script{$i} == "\n") {
+          $sc = false;
         }
+        continue;
+      }
+      else {
+        if ($script{$i} == '\'') {
+          $sq = !$sq;
+        }
+        else if ($script{$i} == '"') {
+          $mq = !$mq;
+        }
+        else if (!$sq && !$mq) {
+          if ($script{$i} == '/') {
+            $i++;
+            if ($script{$i} == '*') {
+              $mc = true;
+              continue;
+            }
+            else if ($script{$i} == '/') {
+              $sc = true;
+              continue;
+            }
+          }
+        }
+      }
       $cleaned .= $script{$i};
     }
     return $cleaned;
   }
 
   static function stripComments_($str) {
-    $str = '__' . $str . '__';
+    $str = '__'.$str.'__';
     $mode = [
-      'singleQuote' => false, 
-      'doubleQuote' => false, 
-      'regex' => false, 
-      'blockComment' => false, 
-      'lineComment' => false, 
-      'condComp' => false
+      'singleQuote'  => false,
+      'doubleQuote'  => false,
+      'regex'        => false,
+      'blockComment' => false,
+      'lineComment'  => false,
+      'condComp'     => false
     ];
     for ($i = 0, $l = strlen($str); $i < $l; $i++) {
       if ($mode['regex']) {
@@ -236,30 +207,30 @@ class TextParsing {
       if ($mode['condComp']) {
         if ($str[$i - 2] === '@' and $str[$i - 1] === '*' and $str[$i] === '/') {
           $mode['condComp'] = false;
+        }
+        continue;
       }
-      continue;
+      $mode['doubleQuote'] = $str[$i] === '"';
+      $mode['singleQuote'] = $str[$i] === "'";
+      if ($str[$i] === '/') {
+        if ($str[$i + 1] === '*' and $str[$i + 2] === '@') {
+          $mode['condComp'] = true;
+          continue;
+        }
+        if ($str[$i + 1] === '*') {
+          $str[$i] = '';
+          $mode['blockComment'] = true;
+          continue;
+        }
+        if ($str[$i + 1] === '/') {
+          $str[$i] = '';
+          $mode['lineComment'] = true;
+          continue;
+        }
+        $mode['regex'] = true;
+      }
     }
-    $mode['doubleQuote'] = $str[$i] === '"';
-    $mode['singleQuote'] = $str[$i] === "'";
-    if ($str[$i] === '/') {
-      if ($str[$i + 1] === '*' and $str[$i + 2] === '@') {
-        $mode['condComp'] = true;
-        continue;
-      }
-      if ($str[$i + 1] === '*') {
-        $str[$i] = '';
-        $mode['blockComment'] = true;
-        continue;
-      }
-      if ($str[$i + 1] === '/') {
-        $str[$i] = '';
-        $mode['lineComment'] = true;
-        continue;
-      }
-      $mode['regex'] = true;
-    }
+    return substr($str, 2, strlen($str) - 4);
   }
-  return substr($str, 2, strlen($str) - 4);
-}
 
 }
