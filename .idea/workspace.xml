@@ -2,152 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\lib\core\cli-init.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\lib\more\common\RabidRatings.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\ads\img.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\ads\text.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\ajax.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\1.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\3.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\4.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\auth1.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\cheackEmail.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\city.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\client.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\client2.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\fieldSet.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\manager.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\select.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\textboxList.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\tiny.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\vkMassMsg.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\vksubs.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\comments\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\content\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\content\edit.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\authors.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\beforeComments.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\complete.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\consecutiveSelect.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\consecutiveSelectAjax.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\css.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\denialAuthorize.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\edit.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\elements.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\form.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\notAllowed.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsList.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsListIconed.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsTreeMultiselect.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsTreeMultiselectInner.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsTreeSelect.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\userTagsList.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlock.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockEdit.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSub.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSub2.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSubAjax.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSubAjaxSimple.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editOnlyBlock.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\jsTpl.editBlock.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\premoderBlock.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\urls.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\video.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\video.playlist.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\video.popup.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\footer\2colsCounters.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\footer\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\forms\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\grid\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\js\userGroup.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\moderBlock.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\myBlog\complete.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\myBlog\list.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\newsRubrics\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\commentsUnsubscribe.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments_answers.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments_newMsgs.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments_ownItems.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\elements.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\itemsUnsubscribe.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\items_new.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\level_nominate.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\vote_ownItems.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pda.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\photo\slideThumbs.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userDataSimple.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userGroup.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userInfo.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userTags.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\popup.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\popup\close.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\popups\uploadImage.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\report\table.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\slideTips\auth.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\slideTips\common.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\slideTips\privMsgs.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\stat.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\subscribe\subscribe.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\subscribe\unsubscribe.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\temp\datepicker.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\temp\multiupload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\error.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\fileUploader\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\fileUploader\upload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imagePreviewUploader\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imagePreviewUploader\upload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imageUploader\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imageUploader\upload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imagesUploader\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\main.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\tableProp\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\table\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\toolbar\comment.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\toolbar\item.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\top.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tpl\sitemap.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tpl\testing.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tpl\tree.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tree\page.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\userData\default.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\userStoreOrder\complete.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\userStoreOrder\myOrders.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\_reg.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\activation.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\activationEmail.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\ajax_searchResults.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\info.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\lostpass.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\profile.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\reg.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\regComplete.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\regEdit.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\regWelcome.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\rules.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\search.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\subscribe.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Arr.class.php" afterPath="$PROJECT_DIR$/lib/core/Arr.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Cli.class.php" afterPath="$PROJECT_DIR$/lib/core/Cli.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/db/DbDumper.class.php" afterPath="$PROJECT_DIR$/lib/core/db/DbDumper.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/Form.class.php" afterPath="$PROJECT_DIR$/lib/more/form/Form.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Misc.class.php" afterPath="$PROJECT_DIR$/lib/core/Misc.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/text/TextParsing.class.php" afterPath="$PROJECT_DIR$/lib/more/text/TextParsing.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/text/TextReplacer.class.php" afterPath="$PROJECT_DIR$/lib/more/text/TextReplacer.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init/cli.php" afterPath="$PROJECT_DIR$/init/cli.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/site/hooks/info.txt" afterPath="$PROJECT_DIR$/site/hooks/info.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Config.class.php" afterPath="$PROJECT_DIR$/lib/core/Config.class.php" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745396529" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377763121819" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766722983" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846020974" ignored="false" />
@@ -597,29 +459,29 @@
     <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanApiObjectCacher.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377263914333" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377280595458" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377310251953" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanApiCached.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377429290321" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377429290320" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/Digitalocean.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377429290320" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanApiCached.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766712326" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766739152" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/Digitalocean.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766739152" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanAdvanced.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377281016287" ignored="false" />
     <file path="/DigitaloceanAdvanced.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377281010661" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanEnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377281410885" ignored="false" />
     <file path="/Digitalocean.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377418704522" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377765699921" ignored="false" />
-    <file path="/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377765611231" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377768111043" ignored="false" />
+    <file path="/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377768096977" ignored="false" />
     <file path="/mime_parser.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377415823742" ignored="false" />
     <file path="$PROJECT_DIR$/../run/run/a.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377416376724" ignored="false" />
     <file path="/MailMimeParser.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377418218409" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377429290320" ignored="false" />
-    <file path="/Config.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377428702419" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/DnsInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743232155" ignored="false" />
+    <file path="/Config.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377815355741" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/DnsInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766663533" ignored="false" />
     <file path="/DnsInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743189751" ignored="false" />
     <file path="$PROJECT_DIR$/../dns-server/install.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377443624956" ignored="false" />
     <file path="$PROJECT_DIR$/../dns-server/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377445332196" ignored="false" />
     <file path="/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377444631313" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377765841213" ignored="false" />
-    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743029612" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377607130335" ignored="false" />
-    <file path="/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377607118289" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377768139736" ignored="false" />
+    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766834722" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377768148395" ignored="false" />
+    <file path="/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377768147476" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377590966382" ignored="false" />
     <file path="/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377590956886" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmDnsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377600960927" ignored="false" />
@@ -630,7 +492,7 @@
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProjectCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377604102797" ignored="false" />
     <file path="/PmLocalProjectCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377604084488" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/defaultWebserverRecords/nginx.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377611060753" ignored="false" />
-    <file path="$PROJECT_DIR$/../dns-server/lib/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377699856227" ignored="false" />
+    <file path="$PROJECT_DIR$/../dns-server/lib/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766448919" ignored="false" />
     <file path="/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377698399300" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/Rar$DR05.674/start.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377627487044" ignored="false" />
     <file path="/DbDumper.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377673703965" ignored="false" />
@@ -679,10 +541,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Cli.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Cli.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="47" selection-start="544" selection-end="544" vertical-scroll-proportion="0.5992579">
+            <state line="19" column="47" selection-start="544" selection-end="544" vertical-scroll-proportion="-12.423077">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Config.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="220" column="31" selection-start="6751" selection-end="6751" vertical-scroll-proportion="0.62357414">
               <folding />
             </state>
           </provider>
@@ -713,7 +584,6 @@
         <option value="$USER_HOME$/Downloads/mimeparser-2012-08-23/rfc822_addresses.php" />
         <option value="$PROJECT_DIR$/lib/more/mail/MailRfc822Addresses.class.php" />
         <option value="$PROJECT_DIR$/lib/more/mail/MailMimeParser.class.php" />
-        <option value="$PROJECT_DIR$/lib/core/Config.class.php" />
         <option value="$PROJECT_DIR$/lib/core/db/Db.class.php" />
         <option value="$PROJECT_DIR$/init/cli.php" />
         <option value="$PROJECT_DIR$/lib/core/cli-init.php" />
@@ -722,6 +592,7 @@
         <option value="$PROJECT_DIR$/lib/core/db/DbDumper.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/Form.class.php" />
         <option value="$PROJECT_DIR$/lib/core/Cli.class.php" />
+        <option value="$PROJECT_DIR$/lib/core/Config.class.php" />
       </list>
     </option>
   </component>
@@ -1151,11 +1022,6 @@
         <state line="185" column="55" selection-start="6244" selection-end="6244" vertical-scroll-proportion="0.031539887" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="316" column="3" selection-start="9825" selection-end="9825" vertical-scroll-proportion="0.51140684" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/db/Db.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="432" column="43" selection-start="12535" selection-end="12535" vertical-scroll-proportion="0.33460075" />
@@ -1200,7 +1066,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="47" selection-start="544" selection-end="544" vertical-scroll-proportion="0.5992579">
+        <state line="19" column="47" selection-start="544" selection-end="544" vertical-scroll-proportion="-12.423077">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="220" column="31" selection-start="6751" selection-end="6751" vertical-scroll-proportion="0.62357414">
           <folding />
         </state>
       </provider>
