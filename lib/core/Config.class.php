@@ -215,7 +215,7 @@ class Config {
     self::updateVar($file, $r);
   }
 
-  static function removeSubVar($file, $k, $v) {
+  static function removeSubVar($file, $k) {
     $r = include $file;
     unset($r[$k]);
     self::updateVar($file, $r);

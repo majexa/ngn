@@ -553,7 +553,7 @@
       <file leaf-file-name="Config.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="220" column="31" selection-start="6751" selection-end="6751" vertical-scroll-proportion="0.62357414">
+            <state line="217" column="40" selection-start="6669" selection-end="6669" vertical-scroll-proportion="0.526616">
               <folding />
             </state>
           </provider>
@@ -1073,7 +1073,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="31" selection-start="6751" selection-end="6751" vertical-scroll-proportion="0.62357414">
+        <state line="217" column="40" selection-start="6669" selection-end="6669" vertical-scroll-proportion="0.526616">
           <folding />
         </state>
       </provider>
