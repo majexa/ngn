@@ -1,1 +1,0 @@
-<a href="/common/ads/click?id=<?= $d['id'] ?>" target="_blank"><?= $d['text'] ?></a>

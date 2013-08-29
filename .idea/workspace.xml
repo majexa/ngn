@@ -1,13 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\lib\core\cli-init.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\lib\more\common\RabidRatings.class.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\ads\img.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\ads\text.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\ajax.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\1.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\3.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\4.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\auth1.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\cheackEmail.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\city.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\client.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\client2.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\fieldSet.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\manager.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\select.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\textboxList.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\tiny.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\vkMassMsg.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\clearTpl\vksubs.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\comments\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\content\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\content\edit.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\authors.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\beforeComments.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\complete.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\consecutiveSelect.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\consecutiveSelectAjax.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\css.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\denialAuthorize.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\edit.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\elements.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\form.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\notAllowed.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsList.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsListIconed.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsTreeMultiselect.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsTreeMultiselectInner.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\tagsTreeSelect.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\dd\userTagsList.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlock.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockEdit.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSub.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSub2.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSubAjax.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editBlockSubAjaxSimple.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\editOnlyBlock.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\jsTpl.editBlock.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\editBlocks\premoderBlock.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\urls.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\video.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\video.playlist.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\elements\video.popup.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\footer\2colsCounters.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\footer\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\forms\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\grid\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\js\userGroup.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\moderBlock.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\myBlog\complete.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\myBlog\list.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\newsRubrics\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\commentsUnsubscribe.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments_answers.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments_newMsgs.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\comments_ownItems.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\elements.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\itemsUnsubscribe.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\items_new.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\level_nominate.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\notify\msgs\vote_ownItems.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pda.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\photo\slideThumbs.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userDataSimple.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userGroup.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userInfo.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\pmsb\userTags.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\popup.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\popup\close.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\popups\uploadImage.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\report\table.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\slideTips\auth.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\slideTips\common.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\slideTips\privMsgs.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\stat.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\subscribe\subscribe.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\subscribe\unsubscribe.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\temp\datepicker.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\temp\multiupload.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\error.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\fileUploader\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\fileUploader\upload.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imagePreviewUploader\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imagePreviewUploader\upload.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imageUploader\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imageUploader\upload.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\imagesUploader\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\main.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\tableProp\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tiny\popup\table\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\toolbar\comment.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\toolbar\item.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\top.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tpl\sitemap.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tpl\testing.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tpl\tree.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\tree\page.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\userData\default.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\userStoreOrder\complete.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\userStoreOrder\myOrders.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\_reg.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\activation.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\activationEmail.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\ajax_searchResults.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\info.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\lostpass.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\profile.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\reg.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\regComplete.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\regEdit.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\regWelcome.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\rules.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\search.php" afterPath="" />
+      <change type="DELETED" beforePath="C:\www\refactor\ngn\site\tpl\users\subscribe.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Arr.class.php" afterPath="$PROJECT_DIR$/lib/core/Arr.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Cli.class.php" afterPath="$PROJECT_DIR$/lib/core/Cli.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/db/DbDumper.class.php" afterPath="$PROJECT_DIR$/lib/core/db/DbDumper.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/Form.class.php" afterPath="$PROJECT_DIR$/lib/more/form/Form.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Misc.class.php" afterPath="$PROJECT_DIR$/lib/core/Misc.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/text/TextParsing.class.php" afterPath="$PROJECT_DIR$/lib/more/text/TextParsing.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/text/TextReplacer.class.php" afterPath="$PROJECT_DIR$/lib/more/text/TextReplacer.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/init/cli.php" afterPath="$PROJECT_DIR$/init/cli.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/site/hooks/info.txt" afterPath="$PROJECT_DIR$/site/hooks/info.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377502506164" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745396529" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377426867924" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377763121819" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846020974" ignored="false" />
@@ -28,7 +168,7 @@
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmRemoteProjectDev.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826399909" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmServerConfigAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176611787" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmRemoteServerDev.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176618644" ignored="false" />
-    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProject.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375782037685" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProject.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377601811624" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376390611591" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/m/css/ks/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375331569398" ignored="false" />
     <file path="/main.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376372091908" ignored="false" />
@@ -49,8 +189,8 @@
     <file path="/FieldEDdCityMultiselect.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375215238885" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/kp/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251874456" ignored="false" />
     <file path="/inner.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375251873999" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826932279" ignored="false" />
-    <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826931836" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377602189060" ignored="false" />
+    <file path="/DdFieldsOrder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377602010719" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/hooks/dd/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377001798940" ignored="false" />
     <file path="/beforeInitItemsManager.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375250408827" ignored="false" />
     <file path="$PROJECT_DIR$/../formatron/lib/SubclientsFinder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375252280209" ignored="false" />
@@ -159,7 +299,7 @@
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample1/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375777914434" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample2/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
-    <file path="$PROJECT_DIR$/../ngn-env/dummyProject/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377094157826" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/dummyProject/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377593215636" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/projects/sample2/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776638385" ignored="false" />
     <file path="/VkVideoGrabber.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375776866539" ignored="false" />
     <file path="/core.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377255241188" ignored="false" />
@@ -179,7 +319,7 @@
     <file path="$PROJECT_DIR$/../sb/lib/cpm/news/hooks/dd/initFields.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785125403" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376390611597" ignored="false" />
     <file path="$PROJECT_DIR$/../autocall/site/lib/CtrlInterviews.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124834" ignored="false" />
-    <file path="/Form.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376828275819" ignored="false" />
+    <file path="/Form.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377676058562" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376390611594" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalItemsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124834" ignored="false" />
     <file path="$PROJECT_DIR$/../ao/site/lib/CtrlCallcenter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124834" ignored="false" />
@@ -464,22 +604,62 @@
     <file path="/DigitaloceanAdvanced.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377281010661" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanEnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377281410885" ignored="false" />
     <file path="/Digitalocean.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377418704522" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377514854121" ignored="false" />
-    <file path="/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377513932597" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377765699921" ignored="false" />
+    <file path="/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377765611231" ignored="false" />
     <file path="/mime_parser.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377415823742" ignored="false" />
     <file path="$PROJECT_DIR$/../run/run/a.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377416376724" ignored="false" />
     <file path="/MailMimeParser.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377418218409" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377429290320" ignored="false" />
     <file path="/Config.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377428702419" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/DnsInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377446147679" ignored="false" />
-    <file path="/DnsInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377446122157" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/DnsInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743232155" ignored="false" />
+    <file path="/DnsInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743189751" ignored="false" />
     <file path="$PROJECT_DIR$/../dns-server/install.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377443624956" ignored="false" />
     <file path="$PROJECT_DIR$/../dns-server/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377445332196" ignored="false" />
     <file path="/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377444631313" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377516905944" ignored="false" />
-    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377516773684" ignored="false" />
-    <file path="$PROJECT_DIR$/../installer/lib/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377515394892" ignored="false" />
-    <file path="/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377515256770" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377765841213" ignored="false" />
+    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743029612" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377607130335" ignored="false" />
+    <file path="/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377607118289" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377590966382" ignored="false" />
+    <file path="/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377590956886" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmDnsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377600960927" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743431156" ignored="false" />
+    <file path="/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743348439" ignored="false" />
+    <file path="$PROJECT_DIR$/../installer/lib/installNgnEnvConfig.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377603279280" ignored="false" />
+    <file path="/installNgnEnvConfig.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377603259658" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProjectCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377604102797" ignored="false" />
+    <file path="/PmLocalProjectCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377604084488" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/defaultWebserverRecords/nginx.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377611060753" ignored="false" />
+    <file path="$PROJECT_DIR$/../dns-server/lib/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377699856227" ignored="false" />
+    <file path="/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377698399300" ignored="false" />
+    <file path="$USER_HOME$/AppData/Local/Temp/Rar$DR05.674/start.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377627487044" ignored="false" />
+    <file path="/DbDumper.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377673703965" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/cmd/exportPbbTags.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377674239890" ignored="false" />
+    <file path="/exportPbbTags.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377674171908" ignored="false" />
+    <file path="$PROJECT_DIR$/../formatron/lib/CtrlAdminFormatronFilter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377688729765" ignored="false" />
+    <file path="/CtrlAdminFormatronFilter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377688724713" ignored="false" />
+    <file path="$PROJECT_DIR$/../dns-server/config.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377687942569" ignored="false" />
+    <file path="/Cli.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377742956271" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/cmd/export.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377695647889" ignored="false" />
+    <file path="/export.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377695640988" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/common-init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512654" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/ws/init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512654" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/run/siteStandAloneInit2.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/dummyProject/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmRemoteServerDev.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/dummyProject/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/dummyProject/queue.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/scripts/deleteLogs.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmLocalProject.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmServerConfigAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmLocalServerConfig.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/web/init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512656" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/scripts/web/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512682" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/ngn/lib/core/Dir.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512695" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/ngn/lib/core/Options.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512695" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -499,10 +679,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Config.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
+      <file leaf-file-name="Cli.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="281" column="17" selection-start="8634" selection-end="8634" vertical-scroll-proportion="0.032319393">
+            <state line="19" column="47" selection-start="544" selection-end="544" vertical-scroll-proportion="0.5992579">
               <folding />
             </state>
           </provider>
@@ -526,14 +706,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/more/text/Jevix.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/text/TextReplacer.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/update/NgnUpdater.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/video/MplayerCommon.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/video/VideoDecoder_mplayer.class.php" />
-        <option value="$PROJECT_DIR$/lib/core/NgnCache.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/core/ObjectCacher.class.php" />
-        <option value="$PROJECT_DIR$/lib/core/ClassCore.class.php" />
         <option value="$PROJECT_DIR$/lib/more/core/CtrlMapper.class.php" />
         <option value="$PROJECT_DIR$/lib/core/ObjectMapper.class.php" />
         <option value="$PROJECT_DIR$/lib/more/core/ObjectCacherGen.class.php" />
@@ -542,6 +714,14 @@
         <option value="$PROJECT_DIR$/lib/more/mail/MailRfc822Addresses.class.php" />
         <option value="$PROJECT_DIR$/lib/more/mail/MailMimeParser.class.php" />
         <option value="$PROJECT_DIR$/lib/core/Config.class.php" />
+        <option value="$PROJECT_DIR$/lib/core/db/Db.class.php" />
+        <option value="$PROJECT_DIR$/init/cli.php" />
+        <option value="$PROJECT_DIR$/lib/core/cli-init.php" />
+        <option value="$PROJECT_DIR$/lib/more/text/TextParsing.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/text/TextReplacer.class.php" />
+        <option value="$PROJECT_DIR$/lib/core/db/DbDumper.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/form/Form.class.php" />
+        <option value="$PROJECT_DIR$/lib/core/Cli.class.php" />
       </list>
     </option>
   </component>
@@ -596,6 +776,60 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -616,11 +850,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../installer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../sb" />
     <property name="FullScreen" value="false" />
     <property name="GoToClass.includeJavaFiles" value="false" />
   </component>
-  <component name="PublishConfig" serverName="droplet - installer" serverId="d597f700-f73f-4679-a809-1b160ca3b69d" autoUpload="true">
+  <component name="PublishConfig" serverName="dnsMaster" serverId="1bd8e83e-f238-453a-939f-7c4a90c6c60e" autoUpload="true">
     <servers>
       <server id="061154f2-0aa4-47d6-ba45-5cbb9680ee65">
         <serverdata>
@@ -646,7 +880,7 @@
       <server id="1bd8e83e-f238-453a-939f-7c4a90c6c60e">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" />
+            <mapping deploy="/root/ngn" local="$PROJECT_DIR$" />
           </mappings>
         </serverdata>
       </server>
@@ -727,6 +961,9 @@
           </mappings>
         </serverdata>
       </server>
+      <server id="d687411d-4767-4f0e-9628-c523b056c624">
+        <serverdata />
+      </server>
       <server id="e0cc7263-143d-417d-90ad-3c5c2cd2c31b">
         <serverdata>
           <mappings>
@@ -799,23 +1036,23 @@
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29173693" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26439393" sideWeight="0.7065767" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27348486" sideWeight="0.70826304" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29342327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1046" y="73" width="257" height="186" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4568528" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45516074" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -884,26 +1121,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/core/NgnCache.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="28" selection-start="609" selection-end="609" vertical-scroll-proportion="0.28385898" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="50" selection-start="2205" selection-end="2205" vertical-scroll-proportion="0.41444868" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/dd/DdCrudAbstractCtrl.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="7" selection-end="97" vertical-scroll-proportion="0.18923934" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/i/js/tiny_mce/classes/AddOnManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="7" selection-start="777" selection-end="777" vertical-scroll-proportion="0.17028986" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/common/Tt.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="205" column="11" selection-start="6598" selection-end="6598" vertical-scroll-proportion="0.33269963" />
@@ -936,7 +1153,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="281" column="17" selection-start="8634" selection-end="8634" vertical-scroll-proportion="0.032319393">
+        <state line="316" column="3" selection-start="9825" selection-end="9825" vertical-scroll-proportion="0.51140684" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/db/Db.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="432" column="43" selection-start="12535" selection-end="12535" vertical-scroll-proportion="0.33460075" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init/cli.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="28" selection-start="296" selection-end="296" vertical-scroll-proportion="0.3153989" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/common/SiteRequest.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="3" selection-start="948" selection-end="948" vertical-scroll-proportion="0.6121673" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/text/TextParsing.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/text/TextReplacer.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/form/Form.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="185" column="88" selection-start="4656" selection-end="4656" vertical-scroll-proportion="0.5346535" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/db/DbDumper.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="29" selection-start="240" selection-end="240" vertical-scroll-proportion="0.3878327" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="102" selection-end="102" vertical-scroll-proportion="0.032319393">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="47" selection-start="544" selection-end="544" vertical-scroll-proportion="0.5992579">
           <folding />
         </state>
       </provider>

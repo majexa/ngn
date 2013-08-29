@@ -135,7 +135,7 @@ class Form {
 
   function isSubmitted() {
     if (!$this->fromRequest) return true;
-    return (isset($this->req->p['formId']) and $this->req->p['formId'] == $this->id());
+    return ($this->req['formId'] and $this->req['formId'] == $this->id());
   }
 
   protected function elementExists($name) {
@@ -176,13 +176,15 @@ class Form {
     return false;
   }
 
+  public $methodPost = true;
+
   protected function htmlFormOpen() {
     if (!$this->disableFormTag) {
       $html = '<form action="'.($this->action ? $this->action : $this->req->options['uri']).'"';
       if (($data = $this->dataParams())) $html .= Html::dataParams($data);
       if (!empty($this->encType)) $html .= ' enctype="'.$this->encType.'"';
       if (!empty($this->options['name'])) $html .= ' name="'.$this->options['name'].'"';
-      $html .= ' id="'.$this->id().'" method="post">';
+      $html .= ' id="'.$this->id().'" method="'.($this->methodPost ? 'post' : 'get').'">';
       return $html;
     }
     else {

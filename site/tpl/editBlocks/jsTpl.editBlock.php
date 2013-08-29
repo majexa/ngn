@@ -1,1 +1,0 @@
-<?php $this->tpl('editBlocks/editBlock', ['path' => '{path}', 'id' => '{id}']);

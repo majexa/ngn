@@ -143,7 +143,7 @@ class Arr {
   static function toObjProp(array $arr, $obj, array $filter = []) {
     foreach ($arr as $k => $v) {
       if (!empty($filter) and !in_array($k, $filter)) continue;
-      if (isset($obj->$k)) $obj->$k = $v;
+      $obj->$k = $v;
     }
   }
 

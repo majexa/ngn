@@ -583,17 +583,6 @@ class Misc {
   }
 
   /**
-   * Преобразует ссылки и экшены форм в тексте в абсолютные
-   * (если они таковыми не явлюяются)
-   *
-   * @param   string  Текст
-   * @return  string
-   */
-  static function extendBaseDomain($c) {
-    return preg_replace('/(href|action)="(?!\/\/)\/?([^"]*)"/', '$1="//'.SITE_DOMAIN.'/$2"', $c);
-  }
-
-  /**
    * Возвращает уровень текущего домена
    *
    * @return integer
