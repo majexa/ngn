@@ -14,7 +14,7 @@ class Cli {
 
   static function runCode($server, $code, $includes) {
     $code = self::formatRunCmd($code, $includes);
-    return sys("ssh $server $cmd");
+    return sys("ssh $server $code");
   }
 
   static function ssh($server, $cmd) {
