@@ -12,8 +12,8 @@ class Cli {
     return "'( cat << EOF\n$cmd\nEOF\n) ".($append ? '>>' : '>')." $file'";
   }
 
-  static function runCode($server, $code, $includes, $user = null) {
-    $code = self::formatRunCmd($code, $includes);
+  static function runCode($server, $code, $includes, $runBasePath = null) {
+    $code = self::formatRunCmd($code, $includes, $runBasePath);
     return sys("ssh $server $code");
   }
 
@@ -21,10 +21,10 @@ class Cli {
     return sys("ssh $server '$cmd'");
   }
 
-  static function formatRunCmd($code, $includes, $user = null) {
+  static function formatRunCmd($code, $includes, $runBasePath = null) {
     $code = str_replace("'", '"', $code);
     $code = str_replace('"', '\\"', $code);
-    return '\'php '.($user ? '~' : "/home/$user/ngn-env").'/run/run.php "'.$code.'" '.$includes.'\'';
+    return '\'php '.($runBasePath ? $runBasePath : '~').'/run/run.php "'.$code.'" '.$includes.'\'';
   }
 
 }

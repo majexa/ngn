@@ -486,7 +486,7 @@
     <file path="/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377956360890" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmDnsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377600960927" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743431156" ignored="false" />
-    <file path="/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961204236" ignored="false" />
+    <file path="/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961896332" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/installNgnEnvConfig.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377824810586" ignored="false" />
     <file path="/installNgnEnvConfig.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377816610085" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProjectCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377604102797" ignored="false" />
@@ -501,7 +501,7 @@
     <file path="$PROJECT_DIR$/../formatron/lib/CtrlAdminFormatronFilter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377688729765" ignored="false" />
     <file path="/CtrlAdminFormatronFilter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377688724713" ignored="false" />
     <file path="$PROJECT_DIR$/../dns-server/config.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377687942569" ignored="false" />
-    <file path="/Cli.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961578587" ignored="false" />
+    <file path="/Cli.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961989687" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/cmd/export.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377695647889" ignored="false" />
     <file path="/export.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377695640988" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/pm/common-init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512654" ignored="false" />
@@ -532,7 +532,7 @@
     <file path="$PROJECT_DIR$/../manager/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377952698422" ignored="false" />
     <file path="$PROJECT_DIR$/../manager/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950235274" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/scripts/web/site/lib/AllErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950262196" ignored="false" />
-    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961548916" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961954385" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -555,7 +555,7 @@
       <file leaf-file-name="Cli.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="35" selection-start="740" selection-end="740" vertical-scroll-proportion="0.72131145">
+            <state line="25" column="35" selection-start="768" selection-end="768" vertical-scroll-proportion="0.72131145">
               <folding />
             </state>
           </provider>
@@ -1043,7 +1043,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="35" selection-start="740" selection-end="740" vertical-scroll-proportion="0.72131145">
+        <state line="25" column="35" selection-start="768" selection-end="768" vertical-scroll-proportion="0.72131145">
           <folding />
         </state>
       </provider>
