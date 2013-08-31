@@ -9,7 +9,7 @@
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377941188422" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377858771664" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377960998685" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846020974" ignored="false" />
@@ -483,17 +483,17 @@
     <file path="$PROJECT_DIR$/../installer/lib/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377855067614" ignored="false" />
     <file path="/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377824505914" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377590966382" ignored="false" />
-    <file path="/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377590956886" ignored="false" />
+    <file path="/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377956360890" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmDnsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377600960927" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743431156" ignored="false" />
-    <file path="/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377743348439" ignored="false" />
+    <file path="/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961204236" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/installNgnEnvConfig.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377824810586" ignored="false" />
     <file path="/installNgnEnvConfig.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377816610085" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProjectCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377604102797" ignored="false" />
     <file path="/PmLocalProjectCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377604084488" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/defaultWebserverRecords/nginx.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377611060753" ignored="false" />
-    <file path="$PROJECT_DIR$/../dns-server/lib/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377766448919" ignored="false" />
-    <file path="/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377698399300" ignored="false" />
+    <file path="$PROJECT_DIR$/../dns-server/lib/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377960324871" ignored="false" />
+    <file path="/DnsServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377960195103" ignored="false" />
     <file path="$USER_HOME$/AppData/Local/Temp/Rar$DR05.674/start.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377627487044" ignored="false" />
     <file path="/DbDumper.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377673703965" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/cmd/exportPbbTags.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377674239890" ignored="false" />
@@ -501,7 +501,7 @@
     <file path="$PROJECT_DIR$/../formatron/lib/CtrlAdminFormatronFilter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377688729765" ignored="false" />
     <file path="/CtrlAdminFormatronFilter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377688724713" ignored="false" />
     <file path="$PROJECT_DIR$/../dns-server/config.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377687942569" ignored="false" />
-    <file path="/Cli.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377858185754" ignored="false" />
+    <file path="/Cli.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961578587" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/cmd/export.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377695647889" ignored="false" />
     <file path="/export.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377695640988" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/pm/common-init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512654" ignored="false" />
@@ -513,7 +513,7 @@
     <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmRemoteServerDev.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/dummyProject/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/dummyProject/queue.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
-    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377956364155" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/scripts/deleteLogs.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmLocalProject.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmServerConfigAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512655" ignored="false" />
@@ -523,16 +523,16 @@
     <file path="$PROJECT_DIR$/../1/ngn-env/ngn/lib/core/Dir.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512695" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/ngn/lib/core/Options.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377745512695" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/monitor/run.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377856770461" ignored="false" />
-    <file path="/run.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377860404559" ignored="false" />
+    <file path="/run.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377956314385" ignored="false" />
     <file path="$PROJECT_DIR$/../manager/collectErrors.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377857825785" ignored="false" />
     <file path="/collectErrors.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377857766159" ignored="false" />
     <file path="$PROJECT_DIR$/../manager/lib/ErrorsCollector.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377860764680" ignored="false" />
     <file path="/ErrorsCollector.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377860709837" ignored="false" />
-    <file path="$PROJECT_DIR$/../manager/monitor/run.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377860565978" ignored="false" />
-    <file path="$PROJECT_DIR$/../manager/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377949942052" ignored="false" />
+    <file path="$PROJECT_DIR$/../manager/monitor/run.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377956314385" ignored="false" />
+    <file path="$PROJECT_DIR$/../manager/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377952698422" ignored="false" />
     <file path="$PROJECT_DIR$/../manager/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950235274" ignored="false" />
     <file path="$PROJECT_DIR$/../1/ngn-env/scripts/web/site/lib/AllErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950262196" ignored="false" />
-    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950282879" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377961548916" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -555,7 +555,7 @@
       <file leaf-file-name="Cli.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="35" selection-start="712" selection-end="712" vertical-scroll-proportion="0.72131145">
+            <state line="25" column="35" selection-start="740" selection-end="740" vertical-scroll-proportion="0.72131145">
               <folding />
             </state>
           </provider>
@@ -1043,7 +1043,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="35" selection-start="712" selection-end="712" vertical-scroll-proportion="0.72131145">
+        <state line="25" column="35" selection-start="740" selection-end="740" vertical-scroll-proportion="0.72131145">
           <folding />
         </state>
       </provider>
