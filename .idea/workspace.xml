@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/Cli.class.php" afterPath="$PROJECT_DIR$/lib/core/Cli.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -468,7 +467,7 @@
     <file path="$PROJECT_DIR$/../installer/lib/DigitaloceanEnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377281410885" ignored="false" />
     <file path="/Digitalocean.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377418704522" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377854297654" ignored="false" />
-    <file path="/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377865410217" ignored="false" />
+    <file path="/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377949920223" ignored="false" />
     <file path="/mime_parser.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377415823742" ignored="false" />
     <file path="$PROJECT_DIR$/../run/run/a.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377416376724" ignored="false" />
     <file path="/MailMimeParser.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377418218409" ignored="false" />
@@ -480,7 +479,7 @@
     <file path="$PROJECT_DIR$/../dns-server/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377445332196" ignored="false" />
     <file path="/createNsZone.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377444631313" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377824897529" ignored="false" />
-    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377824710494" ignored="false" />
+    <file path="/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377941286100" ignored="false" />
     <file path="$PROJECT_DIR$/../installer/lib/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377855067614" ignored="false" />
     <file path="/Installer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377824505914" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalServer.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377590966382" ignored="false" />
@@ -530,7 +529,10 @@
     <file path="$PROJECT_DIR$/../manager/lib/ErrorsCollector.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377860764680" ignored="false" />
     <file path="/ErrorsCollector.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377860709837" ignored="false" />
     <file path="$PROJECT_DIR$/../manager/monitor/run.sh" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377860565978" ignored="false" />
-    <file path="$PROJECT_DIR$/../manager/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377865419202" ignored="false" />
+    <file path="$PROJECT_DIR$/../manager/lib/EnvInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377949942052" ignored="false" />
+    <file path="$PROJECT_DIR$/../manager/lib/WebInstaller.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950235274" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/scripts/web/site/lib/AllErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950262196" ignored="false" />
+    <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmDnsManagerBind.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377950282879" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -553,7 +555,7 @@
       <file leaf-file-name="Cli.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="0.3401109">
+            <state line="14" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="0.3413729">
               <folding />
             </state>
           </provider>
@@ -875,14 +877,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28257576" sideWeight="0.7072758" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28257576" sideWeight="0.7072758" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -1041,7 +1043,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="0.3401109">
+        <state line="14" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="0.3413729">
           <folding />
         </state>
       </provider>
