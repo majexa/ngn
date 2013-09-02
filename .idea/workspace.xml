@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378024374553" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378123324394" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378028747037" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378123339240" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846020974" ignored="false" />
@@ -542,6 +540,8 @@
     <file path="$PROJECT_DIR$/../1/ngn-env/pm/lib/PmDnsManagerAbstract.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378026531742" ignored="false" />
     <file path="$PROJECT_DIR$/../manager/lib/ServerManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378034246158" ignored="false" />
     <file path="/ServerManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378034217348" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/cmd/find.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378123789511" ignored="false" />
+    <file path="/find.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378123591895" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -560,35 +560,7 @@
     <favorites_list name="ngn" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Cli.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="1" selection-start="883" selection-end="883" vertical-scroll-proportion="-18.961538">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Config.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="217" column="40" selection-start="6669" selection-end="6669" vertical-scroll-proportion="-0.65384614">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbSite.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/core/db/DbSite.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="26" selection-start="552" selection-end="552" vertical-scroll-proportion="0.3320965">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -773,6 +745,9 @@
           </mappings>
         </serverdata>
       </server>
+      <server id="427155a6-e923-4d9a-9f77-ee97d47b7500">
+        <serverdata />
+      </server>
       <server id="6146aec1-711b-44b1-bcc3-c7ffd7b98b1b">
         <serverdata>
           <mappings>
@@ -899,25 +874,25 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2927242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45362562" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2871212" sideWeight="0.7072758" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28636363" sideWeight="0.5463744" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1046" y="73" width="257" height="186" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2927242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45516074" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -986,21 +961,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Downloads/mimeparser-2012-08-23/rfc822_addresses.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="6" selection-start="0" selection-end="22689" vertical-scroll-proportion="0.33552632" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/mimeparser-2012-08-23/mime_parser.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="6" selection-start="0" selection-end="93779" vertical-scroll-proportion="0.9329389" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/mimeparser-2012-08-23/test/test.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="150" column="28" selection-start="4043" selection-end="4043" vertical-scroll-proportion="0.03219697" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/core/CtrlMapper.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1014,11 +974,6 @@
     <entry file="file://$PROJECT_DIR$/lib/core/db/Db.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="432" column="43" selection-start="12535" selection-end="12535" vertical-scroll-proportion="0.33460075" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init/cli.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="28" selection-start="296" selection-end="296" vertical-scroll-proportion="0.3153989" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/common/SiteRequest.class.php">
@@ -1048,28 +1003,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Arr.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="102" selection-end="102" vertical-scroll-proportion="0.032319393">
-          <folding />
-        </state>
+        <state line="5" column="0" selection-start="102" selection-end="102" vertical-scroll-proportion="0.032319393" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/core/db/DbSite.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="1" selection-start="883" selection-end="883" vertical-scroll-proportion="-18.961538">
+        <state line="24" column="26" selection-start="552" selection-end="552" vertical-scroll-proportion="0.13123845">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/Config.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="40" selection-start="6669" selection-end="6669" vertical-scroll-proportion="-0.65384614">
+        <state line="217" column="40" selection-start="6669" selection-end="6669" vertical-scroll-proportion="0.03142329">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/db/DbSite.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/core/Cli.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="26" selection-start="552" selection-end="552" vertical-scroll-proportion="0.3320965">
+        <state line="29" column="1" selection-start="883" selection-end="883" vertical-scroll-proportion="0.81146026">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/common/CtrlCommonErrors.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="0.12569316">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/common/ProcessTime.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="6" selection-start="13" selection-end="24" vertical-scroll-proportion="0.06284658">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="23" selection-start="2993" selection-end="3007" vertical-scroll-proportion="0.17992425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/init/cli.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="27" selection-start="251" selection-end="251" vertical-scroll-proportion="0.28280962">
           <folding />
         </state>
       </provider>
