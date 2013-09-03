@@ -13,9 +13,12 @@
       });
     }
   });
-  new Ngn.Grid({
+  var opt = {
     menu: menu,
     toolActions: Ngn.Grid.toolActions,
     isSorting: <?= Arr::jsValue(!empty($d['settings']['enableManualOrder'])) ?>
-  }).reload();
+  };
+  <? Tt()->tpl('admin/dd/beforeGridInit.js', $d, true) ?>
+  var grid = new Ngn.Grid(opt).reload();
+  <? Tt()->tpl('admin/dd/afterGridInit.js', $d, true) ?>
 </script>
