@@ -114,12 +114,12 @@ class DbCond {
     if (is_bool($filter['value'])) $filter['value'] = (int)$filter['value'];
     if (is_array($filter['value'])) {
       foreach ($filter['value'] as &$v) {
-        if (!is_numeric($v)) $v = "'".mysql_real_escape_string($v)."'";
+        if (!is_numeric($v)) $v = "'".mysql_real_escape_string($v, db()->link)."'";
       }
       $filter['value'] = implode(', ', $filter['value']);
     }
     else {
-      if (!is_numeric($filter['value'])) $filter['value'] = "'".mysql_real_escape_string($filter['value'])."'";
+      if (!is_numeric($filter['value'])) $filter['value'] = "'".mysql_real_escape_string($filter['value'], db()->link)."'";
     }
     if (isset($this->filters[$type])) {
       foreach ($this->filters[$type] as $k => $f) {
