@@ -4,7 +4,7 @@
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378291042219" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378299284277" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
     <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290438448" ignored="false" />
@@ -429,7 +429,7 @@
     <file path="$PROJECT_DIR$/../install/installer/lib/ObjectCacherDigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376931860536" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/ObjectCacherGen.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376932329941" ignored="false" />
     <file path="/ObjectCacherGen.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377310762050" ignored="false" />
-    <file path="/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377420025267" ignored="false" />
+    <file path="/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378299835395" ignored="false" />
     <file path="/LongJobStates.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376996540660" ignored="false" />
     <file path="/LongJobState.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377162664326" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/scripts/web/site/lib/Errors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376992264043" ignored="false" />
@@ -438,7 +438,7 @@
     <file path="/AllErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376993279963" ignored="false" />
     <file path="/CtrlCommonErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376993463562" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/counters.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377002276576" ignored="false" />
-    <file path="$PROJECT_DIR$/../run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377420097024" ignored="false" />
+    <file path="$PROJECT_DIR$/../run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378300074314" ignored="false" />
     <file path="/DbModelManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377095221869" ignored="false" />
     <file path="/addLongJob.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377164082693" ignored="false" />
     <file path="/DdXlsLongJobCycle.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377160479433" ignored="false" />
@@ -583,9 +583,11 @@
     <file path="$PROJECT_DIR$/../temp/grabber/GrabberDdImporter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290356299" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PbvItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290356300" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/level/LevelAvatar.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290476877" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/.idea/workspace.xml" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378298721879" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/.idea/workspace.xml" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378300107433" ignored="false" />
     <file path="$PROJECT_DIR$/../formatron/gitUpdateAll" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378297543317" ignored="false" />
     <file path="/gitUpdateAll" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378294725755" ignored="false" />
+    <file path="$PROJECT_DIR$/../run/run/dc.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378300326733" ignored="false" />
+    <file path="/dc.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378300323135" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -731,7 +733,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="158" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../manager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../run" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="154" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="828" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="832" />
