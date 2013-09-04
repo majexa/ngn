@@ -1,43 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/more/dd/DmfaDdCityMultiselect.class.php" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\lib\more\common\WsClient2.class.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/patcher/filePatches/0020_ddItemssettings.php" afterPath="$PROJECT_DIR$/lib/more/patcher/filePatches/0020_ddItemssettings.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/admin/AdminModule.class.php" afterPath="$PROJECT_DIR$/lib/more/admin/AdminModule.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/common/AdsRotator.class.php" afterPath="$PROJECT_DIR$/lib/more/common/AdsRotator.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php" afterPath="$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/common/CalendarItems.class.php" afterPath="$PROJECT_DIR$/lib/more/common/CalendarItems.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/admin/CtrlAdminDdField.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/admin/CtrlAdminDdField.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/admin/CtrlAdminDdStructure.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/admin/CtrlAdminDdStructure.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/DbItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/core/DbItemsManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdFieldsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdFieldsManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdImageConverter.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdImageConverter.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/ddImport/DdImporter.class.php" afterPath="$PROJECT_DIR$/lib/more/ddImport/DdImporter.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItemSystemDatesManager.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItemSystemDatesManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdParamFilterCtrl.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdParamFilterCtrl.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/users/DmfaDdUserImage.class.php" afterPath="$PROJECT_DIR$/lib/more/users/DmfaDdUserImage.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/DmfaFile.class.php" afterPath="$PROJECT_DIR$/lib/more/form/DmfaFile.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/DmfaWisiwig.class.php" afterPath="$PROJECT_DIR$/lib/more/form/DmfaWisiwig.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldECheckbox.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldECheckbox.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/configManager/FieldEExpires.class.php" afterPath="$PROJECT_DIR$/lib/more/configManager/FieldEExpires.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEFlash.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEFlash.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldESelect.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldESelect.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEVideo.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEVideo.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/image/ImageThumbs.class.php" afterPath="$PROJECT_DIR$/lib/more/image/ImageThumbs.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/ItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/core/ItemsManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/common/ItemsReporter.class.php" afterPath="$PROJECT_DIR$/lib/more/common/ItemsReporter.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.videoItems.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.videoItems.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/SubPaDdSlave.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/SubPaDdSlave.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/common/Voting.class.php" afterPath="$PROJECT_DIR$/lib/more/common/Voting.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/default.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/site/tpl/dd/default.php" afterPath="$PROJECT_DIR$/site/tpl/dd/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/css/common/screen.css" afterPath="$PROJECT_DIR$/i/css/common/screen.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/vars/sfl/js/video.php" afterPath="$PROJECT_DIR$/config/vars/sfl/js/video.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378291042219" ignored="false" />
@@ -619,8 +583,8 @@
     <file path="$PROJECT_DIR$/../temp/grabber/GrabberDdImporter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290356299" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PbvItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290356300" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/level/LevelAvatar.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290476877" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/.idea/workspace.xml" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378295836399" ignored="false" />
-    <file path="$PROJECT_DIR$/../formatron/gitUpdateAll" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378294889242" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/.idea/workspace.xml" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378298721879" ignored="false" />
+    <file path="$PROJECT_DIR$/../formatron/gitUpdateAll" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378297543317" ignored="false" />
     <file path="/gitUpdateAll" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378294725755" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -640,7 +604,17 @@
     <favorites_list name="ngn" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="TestRunner.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/test/TestRunner.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="3" selection-start="1443" selection-end="1443" vertical-scroll-proportion="0.2568306">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -964,7 +938,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3" sideWeight="0.7072758" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3" sideWeight="0.7072758" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -1043,11 +1017,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/configManager/FieldEExpires.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="7" selection-start="481" selection-end="481" vertical-scroll-proportion="0.47309834" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/more/tpl/admin/headers.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1123,6 +1092,13 @@
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DmfaDdCityMultiselect.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="0" selection-start="117" selection-end="117" vertical-scroll-proportion="0.23224044" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/test/TestRunner.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="3" selection-start="1443" selection-end="1443" vertical-scroll-proportion="0.2568306">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
