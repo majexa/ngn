@@ -15,7 +15,7 @@ class DdItemSystemDatesManager extends DbItemsManager {
         'name' => 'dateUpdate'
       ]
     ])));
-    $this->form->setElementsData($this->oItems->getItem($itemId));
+    $this->form->setElementsData($this->items->getItem($itemId));
   }
 
 }

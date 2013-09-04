@@ -37,9 +37,11 @@ caption, th, td {
 text-align: left;
 font-weight: normal;
 }
+/*
 table, td, th {
 vertical-align: middle;
 }
+*/
 
 /* Remove possible quote marks (") from <q>, <blockquote>. */
 blockquote:before, blockquote:after, q:before, q:after {

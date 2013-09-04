@@ -41,8 +41,8 @@ class CtrlAdminDdField extends CtrlAdmin {
   }
 
   function action_default() {
-    $this->im->oItems->cond->addF('strName', $this->strName);
-    $this->d['items'] = $this->im->oItems->getItems();
+    $this->im->items->cond->addF('strName', $this->strName);
+    $this->d['items'] = $this->im->items->getItems();
     $this->setPageTitle('Редактирование полей структуры «'.$this->d['strData']['title'].'»');
   }
 
@@ -53,7 +53,7 @@ class CtrlAdminDdField extends CtrlAdmin {
   }
 
   function action_edit() {
-    $fieldData = $this->im->oItems->getItem($this->req->rq('id'));
+    $fieldData = $this->im->items->getItem($this->req->rq('id'));
     if ($this->im->requestUpdate($this->req->rq('id'))) {
       $this->redirect($this->tt->getPath(3));
     }

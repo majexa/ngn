@@ -20,11 +20,11 @@ class CtrlAdminDdStructure extends CtrlAdmin {
   }
   
   function action_default() {
-    $this->d['items'] = $this->im->oItems->getItems();
+    $this->d['items'] = $this->im->items->getItems();
   }
 
   function action_edit() {
-    $data = $this->im->oItems->getItem($this->req->rq('id'));
+    $data = $this->im->items->getItem($this->req->rq('id'));
     $this->setPageTitle('Редактирование структуры «'.$data['title'].'»');
     if ($this->im->requestUpdate($this->req->rq('id'))) {
       $this->redirect($this->tt->getPath(2));

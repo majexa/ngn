@@ -13,14 +13,14 @@ class DmfaWisiwig extends DmfaWisiwigAbstract {
   function elAfterCreate(FieldEWisiwig $el) {
     $this->dm->moveTempFiles($el->options['value'], $this->dm->id, $el['name']);
     $this->dm->cleanupImages($el->options['value'], $this->dm->id, $el['name']);
-    $this->dm->oItems->updateField($this->dm->id, $el['name'], $el->options['value']);
+    $this->dm->items->updateField($this->dm->id, $el['name'], $el->options['value']);
     //$this->dm->updateField($this->dm->id, $el['name'], $el->options['value']);
   }
   
   function elAfterUpdate(FieldEWisiwig $el) {
     $value = BracketName::getValue($this->dm->data, $el['name']);
     $this->dm->cleanupImages($value, $this->dm->id, $el['name']);
-    $this->dm->oItems->updateField($this->dm->id, $el['name'], $value);
+    $this->dm->items->updateField($this->dm->id, $el['name'], $value);
     //$this->dm->updateField($this->dm->id, $el['name'], $value);
   }
 

@@ -169,7 +169,7 @@ trait DdParamFilterCtrl {
     else {
       throw new Exception('not realized');
       //$this->setPageTitle("Возраст от $a до $b");
-      //$this->oManager->oItems->addF('age', $a);
+      //$this->oManager->items->addF('age', $a);
     }
   }
 
@@ -197,7 +197,7 @@ trait DdParamFilterCtrl {
           foreach (DdTagsItems::getIdsByName($this->strName, $tagField, $name) as $id)
             if (!in_array($id, $ids)) $ids[] = $id;
         }
-        if ($ids) $this->oManager->oItems->addF('id', $ids);
+        if ($ids) $this->oManager->items->addF('id', $ids);
       } elseif (strstr($tagsParam, '+')) {
         // Условие выборки "и"
         $tagNames = explode('+', $tagsParam);
@@ -207,7 +207,7 @@ trait DdParamFilterCtrl {
         for ($i = 1; $i < count($ids); $i++)
           $intersectIds = array_intersect($ids[$i - 1], $ids[$i]);
         if ($intersectIds)
-          $this->oManager->oItems->addF('id', $intersectIds);
+          $this->oManager->items->addF('id', $intersectIds);
         // Определяем заголовок
         foreach ($tagNames as $name) {
           if (($tag = DdTags::getTag($name, $tagField, $this->page['id']))) {
@@ -246,7 +246,7 @@ trait DdParamFilterCtrl {
           // Если нет тэгов, делаем значение фильтра таким, что бы выборка была нулевая
           $itemIds = -1;
         }
-        $this->oManager->oItems->addF('id', $itemIds);
+        $this->oManager->items->addF('id', $itemIds);
       }
     }
     */

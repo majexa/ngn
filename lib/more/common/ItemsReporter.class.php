@@ -28,10 +28,10 @@ class ItemsReporter extends Reporter {
   }
   
   protected function setAds() {
-    $oItems = new DdItemsPage($this->strName);
+    $items = new DdItemsPage($this->strName);
     if (isset($this->place))
-      $oItems->setExtraCond("AND place='{$this->place}'");
-    if (!$items = $oItems->getItems($this->limit, $this->itemIds)) {
+      $items->setExtraCond("AND place='{$this->place}'");
+    if (!$items = $items->getItems($this->limit, $this->itemIds)) {
       throw new Exception('No $items in '.$this->strName.' structure');
     }
     $this->items =& $items;

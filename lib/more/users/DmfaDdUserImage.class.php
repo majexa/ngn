@@ -23,8 +23,8 @@ class DmfaDdUserImage extends DmfaImagePreview {
   }
   
   function getAttacheFilenameByEl(FieldEFile $el) {
-    Misc::checkEmpty($this->dm->oItems[$this->dm->id]['authorId']);
-    return $this->dm->oItems[$this->dm->id]['authorId'];
+    Misc::checkEmpty($this->dm->items[$this->dm->id]['authorId']);
+    return $this->dm->items[$this->dm->id]['authorId'];
   }
   
   function elBeforeDelete(FieldEFile $el) {

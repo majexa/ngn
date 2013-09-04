@@ -42,7 +42,7 @@ class DdImageConverter {
     $im->imageSizes['mdW'] = self::$mdW;
     $im->imageSizes['mdH'] = self::$mdH;
     $im->getNonActive = true;
-    if (!$items = $im->oItems->getItems($pageId)) return;
+    if (!$items = $im->items->getItems($pageId)) return;
     foreach ($items as $k => $v) {
       foreach ($v as $fieldName => $v2) {
         if (in_array($fieldName, $imageFields)) {
