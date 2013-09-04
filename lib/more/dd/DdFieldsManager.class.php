@@ -7,7 +7,7 @@ class DdFieldsManager extends DbItemsManager {
   /**
    * @var DdFieldItems
    */
-  public $oItems;
+  public $items;
 
   /**
    * @var DbModel
@@ -280,7 +280,7 @@ class DdFieldsManager extends DbItemsManager {
   }
 
   function createIfNotExists(array $data) {
-    if ($this->oItems->getItemByField('name', $data['name'])) return false;
+    if ($this->items->getItemByField('name', $data['name'])) return false;
     return $this->create($data);
   }
 
@@ -295,7 +295,7 @@ class DdFieldsManager extends DbItemsManager {
 
   protected function updateFilter() {
     if (!$this->filterable()) return;
-    $filterField = $this->filterFm->oItems->getItemByField('name', $this->beforeUpdateData['name']);
+    $filterField = $this->filterFm->items->getItemByField('name', $this->beforeUpdateData['name']);
     if ($filterField) $this->filterFm->update($filterField['id'], $this->data);
   }
 

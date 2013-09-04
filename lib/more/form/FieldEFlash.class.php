@@ -10,7 +10,7 @@ class FieldEFlash extends FieldEFile {
     $path = (!empty($data[$k]['file']) and empty($data[$k]['file']['error'])) ?
       $this->afterUpdateFile($itemId, $data[$k]['file'], $k) :
       $this->beforeUpdateData[$k]['path'];
-    $this->oItems->update(
+    $this->items->update(
       $itemId,
       array(
         $k => array(

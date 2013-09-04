@@ -17,7 +17,7 @@ class FieldECheckbox extends FieldEInput {
       $input .= ' value="'.$key.'"';
       if (in_array($key, (array)$this->options['value'])) $input .= ' checked="checked"';
       $input .= ' />';
-      $input .= '<label for="'.$this->options['id'].Misc::name2id($key).'"'.'>'.$value.($this->options['required'] ? '{required}' : '')."</label></span>";
+      $input .= '<label for="'.$this->options['id'].Misc::name2id($key).'"'.'>'.$value./*($this->options['required'] ? '{required}' : '').*/"</label></span>";
       $i++;
     }
     $input .= '<div class="clear"><!-- --></div>';

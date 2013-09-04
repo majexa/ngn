@@ -19,12 +19,12 @@ class DdItemsManager extends DbItemsManager {
   /**
    * @var Image
    */
-  public $oImage;
+  public $image;
 
   /**
    * @var DdItems
    */
-  public $oItems;
+  public $items;
 
   /**
    * @var DdForm
@@ -63,7 +63,7 @@ class DdItemsManager extends DbItemsManager {
   }
 
   protected function allIds() {
-    return db()->selectCol("SELECT id FROM {$this->oItems->table}");
+    return db()->selectCol("SELECT id FROM {$this->items->table}");
   }
 
   function deleteAll() {
@@ -71,7 +71,7 @@ class DdItemsManager extends DbItemsManager {
   }
 
   protected function getItem($id) {
-    return $this->oItems->getItemNonFormat($id);
+    return $this->items->getItemNonFormat($id);
   }
 
   protected function replaceData() {

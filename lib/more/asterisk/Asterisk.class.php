@@ -18,6 +18,7 @@ class Asterisk {
     if (empty($data['project'])) $data['project'] = PROJECT_KEY;
     if (empty($data['actionName'])) $data['actionName'] = $data['project'];
     LogWriter::v('addOutgoingCall', "$phone, $id, ".getPrr($data));
+    if (!ALLOW_SEND) return;
     $class = AgiAction::getClass($data['actionName']);
     if ($class::recall()) $this->addStartCalling($data['project'], $phone, $id);
     //$t = "Channel: SIP/{$phone}@80.75.130.136:5060";

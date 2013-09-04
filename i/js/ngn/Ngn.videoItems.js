@@ -1,4 +1,4 @@
-Ngn.videoItems = function() {
+Ngn.videitems = function() {
   $$('.f_video a.thumb.popup').each(function(el) {
     el.addEvent('click', function(e) {
       e.preventDefault();

@@ -7,7 +7,7 @@ class CalendarItems extends Calendar {
    *
    * @var DdItemsPage
    */
-  public $oItems;
+  public $items;
 
   /**
    * Массив с днями, для которых существуют данные
@@ -29,14 +29,14 @@ class CalendarItems extends Calendar {
    */
   public $currentPath;
 
-  function __construct($currentPath, DdItemsPage $oItems) {
+  function __construct($currentPath, DdItemsPage $items) {
     $this->currentPath = $currentPath;
-    $this->oItems = $oItems;
+    $this->items = $items;
     $this->setStartDay(1); // Устанавливаем первый день недели - понедельник
   }
 
   function getMonthView($month, $year) {
-    $this->daysDataExists = $this->oItems->getMonthDaysDataExists($month, $year);
+    $this->daysDataExists = $this->items->getMonthDaysDataExists($month, $year);
     return parent::getMonthView($month, $year);
   }
 

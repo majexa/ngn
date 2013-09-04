@@ -7,7 +7,7 @@ Ngn.localStorage.clean();
 
 Вы находитесь в панеле управления сайтом <b><?= SITE_TITLE ?></b>
 
-<img src="http://asite.ru/ngn-admin-ping/index.php?site=<?= SITE_DOMAIN ?>" width="1" height="1" />
+<?/*<img src="http://majexa.ru/ngn-admin-ping/index.php?site=<?= SITE_DOMAIN ?>" width="1" height="1" />*/?>
 
 <?= Config::getVarVar('adminExtras', 'homeHtml', true) ?>
 
@@ -18,8 +18,8 @@ Ngn.localStorage.clean();
   <h2>Техническая информация</h2>
   <h3>Сборка</h3>
   <ul>
-    <li><b>Номер текущей сборки:</b><br /><?= BUILD ?></li>
-    <li><b>Дата и время создания сборки:</b><br /><?= datetimeStr(BUILD_TIME) ?></li>
+    <li><b>Версия JS:</b><br /><?= Sflm::get('js')->version() ?></li>
+    <li><b>Версия CSS:</b><br /><?= Sflm::get('css')->version() ?></li>
   </ul>
   <h3>Размер</h3>
   <?

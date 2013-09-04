@@ -29,16 +29,16 @@ class AdsRotator {
 		}
 		
     includeLib('dd/DdItems_Extended.class.php');
-    $oItems = new DdItems_Extended(self::$strName);
+    $items = new DdItems_Extended(self::$strName);
     if (!$rodeoBannerIds = Settings::get('rodeoBanners'.$place) or 1) {
     	/*
     	print "
-        SELECT id, rodeo FROM {$oItems->table} WHERE
+        SELECT id, rodeo FROM {$items->table} WHERE
         place='$place' AND active=1
         $idsCond $idsCond2";
       */
       $r = $GLOBALS['reg']->db->select("
-        SELECT id, rodeo FROM {$oItems->table} WHERE
+        SELECT id, rodeo FROM {$items->table} WHERE
         place='$place' AND active=1
         $idsCond $idsCond2");
       $totalRodeo = 0;
@@ -56,8 +56,8 @@ class AdsRotator {
       Settings::set('rodeoBanners'.$place, $rodeoBannerIds);
     }
     $bannerId = $rodeoBannerIds[rand(0, count($rodeoBannerIds)-1)];
-    if ($banner = $oItems->getItemF($bannerId)) {
-      $oItems->update($banner['id'], ['rotates' => $banner['rotates']+1]);
+    if ($banner = $items->getItemF($bannerId)) {
+      $items->update($banner['id'], ['rotates' => $banner['rotates']+1]);
       self::log($banner, 'adslog_rotates');
       $shownIds[] = $bannerId;
     }

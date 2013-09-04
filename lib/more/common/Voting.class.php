@@ -14,10 +14,10 @@ class Voting {
     return true;
   }
   
-  function vote($pageId, $itemId, $fieldName, $userId, DdItemsPage $oItems) {
+  function vote($pageId, $itemId, $fieldName, $userId, DdItemsPage $items) {
     if (self::isVoted($pageId, $itemId, $fieldName, $userId)) return;
     db()->query("
-      UPDATE {$oItems->table} SET $fieldName=$fieldName+1 WHERE pageId=?d AND id=?d",
+      UPDATE {$items->table} SET $fieldName=$fieldName+1 WHERE pageId=?d AND id=?d",
       $pageId, $itemId);
     db()->query(
       "INSERT INTO voting_log SET pageId=?d, itemId=?d, fieldName=?, userId=?d",

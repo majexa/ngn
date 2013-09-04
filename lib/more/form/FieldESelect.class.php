@@ -6,7 +6,7 @@ class FieldESelect extends FieldEText {
 
   protected function init() {
     parent::init();
-    if (!isset($this->options['options'])) throw new Exception("Options not set in element: ".getPrr($this->options));
+    if (!isset($this->options['options'])) throw new Exception(get_class($this).": options not set in element: ".getPrr($this->options));
     if (!is_array($this->options['options'])) throw new Exception('options[options] is not array. options: '.getPrr($this->options));
     if (empty($this->options['forceAssoc']) and !Arr::isAssoc($this->options['options'])) $this->options['options'] = Arr::toOptions($this->options['options']);
   }

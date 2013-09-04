@@ -31,10 +31,7 @@ class AdminModule {
   }
 
   static function isListAllowed($v) {
-    if (!empty($v['alwaysOnMenu'])) {
-      //die2($v);
-      return true;
-    }
+    if (!empty($v['alwaysOnMenu'])) return true;
     if (empty($v['onMenu'])) return false;
     if (O::get('Req')->params[0] == 'god' and Misc::isGod()) return true;
     return self::_isAllowed($v);

@@ -5,13 +5,13 @@ class ImageThumbs {
   /**
    * @var Image
    */
-  protected $oImage;
+  protected $image;
   
   protected $imageRoot;
   protected $mime;
   
   function __construct($imageRoot) {
-    $this->oImage = new Image();
+    $this->image = new Image();
     $this->imageRoot = $imageRoot;
     $this->mime = File::getMime($imageRoot);
     
@@ -31,7 +31,7 @@ class ImageThumbs {
       $this->makeThumbs($imageRoot);
     } catch (Exception $e) {
       // Если не получилось сделать тумбу, удаляем значение поля
-      db()->query("UPDATE {$this->oItems->table} SET $k=? WHERE id=?d", '', $itemId);
+      db()->query("UPDATE {$this->items->table} SET $k=? WHERE id=?d", '', $itemId);
       // и оригинал
       unlink($imageRoot);
       throw new Exception($e->getMessage());
@@ -61,11 +61,11 @@ class ImageThumbs {
   
   protected function makeSmallThumbs($imageRoot) {
     if ($this->smResizeType == 'resample') {      
-      $this->oImage->resampleAndSave($imageRoot, 
+      $this->image->resampleAndSave($imageRoot,
         Misc::getFilePrefexedPath($imageRoot, 'sm_'),
         $this->imageSizes['smW'], $this->imageSizes['smH']);
     } else {
-      $this->oImage->resizeAndSave($imageRoot, 
+      $this->image->resizeAndSave($imageRoot,
         Misc::getFilePrefexedPath($imageRoot, 'sm_'),
         $this->imageSizes['smW'], $this->imageSizes['smH']);
     }
@@ -73,11 +73,11 @@ class ImageThumbs {
 
   protected function makeMiddleThumbs($imageRoot) {
     if ($this->mdResizeType == 'resize') {
-      $this->oImage->resizeAndSave($imageRoot, 
+      $this->image->resizeAndSave($imageRoot,
         Misc::getFilePrefexedPath($imageRoot, 'md_'),
         $this->imageSizes['mdW'], $this->imageSizes['mdH']);
     } else {
-      $this->oImage->resampleAndSave($imageRoot, 
+      $this->image->resampleAndSave($imageRoot,
         Misc::getFilePrefexedPath($imageRoot, 'md_'),
         $this->imageSizes['mdW'], $this->imageSizes['mdH']);
     }

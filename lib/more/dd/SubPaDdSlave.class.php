@@ -56,7 +56,7 @@ class SubPaDdSlave extends SubPa {
   }
 
   function setItemsOnItem() {
-    $this->ctrl->oManager->oItems->cond->addF($this->masterField['name'], $this->masterItem['id']);
+    $this->ctrl->oManager->items->cond->addF($this->masterField['name'], $this->masterItem['id']);
     $this->ctrl->setItemsOnItem();
   }
 

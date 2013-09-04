@@ -28,6 +28,6 @@ if (empty($d['settings']['doNotShowItems'])) {
   if (!empty($d['itemsHtml'])) {
     print $d['itemsHtml'].'<div class="clear"><!-- --></div>';
   } else {
-    print Slice::html('noItems_'.$d['page']['id'], 'Нет записей', ['default' => 'Нет записей']);
+    print Slice::html('nitems_'.$d['page']['id'], 'Нет записей', ['default' => 'Нет записей']);
   }
 }

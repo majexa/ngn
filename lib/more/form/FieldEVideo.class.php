@@ -33,7 +33,7 @@ class FieldEVideo extends FieldEFile {
     Arr::checkEmpty($data, array('pageId', 'itemId', 'filePath', 'fieldName'));
     if (!($page = NgnOrmCore::getTable('Pages')->find($data['pageId'])))
       throw new Exception('Page not found');
-    $oItems = new DdItemsPage($page->id);
+    $items = new DdItemsPage($page->id);
     $newFilePath = UPLOAD_PATH.'/'.File::stripExt($data['filePath']);
     rename(UPLOAD_PATH.'/'.$data['filePath'], $newFilePath);
     if (empty($page->settings['mdW'])) {
@@ -57,7 +57,7 @@ class FieldEVideo extends FieldEFile {
       VIDEO_3_W,
       VIDEO_3_H
     );
-    $oItems->update($data['itemId'], array(
+    $items->update($data['itemId'], array(
       $data['fieldName'] => str_replace(UPLOAD_PATH, '', $videoFile),
       $data['fieldName'].'_dur' => $oVideoPreview->getDurationSec($videoFile),
       'active' => 1
