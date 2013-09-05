@@ -11,7 +11,7 @@ DdFieldCore::registerType('ddCityList', [
 class FieldEDdCityList extends FieldEFieldList {
 
   protected function defineOptions() {
-    return array_merge(parent::defineOptions(), ['fieldsType' => 'ddCity']);
+    return array_merge(parent::defineOptions(), [ 'fieldsType' => 'ddCity']);
   }
 
 }
