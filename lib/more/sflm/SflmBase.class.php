@@ -3,9 +3,9 @@
 /**
  * Static File Libraries Manager
  *
- * path - путь. путь к файлу относильно web-рута
- * package - пакет. имя набора путей и других пакетов
- * lib - иблиотека. путь или пакет
+ * path - путь. (i/path/to/file). путь к файлу относильно web-рута
+ * package - пакет. имя набора библиотек
+ * lib - библиотека. путь или пакет
  *
  */
 abstract class SflmBase {
@@ -180,6 +180,7 @@ abstract class SflmBase {
 
   function getTags($package, $code = null) {
     if (Sflm::$debug) {
+
       $t = '';
       foreach ($this->getPaths($package) as $path) {
         if ($this->isPackage($path)) {

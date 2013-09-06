@@ -9,9 +9,9 @@ class SflmJs extends SflmBase {
   }
 
   protected function getPackageCodeR($package) {
-    Err::noticeSwitch(false);  // Выключаем отображение нотисов
+    Err::noticeSwitch(false);
     $code = parent::getPackageCodeR($package);
-    Err::noticeSwitchBefore(); // Включаем
+    Err::noticeSwitchBefore();
     return $code;
   }
 

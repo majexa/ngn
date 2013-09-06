@@ -42,7 +42,7 @@ class SflmFrontend {
   protected function init() {
   }
 
-  protected function code() {
+  function code() {
     return $this->sflm->extractCode($this->getPaths());
   }
 
@@ -87,20 +87,33 @@ class SflmFrontend {
    * @param path / package
    */
   function addLib($lib, $strict = false) {
-    if (!$strict and !$this->sflm->exists($lib)) return;
+    if (!$strict and !$this->sflm->exists($lib)) {
+      output("Lib '$lib' already exists");
+      return;
+    }
+    output("Adding lib '$lib'");
     $newPaths = $this->sflm->getPaths($lib);
     $changed = false;
     foreach ($newPaths as $path) {
-      if (!in_array($path, $this->getPaths()) and $this->sflm->exists($path)) {
-        $this->paths[] = $path;
-        $changed = true;
+      // если путь уже присутствует в этом фронтенде (или если это... WTF?)
+      if (in_array($path, $this->getPaths())/* or $this->sflm->exists($path)*/) {
+        output("New path '$path' already exists");
+        //die2($this->sflm->exists($path));
+        continue;
       }
+      $this->addPath($path);
+      $changed = true;
     }
     if ($changed) {
       NgnCache::c()->save($this->paths, $this->pathsCacheKey());
+      output("update stored file after adding lib '$lib'");
       $this->store();
       $this->incrementVersion();
     }
+  }
+
+  protected function addPath($path) {
+    $this->paths[] = $path;
   }
 
   protected function versionCacheKey() {

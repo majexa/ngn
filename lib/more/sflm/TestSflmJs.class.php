@@ -19,12 +19,11 @@ class TestSflmJs extends NgnTestCase {
     $mtime2 = filemtime(Sflm::get('js')->cacheFile());
     $v2 = Sflm::get('js')->version();
     $this->assertTrue($mtime1 == $mtime2, "mtime1:$mtime1 != mtime2:$mtime2");
-    $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2");
+    $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2. Версии до store() и после не совпадают");
 
     $filesize1 = filesize(Sflm::get('js')->cacheFile());
     (new FieldEPhone(['name' => 'dummy'], new Form([])))->js();
     $this->assertTrue((bool)strstr(file_get_contents(Sflm::get('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is preset in complete file');
-    //die2('----');
     $this->assertTrue(filesize(Sflm::get('js')->cacheFile()) > $filesize1, 'File size is larger then initial');
 
     // reset - эмитация 2-го открытия страницы. без очистки кэша!
