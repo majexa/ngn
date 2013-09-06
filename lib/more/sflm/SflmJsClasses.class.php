@@ -59,15 +59,26 @@ class SflmJsClasses {
 
   function addClass($class) {
     if (in_array($class, $this->existingClasses)) return;
+    output("addClass '$class'");
     if (!isset($this->classesPaths[$class])) throw new Exception("File for class '$class' does not exists");
-    $c = file_get_contents($this->frontend->sflm->getAbsPath($this->classesPaths[$class]));
-    foreach ($this->parseClasses($c) as $v) $this->existingClasses[] = $v;
-    foreach ($this->parseParentClasses($c) as $v) $this->addClass($v);
+    $this->processPath($this->classesPaths[$class]);
+    $this->frontend->incrementVersion();
+  }
+
+  function processPath($path) {
+    $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
+    foreach ($this->parseClasses($c) as $v) {
+      output("Class '$v' exists in $path. Adding to \$this->existingClasses");
+      $this->existingClasses[] = $v;
+    }
+    foreach ($this->parseParentClasses($c) as $v) {
+      $this->addClass($v);
+    }
     foreach ($this->parseRequiredClasses($c) as $v) $this->addClass($v);
-    $this->frontend->addLib($this->classesPaths[$class]);
+    output("addLib '$path'");
+    $this->frontend->addLib($path);
     foreach ($this->parseRequiredAfterClasses($c) as $v) $this->addClass($v);
     NgnCache::c()->save($this->existingClasses, 'jsExistingClasses');
-    $this->frontend->incrementVersion();
   }
 
 }

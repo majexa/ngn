@@ -23,6 +23,7 @@ class SiteRequest {
   protected $subdomain;
 
   function getSubdomain() {
+    return false;
     if (isset($this->subdomain)) return $this->subdomain;
     $domainParts = explode('.', $_SERVER['HTTP_HOST']);
     $baseDomainLevel = Misc::siteDomainLevel();
