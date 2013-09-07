@@ -2,31 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\i\js\ngn\Ngn.PageBlockCreate.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\i\js\ngn\Ngn.PageBlockSlider.js" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\i\js\ngn\Ngn.pb.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/admin/AdminModule.class.php" afterPath="$PROJECT_DIR$/lib/more/admin/AdminModule.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/common/CtrlScripts.class.php" afterPath="$PROJECT_DIR$/lib/more/common/CtrlScripts.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmCss.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmCss.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/tiny/TinyInit.class.php" afterPath="$PROJECT_DIR$/lib/more/tiny/TinyInit.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/default.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/grabber/default.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/grabber/default.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/cp/head.php" afterPath="$PROJECT_DIR$/more/tpl/cp/head.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/headers.php" afterPath="$PROJECT_DIR$/more/tpl/admin/headers.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/scripts/js/common/lib.php" afterPath="$PROJECT_DIR$/more/scripts/js/common/lib.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/tags/listTree.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/tags/listTree.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/scripts/css/common/tiny.css.php" afterPath="$PROJECT_DIR$/more/scripts/css/common/tiny.css.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/DbModelManager.class.php" afterPath="$PROJECT_DIR$/lib/more/core/DbModelManager.class.php" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378539816714" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540445637" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378542278043" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846020974" ignored="false" />
@@ -458,7 +441,7 @@
     <file path="/CtrlCommonErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376993463562" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/counters.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377002276576" ignored="false" />
     <file path="$PROJECT_DIR$/../run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378300074314" ignored="false" />
-    <file path="/DbModelManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377095221869" ignored="false" />
+    <file path="/DbModelManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378542195927" ignored="false" />
     <file path="/addLongJob.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377164082693" ignored="false" />
     <file path="/DdXlsLongJobCycle.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377160479433" ignored="false" />
     <file path="/SampleJob.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377162472088" ignored="false" />
@@ -625,7 +608,7 @@
     <file path="$PROJECT_DIR$/../sb/readme.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378479543280" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/tpl/common/js.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540591667" ignored="false" />
     <file path="/js.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540583802" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/config/vars/sfl/js/pageBlocks.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540684936" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/config/vars/sfl/js/pageBlocks.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378542082824" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/cmd/1.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540149250" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/config/vars/sfl/js/sb.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378483307883" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/notify/Notify_SubscribeText_items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378483384462" ignored="false" />
@@ -647,6 +630,7 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PbvTextAndImage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540149250" ignored="false" />
     <file path="$PROJECT_DIR$/../fpg/site/tpl/home/head.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540149250" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/dd/output/DdoPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540401383" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PageBlockModelManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378542238397" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -666,37 +650,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SflmFrontend.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php">
+      <file leaf-file-name="DbModelManager.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/more/core/DbModelManager.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="98" column="50" selection-start="2512" selection-end="2512" vertical-scroll-proportion="-0.65384614">
+            <state line="27" column="12" selection-start="622" selection-end="622" vertical-scroll-proportion="-3.4615386">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SflmCss.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmCss.class.php">
+      <file leaf-file-name="FieldEPageId.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/form/FieldEPageId.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="93" selection-end="93" vertical-scroll-proportion="0.22623575">
-              <folding />
+            <state line="8" column="6" selection-start="246" selection-end="246" vertical-scroll-proportion="0.40590405">
+              <folding>
+                <marker date="1376390573474" expanded="true" signature="238:275" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Sflm.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/sflm/Sflm.class.php">
+      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="21" selection-start="1610" selection-end="1610" vertical-scroll-proportion="-12.884615">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SflmBase.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="207" column="17" selection-start="6101" selection-end="6101" vertical-scroll-proportion="-11.076923">
+            <state line="302" column="30" selection-start="8329" selection-end="8329" vertical-scroll-proportion="-6.730769">
               <folding />
             </state>
           </provider>
@@ -720,7 +697,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DmfaDdCityMultiselect.class.php" />
         <option value="$PROJECT_DIR$/lib/more/sflm/SflmFrontendJs.class.php" />
         <option value="$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php" />
@@ -736,6 +712,7 @@
         <option value="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" />
         <option value="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" />
         <option value="$PROJECT_DIR$/lib/more/sflm/SflmCss.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/core/DbModelManager.class.php" />
       </list>
     </option>
   </component>
@@ -1068,21 +1045,21 @@
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2893401" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4534687" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3151515" sideWeight="0.7106599" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3151515" sideWeight="0.5465313" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1046" y="73" width="257" height="186" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4534687" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1151,21 +1128,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontendJs.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="27" selection-start="439" selection-end="439" vertical-scroll-proportion="0.6292776" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/init/cli.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="6" selection-end="6" vertical-scroll-proportion="0.062730625" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="13" selection-start="1447" selection-end="1447" vertical-scroll-proportion="0.065891474" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="20" selection-start="1123" selection-end="1123" vertical-scroll-proportion="-0.65384614">
@@ -1238,8 +1200,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmCss.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="93" selection-end="93" vertical-scroll-proportion="0.22623575">
+        <state line="7" column="0" selection-start="93" selection-end="93" vertical-scroll-proportion="-4.576923">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="302" column="30" selection-start="8329" selection-end="8329" vertical-scroll-proportion="-6.730769">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/core/DbModelManager.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="12" selection-start="622" selection-end="622" vertical-scroll-proportion="-3.4615386">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/form/FieldEPageId.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="6" selection-start="246" selection-end="246" vertical-scroll-proportion="0.40590405">
+          <folding>
+            <marker date="1376390573474" expanded="true" signature="238:275" placeholder="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
