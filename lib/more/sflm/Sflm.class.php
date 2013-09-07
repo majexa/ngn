@@ -37,6 +37,7 @@ class Sflm {
    */
   static function get($type, $frontend = null) {
     if (isset(self::$cache[$type.$frontend])) return self::$cache[$type.$frontend];
+    // -- pr($type);
     $frontend = $frontend ? : self::$frontend;
     $class1 = 'Sflm'.ucfirst($type);
     $class2 = 'SflmFrontend'.ucfirst($type);

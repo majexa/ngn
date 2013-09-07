@@ -1,7 +1,7 @@
 <?php
 
-/* @var $oDdo DdoPage */
-$oDdo = $d['o'];
+/* @var $ddo Ddo */
+$ddo = $d['o'];
 $extraClasses = [];
 if (($itemClasses = Config::getVarVar('dd', 'useFieldNameAsItemClass', true))) {
   foreach ($itemClasses as $v) {
@@ -16,7 +16,7 @@ print '<div class="item'.
   '" data-id="'.$d['id'].'" data-userId="'.$d['userId'].'">';
 print '<div class="itemBody">';
 
-$fields = array_values($oDdo->fields);
+$fields = array_values($ddo->fields);
 for ($n=0; $n<count($fields); $n++) {
   $f =& $fields[$n];
   // Открывающийся тэг группы
@@ -27,9 +27,9 @@ for ($n=0; $n<count($fields); $n++) {
   $typeData = DdFieldCore::getTypeData($f['type'], false);
   if (empty($typeData['noElementTag'])) {
     $el = $d[$f['name']]; // $el содержит текущее значение элемента записи
-    print St::dddd($oDdo->elBeginDddd, $f);
-    print $oDdo->el($el, $f['name'], $d['id']);
-    print $oDdo->elEnd;
+    print St::dddd($ddo->elBeginDddd, $f);
+    print $ddo->el($el, $f['name'], $d['id']);
+    print $ddo->elEnd;
   }
   // Закрывающийся тэг группы
   if (

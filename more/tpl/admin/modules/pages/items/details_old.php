@@ -13,7 +13,7 @@ $pageMetaAllowed = AdminModule::isAllowed('pageMeta');
 if ($pageMetaAllowed) $widthPlus += 25; // meta-tags icon
 
 /* @var $ddo DdoPage */
-$ddo = $d['oDdo'];
+$ddo = $d['ddo'];
 
 ?>
 <div class="items">

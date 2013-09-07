@@ -97,7 +97,7 @@ window.addEvent('domready', function(){
     <!-- Начало цикла вывода полей -->
     <? foreach ($fields as $f) { $a = $v[$f['name']]; ?>
       <td class="<?= $f['name'] ?>">
-        <?= $d['oDdo']->el($a, $f['name'], $v['id']) ?>
+        <?= $d['ddo']->el($a, $f['name'], $v['id']) ?>
       </td>
     <? } ?>
     <!-- Конец цикла вывода полей -->

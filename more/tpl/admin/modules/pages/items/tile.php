@@ -25,7 +25,7 @@ clear: both;
 }
 </style>
 
-<?= $d['oDdo']->itemsBegin() ?>
+<?= $d['ddo']->itemsBegin() ?>
 
 <form method="post" id="itemsForm" method="post">
 <div class="moduleBody module_<?= $d['page']['module'] ?> layoutMode_<?= $d['page']['settings']['ddItemsLayout'] ?>">
@@ -34,8 +34,8 @@ clear: both;
   <? $n=0; foreach ($d['items'] as $v) { ?>
     <div class="item <?= $f['name'] ?><?= $v['active'] ? '' : ' nonActive' ?>" id="<?= 'item_'.$v['id'].'_'.$v['oid'] ?>">
       <!-- Начало цикла вывода полей -->
-      <? foreach ($d['oDdo']->fields as $f) { ?>
-        <?= $d['oDdo']->el($v[$f['name']], $f['name'], $v['id']) ?>
+      <? foreach ($d['ddo']->fields as $f) { ?>
+        <?= $d['ddo']->el($v[$f['name']], $f['name'], $v['id']) ?>
       <? } ?>
       <!-- Конец цикла вывода полей -->
       <div class="tools loader">
@@ -66,7 +66,7 @@ clear: both;
 </div>
 </form>
 
-<?= $d['oDdo']->itemsEnd() ?>
+<?= $d['ddo']->itemsEnd() ?>
 
 <? } else { ?>
   <p class="info"><i></i><?= LANG_NO_ENTRIES ?></p>

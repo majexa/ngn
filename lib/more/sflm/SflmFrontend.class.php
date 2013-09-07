@@ -94,11 +94,10 @@ class SflmFrontend {
     output("Adding lib '$lib'");
     $newPaths = $this->sflm->getPaths($lib);
     $changed = false;
+    if ($lib == 'pageBlocks') die2($newPaths);
     foreach ($newPaths as $path) {
-      // если путь уже присутствует в этом фронтенде (или если это... WTF?)
-      if (in_array($path, $this->getPaths())/* or $this->sflm->exists($path)*/) {
+      if (in_array($path, $this->getPathsCache())) {
         output("New path '$path' already exists");
-        //die2($this->sflm->exists($path));
         continue;
       }
       $this->addPath($path);
