@@ -1,9 +1,9 @@
 <?php
 
 // @title Редактирование альбомов в админке
-/* @var $oDdo DdoPage */
-$oDdo = O::get('DdoAdminFactory', $d['page'])->get();
-$oDdo->setItems($d['items']);
+/* @var $ddo DdoPage */
+$ddo = O::get('DdoAdminFactory', $d['page'])->get();
+$ddo->setItems($d['items']);
 
 ?>
 
@@ -24,7 +24,7 @@ window.addEvent('domready', function(){
     <!-- Начало цикла вывода полей -->
     <? foreach ($fields as $f) { $a = $v[$f['name']]; ?>
       <div class="item <?= $f['name'] ?><?= $v['active'] ? '' : ' nonActive' ?>" id="<?= 'item_'.$v['id'].'_'.$v['oid'] ?>">
-        <?= $oDdo->el($a, $f['name'], $v['id']) ?>
+        <?= $ddo->el($a, $f['name'], $v['id']) ?>
         <div class="tools loading">
           <a class="iconBtn edit" title="<?= LANG_EDIT ?>"
             href="<?= $this->getPath(5) ?>?a=edit&itemId=<?= $v['id'] ?>"><i></i></a>
