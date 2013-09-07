@@ -58,7 +58,7 @@ class SflmFrontend {
    * Сохраняет в конечный файл статические и динамические пути
    */
   function store() {
-    $this->sflm->storeLib($this->frontend, $this->code());
+    if ($this->sflm->storeLib($this->frontend, $this->code())) $this->incrementVersion();
   }
 
   /*
@@ -124,6 +124,7 @@ class SflmFrontend {
   }
 
   function incrementVersion() {
+    LogWriter::v('incrementVersion', 1);
     SiteConfig::updateVar($this->versionCacheKey(), (Config::getVar($this->versionCacheKey(), true) ? : 0) + 1);
   }
 
