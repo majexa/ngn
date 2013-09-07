@@ -75,8 +75,8 @@ class AdminModule {
 
   static function sf($name) {
     $s = '';
-    if (file_exists(STATIC_PATH.'/js/ngn/admin/'.$name.'.js')) $s .= Sflm::get('js')->getTag(STATIC_DIR.'/js/ngn/admin/'.$name.'.js');
-    if (file_exists(STATIC_PATH.'/js/ngn/admin/'.$name.'.css')) $s .= Sflm::get('css')->getTag(STATIC_DIR.'/js/ngn/admin/'.$name.'.css');
+    if (file_exists(STATIC_PATH.'/js/ngn/admin/'.$name.'.js')) $s .= Sflm::flm('js')->getTag(STATIC_DIR.'/js/ngn/admin/'.$name.'.js');
+    if (file_exists(STATIC_PATH.'/js/ngn/admin/'.$name.'.css')) $s .= Sflm::flm('css')->getTag(STATIC_DIR.'/js/ngn/admin/'.$name.'.css');
     return $s;
   }
 

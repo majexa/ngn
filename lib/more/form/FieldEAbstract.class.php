@@ -207,9 +207,9 @@ use Options;
   }
 
   protected function defaultJs() {
-    Sflm::get('js')->addLib("formEl/$this->type");
-    Sflm::get('js')->addClass('Ngn.Form.El.'.ucfirst($this->type));
-    Sflm::get('css')->addLib("i/css/formEl/$this->type.css");
+    Sflm::flm('js')->addLib("formEl/$this->type");
+    Sflm::flm('js')->addClass('Ngn.Form.El.'.ucfirst($this->type));
+    Sflm::flm('css')->addLib("i/css/formEl/$this->type.css");
     return "\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }
 

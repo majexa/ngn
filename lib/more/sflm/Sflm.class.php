@@ -26,18 +26,29 @@ class Sflm {
   }
 
   static function getTags() {
-    return Sflm::get('js')->getTags()."\n".Sflm::get('css')->getTags();
+    return Sflm::flm('js')->getTags()."\n".Sflm::flm('css')->getTags();
   }
 
   static $cache = [];
 
   /**
+   * Library Manager
+   *
+   * @param js/css
+   * @return SflmBase
+   */
+  static function lm($type) {
+    return O::get('Sflm'.ucfirst($type));
+  }
+
+  /**
+   * Frontend Library Manager
+   *
    * @param js/css
    * @return SflmFrontend
    */
-  static function get($type, $frontend = null) {
+  static function flm($type, $frontend = null) {
     if (isset(self::$cache[$type.$frontend])) return self::$cache[$type.$frontend];
-    // -- pr($type);
     $frontend = $frontend ? : self::$frontend;
     $class1 = 'Sflm'.ucfirst($type);
     $class2 = 'SflmFrontend'.ucfirst($type);
@@ -51,7 +62,7 @@ class Sflm {
 
   static function reset($type, $frontend = null) {
     unset(self::$cache[$type.$frontend]);
-    return self::get($type, $frontend);
+    return self::flm($type, $frontend);
   }
 
 }

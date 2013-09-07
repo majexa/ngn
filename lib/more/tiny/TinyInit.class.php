@@ -32,7 +32,7 @@ class TinyInit extends Options2 {
   }
 
   protected function initCssFile() {
-    $this->cssFile = empty($this->options['cssFile']) ? Sflm::get('css')->sflm->getCachedUrl('s2/css/common/tiny.css', true) : $this->options['cssFile'];
+    $this->cssFile = empty($this->options['cssFile']) ? Sflm::flm('css')->sflm->getCachedUrl('s2/css/common/tiny.css', true) : $this->options['cssFile'];
   }
 
   function getTheme() {
