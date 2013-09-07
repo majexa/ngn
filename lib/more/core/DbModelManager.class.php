@@ -25,7 +25,7 @@ class DbModelManager extends DataManagerAbstract {
     DbModelCore::delete($this->modelName, $this->id);
   }
   
-  function updateField($id, $fieldName, $value) {
+  function _updateField($id, $fieldName, $value) {
     DbModelCore::update($this->modelName, $id, [$fieldName => $value]);
   }
   
