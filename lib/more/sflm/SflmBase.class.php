@@ -57,9 +57,10 @@ abstract class SflmBase {
     $file = $this->cacheFile($package);
     if (!$code) $code = $this->getPackageCode($package);
     Misc::checkEmpty($code, '$code');
-    if (file_exists($file) and file_get_contents($file) == $code) return; // Если размер кода не изменился, не сохраняем
+    if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
     Dir::make(UPLOAD_PATH.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
+    return true;
   }
 
   function getCode($package) {

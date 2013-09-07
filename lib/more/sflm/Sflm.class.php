@@ -50,12 +50,11 @@ class Sflm {
   static function flm($type, $frontend = null) {
     if (isset(self::$cache[$type.$frontend])) return self::$cache[$type.$frontend];
     $frontend = $frontend ? : self::$frontend;
-    $class1 = 'Sflm'.ucfirst($type);
-    $class2 = 'SflmFrontend'.ucfirst($type);
+    $class = 'SflmFrontend'.ucfirst($type);
     /* @var $sflmFrontend SflmFrontend */
-    $sflmFrontend = new $class2(new $class1($frontend), $frontend);
+    $sflmFrontend = new $class(self::lm($type), $frontend);
     // ... $sflmFrontend->store(); ...
-    //$sflmFrontend->store();
+    $sflmFrontend->store();
     //$sflmFrontend->pathsCacheKey();
     return self::$cache[$type.$frontend] = $sflmFrontend;
   }

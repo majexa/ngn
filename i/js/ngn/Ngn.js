@@ -867,3 +867,5 @@ function basename(str) {
 Ngn.clsToSelector = function(s) {
   return s.split(' ').map(function(v) { '.' + v }).join(' ');
 };
+
+// -- check --

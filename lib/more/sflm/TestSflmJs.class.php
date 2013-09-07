@@ -36,6 +36,17 @@ class TestSflmJs extends NgnTestCase {
     $mtime2 = filemtime(Sflm::flm('js')->cacheFile());
     $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2");
     $this->assertTrue($mtime1 == $mtime2, "mtime1:$mtime1 != mtime2:$mtime2");
+
+    File::replace(NGN_PATH.'/i/js/ngn/Ngn.js', '// -- check --', '// -- che --');
+    Sflm::flm('js')->store();
+    $contains = (bool)strstr(Sflm::flm('js')->code(), '// -- che --');
+    $contains2 = (bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), '// -- che --');
+    $v3 = Sflm::flm('js')->version();
+    File::replace(NGN_PATH.'/i/js/ngn/Ngn.js', '// -- che --', '// -- check --');
+    $this->assertTrue($contains, 'Code does not contain new string');
+    $this->assertTrue($contains2, 'Cached file does not contain new string');
+    $this->assertTrue($v2 < $v3, "Version not changed after one of included files has changed");
+
     return;
 
     Sflm::$frontend = 'admin';
