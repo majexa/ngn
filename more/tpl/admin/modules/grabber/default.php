@@ -88,7 +88,7 @@ background: #FFFFFF;
 
 <div id="countdown"></div>
 
-<?= Sflm::get('js')->getTags('grabber') ?>
+<?= Sflm::flm('js')->getTags('grabber') ?>
 <script type="text/javascript">
 window.addEvent('domready', function(){
   new Ngn.GrabberChannelsTable();
