@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\config\vars\sfl\js\pageBlocks.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\www\refactor\ngn\config\vars\sfl\js\pageLink.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmCss.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmCss.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/albums.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/albums.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/vars/sfl/js/common.php" afterPath="$PROJECT_DIR$/config/vars/sfl/js/common.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/details_old.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/details_old.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/site/tpl/dd/elements.php" afterPath="$PROJECT_DIR$/site/tpl/dd/elements.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/table.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/table.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/thumbs.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/thumbs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/tile.php" afterPath="$PROJECT_DIR$/more/tpl/admin/modules/pages/items/tile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378477412624" ignored="false" />
@@ -629,6 +614,8 @@
     <file path="$PROJECT_DIR$/../sb/tpl/pageBlocks/items.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378483384462" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/tpl/dd/item.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378483499404" ignored="false" />
     <file path="/SflmCss.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378535146124" ignored="false" />
+    <file path="/updateNgn" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378535350466" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/scripts/updateNgn" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378535350466" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1037,7 +1024,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.29103214" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
