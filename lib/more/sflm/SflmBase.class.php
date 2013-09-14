@@ -12,10 +12,10 @@ abstract class SflmBase {
 
   public $type, $version = 1;
 
-  protected function getFileContents($path, $r = []) {
+  protected function getFileContents($path, $strict = true, $r = []) {
     if (!is_file($path)) {
       $error = "File '$path' does not exists";
-      //Err::_log($error, debug_backtrace());
+      if ($strict) Err::_log($error, debug_backtrace());
       return "\n/*----------[ $error ]---------*/\n";
     }
     if (strstr($path, '/scripts/')) {
@@ -32,6 +32,10 @@ abstract class SflmBase {
     return $this->extractCode($this->getPaths($package));
   }
 
+  protected function isStrictPath($path) {
+    return !Misc::hasPrefix('m/', $path);
+  }
+
   function extractCode(array $paths) {
     $code = '';
     foreach ($paths as $path) {
@@ -40,10 +44,10 @@ abstract class SflmBase {
       if (!empty($p['query'])) {
         $a = [];
         parse_str($p['query'], $a);
-        $code .= $this->getFileContents($absPath, $a);
+        $code .= $this->getFileContents($absPath, $this->isStrictPath($path), $a);
       }
       else {
-        $code .= $this->getFileContents($absPath);
+        $code .= $this->getFileContents($absPath, $this->isStrictPath($path));
       }
     }
     return $code;
@@ -91,13 +95,13 @@ abstract class SflmBase {
     return $this->getScriptPath($path);
   }
 
-  function getPath($absPath) {
+  function getPath($absPath, $whyDoUWantToGetThis = null) {
     foreach (Sflm::$absBasePaths as $folder => $absBasePath) {
       if (Misc::hasPrefix($absBasePath, $absPath)) {
         return $folder.Misc::removePrefix($absBasePath, $absPath);
       }
     }
-    throw new NotFoundException($absPath);
+    throw new Exception('"'.$absPath.'" not found'.($whyDoUWantToGetThis ? ". Getting for: $whyDoUWantToGetThis" : ''));
   }
 
   /**
@@ -182,7 +186,6 @@ abstract class SflmBase {
 
   function getTags($package, $code = null) {
     if (Sflm::$debug) {
-
       $t = '';
       foreach ($this->getPaths($package) as $path) {
         if ($this->isPackage($path)) {
@@ -210,7 +213,7 @@ abstract class SflmBase {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package, $code);
     }
-    return '/'.UPLOAD_DIR.'/'.$this->filePath($package);
+    return '/'.UPLOAD_DIR.'/'.$this->filePath($package).'?'.$this->version;
   }
 
 }

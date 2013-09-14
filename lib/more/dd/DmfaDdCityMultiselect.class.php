@@ -2,7 +2,6 @@
 
 class DmfaDdCityMultiselect extends DmfaDdTagsTreeMultiselectAc {
 
-  function afterCreateUpdate($value, $k) {
-  }
+  //function afterCreateUpdate($value, $k) {}
 
 }

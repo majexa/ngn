@@ -246,35 +246,6 @@ overflow: nidden;
 height: 200px;
 }
 
-/*----------------pageLink field element---------------*/
-.type_pageLink input {
-float: left;
-}
-.pageLinkPlaceholder {
-margin-left: 5px;
-padding-top: 2px;
-position: relative;
-float: left;
-}
-.pageLinkPlaceholder .iconBtn {
-z-index: 100;
-position: relative;
-
-}
-.pageLinkPlaceholder .iconBtn.over {
-/*border-bottom: 0px;
-padding-bottom: 1px;*/
-background-color: #FFEB8F;
-}
-
-.type_pageId .pageLinkPlaceholder {
-margin: 0px;
-}
-.type_pageId .pageIdTitle {
-padding: 5px 0px 0px !important;
-float: left;
-}
-
 
 .captcha {
 width: 160px;
@@ -289,7 +260,6 @@ overflow-y: scroll;
 .longElement .checkbox {
 display: block;
 }
-
 .checkbox input, .radio input {
 margin-right: 5px;
 vertical-align: middle;
@@ -300,7 +270,6 @@ margin-right: 3px;
 .checkbox label, .radio label {
 vertical-align: middle;
 }
-
 .checkbox, .radio {
 padding-right: 15px;
 white-space: nowrap;

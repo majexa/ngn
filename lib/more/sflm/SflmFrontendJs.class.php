@@ -2,14 +2,22 @@
 
 class SflmFrontendJs extends SflmFrontend {
 
+  /**
+   * @var SflmJsClasses
+   */
   public $classes;
 
   protected function init() {
     $this->classes = new SflmJsClasses($this);
   }
 
-  function addClass($class) {
-    $this->classes->addClass($class);
+  function addClass($class, $source = 'default') {
+    $frontend = $this;
+    $this->classes->addClass($class, $source, function($path) use ($frontend) {
+      $frontend->addLib($path);
+    }, function($source) use ($class, $frontend) {
+      $frontend->extraCode = "\n/*----------|Class '$class' from '$source' not found|----------*/\n";
+    });
   }
 
   protected function addPath($path) {
