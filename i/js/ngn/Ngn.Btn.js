@@ -9,7 +9,10 @@ Ngn.btn = function(opt) {
     'class': (opt.cls.contains('icon') ? '' : 'smIcons ') + opt.cls,
     html: opt.title || ''
   }, opt.prop || {}));
-  if (opt.caption) a.set('title', opt.caption);
+  if (opt.caption) {
+    a.set('title', opt.caption);
+    a.setTip(opt.caption);
+  }
   new Element('i').inject(a, 'top');
   return a;
 };

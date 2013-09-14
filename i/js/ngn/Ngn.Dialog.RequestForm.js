@@ -33,7 +33,14 @@ Ngn.Dialog.RequestFormBase = new Class({
 
   initFormResponse: function() {
     this.addEvent('request', function(r) {
-      this.formResponse(r);
+      if (r.sflJsDeltaUrl) {
+        Ngn.Request.sflJsDeltaUrlOnLoad = function() {
+          this.formResponse(r);
+        }.bind(this);
+      } else {
+        this.formResponse(r);
+      }
+
     }.bind(this));
   },
 
@@ -117,16 +124,18 @@ Ngn.Dialog.RequestFormBase = new Class({
   finishClose: function() {
     this.parent();
     // если в последнем респонзе есть ссылка не следующую форму
-    if (this.response.nextFormUrl) {
-      new Request.JSON({
-        url: this.response.nextFormUrl,
-        onComplete: function(r) {
-          if (!r.form) throw new Error('Form does not exists in next form url "' + this.response.nextFormUrl + '"');
-          new Ngn.Dialog.RequestForm.Static({
-            staticResponse: r
-          });
-        }
-      }).send();
+    if (this.isOkClose) {
+      if (this.response.nextFormUrl) {
+        new Request.JSON({
+          url: this.response.nextFormUrl,
+          onComplete: function(r) {
+            if (!r.form) throw new Error('Form does not exists in next form url "' + this.response.nextFormUrl + '"');
+            new Ngn.Dialog.RequestForm.Static({
+              staticResponse: r
+            });
+          }
+        }).send();
+      }
     }
   }
 

@@ -226,10 +226,6 @@ use Options;
     $this->beforeAction();
     if (!$this->actionDisabled) {
       $this->actionResult = $this->action();
-
-      //die2([$this->router->frontend, Sflm::get('js')->getFrontentTags($this->router->frontend)]);
-
-
       $this->setDefaultTpl();
       if (!$this->afterActionDisabled) $this->afterAction();
     }
@@ -284,9 +280,8 @@ use Options;
       else {
         if (JSON_DEBUG !== true) header('Content-type: application/json');
         if (is_string($this->json)) return $this->json;
-        //$this->json['sflVersion']['js'] = Sflm::get('js')->version();
-        //$this->json['sflVersion']['css'] = Sflm::get('css')->version();
         if ($this->actionDisabled) $this->json['actionDisabled'] = true;
+        if (($deltaUrl = Sflm::flm('js')->getDeltaUrl())) $this->json['sflJsDeltaUrl'] = $deltaUrl;
         return json_encode($this->json);
       }
     }
@@ -569,7 +564,6 @@ use Options;
       else {
         $this->json['error'] = $e->getMessage();
       }
-      $this->json['sfVersion'] = Sflm::$version;
       LogWriter::v('errors', 'exception: '.$e->getMessage(), getFullTrace($e));
       return;
     }

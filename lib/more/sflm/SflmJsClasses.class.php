@@ -12,10 +12,14 @@ class SflmJsClasses {
 
   protected function initClassesPaths() {
     if (($this->classesPaths = NgnCache::c()->load('jsClassesPaths'))) return;
+    $this->_initClassesPaths();
+  }
+
+  protected function _initClassesPaths() {
     $this->classesPaths = [];
     $files = [];
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
-    foreach ($files as $file) $this->classesPaths[Misc::removeSuffix('.js', basename($file))] = $this->frontend->sflm->getPath($file);
+    foreach ($files as $file) $this->classesPaths[Misc::removeSuffix('.js', basename($file))] = $this->frontend->sflm->getPath($file, 'adding to init classes paths');
     NgnCache::c()->save($this->classesPaths, 'jsClassesPaths');
   }
 
@@ -57,27 +61,38 @@ class SflmJsClasses {
     //}
   }
 
-  function addClass($class) {
+  /**
+   * @param JS класс
+   * @param Текстовое описание источника, откуда происходит добавление класс
+   * @throws Exception
+   */
+  function addClass($class, $source, Closure $success = null, Closure $failure = null) {
     if (in_array($class, $this->existingClasses)) return;
+    if (!isset($this->classesPaths[$class])) {
+      if ($failure) $failure($source);
+      return false;
+    }
     output("addClass '$class'");
-    if (!isset($this->classesPaths[$class])) throw new Exception("File for class '$class' does not exists");
-    $this->processPath($this->classesPaths[$class]);
+    $path = $this->classesPaths[$class];
+    $this->processPath($path, $success);
     $this->frontend->incrementVersion();
+    $this->_initClassesPaths();
+    return true;
   }
 
-  function processPath($path) {
+  function processPath($path, Closure $callback = null) {
     $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
     foreach ($this->parseClasses($c) as $v) {
       output("Class '$v' exists in $path. Adding to \$this->existingClasses");
       $this->existingClasses[] = $v;
     }
     foreach ($this->parseParentClasses($c) as $v) {
-      $this->addClass($v);
+      $this->addClass($v, "$path parent");
     }
-    foreach ($this->parseRequiredClasses($c) as $v) $this->addClass($v);
+    foreach ($this->parseRequiredClasses($c) as $v) $this->addClass($v, "$path required");
     output("addLib '$path'");
-    $this->frontend->addLib($path);
-    foreach ($this->parseRequiredAfterClasses($c) as $v) $this->addClass($v);
+    if ($callback) $callback($path);
+    foreach ($this->parseRequiredAfterClasses($c) as $v) $this->addClass($v, "$path requiredAfter");
     NgnCache::c()->save($this->existingClasses, 'jsExistingClasses');
   }
 

@@ -10,6 +10,8 @@ define('CHARSET', 'UTF-8');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', 'utf8_general_ci');
 
+
+
 require_once LIB_PATH.'/core/R.class.php'; // Registry Class
 require_once LIB_PATH.'/core/LogWriter.class.php';
 require_once LIB_PATH.'/core/Err.class.php';
@@ -20,6 +22,7 @@ require_once LIB_PATH.'/core/File.class.php'; // File processing functions
 require_once LIB_PATH.'/core/Misc.class.php'; // Miscellaneous functions
 require_once LIB_PATH.'/core/Lib.class.php'; // Librarys, classes
 require_once LIB_PATH.'/core/Ngn.class.php';
+
 
 date_default_timezone_set('Europe/Moscow');
 
@@ -58,4 +61,6 @@ define('UPLOAD_DIR', 'u');
 
 // ------------------ core constants -----------------
 
+
 require NGN_PATH.'/config/constants/core.php';
+

@@ -4,7 +4,6 @@ return [
   'core',
   'dialogs',
   'i/js/ngn/Ngn.Tips.js',
-  //'tiny',
   //'i/js/swfobject.js',
   //'upload',
   'ddForm',

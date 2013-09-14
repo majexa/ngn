@@ -4,7 +4,6 @@ MooTools.lang.setLanguage('ru-RU');
 
 // ----------------------------------------------------------
 
-
 Ngn.Class = new Class({
 
   className: function() {
