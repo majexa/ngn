@@ -28,7 +28,7 @@ class ItemsManager extends DataManagerAbstract {
     $this->items->delete($this->id);
   }
 
-  protected function _updateField($id, $fieldName, $value) {
+  function _updateField($id, $fieldName, $value) {
     if (BracketName::getKeys($fieldName) !== false) {
       $data = $this->getItem($id);
       BracketName::setValue($data, $fieldName, $value);

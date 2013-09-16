@@ -4,6 +4,33 @@ class TestSflmJs extends NgnTestCase {
 
   function test() {
     Sflm::$frontend = 'default';
+    Sflm::clearCache();
+    Sflm::flm('js')->store();
+    (new FieldEWisiwigSimple2(['name' => 'dummy']))->js();
+    Sflm::flm('js')->getDeltaUrl();
+    $this->assertFalse((bool)Sflm::reset('js')->newPaths, 'New paths must be empty after reset');
+    //(new FieldEPageId(['name' => 'dummy']))->js();
+    //Sflm::flm('js')->getDeltaUrl();
+    //
+    //prr();
+    return;
+
+    //$paths1 = Sflm::flm('js')->getPaths();
+    //prr(count($paths1));
+    //file_get_contents('http://cmfnn.projects1.majexa.ru');
+    //file_get_contents('http://cmfnn.projects1.majexa.ru/sbc/pageBlocks/1/json_editBlock/9');
+    //die('++');
+    //(new FieldEWisiwigSimple2(['name' => 'dummy']))->js();
+    //$paths2 = Sflm::flm('js')->getPaths();
+    //$a = array_diff($paths1, $paths2);
+    //die2($paths2);
+    //die('88888888888888888');
+    //print file_get_contents('http://cmfnn.projects1.majexa.ru/'.Sflm::flm('js')->getDeltaUrl());
+    //die2("\n\n++++++++");
+    //die2(Sflm::flm('js')->getDeltaUrl());
+    // .............
+
+    Sflm::$frontend = 'default';
     Sflm::flm('js')->store();
     Sflm::flm('js')->addLib('Ngn.Form.El.Phone');
     Sflm::clearCache();

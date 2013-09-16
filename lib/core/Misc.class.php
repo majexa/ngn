@@ -722,4 +722,9 @@ class Misc {
     return number_format($v, 0, '.', ' ');
   }
 
+  static function firstIsUpper($str) {
+    $chr = mb_substr($str, 0, 1, CHARSET);
+    return mb_strtoupper($chr, CHARSET) == $chr;
+  }
+
 }

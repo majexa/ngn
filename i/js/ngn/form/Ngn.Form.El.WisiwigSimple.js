@@ -17,5 +17,3 @@ Ngn.Form.El.WisiwigSimple = new Class({
   }
 
 });
-
-c(Ngn.Form.El.WisiwigSimple);
