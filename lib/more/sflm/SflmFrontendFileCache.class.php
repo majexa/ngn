@@ -3,9 +3,9 @@
 /**
  * Коллекцианирует и кэширует пути к статическим файлам во время выполнения приложения
  */
-class SflmFrontend {
+class SflmFrontendFileCache {
 
-  public $frontend, $sflm, $paths, $newPaths = [], $id, $debug = false;
+  public $frontend, $sflm, $paths, $newPaths = [], $id;
 
   function __construct(SflmBase $sflm, $frontend = null) {
     $this->id = Misc::randString(5);
@@ -21,10 +21,6 @@ class SflmFrontend {
     $this->init();
   }
 
-  function reload() {
-
-  }
-
   protected function getLastPaths() {
     return NgnCache::c()->load('sflmLastPaths'.$this->sflm->type.$this->frontend) ? : [];
   }
@@ -34,7 +30,8 @@ class SflmFrontend {
   }
 
   function getPathsCache() {
-    return NgnCache::c()->load($this->pathsCacheKey()) ? : [];
+    $f = DATA_PATH.'/'.$this->pathsCacheKey();
+    return file_exists($f) ? require $f : [];
   }
 
   /**
@@ -114,19 +111,25 @@ class SflmFrontend {
       $this->addPath($path);
     }
     if ($this->changed) {
-      NgnCache::c()->save($this->paths, $this->pathsCacheKey());
+      file_put_contents(DATA_PATH.'/'.$this->pathsCacheKey(), "<?php\n\nreturn ".var_export($this->paths, true).';');
       output("update stored file after adding lib '$lib'");
       $this->store();
       $this->incrementVersion();
     }
   }
 
+  function getNewPaths() {
+    if ($this->sflm->type == 'js') LogWriter::str('rrr', "$this->id: gettings paths. count: ".count($this->newPaths));
+    return $this->newPaths;
+  }
+
   function getDeltaUrl() {
-    if (!$this->newPaths) return false;
-    return $this->sflm->getUrl($this->frontend.'new', $this->sflm->extractCode($this->newPaths), true);
+    if (!$this->getNewPaths()) return false;
+    return $this->sflm->getUrl($this->frontend.'new', $this->sflm->extractCode($this->newPaths));
   }
 
   protected function addPath($path) {
+    if ($this->sflm->type == 'js') LogWriter::str('rrr', "$this->id: adding new path $path");
     $this->newPaths[] = $path;
     $this->paths[] = $path;
     $this->changed = true;

@@ -58,6 +58,7 @@ class Sflm {
   }
 
   static function reset($type, $frontend = null) {
+    $frontend = $frontend ? : self::$frontend;
     unset(self::$cache[$type.$frontend]);
     return self::flm($type, $frontend);
   }

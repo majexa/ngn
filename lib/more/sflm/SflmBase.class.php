@@ -208,8 +208,8 @@ abstract class SflmBase {
     return $this->type.'/cache/'.$package.'.'.$this->type;
   }
 
-  function getUrl($package, $code = null) {
-    if (Sflm::$debug or Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$this->filePath($package))) {
+  function getUrl($package, $code = null, $force = false) {
+    if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$this->filePath($package))) {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package, $code);
     }

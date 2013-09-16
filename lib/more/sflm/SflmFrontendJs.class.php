@@ -16,6 +16,7 @@ class SflmFrontendJs extends SflmFrontend {
     $this->classes->addClass($class, $source, function($path) use ($frontend) {
       $frontend->addLib($path);
     }, function($source) use ($class, $frontend) {
+      die2("\n/*----------|Class '$class' from '$source' not found|----------*/\n");
       $frontend->extraCode = "\n/*----------|Class '$class' from '$source' not found|----------*/\n";
     });
   }

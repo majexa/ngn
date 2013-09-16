@@ -192,7 +192,7 @@ abstract class DataManagerAbstract extends Options2 {
 
   protected function setFormElementsData(array $data) {
     $this->beforeFormElementsInit();
-    $this->form->setElementsData($data);
+    $this->form->defaultData = $data;
   }
 
   function update($id, array $data, $throwFormErrors = true) {
@@ -300,7 +300,7 @@ abstract class DataManagerAbstract extends Options2 {
     return true;
   }
 
-  abstract protected function _updateField($id, $fieldName, $value);
+  abstract function _updateField($id, $fieldName, $value);
 
   function updateField($id, $fieldName, $value) {
     $this->form->fields->fields = Arr::filterByKeys($this->form->fields->fields, $fieldName);
