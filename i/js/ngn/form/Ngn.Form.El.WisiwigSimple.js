@@ -1,3 +1,6 @@
+/**
+ * @requires Ngn.TinySettings.Simple
+ */
 Ngn.Form.El.WisiwigSimple = new Class({
   Extends: Ngn.Form.El.Wisiwig,
 

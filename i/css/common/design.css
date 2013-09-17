@@ -782,3 +782,6 @@ width: 100%;
 .loginForm .textFields td:first-child {
 padding-right: 10px;
 }
+.apeform .element {
+border-bottom: 1px solid #EDEBD8;
+}
