@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmJs.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmJs.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379410765116" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379416719112" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
     <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379415922567" ignored="false" />
@@ -702,6 +697,9 @@
     <file path="$PROJECT_DIR$/../formatron/tpl/admin/dd/beforeGridInit.js.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379415652063" ignored="false" />
     <file path="/beforeGridInit.js.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379415647846" ignored="false" />
     <file path="$PROJECT_DIR$/../formatron/lib/FilterFinder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379416089152" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379416918320" ignored="false" />
+    <file path="/PmCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379416735949" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalProjectConfig.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379416849615" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -720,44 +718,7 @@
     <favorites_list name="ngn" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Ngn.Grid.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="242" column="0" selection-start="8574" selection-end="8574" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FieldEDdTagsConsecutiveSelect.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/FieldEDdTagsConsecutiveSelect.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="35" selection-start="232" selection-end="261" vertical-scroll-proportion="-7.1923075">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="common.func.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="163" column="48" selection-start="3814" selection-end="3814" vertical-scroll-proportion="0.48790324">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ngn.Btn.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="2" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -945,7 +906,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="158" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../formatron" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ngn-env" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="154" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="828" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="832" />
@@ -1147,11 +1108,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2866779" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49238577" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.49238577" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1160,7 +1121,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19772728" sideWeight="0.5076142" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19772728" sideWeight="0.5076142" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1046" y="73" width="257" height="186" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1320,7 +1281,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="2" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
+        <state line="46" column="2" selection-start="949" selection-end="949" vertical-scroll-proportion="0.959854">
           <folding />
         </state>
       </provider>
