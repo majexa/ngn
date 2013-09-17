@@ -166,18 +166,8 @@ class Db extends DbSimple_Mysql {
   function insertLarge($table, $rows) {
     if (empty($rows)) throw new Exception('$rows is empty');
     $keys = array_keys($rows[0]);
-    if ($keys[0] == 0) throw new Exception('First element of $rows must be a hash');
+    if ($keys[0] === 0) throw new Exception("First element of $rows must be a hash. '{$keys[0]}' given");
     $q = 'INSERT INTO '.$table.' ('.implode(', ', array_keys($rows[0])).") VALUES \n";
-    foreach ($rows as $row) {
-      array_walk($row, 'quoting');
-      $q .= '('.implode(', ', $row)."),\n";
-    }
-    $q[strlen($q) - 2] = ';';
-    $this->query($q);
-  }
-
-  function insertLargeFull($table, $rows) {
-    $q = 'INSERT INTO '.$table.' ('.implode(', ', $this->cols($table)).") VALUES \n";
     foreach ($rows as $row) {
       array_walk($row, 'quoting');
       $q .= '('.implode(', ', $row)."),\n";
@@ -295,11 +285,6 @@ class Db extends DbSimple_Mysql {
     }
     */
     $processTime = round(getMicrotime() - $startTime, 3);
-    $this->log("Import time: $processTime sec.");
-  }
-
-  function log($t) {
-    if (isset($this->logger) and is_callable($this->logger)) call_user_func($this->_logger, $t);
   }
 
   function delete($tables = null) {

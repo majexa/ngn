@@ -116,7 +116,7 @@ class DdItems extends Items {
   function getItemF_cache($id) {
     if (!($item = NgnCache::c()->load('ddItem'.$this->strName.$id))) {
       $item = $this->getItemF($id);
-      $cache->save($item, 'ddItem'.$this->strName.$id);
+      NgnCache::c()->save($item, 'ddItem'.$this->strName.$id);
     }
     return $item;
   }

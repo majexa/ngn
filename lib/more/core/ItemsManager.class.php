@@ -12,7 +12,7 @@ class ItemsManager extends DataManagerAbstract {
     parent::__construct($form, $options);
   }
 
-  protected function getItem($id) {
+  public function getItem($id) {
     return $this->items->getItem($id);
   }
   
