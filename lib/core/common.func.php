@@ -128,12 +128,12 @@ function getMicrotime() {
   return ((float)$usec + (float)$sec);
 }
 
-function setProcessTimeStart() {
-  R::set('processTimeStart', getMicrotime());
+function setProcessTimeStart($k = '') {
+  R::set('processTimeStart'.$k, getMicrotime());
 }
 
-function getProcessTime() {
-  return getMicrotime() - R::get('processTimeStart');
+function getProcessTime($k = '') {
+  return getMicrotime() - R::get('processTimeStart'.$k);
 }
 
 /**

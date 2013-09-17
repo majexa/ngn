@@ -10,25 +10,36 @@ class DdTagsTagsTree extends DdTagsTagsBase {
    * @param   array   ID-шники детей
    * @return  array   Родительские ID-шники, группированые по ID-шникам детей
    *                  Пример:
-   *                  getParentIds(array(3, 5))
+   *                  $this->getParentIds([3, 5])
    *                  вернёт:
-   *                  array(
-   *                    0 => array(
+   *                  [
+   *                    [
    *                      51, 34, 3
-   *                    ),
-   *                    1 => array(
+   *                    ],
+   *                    [
    *                      43, 12, 6
-   *                    )
-   *                  )
+   *                    ]
+   *                  ]
    */
   function getParentIds(array $ids) {
-    $tree = $this->getIdsTree();
-    foreach ($ids as $id) $this->setParentIds($tree, $id);
+    setProcessTimeStart();
+    $tree = $this->_getTree();
+    output("_getTree time: ".getProcessTime());
+    if (!$ids) return [];
+    setProcessTimeStart();
+    $times = [];
+    foreach ($ids as $id) {
+      setProcessTimeStart(1);
+      $this->setParentIds($tree, $id);
+      $times[] = getProcessTime(1);
+    }
+    output('times: '.implode(', ', $times));
+    output("foreach setParentIds: ".getProcessTime());
     return array_values($this->parentIds);
   }
 
   function getParentIds2($id, $includeSelf = true) {
-    $tree = $this->getIdsTree();
+    $tree = $this->_getTree();
     $this->setParentIds($tree, $id);
     $r = Arr::first($this->parentIds);
     if (!$includeSelf) $r = Arr::drop($r, $id);
@@ -36,32 +47,28 @@ class DdTagsTagsTree extends DdTagsTagsBase {
   }
 
   /**
-   * Производит поиск в дереве массива узла с указанным ID и сохраняет в массив $this->parentIds
+   * Производит поиск в дереве узла с указанным ID и сохраняет в массив $this->parentIds
    * все родительские ID и ID самого узла
    *
    * @param   array     Массив с деревом
    * @param   integer   ID искомого узла
    */
-  private function setParentIds(&$nodes, $id) {
+  private function setParentIds(array $nodes, $id) {
     Misc::checkNumeric($id);
     $this->curParentIds = [];
     $this->parentIds[$id] = [];
     $this->_setParentIds($nodes, $id);
-    if (empty($this->parentIds[$id])) {
-      throw new Exception("Tag ID=$id does not exists in tree");
-    }
+    if (empty($this->parentIds[$id])) throw new Exception("Tag ID=$id does not exists in tree");
   }
 
-  private function _setParentIds(&$nodes, $id) {
+  private function _setParentIds(array $nodes, $id) {
     foreach ($nodes as $node) {
       $this->curParentIds[] = $node['id'];
       if ($node['id'] == $id) {
-        $this->parentIds[$id] = Arr::append($this->parentIds[$id], $this->curParentIds);
+        $this->parentIds[$id] = array_merge($this->parentIds[$id], $this->curParentIds);
         return;
       }
-      if ($node['childNodes']) {
-        $this->_setParentIds($node['childNodes'], $id);
-      }
+      if ($node['childNodes']) $this->_setParentIds($node['childNodes'], $id);
       array_pop($this->curParentIds);
     }
   }
@@ -96,10 +103,6 @@ class DdTagsTagsTree extends DdTagsTagsBase {
     FROM {$this->group->table}".$this->getSelectCond()->all());
   }
 
-  function getIdsTree() {
-    return $this->getTree();
-  }
-
   /**
    * @param miexed Один или несколько идентификаторов
    * @return array
@@ -128,7 +131,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
   }
 
   function getData() {
-    return $this->getTree();
+    return $this->_getTree();
   }
 
   // ---------------------------
@@ -175,7 +178,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
   // ---------------------------
 
   protected function getChildrenIds($parentId, $includeParent = true) {
-    $node = $this->findNode($parentId, $this->getIdsTree());
+    $node = $this->findNode($parentId, $this->_getTree());
     $ids = $includeParent ? [$parentId] : [];
     return Arr::append($ids, TreeCommon::getFlatParams($node['childNodes'], 'id'));
   }

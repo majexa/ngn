@@ -6,7 +6,7 @@
  */
 abstract class DataManagerAbstract extends Options2 {
 
-  abstract protected function getItem($id);
+  abstract public function getItem($id);
 
   abstract protected function _create();
 
