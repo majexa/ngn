@@ -2,27 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" afterPath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/db/Db.class.php" afterPath="$PROJECT_DIR$/lib/core/db/Db.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/DbModelManager.class.php" afterPath="$PROJECT_DIR$/lib/more/core/DbModelManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdItemsManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/DdTagsGroup.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/DdTagsGroup.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/DdTagsItems.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/DdTagsItems.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/DdTagsTagsTree.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/DdTagsTagsTree.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DmfaDdCityMultiselect.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DmfaDdCityMultiselect.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselect.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselect.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/DbSimple/Generic.php" afterPath="$PROJECT_DIR$/vendors/DbSimple/Generic.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/ItemsManager.class.php" afterPath="$PROJECT_DIR$/lib/more/core/ItemsManager.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/common.func.php" afterPath="$PROJECT_DIR$/lib/core/common.func.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmJs.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmJs.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379399943663" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379410765116" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
-    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379401683961" ignored="false" />
+    <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379415922567" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DcApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118400290" ignored="false" />
     <file path="$PROJECT_DIR$/../install/i.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375118946477" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/DigitaloceanMy.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376846020974" ignored="false" />
@@ -688,7 +678,7 @@
     <file path="/interface.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378911221560" ignored="false" />
     <file path="/FieldEWisiwigSimple2.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379161977801" ignored="false" />
     <file path="/ca.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379244216790" ignored="false" />
-    <file path="/cc.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379244242653" ignored="false" />
+    <file path="/cc.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379408580341" ignored="false" />
     <file path="/SflmFrontendFileCache.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379250251861" ignored="false" />
     <file path="/Ngn.Form.El.Wisiwig.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379261609452" ignored="false" />
     <file path="/Ngn.Form.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379261670213" ignored="false" />
@@ -703,8 +693,15 @@
     <file path="/2.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379321120548" ignored="false" />
     <file path="/Db.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379329956889" ignored="false" />
     <file path="/DdTagsItems.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379335715184" ignored="false" />
-    <file path="/DdTagsTagsTree.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379402904252" ignored="false" />
+    <file path="/DdTagsTagsTree.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379408563951" ignored="false" />
     <file path="/1.html" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379351142872" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379408577559" ignored="false" />
+    <file path="/cmd.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379408549668" ignored="false" />
+    <file path="$PROJECT_DIR$/../formatron/hooks/dd/gridRowPrepare.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379410791796" ignored="false" />
+    <file path="/Ngn.Grid.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379411557000" ignored="false" />
+    <file path="$PROJECT_DIR$/../formatron/tpl/admin/dd/beforeGridInit.js.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379415652063" ignored="false" />
+    <file path="/beforeGridInit.js.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379415647846" ignored="false" />
+    <file path="$PROJECT_DIR$/../formatron/lib/FilterFinder.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379416089152" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -724,37 +721,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DdTagsTagsTree.class.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DdTagsTagsTree.class.php">
+      <file leaf-file-name="Ngn.Grid.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="0" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.2889734">
+            <state line="242" column="0" selection-start="8574" selection-end="8574" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DmfaDdCityMultiselect.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/dd/DmfaDdCityMultiselect.class.php">
+      <file leaf-file-name="FieldEDdTagsConsecutiveSelect.class.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/FieldEDdTagsConsecutiveSelect.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="73" selection-end="73" vertical-scroll-proportion="-1.9615384">
+            <state line="11" column="35" selection-start="232" selection-end="261" vertical-scroll-proportion="-7.1923075">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DmfaDdTagsTreeMultiselectAc.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselectAc.class.php">
+      <file leaf-file-name="common.func.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="23" selection-start="233" selection-end="233" vertical-scroll-proportion="-4.576923">
+            <state line="163" column="48" selection-start="3814" selection-end="3814" vertical-scroll-proportion="0.48790324">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DmfaDdTagsTreeMultiselect.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselect.class.php">
+      <file leaf-file-name="Ngn.Btn.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="-9.807693">
+            <state line="46" column="2" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -778,10 +775,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/i/js/ngn/Ngn.Form.El.Wisiwig.js" />
-        <option value="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js" />
-        <option value="$PROJECT_DIR$/lib/more/form/FieldEFile.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/core/ItemsManager.class.php" />
         <option value="$PROJECT_DIR$/lib/more/form/DmfaFile.class.php" />
         <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/tags/DdTagsGroup.class.php" />
@@ -791,9 +784,13 @@
         <option value="$PROJECT_DIR$/lib/more/dd/tags/DdTagsItems.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
         <option value="$PROJECT_DIR$/lib/core/common.func.php" />
-        <option value="$PROJECT_DIR$/lib/more/dd/tags/DdTagsTagsTree.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DmfaDdCityMultiselect.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselect.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/dd/tags/DdTagsTagsTree.class.php" />
+        <option value="$PROJECT_DIR$/more/cmd/cc.php" />
+        <option value="$PROJECT_DIR$/lib/more/sflm/SflmJs.class.php" />
+        <option value="$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js" />
+        <option value="$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js" />
       </list>
     </option>
   </component>
@@ -1149,12 +1146,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="722" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2866779" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4720812" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.49238577" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1163,7 +1160,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31666666" sideWeight="0.52791876" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19772728" sideWeight="0.5076142" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1046" y="73" width="257" height="186" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1237,33 +1234,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/queue/Queue.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="30" selection-start="3062" selection-end="3062" vertical-scroll-proportion="0.9326733" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/common/WsItemChanged.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="5" selection-start="348" selection-end="348" vertical-scroll-proportion="0.45945945" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/queue/LongJobQueue.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DdTagsGroup.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="6" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.45057034" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="10" selection-start="560" selection-end="560" vertical-scroll-proportion="0.3219697">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/asterisk/Asterisk.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="79" column="1" selection-start="2440" selection-end="2440" vertical-scroll-proportion="0.81146026">
@@ -1306,13 +1276,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="54" selection-start="3055" selection-end="3055" vertical-scroll-proportion="0.54372627">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DmfaDdTagsTreeMultiselect.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="-9.807693">
@@ -1336,7 +1299,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/DdTagsTagsTree.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="0" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.2889734">
+        <state line="62" column="0" selection-start="1867" selection-end="1867" vertical-scroll-proportion="-5.8461537">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmJs.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="1" selection-start="372" selection-end="372" vertical-scroll-proportion="0.5361781">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/more/cmd/cc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="40" selection-start="242" selection-end="248" vertical-scroll-proportion="0.18923934">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Btn.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="2" selection-start="949" selection-end="949" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="242" column="0" selection-start="8574" selection-end="8574" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/dd/tags/FieldEDdTagsConsecutiveSelect.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="35" selection-start="232" selection-end="261" vertical-scroll-proportion="-7.1923075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/core/common.func.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="48" selection-start="3814" selection-end="3814" vertical-scroll-proportion="0.48790324">
           <folding />
         </state>
       </provider>

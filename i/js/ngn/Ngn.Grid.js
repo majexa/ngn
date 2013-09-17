@@ -186,7 +186,7 @@ Ngn.Grid = new Class({
   currentPage: 1,
 
   replaceLinkAjaxToNormal: function(link) {
-    return ;
+    return;
   },
 
   replaceLink: function(link, ajax) {
@@ -231,6 +231,7 @@ Ngn.Grid = new Class({
   createToolBtn: function(cls, row, action) {
     var action = action || this.options.toolActions[cls] || function() {
     };
+
     var el = new Element('a', {
       'href': this.options.toolLinks[cls] ? this.options.toolLinks[cls](row) : '#',
       'class': 'iconBtn ' + cls,
@@ -238,12 +239,9 @@ Ngn.Grid = new Class({
       'title': row.tools[cls]
     }).inject(new Element('td').inject(row.eTools));
     action = action.bind(this);
-    if (this.options.toolActions[cls]) {
-      el.addEvent('click', function(e) {
-        e.preventDefault();
-        action(row);
-      }.bind(this));
-    }
+    new Ngn.Btn(el, function() {
+      action(row, this);
+    });
     return el;
   },
 
