@@ -197,13 +197,12 @@ Ngn.Form = new Class({
   initHtml5Upload: function() {
     this.uploadType = 'html5';
     this.eForm.getElements('input[type=file]').each(function(eInput) {
-      /*
-       eInputValidator = new Element('input', {
-       type: 'hidden',
-       'class': eInput.hasClass('required') ?
-       'validate-multiUpload-required' : 'validate-multiUpload'
-       }).inject(eInput, 'after');
-       */
+
+      eInputValidator = new Element('input', {
+        type: 'hidden',
+        'class': eInput.hasClass('required') ? 'validate-multiUpload-required' : 'validate-multiUpload'
+      }).inject(eInput, 'after');
+
       var name = eInput.get('name');
       var uploadOptions = {
         url: this.uploadOptions.url.replace('{fn}', name),
