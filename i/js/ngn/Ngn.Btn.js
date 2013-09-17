@@ -44,7 +44,7 @@ Ngn.btns = function(btns, small, opt) {
   if (!opt) opt = {};
   var defaultOpt = { bordered: true };
   if (!opt.bordered) opt.bordered = true;
-  var eCont = new Element('div', {'class' : (small ? 'snIcons' : 'iconsSet') + (opt.bordered ? ' bordered' : '') });
+  var eCont = new Element('div', {'class' : (small ? 'smIcons' : 'iconsSet') + (opt.bordered ? ' bordered' : '') });
   for (var i = 0; i < btns.length; i++) Ngn.btn($merge(defaultOpt, btns[i])).inject(eCont);
   return eCont;
 };

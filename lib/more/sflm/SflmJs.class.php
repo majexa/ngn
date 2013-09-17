@@ -1,6 +1,3 @@
-
-
-
 <?php
 
 class SflmJs extends SflmBase {
