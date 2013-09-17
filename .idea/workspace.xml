@@ -628,7 +628,7 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PbvTextAndImage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540149250" ignored="false" />
     <file path="$PROJECT_DIR$/../fpg/site/tpl/home/head.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540149250" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/lib/core/dd/output/DdoPage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378540401383" ignored="false" />
-    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PageBlockModelManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378542238397" ignored="false" />
+    <file path="$PROJECT_DIR$/../sb/lib/core/page/block/PageBlockModelManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379420369257" ignored="false" />
     <file path="$PROJECT_DIR$/../sb/static/js/Ngn.frm.Page.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378644394044" ignored="false" />
     <file path="/Ngn.frm.Page.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378552631779" ignored="false" />
     <file path="/TestSflmJs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379253792535" ignored="false" />
@@ -1108,7 +1108,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2866779" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
