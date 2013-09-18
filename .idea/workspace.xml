@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DialogSelect.js" afterPath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DialogSelect.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/css/formEl/dateRange.css" afterPath="$PROJECT_DIR$/i/css/formEl/dateRange.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/css/common/dialog.css" afterPath="$PROJECT_DIR$/i/css/common/dialog.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379493548201" ignored="false" />
+    <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379505525741" ignored="false" />
     <file path="/Items.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375108604921" ignored="false" />
     <file path="/Arr.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376891840841" ignored="false" />
     <file path="/a.dummy" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379491658479" ignored="false" />
@@ -24,7 +21,7 @@
     <file path="$PROJECT_DIR$/../ao/site/lib/CtrlCommonAsd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124833" ignored="false" />
     <file path="/CtrlCommonAsd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377001644907" ignored="false" />
     <file path="/WsItemChanged.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376567886416" ignored="false" />
-    <file path="$PROJECT_DIR$/../ao/site/lib/AoQueueActions.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378539969283" ignored="false" />
+    <file path="$PROJECT_DIR$/../ao/site/lib/AoQueueActions.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379495836451" ignored="false" />
     <file path="/AoQueueActions.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375171729098" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/common-init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/scripts/web/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
@@ -69,7 +66,7 @@
     <file path="/OrderSend.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375276228705" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/KpOrderSend.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375332301639" ignored="false" />
     <file path="/KpOrderSend.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375276634843" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlCommonAsd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377001645749" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlCommonAsd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379505783983" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/lib/KpCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377001804902" ignored="false" />
     <file path="/KpCore.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377001783825" ignored="false" />
     <file path="/CtrlCwl.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375328504977" ignored="false" />
@@ -185,7 +182,7 @@
     <file path="$PROJECT_DIR$/../sb/lib/core/page/CtrlPageDd.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379330068801" ignored="false" />
     <file path="$PROJECT_DIR$/../autocall/site/lib/CtrlInterviews.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375785124834" ignored="false" />
     <file path="/Form.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378644515002" ignored="false" />
-    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376390611594" ignored="false" />
+    <file path="$PROJECT_DIR$/../kp/site/lib/CtrlKpApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379505723354" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmLocalItemsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290356291" ignored="false" />
     <file path="$PROJECT_DIR$/../ao/site/lib/CtrlCallcenter.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378290356293" ignored="false" />
     <file path="$PROJECT_DIR$/../cityclass/site/lib/CtrlCityclassDefault.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376397908773" ignored="false" />
@@ -714,6 +711,10 @@
     <file path="/Ngn.Form.El.DialogSelect.js" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379495691187" ignored="false" />
     <file path="/CtrlCabinet.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379494856418" ignored="false" />
     <file path="$PROJECT_DIR$/../ao/m/css/styles.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379495477802" ignored="false" />
+    <file path="$PROJECT_DIR$/../../other/giport/myadmin/config.inc.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379495874381" ignored="false" />
+    <file path="$PROJECT_DIR$/../../other/giport/myadmin/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379496067384" ignored="false" />
+    <file path="/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379496065706" ignored="false" />
+    <file path="/CtrlKpApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379505673086" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -733,68 +734,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="dialog.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/i/css/common/dialog.css">
+      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="0" selection-start="2802" selection-end="2802" vertical-scroll-proportion="0.0">
+            <state line="110" column="5" selection-start="2161" selection-end="2161" vertical-scroll-proportion="0.032319393">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sflm.class.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/more/sflm/Sflm.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="2" selection-start="1575" selection-end="1575" vertical-scroll-proportion="-14.192307">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dateRange.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/vars/sfl/js/formEl/dateRange.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="10" selection-start="127" selection-end="127" vertical-scroll-proportion="-3.2692308">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dateRange.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/i/css/formEl/dateRange.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ngn.DateRangeDialog.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.DateRangeDialog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="23" selection-start="57" selection-end="57" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ngn.Form.El.DialogSelect.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DialogSelect.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="4" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ngn.Dialog.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Dialog.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="4" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1378536445381" expanded="false" signature="16744:16758" placeholder="..." />
-                <marker date="1378536445381" expanded="false" signature="24135:24153" placeholder="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -951,7 +895,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="more" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="more" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -966,88 +950,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vars" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vars" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vars" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="formEl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vars" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sfl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1067,13 +969,13 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="154" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="832" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="828" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="832" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="153" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="147" />
     <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="147" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
     <property name="FullScreen" value="false" />
   </component>
@@ -1276,23 +1178,23 @@
     <frame x="-8" y="-8" width="1382" height="722" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28764805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42808798" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24924242" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19772728" sideWeight="0.67005074" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20075758" sideWeight="0.67005074" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1046" y="73" width="257" height="186" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28764805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42808798" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1361,75 +1263,52 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="46" selection-start="6388" selection-end="6388" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.Upload.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="19" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="45" column="19" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/admin/FieldEDateRange.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontendJs.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="25" selection-start="690" selection-end="690" vertical-scroll-proportion="0.432282">
-          <folding />
-        </state>
+        <state line="24" column="25" selection-start="690" selection-end="690" vertical-scroll-proportion="0.432282" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmJsClasses.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="5" selection-start="3445" selection-end="3445" vertical-scroll-proportion="0.4543726">
-          <folding />
-        </state>
+        <state line="94" column="5" selection-start="3445" selection-end="3445" vertical-scroll-proportion="0.4543726" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="166" column="2" selection-start="5159" selection-end="5159" vertical-scroll-proportion="-6.8846154">
-          <folding />
-        </state>
+        <state line="166" column="2" selection-start="5159" selection-end="5159" vertical-scroll-proportion="-6.8846154" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="36" selection-start="2367" selection-end="2367" vertical-scroll-proportion="-5.6923075">
-          <folding />
-        </state>
+        <state line="90" column="36" selection-start="2367" selection-end="2367" vertical-scroll-proportion="-5.6923075" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="216" column="25" selection-start="6346" selection-end="6346" vertical-scroll-proportion="-11.730769">
-          <folding />
-        </state>
+        <state line="216" column="25" selection-start="6346" selection-end="6346" vertical-scroll-proportion="-11.730769" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.Dialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="4" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.0">
+        <state line="44" column="4" selection-start="1096" selection-end="1096" vertical-scroll-proportion="0.03068592">
           <folding>
-            <marker date="1378536445381" expanded="false" signature="16744:16758" placeholder="..." />
-            <marker date="1378536445381" expanded="false" signature="24135:24153" placeholder="..." />
+            <marker date="1378536445381" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1378536445381" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -1443,28 +1322,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/Sflm.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="2" selection-start="1575" selection-end="1575" vertical-scroll-proportion="-14.192307">
+        <state line="70" column="2" selection-start="1575" selection-end="1575" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DialogSelect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="4" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.0">
+        <state line="78" column="4" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.340388">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.DateRangeDialog.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="23" selection-start="57" selection-end="57" vertical-scroll-proportion="0.0">
+        <state line="1" column="23" selection-start="57" selection-end="57" vertical-scroll-proportion="0.029982364">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/vars/sfl/js/formEl/dateRange.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="10" selection-start="127" selection-end="127" vertical-scroll-proportion="-3.2692308">
+        <state line="5" column="10" selection-start="127" selection-end="127" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1472,6 +1351,13 @@
     <entry file="file://$PROJECT_DIR$/i/css/formEl/dateRange.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="5" selection-start="2161" selection-end="2161" vertical-scroll-proportion="0.032319393">
           <folding />
         </state>
       </provider>
