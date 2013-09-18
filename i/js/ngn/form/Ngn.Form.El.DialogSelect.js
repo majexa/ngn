@@ -74,6 +74,10 @@ Ngn.Form.El.DialogSelect = new Class({
 Ngn.ElSelectDialog = new Class({
   Extends: Ngn.Dialog,
 
+  options: {
+    noPadding: false
+  },
+
   initialize: function(formEl, options) {
     this.formEl = formEl;
     this.parent(options);

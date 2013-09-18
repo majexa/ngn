@@ -70,6 +70,6 @@ Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 
 Sflm::$absBasePaths = [
   //'u' => WEBROOT_PATH.'/'.UPLOAD_DIR,
-  //'m' => WEBROOT_PATH.'/m',
+  'm' => WEBROOT_PATH.'/m',
   'i' => NGN_PATH.'/i'
 ];
