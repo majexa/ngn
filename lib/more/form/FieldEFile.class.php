@@ -89,7 +89,7 @@ class FieldEFile extends FieldEFileBase {
   }
 
   protected function getCurrentValue() {
-    return '/'.UPLOAD_DIR.'/'.$this->options['value'];
+    return '/'.UPLOAD_DIR.'/'.$this->options['value'].'?'.filemtime(UPLOAD_PATH.'/'.$this->options['value']);
   }
 
   protected function htmlNav() {

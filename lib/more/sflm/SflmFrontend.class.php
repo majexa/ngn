@@ -47,10 +47,10 @@ class SflmFrontend {
   protected function init() {
   }
 
-  public $extraCode = '';
+  public $extraCode = "\n//***";
 
   function code() {
-    return $this->sflm->extractCode($this->getPaths()).$this->extraCode;
+    return $this->sflm->extractCode($this->getPaths());
   }
 
   function getTags() {
@@ -80,7 +80,14 @@ class SflmFrontend {
     return 'sflmPaths'.$this->sflm->type.$this->frontend;
   }
 
-  function addGlobalLib($lib, $strict = false) {
+  /**
+   * Добавляет путь, если библиотека существует в одном из зарегистрированных статических каталогов
+   *
+   * @param string Относительный путь к библиотеке
+   * @param bool Вызывать ли ошибку, если библиотека не найдена
+   * @throws Exception
+   */
+  function addStaticLib($lib, $strict = false) {
     foreach (Sflm::$absBasePaths as $k => $path) {
       if (file_exists("$path/{$this->sflm->type}/$lib")) {
         output("add global lib $path/{$this->sflm->type}/$lib");

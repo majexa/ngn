@@ -30,6 +30,7 @@ class DdItems extends Items {
     $this->extendItemsFilePaths($items);
     $this->extendItemsTags($items);
     $this->extendItemsUsers($items);
+    $this->extendItemsFilePaths($items);
     $this->formatItemsText($items);
     $this->extendItemsNumberRange($items);
     if (($paths = Hook::paths('dd/extendItems')) !== false) foreach ($paths as $path) include $path;
