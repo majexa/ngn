@@ -25,19 +25,8 @@ Ngn.Form.Upload = new Class({
   beforeInit: function() {},
 
   init: function() {
-    if (1) {
-      this.eFiles = new Element('div.uploadFiles').inject(this.eInput, 'after');
-      this.eFiles.set('html', 'Происходит загрузка');
-      this.eProgress = new Element('div.fileProgress').inject(this.eFiles, 'after');
-      this.eProgress.setStyle('width', '60%');
-      return;
-    }
-
     this.eFiles = new Element('div.uploadFiles').inject(this.eInput, 'after');
     this.eProgress = new Element('div.fileProgress').setStyle('display', 'none').inject(this.eFiles, 'after');
-
-
-
     this.uploadReq = new Ngn.Request.File({
       url: this.options.url,
       onRequest: function() {
