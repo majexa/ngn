@@ -192,7 +192,8 @@ abstract class DataManagerAbstract extends Options2 {
 
   protected function setFormElementsData(array $data) {
     $this->beforeFormElementsInit();
-    $this->form->defaultData = $data;
+    //$this->form->defaultData = $data;
+    $this->form->setElementsData($data);
   }
 
   function update($id, array $data, $throwFormErrors = true) {
