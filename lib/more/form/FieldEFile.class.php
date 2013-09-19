@@ -89,11 +89,15 @@ class FieldEFile extends FieldEFileBase {
   }
 
   protected function getCurrentValue() {
+    if (empty($this->options['value'])) return false;
+    $file = UPLOAD_PATH.'/'.$this->options['value'];
+    if (!file_exists($file)) return false;
     return '/'.UPLOAD_DIR.'/'.$this->options['value'].'?'.filemtime(UPLOAD_PATH.'/'.$this->options['value']);
   }
 
   protected function htmlNav() {
-    return (empty($this->options['value']) ? '' : '<div class="iconsSet fileNav">'.'<a href="'.$this->getCurrentValue().'" class="'.$this->options['currentFileClass'].'" target="_blank"><i></i> '.$this->options['currentFileTitle'].'</a>'.((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ? '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="delete confirm" title="Удалить"><i></i></a>' : '').'</div>');
+    if (!($v = $this->getCurrentValue())) return '';
+    return '<div class="iconsSet fileNav">'.'<a href="'.$v.'" class="'.$this->options['currentFileClass'].'" target="_blank"><i></i> '.$this->options['currentFileTitle'].'</a>'.((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ? '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="delete confirm" title="Удалить"><i></i></a>' : '').'</div>';
   }
 
   function _html() {
