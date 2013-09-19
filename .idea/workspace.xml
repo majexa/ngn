@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" afterPath="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.Upload.js" afterPath="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.Upload.js" />
     </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -736,10 +735,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="DataManagerAbstract.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="194" column="39" selection-start="4841" selection-end="4841" vertical-scroll-proportion="0.5898876">
+            <state line="194" column="39" selection-start="4841" selection-end="4841" vertical-scroll-proportion="-8.076923">
               <folding />
             </state>
           </provider>
@@ -760,10 +759,37 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Ngn.FieldSet.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.FieldSet.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ngn.Form.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="220" column="45" selection-start="6387" selection-end="6387" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ngn.Form.Upload.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.Upload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="0" selection-start="819" selection-end="819" vertical-scroll-proportion="0.33274338">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Db.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/core/db/Db.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="309" selection-end="309" vertical-scroll-proportion="0.0">
+            <state line="15" column="0" selection-start="309" selection-end="309" vertical-scroll-proportion="-0.65384614">
               <folding />
             </state>
           </provider>
@@ -801,7 +827,6 @@
         <option value="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
         <option value="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js" />
         <option value="$PROJECT_DIR$/lib/more/form/FieldEFile.class.php" />
-        <option value="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.Upload.js" />
         <option value="$PROJECT_DIR$/config/vars/sfl/js/formEl/dateRange.php" />
         <option value="$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js" />
         <option value="$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php" />
@@ -812,6 +837,7 @@
         <option value="$PROJECT_DIR$/i/css/formEl/dateRange.css" />
         <option value="$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php" />
         <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
+        <option value="$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.Upload.js" />
       </list>
     </option>
   </component>
@@ -876,11 +902,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="more" />
+              <option name="myItemId" value="i" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -894,15 +916,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="i" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="more" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -916,7 +934,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="i" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngn" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1213,7 +1239,7 @@
     <frame x="-8" y="-8" width="1382" height="722" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28764805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28764805" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1298,21 +1324,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.Form.El.DateRange.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="35" selection-start="35" selection-end="35" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmFrontendJs.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="25" selection-start="690" selection-end="690" vertical-scroll-proportion="0.432282" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmJsClasses.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="5" selection-start="3445" selection-end="3445" vertical-scroll-proportion="0.4543726" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="166" column="2" selection-start="5159" selection-end="5159" vertical-scroll-proportion="-6.8846154" />
@@ -1340,7 +1351,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.El.DialogSelect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="4" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.340388" />
+        <state line="78" column="4" selection-start="2266" selection-end="2266" vertical-scroll-proportion="0.340388">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/i/js/ngn/form/dateRange/Ngn.DateRangeDialog.js">
@@ -1358,9 +1371,23 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="39" selection-start="4841" selection-end="4841" vertical-scroll-proportion="-8.076923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="160" column="34" selection-start="4744" selection-end="4744" vertical-scroll-proportion="-0.65384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/core/db/Db.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="0" selection-start="309" selection-end="309" vertical-scroll-proportion="0.0">
+        <state line="15" column="0" selection-start="309" selection-end="309" vertical-scroll-proportion="-0.65384614">
           <folding />
         </state>
       </provider>
@@ -1378,16 +1405,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/form/FieldEAbstract.class.php">
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/Ngn.FieldSet.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="160" column="34" selection-start="4744" selection-end="4744" vertical-scroll-proportion="-0.65384614">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php">
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="194" column="39" selection-start="4841" selection-end="4841" vertical-scroll-proportion="0.5898876">
+        <state line="220" column="45" selection-start="6387" selection-end="6387" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/i/js/ngn/form/Ngn.Form.Upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="819" selection-end="819" vertical-scroll-proportion="0.33274338">
           <folding />
         </state>
       </provider>
