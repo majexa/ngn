@@ -93,7 +93,7 @@ class PrivMsgs {
       pmt.status,
       pmt.time1,
       pmt.viewed
-    FROM priv_msgs AS pmt
+    FROM ".self::$table." AS pmt
     LEFT JOIN users ON pmt.fromUserId=users.id
     WHERE
       pmt.toUserId={$this->userId} AND
@@ -147,7 +147,7 @@ class PrivMsgs {
   }
 
   function getNewMsgsCount() {
-    return db()->selectCell("SELECT COUNT(*) FROM priv_msgs WHERE userId=?d AND viewed=0", $this->userId);
+    return db()->selectCell("SELECT COUNT(*) FROM ".self::$table." WHERE userId=?d AND viewed=0", $this->userId);
   }
 
   function deleteMsgs($ownUserId, $msgIds) {
