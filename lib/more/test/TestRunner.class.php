@@ -71,4 +71,8 @@ class TestRunner {
     ]);
   }
 
+  static $folder;
+
 }
+
+TestRunner::$folder = __DIR__;

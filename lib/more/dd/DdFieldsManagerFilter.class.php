@@ -29,7 +29,7 @@ class DdFieldsManagerFilter extends DdFieldsManager {
   }
 
   protected function afterCreateUpdate() {
-    db()->query("UPDATE tags_groups SET masterStrName='{$this->filterableStr['name']}' WHERE strName=? AND name=?", $this->strName, $this->data['name']);
+    db()->query("UPDATE tagGroups SET masterStrName='{$this->filterableStr['name']}' WHERE strName=? AND name=?", $this->strName, $this->data['name']);
   }
 
 }

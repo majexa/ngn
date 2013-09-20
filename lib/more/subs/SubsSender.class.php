@@ -1,9 +1,9 @@
 <?php
 
 class SubsSender {
-  
+
   protected $listId;
-  
+
   /**
    * Пример массива:
    * array(
@@ -17,44 +17,43 @@ class SubsSender {
    * @var array
    */
   protected $subscribers;
-  
+
   /**
    * Использовать ли базу пользователей для осуществления рассылки
    *
    * @var bool
    */
   protected $useUsers;
-  
+
   /**
    * Название рассылки
    *
    * @var string
    */
   protected $title;
-  
+
   /**
    * Текст рассылки
    *
    * @var string
    */
   protected $text;
-  
+
   /**
    * ID новой созданной рассылки
    *
    * @var integer
    */
   protected $subsId;
-  
+
   /**
    * @var SendEmail
    */
   protected $oSender;
-  
+
   function __construct($listId, $subsId = null) {
     $this->listId = $listId;
-    if (!($listData = db()->selectRow('SELECT * FROM subs_list WHERE id=?d', $this->listId)))
-      throw new Exception("Subscribe list ID=$listId does not exists");
+    if (!($listData = db()->selectRow('SELECT * FROM subsList WHERE id=?d', $this->listId))) throw new Exception("Subscribe list ID=$listId does not exists");
     $this->useUsers = (bool)$listData['useUsers'];
     $this->title = $listData['title'];
     $this->text = $listData['text'];
@@ -62,32 +61,30 @@ class SubsSender {
     if (!$subsId) {
       // Создаем новую рассылку
       $this->createSubscribe();
-    } else {
+    }
+    else {
       // Используем имеющуюся
       $this->setSubsId($subsId);
     }
   }
-  
+
   function createSubscribe() {
     $this->subsId = db()->query('
-    INSERT INTO subs_subscribes SET listId=?d, text=?, subsBeginDate=?',
-      $this->listId, $this->text, dbCurTime());
+    INSERT INTO subs_subscribes SET listId=?d, text=?, subsBeginDate=?', $this->listId, $this->text, dbCurTime());
     db()->multiInsert('subs_subscribers', $this->getSubscribers());
     return $this->subsId;
   }
-  
+
   function endSubscribe() {
-    db()->query('UPDATE subs_subscribes SET subsEndDate=? WHERE id=?d',
-      dbCurTime(), $this->subsId);
+    db()->query('UPDATE subs_subscribes SET subsEndDate=? WHERE id=?d', dbCurTime(), $this->subsId);
   }
-  
+
   function setSubsId($subsId) {
-    if (!db()->query('SELECT * FROM subs_subscribes WHERE id=?d', $subsId))
-      throw new Exception("Subscribe with ID=$subsId does not exists");
+    if (!db()->query('SELECT * FROM subs_subscribes WHERE id=?d', $subsId)) throw new Exception("Subscribe with ID=$subsId does not exists");
     $this->subsId = $subsId;
     return $subsId;
   }
-  
+
   function getSubscribers() {
     $n = 0;
     $emails = [];
@@ -113,10 +110,9 @@ class SubsSender {
         $v['status'] = '';
         $subscribers[] = $v;
         $emails[] = $v['email'];
-      }    
+      }
     }
-    foreach (db()->query(
-    'SELECT id, email, code FROM subs_emails WHERE listId=?d', $this->listId) as $v) {
+    foreach (db()->query('SELECT id, email, code FROM subs_emails WHERE listId=?d', $this->listId) as $v) {
       if (in_array($v['email'], $emails)) continue;
       if (!$v['email']) continue;
       $n++;
@@ -124,31 +120,25 @@ class SubsSender {
       $v['type'] = 'emails';
       $v['subsId'] = $this->subsId;
       $v['status'] = '';
-      $subscribers[] = $v;  
+      $subscribers[] = $v;
     }
     return $subscribers;
   }
-  
+
   function getSubsId() {
     return $this->subsId;
   }
-  
+
   function getListId() {
     return $this->listId;
   }
-  
+
   function send() {
-    if (!isset($this->subsId))
-      throw new Exception(
-      '$this->subsId not defined. Use $this->createSubscribe or $this->setSubsId methods.');
+    if (!isset($this->subsId)) throw new Exception('$this->subsId not defined. Use $this->createSubscribe or $this->setSubsId methods.');
     $this->initSubscribers();
-    $this->oSender->send(
-      Arr::get($this->subscribers, 'email'),
-      SITE_TITLE.': '.$this->title,
-      $this->text
-    );
+    $this->oSender->send(Arr::get($this->subscribers, 'email'), SITE_TITLE.': '.$this->title, $this->text);
   }
-  
+
   /**
    * Отправляет рассылку на email
    *
@@ -157,19 +147,14 @@ class SubsSender {
    *                  array(
    *                    'type' => 'emails',
    *                    'code' => 'f87g23f9g732f',
-   *                    'email' => 'masted311@gmail.com'  
+   *                    'email' => 'masted311@gmail.com'
    *                  )
    */
   function sendEmail($subscriber) {
-    if (!isset($this->subsId))
-      throw new Exception('$this->subsId not defined. Use $this->createSubscribe or $this->setSubsId methods.');
-    $message = preg_replace(
-      '/(href=["\'])\/*(.*)(["\'])/', '$1'.Tt()->getPath(0).'/c/subs?subsId='.$this->subsId.
-      '&type='.$subscriber['type'].'&code='.$subscriber['code'].'&link=$2$3',
-      $this->text);
-    $message .= '<hr /><a href="'.Tt()->getPath(0).'/c/subs/unsubscribe?listId='.$this->listId.'&type='.
-      $subscriber['type'].'&code='.$subscriber['code'].'">Отписаться</a>';
+    if (!isset($this->subsId)) throw new Exception('$this->subsId not defined. Use $this->createSubscribe or $this->setSubsId methods.');
+    $message = preg_replace('/(href=["\'])\/*(.*)(["\'])/', '$1'.Tt()->getPath(0).'/c/subs?subsId='.$this->subsId.'&type='.$subscriber['type'].'&code='.$subscriber['code'].'&link=$2$3', $this->text);
+    $message .= '<hr /><a href="'.Tt()->getPath(0).'/c/subs/unsubscribe?listId='.$this->listId.'&type='.$subscriber['type'].'&code='.$subscriber['code'].'">Отписаться</a>';
     $this->oSender->send($subscriber['email'], SITE_TITLE.': '.$this->title, $message);
   }
-  
+
 }

@@ -135,6 +135,8 @@ class Form {
 
   function isSubmitted() {
     if (!$this->fromRequest) return true;
+
+    //pr($this->id());
     return ($this->req['formId'] and $this->req['formId'] == $this->id());
   }
 
@@ -444,10 +446,6 @@ class Form {
   }
 
   public $lastError;
-
-  function getLastError() {
-    return $this->lastError;
-  }
 
   public $tplRequired = '&nbsp;<b style="color: #FF0000;">*</b>';
 

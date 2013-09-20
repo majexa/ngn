@@ -85,7 +85,7 @@ class DdTagsItems {
         ];
       }
     }
-    db()->insertLarge('tags_items', $data);
+    db()->insertLarge('tagItems', $data);
     $this->updateCounts(array_unique($allTagTds));
   }
 
@@ -95,7 +95,7 @@ class DdTagsItems {
     $cnt = db()->selectCell("
     SELECT COUNT(*) FROM
     (
-      SELECT * FROM tags_items
+      SELECT * FROM tagItems
       WHERE strName=? AND tagId=?d AND active=1
       GROUP BY itemId
     ) AS t
@@ -108,7 +108,7 @@ class DdTagsItems {
     if (self::$disableUpdateCount) return;
     if (!$tagIds) return;
     $r = db()->select(<<<SQL
-SELECT tagId, COUNT(*) AS cnt FROM tags_items
+SELECT tagId, COUNT(*) AS cnt FROM tagItems
 WHERE strName=? AND tagId IN (?a) AND active=1
 GROUP BY tagId
 SQL
@@ -120,11 +120,11 @@ SQL
   }
 
   public function _create($tagId, $itemId, $collection = 0) {
-    db()->query('INSERT INTO tags_items SET groupName=?, strName=?, tagId=?d, itemId=?d, collection=?d', $this->group->name, $this->strName, $tagId, $itemId, $collection);
+    db()->query('INSERT INTO tagItems SET groupName=?, strName=?, tagId=?d, itemId=?d, collection=?d', $this->group->name, $this->strName, $tagId, $itemId, $collection);
   }
 
   function _delete($itemId) {
-    db()->query('DELETE FROM tags_items WHERE strName=? AND groupName=? AND itemId=?d', $this->strName, $this->group->name, $itemId);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d', $this->strName, $this->group->name, $itemId);
   }
 
   /**
@@ -153,7 +153,7 @@ SQL
    * @param  integer ID тэга
    */
   function deleteByTagId($tagId) {
-    db()->query('DELETE FROM tags_items WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
     $this->updateCount($tagId);
   }
 
@@ -175,7 +175,7 @@ SQL
   function getIdsByTagId($tagId) {
     $activeCond = self::$getNonActive ? '' : 'AND active=1';
     return db()->selectCol("
-    SELECT itemId FROM tags_items
+    SELECT itemId FROM tagItems
     WHERE strName=? AND groupName=? AND tagId=?d $activeCond", $this->strName, $this->group->name, $tagId);
   }
 
@@ -200,8 +200,8 @@ SQL
   function getFlat($itemIds) {
     $itemIds = (array)$itemIds;
     $params = [
-      'tags_items.*',
-      'tags_items.tagId AS id', // нужно для построения дерева
+      'tagItems.*',
+      'tagItems.tagId AS id', // нужно для построения дерева
       "tags.title",
     ];
     if ($this->group->allowEdit) {
@@ -211,13 +211,13 @@ SQL
     $params = implode(', ', $params);
     $q = "
     SELECT $params
-    FROM tags_items
-    LEFT JOIN {$this->group->table} tags ON tags_items.tagId=tags.id
+    FROM tagItems
+    LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
-      tags_items.strName=? AND
-      tags_items.groupName=? AND
-      tags_items.itemId IN (".implode(', ', $itemIds).") AND
-      tags_items.active=1
+      tagItems.strName=? AND
+      tagItems.groupName=? AND
+      tagItems.itemId IN (".implode(', ', $itemIds).") AND
+      tagItems.active=1
       ";
     $tagItems = db()->select($q, $this->strName, $this->group->name);
     if ($this->getRelatedItems and ($items = $this->group->getRelatedItems()) !== false) {
@@ -254,17 +254,17 @@ SQL
   /*
   static function updateCountByItemId($strName, $itemId) {
     if (self::$disableUpdateCount) return;
-    $r = db()->query("SELECT groupName, tagId FROM tags_items WHERE strName=? AND itemId=?d GROUP BY tagId", $strName, $itemId);
+    $r = db()->query("SELECT groupName, tagId FROM tagItems WHERE strName=? AND itemId=?d GROUP BY tagId", $strName, $itemId);
     foreach ($r as $v) self::updateCount($v['tagId']);
   }
 
   static function activate($strName, $itemId) {
-    db()->query("UPDATE tags_items SET active=1 WHERE strName=? AND itemId=?d", $strName, $itemId);
+    db()->query("UPDATE tagItems SET active=1 WHERE strName=? AND itemId=?d", $strName, $itemId);
     self::updateCountByItemId($strName, $itemId);
   }
 
   static function deactivate($strName, $itemId) {
-    db()->query("UPDATE tags_items SET active=0 WHERE strName=? AND itemId=?d", $strName, $itemId);
+    db()->query("UPDATE tagItems SET active=0 WHERE strName=? AND itemId=?d", $strName, $itemId);
     self::updateCountByItemId($strName, $itemId);
   }
   */
@@ -274,8 +274,8 @@ SQL
    */
   static function cleanup() {
     db()->query('
-      SELECT tags.id, tags_items.tagId AS exists FROM tags
-      LEFT JOIN tags_items ON tags_items.tagId=tags.id');
+      SELECT tags.id, tagItems.tagId AS exists FROM tags
+      LEFT JOIN tagItems ON tagItems.tagId=tags.id');
   }
 
 }

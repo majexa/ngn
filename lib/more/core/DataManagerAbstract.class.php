@@ -101,6 +101,7 @@ abstract class DataManagerAbstract extends Options2 {
    * Обрабатывает пользовательские данные, преобразовывая их с помощью класса формы
    *
    * @param  array  Данные по умолчанию
+   * @return bool|integer
    */
   function requestCreate(array $default = []) {
     $this->form->create = true;

@@ -2,26 +2,6 @@
 
 class UsersCore {
 
-  static function save($pageId, $pageTitle, $pathData) {
-    if (!($userId = Auth::get('id'))) return;
-    db()->query("REPLACE INTO users_pages SET
-      userId=?d, pageId=?d, url=?, title=?, path=?, dateCreate=?", $userId, $pageId, $_SERVER['REQUEST_URI'], $pageTitle, Tt()->enumDddd($pathData, '$title', ' / '), dbCurTime());
-  }
-
-  static function getOnline() {
-    return db()->query("
-    SELECT
-      users.login,
-      users_pages.userId,
-      users_pages.url,
-      users_pages.title,
-      users_pages.path
-    FROM users_pages
-    INNER JOIN users ON users_pages.userId=users.id
-    WHERE users_pages.dateCreate > ?", date('Y-m-d H:i:s', time() - 60 * 1));
-  }
-
-
   static function sendLostPass($email) {
     if (($user = DbModelCore::get('users', $email, 'email')) === false) return false;
     return O::get('SendEmail')->send($user['email'], 'Восстановление пароля', 'Ваш пароль: '.$user['passClear']);

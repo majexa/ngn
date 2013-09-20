@@ -181,7 +181,6 @@ class Db extends DbSimple_Mysql {
   function backup() {
     foreach ($this->tables() as $table) {
       if (!strstr($table, 'bak_')) {
-        //prrr('Copy DB "'.$table.'" --> "'.('bak_'.$table).'"');
         $this->copy($table, 'bak_'.$table);
       }
     }
@@ -289,8 +288,6 @@ class Db extends DbSimple_Mysql {
 
   function delete($tables = null) {
     $tables = (array)$tables;
-    if ($tables) $this->log("Delete tables: ".implode(', ', $tables)." in database ".$this->name);
-    else $this->log("Delete all tables in database ".$this->name);
     foreach ($this->tables() as $table) {
       if ($tables and !in_array($table, $tables)) continue;
       $this->query("DROP TABLE $table");
@@ -416,7 +413,7 @@ class Db extends DbSimple_Mysql {
 
   static function createDb($user, $pass, $host, $name) {
     if (!mysql_connect($host, $user, $pass)) throw new Exception("Can not connect. User='$user', Pass='$pass', Host='$host'");
-    mysql_query("CREATE DATABASE IF NOT EXISTS $name");
+    mysql_query("CREATE DATABASE IF NOT EXISTS $name COLLATE ".DB_COLLATE);
   }
 
   static function deleteDb($user, $pass, $host, $name) {

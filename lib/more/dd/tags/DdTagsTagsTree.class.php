@@ -215,7 +215,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
 
   function delete($id) {
     DbModelCore::delete($this->group->table, $id);
-    db()->query('DELETE FROM tags_items WHERE tagId=?d', $id);
+    db()->query('DELETE FROM tagItems WHERE tagId=?d', $id);
   }
 
 }

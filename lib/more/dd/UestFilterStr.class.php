@@ -1,6 +1,6 @@
 <?php
 
-class TestFilterStr extends NgnTestCase {
+class UestFilterStr extends NgnTestCase {
 
   function test() {
     $sm = new DdStructuresManager();
@@ -24,9 +24,9 @@ class TestFilterStr extends NgnTestCase {
     $tags->create(['title' => 'two']);
     DdTagsItems::create('b', 'catalog', 1, ['one'], true);
     DdTagsItems::create('a', 'catalog', 1, ['one', 'two'], true);
-    $this->assertNotEmpty(db()->selectCell("select * from tags_items WHERE strName='a' AND groupName='catalog'"));
+    $this->assertNotEmpty(db()->selectCell("select * from tagItems WHERE strName='a' AND groupName='catalog'"));
     $bfm->deleteByName('catalog');
-    $this->assertEmpty(db()->selectCell("select * from tags_items WHERE strName='a' AND groupName='catalog'"));
+    $this->assertEmpty(db()->selectCell("select * from tagItems WHERE strName='a' AND groupName='catalog'"));
     $sm->delete($id1);
     $sm->delete($id2);
   }

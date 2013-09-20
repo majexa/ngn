@@ -1,14 +1,14 @@
 <?php
 
 class PrivMsgs {
-  
+
   /**
    * ID пользователя
    *
    * @var integer
    */
   public $userId;
-  
+
   /**
    * Логин/имя пользователя
    *
@@ -22,14 +22,14 @@ class PrivMsgs {
    * @var bool
    */
   public $parseHtml = false;
-  
+
   /**
    * Основная таблица сообщений
    *
    * @var string
    */
-  static $table = 'priv_msgs';
-  
+  static $table = 'privMsgs';
+
   /**
    * Конструктор
    *
@@ -37,7 +37,7 @@ class PrivMsgs {
    * @param string  Логин/имя текущего пользователя
    */
   function __construct($userId = null) {
-    $this->userId = @(int)$userId;
+    $this->userId = (int)$userId;
   }
 
   /**
@@ -81,7 +81,7 @@ class PrivMsgs {
 
     return $newMessages;
   }
-  
+
   function getNewMsgs() {
     $q = "
     SELECT
@@ -99,7 +99,7 @@ class PrivMsgs {
       pmt.toUserId={$this->userId} AND
       pmt.userId={$this->userId} AND 
       viewed=0
-    ORDER BY time1 DESC";    
+    ORDER BY time1 DESC";
     foreach (db()->query($q) as $k => $v) {
       $v += UsersCore::getImageData($v['userId']);
       $r[$k] = $v;
@@ -124,7 +124,7 @@ class PrivMsgs {
         }
         //die2($users);
         if (count($users)) return $users;
-      }      
+      }
     }
     return false;
   }
@@ -145,12 +145,11 @@ class PrivMsgs {
     }
     return false;
   }
-  
+
   function getNewMsgsCount() {
-    return db()->selectCell(
-    "SELECT COUNT(*) FROM priv_msgs WHERE userId=?d AND viewed=0", $this->userId);
+    return db()->selectCell("SELECT COUNT(*) FROM priv_msgs WHERE userId=?d AND viewed=0", $this->userId);
   }
-  
+
   function deleteMsgs($ownUserId, $msgIds) {
     if (!$ownUserId = (int)$ownUserId) return;
     if (!is_array($msgIds) or !count($msgIds)) return;
@@ -161,18 +160,17 @@ class PrivMsgs {
               userId=$ownUserId";
     db()->query($query);
   }
-  
+
   function markViewed($ownUserId, $msgIds) {
-    foreach ($msgIds as $id)
-      db()->query("
+    foreach ($msgIds as $id) db()->query("
         UPDATE ".self::$table." SET viewed=1
         WHERE userId=?d AND id IN (?d)", $ownUserId, $id);
   }
-  
+
   function clearMsgs($ownUserId) {
     db()->query("DELETE FROM ".self::$table." WHERE userId=?d", $ownUserId);
   }
-  
+
   function deleteChat($ownUserId, $toUserId) {
     $query = "DELETE FROM ".self::$table." WHERE
                 userId=$ownUserId AND
@@ -195,23 +193,21 @@ class PrivMsgs {
                 fromUserId=$toUserId";
     db()->query($query);
   }
-  
+
   function deleteAuthMsgs($msgIds) {
     PrivMsgs::deleteMsgs($this->userId, $msgIds);
   }
-  
+
   function formatHtml($text) {
     $o = new FormatText(['allowedTagsConfigName' => 'privMsgs.allowedTags']);
     $o->jevix->cfgSetAutoBrMode(true);
     return $o->html($text);
   }
 
-  function sendMsg($fromUserId, $toUserId, $msgText,
-                   $seveOutgoingHistory = true,
-                   $makeViewedOutgoing = true) {
+  function sendMsg($fromUserId, $toUserId, $msgText, $seveOutgoingHistory = true, $makeViewedOutgoing = true) {
     if (!$toUserId = (int)$toUserId) {
-    	warning('$toUserId not defined');
-    	return false;
+      warning('$toUserId not defined');
+      return false;
     }
     if (!$fromUserId = (int)$fromUserId) {
       Err::warning('$fromUserId not defined');
@@ -221,32 +217,33 @@ class PrivMsgs {
       Err::warning('$fromUserId and $toUserId can not be empty');
       return false;
     }
-    
+
 
     $ipInfo = Misc::getIPInfo();
-    
+
     $msgText = str_replace("'", "\\'", $msgText);
-    
+
     if ($seveOutgoingHistory) {
       if ($makeViewedOutgoing) $viewed = 1;
       else $viewed = 0;
-      
+
       $query = "INSERT INTO ".self::$table." () VALUES ()";
       db()->query($query);
-      
+
       //prr($query);
-      
+
       $msgId = mysql_insert_id();
-      
+
       if ($this->parseHtml) {
         $msgTextF = $this->formatHtml($msgText, [
           'fromUserId' => $fromUserId,
-          'msgId' => $msgId
+          'msgId'      => $msgId
         ]);
-      } else {
+      }
+      else {
         $msgTextF = $msgText;
-      }      
-      
+      }
+
       $query = "UPDATE ".self::$table." SET
                   userId=$fromUserId,
                   fromUserId=$fromUserId,
@@ -259,28 +256,28 @@ class PrivMsgs {
                 WHERE id=$msgId";
 //      die2($query);
       db()->query($query);
-      
+
       $query = "UPDATE ".self::$table."
                 SET pairId=$msgId WHERE id=$msgId";
       db()->query($query);
-    } else {
+    }
+    else {
       $msgId = 0;
-    }    
+    }
 
     $msgId2 = db()->query("INSERT INTO ".self::$table." () VALUES ()");
-     
-    
-    
+
 
     if ($this->parseHtml) {
       $msgTextF2 = $this->formatHtml($msgText, [
         'fromUserId' => $toUserId,
-        'msgId' => $msgId2
+        'msgId'      => $msgId2
       ]);
-    } else {
+    }
+    else {
       $msgTextF2 = $msgText;
     }
-    
+
     $query = "UPDATE ".self::$table." SET
                 pairId=$msgId,
                 userId=$toUserId,
@@ -295,8 +292,8 @@ class PrivMsgs {
     db()->query($query);
     return [$msgId, $msgId2];
   }
-  
-  
+
+
   function setAuthMsgsViewed($msgCodes = []) {
     return PrivMsgs::setMsgsViewed($this->userId, $msgCodes);
   }
@@ -311,9 +308,9 @@ class PrivMsgs {
     db()->query($query);
     return true;
   }
-  
+
   /**
-   * Получаем сообщения для текущего авторизованного пользователя 
+   * Получаем сообщения для текущего авторизованного пользователя
    * от другого пользователя
    *
    * @param integer $toUserId
@@ -322,19 +319,17 @@ class PrivMsgs {
    * @param string  сортировка
    * @return array  массив с сообщениями
    */
-  function getAuthMsgs($toUserId, $onlyNotViewed = true,
-                       $notSetViwed = false, $order = "ASC") {
+  function getAuthMsgs($toUserId, $onlyNotViewed = true, $notSetViwed = false, $order = "ASC") {
     return PrivMsgs::getMsgs($this->userId, $toUserId, $onlyNotViewed, $notSetViwed, $order);
   }
-  
-  function getMsgs($ownUserId, $toUserId, $onlyNotViewed = true,
-                   $notSetViwed = false, $order = 'ASC', $archive = false) {
-                     
+
+  function getMsgs($ownUserId, $toUserId, $onlyNotViewed = true, $notSetViwed = false, $order = 'ASC', $archive = false) {
+
     if (!$ownUserId = (int)$ownUserId) return false;
     if (!$toUserId = (int)$toUserId) return false;
-    
+
     $table = $archive ? self::$table.'_archive' : self::$table;
-    
+
 
     if ($onlyNotViewed) {
       $viewedCond = "AND viewed=0";
@@ -356,7 +351,7 @@ class PrivMsgs {
     AND pmt.userId=$ownUserId 
     ".$viewedCond."
     ORDER BY time1 ".$order;
-    
+
     // Получаем сообщения и их прочитанность текущим юзером
     $r = db()->query($query);
     $msgCodesNotViewed = [];
@@ -367,7 +362,7 @@ class PrivMsgs {
       $row["time1"] = date("H:i:s", $time1);
       $row["date"] = date("d.m.y", $time1);
 
-      if ($time1 < time()-(60*60*24)) $row["IntellectualTime"] = date("d.m.Y H:i", $time1);
+      if ($time1 < time() - (60 * 60 * 24)) $row["IntellectualTime"] = date("d.m.Y H:i", $time1);
       else $row["IntellectualTime"] = date("H:i:s", $time1);
 
       $msgs[$row["pairId"]] = $row;
@@ -393,7 +388,7 @@ class PrivMsgs {
     }
     return $msgs;
   }
-  
+
   function getAllMsgs() {
     $msgs = db()->select("
       SELECT
@@ -409,7 +404,7 @@ class PrivMsgs {
     db()->query("UPDATE ".self::$table." SET viewed=1 WHERE id IN (".implode(', ', $msgIds).")");
     return $msgs;
   }
-  
+
   function getOutMsgs() {
     return db()->select("
       SELECT
@@ -421,11 +416,11 @@ class PrivMsgs {
       WHERE pm.userId=?d AND pm.fromUserId=?d
       ORDER BY pm.time1 DESC", $this->userId, $this->userId);
   }
-  
+
   function getHistory($ownUserId, $toUserId) {
     $msgs = $this->getMsgs($ownUserId, $toUserId, false, false, 'ASC', true);
     $msgs += @$this->getMsgs($ownUserId, $toUserId, false);
     return $msgs;
   }
-  
+
 }
