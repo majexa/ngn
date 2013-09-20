@@ -229,19 +229,20 @@ Ngn.Grid = new Class({
   },
 
   createToolBtn: function(cls, row, action) {
-    var action = action || this.options.toolActions[cls] || function() {
-    };
-
+    var action = action || this.options.toolActions[cls] || false;
     var el = new Element('a', {
       'href': this.options.toolLinks[cls] ? this.options.toolLinks[cls](row) : '#',
       'class': 'iconBtn ' + cls,
       'html': '<i></i>',
       'title': row.tools[cls]
     }).inject(new Element('td').inject(row.eTools));
-    action = action.bind(this);
-    new Ngn.Btn(el, function() {
-      action(row, this);
-    });
+    if (action) {
+      // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
+      action = action.bind(this);
+      new Ngn.Btn(el, function() {
+        action(row, this);
+      });
+    }
     return el;
   },
 

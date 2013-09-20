@@ -7,7 +7,14 @@ class FieldEWisiwig extends FieldETextarea {
   protected $staticType;
 
   function defineOptions() {
-    return array_merge(parent::defineOptions(), ['rowClass' => 'elWisiwig']);
+    return array_merge(parent::defineOptions(), [
+      'rowClass' => 'elWisiwig',
+      'jsOptions' => [
+        'tinySettings' => [
+          'content_css' => Sflm::lm('css')->getUrl('tinyContent')
+        ]
+      ]
+    ]);
   }
 
   protected function addRequiredCssClass() {

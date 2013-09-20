@@ -63,6 +63,10 @@ class Sflm {
     return self::flm($type, $frontend);
   }
 
+  static function output($s) {
+    //output($s);
+  }
+
 }
 
 Sflm::$debug = getConstant('DEBUG_STATIC_FILES');

@@ -39,19 +39,19 @@ class TestRunner {
   }
 
   protected function getClasses() {
-    return array_map(function($v) {
+    return array_map(function ($v) {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
   }
 
   function _all() {
     foreach ($this->getClasses() as $class) $this->addTestSuite($class);
-    PHPUnit_TextUI_TestRunner::run($this->suite);
+    $this->run();
   }
 
   function _test($names) {
     foreach (explode(',', $names) as $name) $this->addTestSuite('Test'.ucfirst($name));
-    PHPUnit_TextUI_TestRunner::run($this->suite);
+    $this->run();
   }
 
   function _lst($name) {
@@ -59,7 +59,7 @@ class TestRunner {
     foreach ($names as $name) {
       $this->addTestSuite('Test'.ucfirst($name));
     }
-    PHPUnit_TextUI_TestRunner::run($this->suite);
+    $this->run();
   }
 
   function _folder($name) {
@@ -69,6 +69,16 @@ class TestRunner {
       'stopOnIncomplete' => true,
       'stopOnError'      => true
     ]);
+  }
+
+  protected function run() {
+    $result = PHPUnit_TextUI_TestRunner::run($this->suite);
+    if ($result->failureCount()) {
+      foreach ($result->failures() as $failure) {
+        /* @var $failure PHPUnit_Framework_TestFailure */
+        $failure->getExceptionAsString();
+      }
+    }
   }
 
   static $folder;

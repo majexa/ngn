@@ -68,18 +68,18 @@ class SflmJsClasses {
    * @throws Exception
    */
   function addClass($class, $source, Closure $success = null, Closure $failure = null) {
-    //output("try to addClass '$class'");
+    //Sflm::output("try to addClass '$class'");
     if (in_array($class, $this->existingClasses)) {
-      //output("class '$class' exists");
+      //Sflm::output("class '$class' exists");
       return;
     }
     if (!isset($this->classesPaths[$class])) {
       if ($failure) $failure($source);
-      output("class '$class' from '$source' not found");
+      Sflm::output("class '$class' from '$source' not found");
       //pr("class '$class' from '$source' not found");
       return false;
     }
-    output("addClass '$class'");
+    Sflm::output("addClass '$class'");
     $path = $this->classesPaths[$class];
     $this->processPath($path, $success);
     $this->frontend->incrementVersion();
@@ -90,7 +90,7 @@ class SflmJsClasses {
   function processPath($path) {
     $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
     foreach ($this->parseClasses($c) as $v) {
-      output("Class '$v' exists in $path. Adding to \$this->existingClasses");
+      Sflm::output("Class '$v' exists in $path. Adding to \$this->existingClasses");
       $this->existingClasses[] = $v;
     }
     foreach ($this->parseRequired($c) as $v) $this->addSomething($v, "$path required");

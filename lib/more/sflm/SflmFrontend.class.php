@@ -90,7 +90,7 @@ class SflmFrontend {
   function addStaticLib($lib, $strict = false) {
     foreach (Sflm::$absBasePaths as $k => $path) {
       if (file_exists("$path/{$this->sflm->type}/$lib")) {
-        output("add global lib $path/{$this->sflm->type}/$lib");
+        Sflm::output("add global lib $path/{$this->sflm->type}/$lib");
         $this->addLib("$k/{$this->sflm->type}/$lib");
         return;
       }
@@ -108,21 +108,21 @@ class SflmFrontend {
    */
   function addLib($lib, $strict = false) {
     if (!$strict and !$this->sflm->exists($lib)) {
-      output("Lib '$lib' already exists");
+      Sflm::output("Lib '$lib' already exists");
       return;
     }
-    output("Adding lib '$lib'");
+    Sflm::output("Adding lib '$lib'");
     $newPaths = $this->sflm->getPaths($lib);
     foreach ($newPaths as $path) {
       if (in_array($path, $this->getPathsCache())) {
-        output("New path '$path' already exists");
+        Sflm::output("New path '$path' already exists");
         continue;
       }
       $this->addPath($path);
     }
     if ($this->changed) {
       NgnCache::c()->save($this->paths, $this->pathsCacheKey());
-      output("update stored file after adding lib '$lib'");
+      Sflm::output("update stored file after adding lib '$lib'");
       $this->store();
       $this->incrementVersion();
     }
