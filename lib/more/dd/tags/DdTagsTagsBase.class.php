@@ -55,7 +55,7 @@ abstract class DdTagsTagsBase implements DbTreeInterface {
    */
   function deleteAll() {
     db()->query("DELETE FROM {$this->group->table} WHERE strName=? AND groupName=?", $this->group->strName, $this->group->name);
-    db()->query('DELETE FROM tags_items WHERE strName=? AND groupName=?', $this->group->strName, $this->group->name);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=?', $this->group->strName, $this->group->name);
   }
 
   abstract function import($text);
@@ -81,15 +81,15 @@ abstract class DdTagsTagsBase implements DbTreeInterface {
 
   function delete($id) {
     DbModelCore::delete($this->group->table, $id);
-    db()->query('DELETE FROM tags_items WHERE tagId=?d', $id);
+    db()->query('DELETE FROM tagItems WHERE tagId=?d', $id);
   }
 
   function getTagsByItemIds($itemIds) {
     $itemIds = (array)$itemIds;
-    $cond = new DbCond('tags_items');
+    $cond = new DbCond('tagItems');
     $cond->addJoin($this->group->table, 'tagId');
     $cond->addF('itemId', $itemIds)->addF('strName', $this->group->tagsGetterStrName)->addF('groupName', $this->group->name);
-    return db()->query("SELECT {$this->group->table}.*, COUNT(*) AS cnt FROM tags_items".$cond->all().' GROUP BY tags_items.tagId');
+    return db()->query("SELECT {$this->group->table}.*, COUNT(*) AS cnt FROM tagItems".$cond->all().' GROUP BY tagItems.tagId');
   }
 
 }

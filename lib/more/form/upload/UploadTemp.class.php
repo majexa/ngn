@@ -26,7 +26,7 @@ class UploadTemp extends Options2 {
   function getFiles() {
     if (!is_dir($this->tempFolder)) return [];
     $files = [];
-    $data = db()->query('SELECT * FROM upload_temp WHERE formId=? AND tempId=?', $this->formId, $this->tempId);
+    $data = db()->query('SELECT * FROM uploadTemp WHERE formId=? AND tempId=?', $this->formId, $this->tempId);
     foreach ($data as $v) {
       if (!file_exists($this->tempFolder.'/'.$v['fileName'])) continue;
       if ($v['multiple']) {
@@ -56,7 +56,7 @@ class UploadTemp extends Options2 {
     Dir::make($this->tempFolder);
     $fileName = Misc::randString(10, true);
     copy($file['tmp_name'], $this->tempFolder.'/'.$fileName);
-    db()->query('INSERT INTO upload_temp SET ?a', [
+    db()->query('INSERT INTO uploadTemp SET ?a', [
       'formId'     => $this->formId,
       'tempId'     => $this->tempId,
       'fieldName'  => $fieldName,
@@ -69,12 +69,12 @@ class UploadTemp extends Options2 {
 
   function delete() {
     Dir::remove($this->tempFolder);
-    db()->query('DELETE FROM upload_temp WHERE tempId=?', $this->tempId);
+    db()->query('DELETE FROM uploadTemp WHERE tempId=?', $this->tempId);
   }
 
   function deleteFile($name) {
-    $fileName = db()->selectCell('SELECT fileName FROM upload_temp WHERE tempId=? AND formId=? AND name=?', $this->tempId, $this->formId, $name);
-    db()->query('DELETE FROM upload_temp WHERE fileName=?', $fileName);
+    $fileName = db()->selectCell('SELECT fileName FROM uploadTemp WHERE tempId=? AND formId=? AND name=?', $this->tempId, $this->formId, $name);
+    db()->query('DELETE FROM uploadTemp WHERE fileName=?', $fileName);
     File::delete($this->tempFolder.'/'.$fileName);
   }
 
@@ -101,13 +101,13 @@ class UploadTemp extends Options2 {
     $timeToKeepFiles = 60 * 60;
     foreach (Dir::getFilesR(TEMP_PATH.'/upload') as $file) if (filemtime($file) < time() - $timeToKeepFiles) File::delete($file);
     Dir::removeEmpties(TEMP_PATH.'/upload');
-    db()->query('DELETE FROM upload_temp WHERE dateCreate < ?', dbCurTime(time() - $timeToKeepFiles));
-    foreach (db()->select('SELECT * FROM upload_temp') as $v) if (!file_exists(TEMP_PATH.'/upload/'.$v['tempId'].'/'.$v['fileName'])) db()->query('DELETE FROM upload_temp WHERE tempId=? AND fileName=?', $v['tempId'], $v['fileName']);
+    db()->query('DELETE FROM uploadTemp WHERE dateCreate < ?', dbCurTime(time() - $timeToKeepFiles));
+    foreach (db()->select('SELECT * FROM uploadTemp') as $v) if (!file_exists(TEMP_PATH.'/upload/'.$v['tempId'].'/'.$v['fileName'])) db()->query('DELETE FROM uploadTemp WHERE tempId=? AND fileName=?', $v['tempId'], $v['fileName']);
   }
 
   static function cleanup() {
     Dir::clear(TEMP_PATH.'/upload');
-    db()->query('TRUNCATE TABLE upload_temp');
+    db()->query('TRUNCATE TABLE uploadTemp');
   }
 
 }

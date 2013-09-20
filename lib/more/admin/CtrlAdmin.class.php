@@ -26,7 +26,7 @@ abstract class CtrlAdmin extends CtrlCp {
   /**
    * @var PrivMsgs
    */
-  public $oPM;
+  public $pribMsgs;
 
   protected $theme;
 
@@ -89,8 +89,8 @@ abstract class CtrlAdmin extends CtrlCp {
 
   protected function initPrivMsgs() {
     if (!AdminModule::isAllowed('privMsgs')) return;
-    $this->oPM = new PrivMsgs($this->userId);
-    $this->d['newMsgsCount'] = $this->oPM->getNewMsgsCount();
+    $this->pribMsgs = new PrivMsgs($this->userId);
+    $this->d['newMsgsCount'] = $this->pribMsgs->getNewMsgsCount();
   }
 
   protected function afterInit() {

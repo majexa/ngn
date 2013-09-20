@@ -10,8 +10,6 @@ define('CHARSET', 'UTF-8');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', 'utf8_general_ci');
 
-
-
 require_once LIB_PATH.'/core/R.class.php'; // Registry Class
 require_once LIB_PATH.'/core/LogWriter.class.php';
 require_once LIB_PATH.'/core/Err.class.php';

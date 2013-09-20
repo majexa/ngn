@@ -10,11 +10,9 @@ class ProjectTestRunner extends TestRunner {
   }
 
   protected function getClasses() {
-    $classes = [];
-    foreach (parent::getClasses() as $class) {
-      if (strstr(Lib::getClassPath($class), "projects/$this->project/")) $classes[] = $class;
-    }
-    return $classes;
+    return array_filter(parent::getClasses(), function($class) {
+      return strstr(Lib::getClassPath($class), "projects/$this->project/");
+    });
   }
 
 }

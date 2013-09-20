@@ -39,7 +39,7 @@ class DdTags {
     db()->select('UPDATE tags SET cnt=0');
     foreach ((db()->select('
     SELECT strName, groupName, tagId AS id, COUNT(*) AS cnt
-    FROM tags_items GROUP BY strName, groupName, tagId')) as $v) {
+    FROM tagItems GROUP BY strName, groupName, tagId')) as $v) {
       db()->select('UPDATE tags SET cnt=?d WHERE strName=? AND groupName=? AND id=?d', $v['cnt'], $v['strName'], $v['groupName'], $v['id']);
     }
   }
@@ -61,10 +61,10 @@ class DdTags {
       tags.id,
       tags.parentId
     FROM tags
-    LEFT JOIN tags_groups ON
-      tags_groups.strName=tags.strName AND
-      tags_groups.name=tags.groupName
-    WHERE tags_groups.tree=1') as $v) {
+    LEFT JOIN tagGroups ON
+      tagGroups.strName=tags.strName AND
+      tagGroups.name=tags.groupName
+    WHERE tagGroups.tree=1') as $v) {
       $ids[$v['strName']][$v['groupName']][] = $v['id'];
       if ($v['parentId']) $parentIds[$v['strName']][$v['groupName']][] = $v['parentId'];
     }
@@ -115,11 +115,11 @@ class DdTags {
     foreach (DdCore::tables() as $table) {
       $strName = Misc::removePrefix('dd_i_', $table);
       $r = db()->query("
-SELECT tags_items.tagId, tags_items.itemId, $table.id
-FROM tags_items
-LEFT JOIN $table ON $table.id=tags_items.itemId
-WHERE tags_items.strName='$strName' AND $table.id IS NULL");
-      foreach ($r as $v) db()->query("DELETE FROM tags_items WHERE tagId={$v['tagId']} AND itemId={$v['itemId']}");
+SELECT tagItems.tagId, tagItems.itemId, $table.id
+FROM tagItems
+LEFT JOIN $table ON $table.id=tagItems.itemId
+WHERE tagItems.strName='$strName' AND $table.id IS NULL");
+      foreach ($r as $v) db()->query("DELETE FROM tagItems WHERE tagId={$v['tagId']} AND itemId={$v['itemId']}");
     }
   }
 

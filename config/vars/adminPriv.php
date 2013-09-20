@@ -3,7 +3,7 @@
 return [
   'allowedAdminModules' => [
     'pages',
-    'pageBlocks',
+    //'pageBlocks',
     'privMsgs',
     'photoImport',
     'stat',
