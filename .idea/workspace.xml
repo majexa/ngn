@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/privMsgs/PrivMsgs.class.php" afterPath="$PROJECT_DIR$/lib/more/privMsgs/PrivMsgs.class.php" />
+    </list>
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379660068138" ignored="false" />
@@ -743,6 +745,7 @@
     <file path="/TestDdImage.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379665986966" ignored="false" />
     <file path="/DdFieldsManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379612481394" ignored="false" />
     <file path="/Req.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379613949035" ignored="false" />
+    <file path="/PrivMsgs.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379666763016" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -780,10 +783,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Image.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Image.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/image/Image.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="248" column="8" selection-start="6994" selection-end="6994" vertical-scroll-proportion="0.42671615">
+            <state line="248" column="8" selection-start="6994" selection-end="6994" vertical-scroll-proportion="-8.846154">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PrivMsgs.class.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/more/privMsgs/PrivMsgs.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="95" column="23" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.36363637">
               <folding />
             </state>
           </provider>
@@ -825,8 +837,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/more/admin/CtrlAdmin.class.php" />
-        <option value="$PROJECT_DIR$/lib/more/privMsgs/PrivMsgs.class.php" />
         <option value="$PROJECT_DIR$/lib/more/subs/SubsSender.class.php" />
         <option value="$PROJECT_DIR$/lib/more/patcher/dbPatches/1530.php" />
         <option value="$PROJECT_DIR$/lib/more/test/UestProjectsIndexAvailable.class.php" />
@@ -841,6 +851,8 @@
         <option value="$PROJECT_DIR$/lib/more/core/DataManagerAbstract.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/TestDdImage.class.php" />
         <option value="$PROJECT_DIR$/lib/more/dd/DdItems.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/image/Image.class.php" />
+        <option value="$PROJECT_DIR$/lib/more/privMsgs/PrivMsgs.class.php" />
       </list>
     </option>
   </component>
@@ -1347,13 +1359,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lib/more/test/ProjectTestRunner.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="275" selection-end="275" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/dd/DdFieldsManager.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="23" selection-start="329" selection-end="329" vertical-scroll-proportion="-9.692307">
@@ -1460,7 +1465,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/image/Image.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="8" selection-start="6994" selection-end="6994" vertical-scroll-proportion="0.42671615">
+        <state line="248" column="8" selection-start="6994" selection-end="6994" vertical-scroll-proportion="-8.846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/privMsgs/PrivMsgs.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="23" selection-start="1889" selection-end="1889" vertical-scroll-proportion="0.36363637">
           <folding />
         </state>
       </provider>
