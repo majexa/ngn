@@ -17,7 +17,6 @@ class SendEmail {
     $this->mailer->SetFrom(Config::getVarVar('mail', 'fromEmail'), Config::getVarVar('mail', 'fromName'));
     $this->mailer->CharSet = CHARSET;
     $this->mailer->Mailer = Config::getVarVar('mail', 'method');
-    //$this->mailer->Encoding = 'quoted-printable';//"8bit", "7bit", "binary", "base64", and "quoted-printable".
     $this->mailer->Encoding = 'base64';//"8bit", "7bit", "binary", "base64", and "quoted-printable".
     if ($this->mailer->Mailer == 'smtp') {
       $smtp = Config::getVar('smtp');
