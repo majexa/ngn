@@ -1,24 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/core/CliColors.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/admin/CtrlAdminDdItems.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/admin/CtrlAdminDdItems.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/dd/DdCrudAbstractCtrl.class.php" afterPath="$PROJECT_DIR$/lib/more/dd/DdCrudAbstractCtrl.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/DmfaImage.class.php" afterPath="$PROJECT_DIR$/lib/more/form/DmfaImage.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/form/FieldEWisiwig.class.php" afterPath="$PROJECT_DIR$/lib/more/form/FieldEWisiwig.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js" afterPath="$PROJECT_DIR$/i/js/ngn/Ngn.Grid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/mail/SendEmail.class.php" afterPath="$PROJECT_DIR$/lib/more/mail/SendEmail.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/Sflm.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmFrontend.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmFrontendFileCache.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmFrontendFileCache.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/SflmJsClasses.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/SflmJsClasses.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/test/TestRunner.class.php" afterPath="$PROJECT_DIR$/lib/more/test/TestRunner.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php" afterPath="$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/core/common.func.php" afterPath="$PROJECT_DIR$/lib/core/common.func.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="166062ad-f8b3-4616-b268-5e72cda7cabf" name="Default" comment="" />
     <ignored path="ngn.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379682100438" ignored="false" />
@@ -39,7 +22,7 @@
     <file path="$PROJECT_DIR$/../ao/site/lib/AoQueueActions.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379495836451" ignored="false" />
     <file path="/AoQueueActions.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375171729098" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/common-init.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379599090634" ignored="false" />
-    <file path="$PROJECT_DIR$/../ngn-env/scripts/web/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/scripts/web/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379696681984" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/run/siteStandAloneInit2.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1375176565386" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376982685499" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmRemoteProjectDev.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376826399909" ignored="false" />
@@ -446,7 +429,7 @@
     <file path="$PROJECT_DIR$/../install/installer/lib/ObjectCacherDigitaloceanApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376931860536" ignored="false" />
     <file path="$PROJECT_DIR$/../install/installer/lib/ObjectCacherGen.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376932329941" ignored="false" />
     <file path="/ObjectCacherGen.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377310762050" ignored="false" />
-    <file path="/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379689116423" ignored="false" />
+    <file path="/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379689560507" ignored="false" />
     <file path="/LongJobStates.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376996540660" ignored="false" />
     <file path="/LongJobState.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377162664326" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/scripts/web/site/lib/Errors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376992264043" ignored="false" />
@@ -455,7 +438,7 @@
     <file path="/AllErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376993279963" ignored="false" />
     <file path="/CtrlCommonErrors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1376993463562" ignored="false" />
     <file path="$PROJECT_DIR$/../kp/site/tpl/counters.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377002276576" ignored="false" />
-    <file path="$PROJECT_DIR$/../run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379683043878" ignored="false" />
+    <file path="$PROJECT_DIR$/../run/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379696528796" ignored="false" />
     <file path="/DbModelManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1378542195927" ignored="false" />
     <file path="/addLongJob.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377164082693" ignored="false" />
     <file path="/DdXlsLongJobCycle.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1377160479433" ignored="false" />
@@ -728,12 +711,12 @@
     <file path="$PROJECT_DIR$/../ao/m/css/styles.css" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379495477802" ignored="false" />
     <file path="$PROJECT_DIR$/../../other/giport/myadmin/config.inc.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379495874381" ignored="false" />
     <file path="$PROJECT_DIR$/../../other/giport/myadmin/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379496067384" ignored="false" />
-    <file path="/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379496065706" ignored="false" />
+    <file path="/index.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379696576710" ignored="false" />
     <file path="/CtrlKpApi.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379505673086" ignored="false" />
     <file path="$PROJECT_DIR$/../../other/giport/inc/modules/poll/export.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379514084308" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/ci/lib/Ci.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379582556007" ignored="false" />
     <file path="/Ci.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379582330771" ignored="false" />
-    <file path="$PROJECT_DIR$/../ngn-env/ci/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379689130489" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/ci/run.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379689561134" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379590785003" ignored="false" />
     <file path="/PmManager.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379590658378" ignored="false" />
     <file path="$PROJECT_DIR$/../ngn-env/pm/lib/PmHelpOpt.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379590409644" ignored="false" />
@@ -768,6 +751,7 @@
     <file path="/TestListener.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379679588632" ignored="false" />
     <file path="/CliColors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379679246729" ignored="false" />
     <file path="/TestResult.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379680025233" ignored="false" />
+    <file path="$PROJECT_DIR$/../ngn-env/lib/Errors.class.php" changelist="166062ad-f8b3-4616-b268-5e72cda7cabf" time="1379694148225" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -787,10 +771,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TestRunner.class.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TestRunner.class.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/more/test/TestRunner.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="23" selection-start="1821" selection-end="1821" vertical-scroll-proportion="0.21150278">
+            <state line="68" column="23" selection-start="1821" selection-end="1821" vertical-scroll-proportion="-4.3846154">
               <folding />
             </state>
           </provider>
@@ -814,10 +798,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SflmBase.class.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SflmBase.class.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="169" column="7" selection-start="5310" selection-end="5310" vertical-scroll-proportion="-3.1538463">
+            <state line="194" column="29" selection-start="6084" selection-end="6084" vertical-scroll-proportion="0.9406308">
               <folding />
             </state>
           </provider>
@@ -917,82 +901,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="more" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="more" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="more" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="sflm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ngn" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1294,7 +1202,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32994923" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24924242" sideWeight="0.70219964" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22272727" sideWeight="0.50423014" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22272727" sideWeight="0.50423014" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="1046" y="73" width="257" height="186" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1445,23 +1353,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/test/TestRunner.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="23" selection-start="1821" selection-end="1821" vertical-scroll-proportion="-4.3846154">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/more/sflm/Sflm.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="54" column="6" selection-start="1128" selection-end="1128" vertical-scroll-proportion="-3.7307692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="7" selection-start="5310" selection-end="5310" vertical-scroll-proportion="-3.1538463">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="347" selection-end="347" vertical-scroll-proportion="-5.1923075">
           <folding />
         </state>
       </provider>
@@ -1473,9 +1374,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/more/test/TestRunner.class.php">
+    <entry file="file://$PROJECT_DIR$/lib/more/sflm/TestSflmJs.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="23" selection-start="1821" selection-end="1821" vertical-scroll-proportion="0.21150278">
+        <state line="11" column="0" selection-start="347" selection-end="347" vertical-scroll-proportion="-5.1923075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/more/sflm/SflmBase.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="194" column="29" selection-start="6084" selection-end="6084" vertical-scroll-proportion="0.9406308">
           <folding />
         </state>
       </provider>
