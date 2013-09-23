@@ -17,8 +17,8 @@ class TestRunner {
   }
 
   function addTestSuite($class) {
-    $path = Lib::getPath($class);
-    if (file_exists(dirname($path).'/init.php')) require_once dirname($path).'/init.php';
+    //$path = Lib::getPath($class);
+    //if (file_exists(dirname($path).'/init.php')) require_once dirname($path).'/init.php';
     $rc = new ReflectionClass($class);
     if ($rc->isAbstract()) return;
     $this->suite->addTestSuite($rc);
@@ -29,32 +29,29 @@ class TestRunner {
     else $this->_test($name);
   }
 
-  /**
-   * Определяет является ли тест тестом проекта или тестом ядра (core, more, site, sb, etc.)
-   *
-   * @param $test
-   */
-  protected function isCoreTest($class) {
-    prr(Lib::getClassPath($class));
-  }
-
   protected function getClasses() {
     return array_map(function ($v) {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
   }
 
-  function _all() {
+  function _global(array $names = null) {
     foreach ($this->getClasses() as $class) $this->addTestSuite($class);
     $this->run();
   }
 
-  function _test($names) {
-    foreach (explode(',', $names) as $name) $this->addTestSuite('Test'.ucfirst($name));
+  function _local($lib) {
+    //foreach (explode(',', $names) as $name) $this->addTestSuite('Test'.ucfirst($name));
     $this->run();
   }
 
-  function _lst($name) {
+  protected function _run(array $classes) {
+    foreach ($classes as $class) $this->addTestSuite($class);
+    $this->run();
+  }
+
+  /*
+  function _list($name) {
     $names = include dirname(__DIR__)."/list/$name.php";
     foreach ($names as $name) {
       $this->addTestSuite('Test'.ucfirst($name));
@@ -70,15 +67,10 @@ class TestRunner {
       'stopOnError'      => true
     ]);
   }
+  */
 
   protected function run() {
-    $result = PHPUnit_TextUI_TestRunner::run($this->suite);
-    if ($result->failureCount()) {
-      foreach ($result->failures() as $failure) {
-        /* @var $failure PHPUnit_Framework_TestFailure */
-        $failure->getExceptionAsString();
-      }
-    }
+    PHPUnit_TextUI_TestRunner::run($this->suite);
   }
 
   static $folder;
