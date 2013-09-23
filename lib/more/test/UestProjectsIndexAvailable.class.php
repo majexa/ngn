@@ -1,6 +1,6 @@
 <?php
 
-class UestProjectsIndexAvailable extends NgnTestCase {
+class TestProjectsIndexAvailable extends NgnTestCase {
 
   function test() {
     $projects = require NGN_ENV_PATH.'/config/projects.php';

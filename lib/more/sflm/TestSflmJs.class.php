@@ -1,6 +1,6 @@
 <?php
 
-class TestSflmJs extends NgnTestCase {
+class TestSflmJs extends ProjectTestCase {
 
   function test() {
     Sflm::$frontend = 'default';

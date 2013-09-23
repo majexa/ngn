@@ -1,6 +1,6 @@
 <?php
 
-class TestDdImage extends NgnTestCase {
+class TestDdImage extends ProjectTestCase {
 
   function test() {
     copy(TestRunner::$folder.'/fixture/image.jpg', TEMP_PATH.'/image.jpg');

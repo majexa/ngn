@@ -1,6 +1,6 @@
 <?php
 
-class UestFilterStr extends NgnTestCase {
+class TestFilterStr extends ProjectTestCase {
 
   function test() {
     $sm = new DdStructuresManager();
