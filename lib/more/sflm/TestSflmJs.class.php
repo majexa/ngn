@@ -1,6 +1,6 @@
 <?php
 
-class TestSflmJs extends ProjectTestCase {//!
+class TestSflmJs extends ProjectTestCase {
 
   function test() {
     Sflm::$frontend = 'default';
@@ -9,10 +9,6 @@ class TestSflmJs extends ProjectTestCase {//!
     (new FieldEWisiwigSimple2(['name' => 'dummy']))->js();
     Sflm::flm('js')->getDeltaUrl();
     $this->assertFalse((bool)Sflm::reset('js')->newPaths, 'New paths must be empty after reset');
-
-
-    $this->assertFalse(true, '123');
-
     Sflm::flm('js')->store();
     Sflm::flm('js')->addLib('Ngn.Form.El.Phone');
     Sflm::clearCache();
