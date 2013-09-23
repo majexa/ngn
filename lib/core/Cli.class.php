@@ -24,7 +24,12 @@ class Cli {
   static function formatRunCmd($code, $includes, $runBasePath = null) {
     $code = str_replace("'", '"', $code);
     $code = str_replace('"', '\\"', $code);
-    return '\'php '.($runBasePath ? $runBasePath : '~').'/run/run.php "'.$code.'" '.$includes.'\'';
+    return '\'php '.($runBasePath ? $runBasePath : '~').'/ngn-env/run/run.php "'.$code.'" '.$includes.'\'';
+  }
+
+  static function rpc($server, $code) {
+    $cmd = "ssh $server sudo -u user TERM=dumb 'php /home/user/ngn-env/run/run.php rpc \"$code\"'";
+    return json_decode(`$cmd`, true);
   }
 
 }

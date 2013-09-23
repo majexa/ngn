@@ -105,7 +105,7 @@ class Err {
   }
 
   static function _log($text, array $trace) {
-    LogWriter::v('errors', $text, $trace);
+    LogWriter::html('errors', $text, $trace);
   }
 
   static function errorHandler($errno, $errstr, $errfile, $errline) {
