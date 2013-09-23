@@ -1,6 +1,6 @@
 <?php
 
-class ProjectTestRunner extends TestRunner {
+class ProjectTestRunner extends TestRunner {//
 
   protected $project;
 
