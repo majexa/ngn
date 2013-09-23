@@ -1,6 +1,6 @@
 <?php
 
-class TestSflmJs extends ProjectTestCase {
+class TestSflmJs extends ProjectTestCase {//!
 
   function test() {
     Sflm::$frontend = 'default';
