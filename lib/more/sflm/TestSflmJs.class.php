@@ -10,6 +10,9 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::flm('js')->getDeltaUrl();
     $this->assertFalse((bool)Sflm::reset('js')->newPaths, 'New paths must be empty after reset');
 
+
+    $this->assertFalse(true, '123');
+
     Sflm::flm('js')->store();
     Sflm::flm('js')->addLib('Ngn.Form.El.Phone');
     Sflm::clearCache();
