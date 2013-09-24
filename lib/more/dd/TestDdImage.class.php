@@ -3,7 +3,7 @@
 class TestDdImage extends ProjectTestCase {
 
   function test() {
-    copy(TestRunner::$folder.'/fixture/image.jpg', TEMP_PATH.'/image.jpg');
+    copy(TestRunnerAbstract::$folder.'/fixture/image.jpg', TEMP_PATH.'/image.jpg');
     $_FILES = [
       'image' => [
         'tmp_name'  => TEMP_PATH.'/image.jpg'
@@ -29,7 +29,7 @@ class TestDdImage extends ProjectTestCase {
     $filesize = filesize(UPLOAD_PATH."/dd/a/$id/image.jpg");
     $smFilesize = filesize(UPLOAD_PATH."/dd/a/$id/sm_image.jpg");
 
-    copy(TestRunner::$folder.'/fixture/image2.jpg', TEMP_PATH.'/image.jpg');
+    copy(TestRunnerAbstract::$folder.'/fixture/image2.jpg', TEMP_PATH.'/image.jpg');
     $_FILES = [
       'image' => [
         'tmp_name'  => TEMP_PATH.'/image.jpg'
@@ -40,7 +40,7 @@ class TestDdImage extends ProjectTestCase {
     $this->assertTrue(filesize(UPLOAD_PATH."/dd/a/$id/sm_image.jpg") != $smFilesize);
 
     unlink(UPLOAD_PATH."/dd/a/$id/image.jpg");
-    copy(TestRunner::$folder.'/fixture/image2.jpg', TEMP_PATH.'/image.jpg');
+    copy(TestRunnerAbstract::$folder.'/fixture/image2.jpg', TEMP_PATH.'/image.jpg');
     $_FILES = [
       'image' => [
         'tmp_name'  => TEMP_PATH.'/image.jpg'
