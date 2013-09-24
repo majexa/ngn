@@ -50,25 +50,6 @@ class TestRunner {
     $this->run();
   }
 
-  /*
-  function _list($name) {
-    $names = include dirname(__DIR__)."/list/$name.php";
-    foreach ($names as $name) {
-      $this->addTestSuite('Test'.ucfirst($name));
-    }
-    $this->run();
-  }
-
-  function _folder($name) {
-    $files = Dir::getOrderedFiles(__DIR__."/$name", 'Test*');
-    foreach ($files as $file) $this->addTestSuite(basename($file, '.class.php'));
-    PHPUnit_TextUI_TestRunner::run($this->suite, [
-      'stopOnIncomplete' => true,
-      'stopOnError'      => true
-    ]);
-  }
-  */
-
   protected function run() {
     PHPUnit_TextUI_TestRunner::run($this->suite);
   }
