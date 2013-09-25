@@ -116,7 +116,7 @@ class DdItems extends Items {
   function getItemF_cache($id) {
     if (!($item = NgnCache::c()->load('ddItem'.$this->strName.$id))) {
       $item = $this->getItemF($id);
-      $cache->save($item, 'ddItem'.$this->strName.$id);
+      NgnCache::c()->save($item, 'ddItem'.$this->strName.$id);
     }
     return $item;
   }
@@ -165,10 +165,10 @@ class DdItems extends Items {
 
   function copy($id, $newData = null) {
     $newId = parent::copy($id, $newData);
-    if (($tagItems = db()->select("SELECT * FROM tags_items WHERE strName=? AND itemId=?d", $this->strName, $id))) {
+    if (($tagItems = db()->select("SELECT * FROM tagItems WHERE strName=? AND itemId=?d", $this->strName, $id))) {
       foreach ($tagItems as $v) {
         $v['itemId'] = $newId;
-        db()->insert('tags_items', $v);
+        db()->insert('tagItems', $v);
       }
     }
     return $newId;
@@ -185,19 +185,19 @@ class DdItems extends Items {
     if (!($fields = $this->fields()->getTagFields())) return;
     foreach (db()->query("
     SELECT
-      tags_items.itemId,
-      tags_items.groupName,
-      tags_items.collection,
+      tagItems.itemId,
+      tagItems.groupName,
+      tagItems.collection,
       tags.id,
       tags.title,
       tags.name,
       tags.cnt
-    FROM tags_items
-    LEFT JOIN tags ON tags_items.tagId=tags.id 
+    FROM tagItems
+    LEFT JOIN tags ON tagItems.tagId=tags.id
     WHERE
-      tags_items.strName=? AND
-      tags_items.groupName IN (?a) AND
-      tags_items.itemId IN (?a)", $this->strName, array_keys($fields), $itemIds) as $v) {
+      tagItems.strName=? AND
+      tagItems.groupName IN (?a) AND
+      tagItems.itemId IN (?a)", $this->strName, array_keys($fields), $itemIds) as $v) {
       $tags[$v['itemId']][$v['groupName']][] = $v;
     }
     foreach ($fields as $fieldName => $field) {
@@ -315,12 +315,12 @@ class DdItems extends Items {
       }
       elseif (FieldCore::hasAncestor($fieldType, 'ddTags')) {
         $tags = db()->selectCol('
-          SELECT tags.title FROM tags_items, tags
+          SELECT tags.title FROM tagItems, tags
           WHERE
-            tags_items.groupName=? AND
-            tags_items.strName=? AND
-            tags_items.itemId=?d AND
-            tags_items.tagId=tags.id
+            tagItems.groupName=? AND
+            tagItems.strName=? AND
+            tagItems.itemId=?d AND
+            tagItems.tagId=tags.id
           ', $fieldName, $this->strName, $item['id']);
         $item[$fieldName] = implode(', ', $tags);
       }

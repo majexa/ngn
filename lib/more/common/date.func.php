@@ -37,14 +37,12 @@ function _date_reformat($date, $outFormat, $inFormat) {
   if ($outFormat == 'timestamp') {
     return mktime(0, 0, 0, $m[$ord['m']], $m[$ord['d']], $m[$ord['y']]);
   }
-
   $outFormat = str_replace('Y', $m[$ord['y']], $outFormat);
   $outFormat = str_replace('m', $m[$ord['m']], $outFormat);
   $outFormat = str_replace('d', $m[$ord['d']], $outFormat);
   if (isset($ord['h'])) $outFormat = str_replace('H', $m[$ord['h']], $outFormat);
   if (isset($ord['i'])) $outFormat = str_replace('i', $m[$ord['i']], $outFormat);
   if (isset($ord['s'])) $outFormat = str_replace('s', $m[$ord['s']], $outFormat);
-
   return $outFormat;
 }
 

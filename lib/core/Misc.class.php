@@ -592,7 +592,14 @@ class Misc {
   }
 
   static function removePrefix($prefix, $str) {
+    $prefix = str_replace('\\', '\\\\', $prefix);
     $prefix = str_replace('/', '\\/', $prefix);
+    $prefix = str_replace('.', '\\.', $prefix);
+    try {
+      preg_replace("/^$prefix(.*)/", '$1', $str);
+    } catch (Exception $e) {
+      throw new Exception("/^$prefix(.*)/");
+    }
     return preg_replace("/^$prefix(.*)/", '$1', $str);
   }
 
@@ -602,7 +609,9 @@ class Misc {
   }
 
   static function hasPrefix($prefix, $str) {
+    $prefix = str_replace('\\', '\\\\', $prefix);
     $prefix = str_replace('/', '\\/', $prefix);
+    $prefix = str_replace('.', '\\.', $prefix);
     return preg_match("/^$prefix.*/", $str);
   }
 
@@ -711,6 +720,11 @@ class Misc {
 
   static function formatPrice($v) {
     return number_format($v, 0, '.', ' ');
+  }
+
+  static function firstIsUpper($str) {
+    $chr = mb_substr($str, 0, 1, CHARSET);
+    return mb_strtoupper($chr, CHARSET) == $chr;
   }
 
 }

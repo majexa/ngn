@@ -16,7 +16,7 @@ class CtrlCommonUserReg extends CtrlCammon {
     $this->d['tpl'] = 'users/reg';
     $this->conf = Config::getVar('userReg');
     Misc::checkEmpty($this->conf['enable'], 'Registration not enabled');
-    $this->subscribes = db()->query('SELECT id, title FROM subs_list WHERE active=1 AND useUsers=1');
+    $this->subscribes = db()->query('SELECT id, title FROM subsList WHERE active=1 AND useUsers=1');
   }
 
   function action_rules() {

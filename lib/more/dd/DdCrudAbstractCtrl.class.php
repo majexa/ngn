@@ -2,6 +2,7 @@
 
 /**
  * @method void processItems(DdItems $items)
+ * @method void processForm(DdForm $form)
  * @method void processDdo(Ddo $ddo)
  */
 trait DdCrudAbstractCtrl {
@@ -48,11 +49,13 @@ use ObjectProcessorCtrl;
 
   protected function getIm() {
     if (isset($this->im)) return $this->im;
-    return $this->im = $this->_getIm();
+    $this->im = $this->_getIm();
+    ;
+    return $this->im;
   }
 
   protected function _getIm() {
-    return new DdItemsManager($this->items(), new DdForm(new DdFields($this->getStrName()), $this->getStrName()));
+    return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName()), $this->getStrName()), 'form'));
   }
 
   function action_json_new() {
@@ -95,6 +98,19 @@ use ObjectProcessorCtrl;
 
   function action_ajax_reorder() {
     $this->getItems()->reorderItems($this->req->rq('ids'));
+  }
+
+  function action_ajax_deleteFile() {
+    $this->deleteFile();
+  }
+
+  function action_deleteFile() {
+    $this->deleteFile();
+    redirect('/');
+  }
+
+  function deleteFile() {
+    $this->getIm()->deleteFile($this->req['id'], $this->req->rq('fieldName'));
   }
 
 }

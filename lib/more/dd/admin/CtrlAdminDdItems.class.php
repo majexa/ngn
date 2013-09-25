@@ -52,4 +52,8 @@ class CtrlAdminDdItems extends CtrlAdmin {
     return $this->jsonFormActionUpdate(new AdminDdItemsSettingsForm($this->structure['id']));
   }
 
+  function processForm(DdForm $form) {
+    $form->options['deleteFileUrl'] = $this->tt->getPath(2).'/'.$this->req->param(2).'/deleteFile?id='.$this->req['id'];
+  }
+
 }

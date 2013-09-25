@@ -56,11 +56,31 @@ class Queue {
     print "\nStarting worker...";
     $o = $this;
     $this->getQueue()->consume(function(AMQPEnvelope $envelope) use ($o) {
-      $o->processData(json_decode($envelope->getBody(), true));
+      $o->processData($envelope->getBody());
     }, AMQP_AUTOACK);
   }
 
-  protected function _processData($data) {
+  function cron() {
+    set_time_limit(0);
+    $d = opendir(DATA_PATH.'/queue') or die($php_errormsg);
+    while (false !== ($f = readdir($d))) {
+      $f = DATA_PATH.'/queue/'.$f;
+      if(is_file($f)) {
+        $body = file_get_contents($f);
+        $data = json_decode($body, true);
+        $class = ucfirst($data['class']);
+        (new $class)->{$data['method']}($data['data']);
+        unlink($f);
+      }
+    }
+    closedir($d);
+  }
+
+  protected function _processData($body) {
+    Dir::make(DATA_PATH.'/queue');
+    $id = time().'-'.rand(100, 10000);
+    file_put_contents(DATA_PATH.'/queue/'.$id, $body);
+    $data = json_decode($body, true);
     if ($data['class'] == 'object') {
       $o = unserialize($data['object']);
       if (isset($data['jobId'])) {
@@ -77,12 +97,13 @@ class Queue {
         $r = (new $class)->{$data['method']}($data['data']);
       }
     }
+    unlink(DATA_PATH.'/queue/'.$id);
     return $r;
   }
 
-  function processData($data) {
+  function processData($body) {
     db()->disconnect();
-    $r = $this->_processData($data);
+    $r = $this->_processData($body);
     db()->disconnect();
     return $r;
   }

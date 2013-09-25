@@ -61,7 +61,7 @@ function getPr($v, $html = true) {
 }
 
 function output($str, $output = false) {
-  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".$str.">").(R::get('plainText') ? "\n" : "</p>");
+  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'green').">").(R::get('plainText') ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 
@@ -128,12 +128,12 @@ function getMicrotime() {
   return ((float)$usec + (float)$sec);
 }
 
-function setProcessTimeStart() {
-  R::set('processTimeStart', getMicrotime());
+function setProcessTimeStart($k = '') {
+  R::set('processTimeStart'.$k, getMicrotime());
 }
 
-function getProcessTime() {
-  return getMicrotime() - R::get('processTimeStart');
+function getProcessTime($k = '') {
+  return getMicrotime() - R::get('processTimeStart'.$k);
 }
 
 /**

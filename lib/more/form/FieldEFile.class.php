@@ -17,8 +17,8 @@ class FieldEFile extends FieldEFileBase {
       $uploadedFileValue = null;
       if (!empty($files)) {
         $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
+        empty($this->options['multiple']) ? $this->processSingle($uploadedFileValue) : $this->processMultiple($uploadedFileValue);
       }
-      empty($this->options['multiple']) ? $this->processSingle($uploadedFileValue) : $this->processMultiple($uploadedFileValue);
     }
     else {
       $uploadedFileValue = !empty($this->options['value']) ? $this->options['value'] : null;
@@ -29,14 +29,15 @@ class FieldEFile extends FieldEFileBase {
   }
 
   protected function processSingle(&$uploadedFileValue) {
-    if (!empty($uploadedFileValue['error'])) $uploadedFileValue = null;
-    if ($uploadedFileValue !== null) {
-      if (empty($uploadedFileValue['tmp_name'])) {
-        throw new EmptyException("{$this->options['name']}: uploadedFileValue['tmp_name']");
-      }
-      if (!file_exists($uploadedFileValue['tmp_name'])) {
-        throw new NoFileException($uploadedFileValue['tmp_name']);
-      }
+    if (!empty($uploadedFileValue['error'])) {
+      $uploadedFileValue = null;
+      return;
+    }
+    if (empty($uploadedFileValue['tmp_name'])) {
+      throw new EmptyException("{$this->options['name']}: uploadedFileValue['tmp_name']");
+    }
+    if (!file_exists($uploadedFileValue['tmp_name'])) {
+      throw new NoFileException($uploadedFileValue['tmp_name']);
     }
   }
 
@@ -48,7 +49,7 @@ class FieldEFile extends FieldEFileBase {
     return $mime;
   }
 
-  protected function process2Single($uploadedFileValue) {
+  protected function process2Single(array $uploadedFileValue) {
     $mime = $this->check($uploadedFileValue);
     if (!empty($this->allowedMimes) and !in_array($mime, $this->allowedMimes)) {
       // Если для этого поля определены MIME и MIME загруженного 
@@ -68,7 +69,7 @@ class FieldEFile extends FieldEFileBase {
     foreach ($uploadedFileValue as &$v) $this->processSingle($v);
   }
 
-  protected function process2Multiple(&$uploadedFileValue) {
+  protected function process2Multiple(array &$uploadedFileValue) {
     foreach ($uploadedFileValue as $k => $v) {
       $mime = $this->check($v);
       if (!empty($this->allowedMimes) and !in_array($mime, $this->allowedMimes)) {
@@ -88,11 +89,15 @@ class FieldEFile extends FieldEFileBase {
   }
 
   protected function getCurrentValue() {
-    return '/'.UPLOAD_DIR.'/'.$this->options['value'];
+    if (empty($this->options['value'])) return false;
+    $file = UPLOAD_PATH.'/'.$this->options['value'];
+    if (!file_exists($file)) return false;
+    return '/'.UPLOAD_DIR.'/'.$this->options['value'].'?'.filemtime(UPLOAD_PATH.'/'.$this->options['value']);
   }
 
   protected function htmlNav() {
-    return (empty($this->options['value']) ? '' : '<div class="iconsSet fileNav">'.'<a href="'.$this->getCurrentValue().'" class="'.$this->options['currentFileClass'].'" target="_blank"><i></i> '.$this->options['currentFileTitle'].'</a>'.((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ? '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="delete confirm" title="Удалить"><i></i></a>' : '').'</div>');
+    if (!($v = $this->getCurrentValue())) return '';
+    return '<div class="iconsSet fileNav">'.'<a href="'.$v.'" class="'.$this->options['currentFileClass'].'" target="_blank"><i></i> '.$this->options['currentFileTitle'].'</a>'.((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ? '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="delete confirm" title="Удалить"><i></i></a>' : '').'</div>';
   }
 
   function _html() {

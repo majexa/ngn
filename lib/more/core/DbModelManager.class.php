@@ -17,7 +17,7 @@ class DbModelManager extends DataManagerAbstract {
     DbModelCore::update($this->modelName, $this->id, $this->data);
   }
   
-  protected function getItem($id) {
+  public function getItem($id) {
     return DbModelCore::get($this->modelName, $id)->r; 
   }
   
@@ -25,7 +25,7 @@ class DbModelManager extends DataManagerAbstract {
     DbModelCore::delete($this->modelName, $this->id);
   }
   
-  function updateField($id, $fieldName, $value) {
+  function _updateField($id, $fieldName, $value) {
     DbModelCore::update($this->modelName, $id, [$fieldName => $value]);
   }
   

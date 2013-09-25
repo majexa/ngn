@@ -36,7 +36,7 @@ class DmfaFile extends Dmfa {
     Dir::make($attachPath);
     $filename = $this->getAttacheFilenameByEl($el).'.'.$this->getExt($el);
     rename($el['postValue']['tmp_name'], $attachPath.'/'.$filename);
-    $this->dm->items->updateField($this->dm->id, $el['name'], $attachFolder.'/'.$filename);
+    $this->dm->_updateField($this->dm->id, $el['name'], $attachFolder.'/'.$filename);
     return $attachPath.'/'.$filename;
   }
 

@@ -25,7 +25,7 @@ abstract class CtrlCommonTinyUploader extends CtrlCommonTinyDialog {
       return;
     }
     $this->json['title'] = $this->title;
-    if ($oF->isSubmitted()) die2($oF->getLastError());
+    if ($oF->isSubmitted()) die2($oF->lastError));
     return $oF;
   }
 

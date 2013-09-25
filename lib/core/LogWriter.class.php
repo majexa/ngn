@@ -27,7 +27,7 @@ class LogWriter {
   static function html($name, $html, array $trace = [], array $params = []) {
     $s = '('.__FILE__.':'.__LINE__.")\n";
     if (isset($_SERVER['REQUEST_URI'])) {
-      $s .= 'url: '.$_SERVER['REQUEST_URI'].', referer: '.(!empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
+      $s .= 'url: '.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$_SERVER['REQUEST_URI'].', referer: '.(!empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
       if ($params) $s .= ', ';
     }
     if ($params) $s .= Tt()->enum($params, ', ', '$k.`: `.$v');

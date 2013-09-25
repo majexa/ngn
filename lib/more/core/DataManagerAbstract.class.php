@@ -6,7 +6,7 @@
  */
 abstract class DataManagerAbstract extends Options2 {
 
-  abstract protected function getItem($id);
+  abstract public function getItem($id);
 
   abstract protected function _create();
 
@@ -101,6 +101,7 @@ abstract class DataManagerAbstract extends Options2 {
    * Обрабатывает пользовательские данные, преобразовывая их с помощью класса формы
    *
    * @param  array  Данные по умолчанию
+   * @return bool|integer
    */
   function requestCreate(array $default = []) {
     $this->form->create = true;
@@ -192,6 +193,7 @@ abstract class DataManagerAbstract extends Options2 {
 
   protected function setFormElementsData(array $data) {
     $this->beforeFormElementsInit();
+    //$this->form->defaultData = $data;
     $this->form->setElementsData($data);
   }
 
@@ -300,7 +302,7 @@ abstract class DataManagerAbstract extends Options2 {
     return true;
   }
 
-  abstract protected function _updateField($id, $fieldName, $value);
+  abstract function _updateField($id, $fieldName, $value);
 
   function updateField($id, $fieldName, $value) {
     $this->form->fields->fields = Arr::filterByKeys($this->form->fields->fields, $fieldName);

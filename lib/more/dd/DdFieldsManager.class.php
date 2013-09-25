@@ -19,6 +19,10 @@ class DdFieldsManager extends DbItemsManager {
    */
   protected $filterFm;
 
+  /**
+   * @param string $strName
+   * @param array $options
+   */
   function __construct($strName, array $options = []) {
     Misc::checkEmpty($strName);
     $this->str = DbModelCore::get('dd_structures', $strName, 'name');

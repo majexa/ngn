@@ -639,15 +639,20 @@ margin: 5px 5px 0px 0px;
 /*width: 40px;*/
 padding: 3px 0px 3px 3px;
 background: #F2F2F2;
-border: 1px solid #CECECE;
 border-radius: 5px;
 position: absolute;
 /*visibility: hidden;*/
 z-index: 1;
+border: 1px solid #E3E2D3;
+background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
 }
 .col.allowBlocks .editBlock a {
+border-color: #EDECE1;
 border-radius: 3px;
 background: #FFF;
+}
+.col.allowBlocks .editBlock a:hover {
+border-color: #E3E2D3;
 }
 .col {
 position: relative;
@@ -776,4 +781,7 @@ width: 100%;
 }
 .loginForm .textFields td:first-child {
 padding-right: 10px;
+}
+.apeform .element {
+border-bottom: 1px solid #EDEBD8;
 }

@@ -135,6 +135,8 @@ class Form {
 
   function isSubmitted() {
     if (!$this->fromRequest) return true;
+
+    //pr($this->id());
     return ($this->req['formId'] and $this->req['formId'] == $this->id());
   }
 
@@ -395,7 +397,8 @@ class Form {
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
       file_put_contents($file, "Ngn.frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
     }
-    return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : BUILD);
+    //return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : BUILD);
+    return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : 0);
   }
 
   function display() {
@@ -443,10 +446,6 @@ class Form {
   }
 
   public $lastError;
-
-  function getLastError() {
-    return $this->lastError;
-  }
 
   public $tplRequired = '&nbsp;<b style="color: #FF0000;">*</b>';
 

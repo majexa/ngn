@@ -5,8 +5,6 @@ set_time_limit(70);
 
 class AdminRouter extends Router {
 
-  public $frontend = 'admin';
-
   /**
    * Текущий модуль администрирования
    *
@@ -22,6 +20,10 @@ class AdminRouter extends Router {
   protected $moduleSubfolder;
 
   protected $allowedAdminModules;
+
+  function getFrontend() {
+    return 'admin';
+  }
 
   function getController() {
     if (empty($this->req->params[0])) {

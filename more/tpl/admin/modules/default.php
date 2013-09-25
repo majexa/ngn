@@ -18,8 +18,8 @@ Ngn.localStorage.clean();
   <h2>Техническая информация</h2>
   <h3>Сборка</h3>
   <ul>
-    <li><b>Версия JS:</b><br /><?= Sflm::get('js')->version() ?></li>
-    <li><b>Версия CSS:</b><br /><?= Sflm::get('css')->version() ?></li>
+    <li><b>Версия JS:</b><br /><?= Sflm::flm('js')->version() ?></li>
+    <li><b>Версия CSS:</b><br /><?= Sflm::flm('css')->version() ?></li>
   </ul>
   <h3>Размер</h3>
   <?

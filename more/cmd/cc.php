@@ -11,4 +11,4 @@ NgnCache::clean();
 Mem::clean();
 UrlCache::clearCache();
 Sflm::clearCache();
-die("cleared. dying...");
+output("cleared");

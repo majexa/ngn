@@ -1,6 +1,6 @@
 Ngn.Request = new Class({
   Extends: Request,
-  
+
   success: function(text, xml) {
     if (text.contains('Error: ')) {
       return;
@@ -54,10 +54,19 @@ Ngn.Request.JSON = new Class({
   
   success: function(text){
     this.response.json = Ngn.JSON.decode(text, this.options.secure);
-
     if (this.response.json === null) {
       this.onSuccess({});
       return;
+    }
+    if (this.response.json.sflJsDeltaUrl) {
+      Asset.javascript(this.response.json.sflJsDeltaUrl, {
+        onLoad: function(){
+          if (Ngn.Request.sflJsDeltaUrlOnLoad) {
+            Ngn.Request.sflJsDeltaUrlOnLoad();
+            Ngn.Request.sflJsDeltaUrlOnLoad = false;
+          }
+        }
+      });
     }
     if (this.response.json.actionDisabled) {
       window.location.reload(true);
@@ -76,3 +85,6 @@ Ngn.Request.JSON = new Class({
   }
   
 });
+
+
+Ngn.Request.sflJsDeltaUrlOnLoad = false;

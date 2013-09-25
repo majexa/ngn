@@ -9,6 +9,10 @@ class RouterScripts extends RouterCommon {
    */
   private $controllerType;
 
+  function getFrontend() {
+    return $this->req->params[0] == 'default' ? 'default' : false;
+  }
+
   protected function init() {
     $this->controllerType = $this->req->params[0][0] == 's' ? 'scripts' : 'controllers';
     if ($this->req->params[0] == 's2' or $this->req->params[0] == 'c2') {

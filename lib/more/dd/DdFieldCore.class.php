@@ -79,7 +79,7 @@ class DdFieldCore {
    */
   static function getTypes() {
     foreach (ClassCore::getClassesByPrefix('FieldE') as $class) // Регистрация типа dd-поля происходит в классе элмента
-      Lib::required($class);
+    Lib::required($class);
     return Arr::sortByOrderKey(self::$types, 'order');
   }
 
@@ -134,10 +134,10 @@ $r = [
     'title'    => 'E-mail',
     'order'    => 60
   ],
-  'emails'         => [
-    'dbType'   => 'TEXT',
-    'title'    => 'E-mail`ы',
-    'order'    => 60
+  'emails'        => [
+    'dbType' => 'TEXT',
+    'title'  => 'E-mail`ы',
+    'order'  => 60
   ],
   'date'          => [
     'dbType' => 'DATE',
@@ -175,13 +175,13 @@ $r = [
     'title'    => 'Целое число',
     'order'    => 120
   ],
-  'name'           => [
+  'name'          => [
     'dbType'   => 'VARCHAR',
     'dbLength' => 255,
     'title'    => 'Имя',
     'order'    => 120
   ],
-  'domain'           => [
+  'domain'        => [
     'dbType'   => 'VARCHAR',
     'dbLength' => 255,
     'title'    => 'Домен',
@@ -232,7 +232,7 @@ $r = [
     'virtual' => true,
     //'system' => true,
   ],
-  'headerClose'        => [
+  'headerClose'   => [
     'title'   => 'Заголовок конец',
     'order'   => 160,
     'virtual' => true,

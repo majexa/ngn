@@ -30,11 +30,13 @@ use Options;
     $this->init();
   }
 
-  public $frontend;
+  function getFrontend() {
+    return false;
+  }
 
   protected function init() {
     $this->headers();
-    if (isset($this->frontend)) Sflm::setFrontend($this->frontend);
+    if (($frontend = $this->getFrontend())) Sflm::setFrontend($frontend);
     if ($this->isDb) {
       $this->session();
       $this->auth();

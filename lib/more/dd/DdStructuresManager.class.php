@@ -141,8 +141,8 @@ class DdStructuresManager extends DbItemsManager {
       //DbModelPages::updateStrName($old, $new);
       // Структуры в тэгах
       db()->query('UPDATE tags SET strName=? WHERE strName=?', $new, $old);
-      db()->query('UPDATE tags_groups SET strName=? WHERE strName=?', $new, $old);
-      db()->query('UPDATE tags_items SET strName=? WHERE strName=?', $new, $old);
+      db()->query('UPDATE tagGroups SET strName=? WHERE strName=?', $new, $old);
+      db()->query('UPDATE tagItems SET strName=? WHERE strName=?', $new, $old);
       db()->query("UPDATE dd_structures SET name=?, title=?, descr=?, type=? WHERE name=?", $new, $this->data['title'], $this->data['descr'], $this->data['type'], $old);
     }
     $this->tableComment($new, $this->data['title']);

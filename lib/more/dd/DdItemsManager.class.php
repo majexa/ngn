@@ -70,7 +70,7 @@ class DdItemsManager extends DbItemsManager {
     foreach ($this->allIds() as $id) $this->delete($id);
   }
 
-  protected function getItem($id) {
+  public function getItem($id) {
     return $this->items->getItemNonFormat($id);
   }
 

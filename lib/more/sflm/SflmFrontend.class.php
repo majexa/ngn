@@ -5,9 +5,10 @@
  */
 class SflmFrontend {
 
-  public $frontend, $sflm, $paths;
+  public $frontend, $sflm, $paths, $newPaths = [], $id, $debug = false;
 
   function __construct(SflmBase $sflm, $frontend = null) {
+    $this->id = Misc::randString(5);
     $this->sflm = $sflm;
     $this->frontend = $frontend ? : Sflm::$frontend;
     Misc::checkEmpty($this->frontend, '$this->frontend');
@@ -18,6 +19,10 @@ class SflmFrontend {
       $this->storeLastPaths();
     }
     $this->init();
+  }
+
+  function reload() {
+
   }
 
   protected function getLastPaths() {
@@ -42,7 +47,9 @@ class SflmFrontend {
   protected function init() {
   }
 
-  protected function code() {
+  public $extraCode = "\n//***";
+
+  function code() {
     return $this->sflm->extractCode($this->getPaths());
   }
 
@@ -58,15 +65,8 @@ class SflmFrontend {
    * Сохраняет в конечный файл статические и динамические пути
    */
   function store() {
-    $this->sflm->storeLib($this->frontend, $this->code());
+    if ($this->sflm->storeLib($this->frontend, $this->code())) $this->incrementVersion();
   }
-
-  /*
-  protected function storePaths(array $paths) {
-    $this->sflm->storeLib($this->frontend, $this->sflm->extractCode($paths));
-    return $this;
-  }
-  */
 
   function filePath() {
     return $this->sflm->filePath($this->frontend);
@@ -81,26 +81,62 @@ class SflmFrontend {
   }
 
   /**
+   * Добавляет путь, если библиотека существует в одном из зарегистрированных статических каталогов
+   *
+   * @param string Относительный путь к библиотеке
+   * @param bool Вызывать ли ошибку, если библиотека не найдена
+   * @throws Exception
+   */
+  function addStaticLib($lib, $strict = false) {
+    foreach (Sflm::$absBasePaths as $k => $path) {
+      if (file_exists("$path/{$this->sflm->type}/$lib")) {
+        Sflm::output("add global lib $path/{$this->sflm->type}/$lib");
+        $this->addLib("$k/{$this->sflm->type}/$lib");
+        return;
+      }
+    }
+    if ($strict) throw new Exception("Global lib '$lib' does not exists");
+  }
+
+  protected $changed = false;
+
+  /**
    * Добавляет в runtime-кэш библиотеку
    *
    * @param package
    * @param path / package
    */
   function addLib($lib, $strict = false) {
-    if (!$strict and !$this->sflm->exists($lib)) return;
-    $newPaths = $this->sflm->getPaths($lib);
-    $changed = false;
-    foreach ($newPaths as $path) {
-      if (!in_array($path, $this->getPaths()) and $this->sflm->exists($path)) {
-        $this->paths[] = $path;
-        $changed = true;
-      }
+    if (!$strict and !$this->sflm->exists($lib)) {
+      Sflm::output("Lib '$lib' already exists");
+      return;
     }
-    if ($changed) {
+    Sflm::output("Adding lib '$lib'");
+    $newPaths = $this->sflm->getPaths($lib);
+    foreach ($newPaths as $path) {
+      if (in_array($path, $this->getPathsCache())) {
+        Sflm::output("New path '$path' already exists");
+        continue;
+      }
+      $this->addPath($path);
+    }
+    if ($this->changed) {
       NgnCache::c()->save($this->paths, $this->pathsCacheKey());
+      Sflm::output("update stored file after adding lib '$lib'");
       $this->store();
       $this->incrementVersion();
     }
+  }
+
+  function getDeltaUrl() {
+    if (!$this->newPaths) return false;
+    return $this->sflm->getUrl($this->frontend.'new', $this->sflm->extractCode($this->newPaths), true);
+  }
+
+  protected function addPath($path) {
+    $this->newPaths[] = $path;
+    $this->paths[] = $path;
+    $this->changed = true;
   }
 
   protected function versionCacheKey() {
@@ -112,7 +148,9 @@ class SflmFrontend {
   }
 
   function incrementVersion() {
-    SiteConfig::updateVar($this->versionCacheKey(), (Config::getVar($this->versionCacheKey(), true) ? : 0) + 1);
+    $version = (Config::getVar($this->versionCacheKey(), true) ? : 0) + 1;
+    SiteConfig::updateVar($this->versionCacheKey(), $version);
+    $this->sflm->version = $version;
   }
 
 }
