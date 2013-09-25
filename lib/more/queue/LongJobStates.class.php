@@ -1,26 +1,31 @@
 <?php
 
-class LongJobStates extends ArrayAccesseble implements IteratorAggregate {
+class LongJobStatesIterator extends ArrayIterator {
+
+  function current() {
+    $id = parent::current();
+    return new LongJobState($id);
+  }
+
+}
+
+class LongJobStates extends ArrayAccesseble {
 
   function __construct() {
-    $this->r = Mem::get('longJobs');
+    $this->r = Mem::get('longJobs') ?: [];
   }
 
   function remove($id) {
-    foreach ($this->r as $n => $v) if ($v['id'] == $id) unset($this->r[$n]);
-    $this->r = array_values($this->r);
+    unset($this->r[array_search($id, $this->r)]);
     $this->store();
   }
 
-  function removeAll() {
+  function destroy() {
     Mem::delete('longJobs');
   }
 
   function add($id) {
-    $this->r[] = [
-      'id' => $id,
-      'backtrace' => getBacktrace(false)
-    ];
+    $this->r[] = $id;
     $this->store();
   }
 
@@ -29,7 +34,27 @@ class LongJobStates extends ArrayAccesseble implements IteratorAggregate {
   }
 
   function getIterator() {
-    return new ArrayIterator($this->getArrayRef());
+    return new LongJobStatesIterator($this->getArrayRef());
+  }
+
+  static function monitor() {
+    function replaceOut($str) {
+      if (is_array($str)) $str = getPrr($str);
+      $numNewLines = substr_count($str, "\n");
+      echo chr(27)."[0G"; // Set cursor to first column
+      echo $str;
+      echo chr(27)."[".$numNewLines."A"; // Set cursor up x lines
+    }
+    while (true) {
+      $s = "";
+      foreach ((new LongJobStates) as $state) {
+        /* @var LongJobState $state */
+        $d = $state->all();
+        $s .= "{$d['id']} ({$d['percentage']}%): {$d['status']} | ";
+        replaceOut($s);
+      }
+      usleep(50000);
+    }
   }
 
 }

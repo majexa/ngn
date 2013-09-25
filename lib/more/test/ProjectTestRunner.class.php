@@ -1,17 +1,20 @@
 <?php
 
-class ProjectTestRunner extends TestRunnerAbstract {//
+class ProjectTestRunner extends TestRunnerAbstract {
 
-  protected $project;
+  protected $project, $filterClasses = [];
 
-  function __construct($project = null) {
-    $this->project = $project ?: PROJECT_KEY;
+  function __construct(array $filterNames = null) {
+    $this->project = PROJECT_KEY;
+    if ($filterNames) foreach ($filterNames as $v) $this->filterClasses[] = 'Test'.ucfirst($v);
     parent::__construct();
   }
 
   protected function getClasses() {
-    return array_filter(parent::getClasses(), function($v) {
-      return ClassCore::hasAncestor($v, 'ProjectTestCase');
+    return array_filter(parent::getClasses(), function($class) {
+      $r = ClassCore::hasAncestor($class, 'ProjectTestCase');
+      if ($r and $this->filterClasses) $r = in_array($class, $this->filterClasses);
+      return $r;
     });
   }
 

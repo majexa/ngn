@@ -2,19 +2,29 @@
 
 class LongJobCore {
 
-  static function create($id, $object) {
-    (new ProjectQueue)->add([
-      'class' => 'object',
-      'object' => $object,
-      'method' => 'cycle',
-      'jobId' => 'lj'.$id
-    ]);
-
+  static function run(LongJobCycle $longJob) {
+    $id = 'lj'.$longJob->id();
+    $status = self::state($id)->status();
+    output("current status before adding: $status");
+    if (!$status or $status == 'complete') {
+      (new ProjectQueue('kp'))->add([
+        'class' => 'object',
+        'object' => $longJob,
+        'method' => 'cycle',
+        'jobId' => $id
+      ]);
+      self::state($id)->start();
+      return true;
+    }
+    return false;
   }
 
-  static function get($id) {
-
-    return new LongJobState($id);
+  /**
+   * @param integer Long Job ID
+   * @return LongJobState
+   */
+  static function state($id) {
+    return O::get('LongJobState', $id);
   }
 
 }

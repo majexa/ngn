@@ -4,18 +4,19 @@ class LongJobState {
 
   public $id, $states;
 
-  function __construct($id) {
+  function __construct($id, LongJobStates $states = null) {
     $this->id = 'lj'.Misc::removePrefix('lj', $id);
-    $this->states = new LongJobStates;
+    $this->states = $states ?: new LongJobStates;
   }
 
+  /**
+   * Устанавливает состояние задачи в позицию начала
+   */
   function start() {
-    //$this->storeJob();
-    //$status = $this->status();
-    //if ($status == 'progress' or $status == 'complete') return false;
+    $this->abort();
     Mem::set($this->id.'percentage', 0);
     Mem::set($this->id.'status', 'progress');
-    return true;
+    $this->states->add($this->id);
   }
 
   function percentage() {
@@ -32,33 +33,37 @@ class LongJobState {
   }
 
   function all() {
-    if (!($status = $this->status())) throw new NotFoundException("job ID={$this->id}");
+    //if (!($status = $this->status())) throw new NotFoundException("job ID={$this->id}");
     return [
+      'id' => $this->id,
       'percentage' => Mem::get($this->id.'percentage'),
       'status' => Mem::get($this->id.'status'),
-      'data' => $this->data($this->id.'data')
+      'data' => $this->data($this->id.'data'),
+      //'lastUpdateTrace' => Mem::get($this->id.'trace')
     ];
   }
 
   function finish($data) {
+    if (!$this->status()) return;
     $this->update('status', 'complete');
     $this->update('data', $data);
   }
 
-  protected function update($k, $v) {
-    if (!in_array($k, ['percentage', 'status', 'data'])) {
-      throw new Exception("No such property as '$k' for LongJob");
-    }
+  function update($k, $v) {
+    if (!$this->status() and $k != 'status') return;
+    if (!in_array($k, ['percentage', 'status', 'data'])) throw new Exception("No such property as '$k' for LongJob");
     Mem::set($this->id.$k, $v);
+    //Mem::set($this->id.'trace', getBacktrace(false));
   }
 
-  function delete() {
-    $this->removeStoredJob();
+  function abort() {
+    $this->states->remove($this->id);
     Mem::delete($this->id.'status');
     Mem::delete($this->id.'data');
     Mem::delete($this->id.'percentage');
   }
 
+  /*
   protected function storeJob() {
     $this->jobs[] = [
       'id' => $this->id,
@@ -84,5 +89,6 @@ class LongJobState {
   static function storedJobs() {
     return Mem::get('longJobs') ?: [];
   }
+  */
 
 }

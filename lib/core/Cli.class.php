@@ -32,4 +32,9 @@ class Cli {
     return json_decode(`$cmd`, true);
   }
 
+  static function shell($cmd) {
+    output($cmd);
+    return `$cmd`;
+  }
+
 }
