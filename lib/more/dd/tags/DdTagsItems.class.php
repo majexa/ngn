@@ -9,9 +9,7 @@ class DdTagsItems {
 
   function __construct($strName, $groupName) {
     $this->strName = $strName;
-    $this->groupName = $groupName;
-    if (is_numeric($this->groupName)) throw new Exception('$this->groupName cat not be numeric');
-    $this->group = new DdTagsGroup($this->strName, $this->groupName);
+    $this->group = new DdTagsGroup($this->strName, $groupName);
   }
 
   /**
@@ -44,7 +42,7 @@ class DdTagsItems {
       if (!$tag) {
         if ($strict) throw new NotFoundException("Tag with title '$title' not found (strName=$strName, groupName=$groupName)");
         if (!$this->group->itemsDirected) // Если ТэгЗаписи не влияют на Тэги
-          continue;
+        continue;
         $tagId = $tags->create(['title' => $title]);
       }
       else {
@@ -71,17 +69,24 @@ class DdTagsItems {
     $this->updateCount($tagId);
   }
 
-  // работает как replace
-  function createByIdsCollection($itemId, array $collectionTagIds) {
-    $this->delete($itemId);
+  function createByIdsCollection($itemId, array $collectionTagIds, $replace = true) {
+    if ($replace) $this->delete($itemId);
+    $allTagTds = [];
+    if (!$collectionTagIds) return;
     foreach ($collectionTagIds as $collection => $tagTds) {
       foreach ($tagTds as $tagId) {
-        //if (DbModelCore::get('tags', $tagId)) { // модель может находиться в другой табличке "tagCities", например
-          $this->_create($tagId, $itemId, $collection); // Создаем ТэгЗапись
-          $this->updateCount($tagId);
-        //}
+        $allTagTds[] = $tagId;
+        $data[] = [
+          'groupName'  => $this->group->name,
+          'strName'    => $this->strName,
+          'tagId'      => $tagId,
+          'itemId'     => $itemId,
+          'collection' => $collection
+        ];
       }
     }
+    db()->insertLarge('tagItems', $data);
+    $this->updateCounts(array_unique($allTagTds));
   }
 
   function updateCount($tagId) {
@@ -89,22 +94,37 @@ class DdTagsItems {
     Misc::checkEmpty($tagId);
     $cnt = db()->selectCell("
     SELECT COUNT(*) FROM
-    (SELECT *
-      FROM tags_items
-      WHERE tagId=?d AND active=1
-      GROUP BY itemId) AS t
-    ", $tagId);
+    (
+      SELECT * FROM tagItems
+      WHERE strName=? AND tagId=?d AND active=1
+      GROUP BY itemId
+    ) AS t
+    ", $this->strName, $tagId);
     db()->query('UPDATE tags SET cnt=?d WHERE id=?d', $cnt, $tagId);
     return $cnt;
   }
 
-
-  protected function _create($tagId, $itemId, $collection = 0) {
-    db()->query('INSERT INTO tags_items SET groupName=?, strName=?, tagId=?d, itemId=?d, collection=?d', $this->groupName, $this->strName, $tagId, $itemId, $collection);
+  function updateCounts(array $tagIds) {
+    if (self::$disableUpdateCount) return;
+    if (!$tagIds) return;
+    $r = db()->select(<<<SQL
+SELECT tagId, COUNT(*) AS cnt FROM tagItems
+WHERE strName=? AND tagId IN (?a) AND active=1
+GROUP BY tagId
+SQL
+      , $this->strName, $tagIds);
+    foreach ($r as $v) {
+      //output("update count");
+      db()->query('UPDATE tags SET cnt=?d WHERE id=?d', $v['cnt'], $v['tagId']);
+    }
   }
 
-  protected function _delete($itemId) {
-    db()->query('DELETE FROM tags_items WHERE strName=? AND groupName=? AND itemId=?d', $this->strName, $this->groupName, $itemId);
+  public function _create($tagId, $itemId, $collection = 0) {
+    db()->query('INSERT INTO tagItems SET groupName=?, strName=?, tagId=?d, itemId=?d, collection=?d', $this->group->name, $this->strName, $tagId, $itemId, $collection);
+  }
+
+  function _delete($itemId) {
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d', $this->strName, $this->group->name, $itemId);
   }
 
   /**
@@ -133,7 +153,7 @@ class DdTagsItems {
    * @param  integer ID тэга
    */
   function deleteByTagId($tagId) {
-    db()->query('DELETE FROM tags_items WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->groupName, $tagId);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
     $this->updateCount($tagId);
   }
 
@@ -155,8 +175,8 @@ class DdTagsItems {
   function getIdsByTagId($tagId) {
     $activeCond = self::$getNonActive ? '' : 'AND active=1';
     return db()->selectCol("
-    SELECT itemId FROM tags_items
-    WHERE strName=? AND groupName=? AND tagId=?d $activeCond", $this->strName, $this->groupName, $tagId);
+    SELECT itemId FROM tagItems
+    WHERE strName=? AND groupName=? AND tagId=?d $activeCond", $this->strName, $this->group->name, $tagId);
   }
 
   /**
@@ -180,8 +200,8 @@ class DdTagsItems {
   function getFlat($itemIds) {
     $itemIds = (array)$itemIds;
     $params = [
-      'tags_items.*',
-      'tags_items.tagId AS id', // нужно для построения дерева
+      'tagItems.*',
+      'tagItems.tagId AS id', // нужно для построения дерева
       "tags.title",
     ];
     if ($this->group->allowEdit) {
@@ -191,15 +211,15 @@ class DdTagsItems {
     $params = implode(', ', $params);
     $q = "
     SELECT $params
-    FROM tags_items
-    LEFT JOIN {$this->group->table} tags ON tags_items.tagId=tags.id
+    FROM tagItems
+    LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
-      tags_items.strName=? AND
-      tags_items.groupName=? AND
-      tags_items.itemId IN (".implode(', ', $itemIds).") AND
-      tags_items.active=1
+      tagItems.strName=? AND
+      tagItems.groupName=? AND
+      tagItems.itemId IN (".implode(', ', $itemIds).") AND
+      tagItems.active=1
       ";
-    $tagItems = db()->select($q, $this->strName, $this->groupName);
+    $tagItems = db()->select($q, $this->strName, $this->group->name);
     if ($this->getRelatedItems and ($items = $this->group->getRelatedItems()) !== false) {
       foreach ($tagItems as &$v) $v = $items->getItemF($v['id']);
     }
@@ -221,7 +241,7 @@ class DdTagsItems {
   protected function injectInParent($parentId, $node) {
     $parent = DbModelCore::get($this->group->table, $parentId)->r;
     $parent['childNodes'] = [$node];
-    $parent['collection']  = $node['collection'];
+    $parent['collection'] = $node['collection'];
     $this->parents = $parent;
     if ($parent['parentId']) $this->injectInParent($parent['parentId'], $parent);
     return $this->parents;
@@ -234,17 +254,17 @@ class DdTagsItems {
   /*
   static function updateCountByItemId($strName, $itemId) {
     if (self::$disableUpdateCount) return;
-    $r = db()->query("SELECT groupName, tagId FROM tags_items WHERE strName=? AND itemId=?d GROUP BY tagId", $strName, $itemId);
+    $r = db()->query("SELECT groupName, tagId FROM tagItems WHERE strName=? AND itemId=?d GROUP BY tagId", $strName, $itemId);
     foreach ($r as $v) self::updateCount($v['tagId']);
   }
 
   static function activate($strName, $itemId) {
-    db()->query("UPDATE tags_items SET active=1 WHERE strName=? AND itemId=?d", $strName, $itemId);
+    db()->query("UPDATE tagItems SET active=1 WHERE strName=? AND itemId=?d", $strName, $itemId);
     self::updateCountByItemId($strName, $itemId);
   }
 
   static function deactivate($strName, $itemId) {
-    db()->query("UPDATE tags_items SET active=0 WHERE strName=? AND itemId=?d", $strName, $itemId);
+    db()->query("UPDATE tagItems SET active=0 WHERE strName=? AND itemId=?d", $strName, $itemId);
     self::updateCountByItemId($strName, $itemId);
   }
   */
@@ -254,8 +274,8 @@ class DdTagsItems {
    */
   static function cleanup() {
     db()->query('
-      SELECT tags.id, tags_items.tagId AS exists FROM tags
-      LEFT JOIN tags_items ON tags_items.tagId=tags.id');
+      SELECT tags.id, tagItems.tagId AS exists FROM tags
+      LEFT JOIN tagItems ON tagItems.tagId=tags.id');
   }
 
 }

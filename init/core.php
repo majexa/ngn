@@ -21,6 +21,7 @@ require_once LIB_PATH.'/core/Misc.class.php'; // Miscellaneous functions
 require_once LIB_PATH.'/core/Lib.class.php'; // Librarys, classes
 require_once LIB_PATH.'/core/Ngn.class.php';
 
+
 date_default_timezone_set('Europe/Moscow');
 
 // Важно! До установки Lib::$isCache = true никаких обращений к классам
@@ -58,4 +59,6 @@ define('UPLOAD_DIR', 'u');
 
 // ------------------ core constants -----------------
 
+
 require NGN_PATH.'/config/constants/core.php';
+

@@ -69,16 +69,22 @@ cursor: url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move
 .dragBox {
 width: 15px;
 height: 21px;
-background: url(../../../i/img/black/drag-bg.gif);
+/*background: url(../../../i/img/black/drag-bg.gif);*/
+background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
 float: left;
-border: 1px solid #CCC;
+border: 1px solid #E3E2D3;
 margin-left: 5px;
 display: block;
-background-color: #FFF;
+
+
+/*
+
+
+*/
 }
 .dragBox:hover {
-background-color: #FFD515;
-border-color: #555;
+background: #FFF4BF;
+border-color: #F1CA7E;
 }
 
 .fileDroppable {

@@ -62,12 +62,12 @@ class CtrlAdminTags extends CtrlAdmin {
   function action_default() {
     $r = db()->query('
     SELECT
-      tags_groups.*,
+      tagGroups.*,
       dd_fields.title AS title,
       dd_structures.title AS strTitle
-    FROM tags_groups
-    LEFT JOIN dd_fields ON tags_groups.name=dd_fields.name
-    LEFT JOIN dd_structures ON tags_groups.strName=dd_structures.name
+    FROM tagGroups
+    LEFT JOIN dd_fields ON tagGroups.name=dd_fields.name
+    LEFT JOIN dd_structures ON tagGroups.strName=dd_structures.name
     ');
     $items = [];
     foreach ($r as $v) {

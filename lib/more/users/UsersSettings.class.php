@@ -1,7 +1,7 @@
 <?php
 
-class UsersSettings extends Settings {
+class UserSettings extends Settings {
 
-  static $table = 'users_settings';
+  static $table = 'userSettings';
 
 }

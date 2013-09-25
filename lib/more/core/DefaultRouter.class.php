@@ -2,7 +2,9 @@
 
 class DefaultRouter extends Router {
 
-  public $frontend = 'default';
+  function getFrontend() {
+    return 'default';
+  }
 
   protected function prefix() {
     return 'Ctrl';

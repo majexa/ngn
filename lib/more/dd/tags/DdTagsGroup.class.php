@@ -22,11 +22,11 @@ use ObjectPropertyGetter;
   function __construct($strName, $name) {
     Misc::checkEmpty($strName, '$strName');
     Misc::checkEmpty($name, '$name');
-    try {
+    //try {
       $this->p = self::getData($strName, $name);
-    } catch (Exception $e) {
-      throw new Exception("tag group $strName::$name does not exists");
-    }
+    //} catch (Exception $e) {
+      //throw new Exception("tag group $strName::$name does not exists");
+    //}
     if (empty($this->p['fieldType'])) throw new Exception('Field for tag "'.$name.'" of "'.$strName.'" structure does not exists');
     $this->p['tagsGetterStrName'] = empty($this->p['masterStrName']) ? $this->p['strName'] : $this->p['masterStrName'];
     $this->p['tree'] = DdTags::isTagTreeType($this->p['fieldType']);
@@ -64,8 +64,8 @@ use ObjectPropertyGetter;
   }
 
   function delete() {
-    db()->query('DELETE FROM tags_groups WHERE id=?d', $this->p['id']);
-    db()->query('DELETE FROM tags_items WHERE strName=? AND groupName=?', $this->p['strName'], $this->p['name']);
+    db()->query('DELETE FROM tagGroups WHERE id=?d', $this->p['id']);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=?', $this->p['strName'], $this->p['name']);
     db()->query('DELETE FROM tags WHERE strName=? AND groupName=?', $this->p['strName'], $this->p['name']);
     O::delete(get_class($this), $this->p['name']);
   }
@@ -82,21 +82,21 @@ use ObjectPropertyGetter;
   static function getData($strName, $name, $strict = true) {
     $r = db()->selectRow('
     SELECT
-      tags_groups.*,
+      tagGroups.*,
       dd_fields.title,
       dd_fields.type AS fieldType
-    FROM tags_groups
-    LEFT JOIN dd_fields ON dd_fields.name=tags_groups.name AND
-                           dd_fields.strName=tags_groups.strName
+    FROM tagGroups
+    LEFT JOIN dd_fields ON dd_fields.name=tagGroups.name AND
+                           dd_fields.strName=tagGroups.strName
     WHERE
-      tags_groups.strName=? AND
-      tags_groups.name=?', $strName, $name);
+      tagGroups.strName=? AND
+      tagGroups.name=?', $strName, $name);
     if ($strict) Misc::checkEmpty($r);
     return $r;
   }
 
   static function getById($id) {
-    $r = db()->selectRow('SELECT * FROM tags_groups WHERE id=?d', $id);
+    $r = db()->selectRow('SELECT * FROM tagGroups WHERE id=?d', $id);
     return new DdTagsGroup($r['strName'], $r['name']);
   }
 
@@ -111,7 +111,7 @@ use ObjectPropertyGetter;
    */
   static function create($strName, $name, $itemsDirected = true, $unicalTagsName = true, $tree = false) {
     if (!$name) throw new Exception('$name not defined');
-    return db()->query('REPLACE INTO tags_groups
+    return db()->query('REPLACE INTO tagGroups
        SET strName=?, name=?, itemsDirected=?d, unicalTagsName=?d, tree=?d', $strName, $name, $itemsDirected, $unicalTagsName, $tree);
     //return new TagsGroup($strName, $name);
   }
@@ -134,11 +134,11 @@ use ObjectPropertyGetter;
       throw new Exception("Tags group strName=$strName, name=$name does not exists.");
     }
     db()->query('
-      UPDATE tags_groups
+      UPDATE tagGroups
       SET name=?, itemsDirected=?d, unicalTagsName=?d, tree=?d
       WHERE strName=? AND name=?', $newName, $itemsDirected, $unicalTagsName, $tree, $strName, $name);
     db()->query('UPDATE tags SET groupName=? WHERE groupName=? AND strName=?', $newName, $name, $strName);
-    db()->query('UPDATE tags_items SET groupName=? WHERE groupName=? AND strName=?', $newName, $name, $strName);
+    db()->query('UPDATE tagItems SET groupName=? WHERE groupName=? AND strName=?', $newName, $name, $strName);
   }
 
 }

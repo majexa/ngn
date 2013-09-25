@@ -9,26 +9,26 @@ class CtrlAdminPrivMsgs extends CtrlAdmin {
   ];
   
   function init() {
-    if (!$this->oPM) throw new Exception('$this->oPM not defined');
+    if (!$this->pribMsgs) throw new Exception('$this->oPM not defined');
     $this->d['tpl'] = 'privMsgs/default';
   }
 
   function action_default() {
-    $this->d['msgs'] = $this->oPM->getAllMsgs();
+    $this->d['msgs'] = $this->pribMsgs->getAllMsgs();
   }
   
   function action_delete() {
-    $this->oPM->deleteMsgs($this->userId, [$this->req->r['id']]);
+    $this->pribMsgs->deleteMsgs($this->userId, [$this->req->r['id']]);
     $this->redirect();
   }
   
   function action_clear() {
-    $this->oPM->clearMsgs($this->userId);
+    $this->pribMsgs->clearMsgs($this->userId);
     $this->redirect();
   }
   
   function action_send() {
-    $this->oPM->sendMsg(Auth::get('id'), $this->req->r['user'], $this->req->r['text']);
+    $this->pribMsgs->sendMsg(Auth::get('id'), $this->req->r['user'], $this->req->r['text']);
     $this->redirect($this->tt->getPath(2).'/sendComplete');
   }
   

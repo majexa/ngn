@@ -10,11 +10,12 @@ class FieldEImagePreview extends FieldEImage {
   }
   
   protected function getCurrentValue() {
-    return Misc::getFilePrefexedPath(parent::getCurrentValue(), 'sm_');
+    if (!($v = parent::getCurrentValue())) return false;
+    return Misc::getFilePrefexedPath($v, 'sm_');
   }
   
   protected function htmlNav() {
-    if (empty($this->options['value'])) return '';
+    if (!($v = $this->getCurrentValue())) return '';
     $deleteBtn = (!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ?
       '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="iconBtn noborder delete confirm" title="Удалить"><i></i></a>' :
       '';

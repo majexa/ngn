@@ -497,32 +497,6 @@ display: inline;
 background: url(../../../i/img/black/loader.gif) no-repeat center center;
 }
 /* user search end */
-
-.priviliges .item {
-border-bottom: 1px solid #F1EDED;
-padding: 7px 0px 7px 0px;
-}
-.priviliges .pageLink {
-margin-bottom: 5px;
-}
-.priviliges .user {
-float: left;
-margin: 0px 15px 0px 2px;
-}
-.priviliges .user small {
-display: block;
-margin-top: 2px;
-}
-
-.priviliges .privs {
-display: block;
-color: #55BB55;
-}
-.priviliges a.editPage {
-color: #999999;
-font-size: 10px;
-}
-
   
 /* Приватные сообщения */
 .notViewed td {

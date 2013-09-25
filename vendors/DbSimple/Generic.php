@@ -1023,7 +1023,7 @@ class DbSimple_Generic_Database extends DbSimple_Generic_LastError {
     if (!$this->_logger) return;
     $this->_expandPlaceholders($query, false);
     $args = [];
-    $args[] =& $this;
+    $args[] = $this;
     $args[] = $query[0];
     $args[] = $noTrace ? null : $this->findLibraryCaller();
     return call_user_func_array($this->_logger, $args);

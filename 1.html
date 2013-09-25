@@ -1,0 +1,19 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 123
+<body>
+<div id="h11"></div>
+<script type="text/javascript">
+    document.getElementById('h11').innerHTML = '<h1><b>Лучшие предложения: </b></h1>';
+</script>
+<div id="h12"></div>
+<script>
+    $('<h1><b>Лучшие предложения: </b></h1>')
+    $.getJSON('http://catalog.api.2gis.ru/ads/search?what=%D0%B1%D0%B0%D0%BD%D0%BA%D0%B8&where=%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9%20%D0%BD%D0%BE%D0%B2%D0%B3%D0%BE%D1%80%D0%BE%D0%B4&version=1.3&key=ruvfpc6907', function(data) {
+        console.debug(data);
+        $.each(data.result, function(key, val) {
+            $('<div>', {
+                html: val.name + ' <br> <i>' + val.advertising.text + '</i>'
+            }).appendTo('#h12');
+        });
+    });
+</script>
+</body>

@@ -3,19 +3,19 @@
 /**
  * Static File Libraries Manager
  *
- * path - путь. путь к файлу относильно web-рута
- * package - пакет. имя набора путей и других пакетов
- * lib - иблиотека. путь или пакет
+ * path - путь. (i/path/to/file). путь к файлу относильно web-рута
+ * package - пакет. имя набора библиотек
+ * lib - библиотека. путь или пакет
  *
  */
 abstract class SflmBase {
 
   public $type, $version = 1;
 
-  protected function getFileContents($path, $r = []) {
+  protected function getFileContents($path, $strict = true, $r = []) {
     if (!is_file($path)) {
       $error = "File '$path' does not exists";
-      //Err::_log($error, debug_backtrace());
+      if ($strict) Err::_log($error, debug_backtrace());
       return "\n/*----------[ $error ]---------*/\n";
     }
     if (strstr($path, '/scripts/')) {
@@ -32,6 +32,10 @@ abstract class SflmBase {
     return $this->extractCode($this->getPaths($package));
   }
 
+  protected function isStrictPath($path) {
+    return !Misc::hasPrefix('m/', $path);
+  }
+
   function extractCode(array $paths) {
     $code = '';
     foreach ($paths as $path) {
@@ -40,10 +44,10 @@ abstract class SflmBase {
       if (!empty($p['query'])) {
         $a = [];
         parse_str($p['query'], $a);
-        $code .= $this->getFileContents($absPath, $a);
+        $code .= $this->getFileContents($absPath, $this->isStrictPath($path), $a);
       }
       else {
-        $code .= $this->getFileContents($absPath);
+        $code .= $this->getFileContents($absPath, $this->isStrictPath($path));
       }
     }
     return $code;
@@ -57,9 +61,10 @@ abstract class SflmBase {
     $file = $this->cacheFile($package);
     if (!$code) $code = $this->getPackageCode($package);
     Misc::checkEmpty($code, '$code');
-    if (file_exists($file) and file_get_contents($file) == $code) return; // Если размер кода не изменился, не сохраняем
+    if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
     Dir::make(UPLOAD_PATH.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
+    return true;
   }
 
   function getCode($package) {
@@ -90,13 +95,13 @@ abstract class SflmBase {
     return $this->getScriptPath($path);
   }
 
-  function getPath($absPath) {
+  function getPath($absPath, $whyDoUWantToGetThis = null) {
     foreach (Sflm::$absBasePaths as $folder => $absBasePath) {
       if (Misc::hasPrefix($absBasePath, $absPath)) {
         return $folder.Misc::removePrefix($absBasePath, $absPath);
       }
     }
-    throw new NotFoundException($absPath);
+    throw new Exception('"'.$absPath.'" not found'.($whyDoUWantToGetThis ? ". Getting for: $whyDoUWantToGetThis" : ''));
   }
 
   /**
@@ -162,6 +167,7 @@ abstract class SflmBase {
   function getPaths($lib) {
     if (!$this->isPackage($lib)) return [$lib];
     if (isset($this->libsCache[$lib])) return $this->libsCache[$lib];
+    Sflm::output("Getting package '$lib' libs recursive");
     return $this->libsCache[$lib] = $this->getPackageLibsR($lib);
   }
 
@@ -202,12 +208,12 @@ abstract class SflmBase {
     return $this->type.'/cache/'.$package.'.'.$this->type;
   }
 
-  function getUrl($package, $code = null) {
-    if (Sflm::$debug or Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$this->filePath($package))) {
+  function getUrl($package, $code = null, $force = false) {
+    if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$this->filePath($package))) {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package, $code);
     }
-    return '/'.UPLOAD_DIR.'/'.$this->filePath($package);
+    return '/'.UPLOAD_DIR.'/'.$this->filePath($package).'?'.$this->version;
   }
 
 }

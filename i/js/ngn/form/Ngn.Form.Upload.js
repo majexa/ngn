@@ -23,11 +23,10 @@ Ngn.Form.Upload = new Class({
   },
   
   beforeInit: function() {},
-	
+
   init: function() {
     this.eFiles = new Element('div.uploadFiles').inject(this.eInput, 'after');
-    this.eProgress = new Element('div.fileProgress')
-      .setStyle('display', 'none').inject(this.eFiles, 'after');
+    this.eProgress = new Element('div.fileProgress').setStyle('display', 'none').inject(this.eFiles, 'after');
     this.uploadReq = new Ngn.Request.File({
       url: this.options.url,
       onRequest: function() {

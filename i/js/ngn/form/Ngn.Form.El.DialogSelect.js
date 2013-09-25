@@ -46,6 +46,7 @@ Ngn.Form.El.DialogSelect = new Class({
   initControl: function() {
     this.eSelectDialog.addEvent('click', function() {
       var cls = this.getDialogClass();
+      if (!cls) throw new Error('class not found');
       new cls(this, $merge({
         value: this.value // was "selectedName"
       }, this.getDialogOptions()));
@@ -72,6 +73,10 @@ Ngn.Form.El.DialogSelect = new Class({
 
 Ngn.ElSelectDialog = new Class({
   Extends: Ngn.Dialog,
+
+  options: {
+    noPadding: false
+  },
 
   initialize: function(formEl, options) {
     this.formEl = formEl;

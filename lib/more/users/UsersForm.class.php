@@ -110,7 +110,7 @@ use FormDbUnicCheck;
   protected function initSubscribe() {
     $this->subscribeOnReg = (!empty($this->options['subscribeOnReg']) and Config::getVarVar('subscribe', 'onReg'));
     if (!$this->subscribeOnReg) return;
-    $subscribes = db()->query('SELECT id, title FROM subs_list WHERE active=1 AND useUsers=1');
+    $subscribes = db()->query('SELECT id, title FROM subsList WHERE active=1 AND useUsers=1');
     if (!$subscribes) return;
     $this->fields[] = [
       'name'  => 'subscribes',

@@ -117,8 +117,7 @@ margin: 0px;
 }
 
 .date-button {
-background: url(../../i/../img/dialog/date.png) no-repeat center
-center;
+background: url(../../i/../img/dialog/date.png) no-repeat center center;
 width: 22px;
 height: 24px;
 }
@@ -156,12 +155,12 @@ background: #fff;
 color: #000;
 cursor: default;
 font-size: 16px;
-line-height: 31px;
 margin: 5px 5px 0;
 padding: 4px 8px 2px 8px;
-height: 31px;
 font-family: Georgia;
 position: relative;
+
+height: 31px;
 }
 
 .dialog-message {
@@ -220,9 +219,9 @@ margin-right: 3px;
 .md-title-text {
 overflow: hidden;
 display: block;
-white-space: nowrap;
 text-align: center;
 padding-right: 25px;
+padding-bottom: 4px;
 border-bottom: 1px #ccc dashed;
 }
 .dialog-tabs .md-title-text {
