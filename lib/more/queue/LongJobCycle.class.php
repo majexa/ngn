@@ -4,15 +4,19 @@ abstract class LongJobCycle {
 
   protected $object, $state, $n, $percentage, $total;
 
-  function __construct(LongJobObject $object, LongJobState $state) {
-    $this->object = $object;
-    $this->state = $state;
+  function __construct() {
+    $this->state = LongJobCore::state($this->id());
   }
 
   protected function total() {
     if (isset($this->total)) return $this->total;
     return $this->total = $this->_total();
   }
+
+  /**
+   * @return string Unical ID for this job
+   */
+  abstract function id();
 
   abstract protected function _total();
   abstract protected function step();
@@ -25,16 +29,22 @@ abstract class LongJobCycle {
 
   function cycle() {
     set_time_limit(0);
+    $this->state->start();
     $total = $this->total();
     $step = $this->step();
-    $this->n = 0;
+    $this->n = 1;
     while (1) {
-      if (!$this->longJob->status()) return; // если задача снята, выходим из цикла
+      if (!$this->state->status()) return; // если задача снята, выходим из цикла
       $this->percentage = round($this->n / $total * 100);
-      //$before = Misc::formatPrice(memory_get_usage());
+      $this->state->update('percentage', $this->percentage);
+      $before = Misc::formatPrice(memory_get_usage());
       $this->iteration();
-      //LogWriter::str('ddxls', "QUEUE N: {$this->queueN}, all: $total, $n, cur: ".($n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
-      if ($this->complete()) return $this->result();
+      output("Long Job Iteration. STEP: $step, cur: $this->n, total: $total, cur: ".($this->n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
+      if ($this->complete()) {
+        $this->state->finish($this->result());
+        output("finished. status: ".LongJobCore::state($this->id())->status());
+        return;
+      }
       $this->n += $step;
     }
   }

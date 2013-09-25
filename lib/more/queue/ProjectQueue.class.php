@@ -1,6 +1,6 @@
 <?php
 
-class ProjectQueue extends LongJobQueue {
+class ProjectQueue extends Queue {
 
   function __construct($projectKey = null) {
     if (!$projectKey and !defined('PROJECT_KEY')) throw new Exception("Define PROJECT_KEY constant or $projectKey");
@@ -16,6 +16,10 @@ class ProjectQueue extends LongJobQueue {
       'method' => $method,
       'data' => $data
     ]);
+  }
+
+  static function workerStarted($projectKey) {
+    return Mem::get('queueworker'.$projectKey.'started');
   }
 
 }

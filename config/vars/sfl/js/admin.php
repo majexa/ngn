@@ -24,5 +24,5 @@ return [
   'i/js/ngn/Ngn.initConfigManager.js',
   'i/js/MooCountdown.js',
   'partialJob',
-  'pageBlocks',
+  //'pageBlocks',
 ];

@@ -6,7 +6,6 @@ class DdXls extends LongJobCycle {
 
   function __construct($strName, DdItems $items) {
     $this->items = $items;
-    $this->hasOutput = false;
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
     $this->ddo = new Ddo($strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
     $this->ddo->text = true;
@@ -18,11 +17,10 @@ class DdXls extends LongJobCycle {
   }
 
   protected function getItems() {
-    throw new Exception('+)!I(E*@(E@ BAD. REPEAT');
     return $this->items->getItems();
   }
 
-  protected function total() {
+  protected function _total() {
     return $this->items->count();
   }
 

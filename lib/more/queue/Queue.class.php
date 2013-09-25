@@ -5,13 +5,22 @@ class Queue {
   protected $n, $channel, $exchange, $queue, $exName = 'exchange1', $queueName = 'exchange1';
 
   function __construct() {
-    $connection = new AMQPConnection();
+    $connection = new AMQPConnection;
     $connection->connect();
-    $this->n = (ProjMem::get('queueN') ?: 0) + 1;
-    ProjMem::set('queueN', $this->n);
     if (!$connection->isConnected()) throw new Exception('Can not connect');
     $this->channel = new AMQPChannel($connection);
     $this->getExchange();
+  }
+
+  function worker() {
+    set_time_limit(0);
+    output("Starting worker. Exchange: $this->exName, queue: $this->queueName");
+    $o = $this;
+    output('queueworker'.$this->exName.'started');
+    Mem::set('queueworker'.$this->exName.'started', true);
+    $this->getQueue()->consume(function(AMQPEnvelope $envelope) use ($o) {
+      $o->processData($envelope->getBody());
+    }, AMQP_AUTOACK);
   }
 
   protected function getExchange() {
@@ -30,8 +39,9 @@ class Queue {
       $data['object'] = serialize($data['object']);
     }
     $attr = empty($data['id']) ? [] : ['message_id' => $data['id']];
+    output("Adding data. Exchange: $this->exName, queue: $this->queueName");
     if (!($this->getExchange()->publish(json_encode($data), 'global', AMQP_NOPARAM, $attr))) {
-      throw new Exception('=(');
+      throw new Exception('Publish data error');
     }
   }
 
@@ -51,61 +61,62 @@ class Queue {
     return $data;
   }
 
-  function worker() {
-    set_time_limit(0);
-    print "\nStarting worker...";
-    $o = $this;
-    $this->getQueue()->consume(function(AMQPEnvelope $envelope) use ($o) {
-      $o->processData($envelope->getBody());
-    }, AMQP_AUTOACK);
-  }
-
-  function cron() {
-    set_time_limit(0);
-    $d = opendir(DATA_PATH.'/queue') or die($php_errormsg);
-    while (false !== ($f = readdir($d))) {
-      $f = DATA_PATH.'/queue/'.$f;
-      if(is_file($f)) {
-        $body = file_get_contents($f);
-        $data = json_decode($body, true);
-        $class = ucfirst($data['class']);
-        (new $class)->{$data['method']}($data['data']);
-        unlink($f);
-      }
-    }
-    closedir($d);
-  }
-
   protected function _processData($body) {
     Dir::make(DATA_PATH.'/queue');
     $id = time().'-'.rand(100, 10000);
     file_put_contents(DATA_PATH.'/queue/'.$id, $body);
+    if (empty($body)) throw new Exception('Body is empty');
     $data = json_decode($body, true);
+    /**
+     * Примеры $data:
+     * [
+     *   'class' => 'className',
+     *   'method' => '__construct',
+     *   'data' => ['param1', 'param2', ...]
+     * ]
+     * [
+     *   'class' => 'className',
+     *   'method' => 'methodName',
+     *   'data' => ['param1', 'param2', ...]
+     * ]
+     * [
+     *   'class' => 'object',
+     *   'object' => $object,
+     *   'method' => 'method',
+     * ]
+     * [
+     *   'class' => 'object',
+     *   'object' => $longJobObject,
+     *   'method' => 'cycle',
+     *   'jobId' => 'ljSomeId'
+     * ]
+     */
     if ($data['class'] == 'object') {
       $o = unserialize($data['object']);
       if (isset($data['jobId'])) {
-        if (!ClassCore::hasTrait($o, 'LongJob')) throw new Exception('Object with class "'.get_class($o).'" must use trait "LongJob"');
-        $o->queueN = $this->n;
+        if (!is_subclass_of($o, 'LongJobCycle')) {
+          throw new Exception('Object with class "'.get_class($o).'" must be subclass of "LongJobCycle"');
+        }
       }
-      $r = $o->{$data['method']}();
+      $o->{$data['method']}();
+      if (isset($data['jobId'])) {
+        output("status: {$data['jobId']}: ".LongJobCore::state($data['jobId'])->status());
+      }
     } else {
       $class = ucfirst($data['class']);
       if ($data['method'] == '__construct') {
-        new $class($data[2]);
-        $r = null;
+        new $class($data['data']);
       } else {
-        $r = (new $class)->{$data['method']}($data['data']);
+        (new $class)->{$data['method']}($data['data']);
       }
     }
     unlink(DATA_PATH.'/queue/'.$id);
-    return $r;
   }
 
   function processData($body) {
     db()->disconnect();
-    $r = $this->_processData($body);
+    $this->_processData($body);
     db()->disconnect();
-    return $r;
   }
 
   function eventName($event, $id) {
