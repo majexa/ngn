@@ -11,7 +11,12 @@ class AdminDdItemsSettingsForm extends Form {
         'title' => 'Включить ручную сортировку',
         'name'  => 'enableManualOrder',
         'type'  => 'bool'
-      ]
+      ],
+      [
+        'title' => 'Показывать отключенные записи',
+        'name'  => 'getNonActive',
+        'type'  => 'bool'
+      ],
     ]);
   }
 
