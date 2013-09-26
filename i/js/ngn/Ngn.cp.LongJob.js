@@ -1,4 +1,4 @@
-Ngn.cp.LongJob = new Class({
+Ngn.LongJob = new Class({
   Implements: [Options],
 
   options: {
@@ -101,6 +101,6 @@ Ngn.cp.LongJob = new Class({
 
 });
 
-Ngn.cp.LongJob.status = function() {
+Ngn.LongJob.status = function() {
 
 };

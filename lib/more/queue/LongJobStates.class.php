@@ -38,6 +38,7 @@ class LongJobStates extends ArrayAccesseble {
   }
 
   static function monitor() {
+    $t = '';
     function replaceOut($str) {
       if (is_array($str)) $str = getPrr($str);
       $numNewLines = substr_count($str, "\n");
@@ -51,9 +52,13 @@ class LongJobStates extends ArrayAccesseble {
         /* @var LongJobState $state */
         $d = $state->all();
         $s .= "{$d['id']} ({$d['percentage']}%): {$d['status']} | ";
+      }
+      $s = $s ?: "                                                              ";
+      if ($t != $s) {
+        $t = $s;
         replaceOut($s);
       }
-      usleep(50000);
+      usleep(0.5 * 1000000);
     }
   }
 

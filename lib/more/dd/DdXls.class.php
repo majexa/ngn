@@ -12,12 +12,14 @@ class DdXls extends LongJobAbstract {
     $this->ddo->text = true;
     $this->fileName = '/temp/admin/xls/'.$this->items->strName.'_'.date('d-m-Y_H-i-s').'.xls';
     $this->init();
+    parent::__construct();
   }
 
   protected function init() {
   }
 
   function id() {
+    Misc::checkEmpty($this->longJobId, '$this->longJobId');
     return $this->longJobId;
   }
 
@@ -34,6 +36,7 @@ class DdXls extends LongJobAbstract {
   }
 
   protected function iteration() {
+    //LogWriter::v('iteration', 1);
     $this->items->cond->setLimit($this->n.','.$this->step());
     $this->ddo->setItems($this->getItems())->xls(UPLOAD_PATH.$this->fileName, !(bool)$this->n);
   }
