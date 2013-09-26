@@ -33,6 +33,11 @@ class SflmFrontend {
     NgnCache::c()->save($this->getPaths(), 'sflmLastPaths'.$this->sflm->type.$this->frontend);
   }
 
+  /**
+   * Возвращает сохраненные для текущего фронтенда runtime пути
+   *
+   * @return array
+   */
   function getPathsCache() {
     return NgnCache::c()->load($this->pathsCacheKey()) ? : [];
   }
@@ -103,8 +108,8 @@ class SflmFrontend {
   /**
    * Добавляет в runtime-кэш библиотеку
    *
-   * @param package
-   * @param path / package
+   * @param string lib
+   * @param bool
    */
   function addLib($lib, $strict = false) {
     if (!$strict and !$this->sflm->exists($lib)) {
@@ -118,7 +123,7 @@ class SflmFrontend {
         Sflm::output("New path '$path' already exists");
         continue;
       }
-      $this->addPath($path);
+      $this->addPath($path, "package '$lib'");
     }
     if ($this->changed) {
       NgnCache::c()->save($this->paths, $this->pathsCacheKey());
@@ -133,7 +138,11 @@ class SflmFrontend {
     return $this->sflm->getUrl($this->frontend.'new', $this->sflm->extractCode($this->newPaths), true);
   }
 
-  protected function addPath($path) {
+  /**
+   * @param string Добавляет к текущему фронтенду runtime путь
+   */
+  protected function addPath($path, $addingFrom = null) {
+    if (in_array($path, $this->getPaths())) throw new Exception("Path '$path' already exists. Adding from $addingFrom");
     $this->newPaths[] = $path;
     $this->paths[] = $path;
     $this->changed = true;

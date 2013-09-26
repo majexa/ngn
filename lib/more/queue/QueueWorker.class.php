@@ -2,10 +2,9 @@
 
 class QueueWorker {
 
-  function install($project) {
-    $workerCount = 1;
+  function install($project, $workersCount = 1) {
     $for = '';
-    for ($i = 1; $i <= $workerCount; $i++) $for .= " $i";
+    for ($i = 1; $i <= $workersCount; $i++) $for .= " $i";
     $c = '#! /bin/sh
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
