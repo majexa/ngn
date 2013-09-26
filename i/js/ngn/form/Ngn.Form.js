@@ -32,7 +32,6 @@ Ngn.Form = new Class({
     this.initValidation();
     this.initSubmit();
     // more
-    this.initMooRainbow();
     this.initVisibilityConditions();
     this.initHeaderToggle();
     this.initFileNav();
@@ -278,36 +277,6 @@ Ngn.Form = new Class({
   },
 
   initValues: {},
-
-  initMooRainbow: function() {
-    this.eForm.getElements('.type_color').each(function(el) {
-      var eColor = el.getElement('div.color');
-      var eInput = el.getElement('input').addClass('hexInput');
-      eInput.addEvent('change', function() {
-        eColor.setStyle('background-color', eInput.value);
-      });
-      new MooRainbow(eInput, {
-        eParent: eInput.getParent(),
-        id: 'rainbow_' + eInput.get('name'),
-        //styles: { // и так работает
-        //  'z-index': this.options.dialog.dialog.getStyle('z-index').toInt() + 1
-        //},
-        imgPath: '/i/img/rainbow/small/',
-        wheel: true,
-        startColor: eInput.value ? new Color(eInput.value).rgb : [255, 255, 255],
-        onChange: function(color) {
-          eColor.setStyle('background-color', color.hex);
-          eInput.value = color.hex;
-          eInput.fireEvent('change', color);
-        },
-        onComplete: function(color) {
-          eColor.setStyle('background-color', color.hex);
-          eInput.value = color.hex;
-          eInput.fireEvent('change', color);
-        }
-      });
-    }.bind(this));
-  },
 
   initAutoGrow: function() {
     this.eForm.getElements('textarea').each(function(el) {

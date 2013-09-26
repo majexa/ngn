@@ -450,7 +450,15 @@ class DdItems extends Items {
     }
   }
 
-  function addTagFilter($tagField, array $tagValues, $byId = true) {
+  /**
+   * @param string
+   * @param array|integer
+   * @param bool $byId
+   * @return $this
+   * @throws Exception
+   */
+  function addTagFilter($tagField, $tagValues, $byId = true) {
+    $tagValues = (array)$tagValues;
     $tags = DdTags::get($this->strName, $tagField);
     if (!$byId and $tags->group->tree) throw new Exception("Getting tags by name supportes only flat tags. '$tagField' is tree type tag.");
     $itemIds = [];

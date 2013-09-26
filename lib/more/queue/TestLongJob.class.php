@@ -18,7 +18,7 @@ class TestLongJob extends ProjectTestCase {
     $this->assertTrue(LongJobCore::state('ljsample')->all()['status'] == 'progress');
     $this->assertTrue(LongJobCore::state('ljsample')->status() == 'progress', 'job is in progress');
     $this->assertTrue(count(new LongJobStates) == 1, 'previews state replaced bu current');
-    LongJobCore::state('ljsample')->abort();
+    LongJobCore::state('ljsample')->delete();
     $this->assertTrue(LongJobCore::state('ljsample')->status() === false, 'job stopped');
     $this->assertTrue(count(new LongJobStates) == 0, 'job removed from states');
 

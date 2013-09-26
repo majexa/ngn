@@ -13,7 +13,7 @@ class LongJobState {
    * Устанавливает состояние задачи в позицию начала
    */
   function start() {
-    $this->abort();
+    $this->delete();
     Mem::set($this->id.'percentage', 0);
     Mem::set($this->id.'status', 'progress');
     $this->states->add($this->id);
@@ -56,7 +56,7 @@ class LongJobState {
     //Mem::set($this->id.'trace', getBacktrace(false));
   }
 
-  function abort() {
+  function delete() {
     $this->states->remove($this->id);
     Mem::delete($this->id.'status');
     Mem::delete($this->id.'data');

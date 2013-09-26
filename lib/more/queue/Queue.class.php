@@ -94,7 +94,7 @@ class Queue {
     if ($data['class'] == 'object') {
       $o = unserialize($data['object']);
       if (isset($data['jobId'])) {
-        if (!is_subclass_of($o, 'LongJobCycle')) {
+        if (!is_subclass_of($o, 'LongJobAbstract')) {
           throw new Exception('Object with class "'.get_class($o).'" must be subclass of "LongJobCycle"');
         }
       }

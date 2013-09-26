@@ -2,7 +2,7 @@
 
 class LongJobCore {
 
-  static function run(LongJobCycle $longJob) {
+  static function run(LongJobAbstract $longJob) {
     $id = 'lj'.$longJob->id();
     $status = self::state($id)->status();
     output("current status before adding: $status");

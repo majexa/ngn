@@ -1,6 +1,6 @@
 <?php
 
-abstract class LongJobCycle {
+abstract class LongJobAbstract {
 
   protected $object, $state, $n, $percentage, $total;
 

@@ -1,6 +1,6 @@
 <?php
 
-class SampleLongJob extends LongJobCycle {
+class SampleLongJob extends LongJobAbstract {
 
   function id() {
     return 'sample';
