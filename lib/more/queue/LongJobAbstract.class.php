@@ -29,6 +29,7 @@ abstract class LongJobAbstract {
 
   function cycle() {
     set_time_limit(0);
+    if (!isset($this->state)) throw new Exception('U need to call parent constructor in the end of '.get_class($this).' class constructor');
     $this->state->start();
     $total = $this->total();
     $step = $this->step();
