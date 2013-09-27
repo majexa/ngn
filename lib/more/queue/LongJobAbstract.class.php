@@ -20,7 +20,7 @@ abstract class LongJobAbstract {
 
   abstract protected function _total();
   abstract protected function step();
-  abstract protected function iteration();
+  abstract function iteration();
   abstract protected function result();
 
   protected function complete() {
@@ -30,21 +30,23 @@ abstract class LongJobAbstract {
   function cycle() {
     set_time_limit(0);
     if (!isset($this->state)) throw new Exception('U need to call parent constructor in the end of '.get_class($this).' class constructor');
-    $this->state->start();
+    output("CYCLE BEGIN");
+    $this->state->started();
     $total = $this->total();
+    $this->state->update('total', $total);
     $step = $this->step();
     $this->n = 1;
     while (1) {
-      if (!$this->state->status()) return; // если задача снята, выходим из цикла
+      if (!$this->state->status()) return false; // если задача снята, выходим из цикла
       $this->percentage = round($this->n / $total * 100);
       $this->state->update('percentage', $this->percentage);
       $before = Misc::formatPrice(memory_get_usage());
       $this->iteration();
-      output("Long Job Iteration. STEP: $step, cur: $this->n, total: $total, cur: ".($this->n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
+      output($this->state->id.'. status='.$this->state->status().": Long Job Iteration. STEP: $step, cur: $this->n, total: $total, cur: ".($this->n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
       if ($this->complete()) {
         $this->state->finish($this->result());
         output("finished. status: ".LongJobCore::state($this->id())->status());
-        return;
+        return true;
       }
       $this->n += $step;
     }

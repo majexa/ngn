@@ -31,6 +31,7 @@ class Mem {
 
   static function set($key, $val, $expires = 0) {
     if (!self::$enable) return;
+    if (strstr($key, 'status')) LogWriter::v('status_8', "$key $val");
     self::getMemcache()->set(static::$keyPrefix.$key, $val, $expires);
   }
 

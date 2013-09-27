@@ -2,19 +2,29 @@
 
 class SampleLongJob extends LongJobAbstract {
 
+  protected $id;
+
+  function __construct($id = 'sample') {
+    $this->id = $id;
+    if ($this->step() > $this->_total()) {
+      throw new Exception('Step ' . $this->step() . ' can not be bigger then total ' . $this->_total());
+    }
+    parent::__construct();
+  }
+
   function id() {
-    return 'sample';
+    return $this->id;
   }
 
   protected function _total() {
-    return 10;
+    return 100;
   }
 
   protected function step() {
     return 1;
   }
 
-  protected function iteration() {
+  function iteration() {
     usleep(0.1 * 1000000);
   }
 

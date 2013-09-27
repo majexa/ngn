@@ -41,7 +41,7 @@ function pr($var, $html = true, $trace = true) {
 }
 
 function prr($var, $html = true) {
-  pr($var, $html, true);
+  pr($var, $html, false);
 }
 
 function getPrr($v, $html = true) {
@@ -62,6 +62,16 @@ function getPr($v, $html = true) {
 
 function output($str, $output = false) {
   if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'green').">").(R::get('plainText') ? "\n" : "</p>");
+  LogWriter::str('output', $str);
+}
+
+function output2($str, $output = false) {
+  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'cyan').">").(R::get('plainText') ? "\n" : "</p>");
+  LogWriter::str('output', $str);
+}
+
+function output3($str, $output = false) {
+  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'red').">").(R::get('plainText') ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 

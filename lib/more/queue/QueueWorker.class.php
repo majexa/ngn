@@ -1,77 +1,81 @@
 <?php
 
-class QueueWorker {
+class QueueWorker extends QueueBase {
 
-  function install($project, $workersCount = 1) {
-    $for = '';
-    for ($i = 1; $i <= $workersCount; $i++) $for .= " $i";
-    $c = '#! /bin/sh
+  protected $id;
 
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON=/usr/bin/php
-DAEMON_OPTS=\'/home/user/ngn-env/projects/'.$project.'/queue.php\'
-NAME='.$project.'-queue
-QUIET="--quiet"
-
-for N in '.$for.'
-do
-  DESC="'.$project.' queue daemon ${N}"
-  PIDFILE="/var/run/${NAME}${N}.pid"
-  START_OPTS="--start ${QUIET} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS}"
-  STOP_OPTS="--stop --pidfile ${PIDFILE}"
-  test -x $DAEMON || exit 0
-  set -e
-  case "$1" in
-    start)
-      echo -n "Starting $DESC: "
-      start-stop-daemon $START_OPTS
-      echo "$NAME."
-    ;;
-    stop)
-      echo -n "Stopping $DESC: "
-      start-stop-daemon $STOP_OPTS
-      echo "$NAME."
-    ;;
-    check)
-      if [ -f $PIDFILE ]
-      then
-        if ! kill -0 `cat $PIDFILE` > /dev/null 2>&1; then
-          echo -n "Starting $DESC: "
-          start-stop-daemon $START_OPTS
-          echo "$NAME."
-        fi
-      fi
-    ;;
-    restart|force-reload)
-      if kill -0 `cat $PIDFILE` > /dev/null 2>&1; then
-        echo -n "Restarting $DESC: "
-        start-stop-daemon $STOP_OPTS
-        sleep 1
-      else
-        echo -n "Starting $DESC: "
-      fi
-      start-stop-daemon $START_OPTS
-      echo "$NAME."
-    ;;
-    *)
-      NM=/etc/init.d/$NAME
-      echo "Usage: $NM {start|stop|restart|force-reload|check}" >&2
-      exit 1
-    ;;
-  esac
-done
-
-exit 0';
-    file_put_contents("/tmp/$project-queue", $c);
-    print Cli::shell("sudo mv /tmp/$project-queue /etc/init.d/$project-queue");
-    print Cli::shell("sudo chmod +x /etc/init.d/$project-queue");
-    print Cli::shell("sudo /etc/init.d/$project-queue restart");
-    usleep(0.1 * 1000000);
+  function __construct($id) {
+    parent::__construct();
+    $this->id = $id;
+    $this->run();
   }
 
-  function uninstall($project) {
-    `sudo /etc/init.d/$project-queue stop`;
-    `sudo rm /etc/init.d/$project-queue`;
+  protected function run() {
+    set_time_limit(0);
+    output("Worker $this->id started");
+//  //LogWriter::str('worker', "worker $this->id init");
+    $this->getQueue()->consume(function(AMQPEnvelope $envelope) {
+      $this->processData($envelope->getBody());
+    }, AMQP_AUTOACK);
+  }
+
+  function processData($body) {
+    output("Worker $this->id start processing data");
+    db()->disconnect();
+    $this->_processData($body);
+    db()->disconnect();
+    output("Worker $this->id finish processing data");
+  }
+
+  protected function _processData($body) {
+    Dir::make(DATA_PATH.'/queue');
+    $id = time().'-'.rand(100, 10000);
+    file_put_contents(DATA_PATH.'/queue/'.$id, $body);
+    if (empty($body)) throw new Exception('Body is empty');
+    $data = json_decode($body, true);
+    /**
+     * Примеры $data:
+     * [
+     *   'class' => 'className',
+     *   'method' => '__construct',
+     *   'data' => ['param1', 'param2', ...]
+     * ]
+     * [
+     *   'class' => 'className',
+     *   'method' => 'methodName',
+     *   'data' => ['param1', 'param2', ...]
+     * ]
+     * [
+     *   'class' => 'object',
+     *   'object' => $object,
+     *   'method' => 'method',
+     * ]
+     * [
+     *   'class' => 'object',
+     *   'object' => $longJobObject,
+     *   'method' => 'cycle',
+     *   'ljId' => 'ljSomeId'
+     * ]
+     */
+    if ($data['class'] == 'object') {
+      $o = unserialize($data['object']);
+      if (isset($data['ljId']) and !is_subclass_of($o, 'LongJobAbstract')) throw new Exception('Object with class "'.get_class($o).'" must be subclass of "LongJobCycle"');
+      if (isset($data['ljId'])) {
+    //  //LogWriter::str('worker', "$this->id started processing {$data['ljId']}");
+        output("status: {$data['ljId']}: ".LongJobCore::state($data['ljId'])->status());
+      }
+      $r = $o->{$data['method']}();
+  //  //if (isset($data['ljId'])) LogWriter::str('worker', "$this->id finished processing {$data['ljId']}. By ".($r ? 'complete' : 'abort'));
+    } else {
+      $class = ucfirst($data['class']);
+      if ($data['method'] == '__construct') {
+        new $class($data['data']);
+      } else {
+        (new $class)->{$data['method']}($data['data']);
+      }
+  }
+
+    unlink(DATA_PATH.'/queue/'.$id);
   }
 
 }
