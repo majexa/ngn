@@ -1,6 +1,6 @@
 <?php
 
-class StandAloneDbPatcher extends Patcher {
+class StandAloneDbPatcherOld extends PatcherOld {
   
   private $siteFolder;
   

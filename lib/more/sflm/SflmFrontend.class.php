@@ -7,6 +7,10 @@ class SflmFrontend {
 
   public $frontend, $sflm, $paths, $newPaths = [], $id, $debug = false;
 
+  function addClass($class, $source = 'default') {
+    throw new Exception('Realized only for js type');
+  }
+
   function __construct(SflmBase $sflm, $frontend = null) {
     $this->id = Misc::randString(5);
     $this->sflm = $sflm;
@@ -118,7 +122,7 @@ class SflmFrontend {
     }
     Sflm::output("Adding lib '$lib'");
     $newPaths = $this->sflm->getPaths($lib);
-    foreach ($newPaths as $path) {
+    foreach ($newPaths as $n => $path) {
       if (in_array($path, $this->getPathsCache())) {
         Sflm::output("New path '$path' already exists");
         continue;
@@ -141,8 +145,8 @@ class SflmFrontend {
   /**
    * @param string Добавляет к текущему фронтенду runtime путь
    */
-  protected function addPath($path, $addingFrom = null) {
-    if (in_array($path, $this->getPaths())) throw new Exception("Path '$path' already exists. Adding from $addingFrom");
+  protected function addPath($path, $addingFrom = '[not defined]') {
+    if (in_array($path, $this->getPaths())) return;//throw new Exception("Path '$path' already exists. Adding from $addingFrom");
     $this->newPaths[] = $path;
     $this->paths[] = $path;
     $this->changed = true;

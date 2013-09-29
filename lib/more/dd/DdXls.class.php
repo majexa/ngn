@@ -35,7 +35,7 @@ class DdXls extends LongJobAbstract {
     return 5;
   }
 
-  protected function iteration() {
+  function iteration() {
     $this->items->cond->setLimit($this->n.','.$this->step());
     $this->ddo->setItems($this->getItems())->xls(UPLOAD_PATH.$this->fileName, !(bool)$this->n);
   }

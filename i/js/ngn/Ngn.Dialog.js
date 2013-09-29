@@ -76,7 +76,6 @@ Ngn.Dialog = new Class({
 
   initialize: function(_opts) {
     this.setOptions(_opts);
-
     if (this.options.vResize && typeof(this.options.vResize) != 'function') {
       this.options.vResize = Ngn.Dialog.VResize;
     }
@@ -84,7 +83,10 @@ Ngn.Dialog = new Class({
     if (this.options.noPadding) this.options.messageAreaClass += ' dialog-nopadding';
     if (this.options.reduceHeight) this.options.messageAreaClass += ' dialog-scroll';
 
-    if ($(this.options.id + '_dialog')) return null;
+    if ($(this.options.id + '_dialog')) {
+      c('Dialog with id='+this.options.id+' already opened. Aborted');
+      return null;
+    }
 
     if (this.options.bindBuildMessageFunction) this.options.message = this.buildMessage.bind(this, this.options.message);
     this.request = new (this.options.jsonRequest ? Ngn.Request.JSON : Ngn.Request)({

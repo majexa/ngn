@@ -175,10 +175,6 @@ abstract class SflmBase {
     if (!$this->isPackage($lib)) return [$lib];
     if (isset($this->packagesCache[$lib])) return $this->packagesCache[$lib];
     Sflm::output("Getting package '$lib' libs recursive");
-
-    //$r = $this->getPackageLibsR($lib);
-    //if ($lib == )
-
     return $this->packagesCache[$lib] = $this->getPackageLibsR($lib);
   }
 
@@ -193,10 +189,16 @@ abstract class SflmBase {
         $this->existingPackages[] = $lib;
         $libs = Arr::append($libs, $this->getPackageLibsR($lib));
       }
-      else $libs[] = $lib;
+      else {
+        //$this->processPathOnAdd($lib);
+        $libs[] = $lib;
+      }
     }
     return $libs;
   }
+
+  //protected function processPathOnAdd($path) {
+  //}
 
   function isPackage($path) {
     return !(strstr($path, '.') or strstr($path, $this->type.'/'));

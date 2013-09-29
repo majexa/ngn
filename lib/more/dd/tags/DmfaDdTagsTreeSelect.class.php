@@ -12,7 +12,7 @@ class DmfaDdTagsTreeSelect extends DmfaDdTagsAbstract {
     // Если данные этого поля пустые
     if (empty($v)) {
       // Удаляем текущие тэг-записи
-      $this->beforeDelete($k);
+      $this->deleteTagItems($k);
       return;
     }
     $name = BracketName::getPureName($k);

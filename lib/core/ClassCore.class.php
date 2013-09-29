@@ -201,12 +201,6 @@ class ClassCore {
     return false;
   }
 
-  static function getMethodOptions(ReflectionMethod $method) {
-    $options = ClassCore::getDocComment($method->getDocComment(), 'options');
-    if (!$options) return false;
-    return array_map('trim', explode(',', $options));
-  }
-
   static function hasTrait($class, $trait) {
     if (is_object($class)) $class = get_class($class);
     foreach (self::getAncestors($class) as $cls) {
