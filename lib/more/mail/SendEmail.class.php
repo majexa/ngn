@@ -46,7 +46,7 @@ class SendEmail {
    * @return  bool
    */
   function send($emails, $subject, $message, $html = true) {
-    Misc::checkEmpty($emails);
+    Misc::checkEmpty($emails, '$emails');
     if (ALLOW_SEND === false) {
       LogWriter::v('email', "$subject\n--------------\n$message");
       return true;

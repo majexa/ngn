@@ -1,6 +1,6 @@
 <?php
 
-class TestPatcherLocal extends ProjectTestCase {
+class UestPatcherLocal extends ProjectTestCase {
 
   static $local = true;
 
