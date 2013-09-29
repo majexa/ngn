@@ -4,7 +4,7 @@ function patch_createLastDbPatchConstant($webrootFolder, $fromNgnFolder, $toNgnF
 
 # -- File: C:/a/www/ngn/dev/lib/more/patcher/standAlonePatches/createLastDbPatchConstant.php
 
-  $oP = new StandAloneDbPatcher();
+  $oP = new StandAloneDbPatcherOld();
   $oP->noCache = true;
   $oP->patchesFolders = 
     [$toNgnFolder.'/lib/more/patcher/dbPatches'];

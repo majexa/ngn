@@ -68,8 +68,8 @@ class SflmJsClasses {
   }
 
   /**
-   * @param JS класс
-   * @param Текстовое описание источника, откуда происходит добавление класс
+   * @param string JS класс
+   * @param string Описание источника, откуда происходит добавление класса
    * @throws Exception
    */
   function addClass($class, $source, Closure $success = null, Closure $failure = null) {
@@ -109,12 +109,16 @@ class SflmJsClasses {
     foreach ($this->parseRequired($c) as $v) $this->addSomething($v, "$path required");
     foreach ($this->parseParentClasses($c) as $v) $this->addSomething($v, "$path parent");
     $this->frontend->addLib($path, true);
-    //foreach ($this->parseNewNgnClasses($c) as $v) $this->addSomething($v, "$path new");
+    $this->processNewNgnClasses($c, $path);
     foreach ($this->parseRequiredAfterClasses($c) as $v) $this->addSomething($v, "$path requiredAfter");
   }
 
   protected function addSomething($str, $descr = null) {
     Misc::firstIsUpper($str) ? $this->addClass($str, $descr) : $this->frontend->addLib($str);
+  }
+
+  function processNewNgnClasses($code, $path = 'default') {
+    foreach ($this->parseNewNgnClasses($code) as $v) $this->addClass($v, "$path new");
   }
 
 }
