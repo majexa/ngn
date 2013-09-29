@@ -5,6 +5,7 @@ class TestPatcher extends ProjectTestCase {
   function test() {
     $dbPatcher = new DbPatcher;
     $lastLibIds = $dbPatcher->getLastPatchLibIds();
+    output('Patch lib IDs: '.implode(',', array_keys($lastLibIds)));
     $this->assertTrue(count($lastLibIds) == 2); // только если проект типа "sb"
     foreach ($dbPatcher->getProjectCurrentPatchIds() as $lib => $id) $this->assertTrue($lastLibIds[$lib] == $id); // новый проект должен быть создан уже пропатченым
     foreach ($dbPatcher->getLibPatchFolders() as $lib => $folder) {
@@ -20,8 +21,9 @@ CODE
     }
     $dbPatcher->patch();
     foreach ($dbPatcher->getProjectCurrentPatchIds() as $lib => $id) $this->assertTrue($lastLibIds[$lib] == $id);
+    $lastLibIds = $dbPatcher->getLastPatchLibIds();
     foreach (array_keys($dbPatcher->getLibPatchFolders()) as $lib) db()->exists("new$lib");
-    foreach ($dbPatcher->getLibPatchFolders() as $lib => $folder) unlink($folder.'/'.$newId.'_sample.php');
+    foreach ($dbPatcher->getLibPatchFolders() as $lib => $folder) unlink($folder.'/'.$lastLibIds[$lib].'_sample.php');
   }
 
 }
