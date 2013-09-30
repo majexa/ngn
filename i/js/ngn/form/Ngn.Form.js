@@ -364,8 +364,7 @@ Ngn.Form = new Class({
 
   submitAjax: function() {
     if (this.options.ajaxSubmit)
-      this._submitAjax();
-    else
+      this._submitAjax(); else
       this._submit();
   },
 
@@ -436,9 +435,7 @@ Ngn.Form.getElType = function(el) {
 
 Ngn.Form.ElN = 0;
 Ngn.Form.El = new Class({
-
   options: {},
-
   initialize: function(type, form, eRow) {
     this.type = type;
     this.form = form;
@@ -450,10 +447,8 @@ Ngn.Form.El = new Class({
     if (Ngn.Form.ElOptions[this.name]) this.options = Ngn.Form.ElOptions[this.name];
     this.init();
   },
-
   init: function() {
   }
-
 });
 
 // ------------------- Form Elements Framework End -------------------

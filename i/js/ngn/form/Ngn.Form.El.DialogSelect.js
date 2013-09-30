@@ -1,17 +1,13 @@
 Ngn.Form.El.DialogSelect = new Class({
   Extends: Ngn.Form.El,
-
   options: {
     selectTitle: 'Нажмите, чтобы сменить',
     selectClass: ''
   },
-
   baseName: 'defualt',
-
   getInitField: function() {
     return this.eRow.getElement('input') || this.eRow.getElement('select');
   },
-
   getSelectDialogEl: function() {
     return new Element('a', {
       'class': 'pseudoLink dgray' + (this.options.selectClass ? ' ' + this.options.selectClass : ''),
@@ -48,7 +44,7 @@ Ngn.Form.El.DialogSelect = new Class({
       var cls = this.getDialogClass();
       if (!cls) throw new Error('class not found');
       new cls($merge({
-        value: this.value // was "selectedName"
+        value: this.value
       }, this.getDialogOptions()));
     }.bind(this));
   },
@@ -68,28 +64,23 @@ Ngn.Form.El.DialogSelect = new Class({
       }.bind(this)
     };
   }
-
 });
 
 Ngn.ElSelectDialog = new Class({
   Extends: Ngn.Dialog,
-
   options: {
+    dialogClass: 'dialog selectDialog',
     noPadding: false
   },
-
-  initialize: function(formEl, options) {
-    this.formEl = formEl;
+  initialize: function(options) {
     this.parent(options);
   },
-
   okClose: function() {
+    //this.formEl.setVisibleValue(this.getValue());
     this.fireEvent('changeValue', this.getValue());
     this.parent();
   },
-
   getValue: function() {
     throw new Error('Abstract');
   }
-
 });
