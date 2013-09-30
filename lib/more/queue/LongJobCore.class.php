@@ -37,4 +37,29 @@ class LongJobCore {
     return O::get('LongJobStates');
   }
 
+  static function monitor() {
+    $t = '';
+    function replaceOut($str) {
+      if (is_array($str)) $str = getPrr($str);
+      $numNewLines = substr_count($str, "\n");
+      echo chr(27)."[0G"; // Set cursor to first column
+      echo $str;
+      echo chr(27)."[".$numNewLines."A"; // Set cursor up x lines
+    }
+    while (true) {
+      $s = "";
+      foreach ((new self) as $v) {
+        /* @var LongJobState $v */
+        $d = $v->all();
+        $s .= $d['id']." ({$d['percentage']}%): {$d['status']} {$d['total']} | ";
+      }
+      $s = $s ? : "                                                                                                               ";
+      if ($t != $s) {
+        $t = $s;
+        replaceOut($s);
+      }
+      usleep(0.5 * 1000000);
+    }
+  }
+
 }

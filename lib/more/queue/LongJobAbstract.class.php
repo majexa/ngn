@@ -2,7 +2,8 @@
 
 abstract class LongJobAbstract {
 
-  protected $object, $state, $n, $percentage, $total;
+  public $state;
+  protected $object, $n, $percentage, $total;
 
   function __construct() {
     $this->state = LongJobCore::state($this->id());
