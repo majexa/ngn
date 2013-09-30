@@ -1,6 +1,6 @@
 <?php
 
-class UestLongJob extends ProjectTestCase {
+class TestLongJob extends ProjectTestCase {
 
   protected $jobIds = ['sample1', 'sample2', 'sample3', 'sample4'];
 
