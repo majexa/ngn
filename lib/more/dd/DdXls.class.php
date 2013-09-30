@@ -4,10 +4,10 @@ class DdXls extends LongJobAbstract {
 
   protected $items, $ddo, $fileName, $longJobId;
 
-  function __construct($strName, DdItems $items) {
+  function __construct(DdItems $items) {
     $this->items = $items;
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
-    $this->ddo = new Ddo($strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
+    $this->ddo = new Ddo($this->items->strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
     $this->longJobId = session_id() ?: 'ddxls';
     $this->ddo->text = true;
     $this->fileName = '/temp/admin/xls/'.$this->items->strName.'_'.date('d-m-Y_H-i-s').'.xls';
