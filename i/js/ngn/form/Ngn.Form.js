@@ -364,7 +364,8 @@ Ngn.Form = new Class({
 
   submitAjax: function() {
     if (this.options.ajaxSubmit)
-      this._submitAjax(); else
+      this._submitAjax();
+    else
       this._submit();
   },
 

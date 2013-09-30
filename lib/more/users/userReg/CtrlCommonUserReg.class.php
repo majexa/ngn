@@ -382,9 +382,9 @@ class CtrlCommonUserReg extends CtrlCammon {
     foreach (db()->selectCol('
     SELECT listId FROM subs_users WHERE userId=?d', $this->userId) as $listId) $cur['subsList'][$listId] = 1;
 
-    $oF = new Form(new Fields($fields));
-    $data = $oF->setElementsData($cur);
-    if ($oF->isSubmittedAndValid()) {
+    $form = new Form(new Fields($fields));
+    $data = $form->setElementsData($cur);
+    if ($form->isSubmittedAndValid()) {
       $this->d['saved'] = true;
       foreach ($data['subsList'] as $listId => $subscribed) {
         if ($subscribed) {
@@ -395,7 +395,7 @@ class CtrlCommonUserReg extends CtrlCammon {
         }
       }
     }
-    $this->d['form'] = $oF->html();
+    $this->d['form'] = $form->html();
   }
 
 }

@@ -203,6 +203,7 @@ Ngn.FieldSet = new Class({
     var nextRowN = this.getNextN(eLastRow);
     var eLabel;
     var lastRowElements = eLastRow.getElements(Ngn.frm.selector);
+    c(lastRowElements);
     eNewRow.getElements('.element').each(function(eElement, i) {
       //c(eElement.get('class').replace('-' + curN + '-', '-' + nextN + '-'));
       //c('(.*)-' + lastRowN + '-(.*)');
@@ -212,11 +213,11 @@ Ngn.FieldSet = new Class({
       Ngn.frm.emptify(eInput);
       //if (eInput.get('value')) eInput.set('value', '');
       //if (eInput.get('checked')) eInput.set('checked', false);
-      c(nextRowN);
+      //c(nextRowN);
       eInput.set('name', this.getInputName(eInput, nextRowN));
-      eInput.set('id', lastRowElements[i].get('id').replace('-' + lastRowN + '-', '-' + nextRowN + '-'));
+      //eInput.set('id', lastRowElements[i].get('id').replace('-' + lastRowN + '-', '-' + nextRowN + '-'));
       eLabel = eInput.getNext('label');
-      if (eLabel) eLabel.set('for', eInput.get('id'));
+      //if (eLabel) eLabel.set('for', eInput.get('id'));
       this.initInput(eInput);
     }.bind(this));
     eNewRow.injectAfter(eLastRow);
