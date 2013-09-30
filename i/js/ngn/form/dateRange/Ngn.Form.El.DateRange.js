@@ -8,6 +8,8 @@ Ngn.Form.El.DateRange = new Class({
   setVisibleValue: function(value) {
     var v;
     var d = new Date();
+    console.trace();
+    c(value);
     if (value.from[2] == value.to[2]) {
       if (value.to[2] == d.getFullYear()) {
         if (value.from[0] == value.to[0] && value.from[1] == value.to[1]) {
