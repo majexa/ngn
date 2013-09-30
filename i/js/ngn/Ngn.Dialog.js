@@ -76,18 +76,16 @@ Ngn.Dialog = new Class({
 
   initialize: function(_opts) {
     this.setOptions(_opts);
+    //if (this.name && this.name == 'font') return;
     if (this.options.vResize && typeof(this.options.vResize) != 'function') {
       this.options.vResize = Ngn.Dialog.VResize;
     }
-
     if (this.options.noPadding) this.options.messageAreaClass += ' dialog-nopadding';
     if (this.options.reduceHeight) this.options.messageAreaClass += ' dialog-scroll';
-
     if ($(this.options.id + '_dialog')) {
       c('Dialog with id='+this.options.id+' already opened. Aborted');
       return null;
     }
-
     if (this.options.bindBuildMessageFunction) this.options.message = this.buildMessage.bind(this, this.options.message);
     this.request = new (this.options.jsonRequest ? Ngn.Request.JSON : Ngn.Request)({
       evalScripts: true,
@@ -98,13 +96,11 @@ Ngn.Dialog = new Class({
     this.dialogN = Ngn.dialogs.length() + 1;
     Ngn.dialogs[this.dialogId] = this;
     this.parentElement = $((this.options.parent || document.body));
-
     var dialog_styles = $merge({
       'display': 'none',
       'width': this.options.width.toInt() + 'px',
       'z-index': this.options.baseZIndex + (this.dialogN * 2)
     }, this.options.styles);
-
     this.dialog = new Element('div', {
       'id': this.dialogId,
       'class': this.options.dialogClass,

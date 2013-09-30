@@ -29,7 +29,7 @@ Ngn.Form.El.DialogSelect = new Class({
     new Element('div', {'class': 'rightFading'}).inject(this.eSelectDialog);
     this.eInitField.dispose();
     this.initControlDefault();
-    if (this.value) this.setValue(this.value);
+    this.setValue(this.value);
   },
   setValue: function(value) {
     this.setVisibleValue(value);
@@ -47,7 +47,7 @@ Ngn.Form.El.DialogSelect = new Class({
     this.eSelectDialog.addEvent('click', function() {
       var cls = this.getDialogClass();
       if (!cls) throw new Error('class not found');
-      new cls(this, $merge({
+      new cls($merge({
         value: this.value // was "selectedName"
       }, this.getDialogOptions()));
     }.bind(this));

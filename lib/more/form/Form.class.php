@@ -135,8 +135,6 @@ class Form {
 
   function isSubmitted() {
     if (!$this->fromRequest) return true;
-
-    //pr($this->id());
     return ($this->req['formId'] and $this->req['formId'] == $this->id());
   }
 
