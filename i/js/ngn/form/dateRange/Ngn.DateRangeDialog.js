@@ -1,24 +1,22 @@
 Ngn.DateRangeDialog = new Class({
   Extends: Ngn.ElSelectDialog,
-
   options: {
     width: 270,
     bindBuildMessageFunction: true,
     title: 'Выберите дату',
     dialogClass: 'dialog dateRangeDialog'
   },
-
   buildMessage: function() {
     return Ngn.tpls.dateRange;
   },
-
   init: function() {
     var from, to;
-    if (!this.formEl.value) {
+    if (!this.options.value) {
       var d = new Date();
       from = to = [d.getDate(), d.getMonth() + 1, d.getFullYear()];
     } else {
-      var o = Ngn.DdFilterPath.date.toObj(this.formEl.value);
+      //throw new Error('can not use Ngn.DdFilterPath here');
+      var o = Ngn.DdFilterPath.date.toObj(this.options.value);
       from = o.from;
       to = o.to;
     }
@@ -33,7 +31,6 @@ Ngn.DateRangeDialog = new Class({
     //Ngn.btn1('Сегодня', 'btn ok').inject(this.message).addEvent('click', function() {
     //});
   },
-
   getValue: function() {
     var value = {
       from: [],
@@ -47,6 +44,4 @@ Ngn.DateRangeDialog = new Class({
     });
     return value;
   }
-
-
 });

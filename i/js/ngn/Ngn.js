@@ -191,7 +191,10 @@ Ngn.checkboxesSelected = function(esCheckboxes) {
 // --------------------------Common functions------------------------------
 
 function c(t) {
-  if ($defined(console) && console.log) console.log(t);
+  if ($defined(console) && console.log) {
+    console.log(t);
+    console.trace();
+  }
 };
 
 Ngn.name2id = function(name) {

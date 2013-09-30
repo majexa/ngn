@@ -111,6 +111,7 @@ Ngn.DdFilterPath.Interface = new Class({
         } else {
           value = value.split(',');
           var els = Ngn.frm.getElements(name);
+          c(els);
           for (var i = 0; i < els.length; i++) {
             if (els[i].get('type') == 'checkbox') {
               if (Arr.inn(els[i].get('value'), value)) els[i].set('checked', true);
