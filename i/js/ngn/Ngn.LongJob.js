@@ -14,7 +14,8 @@ Ngn.LongJob = new Class({
     this.setOptions(options);
     this.status(function(r) {
       if (!r) return;
-      if (r.status == 'progress') this.startRequestCycle();
+      c(r);
+      if (r.status == 'progress') this.statusCycle();
       else if (r.status == 'complete') {
         this.build();
         this.complete(r);
@@ -39,7 +40,7 @@ Ngn.LongJob = new Class({
 
   delete: function(callback) {
     new Ngn.Request({
-      url: this.options.url + '?a=ajax_' + this.options.action + 'Delete',
+      url: this.options.url + '?a=ajax_ljDelete',
       onComplete: function() {
         if (callback) callback();
       }
@@ -53,36 +54,34 @@ Ngn.LongJob = new Class({
       alert('Операция "' + this.options.title + '" в процессе');
       return;
     }
-    this.completed ? this.delete(this.startRequestCycle.bind(this)) : this.startRequestCycle();
+    new Ngn.Request.JSON({
+      url: this.options.url + '?a=json_ljStart'
+    }).send();
+    this.statusCycle();
+    //this.completed ? this.delete(this.statusCycle.bind(this)) : this.statusCycle();
   },
 
-  startRequestCycle: function() {
+  statusCycle: function() {
     this.started = true;
     if (!this.el) this.build();
     this.elCont.set('html', this.options.title + '...');
     this.el.addClass('hLoader');
-    var action = function() {
-      new Ngn.Request.JSON({
-        url: this.options.url + '?a=json_' + this.options.action,
-        onComplete: function(r) {
-          if (r.status == 'complete') {
-            if (this.timer) clearInterval(this.timer);
-            this.complete(r);
-          } else {
-            this.elCont.set('html', 'Готово на ' + r.percentage + '%');
-          }
-        }.bind(this)
-      }).send();
+    var checkStatus = function() {
+      this.status(function(r) {
+        if (r.status == 'complete') {
+          if (this.timer) clearInterval(this.timer);
+          this.complete(r);
+        } else {
+          this.elCont.set('html', 'Готово на ' + r.percentage + '%');
+        }
+      }.bind(this));
     }.bind(this);
-    action();
-    this.timer = action.periodical(this.options.period);
+    this.timer = checkStatus.periodical(this.options.period);
   },
-
-  status: false,
 
   status: function(callback) {
     new Ngn.Request.JSON({
-      url: this.options.url + '?a=json_' + this.options.action + 'Status',
+      url: this.options.url + '?a=json_ljStatus',
       onComplete: function(r) {
         callback(r);
       }.bind(this)

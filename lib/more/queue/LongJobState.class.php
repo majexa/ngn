@@ -17,6 +17,7 @@ class LongJobState {
   function start() {
     $this->delete();
     $this->update('status', 'starting');
+    $this->update('startTime', time());
     return $this;
   }
 
@@ -45,11 +46,12 @@ class LongJobState {
   function all() {
     return [
       'id' => $this->_id,
-      'percentage' => Mem::get($this->_id.'percentage'),
-      'status' => Mem::get($this->_id.'status'),
-      'data' => $this->data($this->_id.'data'),
+      'percentage' => $this->get('percentage'),
+      'status' => $this->get('status'),
+      'data' => $this->data(),
       'total' => $this->get('total'),
-      'lastUpdateTrace' => Mem::get($this->id.'trace')
+      'startTime' => date('d.m.Y H:i:s', $this->get('startTime')),
+      'lastUpdateTrace' => $this->get('trace')
     ];
   }
 
