@@ -272,12 +272,24 @@ use Options;
 
   public $textItemSeparator = "--\n";
 
+  protected $excelWriters = [];
+
+  /**
+   * @param $file
+   * @return ExcelWriter
+   */
+  protected function getExcelWriter($file) {
+    if (isset($this->excelWriter[$file])) return $this->excelWriter[$file];
+    $this->excelWriter[$file] = new ExcelWriter($file);
+    return $this->excelWriter[$file];
+  }
+
   function xls($file, $header = true) {
     Err::noticeSwitch(false);
     $this->check();
     $this->text = true;
     $this->titled = false;
-    $exl = new ExcelWriter($file);
+    $exl = $this->getExcelWriter($file);
     if ($header) $exl->writeLine(Arr::get($this->fields, 'title'));
     foreach ($this->items as $v) {
       $row = [];
