@@ -2,7 +2,9 @@ Ngn.DdGrid = new Class({
   Extends: Ngn.Grid,
 
   options: {
-    reloadOnDelete: false,
+    reloadOnDelete: false
+    /*
+    так делать нельзя. в админке используется без меню
     menu: [
       {
         title: 'Добавить запись',
@@ -19,6 +21,7 @@ Ngn.DdGrid = new Class({
         }
       }
     ]
+    */
   },
 
   fieldNames: [],
