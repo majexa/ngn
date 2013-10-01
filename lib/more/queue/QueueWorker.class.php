@@ -34,6 +34,7 @@ class QueueWorker extends QueueBase {
     file_put_contents(DATA_PATH.'/queue/'.$id, $body);
     if (empty($body)) throw new Exception('Body is empty');
     $data = json_decode($body, true);
+    LogWriter::v('processData', $data);
     /**
      * Примеры $data:
      * [

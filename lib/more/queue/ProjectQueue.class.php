@@ -3,8 +3,8 @@
 class ProjectQueue extends Queue {
   use ProjectQueueBase;
 
-  function __construct() {
-    $this->initProjectQueue(PROJECT_KEY);
+  function __construct($projectKey = null) {
+    $this->initProjectQueue($projectKey ? : PROJECT_KEY);
     parent::__construct();
   }
 
