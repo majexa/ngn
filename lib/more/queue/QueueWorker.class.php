@@ -33,6 +33,7 @@ class QueueWorker extends QueueBase {
     $id = time().'-'.rand(100, 10000);
     file_put_contents(DATA_PATH.'/queue/'.$id, $body);
     if (empty($body)) throw new Exception('Body is empty');
+    LogWriter::v('processBody', $body);
     $data = json_decode($body, true);
     LogWriter::v('processData', $data);
     /**
