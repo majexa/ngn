@@ -1596,9 +1596,9 @@ class AgiBase {
   /**
    * Create a new AGI_AsteriskManager.
    */
-  function &new_AsteriskManager() {
+  function new_AsteriskManager() {
     $this->asm = new AGI_AsteriskManager(NULL, $this->config);
-    $this->asm->pagi =& $this;
+    $this->asm->pagi = $this;
     $this->config =& $this->asm->config;
     return $this->asm;
   }
