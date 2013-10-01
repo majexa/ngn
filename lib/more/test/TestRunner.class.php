@@ -12,10 +12,12 @@ class TestRunner extends TestRunnerAbstract {
     $this->_run($this->getClasses());
   }
 
+  /*
   function _local($libPath) {
     $this->_run(array_filter($this->getClasses(), function($v) use ($libPath) {
       return strstr(Lib::getClassPath($v), $libPath);
     }));
   }
+  */
 
 }
