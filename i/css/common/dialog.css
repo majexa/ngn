@@ -156,11 +156,12 @@ color: #000;
 cursor: default;
 font-size: 16px;
 margin: 5px 5px 0;
-padding: 4px 8px 2px 8px;
+padding: 4px 4px 0px 4px;
 font-family: Georgia;
 position: relative;
-
-height: 31px;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+/*height: 31px;*/
 }
 
 .dialog-message {
@@ -206,9 +207,8 @@ margin: 0 5px 5px;
 }
 
 .dialog-footer .foot-wrap {
-border-top: 1px solid #ddd;
-background: #DEDCC7;
-padding: 7px 5px 9px 5px;
+background: #bfdeff;
+padding: 7px 5px 3px 5px;
 height: 22px;
 }
 
@@ -232,10 +232,13 @@ border-bottom: 0px;
 position: absolute;
 right: 7px;
 top: 3px;
-background-image: url(../../../i/img/dialog/cross.png);
-height: 30px;
+background-position: right 1px;
+background-image: url(/i/img/dialog/cross.png?2);
+height: 25px;
 }
-
+.md-closer:active {
+background-image: url(/i/img/dialog/cross-pushed.png);
+}
 .dialog-shade {
 border: 0;
 left: 0;

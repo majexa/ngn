@@ -76,6 +76,7 @@ Ngn.Dialog = new Class({
 
   initialize: function(_opts) {
     this.setOptions(_opts);
+    this.options.id = 'dlg' + Ngn.randString(5);
     //if (this.name && this.name == 'font') return;
     if (this.options.vResize && typeof(this.options.vResize) != 'function') {
       this.options.vResize = Ngn.Dialog.VResize;

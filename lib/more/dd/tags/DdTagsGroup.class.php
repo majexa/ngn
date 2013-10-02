@@ -17,15 +17,15 @@
  * @property-private string $masterStrName  Имя мастер-структуры группы, Мастер-структура - та, которая отвечает за получение тэгов
  */
 class DdTagsGroup {
-use ObjectPropertyGetter;
+  use ObjectPropertyGetter;
 
   function __construct($strName, $name) {
     Misc::checkEmpty($strName, '$strName');
     Misc::checkEmpty($name, '$name');
     //try {
-      $this->p = self::getData($strName, $name);
+    $this->p = self::getData($strName, $name);
     //} catch (Exception $e) {
-      //throw new Exception("tag group $strName::$name does not exists");
+    //throw new Exception("tag group $strName::$name does not exists");
     //}
     if (empty($this->p['fieldType'])) throw new Exception('Field for tag "'.$name.'" of "'.$strName.'" structure does not exists');
     $this->p['tagsGetterStrName'] = empty($this->p['masterStrName']) ? $this->p['strName'] : $this->p['masterStrName'];
@@ -35,17 +35,6 @@ use ObjectPropertyGetter;
     $this->p['table'] = 'tags';
     $this->p['allowEdit'] = true;
     $this->p = array_merge($this->p, $this->getTypeProperties());
-  }
-
-  /**
-   * @return DdItems|false
-   */
-  function getRelatedItems() {
-    if (DdTags::isDdItemsType($this->p['fieldType'])) {
-      $strName = (new DdFields($this->p['strName'], ['getHidden' => true]))->getField($this->p['name'])['settings']['strName'];
-      return new DdItems($strName);
-    }
-    return false;
   }
 
   function getTypeProperties() {
@@ -80,7 +69,7 @@ use ObjectPropertyGetter;
    * @return  array
    */
   static function getData($strName, $name, $strict = true) {
-    $r = db()->selectRow('
+    $r = db()->selectRow(<<<SQL
     SELECT
       tagGroups.*,
       dd_fields.title,
@@ -90,7 +79,9 @@ use ObjectPropertyGetter;
                            dd_fields.strName=tagGroups.strName
     WHERE
       tagGroups.strName=? AND
-      tagGroups.name=?', $strName, $name);
+      tagGroups.name=?
+SQL
+      , $strName, $name);
     if ($strict) Misc::checkEmpty($r);
     return $r;
   }
@@ -103,11 +94,11 @@ use ObjectPropertyGetter;
   /**
    * Создает группу
    *
-   * @param   string  Имя группы
+   * @param   string Имя группы
    * @param   integer ID раздела
-   * @param   bool    Флаг определяющий, управляются ли тэги этой группы тэг-записями
-   * @param   bool    Флаг определяющий, уникально ли имя тэгов
-   * @param   bool    Флаг определяющий, могут ли быть тэги древовидными
+   * @param   bool Флаг определяющий, управляются ли тэги этой группы тэг-записями
+   * @param   bool Флаг определяющий, уникально ли имя тэгов
+   * @param   bool Флаг определяющий, могут ли быть тэги древовидными
    */
   static function create($strName, $name, $itemsDirected = true, $unicalTagsName = true, $tree = false) {
     if (!$name) throw new Exception('$name not defined');
@@ -122,12 +113,12 @@ use ObjectPropertyGetter;
    *
    * Переименовывает группы
    *
-   * @param   integer   Структура группы
-   * @param   string    Текущее имя группы
-   * @param   string    Новое имя группы
-   * @param   bool      Флаг определяющий, управляются ли тэги этой группы тэг-записями
-   * @param   bool      Флаг определяющий, уникально ли имя тэгов
-   * @param   bool      Флаг определяющий, могут ли быть тэги древовидными
+   * @param   integer Структура группы
+   * @param   string Текущее имя группы
+   * @param   string Новое имя группы
+   * @param   bool Флаг определяющий, управляются ли тэги этой группы тэг-записями
+   * @param   bool Флаг определяющий, уникально ли имя тэгов
+   * @param   bool Флаг определяющий, могут ли быть тэги древовидными
    */
   static function update($strName, $name, $newName, $itemsDirected = true, $unicalTagsName = true, $tree = false) {
     if (!self::getData($strName, $name)) {
