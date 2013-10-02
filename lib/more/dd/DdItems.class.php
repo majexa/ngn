@@ -231,7 +231,7 @@ class DdItems extends Items {
   /**
    * Добавляет данные для тэгов в массив записи
    *
-   * @param   array   Массив записи
+   * @param   array Массив записи
    */
   private function extendItemTags(&$item) {
     $this->setFieldTagTypes();
@@ -310,19 +310,20 @@ class DdItems extends Items {
     foreach (array_keys($item) as $fieldName) {
       if (empty($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
-      //if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselect') or FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
+      // if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselect') or FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
       if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
         $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
       }
       elseif (FieldCore::hasAncestor($fieldType, 'ddTags')) {
-        $tags = db()->selectCol('
-          SELECT tags.title FROM tagItems, tags
-          WHERE
-            tagItems.groupName=? AND
-            tagItems.strName=? AND
-            tagItems.itemId=?d AND
-            tagItems.tagId=tags.id
-          ', $fieldName, $this->strName, $item['id']);
+        $tags = db()->selectCol(<<<SQL
+SELECT tags.title FROM tagItems, tags
+WHERE
+  tagItems.groupName =? AND
+  tagItems.strName =? AND
+  tagItems.itemId =?d AND
+  tagItems.tagId = tags.id
+SQL
+          , $fieldName, $this->strName, $item['id']);
         $item[$fieldName] = implode(', ', $tags);
       }
       elseif (FieldCore::hasAncestor($fieldType, 'ddTagsSelect')) {

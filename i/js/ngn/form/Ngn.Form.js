@@ -84,13 +84,9 @@ Ngn.Form = new Class({
         onLoad: function() {
           var func = eval('Ngn.frm.init.' + this.eForm.get('id'));
           if (func) func();
-
           (function() {
-            c('fire jsComplete');
             this.fireEvent('jsComplete');
           }).delay(2000, this);
-          //c('fire jsComplete');
-
         }.bind(this)
       });
     }
