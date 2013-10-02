@@ -3,7 +3,6 @@
 class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
 
   function afterCreateUpdate($tagIds, $k) {
-    $this->deleteTagItems($k);
     if (empty($tagIds)) {
       $this->deleteTagItems($k);
       return;
@@ -16,7 +15,6 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     foreach ($tagIds as $id) if (!in_array($id, $currentTagIds)) $newTagIds[] = $id;
     foreach ($currentTagIds as $id) if (!in_array($id, $tagIds)) $deleteTagIds[] = $id;
     $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($newTagIds);
-    //die2($collectionTagIds);
     $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);
     $tagItems->updateCounts($deleteTagIds);
   }

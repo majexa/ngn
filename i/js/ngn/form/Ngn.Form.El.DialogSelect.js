@@ -72,9 +72,6 @@ Ngn.ElSelectDialog = new Class({
     dialogClass: 'dialog selectDialog',
     noPadding: false
   },
-  initialize: function(options) {
-    this.parent(options);
-  },
   okClose: function() {
     //this.formEl.setVisibleValue(this.getValue());
     this.fireEvent('changeValue', this.getValue());
