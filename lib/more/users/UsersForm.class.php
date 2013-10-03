@@ -69,9 +69,6 @@ use FormDbUnicCheck;
     $this->unicCheck('email', 'Такой имейл уже зарегистрирован');
     $this->unicCheck('login', Config::getVarVar('userReg', 'loginAsFullName') ? 'Такое Ф.И.О. уже зарегистрировано' : 'Такой логин уже зарегистрирован');
     $this->unicCheck('phone', 'Пользователь с таким телефоном уже существует');
-    if ($this->mysite) {
-      $this->unicCheck('name', 'Такой домен уже зарегистрирован');
-    }
   }
 
   protected function init() {
