@@ -53,7 +53,6 @@ Ngn.Dialog.RequestFormBase = new Class({
     this.loading(false);
     if (r.title) this.setTitle(r.title);
     if (r.submitTitle) this.setOkText(r.submitTitle);
-
     if (r.jsOptions) {
       //this.setOptions(r.jsOptions);
       if (r.jsOptions.onOkClose)
@@ -68,6 +67,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     // Формы после выполнения конструктура, иначе объект
     // Даилога не будет содержать созданого объекта Формы
     this.form.init();
+    this.fireEvent('formResponse');
     //this.form.addEvent('jsComplete', function(r) {
     //new Fx.Scroll(document.body).toElement(this.dialog, 'y');
     //}.bind(this));

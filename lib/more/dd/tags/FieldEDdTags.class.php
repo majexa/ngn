@@ -11,7 +11,7 @@ DdFieldCore::registerType('ddTags', [
 
 class FieldEDdTags extends FieldEText {
   
-  protected $useDefaultJs = true;
+  protected $useTypeJs = true;
   
 }
 

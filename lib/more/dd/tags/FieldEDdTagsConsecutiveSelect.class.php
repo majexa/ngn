@@ -16,7 +16,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
    */
   protected $tags;
 
-  protected $useDefaultJs = true;
+  protected $useTypeJs = true;
 
   protected function init() {
     parent::init();

@@ -98,8 +98,11 @@ class Config {
   }
 
   static function _deleteConstant($c, $k) {
-    $r = preg_replace(self::regexp('\s*if\s*\(\s*!defined\([\'"]'.$k.'[\'"]\s*\)\s*\)\s* define', $k), '', $c);
-    return preg_replace(self::regexp('setConstant', $k), '', $r);
+    $c = preg_replace(self::regexp('\s*if\s*\(\s*!defined\([\'"]'.$k.'[\'"]\s*\)\s*\)\s* define', $k), '', $c);
+    $c = preg_replace(self::regexp('define', $k), '', $c);
+    $c = preg_replace(self::regexp('setConstant', $k), '', $c);
+    $c = preg_replace("/\n{2,}/", "\n\n", $c);
+    return $c;
   }
 
   /**

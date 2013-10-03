@@ -8,5 +8,4 @@ class FilePatcher extends Patcher {
     return Config::getVar("{$this->type}PatchLastIds", true) ? : ['ngn' => 0];
   }
 
-
 }
