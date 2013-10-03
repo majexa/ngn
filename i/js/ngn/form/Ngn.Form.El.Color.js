@@ -8,7 +8,6 @@ Ngn.Form.El.Color = new Class({
     var el = this.eRow;
     var eColor = el.getElement('div.color');
     var eInput = el.getElement('input').addClass('hexInput');
-    c([eColor, eInput]);
     eInput.addEvent('change', function() {
       eColor.setStyle('background-color', eInput.value);
     });

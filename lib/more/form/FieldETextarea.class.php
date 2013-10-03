@@ -3,7 +3,7 @@
 class FieldETextarea extends FieldEText {
 
   protected $staticType = 'textarea';
-  protected $useDefaultJs = true;
+  protected $useTypeJs = true;
 
   public $options = [
     'maxlength' => 65000

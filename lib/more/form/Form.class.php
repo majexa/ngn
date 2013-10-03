@@ -363,14 +363,16 @@ class Form {
     if ($this->disableJs or $this->disableFormTag) return '';
     $this->js = '';
     $jsTypesAdded = [];
+    $typeJs = '';
     foreach ($this->els as $el) {
       if (($js = $el->jsInline()) != '') $this->jsInline .= $js;
-      if (($js = $el->js()) == '') continue;
-      if ($el->type == 'js' or !in_array($el->type, $jsTypesAdded)) {
+      if (($js = $el->js())) $this->js .= $js;
+      if (($js = $el->typeJs()) and !in_array($el->type, $jsTypesAdded)) {
         $jsTypesAdded[] = $el->type;
-        $this->js .= $js;
+        $typeJs .= $js;
       }
     }
+    $this->js .= $typeJs;
     // Call "js..." methods
     foreach (get_class_methods($this) as $method) {
       if ($method != 'js' and substr($method, 0, 2) == 'js') {

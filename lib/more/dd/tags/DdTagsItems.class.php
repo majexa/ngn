@@ -270,7 +270,7 @@ SQL
       tagItems.active=1
       ";
     return db()->select($q, $this->strName, $this->group->name);
-  }
+    jsOptions  }
 
   public $getRelatedItems = false;
 

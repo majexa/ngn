@@ -131,7 +131,7 @@ class Db extends DbSimple_Mysql {
     return in_array($table, $this->tables());
   }
 
-  static function dbExists($db, array $c = null) {
+  static function dbExists($db, $config = null) {
     if (defined('NGN_ENV_PATH')) $c = include NGN_ENV_PATH.'/config/server.php';
     Arr::checkEmpty($c, ['dbHost', 'dbUser', 'dbPass']);
     $id = mysql_connect($c['dbHost'], $c['dbUser'], $c['dbPass']);

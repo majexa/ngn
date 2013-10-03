@@ -1,6 +1,6 @@
 <?php
 
-class TestDdCityMultiselect extends TestDd {
+class UestDdCityMultiselect extends TestDd {
 
   function test() {
     //self::$sm->deleteByName('a');

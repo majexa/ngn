@@ -387,6 +387,7 @@ Ngn.Form = new Class({
     this.eForm.submit();
   }
 
+
 });
 
 Ngn.Form.factory = function(eForm, opts) {
@@ -407,7 +408,9 @@ Ngn.Form.ElInit = new Class({
   },
 
   init: function() {
-    this.form.eForm.getElements('.type_' + this.type).each(function(eRow) {
+    var els = this.form.eForm.getElements('.type_' + this.type);
+    if (!els.length) throw new Error('No ".type_' + this.type + '" elements was found. User FieldEAbstract::_html() instead of html()');
+    els.each(function(eRow) {
       var clsName = 'Ngn.Form.El.' + ucfirst(this.type)
       var cls = eval(clsName);
       if (cls === undefined) {
@@ -448,6 +451,9 @@ Ngn.Form.El = new Class({
     this.form.els[this.name] = this;
     if (Ngn.Form.ElOptions[this.name]) this.options = Ngn.Form.ElOptions[this.name];
     this.init();
+  },
+  fireFormElEvent: function(event,  value) {
+    this.form.fireEvent('el' + ucfirst(this.name) + ucfirst(event), value);
   },
   init: function() {
   }
