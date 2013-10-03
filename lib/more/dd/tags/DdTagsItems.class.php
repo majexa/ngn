@@ -218,7 +218,14 @@ SQL
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
-    return db()->select($q, $this->strName, $this->group->name);
+    $r = db()->select($q, $this->strName, $this->group->name);
+    $this->hash2arrayR($r);
+    return $r;
+  }
+
+  function hash2arrayR(array &$nodes) {
+    $nodes = array_values($nodes);
+    foreach ($nodes as &$v) if (!empty($v['childNodes'])) $this->hash2arrayR($v['childNodes']);
   }
 
   function getFlatOld($itemIds) {
