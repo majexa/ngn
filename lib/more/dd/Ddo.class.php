@@ -188,7 +188,6 @@ use Options;
         $r = ($this->debug ? 'ddddByType:'.$data['type'].'=' : ''). // debug
           St::dddd($ddddByType[$data['type']], $data);
       } catch (Exception $e) {
-        die2($data);
         throw new Exception('ddddByType type="'.$data['type'].', name="'.$data['name'].'", itemId='.$data['id'].' current class='.get_class($this).'". error: '.$e->getMessage());
       }
       return $r;
