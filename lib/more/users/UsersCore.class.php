@@ -21,9 +21,7 @@ class UsersCore {
       }
       db()->query('UPDATE users SET name=? WHERE id=?d', $new, $v['id']);
     }
-    foreach (db()->query("SELECT id, login FROM users
-    WHERE id>0 AND name=''
-    ORDER BY id") as $v) {
+    foreach (db()->query("SELECT id, login FROM users WHERE id>0 AND name='' ORDER BY id") as $v) {
       try {
         $_name = $name = Misc::domain($v['login']);
       } catch (Exception $e) {
