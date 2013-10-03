@@ -62,7 +62,10 @@ class Patcher {
   function runPatches($lib) {
     $projectId = $this->getProjectCurrentPatchIds()[$lib];
     foreach ($this->getLibPatches($lib) as $patch) {
-      if ($patch['id'] > $projectId) $this->runPatch($patch);
+      if ($patch['id'] > $projectId) {
+        $this->runPatch($patch);
+        SiteConfig::updateSubVar("{$this->type}PatchLastIds", $lib, $patch['id']);
+      }
     }
   }
 

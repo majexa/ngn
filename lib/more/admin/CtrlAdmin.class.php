@@ -3,11 +3,11 @@
 /**
  * use config var "adminTopLinks" to extend admin menu.
  * format:
-   [
-     'link'  => $this->tt->getPath(1).'/asd',
-     'class' => 'asd',
-     'title' => 'Asd'
-   ]
+ * [
+ * 'link'  => $this->tt->getPath(1).'/asd',
+ * 'class' => 'asd',
+ * 'title' => 'Asd'
+ * ]
  *
  */
 abstract class CtrlAdmin extends CtrlCp {
@@ -79,12 +79,20 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function initMainTpl() {
+    if (file_exists(NGN_ENV_PATH.'/config/server.php')) {
+      $server = require NGN_ENV_PATH.'/config/server.php';
+      if ($server['sType'] == 'test' and $this->req['forceAuth']) {
+        parent::initMainTpl();
+        return;
+      }
+    }
     if (!($this->userId = Auth::get('id')) or (!Misc::isAdmin() and !Misc::isGod())) {
       $this->actionDisabled = true;
       $this->d['mainTpl'] = 'admin/auth';
     }
-    else
+    else {
       parent::initMainTpl();
+    }
   }
 
   protected function initPrivMsgs() {

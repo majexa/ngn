@@ -6,13 +6,16 @@ Lib::addPearAutoloader('PHP');
 
 class TestRunnerAbstract {
 
+  protected $filterClasses = [];
+
   /**
    * @var PHPUnit_Framework_TestSuite
    */
   protected $suite;
 
-  function __construct() {
+  function __construct(array $filterNames = null) {
     R::set('plainText', true);
+    if ($filterNames) foreach ($filterNames as $v) $this->filterClasses[] = 'Test'.ucfirst($v);
     $this->suite = new PHPUnit_Framework_TestSuite('one');
   }
 
@@ -30,9 +33,15 @@ class TestRunnerAbstract {
   }
 
   protected function getClasses() {
-    return array_map(function ($v) {
+    $r = array_map(function ($v) {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
+    if ($this->filterClasses) {
+      $r = array_filter($r, function($class) {
+        return in_array($class, $this->filterClasses);
+      });
+    }
+    return $r;
   }
 
   protected function _run(array $classes) {

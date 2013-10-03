@@ -144,6 +144,10 @@ class Curl {
     return new HttpResult($this->convert($result));
   }
 
+  function check200($url) {
+    return $this->getObj($url)->getAllHeaders()[0]['Code'] == 200 ? true : false;
+  }
+
   protected function convert($text) {
     return $text;
     return $this->detectUTF8($this->getParsed($text, '<title>', '</title>')) ? $text : iconv($this->defaultInputEncoding, $this->encoding.'//IGNORE', $text);
