@@ -163,7 +163,7 @@ class Err {
   }
 
   static $showNoticesLast;
-  static $showNotices = true;
+  static $showNotices = false;
 
   /**
    * Переключает режим отображения нотисов

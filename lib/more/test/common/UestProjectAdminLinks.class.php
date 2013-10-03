@@ -1,11 +1,10 @@
 <?php
 
-class TestProjectAdminLinks extends ProjectTestCase {
+class UestProjectAdminLinks extends ProjectTestCase {
 
   static $local = true;
 
   function test() {
-    //getConstant()
     $html = Ganon::fileGetDom('http://'.SITE_DOMAIN.'/admin?forceAuth=1');
     $curl = new Curl;
     foreach ($html('.navTop a') as $el) {

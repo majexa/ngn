@@ -268,7 +268,11 @@ SQL
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
-    return db()->select($q, $this->strName, $this->group->name);
+    $tagItems = db()->select($q, $this->strName, $this->group->name);
+    if ($this->getRelatedItems and ($items = $this->group->getRelatedItems()) !== false) { // используется для подхватывания юзеров, когда они добавлены, как тэги
+      foreach ($tagItems as &$v) $v = $items->getItemF($v['id']);
+    }
+    return $tagItems;
   }
 
   public $getRelatedItems = false;
