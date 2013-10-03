@@ -265,7 +265,6 @@ SQL
     WHERE
       tagItems.strName=? AND
       tagItems.groupName=? AND
-      tagItems.collection=1058 AND
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
