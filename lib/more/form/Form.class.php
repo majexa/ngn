@@ -364,7 +364,6 @@ class Form {
     $this->js = '';
     $jsTypesAdded = [];
     $typeJs = '';
-    $this->debugElements();
     foreach ($this->els as $el) {
       if (($js = $el->jsInline()) != '') $this->jsInline .= $js;
       if (($js = $el->js())) $this->js .= $js;

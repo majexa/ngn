@@ -24,7 +24,7 @@ return [
   //'ddTagsTreeMultiselect' => '$v ? Tt()->enum($v, ``, getPrr()) : ``',
   //'ddTagsTreeMultiselect' => 'getPrr($v)',
   //'ddTagsTreeMultiselect' => '`dummy`',
-  'ddCityMultiselect' => '%ddTagsConsecutiveSelect',
+  'ddCityMultiselect' => '%ddTagsTreeMultiselect',
   'ddCity' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v[0]) : ``',
   //'ddCity' => '`CITY STRIPPED`',
   'ddCityRussia' => '%ddCity',
