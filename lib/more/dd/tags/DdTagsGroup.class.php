@@ -132,4 +132,15 @@ SQL
     db()->query('UPDATE tagItems SET groupName=? WHERE groupName=? AND strName=?', $newName, $name, $strName);
   }
 
+  /**
+   * @return DdItems|false
+   */
+  function getRelatedItems() {
+    if (DdTags::isDdItemsType($this->p['fieldType'])) {
+      $strName = O::get('DdFields', $this->p['strName'], ['getHidden' => true])->getField($this->p['name'])['settings']['strName'];
+      return new DdItems($strName);
+    }
+    return false;
+  }
+
 }
