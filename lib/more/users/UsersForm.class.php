@@ -79,7 +79,6 @@ use FormDbUnicCheck;
     if (!empty($this->fields->fields['phone'])) $this->fields->fields['phone']['options']['disabled'] = true;
     $this->initRole();
     $this->initSubscribe();
-    $this->initMysite();
   }
 
   /*
@@ -125,16 +124,6 @@ use FormDbUnicCheck;
         'default' => true
       ];
     }
-  }
-
-  protected function initMysite() {
-    if (!($this->mysite = Config::getVarVar('mysite', 'enable'))) return;
-    $this->fields[] = [
-      'name'     => 'name',
-      'title'    => 'Домен',
-      'type'     => 'name',
-      'required' => true
-    ];
   }
 
 }
