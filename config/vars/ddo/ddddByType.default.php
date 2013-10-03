@@ -25,7 +25,7 @@ return [
   //'ddTagsTreeMultiselect' => 'getPrr($v)',
   //'ddTagsTreeMultiselect' => '`dummy`',
   'ddCityMultiselect' => '%ddTagsTreeMultiselect',
-  'ddCity' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v[0]) : ``',
+  'ddCity' => '$v ? DdTagsHtml::tagsTreeArrowsNode(Arr::first($v)) : ``',
   //'ddCity' => '`CITY STRIPPED`',
   'ddCityRussia' => '%ddCity',
   //'ddCity' => 'getPrr($v)',

@@ -2,18 +2,16 @@
 
 class ProjectTestRunner extends TestRunnerAbstract {
 
-  protected $project, $filterClasses = [];
+  protected $project;
 
   function __construct(array $filterNames = null) {
     $this->project = PROJECT_KEY;
-    if ($filterNames) foreach ($filterNames as $v) $this->filterClasses[] = 'Test'.ucfirst($v);
-    parent::__construct();
+    parent::__construct($filterNames);
   }
 
   protected function getClasses() {
     return array_filter(parent::getClasses(), function($class) {
       $r = ClassCore::hasAncestor($class, 'ProjectTestCase');
-      if ($r and $this->filterClasses) $r = in_array($class, $this->filterClasses);
       return $r;
     });
   }
