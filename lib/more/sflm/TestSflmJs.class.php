@@ -6,7 +6,7 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::$frontend = 'default';
     Sflm::clearCache();
     Sflm::flm('js')->store();
-    (new FieldEWisiwigSimple2(['name' => 'dummy']))->js();
+    (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
     Sflm::flm('js')->getDeltaUrl();
     $this->assertFalse((bool)Sflm::reset('js')->newPaths, 'New paths must be empty after reset');
     Sflm::flm('js')->store();
@@ -27,14 +27,16 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2. Версии до store() и после не совпадают");
 
     $filesize1 = filesize(Sflm::flm('js')->cacheFile());
-    (new FieldEPhone(['name' => 'dummy'], new Form([])))->js();
+    (new FieldEPhone(['name' => 'dummy'], new Form([])))->typeJs();
+    //$c = file_get_contents(Sflm::flm('js')->cacheFile());
+    //prr($c);
     $this->assertTrue((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is preset in complete file');
     $this->assertTrue(filesize(Sflm::flm('js')->cacheFile()) > $filesize1, 'File size is larger then initial');
 
     // reset - эмитация 2-го открытия страницы. без очистки кэша!
     $v1 = Sflm::flm('js')->version();
     $mtime1 = filemtime(Sflm::flm('js')->cacheFile());
-    (new FieldEPhone(['name' => 'dummy'], new Form([])))->js();
+    (new FieldEPhone(['name' => 'dummy'], new Form([])))->typeJs();
     //$this->assertTrue(in_array('Ngn.Form.El.Phone', Sflm::reset('js')->classes->existingClasses));
     //$this->assertTrue(in_array('i/js/ngn/form/Ngn.Form.El.Phone.js', Sflm::reset('js')->paths));
     $v2 = Sflm::flm('js')->version();
