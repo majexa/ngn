@@ -44,7 +44,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
       ]];
     } else {
       $d['items'] = [[
-        'default' => $this->options['value'][2],
+        'default' => isset($this->options['value'][2]) ? $this->options['value'][2] : '123',
         'options' => $this->getRootOptions()
       ]];
       if (count($this->options['value'] > 1)) {

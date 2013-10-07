@@ -68,6 +68,7 @@ Ngn.Request.JSON = new Class({
         }
       });
     }
+    if (this.response.json.sflCssDeltaUrl) Asset.css(this.response.json.sflCssDeltaUrl);
     if (this.response.json.actionDisabled) {
       window.location.reload(true);
       return;
