@@ -42,7 +42,8 @@ use ObjectProcessorCtrl;
   }
 
   protected function getGrid() {
-    return Ddo::getGrid($this->getItems()->getItems_cache(), $this->ddo());
+
+    return Ddo::getGrid($this->getItems()->getItems(), $this->ddo());
   }
 
   protected $im;

@@ -94,7 +94,7 @@ Ngn.DdFilterPath.Interface = new Class({
       this.grid.reload();
       this.resetMarkers();
     }.bind(this));
-    //this.groupToggler = new Ngn.GroupToggler(this.filtersForm.eForm);
+    this.groupToggler = new Ngn.GroupToggler(this.filtersForm.eForm);
     this.initFromPath();
     this.initEvents(this.filtersForm.eForm);
     this.filtersForm.addEvent('newElement', this.initEvents.bind(this));

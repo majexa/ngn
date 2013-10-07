@@ -40,7 +40,6 @@ Ngn.Dialog.RequestFormBase = new Class({
       } else {
         this.formResponse(r);
       }
-
     }.bind(this));
   },
 

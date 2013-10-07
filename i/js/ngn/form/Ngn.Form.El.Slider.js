@@ -17,19 +17,10 @@
         if (this.options.snap)
           position = this.toPosition(this.step);
         this.knob.setStyle(this.property, position);
-
-        // --- extended ----------- Anfang Bearbeitet --------------------------------
-        // Wird ben�tigt damit dr aktuelle Wert des Sliders gelesen wird.
         $(document.body).getElements('.knob').setProperty('aria-valuenow', this.step);
-        //		 $(document.body).getElements('.knob').setProperty('aria-valuetext', this.step);
-        // ------------------------- Ende Bearbeitet ---------------------------------
       },
       onMoveTick: function(position) {
-        // --- extended ----------- Anfang Bearbeitet --------------------------------
-        // Wird ben�tigt damit dr aktuelle Wert des Sliders gelesen wird.
         $(document.body).getElements('.knob').setProperty('aria-valuenow', this.step);
-        //		 $(document.body).getElements('.knob').setProperty('aria-valuetext', this.step);
-        // ------------------------- Ende Bearbeitet ---------------------------------
       },
       initialStep: 0,
       snap: false,
@@ -49,7 +40,6 @@
         'x': false,
         'y': false
       };
-
       switch (this.options.mode) {
         case 'vertical':
           this.axis = 'y';
@@ -61,7 +51,6 @@
           this.property = 'left';
           offset = 'offsetWidth';
       }
-
       this.full = this.element.measure(function() {
         this.half = this.knob[offset] / 2;
         return this.element[offset] - this.knob[offset] + (this.options.offset * 2);
@@ -110,8 +99,6 @@
       this.drag = new Drag(this.knob, dragOptions);
       this.attach();
 
-      // --- extended ----------- Anfang Bearbeitet --------------------------------
-      // Notwendige und hinreichende Attribute die dem Element 'knob' zugewiesen werden
       $(document.body).getElements('.knob').setProperty('role', 'slider');
       $(document.body).getElements('.knob').setProperty('aria-valuemin', this.min);
       $(document.body).getElements('.knob').setProperty('aria-valuemax', this.max);
@@ -120,8 +107,6 @@
       //$(document.body).getElements('.knob').setProperty('aria-live', 'assertive');
       $(document.body).getElements('.knob').setProperty('tabindex', '0');
       this.lastValueNow = this.knob.getProperty('aria-valuenow');
-
-      // ------------------------- Ende Bearbeitet ---------------------------------
 
     },
     attach: function() {
@@ -135,9 +120,6 @@
       if (this.options.wheel)
         this.element.addEvent('mousewheel', this.scrolledElement);
 
-      // --- extended ----------- Anfang Bearbeitet --------------------------------
-      // Aufruf der Funktion clickedElementKeyUp bei einem Tastendruck. Selbst geschriebener
-      // eventlistener.
       this.knob.addEvent('keydown', this.clickedElementKeyUp.bindWithEvent(this));
 
       //VoiceOver compatibility
@@ -213,9 +195,6 @@
       this.end();
       return this;
     },
-    // --- extended ----------- Anfang Bearbeitet --------------------------------
-    // Die Funktion clickedElementKeyUp verarbeitet die eingegebenen Tasten so das sich
-    // der Slider wie gew�nscht verh�lt.
     clickedElementKeyUp: function(event) {
 
       var keyCode;

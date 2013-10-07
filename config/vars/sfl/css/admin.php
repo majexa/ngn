@@ -9,5 +9,6 @@ return [
   'i/css/common/adminPanel.css',
   'i/css/common/ddo.css',
   'm/css/common/admin.css',
-  'i/css/admin/ddFilters.css'
+  'i/css/admin/ddFilters.css',
+  'i/css/admin/grid.css'
 ];
