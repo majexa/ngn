@@ -35,6 +35,9 @@ use Options;
    */
   protected $settings;
 
+  /**
+   * @var string
+   */
   public $strName;
 
   public $titled = false, $text = false, $titledSettings;

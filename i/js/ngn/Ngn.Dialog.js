@@ -79,8 +79,8 @@ Ngn.Dialog = new Class({
     if (this.options.id == 'dlg') {
       this.options.id = 'dlg' + Ngn.randString(5);
       if (this.options.savePosition) throw new Error('Can not save position on random ID');
+      if (this.options.vResize) throw new Error('Can not save size on random ID');
     }
-    //if (this.name && this.name == 'font') return;
     if (this.options.vResize && typeof(this.options.vResize) != 'function') {
       this.options.vResize = Ngn.Dialog.VResize;
     }

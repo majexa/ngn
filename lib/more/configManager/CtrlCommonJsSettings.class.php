@@ -3,6 +3,7 @@
 class CtrlCommonJsSettings extends CtrlCommon {
 
   function action_ajax_default() {
+    header('Content-type: application/javascript; charset='.CHARSET);
     $name = $this->req->param(2);
     $s = "Ngn.settings.$name";
     if (!empty($this->req->params[3])) {
@@ -11,7 +12,7 @@ class CtrlCommonJsSettings extends CtrlCommon {
     } else {
       $v = Config::getVar($name, true);
     }
-    print "\n// Dynamic settings:\nNgn.toObj('$s');\n".$s.' = '.Arr::jsValue($v)."\n";
+    print "\n// Dynamic settings:\nNgn.toObj('$s');\n".$s.' = '.json_encode($v)."\n";
   }
 
 }

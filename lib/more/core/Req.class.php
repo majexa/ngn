@@ -197,6 +197,11 @@ use Options;
     return Misc::checkEmpty($this->params[$n], "params[$n]");
   }
 
+  function path($n) {
+    return implode('/', array_slice($this->params, $n, count($this->params)));
+  }
+
+
   /**
    * @return Req
    */
