@@ -8,7 +8,9 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::flm('js')->store();
     (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
     Sflm::flm('js')->getDeltaUrl();
-    $this->assertFalse((bool)Sflm::reset('js')->newPaths, 'New paths must be empty after reset');
+
+    $newPaths = Sflm::reset('js')->newPaths;
+    $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
     Sflm::flm('js')->store();
     Sflm::flm('js')->addLib('Ngn.Form.El.Phone');
     Sflm::clearCache();

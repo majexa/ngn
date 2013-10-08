@@ -664,7 +664,7 @@ class Form {
       $fields = $this->fields->getRequired();
     }
     else {
-      $fields = $this->fields->getFormFields();
+      $fields = $this->fields->getFieldsF();
     }
     foreach ($fields as $v) {
       if ($this->fields->isFileType($v['name'])) {

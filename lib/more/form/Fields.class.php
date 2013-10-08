@@ -50,9 +50,11 @@ class Fields extends ArrayAccesseble {
   }
 
   /**
-   * @return array Возвращает только те поля, что необходимо выводить в форме
+   * Возвращает отфильтрованые поля
+   *
+   * @return array
    */
-  function getFormFields() {
+  function getFieldsF() {
     return $this->getFields();
   }
 

@@ -26,7 +26,6 @@ class SflmFrontend {
   }
 
   function reload() {
-
   }
 
   protected function getLastPaths() {
