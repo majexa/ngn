@@ -156,12 +156,12 @@ class SflmFrontend {
   }
 
   function version() {
-    return Config::getVar($this->versionCacheKey(), true) ? : 0;
+    return ProjectState::get($this->versionCacheKey(), true) ? : 0;
   }
 
   function incrementVersion() {
-    $version = (Config::getVar($this->versionCacheKey(), true) ? : 0) + 1;
-    SiteConfig::updateVar($this->versionCacheKey(), $version);
+    $version = $this->version() + 1;
+    ProjectState::update($this->versionCacheKey(), $version);
     $this->sflm->version = $version;
   }
 
