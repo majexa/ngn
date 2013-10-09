@@ -50,7 +50,7 @@ class Patcher {
   }
 
   function getProjectCurrentPatchIds() {
-    return Config::getVar("{$this->type}PatchLastIds");
+    return ProjectState::get("{$this->type}PatchLastIds");
   }
 
   function patch() {
@@ -64,7 +64,7 @@ class Patcher {
     foreach ($this->getLibPatches($lib) as $patch) {
       if ($patch['id'] > $projectId) {
         $this->runPatch($patch);
-        SiteConfig::updateSubVar("{$this->type}PatchLastIds", $lib, $patch['id']);
+        ProjectState::updateSub("{$this->type}PatchLastIds", $lib, $patch['id']);
       }
     }
   }
@@ -75,7 +75,7 @@ class Patcher {
   }
 
   function updateProjectFromLib() {
-    SiteConfig::updateVar("{$this->type}PatchLastIds", $this->getLastPatchLibIds());
+    ProjectState::update("{$this->type}PatchLastIds", $this->getLastPatchLibIds());
   }
 
 }
