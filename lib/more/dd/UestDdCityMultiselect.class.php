@@ -3,7 +3,7 @@
 class UestDdCityMultiselect extends TestDd {
 
   function test() {
-    //self::$sm->deleteByName('a');
+    self::$sm->deleteByName('a');
     (new DdFieldsManager('a'))->create([
       'title' => 'region',
       'name'  => 'region',
@@ -54,7 +54,6 @@ INSERT INTO tagItems (groupName, strName, tagId, itemId, collection, active) VAL
 ('region', 'a', 31, $itemId, 31, 1),
 ('region', 'a', 3256, $itemId, 31, 1),
 ('region', 'a', 300, $itemId, $itemId, 1),
-('region', 'a'__call, 200, $itemId, $itemId, 1),
 ('region', 'a', 31, $itemId, $itemId, 1),
 ('region', 'a', 3256, $itemId, 31, 1),
 ('region', 'a', 300, $itemId, $itemId, 1),
@@ -70,7 +69,7 @@ INSERT INTO tagItems (groupName, strName, tagId, itemId, collection, active) VAL
 ('region', 'a', 31, $itemId, 34, 1),
 SQL
   );
-    prr(DdTags::items('a', 'region')->getItems($itemId));
+    //prr(DdTags::items('a', 'region')->getItems($itemId));
   }
 
   static function tearDownAfterClass() {}

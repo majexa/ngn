@@ -193,7 +193,7 @@ Ngn.checkboxesSelected = function(esCheckboxes) {
 function c(t) {
   if ($defined(console) && console.log) {
     console.log(t);
-    //console.trace();
+    console.trace();
   }
 };
 

@@ -14,26 +14,6 @@
         });
       }
     });
-
-    if (1) {
-      var job = new Ngn.LongJob({
-        title: 'Выгрузка',
-        url: Ngn.DdFilterPath.getUrl(),
-        action: 'xls',
-        period: 2000,
-        completeText: function(r) {
-          return '<a href="' + r.data + '">' + Ngn.DdFilterPath.reformat(r.data) + '</a>'
-        }
-      });
-      menu.push({
-        title: 'Выгрузить',
-        cls: 'xls',
-        action: function() {
-          job.options.url = Ngn.DdFilterPath.getUrl();
-          job.start();
-        }
-      });
-    }
     var opt = {
       menu: menu,
       toolActions: Ngn.Grid.toolActions,

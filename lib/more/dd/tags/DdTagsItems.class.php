@@ -2,7 +2,7 @@
 
 class DdTagsItems {
 
-  public $strName, $groupName, $group;
+  public $strName, $group;
 
   static $disableUpdateCount = false;
   static $getNonActive = false;
@@ -71,19 +71,54 @@ class DdTagsItems {
     if ($replace) $this->delete($itemId);
     $allTagTds = [];
     if (!$collectionTagIds) return;
+    if (!$replace) {
+      // Если добавляем, то учитываем, что коллекции уже существуют
+      $lastCollectionId = db()->selectCell(<<<SQL
+SELECT collection FROM tagItems
+WHERE strName=? AND groupName=? AND itemId=?d
+GROUP BY collection
+ORDER BY collection DESC
+LIMIT 1
+SQL
+        , $this->strName, $this->group->name, $itemId);
+      foreach ($collectionTagIds as $v) {
+        $lastCollectionId++;
+        $new[$lastCollectionId] = $v;
+      }
+      $collectionTagIds = $new;
+    }
+    $useInsertLarge = (count($collectionTagIds) > 20);
     foreach ($collectionTagIds as $collection => $tagTds) {
       foreach ($tagTds as $tagId) {
         $allTagTds[] = $tagId;
-        $data[] = [
+        $d = [
           'groupName'  => $this->group->name,
           'strName'    => $this->strName,
           'tagId'      => $tagId,
           'itemId'     => $itemId,
           'collection' => $collection
         ];
+        if ($useInsertLarge) {
+          $data[] = $d;
+        }
+        else {
+          try {
+            db()->insert('tagItems', $d);
+          } catch (Exception $e) {
+            if (mysql_errno() == 1062) throw new Exception("Change collection ID. Identical collection already exists: ".getPrr($d));
+            else throw $e;
+          }
+        }
       }
     }
-    db()->insertLarge('tagItems', $data);
+    if ($useInsertLarge) {
+      try {
+        db()->insertLarge('tagItems', $data);
+      } catch (Exception $e) {
+        if (mysql_errno() == 1062) throw new Exception("Some of inserted collections already exist");
+        else throw $e;
+      }
+    }
     $this->updateCounts(array_unique($allTagTds));
   }
 
@@ -201,11 +236,11 @@ SQL
     ];
     /**
      * @todo: посмотреть что это такое
-    if ($this->group->allowEdit) {
-      $params[] = 'tags.name';
-      $params[] = 'tags.parentId';
-    }
-    */
+     * if ($this->group->allowEdit) {
+     * $params[] = 'tags.name';
+     * $params[] = 'tags.parentId';
+     * }
+     */
     $params = implode(', ', $params);
 //    ;      tagItems.collection=1058 AND
     $q = "
