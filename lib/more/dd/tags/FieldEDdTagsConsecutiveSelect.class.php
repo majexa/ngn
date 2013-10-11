@@ -26,7 +26,11 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
   protected function preparePostValue() {
     $this->options['value'] = (int)$this->options['value'];
     if (!empty($this->options['value'])) {
-      $this->options['value'] = $this->tags->getParentIds2($this->options['value']);
+      try {
+        $this->options['value'] = $this->tags->getParentIds2($this->options['value']);
+      } catch (NotFoundException $e) {
+        throw new NotFoundException("Getting parents for tag name={$this->options['name']}, id={$this->options['value']} error");
+      }
     }
   }
 
