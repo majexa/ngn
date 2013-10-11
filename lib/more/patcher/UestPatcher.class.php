@@ -1,6 +1,6 @@
 <?php
 
-class TestPatcher extends ProjectTestCase {
+class UestPatcher extends ProjectTestCase {
 
   function test() {
     $dbPatcher = new DbPatcher;

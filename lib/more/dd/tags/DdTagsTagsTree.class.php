@@ -58,7 +58,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
     $this->curParentIds = [];
     $this->parentIds[$id] = [];
     $this->_setParentIds($nodes, $id);
-    if (empty($this->parentIds[$id])) throw new Exception("Tag ID=$id does not exists in tree");
+    if (empty($this->parentIds[$id])) throw new NotFoundException("Tag ID=$id does not exists in tree");
   }
 
   private function _setParentIds(array $nodes, $id) {

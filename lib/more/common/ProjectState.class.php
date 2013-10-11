@@ -3,7 +3,7 @@
 class ProjectState {
 
   static protected function file($key) {
-    return DATA_PATH.'/state/'.$key;
+    return DATA_PATH.'/state/'.$key.'.php';
   }
 
   static function get($key, $quietly = false) {
