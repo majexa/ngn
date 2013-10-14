@@ -14,6 +14,7 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     $deleteTagIds = [];
     foreach ($tagIds as $id) if (!in_array($id, $currentTagIds)) $newTagIds[] = $id;
     foreach ($currentTagIds as $id) if (!in_array($id, $tagIds)) $deleteTagIds[] = $id;
+    //if ($k == 'regRegion') prr([$tagIds, $currentTagIds, $newTagIds, $deleteTagIds]);
     $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($newTagIds);
     foreach ($deleteTagIds as $id) $tagItems->deleteByCollection($this->dm->id, $id);
     $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);

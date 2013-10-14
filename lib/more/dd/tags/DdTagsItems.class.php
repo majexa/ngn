@@ -176,7 +176,7 @@ SQL
   }
 
   function deleteByCollection($itemId, $tagId) {
-    $collection = db()->selectCell('SELECT collection FROM tagItems WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
+    $collection = db()->selectCell('SELECT collection FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND tagId=?d', $this->strName, $this->group->name, $itemId, $tagId);
     db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND collection=?d', $this->strName, $this->group->name, $itemId, $collection);
   }
 
