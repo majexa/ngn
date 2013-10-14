@@ -9,7 +9,7 @@ class FieldEDdTagsTreeMultiselectAc extends FieldEDdTags {
   function jsInline() {
     if (empty($this->options['value'])) return '';
     $v = Arr::filterByKeys2($this->options['value'], ['id', 'title']);
-    return "Ngn.toObj('Ngn.Form.El.DdTags.values.{$this->form->id()}.{$this->options['name']}', ".Arr::jsArr($v).");";
+    return "Ngn.toObj('Ngn.Form.El.DdTags.values.{$this->form->id()}.{$this->options['name']}', ".Arr::jsArr($v)."); c(Ngn.Form.El.DdTags.values.{$this->form->id()}); ";
   }
 
 }
