@@ -14,6 +14,8 @@ Ngn.Form.Upload = new Class({
     this.eInput = document.id(eInput);
     this.name = this.eInput.get('name');
     this.setOptions(options);
+    console.trace();
+    c(this.options.url);
     if ('FormData' in window) {
       this.beforeInit();
       this.init();

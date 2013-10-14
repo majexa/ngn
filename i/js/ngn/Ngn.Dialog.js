@@ -519,6 +519,15 @@ Ngn.Dialog.VResize.Wisiwig = new Class({
 
 });
 
+Ngn.Dialog.VResize.Textarea = new Class({
+  Extends: Ngn.Dialog.VResize,
+
+  getResizebleEl: function() {
+    return this.dialog.eMessage.getElement('textarea');
+  }
+
+});
+
 Ngn.Dialog.Confirm = new Class({
   Extends: Ngn.Dialog.Msg,
 

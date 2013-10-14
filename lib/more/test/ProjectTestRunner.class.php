@@ -17,6 +17,7 @@ class ProjectTestRunner extends TestRunnerAbstract {
   }
 
   function _projectLocal() {
+    die2($this->getClasses());
     $this->_run(array_filter($this->getClasses(), function($class) {
       return strstr(Lib::getClassPath($class), "projects/$this->project/") or !empty($class::$local);
     }));

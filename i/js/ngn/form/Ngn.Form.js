@@ -480,16 +480,8 @@ Ngn.Form.El.Textarea = new Class({
   resizebleOptions: {},
 
   init: function() {
-    this.initResize();
-  },
-
-  initResize: function() {
-    if (this.form.options.dialog && this.form.options.dialog.vResize) {
-      this.resizebleOptions = $merge(this.resizebleOptions, {
-        handler: this.form.options.dialog.vResize.eHandler
-      });
-    }
-    new Ngn.ResizableTextarea(this.eRow, this.resizebleOptions);
+    if (this.form.options.dialog && this.form.options.dialog.options.vResize) return;
+    new Ngn.ResizableTextarea(this.eRow);
   }
 
 });

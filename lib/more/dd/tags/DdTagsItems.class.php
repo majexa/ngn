@@ -175,13 +175,19 @@ SQL
     }
   }
 
+  function deleteByCollection($itemId, $tagId) {
+    $collection = db()->selectCell('SELECT collection FROM tagItems WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND collection=?d', $this->strName, $this->group->name, $itemId, $collection);
+  }
+
   /**
-   * Удаляет все тег-записи определенного тэга,
-   * обновляет кол-во записей в этом тэге
+   * Удаляет все тег-записи определенного тэга, обновляет кол-во записей в этом тэге
    *
    * @param  integer ID тэга
    */
   function deleteByTagId($tagId) {
+    // а ещё у этого тэга есть родительские tagItems. их бы тоже надо удалить
+    // get tree by $tagId
     db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
     $this->updateCount($tagId);
   }
