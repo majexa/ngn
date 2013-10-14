@@ -40,6 +40,11 @@ class CtrlAdminDdItems extends CtrlAdmin {
     Sflm::flm('js')->addClass('Ngn.DdGrid.Admin');
   }
 
+  protected function _getIm() {
+    // переопределяем инициализацию полей
+    return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName(), ['getDisallowed' => true]), $this->getStrName()), 'form'));
+  }
+
   protected function getParamActionN() {
     return 3;
   }
