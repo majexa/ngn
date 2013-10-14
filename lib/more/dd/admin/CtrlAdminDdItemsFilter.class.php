@@ -22,7 +22,6 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
   protected function init() {
     parent::init();
     $this->initFilterByParams();
-
     $filters = [];
     //if (($paths = Hook::paths('dd/admin/beforeInitFilters')) !== false) foreach ($paths as $path) include $path;
     $filters = Arr::append($filters, DdGridFilters::getAll($this->getStrName()));
