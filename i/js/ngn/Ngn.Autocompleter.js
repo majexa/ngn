@@ -1,8 +1,11 @@
+/**
+ * @requires ac
+ */
 Ngn.Autocompleter = new Class({
   Extends: Autocompleter.Request.JSON,
   
   options: {
-    caption: 'Нашмите клавишу "вниз" для выбора вариантов',
+    caption: 'Нажмите клавишу "вниз" для выбора вариантов',
     postVar: 'mask',
     minLength: 1,
     //onFocus: function(el) {
