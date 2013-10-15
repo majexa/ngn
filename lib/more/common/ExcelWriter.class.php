@@ -146,13 +146,13 @@ EOH;
     return "</table></body></html>";
   }
 
-  function writeLine($line_arr) {
-    $line_arr = Misc::iconvR(CHARSET, 'cp1251', $line_arr);
+  function writeLine($row) {
+    $row = Misc::iconvR(CHARSET, 'cp1251', $row);
     if ($this->state != 'OPENED') return false;
-    if (!is_array($line_arr)) return false;
-    fwrite($this->fp, "<tr>");
-    foreach ($line_arr as $col) fwrite($this->fp, "<td class=xl24 width=64 >$col</td>");
-    fwrite($this->fp, "</tr>");
+    if (!is_array($row)) return false;
+    fwrite($this->fp, "<tr>\n");
+    foreach ($row as $col) fwrite($this->fp, "  <td width=64>$col</td>\n");
+    fwrite($this->fp, "</tr>\n");
   }
 
   function writeRow() {
