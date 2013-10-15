@@ -41,7 +41,6 @@ class CtrlAdminDdItems extends CtrlAdmin {
   }
 
   protected function _getIm() {
-    // переопределяем инициализацию полей
     return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName(), ['getDisallowed' => true]), $this->getStrName()), 'form'));
   }
 

@@ -218,7 +218,6 @@ class Items extends DbItems {
 
   protected function _prepareItemsConds() {
     $this->cond->addJoin('users', 'userId');
-    //$this->cond->addJoin('pages', 'pageId');
     if (!$this->getNonActive) $this->setActiveCond(); // $activeCond - должно стоять первым в запросе
     parent::_prepareItemsConds();
   }

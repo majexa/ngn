@@ -51,7 +51,6 @@ use ObjectProcessorCtrl;
   protected function getIm() {
     if (isset($this->im)) return $this->im;
     $this->im = $this->_getIm();
-    ;
     return $this->im;
   }
 
