@@ -215,7 +215,9 @@ margin-top: 0px;
 .longJobs .item .cont {
 padding: 5px;
 padding-top: 8px;
+padding-right: 30px;
 display: block;
+position: relative;
 }
 
 .pagePath {

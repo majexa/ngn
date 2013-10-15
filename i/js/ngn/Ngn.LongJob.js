@@ -1,5 +1,5 @@
 Ngn.LongJob = new Class({
-  Implements: [Options],
+  Implements: [Options, Events],
 
   options: {
     title: 'Ждите',
@@ -23,10 +23,9 @@ Ngn.LongJob = new Class({
   },
 
   build: function() {
-    this.el = Elements.from('<div class="item dgray"><div class="icon-button md-closer"></div><div class="cont"></div></div>')[0].inject(document.getElement('.longJobs'));
+    this.el = Elements.from('<div class="item dgray"><div class="cont"><div class="icon-button md-closer"></div><div class="result"></div></div></div>')[0].inject(document.getElement('.longJobs'));
     this.btnClose = this.el.getElement('.icon-button');
-    // this.btnClose.setStyle('display', 'none');
-    this.elCont = this.el.getElement('.cont');
+    this.eResult = this.el.getElement('.cont .result');
     Ngn.opacityBtn(this.btnClose).addEvent('click', function() {
       this.delete(function() {
         this.started = false;
@@ -63,15 +62,16 @@ Ngn.LongJob = new Class({
   statusCycle: function() {
     this.started = true;
     if (!this.el) this.build();
-    this.elCont.set('html', this.options.title + '...');
+    this.eResult.set('html', this.options.title + '...');
     this.el.addClass('hLoader');
     var checkStatus = function() {
       this.status(function(r) {
         if (r.status == 'complete') {
           if (this.timer) clearInterval(this.timer);
           this.complete(r);
+          this.fireEvent('complete', r);
         } else {
-          this.elCont.set('html', 'Готово на ' + r.percentage + '%');
+          this.eResult.set('html', 'Готово на ' + r.percentage + '%');
         }
       }.bind(this));
     }.bind(this);
@@ -94,7 +94,7 @@ Ngn.LongJob = new Class({
     this.completed = true;
     this.el.removeClass('hLoader');
     this.btnClose.setStyle('display', 'block');
-    this.elCont.set('html', this.options.completeText(r));
+    this.eResult.set('html', this.options.completeText(r));
   }
 
 });
