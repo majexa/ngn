@@ -36,7 +36,7 @@ abstract class LongJobAbstract {
     $total = $this->total();
     $this->state->update('total', $total);
     $step = $this->step();
-    $this->n = 1;
+    $this->n = 0;
     while (1) {
       if (!$this->state->status()) return false; // если задача снята, выходим из цикла
       $this->percentage = round($this->n / $total * 100);
