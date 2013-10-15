@@ -32,7 +32,7 @@ class DdXls extends LongJobAbstract {
   }
 
   protected function step() {
-    return 50;
+    return 30;
   }
 
   function iteration() {
