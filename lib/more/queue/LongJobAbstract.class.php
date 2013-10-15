@@ -41,14 +41,14 @@ abstract class LongJobAbstract {
       if (!$this->state->status()) return false; // если задача снята, выходим из цикла
       $this->percentage = round($this->n / $total * 100);
       $this->state->update('percentage', $this->percentage);
-      $before = Misc::formatPrice(memory_get_usage());
-      $this->iteration();
-      output($this->state->id.'. status='.$this->state->status().": Long Job Iteration. STEP: $step, cur: $this->n, total: $total, cur: ".($this->n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
       if ($this->complete()) {
         $this->state->finish($this->result());
         output("finished. status: ".LongJobCore::state($this->id())->status());
         return true;
       }
+      $before = Misc::formatPrice(memory_get_usage());
+      $this->iteration();
+      output($this->state->id.'. status='.$this->state->status().": Long Job Iteration. STEP: $step, cur: $this->n, total: $total, cur: ".($this->n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
       $this->n += $step;
     }
   }

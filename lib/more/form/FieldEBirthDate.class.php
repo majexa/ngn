@@ -3,7 +3,7 @@
 class FieldEBirthDate extends FieldEDate {
 
   protected function getLastYear() {
-    return date('Y') - 15;
+    return date('Y') - 18;
   }
 
   //protected function validate3() {
