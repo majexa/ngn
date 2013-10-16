@@ -174,8 +174,9 @@ abstract class SflmBase {
   function getPaths($lib) {
     if (!$this->isPackage($lib)) return [$lib];
     if (isset($this->packagesCache[$lib])) return $this->packagesCache[$lib];
-    Sflm::output("Getting package '$lib' libs recursive");
-    return $this->packagesCache[$lib] = $this->getPackageLibsR($lib);
+    $this->packagesCache[$lib] = $this->getPackageLibsR($lib);
+    Sflm::output("Got package '$lib' libs recursive:\n".implode("\n", $this->packagesCache[$lib]));
+    return $this->packagesCache[$lib];
   }
 
   protected $existingPackages = [];

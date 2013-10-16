@@ -78,12 +78,18 @@ Ngn.DdFilterPath.date.toStr = function(obj) {
 };
 
 Ngn.DdFilterPath.Interface = new Class({
+  Implements: [Options],
+
+  options: {
+    groupToggler: true
+  },
 
   /**
    * @param Ngn.Grid
    * @param Ngn.DdForm
    */
-  initialize: function(grid, filtersForm) {
+  initialize: function(grid, filtersForm, options) {
+    this.setOptions(options);
     this.translate = {};
     this.grid = grid;
     if (!this.grid.options.filterPath) throw new Error('Grid must be initialized with filterPath option');
@@ -94,7 +100,7 @@ Ngn.DdFilterPath.Interface = new Class({
       this.grid.reload();
       this.resetMarkers();
     }.bind(this));
-    //this.groupToggler = new Ngn.GroupToggler(this.filtersForm.eForm);
+    if (this.options.groupToggler) this.groupToggler = new Ngn.GroupToggler(this.filtersForm.eForm);
     this.initFromPath();
     this.initEvents(this.filtersForm.eForm);
     this.filtersForm.addEvent('newElement', this.initEvents.bind(this));
