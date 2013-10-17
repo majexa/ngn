@@ -123,4 +123,7 @@ class DdCore {
     return new DdItemsManager(new DdItems($strName), new DdForm(new DdFields($strName, ['getDisallowed' => true]), $strName));
   }
 
+  static function exportItems($ids) {
+  }
+
 }
