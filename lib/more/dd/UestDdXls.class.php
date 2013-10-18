@@ -1,6 +1,6 @@
 <?php
 
-class TestDdXls extends TestDd {
+class UestDdXls extends TestDd {
 
   function test() {
     $fm = new DdFieldsManager('a');
