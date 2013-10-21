@@ -1,9 +1,10 @@
 <?php
 
-if (defined('SB_PATH')) {
+if (!defined('SB_PATH')) {
   $tables = [
     'comments',
     'comments_active',
+    'comments_srt',
     'comments_counts',
     'notify_subscribe_items',
     'notify_subscribe_pages',
@@ -30,9 +31,17 @@ if (defined('SB_PATH')) {
     'level_users',
     'menu',
     'tasks_items',
-    'tasks_types'
+    'tasks_types',
+    'userStoreOrder',
+    'userStoreOrderItems',
+    'userStoreSettings',
+    'voting_log',
+    'events',
+    'patches',
+    'indx',
+    'pages_log',
+    'pages_meta',
+    'users_pages'
   ];
   foreach ($tables as $table) q("DROP TABLE IF EXISTS $table");
 }
-
-

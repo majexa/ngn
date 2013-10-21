@@ -70,7 +70,7 @@ class Patcher {
   }
 
   protected function runPatch(array $patch) {
-    output("running {$this->type} patch {$patch['id']} '{$patch['title']}'");
+    output("running {$this->type} patch {$patch['id']} '{$patch['title']}'", true);
     include $patch['filepath'];
   }
 

@@ -123,7 +123,14 @@ class DdCore {
     return new DdItemsManager(new DdItems($strName), new DdForm(new DdFields($strName, ['getDisallowed' => true]), $strName));
   }
 
-  static function exportItems($ids) {
+  static function exportItems($strName, $ids) {
+    $dumper = new DbDumper(null, ['noHeaders' => true]);
+    $dumper->cond->addF('id', $ids);
+    $r = $dumper->getDump(self::table($strName));
+    $dumper = new DbDumper(null, ['noHeaders' => true]);
+    $dumper->cond->addF('itemId', $ids);
+    $r .= $dumper->getDump('tagItems');
+    return $r;
   }
 
 }

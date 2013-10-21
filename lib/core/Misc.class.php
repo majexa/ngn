@@ -115,7 +115,6 @@ class Misc {
   }
 
   static function parseId($str) {
-    //prr($str);
     if (!preg_match('/[a-z_]/i', $str[0])) $str[0] = '_';
     for ($i = 0; $i < strlen($str); $i++) {
       if (!preg_match('/[a-z0-9_]/i', $str[$i])) $str[$i] = '_';
