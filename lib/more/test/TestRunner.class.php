@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__.'/TestRunnerAbstract.class.php';
+
 class TestRunner extends TestRunnerAbstract {
 
   protected function getClasses() {
@@ -12,12 +14,11 @@ class TestRunner extends TestRunnerAbstract {
     $this->_run($this->getClasses());
   }
 
-  /*
-  function _local($libPath) {
+  function _local($folderName) {
+    Lib::addFolder($libPath);
     $this->_run(array_filter($this->getClasses(), function($v) use ($libPath) {
       return strstr(Lib::getClassPath($v), $libPath);
     }));
   }
-  */
 
 }

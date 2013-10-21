@@ -1,6 +1,7 @@
 <?php
 
 class DbDumper {
+  use Options;
 
   public $droptables = false, $dumpStructure = true, $dumpData = true, $autoIncrementToNull = true, $cond;
 
@@ -9,7 +10,8 @@ class DbDumper {
    */
   private $db;
 
-  function __construct($db = null) {
+  function __construct($db = null, array $options = []) {
+    $this->setOptions($options);
     $this->db = $db ? : db();
     $this->cond = new DbCond;
   }
@@ -49,15 +51,19 @@ class DbDumper {
 
   public $separateGroupFiles = false;
 
+  protected $fp, $toFile;
+
   /**
    * Делает дамп базы
    *
-   * @param   string  Файл для экспорта
-   * @param   array   Таблицы для дампа или null, если нужен дамп всех таблиц базы
+   * @param   string Файл для экспорта
+   * @param   string|array   Таблицы для дампа или null, если нужен дамп всех таблиц базы
    * @return  string  Дамп
    */
   function createDump($toFile, $onlyTables = null) {
-    // Set line feed 
+    $this->toFile = $toFile;
+    if ($onlyTables) $onlyTables = (array)$onlyTables;
+    // Set line feed
     $lf = "\n";
     $result = mysql_query("SHOW TABLES", $this->db->link) or die(mysql_error());
     $tables = $this->result2Array(0, $result);
@@ -66,19 +72,23 @@ class DbDumper {
       $result = mysql_query("SHOW CREATE TABLE `$table`");
       $createTable[$table] = $this->result2Array(1, $result);
     }
-    if (file_exists($toFile)) unlink($toFile);
-    if (!$fp = fopen($toFile, 'a')) throw new Exception('Can not open file "'.$toFile.'"');
-    // Set header
-    $dumpHeader = "#".$lf;
-    $dumpHeader .= "# DbDumper SQL Dump".$lf;
-    $dumpHeader .= "# Version 1.0".$lf;
-    $dumpHeader .= "# ".$lf;
-    $dumpHeader .= "# Host: ".$this->db->getHost().$lf;
-    $dumpHeader .= "# Generation Time: ".date("M j, Y \\a\\t H:i").$lf;
-    $dumpHeader .= "# Server version: ".mysql_get_server_info().$lf;
-    if ($this->db->getName()) $dumpHeader .= "# Database : `".$this->db->getName()."`".$lf;
-    $dumpHeader .= "#";
-    fwrite($fp, $dumpHeader);
+    if ($this->toFile !== false) {
+      if (file_exists($this->toFile)) unlink($this->toFile);
+      if (!$this->fp = fopen($this->toFile, 'a')) throw new Exception('Can not open file "'.$toFile.'"');
+    }
+    if (empty($this->options['noHeaders'])) {
+      // Set header
+      $dumpHeader = "#".$lf;
+      $dumpHeader .= "# DbDumper SQL Dump".$lf;
+      $dumpHeader .= "# Version 1.0".$lf;
+      $dumpHeader .= "# ".$lf;
+      $dumpHeader .= "# Host: ".$this->db->getHost().$lf;
+      $dumpHeader .= "# Generation Time: ".date("M j, Y \\a\\t H:i").$lf;
+      $dumpHeader .= "# Server version: ".mysql_get_server_info().$lf;
+      if ($this->db->getName()) $dumpHeader .= "# Database : `".$this->db->getName()."`".$lf;
+      $dumpHeader .= "#";
+      $this->write($dumpHeader);
+    }
     $tablesN = 0;
     $groupN = 1;
     // Generate dumptext for the tables. 
@@ -100,11 +110,11 @@ class DbDumper {
         $tableHeader .= $lf;
         output("Table '$table' structure exported");
       }
-      fwrite($fp, $tableHeader);
+      if (empty($this->options['noHeaders'])) $this->write($tableHeader);
       if ($this->dumpData) {
         output('Dumping data for '.$table.' table');
         $tableDumpHeader = "#".$lf."# Dumping data for table `$table`".$lf."#".$lf;
-        fwrite($fp, $tableDumpHeader);
+        if (empty($this->options['noHeaders'])) $this->write($tableDumpHeader);
         $emptifyFieldNames = [];
         if (isset($this->emptifyFieldTypes)) {
           // Имена полей, значение которых нужно будет заменить на пустые строки
@@ -138,11 +148,11 @@ class DbDumper {
           if ($rowN == $this->insertGroupLimit) {
             $insertDump = rtrim($insertDump, ', ').");";
             $insertDumpGroup .= $insertDump;
-            if ($this->separateGroupFiles) {
-              fclose($fp);
-              $fp = fopen($this->getFilename($toFile, $groupN), 'w');
+            if ($this->separateGroupFiles and $this->toFile !== false) {
+              fclose($this->fp);
+              $this->fp = fopen($this->getFilename($this->toFile, $groupN), 'w');
             }
-            fwrite($fp, $insertDumpGroup);
+            $this->write($insertDumpGroup);
             $insertDumpGroup = '';
             $rowN = 0;
             $groupN++;
@@ -152,20 +162,32 @@ class DbDumper {
             $insertDumpGroup .= $insertDump;
           }
         }
+
         if ($insertDumpGroup) {
-          if ($this->separateGroupFiles) {
-            fclose($fp);
-            $fp = fopen($this->getFilename($toFile, $groupN), 'w');
+          if ($this->separateGroupFiles and $this->toFile !== false) {
+            fclose($this->fp);
+            $this->fp = fopen($this->getFilename($this->toFile, $groupN), 'w');
           }
           $insertDumpGroup = rtrim($insertDumpGroup, ',').";";
-          fwrite($fp, $insertDumpGroup);
+          $this->write($insertDumpGroup);
         }
         if ($nn == 0) output("There is no data to dump in table '$table'");
         else
           output("Table '$table' data exported ($nn records)");
       }
     }
-    fclose($fp);
+    if ($this->toFile !== false) fclose($this->fp);
+  }
+
+  protected $write = '';
+
+  protected function write($str) {
+    $this->toFile === false ? $this->write .= $str : fwrite($this->fp, $str);
+  }
+
+  function getDump($onlyTables = null) {
+    $this->createDump(false, $onlyTables);
+    return $this->write;
   }
 
   private function getFilename($filename, $n) {
