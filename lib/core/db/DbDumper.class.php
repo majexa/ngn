@@ -131,8 +131,8 @@ class DbDumper {
         while (($row = mysql_fetch_assoc($result))) {
           if ($rowN == 0) $insertDumpGroup = $lf."INSERT INTO `$table` VALUES";
           $insertDump = $lf."(";
-          $arr = $row;
-          foreach ($arr as $fieldName => $value) {
+          $this->processRow($row);
+          foreach ($row as $fieldName => $value) {
             if (!empty($emptifyFieldNames) and in_array($fieldName, $emptifyFieldNames)) {
               $value = 'dummy';
             }
@@ -162,7 +162,6 @@ class DbDumper {
             $insertDumpGroup .= $insertDump;
           }
         }
-
         if ($insertDumpGroup) {
           if ($this->separateGroupFiles and $this->toFile !== false) {
             fclose($this->fp);
@@ -178,6 +177,8 @@ class DbDumper {
     }
     if ($this->toFile !== false) fclose($this->fp);
   }
+
+  protected function processRow(array &$row) {}
 
   protected $write = '';
 
