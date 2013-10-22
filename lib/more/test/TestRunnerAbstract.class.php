@@ -13,9 +13,12 @@ class TestRunnerAbstract {
    */
   protected $suite;
 
-  function __construct(array $filterNames = null) {
+  function __construct($filterNames = null) {
     R::set('plainText', true);
-    if ($filterNames) foreach ($filterNames as $v) $this->filterClasses[] = 'Test'.ucfirst($v);
+    if ($filterNames) {
+      $filterNames = (array)$filterNames;
+      foreach ($filterNames as $v) $this->filterClasses[] = 'Test'.ucfirst($v);
+    }
     $this->suite = new PHPUnit_Framework_TestSuite('one');
   }
 
