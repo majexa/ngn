@@ -116,6 +116,7 @@ class Auth {
   }
   
   static function save(DbModelUsers $user) {
+    $user = $user->r;
     if (self::$method == 'cookie') {
       self::saveCookie($user);
     } else {
@@ -149,9 +150,9 @@ class Auth {
     $_COOKIE['auth'] = $data;
   }
   
-  static private function saveSession($data) {
+  static private function saveSession($user) {
     Session::init();
-    $_SESSION['auth'] = $data;
+    $_SESSION['auth'] = $user;
   }
   
   static function relogin() {

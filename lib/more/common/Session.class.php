@@ -105,24 +105,24 @@ class Session {
      */
     ini_set('session.save_handler', 'user');
     session_set_save_handler([
-        'Session',
-        'open'
-      ], [
-        'Session',
-        'close'
-      ], [
-        'Session',
-        'read'
-      ], [
-        'Session',
-        'write'
-      ], [
-        'Session',
-        'destroy'
-      ], [
-        'Session',
-        'gc'
-      ]);
+      'Session',
+      'open'
+    ], [
+      'Session',
+      'close'
+    ], [
+      'Session',
+      'read'
+    ], [
+      'Session',
+      'write'
+    ], [
+      'Session',
+      'destroy'
+    ], [
+      'Session',
+      'gc'
+    ]);
     if (!session_id()) session_start();
     self::$started = true;
   }
@@ -145,11 +145,44 @@ class Session {
       $num = $pos - $offset;
       $varname = substr($session_data, $offset, $num);
       $offset += $num + 1;
-      $data = unserialize(substr($session_data, $offset));
+      try {
+        $a = substr($session_data, $offset);
+        $data = unserialize($a);
+      } catch (Exception $e) {
+        preg_match('/offset (\d+)/', $e->getMessage(), $m);
+        print $e->getMessage()."\n---\n";
+        print substr($a, $m[1], 30).'....'."\n---\n";
+        print $session_data;
+        die();
+      }
       $return_data[$varname] = $data;
       $offset += strlen(serialize($data));
     }
     return $return_data;
+  }
+
+  static function unserialize_($data) {
+    if (strlen($data) == 0) {
+      return array();
+    }
+    // match all the session keys and offsets
+    preg_match_all('/(^|;|\})([a-zA-Z0-9_]+)\|/i', $data, $matchesarray, PREG_OFFSET_CAPTURE);
+    $returnArray = array();
+    $lastOffset = null;
+    $currentKey = '';
+    foreach ($matchesarray[2] as $value) {
+      $offset = $value[1];
+      if (!is_null($lastOffset)) {
+        $valueText = substr($data, $lastOffset, $offset - $lastOffset);
+        $returnArray[$currentKey] = unserialize($valueText);
+      }
+      $currentKey = $value[0];
+
+      $lastOffset = $offset + strlen($currentKey) + 1;
+    }
+    $valueText = substr($data, $lastOffset);
+    $returnArray[$currentKey] = unserialize($valueText);
+    return $returnArray;
   }
 
 }
