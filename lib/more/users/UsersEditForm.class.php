@@ -50,6 +50,20 @@ class UsersEditForm extends UsersForm {
   protected function _update(array $data) {
     if (empty($data['pass'])) unset($data['pass']);
     DbModelCore::update('users', $this->userId, $data, true);
+    $this->logout($this->userId);
+  }
+
+  protected function logout($userId) {
+    foreach (db()->select("SELECT id, data FROM sessions WHERE data LIKE '%auth|%'") as $v) {
+      $user = Session::unserialize($v['data']);
+      prr($user['id']);
+      prr([$user['id'], $userId]);
+      //
+      if ($user['id'] == $userId) {
+        prr("remove {$v['id']}");
+        db()->query("DELETE FROM sessions WHERE id=?", $v['id']);
+      }
+    }
   }
 
 }
