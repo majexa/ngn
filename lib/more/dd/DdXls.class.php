@@ -4,7 +4,11 @@ class DdXls extends LongJobAbstract {
 
   protected $items, $ddo, $fileName, $longJobId;
 
-  function __construct(DdItems $items) {
+  /**
+   * @param string Используется для переопределения класса в O::replaceInjection
+   * @param DdItems $items
+   */
+  function __construct($strName, DdItems $items) {
     $this->items = $items;
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
     $this->ddo = new Ddo($this->items->strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
