@@ -20,7 +20,6 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
   }
 
   protected function init() {
-    die2(get_class($this->getLongJob()));
     parent::init();
     $this->initFilterByParams();
     $filters = [];
