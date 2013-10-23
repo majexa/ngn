@@ -41,6 +41,14 @@ class DbModelUsers extends DbModel {
       unset($data['extra']);
     }
     parent::update('users', $id, $data, true);
+    if (!empty($data['pass'])) self::logout($id);
+  }
+
+  static protected function logout($userId) {
+    foreach (db()->select("SELECT id, data FROM sessions WHERE data LIKE '%auth|%'") as $v) {
+      $user = Session::unserialize($v['data'])['auth'];
+      if ($user['id'] == $userId) db()->query("DELETE FROM sessions WHERE id=?", $v['id']);
+    }
   }
 
   static function _create(array $data) {
