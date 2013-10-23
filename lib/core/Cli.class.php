@@ -24,7 +24,11 @@ class Cli {
   static function formatRunCmd($code, $includes, $runBasePath = null) {
     $code = str_replace("'", '"', $code);
     $code = str_replace('"', '\\"', $code);
-    return '\'php '.($runBasePath ? $runBasePath : '~').'/ngn-env/run/run.php "'.$code.'" '.$includes.'\'';
+    return "'".self::addRunPaths($code, $includes, $runBasePath)."'";
+  }
+
+  static function addRunPaths($code, $includes, $runBasePath = null) {
+    return 'php '.($runBasePath ? $runBasePath : '~').'/ngn-env/run/run.php "'.$code.'" '.$includes;
   }
 
   static function rpc($server, $code) {
