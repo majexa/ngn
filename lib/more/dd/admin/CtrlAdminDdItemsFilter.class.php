@@ -16,10 +16,11 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
    */
   protected function getLongJob() {
     $this->initFilterByParams();
-    return O::gett('DdXls', $this->getItems());
+    return O::gett('DdXls', $this->getItems()->strName, $this->getItems());
   }
 
   protected function init() {
+    die2(get_class($this->getLongJob()));
     parent::init();
     $this->initFilterByParams();
     $filters = [];
