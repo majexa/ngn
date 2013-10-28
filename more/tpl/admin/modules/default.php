@@ -1,10 +1,3 @@
-<? if ($d['action'] == 'cleanup') { ?>
-<script type="text/javascript">
-Ngn.localStorage.clean();
-//window.location = Ngn.getPath(1);
-</script>
-<? die(); } ?>
-
 Вы находитесь в панеле управления сайтом <b><?= SITE_TITLE ?></b>
 
 <?/*<img src="http://majexa.ru/ngn-admin-ping/index.php?site=<?= SITE_DOMAIN ?>" width="1" height="1" />*/?>

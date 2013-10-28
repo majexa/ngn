@@ -161,13 +161,12 @@ function getOS() {
 
 function redirect($path) {
   if (!strstr($path, 'http://')) $path = '/'.ltrim($path, '/');
-  $location = $path;
-  if (getConstant('JS_REDIRECT')) {
-    header('Location: /c2/jsRedirect?r='.urlencode($location));
-  } else {
-    header('Location: '.$location);
-  }
+  getConstant('JS_REDIRECT') ? jsRedirect($path) : header('Location: '.$path);
   print "\n"; // странность: если после хедера нет никакого вывода, редирект не осуществляется
+}
+
+function jsRedirect($path) {
+  header('Location: /default/jsRedirect?r='.urlencode($path));
 }
 
 function set_time_limit_q($n) {

@@ -136,7 +136,7 @@ abstract class CtrlAdmin extends CtrlCp {
       'target' => '_blank'
     ];
     $links[] = [
-      'link'  => $this->tt->getPath(0).'/admin?logout=1',
+      'link'  => $this->tt->getPath().'?logout=1',
       'class' => 'logout',
       'title' => LANG_EXIT
     ];
