@@ -31,7 +31,6 @@ class ExcelWriter {
   }
 
   function GetHeader() {
-    LogWriter::v('GetHeader', 1);
     $header = <<<EOH
 			<html xmlns:o="urn:schemas-microsoft-com:office:office"
 			xmlns:x="urn:schemas-microsoft-com:office:excel"
