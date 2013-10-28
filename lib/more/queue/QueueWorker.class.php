@@ -12,30 +12,29 @@ class QueueWorker extends QueueBase {
 
   protected function run() {
     set_time_limit(0);
-    if ($this->debug) output("Worker $this->id started");
+    $this->output("Worker $this->id started");
     $this->getQueue()->consume(function (AMQPEnvelope $envelope) {
       $this->processData($envelope->getBody());
     }, AMQP_AUTOACK);
   }
 
   function processData($body) {
-    if ($this->debug) output("Worker $this->id start processing data");
+    $this->output("Worker $this->id start processing data");
     $t = getMicrotime();
     db()->disconnect();
     $this->_processData($body);
     db()->disconnect();
-    if ($this->debug) output("Worker $this->id finish processing data. Time: ".Misc::price(getMicrotime() - $t));
+    $this->output("Worker $this->id finish processing data. Time: ".Misc::price(getMicrotime() - $t));
   }
 
   protected function _processData($body) {
     Dir::make(DATA_PATH.'/queue');
     $id = time().'-'.rand(100, 10000);
     file_put_contents(DATA_PATH.'/queue/'.$id, $body);
-    // ...
     if (empty($body)) throw new Exception('Body is empty');
-    if ($this->debug) LogWriter::v('processBody', $body);
+    if ($this->isDebug()) LogWriter::v('processBody', $body);
     $data = json_decode($body, true);
-    if ($this->debug) LogWriter::v('processData', $data);
+    if ($this->isDebug()) LogWriter::v('processData', $data);
     /**
      * Примеры $data:
      * [
@@ -63,12 +62,9 @@ class QueueWorker extends QueueBase {
     if ($data['class'] == 'object') {
       $o = unserialize($data['object']);
       if (isset($data['ljId']) and !is_subclass_of($o, 'LongJobAbstract')) throw new Exception('Object with class "'.get_class($o).'" must be subclass of "LongJobCycle"');
-      if (isset($data['ljId'])) {
-        //  //LogWriter::str('worker', "$this->id started processing {$data['ljId']}");
-        if ($this->debug) output("status: {$data['ljId']}: ".LongJobCore::state($data['ljId'])->status());
-      }
+      if (isset($data['ljId'])) if ($this->isDebug()) $this->output("status: {$data['ljId']}: ".LongJobCore::state($data['ljId'])->status());
       $r = $o->{$data['method']}();
-      //  //if (isset($data['ljId'])) LogWriter::str('worker', "$this->id finished processing {$data['ljId']}. By ".($r ? 'complete' : 'abort'));
+      $this->output("$this->id finished processing {$data['ljId']}. By ".($r ? 'complete' : 'abort'));
     }
     else {
       $class = ucfirst($data['class']);
@@ -80,6 +76,10 @@ class QueueWorker extends QueueBase {
       }
     }
     unlink(DATA_PATH.'/queue/'.$id);
+  }
+
+  protected function isDebug() {
+    return false;
   }
 
 }

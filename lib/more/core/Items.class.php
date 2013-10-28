@@ -149,6 +149,7 @@ class Items extends DbItems {
       {$this->selectCond}
     FROM {$this->table}
     ".$this->cond->all();
+    LogWriter::v('getItems', $q);
     /*
       pages.strName,
 

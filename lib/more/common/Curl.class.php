@@ -1,6 +1,7 @@
 <?php
 
 class Curl {
+  use DebugOutput;
 
   public $getHeaders = false; // headers will be added to output 
   public $getContent = true; // contens will be added to output 
@@ -76,8 +77,8 @@ class Curl {
 
   function get($url) {
     if (!$this->fSocket) return false;
-    output('curl get: '.$url);
-    //$this->setopt(CURLOPT_HEADER, 1); 
+    $this->output('curl get: '.$url);
+    //$this->setopt(CURLOPT_HEADER, 1);
     $this->setopt(CURLOPT_NOBODY, 0);
     $this->setopt(CURLOPT_POST, 0);
     $this->setopt(CURLOPT_URL, $url);

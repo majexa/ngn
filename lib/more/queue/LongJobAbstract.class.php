@@ -1,6 +1,7 @@
 <?php
 
 abstract class LongJobAbstract {
+  use DebugOutput;
 
   public $state;
   protected $object, $n, $percentage, $total;
@@ -31,12 +32,13 @@ abstract class LongJobAbstract {
   function cycle() {
     set_time_limit(0);
     if (!isset($this->state)) throw new Exception('U need to call parent constructor in the end of '.get_class($this).' class constructor');
-    output("CYCLE BEGIN");
+    $this->output("Start long job cycle. Class: ".get_class($this));
     $this->state->started();
     $total = $this->total();
+    $this->output("items total: $total");
     if (!$total) {
       $this->state->finish(false);
-      output("no records");
+      $this->output("no records");
     }
     $this->state->update('total', $total);
     $step = $this->step();
@@ -47,12 +49,12 @@ abstract class LongJobAbstract {
       $this->state->update('percentage', $this->percentage);
       if ($this->complete()) {
         $this->state->finish($this->result());
-        output("finished. status: ".LongJobCore::state($this->id())->status());
+        $this->output("finished. status: ".LongJobCore::state($this->id())->status());
         return true;
       }
       $before = Misc::formatPrice(memory_get_usage());
       $this->iteration();
-      output($this->state->id.'. status='.$this->state->status().": Long Job Iteration. STEP: $step, cur: $this->n, total: $total, cur: ".($this->n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
+      $this->output($this->state->id.'. status='.$this->state->status().": Long Job Iteration. STEP: $step, cur: $this->n, total: $total, cur: ".($this->n + $step).', mem before: '.$before.', mem after: '.Misc::formatPrice(memory_get_usage()));
       $this->n += $step;
     }
   }

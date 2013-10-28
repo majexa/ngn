@@ -57,7 +57,6 @@ class LongJobState {
 
   function finish($data) {
     if (!$this->status()) return;
-    LogWriter::str('finished', "{$this->id} finished =(");
     $this->update('status', 'complete');
     $this->update('data', $data);
   }
@@ -75,7 +74,7 @@ class LongJobState {
     if (!$this->status()) return;
     if (!$forceStaring and $this->status() == 'starting') throw new Exception("Can not delete '$this->id' while starting");
     output("delete {$this->id}");
-    //$this->update('status', 'deleted');
+    // $this->update('status', 'deleted');
     Mem::delete($this->_id.'status');
     Mem::delete($this->_id.'data');
     Mem::delete($this->_id.'percentage');
