@@ -34,6 +34,10 @@ abstract class LongJobAbstract {
     output("CYCLE BEGIN");
     $this->state->started();
     $total = $this->total();
+    if (!$total) {
+      $this->state->finish(false);
+      output("no records");
+    }
     $this->state->update('total', $total);
     $step = $this->step();
     $this->n = 0;

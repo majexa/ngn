@@ -19,7 +19,7 @@
       <? } ?>
       <p class="error">У вас нет прав доступа к панеле управления сайтом</p>
     <? } else { ?>
-      <form action="/admin?a=cleanup" method="post" id="loginForm">
+      <form action="" method="post" id="loginForm">
       <table cellspacing="0" cellpadding="2" width="100%">
       <tr>
         <td nowrap><?= UserRegCore::getAuthLoginTitle() ?>:</td>

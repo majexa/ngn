@@ -28,6 +28,8 @@ class DdXls extends LongJobAbstract {
   }
 
   protected function getItems() {
+    LogWriter::str('ddXlsCond', $this->items->cond->all());
+    LogWriter::str('ddXlsCond', 'count: '.count($this->items->getItemIds()));
     return $this->items->getItems();
   }
 

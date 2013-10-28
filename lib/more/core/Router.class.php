@@ -75,8 +75,8 @@ use Options;
     if (isset($this->req->g['logout'])) {
       Auth::logout();
       $url = 'http://'.SITE_DOMAIN.Tt()->getUrlDeletedParams($_SERVER['REQUEST_URI'], ['logout']);
-      sendHeader();
-      die("<a href='$url'>перейти</a>");
+      jsRedirect($url);
+      die();
       (new Curl)->exists($url) ? redirect($url) : redirect('/');
     }
     elseif (isset($this->req->g['clear'])) {
