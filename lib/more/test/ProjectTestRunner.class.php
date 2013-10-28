@@ -16,20 +16,19 @@ class ProjectTestRunner extends TestRunnerAbstract {
     });
   }
 
-  function _projectLocal() {
-    die2($this->getClasses());
+  function _local() {
     $this->_run(array_filter($this->getClasses(), function($class) {
       return strstr(Lib::getClassPath($class), "projects/$this->project/") or !empty($class::$local);
     }));
   }
 
-  function _projectGlobal() {
+  function _global() {
     $this->_run(array_filter($this->getClasses(), function($class) {
       return !strstr(Lib::getClassPath($class), "projects/$this->project/");
     }));
   }
 
-  function _project() {
+  function _all() {
     $this->_run($this->getClasses());
   }
 

@@ -2,7 +2,7 @@
 
 class QueueBase {
 
-  protected $n, $channel, $exchange, $queue, $exName = 'exchange1', $queueName = 'exchange1';
+  protected $debug = false, $n, $channel, $exchange, $queue, $exName = 'exchange1', $queueName = 'exchange1';
 
   function __construct() {
     $connection = new AMQPConnection;
@@ -29,14 +29,5 @@ class QueueBase {
     $this->queue->bind($this->exName, 'global');
     return $this->queue;
   }
-
-  /*
-  function get($flags = 0) {
-    if (!($envelope = $this->getQueue()->get($flags))) return false;
-    $data = $envelope->getBody();
-    $data = json_decode($data, true);
-    return $data;
-  }
-  */
 
 }

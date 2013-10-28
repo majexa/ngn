@@ -335,34 +335,6 @@ class CtrlCommonUserReg extends CtrlCammon {
     $this->redirect();
   }
 
-  function action_lostpass() {
-    $this->setPageTitle('Забыли пароль?');
-    $form = new Form(new Fields([
-      [
-        'name'     => 'email',
-        'title'    => 'E-mail',
-        'type'     => 'email',
-        'required' => true
-      ]
-    ]));
-    $form->options['submitTitle'] = 'Выслать';
-    $this->d['form'] = $form->html();
-    if ($form->isSubmittedAndValid()) {
-      $this->redirect($this->tt->getPath(1).(UsersCore::sendLostPass($data['email']) ? '/lostpassComplete' : '/lostpassFailed'));
-    }
-    $this->d['tpl'] = 'users/lostpass';
-  }
-
-  function action_lostpassFailed() {
-    print 'Ошибка отправки';
-    $this->hasOutput = false;
-  }
-
-  function action_lostpassComplete() {
-    print 'Отправлено успешно';
-    $this->hasOutput = false;
-  }
-
   function action_subscribe() {
     if (!Config::getVarVar('subscribe', 'onReg') or empty($this->subscribes)) throw new Exception('Action not allowed');
     $this->initSubmenu();

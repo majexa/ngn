@@ -4,7 +4,7 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
   use DdParamFilterCtrl, LongJobCtrl;
 
   protected function paramFilterItems() {
-    return $this->getItems();
+    return $this->items();
   }
 
   protected function paramFilterN() {
@@ -16,7 +16,7 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
    */
   protected function getLongJob() {
     $this->initFilterByParams();
-    return O::gett('DdXls', $this->getItems()->strName, $this->getItems());
+    return O::gett('DdXls', $this->items()->strName, $this->items());
   }
 
   protected function init() {

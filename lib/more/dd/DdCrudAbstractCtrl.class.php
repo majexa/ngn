@@ -9,26 +9,26 @@ trait DdCrudAbstractCtrl {
 use ObjectProcessorCtrl;
 
   /**
+   * @var DdItems
+   */
+  protected $items;
+
+  /**
    * @abstract
    * @return DdItems
    */
-  abstract protected function items();
+  abstract protected function _items();
 
   protected function getStrName() {
     return lcfirst(Misc::removePrefix('Ctrl', get_class($this)));
   }
 
   /**
-   * @var DdItems
-   */
-  protected $items;
-
-  /**
    * @return DdItems
    */
-  protected function getItems() {
+  protected function items() {
     if (isset($this->items)) return $this->items;
-    $this->items = $this->items();
+    $this->items = $this->_items();
     $this->items->isPagination = true;
     return $this->objectProcess($this->items, 'items');
   }
@@ -43,7 +43,7 @@ use ObjectProcessorCtrl;
 
   protected function getGrid() {
 
-    return Ddo::getGrid($this->getItems()->getItems(), $this->ddo());
+    return Ddo::getGrid($this->items()->getItems(), $this->ddo());
   }
 
   protected $im;
@@ -73,7 +73,7 @@ use ObjectProcessorCtrl;
 
   function action_json_getItems() {
     $this->json = $this->getGrid();
-    if ($this->getItems()->isPagination) $this->json['pagination'] = $this->getItems()->getPagination();
+    if ($this->items()->isPagination) $this->json['pagination'] = $this->items()->getPagination();
   }
 
   function action_ajax_delete() {
@@ -97,7 +97,7 @@ use ObjectProcessorCtrl;
   }
 
   function action_ajax_reorder() {
-    $this->getItems()->reorderItems($this->req->rq('ids'));
+    $this->items()->reorderItems($this->req->rq('ids'));
   }
 
   function action_ajax_deleteFile() {
