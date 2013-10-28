@@ -70,8 +70,7 @@ class Sflm {
   }
 
   static function output($s) {
-    output($s);
-    //print "<span style='color:#FF0000'>$s</span><br />";
+    if (self::$debug) output($s);
   }
 
 }
