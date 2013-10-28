@@ -10,6 +10,7 @@ class DdXls extends LongJobAbstract {
    */
   function __construct($strName, DdItems $items) {
     $this->items = $items;
+    $this->items->isPagination = false; // переопределяем, т.к. объект может быть получен уже сформированным
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
     $this->ddo = new Ddo($this->items->strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
     $this->longJobId = 'i'.(session_id() ? : 'ddxls');
@@ -28,8 +29,8 @@ class DdXls extends LongJobAbstract {
   }
 
   protected function getItems() {
-    LogWriter::str('ddXlsCond', $this->items->cond->all());
-    LogWriter::str('ddXlsCond', 'count: '.count($this->items->getItemIds()));
+    //LogWriter::str('ddXlsCond', $this->items->cond->all());
+    //LogWriter::str('ddXlsCond', 'count: '.count($this->items->getItemIds()));
     return $this->items->getItems();
   }
 
@@ -42,6 +43,7 @@ class DdXls extends LongJobAbstract {
   }
 
   function iteration() {
+    $this->output("set limit {$this->n},".$this->step());
     $this->items->cond->setLimit($this->n.','.$this->step());
     $this->ddo->setItems($this->getItems())->xls(UPLOAD_PATH.$this->fileName, !(bool)$this->n);
   }

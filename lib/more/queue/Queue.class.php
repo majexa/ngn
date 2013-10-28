@@ -10,7 +10,6 @@ class Queue extends QueueBase {
     }
     $attr = empty($data['id']) ? [] : ['message_id' => $data['id']];
     if ($this->debug) output("Adding data. Exchange: $this->exName, queue: $this->queueName");
-    LogWriter::str('worker', "publish new data");
     $body = json_encode($data);
     if ($this->debug) LogWriter::v('publishBody', $body);
     if (!($this->getExchange()->publish($body, 'global', AMQP_NOPARAM, $attr))) {

@@ -1,8 +1,9 @@
 <?php
 
 class QueueBase {
+  use DebugOutput;
 
-  protected $debug = false, $n, $channel, $exchange, $queue, $exName = 'exchange1', $queueName = 'exchange1';
+  protected $n, $channel, $exchange, $queue, $exName = 'exchange1', $queueName = 'exchange1';
 
   function __construct() {
     $connection = new AMQPConnection;

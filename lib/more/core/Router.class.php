@@ -76,16 +76,14 @@ use Options;
       Auth::logout();
       $url = 'http://'.SITE_DOMAIN.Tt()->getUrlDeletedParams($_SERVER['REQUEST_URI'], ['logout']);
       jsRedirect($url);
-      die();
-      (new Curl)->exists($url) ? redirect($url) : redirect('/');
     }
     elseif (isset($this->req->g['clear'])) {
       Auth::clear();
       //header('Location: '.Tt()->getUrlDeletedParams($_SERVER['REQUEST_URI'], array('clear')));
     }
     else {
-      // Auth::$doNotSavePass = $_REQUEST
       Auth::setAuth();
+      if (Auth::$postAuth) jsRedirect(Tt()->getPath());
     }
   }
 
