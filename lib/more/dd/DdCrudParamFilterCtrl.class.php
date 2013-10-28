@@ -4,7 +4,7 @@ trait DdCrudParamFilterCtrl {
 use DdCrudCtrl, DdParamFilterCtrl;
 
   protected function paramFilterItems() {
-    return $this->getItems();
+    return $this->items();
   }
 
   protected function processItemsInitParamFilter() {
