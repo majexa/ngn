@@ -6,7 +6,7 @@ Ngn.Request = new Class({
       return;
       new Ngn.Dialog.Error({
         width: 600,
-        message: 'Ошибка запроса: '+this.options.url
+        message: 'Ошибка запроса: ' + this.options.url
       });
     }
     this.parent(text, xml);
@@ -42,7 +42,7 @@ Ngn.JSON.process = function(json) {
     } else if (typeOf(json[i]) == 'string') {
       if (json[i].test(/^func: .*/)) {
         json[i] = json[i].replace(/^func: (.*)/, '$1');
-        json[i] = eval('(function() {'+json[i]+'})');
+        json[i] = eval('(function() {' + json[i] + '})');
       }
     }
   }
@@ -51,8 +51,8 @@ Ngn.JSON.process = function(json) {
 
 Ngn.Request.JSON = new Class({
   Extends: Request.JSON,
-  
-  success: function(text){
+
+  success: function(text) {
     this.response.json = Ngn.JSON.decode(text, this.options.secure);
     if (this.response.json === null) {
       this.onSuccess({});
@@ -60,7 +60,7 @@ Ngn.Request.JSON = new Class({
     }
     if (this.response.json.sflJsDeltaUrl) {
       Asset.javascript(this.response.json.sflJsDeltaUrl, {
-        onLoad: function(){
+        onLoad: function() {
           if (Ngn.Request.sflJsDeltaUrlOnLoad) {
             Ngn.Request.sflJsDeltaUrlOnLoad();
             Ngn.Request.sflJsDeltaUrlOnLoad = false;
@@ -74,18 +74,22 @@ Ngn.Request.JSON = new Class({
       return;
     }
     if (this.response.json.error) {
-      throw new Error(this.response.json.error.message+"\n----------\n"+this.response.json.error.trace);
+      Ngn.Request.JSON.throwServerError(this.response.json);
       return;
     }
     this.onSuccess(this.response.json, text);
   },
-  
+
   failure: function(xhr) {
     //new Ngn.Dialog.Error({message: this.xhr.responseText + '<hr/>URL: ' + this.options.url});
     this.parent();
   }
-  
+
 });
 
+Ngn.Request.JSON.throwServerError = function(error) {
+  c(error);
+  throw new Error(error.message + "\n----------\n" + error.trace)
+};
 
 Ngn.Request.sflJsDeltaUrlOnLoad = false;

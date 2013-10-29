@@ -154,7 +154,23 @@ Array.prototype.max = function() {
   var len = this.length;
   for (var i = 1; i < len; i++) if (this[i] > max) max = this[i];
   return max;
-}
+};
+
+Array.prototype.get = function(k, v) {
+  for (var i=0; i<this.length; i++) {
+    if (this[i][k] == v) return this[i];
+  }
+  return false;
+};
+
+/*
+Array.prototype.getIndex = function(k, v) {
+  for (var i=0; i<this.length; i++) {
+    if (this[i][k] == v) return i;
+  }
+  return false;
+};
+*/
 
 Arr = {};
 Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists in an array
