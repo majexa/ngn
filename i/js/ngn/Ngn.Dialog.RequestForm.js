@@ -128,10 +128,12 @@ Ngn.Dialog.RequestFormBase = new Class({
         new Request.JSON({
           url: this.response.nextFormUrl,
           onComplete: function(r) {
+            if (r.error) Ngn.Request.JSON.throwServerError(r.error);
             if (!r.form) throw new Error('Form does not exists in next form url "' + this.response.nextFormUrl + '"');
-            new Ngn.Dialog.RequestForm.Static({
-              staticResponse: r
-            });
+            var opt = { staticResponse: r };
+            if (this.options.nextFormOptions) opt = $merge(opt, this.options.nextFormOptions);
+            if (this.response.nextFormOptions) opt = $merge(opt, this.response.nextFormOptions);
+            new Ngn.Dialog.RequestForm.Static(opt);
           }
         }).send();
       }

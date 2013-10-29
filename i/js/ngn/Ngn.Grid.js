@@ -34,6 +34,7 @@ Ngn.Grid = new Class({
       for (var i = 0; i < this.options.menu.length; i++) {
         (function() {
           var v = grid.options.menu[i];
+          // v может быть обычной ф-ей или объектом
           var action = typeof(v.action) == 'function' ? { action: v.action } : (v.action || null);
           if (action) {
             action.id = v.cls;

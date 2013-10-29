@@ -14,6 +14,39 @@
         });
       }
     });
+    // Переопределяем для типа кредита
+    // clone menu['new'].action;
+   //
+    //c(menu);
+    //for (var i=0; i<menu.length; i++) if (menu[i])
+
+    var newMenuOption = menu.get('cls', 'add');
+    //c(newMenuOption.action);
+
+    var ac = new Class({
+
+    });
+
+    c(typeof(ac));
+
+    newMenuOption.action = function (grid) {
+      new Ngn.Dialog.RequestForm({
+        width: 300,
+        dialogClass: 'dialog fieldFullWidth',
+        url: grid.options.basePath + '/json_selectCreditType',
+        title: false,
+        nextFormOptions: {},
+        onOkClose: function() {
+          c('Это успех');
+        }.bind(this)
+      });
+    };
+
+    /*
+    menu['new'].action = function(grid) {
+    };
+    */
+
     var opt = {
       menu: menu,
       toolActions: Ngn.Grid.toolActions,
