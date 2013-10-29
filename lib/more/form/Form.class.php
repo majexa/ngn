@@ -707,7 +707,6 @@ class Form {
   protected function setElementsDataDefault() {
     if ($this->elementsDefaultDefined) return false;
     $this->setElementsData($this->defaultData);
-    if (($paths = Hook::paths('dd/formInit'))) foreach ($paths as $path) require $path;
     $this->elementsDefaultDefined = true;
     return true;
   }
