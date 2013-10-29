@@ -9,12 +9,7 @@ DdFieldCore::registerType('ddTags', [
   'tagsItemsDirected' => true
 ]);
 
-class FieldEDdTags extends FieldEText {
-  
-  protected $useTypeJs = true;
-  
-}
-
+/*
 DdFieldCore::registerType('ddTagsFieldSet', [
   'dbType' => 'VARCHAR',
   'dbLength' => 255,
@@ -22,3 +17,10 @@ DdFieldCore::registerType('ddTagsFieldSet', [
   'order' => 210,
   'tags' => true
 ]);
+*/
+
+class FieldEDdTags extends FieldEText {
+  
+  protected $useTypeJs = true;
+  
+}

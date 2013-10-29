@@ -311,7 +311,6 @@ class Form {
     if ($this->disableSubmit) {
       foreach ($this->els as $k => $el) if ($el->type == 'submit') unset($this->els[$k]);
     }
-
     $html = $this->htmlFormOpen();
     if ($this->globalError) $html .= str_replace('{error}', $this->globalError, $this->templates['globalError']);
     $this->visibleRowN = -1;
@@ -708,6 +707,7 @@ class Form {
   protected function setElementsDataDefault() {
     if ($this->elementsDefaultDefined) return false;
     $this->setElementsData($this->defaultData);
+    foreach (Hook::paths('dd/formInit') as $path) require $path;
     $this->elementsDefaultDefined = true;
     return true;
   }
