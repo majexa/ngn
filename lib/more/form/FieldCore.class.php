@@ -3,7 +3,7 @@
 class FieldCore {
 
   const FIELD_ELEMENT_CLASS_PREFIX = 'FieldE';
-  
+
   /**
    * @return FieldEAbstract
    */

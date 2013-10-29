@@ -40,8 +40,11 @@ class DdTagsGroup {
   function getTypeProperties() {
     $p = [];
     if (DdTags::isDdItemsType($this->p['fieldType'])) {
-      $strName = O::get('DdFields', $this->strName, ['getHidden' => true])->getField($this->p['name'])['settings']['strName'];
-      $p['table'] = DdCore::table($strName);
+      $field = O::get('DdFields', $this->strName, ['getHidden' => true])->getField($this->p['name']);
+      if (isset($field['settings']['strName'])) {
+        $strName = $field['settings']['strName'];
+        $p['table'] = DdCore::table($strName);
+      }
       $p['global'] = true;
       $p['allowEdit'] = false;
     }

@@ -32,6 +32,8 @@ class DdCore {
    * @return DdItemsManagerPage
    */
   static function getItemsManager($pageId, array $options = []) {
+    throw new Exception('Depricated');
+    /*
     if (($page = DbModelCore::get('pages', $pageId)) === false) {
       throw new Exception("No page by id=$pageId");
     }
@@ -59,6 +61,7 @@ class DdCore {
       $im->setStaticId($options['staticId']);
     }
     return $im;
+    */
   }
 
   const masterFieldName = 'mstr';
