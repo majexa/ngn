@@ -13,6 +13,7 @@ class TestLongJob extends ProjectTestCase {
     $a = $this->jobIds;
     LongJobCore::states()->destroy(true);
     usleep($iterationTime * 1000000);
+
     foreach ($a as $k) $this->assertTrue(LongJobCore::run(new SampleLongJob($k)));
     usleep(0.1 * 1000000);
     foreach ($a as $k) $this->assertFalse(LongJobCore::run(new SampleLongJob($k)));

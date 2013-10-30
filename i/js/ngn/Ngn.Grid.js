@@ -28,24 +28,7 @@ Ngn.Grid = new Class({
     if (!this.options.eParent) throw new Ngn.EmptyError('this.options.eParent');
     if (this.options.basePath == '/') this.options.basePath = '';
     this.eParent = $(this.options.eParent);
-    var grid = this;
-    this.eMenu = Elements.from('<div class="itemsTableMenu dgray iconsSet"></div>')[0].inject(this.eParent);
-    if (this.options.menu) {
-      for (var i = 0; i < this.options.menu.length; i++) {
-        (function() {
-          var v = grid.options.menu[i];
-          // v может быть обычной ф-ей или объектом
-          var action = typeof(v.action) == 'function' ? { action: v.action } : (v.action || null);
-          if (action) {
-            action.id = v.cls;
-            action.args = grid;
-          }
-          var cls = v.cls;
-          v.cls = 'btn ' + v.cls;
-          grid.btns[cls] = new Ngn.Btn(Ngn.btn(v).inject(this.eMenu), action, v.options || {});
-        }.bind(this))();
-      }
-    }
+    this.initMenu();
     this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
     this.eHeadTr = this.options.eItems.getElement('thead tr');
     if (this.options.checkboxes) {
@@ -54,6 +37,39 @@ Ngn.Grid = new Class({
       Elements.from('<th></th>')[0].inject(this.eHeadTr);
     }
     if (this.options.data) this.initInterface(this.options.data);
+  },
+
+  initMenu: function() {
+    var grid = this, action;
+    this.eMenu = Elements.from('<div class="itemsTableMenu dgray iconsSet"></div>')[0].inject(this.eParent);
+    if (!this.options.menu) return;
+    for (var i = 0; i < this.options.menu.length; i++) {
+      (function() {
+        var v = grid.options.menu[i];
+        var keys = Object.keys(v.action);
+        if (keys.length && in_array('$constructor', keys)) {
+          // класс Ngn.GridBtnAction.*
+          action = new v.action(grid);
+          action.action.bind(action);
+          action.id = v.cls;
+          // action.action();
+        } else {
+          if (typeof(v.action) == 'function') {
+            // ф-я function(grid) {}
+            action = { action: v.action };
+          } else {
+            action = (v.action || null);
+          }
+          if (action) {
+            action.id = v.cls;
+            action.args = grid;
+          }
+        }
+        var cls = v.cls;
+        v.cls = 'btn ' + v.cls;
+        grid.btns[cls] = new Ngn.Btn(Ngn.btn(v).inject(this.eMenu), action, v.options || {});
+      }.bind(this))();
+    }
   },
 
   dataLoaded: function(data) {
@@ -262,20 +278,37 @@ Ngn.Grid.defaultDialogOpts = {
 };
 
 Ngn.Grid.menu = {};
+
+Ngn.GridBtnAction = new Class({
+  Extends: Ngn.BtnAction,
+  initialize: function(grid) {
+    this.grid = grid;
+    this.classAction = true;
+  }
+});
+
+Ngn.GridBtnAction.New = new Class({
+  Extends: Ngn.GridBtnAction,
+  action: function() {
+    new Ngn.Dialog.RequestForm(this.getDialogOptions());
+  },
+  getDialogOptions: function() {
+    return $merge({
+      id: 'CHANGE_ME',
+      dialogClass: 'dialog fieldFullWidth',
+      url: this.grid.options.basePath + '/json_new',
+      title: false,
+      onOkClose: function() {
+        this.grid.reload();
+      }.bind(this)
+    }, Ngn.Grid.defaultDialogOpts)
+  }
+});
+
 Ngn.Grid.menu['new'] = {
   title: 'Создать',
   cls: 'add',
-  action: function(grid) {
-    new Ngn.Dialog.RequestForm($merge({
-      id: 'CHANGE_ME',
-      dialogClass: 'dialog fieldFullWidth',
-      url: grid.options.basePath + '/json_new',
-      title: false,
-      onOkClose: function() {
-        grid.reload();
-      }.bind(this)
-    }, Ngn.Grid.defaultDialogOpts));
-  }
+  action: Ngn.GridBtnAction.New
 };
 Ngn.Grid.defaultMenu = [Ngn.Grid.menu['new']];
 

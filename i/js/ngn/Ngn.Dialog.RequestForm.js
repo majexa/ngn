@@ -123,20 +123,24 @@ Ngn.Dialog.RequestFormBase = new Class({
   finishClose: function() {
     this.parent();
     // если в последнем респонзе есть ссылка не следующую форму
-    if (this.isOkClose) {
-      if (this.response.nextFormUrl) {
-        new Request.JSON({
-          url: this.response.nextFormUrl,
-          onComplete: function(r) {
-            if (r.error) Ngn.Request.JSON.throwServerError(r.error);
-            if (!r.form) throw new Error('Form does not exists in next form url "' + this.response.nextFormUrl + '"');
-            var opt = { staticResponse: r };
-            if (this.options.nextFormOptions) opt = $merge(opt, this.options.nextFormOptions);
-            if (this.response.nextFormOptions) opt = $merge(opt, this.response.nextFormOptions);
-            new Ngn.Dialog.RequestForm.Static(opt);
-          }
-        }).send();
-      }
+    if (this.isOkClose && this.response.nextFormUrl) {
+      var opt = {};
+      if (this.options.nextFormOptions) opt = $merge(opt, this.options.nextFormOptions);
+      opt.url = this.response.nextFormUrl;
+      new Ngn.Dialog.RequestForm(opt);
+      /*
+      new Request.JSON({
+        url: this.response.nextFormUrl,
+        onComplete: function(r) {
+          if (r.error) Ngn.Request.JSON.throwServerError(r.error);
+          if (!r.form) throw new Error('Form does not exists in next form url "' + this.response.nextFormUrl + '"');
+          var opt = { staticResponse: r };
+          if (this.options.nextFormOptions) opt = $merge(opt, this.options.nextFormOptions);
+          if (this.response.nextFormOptions) opt = $merge(opt, this.response.nextFormOptions);
+          new Ngn.Dialog.RequestForm.Static(opt);
+        }.bind(this)
+      }).send();
+      */
     }
   }
 

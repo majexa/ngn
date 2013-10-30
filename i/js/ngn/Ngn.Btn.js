@@ -44,7 +44,7 @@ Ngn.btns = function(btns, small, opt) {
   if (!opt) opt = {};
   var defaultOpt = { bordered: true };
   if (!opt.bordered) opt.bordered = true;
-  var eCont = new Element('div', {'class' : (small ? 'smIcons' : 'iconsSet') + (opt.bordered ? ' bordered' : '') });
+  var eCont = new Element('div', {'class': (small ? 'smIcons' : 'iconsSet') + (opt.bordered ? ' bordered' : '') });
   for (var i = 0; i < btns.length; i++) Ngn.btn($merge(defaultOpt, btns[i])).inject(eCont);
   return eCont;
 };
@@ -81,6 +81,10 @@ Ngn._btnFlag = function(eA, state1, state2) {
   });
 };
 
+Ngn.BtnAction = new Class({
+  action: function() {}
+});
+
 Ngn.Btn = new Class({
   Implements: [Options],
 
@@ -94,18 +98,35 @@ Ngn.Btn = new Class({
   /**
    * @param Element Элемент кнопки
    * @param function/object Функция вызывающаяся при нажатии, либо объект {action: function},
-   *                        содержащий эту ф-ю. В объекте может так же находся дополнительная информация, как-то
+   *                        содержащий эту ф-ю. В объекте может так же находится дополнительная информация, как-то
    *                        id (уникальный идентификатор кнопки) и confirm (флаг - подтверждать нажатие или нет)
-   *                        this в этой ф-ии - это объект Ngn.Btn
    * @param options
    */
   initialize: function(el, action, options) {
     this.setOptions(options);
-    if (!action) action = function() {};
+
+    if (!action) action = function() {
+    };
+
     if (typeof(action) == 'function') this.action = { action: action };
     else this.action = action;
-    if (action.args) this.action.action = this.action.action.pass(action.args, this);
-    else this.action.action = this.action.action.bind(this);
+
+    if (this.action.classAction) {
+      this.action.action();
+    }
+    else if (this.action.action.args) {
+      this.action.action = this.action.action.pass(action.args, this);
+    }
+    else {
+      this.action.action = this.action.action.bind(this);
+    }
+
+
+
+
+
+
+
     this.el = el;
     this.initVirtualElement(this.el);
     this.toggleDisabled(true);
@@ -149,8 +170,9 @@ Ngn.Btn = new Class({
     this.action.action();
     if (this.options.usePushed) this.togglePushed(!this.pushed);
   },
-  
-  init: function() {},
+
+  init: function() {
+  },
 
   togglePushed: function(pushed) {
     this.pushed = pushed;
@@ -171,8 +193,10 @@ Ngn.Btn.FileUpload = new Class({
   options: {
     // url: '',
     mime: '',
-    onRequest: function() {},
-    onComplete: function() {}
+    onRequest: function() {
+    },
+    onComplete: function() {
+    }
   },
 
   initialize: function(btn, options) {
@@ -182,7 +206,7 @@ Ngn.Btn.FileUpload = new Class({
       position: 'relative',
       display: 'inline-block',
       overflow: 'hidden'
-  }}).wraps(this.btn.el);
+    }}).wraps(this.btn.el);
     var eEile = new Element('input', {type: 'file', accept: this.options.mime, events: {
       mouseover: function() {
         this.getParent().getElement('a').addClass('over');
@@ -243,7 +267,7 @@ Ngn.BtnDropdowner = new Class({
         'border': '1px solid #FF0000'
       }
     }).inject(this.iconBtns[0], 'before');
-    for (var i=0; i<this.iconBtns.length; i++) this.iconBtns[i].inject(this.eWrapper);
+    for (var i = 0; i < this.iconBtns.length; i++) this.iconBtns[i].inject(this.eWrapper);
   },
 
   rebuild: function() {
