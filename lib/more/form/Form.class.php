@@ -706,7 +706,7 @@ class Form {
    */
   protected function setElementsDataDefault() {
     if ($this->elementsDefaultDefined) return false;
-    $this->setElementsData($this->defaultData);
+    $this->setElementsData($this->getDefaultData());
     $this->elementsDefaultDefined = true;
     return true;
   }

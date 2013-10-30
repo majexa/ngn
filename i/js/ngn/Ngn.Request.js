@@ -10,6 +10,11 @@ Ngn.Request = new Class({
       });
     }
     this.parent(text, xml);
+  },
+
+  send: function() {
+    console.trace();
+    this.parent();
   }
 
 });
