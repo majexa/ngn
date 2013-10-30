@@ -50,7 +50,7 @@ Ngn.Grid = new Class({
         if (keys.length && in_array('$constructor', keys)) {
           // класс Ngn.GridBtnAction.*
           action = new v.action(grid);
-          action.action.bind(action);
+          //action.action.bind(action);
           action.id = v.cls;
           // action.action();
         } else {
