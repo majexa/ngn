@@ -112,7 +112,6 @@ Ngn.Btn = new Class({
     else this.action = action;
 
     if (this.action.classAction) {
-      this.action.action();
     }
     else if (this.action.action.args) {
       this.action.action = this.action.action.pass(action.args, this);
@@ -120,13 +119,7 @@ Ngn.Btn = new Class({
     else {
       this.action.action = this.action.action.bind(this);
     }
-
-
-
-
-
-
-
+    
     this.el = el;
     this.initVirtualElement(this.el);
     this.toggleDisabled(true);

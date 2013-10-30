@@ -14,30 +14,11 @@
         });
       }
     });
-
-    Ngn.GridBtnAction.NewKpOrder = new Class({
-      Extends: Ngn.GridBtnAction.New,
-      action: function() {
-        new Ngn.Dialog.RequestForm({
-          width: 300,
-          dialogClass: 'dialog fieldFullWidth',
-          url: this.grid.options.basePath + '/json_selectCreditType',
-          title: false,
-          nextFormOptions: this.getDialogOptions()
-        });
-      }
-    });
-
-    var newMenuOption = menu.get('cls', 'add');
-    newMenuOption.action = Ngn.GridBtnAction.NewKpOrder;
-
     var opt = {
       menu: menu,
       toolActions: Ngn.Grid.toolActions,
       isSorting: <?= Arr::jsValue(!empty($d['settings']['enableManualOrder'])) ?>
     };
     Ngn.DdGrid.Admin.grid = new Ngn.DdGrid.Admin.factory(Ngn.getParam(2), opt).reload();
-
   })();
-
 </script>
