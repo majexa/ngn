@@ -119,7 +119,7 @@ Ngn.Btn = new Class({
     else {
       this.action.action = this.action.action.bind(this);
     }
-    
+
     this.el = el;
     this.initVirtualElement(this.el);
     this.toggleDisabled(true);
