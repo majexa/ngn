@@ -92,6 +92,7 @@ Ngn.Grid = new Class({
 
   reload: function(itemId) {
     if (itemId) this.loading(itemId, true); // показываем, что строчка обновляется
+    console.trace();
     Ngn.loading(true);
     new Ngn.Request.JSON({
       url: this.getLink(true),

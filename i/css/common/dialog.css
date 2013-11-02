@@ -309,11 +309,6 @@ margin: 3px 10px 0px 10px;
 width: 98%;
 }
 
-.hgrp_subscribes .type_radio p,
-.hgrp_subscribes .type_radio span {
-display: inline-block !important;
-}
-
 .dialog-progress {
 height: 19px;
 margin: 7px 0px 5px 0px;
