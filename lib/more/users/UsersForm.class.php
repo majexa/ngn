@@ -8,8 +8,7 @@ use FormDbUnicCheck;
 
   protected function defineOptions() {
     return [
-      'subscribeOnReg' => true,
-      'active'         => !(bool)Config::getVarVar('userReg', 'activation')
+      'active' => !(bool)Config::getVarVar('userReg', 'activation')
     ];
   }
 
@@ -75,19 +74,7 @@ use FormDbUnicCheck;
     parent::init();
     if (!empty($this->fields->fields['phone'])) $this->fields->fields['phone']['options']['disabled'] = true;
     $this->initRole();
-    $this->initSubscribe();
   }
-
-  /*
-  protected function afterUserUpdate($userId, array $data) {
-    if ($this->options['subscribeOnReg'] and isset($data['subsList'])) {
-      foreach ($data['subsList'] as $listId => $subscribed) {
-        if (!$subscribed) continue;
-        db()->query('REPLACE INTO subs_users SET userId=?d, listId=?d', $userId, $listId);
-      }
-    }
-  }
-  */
 
   protected function initRole() {
     if (Config::getVarVar('role', 'enable', true)) {
@@ -101,26 +88,6 @@ use FormDbUnicCheck;
       'name'  => 'role',
       'type'  => 'userRole'
     ];
-  }
-
-  protected function initSubscribe() {
-    $this->subscribeOnReg = (!empty($this->options['subscribeOnReg']) and Config::getVarVar('subscribe', 'onReg'));
-    if (!$this->subscribeOnReg) return;
-    $subscribes = db()->query('SELECT id, title FROM subsList WHERE active=1 AND useUsers=1');
-    if (!$subscribes) return;
-    $this->fields[] = [
-      'name'  => 'subscribes',
-      'title' => Config::getVarVar('subscribe', 'regHeaderTitle'),
-      'type'  => 'header'
-    ];
-    foreach ($subscribes as $v) {
-      $this->fields[] = [
-        'name'    => 'subsList['.$v['id'].']',
-        'title'   => $v['title'],
-        'type'    => 'bool',
-        'default' => true
-      ];
-    }
   }
 
 }

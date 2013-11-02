@@ -9,14 +9,11 @@ class CtrlCommonUserReg extends CtrlCammon {
    */
   private $conf;
 
-  protected $subscribes;
-
   protected function init() {
     parent::init();
     $this->d['tpl'] = 'users/reg';
     $this->conf = Config::getVar('userReg');
     Misc::checkEmpty($this->conf['enable'], 'Registration not enabled');
-    $this->subscribes = db()->query('SELECT id, title FROM subsList WHERE active=1 AND useUsers=1');
   }
 
   function action_rules() {
@@ -142,13 +139,6 @@ class CtrlCommonUserReg extends CtrlCammon {
           'name'  => 'editMysite'
         ];
       }
-    }
-    if (Config::getVarVar('subscribe', 'onReg') and !empty($this->subscribes)) {
-      $items[] = [
-        'title' => 'Подписка на рассылки',
-        'link'  => $this->tt->getPath(1).'/subscribe',
-        'name'  => 'subscribe'
-      ];
     }
     $this->d['submenu'] = getLinks($items, $this->action);
     foreach ($this->d['submenu'] as $v) {
@@ -333,41 +323,6 @@ class CtrlCommonUserReg extends CtrlCammon {
   function action_updateUserDataPageId() {
     db()->query("UPDATE users SET userDataPageId=?d WHERE id=?d", $this->req->r['userDataPageId'], Auth::get('id'));
     $this->redirect();
-  }
-
-  function action_subscribe() {
-    if (!Config::getVarVar('subscribe', 'onReg') or empty($this->subscribes)) throw new Exception('Action not allowed');
-    $this->initSubmenu();
-    $this->processSubscribeForm();
-    $this->d['tpl'] = 'users/regEdit';
-  }
-
-  protected function processSubscribeForm() {
-    foreach ($this->subscribes as $v) {
-      $fields[] = [
-        'name'  => 'subsList['.$v['id'].']',
-        'title' => $v['title'],
-        'type'  => 'bool'
-      ];
-    }
-    $cur = [];
-    foreach (db()->selectCol('
-    SELECT listId FROM subs_users WHERE userId=?d', $this->userId) as $listId) $cur['subsList'][$listId] = 1;
-
-    $form = new Form(new Fields($fields));
-    $data = $form->setElementsData($cur);
-    if ($form->isSubmittedAndValid()) {
-      $this->d['saved'] = true;
-      foreach ($data['subsList'] as $listId => $subscribed) {
-        if ($subscribed) {
-          db()->query('REPLACE INTO subs_users SET userId=?d, listId=?d', $this->userId, $listId);
-        }
-        else {
-          db()->query('DELETE FROM subs_users WHERE userId=?d AND listId=?d', $this->userId, $listId);
-        }
-      }
-    }
-    $this->d['form'] = $form->html();
   }
 
 }
