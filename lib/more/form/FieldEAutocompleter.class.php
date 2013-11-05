@@ -2,7 +2,7 @@
 
 abstract class FieldEAutocompleter extends FieldEInput {
 
-  protected $useDefaultJs = true;
+  protected $useTypeJs = true;
 
   protected function __html($acDefault) {
     return Tt()->getTpl('common/autocompleter',

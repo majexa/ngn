@@ -162,25 +162,46 @@ abstract class SflmBase {
     return Config::getVar("sfl/".$this->type."/$package");
   }
 
-  protected $libsCache = [];
+  public $packagesCache = [];
 
+  /**
+   * Возвращает массив путей для указанного пакета, за исключением подпакетов, уже находящихся в кэше.
+   * Или сам путь (если указан путь), обёрнутый в массив
+   *
+   * @param   string lib
+   * @return  array
+   */
   function getPaths($lib) {
     if (!$this->isPackage($lib)) return [$lib];
-    if (isset($this->libsCache[$lib])) return $this->libsCache[$lib];
-    Sflm::output("Getting package '$lib' libs recursive");
-    return $this->libsCache[$lib] = $this->getPackageLibsR($lib);
+    if (isset($this->packagesCache[$lib])) return $this->packagesCache[$lib];
+    $this->packagesCache[$lib] = $this->getPackageLibsR($lib);
+    Sflm::output("Got package '$lib' libs recursive:\n".implode("\n", $this->packagesCache[$lib]));
+    return $this->packagesCache[$lib];
   }
 
-  protected function getPackageLibsR($package) {
+  protected $existingPackages = [];
+
+  protected function getPackageLibsR($package, $skipExistingPackages = true) {
     $libs = [];
+    $this->existingPackages[] = $package;
     foreach ($this->getPackageLibs($package) as $lib) {
-      if ($this->isPackage($lib)) $libs = Arr::append($libs, $this->getPackageLibsR($lib));
-      else $libs[] = $lib;
+      if ($this->isPackage($lib)) {
+        if ($skipExistingPackages and in_array($lib, $this->existingPackages)) continue;
+        $this->existingPackages[] = $lib;
+        $libs = Arr::append($libs, $this->getPackageLibsR($lib));
+      }
+      else {
+        //$this->processPathOnAdd($lib);
+        $libs[] = $lib;
+      }
     }
     return $libs;
   }
 
-  protected function isPackage($path) {
+  //protected function processPathOnAdd($path) {
+  //}
+
+  function isPackage($path) {
     return !(strstr($path, '.') or strstr($path, $this->type.'/'));
   }
 

@@ -131,7 +131,7 @@ class Db extends DbSimple_Mysql {
     return in_array($table, $this->tables());
   }
 
-  static function dbExists($db, array $c = null) {
+  static function dbExists($db, $config = null) {
     if (defined('NGN_ENV_PATH')) $c = include NGN_ENV_PATH.'/config/server.php';
     Arr::checkEmpty($c, ['dbHost', 'dbUser', 'dbPass']);
     $id = mysql_connect($c['dbHost'], $c['dbUser'], $c['dbPass']);
@@ -163,11 +163,13 @@ class Db extends DbSimple_Mysql {
     return $this->query(($replace ? 'REPLACE' : 'INSERT')." INTO $table SET ?a", $data);
   }
 
-  function insertLarge($table, $rows) {
+  public $insertIgnore = false;
+
+  function insertLarge($table, $rows/*, array $opts = []*/) {
     if (empty($rows)) throw new Exception('$rows is empty');
     $keys = array_keys($rows[0]);
     if ($keys[0] === 0) throw new Exception("First element of $rows must be a hash. '{$keys[0]}' given");
-    $q = 'INSERT INTO '.$table.' ('.implode(', ', array_keys($rows[0])).") VALUES \n";
+    $q = 'INSERT './*(empty($opts['ignore']) ? '' : "{$opts['ignore']} ").*/'INTO '.$table.' ('.implode(', ', array_keys($rows[0])).") VALUES \n";
     foreach ($rows as $row) {
       array_walk($row, 'quoting');
       $q .= '('.implode(', ', $row)."),\n";

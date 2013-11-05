@@ -16,7 +16,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
    */
   protected $tags;
 
-  protected $useDefaultJs = true;
+  protected $useTypeJs = true;
 
   protected function init() {
     parent::init();
@@ -26,7 +26,11 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
   protected function preparePostValue() {
     $this->options['value'] = (int)$this->options['value'];
     if (!empty($this->options['value'])) {
-      $this->options['value'] = $this->tags->getParentIds2($this->options['value']);
+      try {
+        $this->options['value'] = $this->tags->getParentIds2($this->options['value']);
+      } catch (NotFoundException $e) {
+        throw new NotFoundException("Getting parents for tag name={$this->options['name']}, id={$this->options['value']} error");
+      }
     }
   }
 
@@ -44,7 +48,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
       ]];
     } else {
       $d['items'] = [[
-        'default' => $this->options['value'][2],
+        'default' => isset($this->options['value'][2]) ? $this->options['value'][2] : '123',
         'options' => $this->getRootOptions()
       ]];
       if (count($this->options['value'] > 1)) {

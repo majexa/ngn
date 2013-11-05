@@ -11,23 +11,29 @@ class SflmFrontendJs extends SflmFrontend {
     $this->classes = new SflmJsClasses($this);
   }
 
-  function addClass($class, $source = 'default') {
+  function processCode($code) {
+    $this->classes->processNewNgnClasses($code, explode("\n", getBacktrace(false))[1].' processing');
+    return $code;
+  }
+
+  function addClass($class, $source = 'default', $strict = false) {
     $frontend = $this;
     $this->classes->addClass($class, $source, function($path) use ($frontend) {
       $frontend->addLib($path);
-    }, function($source) use ($class, $frontend) {
-      die2("\n/*----------|Class '$class' from '$source' not found|----------*/\n");
-      $frontend->extraCode = "\n/*----------|Class '$class' from '$source' not found|----------*/\n";
+    }, function($source) use ($class, $frontend, $strict) {
+      $s = "Class '$class' from '$source' not found";
+      if ($strict) throw new Exception($s);
+      $frontend->extraCode = "\n/*----------|$s|----------*/\n";
     });
   }
 
-  protected function addPath($path) {
+  protected function addPath($path, $addingFrom = '[not defined]') {
     if (Misc::hasPrefix('@', $path)) {
       $path = Misc::removePrefix('@', $path);
       $this->classes->processPath($path);
       return;
     }
-    parent::addPath($path);
+    parent::addPath($path, $addingFrom);
   }
 
   protected function code_____() {

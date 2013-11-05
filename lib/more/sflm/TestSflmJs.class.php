@@ -6,9 +6,11 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::$frontend = 'default';
     Sflm::clearCache();
     Sflm::flm('js')->store();
-    (new FieldEWisiwigSimple2(['name' => 'dummy']))->js();
+    (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
     Sflm::flm('js')->getDeltaUrl();
-    $this->assertFalse((bool)Sflm::reset('js')->newPaths, 'New paths must be empty after reset');
+
+    $newPaths = Sflm::reset('js')->newPaths;
+    $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
     Sflm::flm('js')->store();
     Sflm::flm('js')->addLib('Ngn.Form.El.Phone');
     Sflm::clearCache();
@@ -27,14 +29,16 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2. Версии до store() и после не совпадают");
 
     $filesize1 = filesize(Sflm::flm('js')->cacheFile());
-    (new FieldEPhone(['name' => 'dummy'], new Form([])))->js();
+    (new FieldEPhone(['name' => 'dummy'], new Form([])))->typeJs();
+    //$c = file_get_contents(Sflm::flm('js')->cacheFile());
+    //prr($c);
     $this->assertTrue((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is preset in complete file');
     $this->assertTrue(filesize(Sflm::flm('js')->cacheFile()) > $filesize1, 'File size is larger then initial');
 
     // reset - эмитация 2-го открытия страницы. без очистки кэша!
     $v1 = Sflm::flm('js')->version();
     $mtime1 = filemtime(Sflm::flm('js')->cacheFile());
-    (new FieldEPhone(['name' => 'dummy'], new Form([])))->js();
+    (new FieldEPhone(['name' => 'dummy'], new Form([])))->typeJs();
     //$this->assertTrue(in_array('Ngn.Form.El.Phone', Sflm::reset('js')->classes->existingClasses));
     //$this->assertTrue(in_array('i/js/ngn/form/Ngn.Form.El.Phone.js', Sflm::reset('js')->paths));
     $v2 = Sflm::flm('js')->version();
@@ -52,34 +56,7 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertTrue($contains2, 'Cached file does not contain new string');
     $this->assertTrue($v2 < $v3, "Version not changed after one of included files has changed");
 
-    return;
-
-    Sflm::$frontend = 'admin';
-    $adminMtime2 = filemtime(UPLOAD_PATH.'/'.Sflm::flm('js')->store()->filePath());
-    $this->assertTrue($adminMtime1 == $adminMtime2, "mtime1:$adminMtime1 != mtime2:$adminMtime2");
-    return;
-
-    //Sflm::$frontend = 'admin';
-    //$adminMtime1 = filemtime(UPLOAD_PATH.'/'.Sflm::get('js')->store()->filePath());
-    // 1. Тест на то, что время изменения до store() и после не изменяется
-    //Sflm::get('js')->store();
-    //$filesize1 = filesize($file);
-    // 2. Тест на то, что версия фронтенда 'default' до storeDefault() и после не изменяется
-    // 3. Тест на то, что версия фронтенда 'default' до new FieldE{...} и после неизменяется
-
-    $v1 = Sflm::flm('js')->version();
-    $mtime1 = filemtime($file);
-    (new FieldEPhone(['name' => 'dummy'], new Form([])))->js();
-    // reset - эмитация 2-го открытия страницы
-    $this->assertTrue(in_array('Ngn.Form.El.Phone', Sflm::reset('js')->classes->existingClasses));
-    $this->assertTrue(in_array('i/js/ngn/form/Ngn.Form.El.Phone.js', Sflm::reset('js')->paths));
-    $v2 = Sflm::flm('js')->version();
-    $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2");
-    Sflm::flm('js')->store();
-    $mtime2 = filemtime($file);
-    $this->assertTrue($mtime1 == $mtime2, "mtime1:$mtime1 != mtime2:$mtime2");
-
-    // Файл другого фроненда (admin) не менялся
+    // @todo тест на добавления пакета, в путях которого не достаёт классов
   }
 
 }

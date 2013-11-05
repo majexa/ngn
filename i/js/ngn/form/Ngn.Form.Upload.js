@@ -3,7 +3,7 @@ Ngn.Form.Upload = new Class({
 
   options: {
     dropMsg: 'Пожалуйста перетащите файлы сюда',
-    onComplete: function(){
+    onComplete: function() {
       //window.location.reload(true);
     },
     fileOptions: {}
@@ -14,15 +14,17 @@ Ngn.Form.Upload = new Class({
     this.eInput = document.id(eInput);
     this.name = this.eInput.get('name');
     this.setOptions(options);
+    console.trace();
+    c(this.options.url);
     if ('FormData' in window) {
       this.beforeInit();
       this.init();
       this.afterInit();
-    }
-    else throw new Error('FormData.window not exists');
+    } else throw new Error('FormData.window not exists');
   },
-  
-  beforeInit: function() {},
+
+  beforeInit: function() {
+  },
 
   init: function() {
     this.eFiles = new Element('div.uploadFiles').inject(this.eInput, 'after');
@@ -45,9 +47,10 @@ Ngn.Form.Upload = new Class({
       }.bind(this)
     });
   },
-  
-  afterInit: function() {}
-  
+
+  afterInit: function() {
+  }
+
 });
 
 Ngn.Form.Upload.Multi = new Class({
@@ -56,24 +59,23 @@ Ngn.Form.Upload.Multi = new Class({
   afterInit: function() {
     //this.eInput.set('name', this.eInput.get('name').replace('[]', ''));
     //c(this.eInput);
-    this.inputFiles = new Ngn.Form.MultipleFileInput(this.eInput, this.eFiles,
-      $merge({}, this.options.fileOptions)/*, {
-      drop: drop,
-      onDragenter: drop.addClass.pass('hover', drop),
-      onDragleave: drop.removeClass.pass('hover', drop),
-      onDrop: drop.removeClass.pass('hover', drop)
-    }*/);
+    this.inputFiles = new Ngn.Form.MultipleFileInput(this.eInput, this.eFiles, $merge({}, this.options.fileOptions)/*, {
+     drop: drop,
+     onDragenter: drop.addClass.pass('hover', drop),
+     onDragleave: drop.removeClass.pass('hover', drop),
+     onDrop: drop.removeClass.pass('hover', drop)
+     }*/);
     /*
-    drop = new Element('div.fileDroppable', {
-      text: this.options.dropMsg
-    }).inject(input, 'after'),
-    */
+     drop = new Element('div.fileDroppable', {
+     text: this.options.dropMsg
+     }).inject(input, 'after'),
+     */
   },
-  
+
   send: function() {
     var n = 0;
     this.inputFiles.getFiles().each(function(file) {
-      this.uploadReq.append(this.name + '['+n+']', file);
+      this.uploadReq.append(this.name + '[' + n + ']', file);
       n++;
     }.bind(this));
     this.uploadReq.send();
@@ -91,7 +93,7 @@ Ngn.Form.Upload.Single = new Class({
       }.bind(this)
     });
   },
-  
+
   afterInit: function() {
     if (this.options.loadedFiles[this.eInput.get('name')])
       this.eFiles.set('html', 'Загружен: ' + this.options.loadedFiles[this.eInput.get('name')].name);

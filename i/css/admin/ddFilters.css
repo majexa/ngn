@@ -23,3 +23,12 @@ margin-top: 10px;
 .filters .type_num input {
 width: 50px;
 }
+.filters p {
+margin: 5px 0px 0px 0px;
+}
+.filters .cont {
+padding: 0px 10px 10px 10px;
+}
+.filters select {
+max-width: 150px;
+}

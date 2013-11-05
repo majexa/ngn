@@ -8,12 +8,17 @@ class Req extends ArrayAccesseble {
 use Options;
 
   /**
-   * Пуьт к файлу, очищенный от всякого мусора
+   * Cтрока запроса
    *
    * @var string
    */
   public $initPath;
 
+  /**
+   * Cтрока запроса без QUERY_STRING прошедшая санитаризацию
+   *
+   * @var string
+   */
   public $path;
 
   /**
@@ -37,6 +42,9 @@ use Options;
    */
   public $lastSlash = false;
 
+  /**
+   * @var integer Номер текущей страницы (/pg{N})
+   */
   public $pg;
 
   /**
@@ -195,6 +203,10 @@ use Options;
 
   function param($n) {
     return Misc::checkEmpty($this->params[$n], "params[$n]");
+  }
+
+  function path($offset = 0, $limit = 0) {
+    return implode('/', array_slice($this->params, $offset, $limit ?: count($this->params)));
   }
 
   /**

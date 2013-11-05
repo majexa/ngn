@@ -115,7 +115,6 @@ class Misc {
   }
 
   static function parseId($str) {
-    //prr($str);
     if (!preg_match('/[a-z_]/i', $str[0])) $str[0] = '_';
     for ($i = 0; $i < strlen($str); $i++) {
       if (!preg_match('/[a-z0-9_]/i', $str[$i])) $str[$i] = '_';
@@ -476,7 +475,7 @@ class Misc {
     if (!is_numeric($v)) throw new Exception(getPrr($v).' is not numeric');
   }
 
-  static function checkValidUrl($url) {
+  static function checkUrl($url) {
     if (!self::validUrl($url)) throw new Exception("Url '$url' is not valid");
   }
 
@@ -598,7 +597,7 @@ class Misc {
     try {
       preg_replace("/^$prefix(.*)/", '$1', $str);
     } catch (Exception $e) {
-      throw new Exception("/^$prefix(.*)/");
+      throw new Exception($e->getMessage()."(/^$prefix(.*)/)");
     }
     return preg_replace("/^$prefix(.*)/", '$1', $str);
   }

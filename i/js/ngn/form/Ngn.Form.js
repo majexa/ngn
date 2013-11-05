@@ -32,7 +32,6 @@ Ngn.Form = new Class({
     this.initValidation();
     this.initSubmit();
     // more
-    this.initMooRainbow();
     this.initVisibilityConditions();
     this.initHeaderToggle();
     this.initFileNav();
@@ -85,7 +84,9 @@ Ngn.Form = new Class({
         onLoad: function() {
           var func = eval('Ngn.frm.init.' + this.eForm.get('id'));
           if (func) func();
-          this.fireEvent('jsComplete');
+          //(function() {
+            this.fireEvent('jsComplete');
+          //}).delay(2000, this);
         }.bind(this)
       });
     }
@@ -279,36 +280,6 @@ Ngn.Form = new Class({
 
   initValues: {},
 
-  initMooRainbow: function() {
-    this.eForm.getElements('.type_color').each(function(el) {
-      var eColor = el.getElement('div.color');
-      var eInput = el.getElement('input').addClass('hexInput');
-      eInput.addEvent('change', function() {
-        eColor.setStyle('background-color', eInput.value);
-      });
-      new MooRainbow(eInput, {
-        eParent: eInput.getParent(),
-        id: 'rainbow_' + eInput.get('name'),
-        //styles: { // и так работает
-        //  'z-index': this.options.dialog.dialog.getStyle('z-index').toInt() + 1
-        //},
-        imgPath: '/i/img/rainbow/small/',
-        wheel: true,
-        startColor: eInput.value ? new Color(eInput.value).rgb : [255, 255, 255],
-        onChange: function(color) {
-          eColor.setStyle('background-color', color.hex);
-          eInput.value = color.hex;
-          eInput.fireEvent('change', color);
-        },
-        onComplete: function(color) {
-          eColor.setStyle('background-color', color.hex);
-          eInput.value = color.hex;
-          eInput.fireEvent('change', color);
-        }
-      });
-    }.bind(this));
-  },
-
   initAutoGrow: function() {
     this.eForm.getElements('textarea').each(function(el) {
       new AutoGrow(el);
@@ -416,6 +387,7 @@ Ngn.Form = new Class({
     this.eForm.submit();
   }
 
+
 });
 
 Ngn.Form.factory = function(eForm, opts) {
@@ -436,7 +408,9 @@ Ngn.Form.ElInit = new Class({
   },
 
   init: function() {
-    this.form.eForm.getElements('.type_' + this.type).each(function(eRow) {
+    var els = this.form.eForm.getElements('.type_' + this.type);
+    if (!els.length) throw new Error('No ".type_' + this.type + '" elements was found. User FieldEAbstract::_html() instead of html()');
+    els.each(function(eRow) {
       var clsName = 'Ngn.Form.El.' + ucfirst(this.type)
       var cls = eval(clsName);
       if (cls === undefined) {
@@ -466,9 +440,7 @@ Ngn.Form.getElType = function(el) {
 
 Ngn.Form.ElN = 0;
 Ngn.Form.El = new Class({
-
   options: {},
-
   initialize: function(type, form, eRow) {
     this.type = type;
     this.form = form;
@@ -480,10 +452,11 @@ Ngn.Form.El = new Class({
     if (Ngn.Form.ElOptions[this.name]) this.options = Ngn.Form.ElOptions[this.name];
     this.init();
   },
-
+  fireFormElEvent: function(event,  value) {
+    this.form.fireEvent('el' + ucfirst(this.name) + ucfirst(event), value);
+  },
   init: function() {
   }
-
 });
 
 // ------------------- Form Elements Framework End -------------------
@@ -507,16 +480,8 @@ Ngn.Form.El.Textarea = new Class({
   resizebleOptions: {},
 
   init: function() {
-    this.initResize();
-  },
-
-  initResize: function() {
-    if (this.form.options.dialog && this.form.options.dialog.vResize) {
-      this.resizebleOptions = $merge(this.resizebleOptions, {
-        handler: this.form.options.dialog.vResize.eHandler
-      });
-    }
-    new Ngn.ResizableTextarea(this.eRow, this.resizebleOptions);
+    if (this.form.options.dialog && this.form.options.dialog.options.vResize) return;
+    new Ngn.ResizableTextarea(this.eRow);
   }
 
 });

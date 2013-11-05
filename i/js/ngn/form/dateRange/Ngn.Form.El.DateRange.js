@@ -1,11 +1,10 @@
 Ngn.Form.El.DateRange = new Class({
   Extends: Ngn.Form.El.DialogSelect,
-
   getDialogClass: function() {
     return Ngn.DateRangeDialog;
   },
-
   setVisibleValue: function(value) {
+    if (!value) return;
     var v;
     var d = new Date();
     if (value.from[2] == value.to[2]) {
@@ -23,9 +22,8 @@ Ngn.Form.El.DateRange = new Class({
     }
     this.parent(v);
   },
-
   _setValue: function(value) {
+    if (!value) return;
     this.parent(Ngn.DdFilterPath.date.toStr(value));
   }
-
 });

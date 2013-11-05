@@ -29,7 +29,7 @@ class FieldEDdTagsTreeSelect extends FieldEText {
   }
   
   function _js() {
-    return $this->defaultJs();
+    return $this->typeJs();
   }
   
 }

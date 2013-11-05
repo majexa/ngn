@@ -1,9 +1,15 @@
 <?php
 
-abstract class ArrayAccesseble implements ArrayAccess, IteratorAggregate {
+abstract class ArrayAccesseble implements ArrayAccess, IteratorAggregate, Countable {
+
+  public $r;
 
   protected function &getArrayRef() {
     return $this->r;
+  }
+
+  function count() {
+    return count($this->getArrayRef());
   }
 
   function getIterator() {

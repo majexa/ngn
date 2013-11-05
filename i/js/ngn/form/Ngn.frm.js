@@ -13,7 +13,17 @@ Ngn.frm.emptify = function(eInput) {
   else eInput.get('value', '');
 };
 
-Ngn.frm.getValue = function(elements) {
+/**
+ *
+ * @param Element|array of Element
+ * @returns {*}
+ */
+Ngn.frm.getValue = function(el) {
+  if (el.length === undefined) {
+    var elements = el.getElements(Ngn.frm.selector);
+  } else {
+    var elements = el;
+  }
   var r = null;
   elements.each(function(el){
     var type = el.get('type');

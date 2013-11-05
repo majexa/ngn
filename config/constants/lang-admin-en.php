@@ -32,7 +32,6 @@ define('LANG_AM_configManager_vars_admins', 'Admins');
 define('LANG_AM_configManager_vars_allowedAdminModules', 'Allowed for Admin admin modules');
 define('LANG_AM_configManager_vars_allowedConfigVars', 'Allowed for Admin config vars');
 define('LANG_AM_configManager_vars_gods', 'Gods');
-define('LANG_AM_configManager_vars_eventsInfo', 'Events Templates');
 define('LANG_AM_configManager_vars_layout', 'Layout Variables');
 
 define('LANG_AM_configManager_constants_config', 'Common');

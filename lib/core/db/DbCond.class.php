@@ -160,7 +160,7 @@ class DbCond {
    * @param   string  Имя ф-ии, которую необходимо применить при вычислении значения диапозона
    * @param   bool    Строгое (>) или нестрогое (>=) неравенство
    */
-  function addRangeFilter($key, $from, $to, $params = null, $strict = false) {
+  function addRangeFilter($key, $from, $to = false, $params = null, $strict = false) {
     $tablePrefix = $this->tablePrefix;
     $func = null;
     if ($params !== null) {

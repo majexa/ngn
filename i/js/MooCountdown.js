@@ -65,8 +65,6 @@ Events:
 
 */
 
-var MooCountdown;
-
 MooCountdown = new Class({
 
   Implements: [Events, Options],

@@ -7,6 +7,10 @@ class SflmFrontend {
 
   public $frontend, $sflm, $paths, $newPaths = [], $id, $debug = false;
 
+  function addClass($class, $source = 'default') {
+    throw new Exception('Realized only for js type');
+  }
+
   function __construct(SflmBase $sflm, $frontend = null) {
     $this->id = Misc::randString(5);
     $this->sflm = $sflm;
@@ -22,7 +26,6 @@ class SflmFrontend {
   }
 
   function reload() {
-
   }
 
   protected function getLastPaths() {
@@ -33,6 +36,11 @@ class SflmFrontend {
     NgnCache::c()->save($this->getPaths(), 'sflmLastPaths'.$this->sflm->type.$this->frontend);
   }
 
+  /**
+   * Возвращает сохраненные для текущего фронтенда runtime пути
+   *
+   * @return array
+   */
   function getPathsCache() {
     return NgnCache::c()->load($this->pathsCacheKey()) ? : [];
   }
@@ -103,8 +111,8 @@ class SflmFrontend {
   /**
    * Добавляет в runtime-кэш библиотеку
    *
-   * @param package
-   * @param path / package
+   * @param string lib
+   * @param bool
    */
   function addLib($lib, $strict = false) {
     if (!$strict and !$this->sflm->exists($lib)) {
@@ -113,12 +121,12 @@ class SflmFrontend {
     }
     Sflm::output("Adding lib '$lib'");
     $newPaths = $this->sflm->getPaths($lib);
-    foreach ($newPaths as $path) {
+    foreach ($newPaths as $n => $path) {
       if (in_array($path, $this->getPathsCache())) {
         Sflm::output("New path '$path' already exists");
         continue;
       }
-      $this->addPath($path);
+      $this->addPath($path, "package '$lib'");
     }
     if ($this->changed) {
       NgnCache::c()->save($this->paths, $this->pathsCacheKey());
@@ -133,7 +141,11 @@ class SflmFrontend {
     return $this->sflm->getUrl($this->frontend.'new', $this->sflm->extractCode($this->newPaths), true);
   }
 
-  protected function addPath($path) {
+  /**
+   * @param string Добавляет к текущему фронтенду runtime путь
+   */
+  protected function addPath($path, $addingFrom = '[not defined]') {
+    if (in_array($path, $this->getPaths())) return;//throw new Exception("Path '$path' already exists. Adding from $addingFrom");
     $this->newPaths[] = $path;
     $this->paths[] = $path;
     $this->changed = true;
@@ -144,12 +156,12 @@ class SflmFrontend {
   }
 
   function version() {
-    return Config::getVar($this->versionCacheKey(), true) ? : 0;
+    return ProjectState::get($this->versionCacheKey(), true) ? : 0;
   }
 
   function incrementVersion() {
-    $version = (Config::getVar($this->versionCacheKey(), true) ? : 0) + 1;
-    SiteConfig::updateVar($this->versionCacheKey(), $version);
+    $version = $this->version() + 1;
+    ProjectState::update($this->versionCacheKey(), $version);
     $this->sflm->version = $version;
   }
 

@@ -73,8 +73,11 @@ function sys($cmd, $output = false) {
   return $c;
 }
 
-function rad($t) {
+function red($t) {
+  //if (!R::get('plainText'))
   print "<h1 style='color:#FF0000'>";
+  //if (R::get('plainText')) $t = (new CliColors)->getColoredString($t, 'red');
   pr($t);
+  //if (!R::get('plainText'))
   print "</h1>";
 }

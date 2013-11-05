@@ -8,8 +8,7 @@ use FormDbUnicCheck;
 
   protected function defineOptions() {
     return [
-      'subscribeOnReg' => true,
-      'active'         => !(bool)Config::getVarVar('userReg', 'activation')
+      'active' => !(bool)Config::getVarVar('userReg', 'activation')
     ];
   }
 
@@ -52,7 +51,7 @@ use FormDbUnicCheck;
       ], array_map(function($v) {
         $v['name'] = 'extra['.$v['name'].']';
         return $v;
-      }, (new DdFields(UsersCore::extraStrName, $this->extraFieldsOptions()))->getFormFields()));
+      }, (new DdFields(UsersCore::extraStrName, $this->extraFieldsOptions()))->getFieldsF()));
     }
     return $fields;
   }
@@ -69,29 +68,13 @@ use FormDbUnicCheck;
     $this->unicCheck('email', 'Такой имейл уже зарегистрирован');
     $this->unicCheck('login', Config::getVarVar('userReg', 'loginAsFullName') ? 'Такое Ф.И.О. уже зарегистрировано' : 'Такой логин уже зарегистрирован');
     $this->unicCheck('phone', 'Пользователь с таким телефоном уже существует');
-    if ($this->mysite) {
-      $this->unicCheck('name', 'Такой домен уже зарегистрирован');
-    }
   }
 
   protected function init() {
     parent::init();
     if (!empty($this->fields->fields['phone'])) $this->fields->fields['phone']['options']['disabled'] = true;
     $this->initRole();
-    $this->initSubscribe();
-    $this->initMysite();
   }
-
-  /*
-  protected function afterUserUpdate($userId, array $data) {
-    if ($this->options['subscribeOnReg'] and isset($data['subsList'])) {
-      foreach ($data['subsList'] as $listId => $subscribed) {
-        if (!$subscribed) continue;
-        db()->query('REPLACE INTO subs_users SET userId=?d, listId=?d', $userId, $listId);
-      }
-    }
-  }
-  */
 
   protected function initRole() {
     if (Config::getVarVar('role', 'enable', true)) {
@@ -104,36 +87,6 @@ use FormDbUnicCheck;
       'title' => 'Тип профиля',
       'name'  => 'role',
       'type'  => 'userRole'
-    ];
-  }
-
-  protected function initSubscribe() {
-    $this->subscribeOnReg = (!empty($this->options['subscribeOnReg']) and Config::getVarVar('subscribe', 'onReg'));
-    if (!$this->subscribeOnReg) return;
-    $subscribes = db()->query('SELECT id, title FROM subsList WHERE active=1 AND useUsers=1');
-    if (!$subscribes) return;
-    $this->fields[] = [
-      'name'  => 'subscribes',
-      'title' => Config::getVarVar('subscribe', 'regHeaderTitle'),
-      'type'  => 'header'
-    ];
-    foreach ($subscribes as $v) {
-      $this->fields[] = [
-        'name'    => 'subsList['.$v['id'].']',
-        'title'   => $v['title'],
-        'type'    => 'bool',
-        'default' => true
-      ];
-    }
-  }
-
-  protected function initMysite() {
-    if (!($this->mysite = Config::getVarVar('mysite', 'enable'))) return;
-    $this->fields[] = [
-      'name'     => 'name',
-      'title'    => 'Домен',
-      'type'     => 'name',
-      'required' => true
     ];
   }
 

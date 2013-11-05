@@ -16,7 +16,7 @@
           tinyMCE.activeEditor.selection.moveToBookmark(bookmark);
         };
         new Ngn.Dialog.RequestForm({
-          url: '/c/tinyImageUploader' +
+          url: '/default/tinyImageUploader' +
             '?tinyAttachId=' + ed.settings.attachId,
           onSubmitSuccess: function(r) {
             insertImage(r.imageUrl);
@@ -29,7 +29,7 @@
       // --------------------------------------------------------------------------------
       ed.addCommand('mceUploadImagePreview', function() {
         new Ngn.Dialog.RequestForm({
-          url: '/c/tinyImagePreviewUploader' +
+          url: '/default/tinyImagePreviewUploader' +
             '?tinyAttachId=' + ed.settings.attachId,
           onSubmitSuccess: function(r) {
             tinyMCE.activeEditor.execCommand(
@@ -70,7 +70,7 @@
           }
         };
         var dialog = new Ngn.Dialog.Form({
-          url: '/c/tinyImageProp',
+          url: '/default/tinyImageProp',
           onFormInit: function() {
             Ngn.frm.objTo(this.form.eForm, $(el).getProperties('alt'));
           },

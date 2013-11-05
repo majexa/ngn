@@ -16,7 +16,7 @@ Ngn.Dialog.Tiny.Link = new Class({
   
   options: {
     id: 'dqwdq',
-    url: '/c/tinyLink'
+    url: '/default/tinyLink'
   },
   
   formInit: function() {

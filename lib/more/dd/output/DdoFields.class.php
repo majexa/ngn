@@ -128,18 +128,18 @@ class DdoFields {
   ];
   
   function getFields() {
-    $fields = $this->fields->getFields();
+    $fields = $this->fields->getFieldsF();
     $fields += $this->extraVirtualFields;
     $_fields = [];
     foreach ($fields as $k => $v) {
-      //if (!empty($v['virtual'])) continue;
       $allowed = ($this->options['allowed'] and in_array($k, $this->options['allowed']));
       if (!$allowed and empty($this->options['forceAllowed'])) {
         if (!empty($v['notList'])) continue;
         // Если настройки не определены
         if (!$this->settingsExists) {
           // Не выводим системные по умолчанию
-          if (!empty($v['system']) or !empty($v['extraVirtual'])) continue;
+          if (!empty($v['extraVirtual'])) continue;
+          //if ((!empty($v['system']) and !$this->fields->options['getSystem']) or !empty($v['extraVirtual'])) continue;
           // Не выводим большие текстовые поля для списков записей
           //if ($this->isItemsList and in_array($v['type'], $this->forceListShowTypes)) continue;
           if (in_array($v['type'], $this->forceShowTypes)) continue;

@@ -12,7 +12,7 @@ DdFieldCore::registerType('ddTagsTreeMultiselect', [
 class FieldEDdTagsTreeMultiselect extends FieldEText {
 use DdElement;
 
-  protected $useDefaultJs = true;
+  protected $useTypeJs = true;
 
   function _html() {
     $data = self::getTplData(new DdTagsTagsTree(new DdTagsGroup($this->strName, $this->options['name'])), $this->options['name'], $this->options['value']);

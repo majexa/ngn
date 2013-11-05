@@ -35,6 +35,9 @@ use Options;
    */
   protected $settings;
 
+  /**
+   * @var string
+   */
   public $strName;
 
   public $titled = false, $text = false, $titledSettings;
@@ -188,7 +191,7 @@ use Options;
         $r = ($this->debug ? 'ddddByType:'.$data['type'].'=' : ''). // debug
           St::dddd($ddddByType[$data['type']], $data);
       } catch (Exception $e) {
-        throw new Exception('ddddByType type="'.$data['type'].', name="'.$data['name'].'" current class='.get_class($this).'". error: '.$e->getMessage());
+        throw new Exception('ddddByType type="'.$data['type'].', name="'.$data['name'].'", itemId='.$data['id'].' current class='.get_class($this).'". error: '.$e->getMessage());
       }
       return $r;
     }
@@ -272,12 +275,24 @@ use Options;
 
   public $textItemSeparator = "--\n";
 
+  protected $excelWriters = [];
+
+  /**
+   * @param $file
+   * @return ExcelWriter
+   */
+  protected function getExcelWriter($file) {
+    if (isset($this->excelWriter[$file])) return $this->excelWriter[$file];
+    $this->excelWriter[$file] = new ExcelWriter($file);
+    return $this->excelWriter[$file];
+  }
+
   function xls($file, $header = true) {
     Err::noticeSwitch(false);
     $this->check();
     $this->text = true;
     $this->titled = false;
-    $exl = new ExcelWriter($file);
+    $exl = $this->getExcelWriter($file);
     if ($header) $exl->writeLine(Arr::get($this->fields, 'title'));
     foreach ($this->items as $v) {
       $row = [];

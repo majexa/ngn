@@ -8,5 +8,5 @@ return [
   'i/js/ngn/Ngn.cp.TwoPanels.js',
   'i/js/ngn/Ngn.cp.ddFieldType.js',
   'i/js/ngn/Ngn.GroupToggler.js',
-  'i/js/ngn/Ngn.cp.LongJob.js'
+  'i/js/ngn/Ngn.LongJob.js'
 ];
