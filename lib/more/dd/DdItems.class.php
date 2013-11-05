@@ -41,8 +41,9 @@ class DdItems extends Items {
   protected function _prepareItemsConds() {
     $structure = (new DdStructureItems)->getItemByField('name', $this->strName);
     if (empty($structure)) throw new Exception('Structure "'.$this->strName.'" does not exists');
+    if (!empty($structure['settings']['getNonActive'])) $this->getNonActive = $structure['settings']['getNonActive'];
     if (!empty($structure['settings']['enableManualOrder'])) $this->cond->setOrder('oid');
-    else $this->cond->setOrder('dateCreate DESC');
+    elseif (!isset($this->cond->orderCond)) $this->cond->setOrder('dateCreate DESC');
     parent::_prepareItemsConds();
   }
 
@@ -230,7 +231,7 @@ class DdItems extends Items {
   /**
    * Добавляет данные для тэгов в массив записи
    *
-   * @param   array   Массив записи
+   * @param   array Массив записи
    */
   private function extendItemTags(&$item) {
     $this->setFieldTagTypes();
@@ -309,19 +310,20 @@ class DdItems extends Items {
     foreach (array_keys($item) as $fieldName) {
       if (empty($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
-      //if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselect') or FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
+      // if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselect') or FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
       if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
         $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
       }
       elseif (FieldCore::hasAncestor($fieldType, 'ddTags')) {
-        $tags = db()->selectCol('
-          SELECT tags.title FROM tagItems, tags
-          WHERE
-            tagItems.groupName=? AND
-            tagItems.strName=? AND
-            tagItems.itemId=?d AND
-            tagItems.tagId=tags.id
-          ', $fieldName, $this->strName, $item['id']);
+        $tags = db()->selectCol(<<<SQL
+SELECT tags.title FROM tagItems, tags
+WHERE
+  tagItems.groupName =? AND
+  tagItems.strName =? AND
+  tagItems.itemId =?d AND
+  tagItems.tagId = tags.id
+SQL
+          , $fieldName, $this->strName, $item['id']);
         $item[$fieldName] = implode(', ', $tags);
       }
       elseif (FieldCore::hasAncestor($fieldType, 'ddTagsSelect')) {
@@ -449,7 +451,15 @@ class DdItems extends Items {
     }
   }
 
-  function addTagFilter($tagField, array $tagValues, $byId = true) {
+  /**
+   * @param string
+   * @param array|integer
+   * @param bool $byId
+   * @return $this
+   * @throws Exception
+   */
+  function addTagFilter($tagField, $tagValues, $byId = true) {
+    $tagValues = (array)$tagValues;
     $tags = DdTags::get($this->strName, $tagField);
     if (!$byId and $tags->group->tree) throw new Exception("Getting tags by name supportes only flat tags. '$tagField' is tree type tag.");
     $itemIds = [];

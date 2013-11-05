@@ -1,8 +1,5 @@
 Ngn.Carousel = new Class({
-  
   Extends: Fx.Scroll,
-  
-  SUCK: 1,
   
   options: {
     mode: 'horizontal',
@@ -14,11 +11,13 @@ Ngn.Carousel = new Class({
   initialize: function(element, options){
     this.parent(element, options);
     this.cacheElements();
+    if (!this.elements[0]) throw new Error('No elements was found');
     for (var i=0; i<this.elements.length; i++) {
       this.elements[i].store('initIndex', i);
     }
     this.currentIndex = 0;
     this.elementWidth = this.elements[0].getSize().x;
+    c(this.elements);
     this.visibleElementsN = Math.round(this.element.getSize().x / this.elementWidth);
   },
   
@@ -26,8 +25,8 @@ Ngn.Carousel = new Class({
     var els;
     if (this.options.childSelector) {
       els = this.element.getElements(this.options.childSelector);
-    } else if (this.options.mode == 'horizontal'){
-      els = this.element.getElements(':first-child > *');
+    //} else if (this.options.mode == 'horizontal'){
+    //  els = this.element.getElements(':first-child > *');
     } else {
       els = this.element.getChildren();
     }

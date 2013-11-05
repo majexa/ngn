@@ -15,4 +15,8 @@ class SflmJs extends SflmBase {
     return $code;
   }
 
+  static function processCode($code) {
+    Sflm::flm('js')->processCode($code);
+  }
+
 }

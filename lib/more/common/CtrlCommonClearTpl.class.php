@@ -7,7 +7,7 @@ class CtrlCommonClearTpl extends CtrlCommon {
   }
   
   function action_default() {
-    $this->tt->tpl('clearTpl', ['tpl' => 'clearTpl/'.$this->req->param(2)]);
+    $this->tt->tpl('clearTpl', ['tpl' => 'clearTpl/'.$this->req->path(2)]);
   }
   
   function action_json_asd() {

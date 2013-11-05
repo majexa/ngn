@@ -284,6 +284,9 @@ clear: both;
 visibility: hidden;
 overflow: hidden;
 }
+.noOverflow {
+overflow: hidden;
+}
 .clearfix, .container {
 display: block;
 }

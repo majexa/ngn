@@ -10,9 +10,13 @@ class DdFieldItems extends DbItems {
 
   function getItems() {
     $items = parent::getItems();
-    array_walk($items, function(&$v) {
-      if (DdTagsGroup::getData($v['strName'], $v['name'], false)) {
-        $v['tagGroup'] = (new DdTagsGroup($v['strName'], $v['name']))->p;
+    array_walk($items, function (&$v) {
+      try {
+        if (DdTagsGroup::getData($v['strName'], $v['name'], false)) {
+          $v['tagGroup'] = (new DdTagsGroup($v['strName'], $v['name']))->p;
+        }
+      } catch (Exception $e) {
+        throw new Exception("Problems with Id={$v['id']}, type={$v['type']}: ".$e->getMessage());
       }
     });
     return $items;

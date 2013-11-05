@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 class UsersEditFormAdmin extends UsersEditForm {
 

@@ -76,16 +76,20 @@ Ngn.Dialog = new Class({
 
   initialize: function(_opts) {
     this.setOptions(_opts);
-
+    if (this.options.id == 'dlg') {
+      this.options.id = 'dlg' + Ngn.randString(5);
+      if (this.options.savePosition) throw new Error('Can not save position on random ID');
+      if (this.options.vResize) throw new Error('Can not save size on random ID');
+    }
     if (this.options.vResize && typeof(this.options.vResize) != 'function') {
       this.options.vResize = Ngn.Dialog.VResize;
     }
-
     if (this.options.noPadding) this.options.messageAreaClass += ' dialog-nopadding';
     if (this.options.reduceHeight) this.options.messageAreaClass += ' dialog-scroll';
-
-    if ($(this.options.id + '_dialog')) return null;
-
+    if ($(this.options.id + '_dialog')) {
+      c('Dialog with id=' + this.options.id + ' already opened. Aborted');
+      return null;
+    }
     if (this.options.bindBuildMessageFunction) this.options.message = this.buildMessage.bind(this, this.options.message);
     this.request = new (this.options.jsonRequest ? Ngn.Request.JSON : Ngn.Request)({
       evalScripts: true,
@@ -96,13 +100,11 @@ Ngn.Dialog = new Class({
     this.dialogN = Ngn.dialogs.length() + 1;
     Ngn.dialogs[this.dialogId] = this;
     this.parentElement = $((this.options.parent || document.body));
-
     var dialog_styles = $merge({
       'display': 'none',
       'width': this.options.width.toInt() + 'px',
       'z-index': this.options.baseZIndex + (this.dialogN * 2)
     }, this.options.styles);
-
     this.dialog = new Element('div', {
       'id': this.dialogId,
       'class': this.options.dialogClass,
@@ -147,7 +149,7 @@ Ngn.Dialog = new Class({
     this.message = new Element('div', {
       'id': this.options.id + '_message',
       'class': this.options.messageAreaClass + (this.options.title === false ? ' ' + this.options.noTitleClass : '') + (this.options.footer === false ? ' ' + this.options.noFooterClass : '')
-    }).inject(this.eMessage).setStyle('height', (this.options.height == 'auto' ? 'auto' : this.options.height.toInt() + 'px'));
+    }).inject(this.eMessage).setStyle('max-height', (this.options.height == 'auto' ? 'auto' : this.options.height.toInt() + 'px'));
     if (this.options.height != 'auto') this.message.setStyle('overflow-y', 'auto');
 
     this.beforeInitRequest();
@@ -252,7 +254,8 @@ Ngn.Dialog = new Class({
 
   reduceHeight: function() {
     var maxH = window.getSize().y - 150;
-    this.message.setStyle('height', maxH + 'px');
+    c(maxH);
+    this.message.setStyle('max-height', maxH + 'px');
     return;
     if (this.initHeight < maxH)
       this.message.setStyle('height', this.initHeight + 'px'); else
@@ -513,6 +516,15 @@ Ngn.Dialog.VResize.Wisiwig = new Class({
 
   getResizebleEl: function() {
     return this.dialog.eMessage.getElement('iframe');
+  }
+
+});
+
+Ngn.Dialog.VResize.Textarea = new Class({
+  Extends: Ngn.Dialog.VResize,
+
+  getResizebleEl: function() {
+    return this.dialog.eMessage.getElement('textarea');
   }
 
 });
@@ -843,7 +855,7 @@ Ngn.Dialog.openWhenClosed = function(closingDialogObject, openDialogClass, optio
 };
 
 Ngn.Dialog.Link = new Class({
-Extends: Ngn.Dialog.Msg,
+  Extends: Ngn.Dialog.Msg,
 
   options: {
     width: 120,

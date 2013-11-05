@@ -12,7 +12,7 @@
       t.editor = ed;
       ed.addCommand('mceUploadImages', function() {
         ed.windowManager.open({
-          file: './c/tinyImagesUploader' +
+          file: './default/tinyImagesUploader' +
             (ed.settings.attachId ? '?attachId=' + ed.settings.attachId : ''),
           width: 270,
           height: 200,

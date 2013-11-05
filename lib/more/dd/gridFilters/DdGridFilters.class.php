@@ -60,7 +60,7 @@ class DdGridFilters {
   }
 
   /**
-   * @param array example: [
+   * @param array Поля фильтров. Пример: [
    *   [
    *     [title] => Выберите модель авто
    *     [tree] => true

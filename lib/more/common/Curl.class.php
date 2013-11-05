@@ -1,6 +1,7 @@
 <?php
 
 class Curl {
+  use DebugOutput;
 
   public $getHeaders = false; // headers will be added to output 
   public $getContent = true; // contens will be added to output 
@@ -76,8 +77,8 @@ class Curl {
 
   function get($url) {
     if (!$this->fSocket) return false;
-    output('curl get: '.$url);
-    //$this->setopt(CURLOPT_HEADER, 1); 
+    $this->output('curl get: '.$url);
+    //$this->setopt(CURLOPT_HEADER, 1);
     $this->setopt(CURLOPT_NOBODY, 0);
     $this->setopt(CURLOPT_POST, 0);
     $this->setopt(CURLOPT_URL, $url);
@@ -142,6 +143,10 @@ class Curl {
     $this->destroy();
     if (!$result) throw new Exception("No result by url '$url'");
     return new HttpResult($this->convert($result));
+  }
+
+  function check200($url) {
+    return $this->getObj($url)->getAllHeaders()[0]['Code'] == 200 ? true : false;
   }
 
   protected function convert($text) {

@@ -154,7 +154,23 @@ Array.prototype.max = function() {
   var len = this.length;
   for (var i = 1; i < len; i++) if (this[i] > max) max = this[i];
   return max;
-}
+};
+
+Array.prototype.get = function(k, v) {
+  for (var i=0; i<this.length; i++) {
+    if (this[i][k] == v) return this[i];
+  }
+  return false;
+};
+
+/*
+Array.prototype.getIndex = function(k, v) {
+  for (var i=0; i<this.length; i++) {
+    if (this[i][k] == v) return i;
+  }
+  return false;
+};
+*/
 
 Arr = {};
 Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists in an array
@@ -191,7 +207,10 @@ Ngn.checkboxesSelected = function(esCheckboxes) {
 // --------------------------Common functions------------------------------
 
 function c(t) {
-  if ($defined(console) && console.log) console.log(t);
+  if ($defined(console) && console.log) {
+    console.log(t);
+    //console.trace();
+  }
 };
 
 Ngn.name2id = function(name) {
@@ -215,20 +234,17 @@ function translate(str) {
   }
   str = str.replace(/(\W)/g, '-').toLowerCase();
   return str;
-}
-;
+};
 
 function trim(s) {
   return s.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-}
-;
+};
 
 function numerical(s) {
   if (s == 0) return true;
   var _s = s.toInt().toString();
   return _s.length == s.length && _s != 0;
-}
-;
+};
 
 function abbreviate(elements, n) {
   elements.each(function(el) {
@@ -239,14 +255,12 @@ function abbreviate(elements, n) {
       el.addClass('tooltip');
     }
   });
-}
-;
+};
 
 function ucfirst(str) {
   var f = str.charAt(0).toUpperCase();
   return f + str.substr(1, str.length - 1);
-}
-;
+};
 
 Ngn.settings = function(name, callback) {
   Asset.javascript('/c2/jsSettings/' + name, {
@@ -765,7 +779,7 @@ Ngn.cutElementText = function(el, length) {
   el.set('title', text);
 };
 
-Ngn._whenElPresents = function(elGetter, action) {
+Ngn._whenElPresents = function(elGetter, action, maxAttempts) {
   var el;
   el = elGetter();
   find = function() {
@@ -775,7 +789,7 @@ Ngn._whenElPresents = function(elGetter, action) {
     action(el);
     return;
   }
-  var maxAttempts = 10;
+  maxAttempts = maxAttempts || 10;
   var n = 1;
   var id = function() {
     n++;
@@ -786,9 +800,9 @@ Ngn._whenElPresents = function(elGetter, action) {
     }
     if (n == maxAttempts) {
       $clear(id);
-      throw new Error('Element not presents after 100 attempts');
+      throw new Error('Element not presents after ' + maxAttempts + ' attempts');
     }
-  }.periodical(100);
+  }.periodical(200);
 };
 
 Ngn.whenElPresents = function(eParent, selector, action) {
@@ -864,7 +878,9 @@ function basename(str) {
 }
 
 Ngn.clsToSelector = function(s) {
-  return s.split(' ').map(function(v) { '.' + v }).join(' ');
+  return s.split(' ').map(function(v) {
+    '.' + v
+  }).join(' ');
 };
 
 // -- check --

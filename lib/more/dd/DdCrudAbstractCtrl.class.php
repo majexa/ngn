@@ -9,26 +9,26 @@ trait DdCrudAbstractCtrl {
 use ObjectProcessorCtrl;
 
   /**
+   * @var DdItems
+   */
+  protected $items;
+
+  /**
    * @abstract
    * @return DdItems
    */
-  abstract protected function items();
+  abstract protected function _items();
 
   protected function getStrName() {
     return lcfirst(Misc::removePrefix('Ctrl', get_class($this)));
   }
 
   /**
-   * @var DdItems
-   */
-  protected $items;
-
-  /**
    * @return DdItems
    */
-  protected function getItems() {
+  protected function items() {
     if (isset($this->items)) return $this->items;
-    $this->items = $this->items();
+    $this->items = $this->_items();
     $this->items->isPagination = true;
     return $this->objectProcess($this->items, 'items');
   }
@@ -42,7 +42,7 @@ use ObjectProcessorCtrl;
   }
 
   protected function getGrid() {
-    return Ddo::getGrid($this->getItems()->getItems_cache(), $this->ddo());
+    return Ddo::getGrid($this->items()->getItems(), $this->ddo());
   }
 
   protected $im;
@@ -50,7 +50,6 @@ use ObjectProcessorCtrl;
   protected function getIm() {
     if (isset($this->im)) return $this->im;
     $this->im = $this->_getIm();
-    ;
     return $this->im;
   }
 
@@ -61,19 +60,21 @@ use ObjectProcessorCtrl;
   function action_json_new() {
     $im = $this->getIm();
     $im->form->options['submitTitle'] = 'Создать';
-    if ($im->requestCreate()) return;
+    if (($id = $im->requestCreate())) return $id;
     $this->jsonFormAction($im->form);
+    return false;
   }
 
   function action_json_edit() {
     $im = $this->getIm();
-    if ($im->requestUpdate($this->req['id'])) return;
+    if ($im->requestUpdate($this->req['id'])) return true;
     $this->jsonFormAction($im->form);
+    return false;
   }
 
   function action_json_getItems() {
     $this->json = $this->getGrid();
-    if ($this->getItems()->isPagination) $this->json['pagination'] = $this->getItems()->getPagination();
+    if ($this->items()->isPagination) $this->json['pagination'] = $this->items()->getPagination();
   }
 
   function action_ajax_delete() {
@@ -97,7 +98,7 @@ use ObjectProcessorCtrl;
   }
 
   function action_ajax_reorder() {
-    $this->getItems()->reorderItems($this->req->rq('ids'));
+    $this->items()->reorderItems($this->req->rq('ids'));
   }
 
   function action_ajax_deleteFile() {

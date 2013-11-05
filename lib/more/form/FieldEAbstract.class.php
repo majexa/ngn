@@ -32,7 +32,7 @@ use Options;
 
   public $isPostValue = false;
 
-  protected $useDefaultJs = false;
+  protected $useTypeJs = false;
 
   protected function defineOptions() {
     return [
@@ -183,10 +183,9 @@ use Options;
   function js() {
     $js = '';
     if (!empty($this->options['jsOptions'])) {
-      $js .= 'Ngn.Form.ElOptions.'.$this->options['name'].' = '.Arr::jsObj($this->options['jsOptions'])."\n";
+      $js .= 'Ngn.Form.ElOptions.'.$this->options['name'].' = '.json_encode($this->options['jsOptions'])."\n";
     }
     $js = $js.$this->_js();
-    if ($js) $js = "\n// ------- type: {$this->type} -------\n".$js;
     return $js;
   }
 
@@ -195,7 +194,6 @@ use Options;
   }
 
   function _js() {
-    if ($this->useDefaultJs) return $this->defaultJs();
     return '';
   }
 
@@ -206,12 +204,13 @@ use Options;
     return empty($this->cssClasses) ? false : $this->cssClasses;
   }
 
-  protected function defaultJs() {
+  function typeJs() {
+    if (!$this->useTypeJs) return '';
     Sflm::flm('js')->addLib("formEl/$this->type");
     Sflm::flm('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
     Sflm::flm('css')->addStaticLib("formEl/$this->type.css");
     if (!$this->form) return '';
-    return "\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
+    return "\n// ------- type: {$this->type} -------\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }
 
   public $errorBacktrace;

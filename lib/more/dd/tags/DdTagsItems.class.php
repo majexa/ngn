@@ -2,7 +2,7 @@
 
 class DdTagsItems {
 
-  public $strName, $groupName, $group;
+  public $strName, $group;
 
   static $disableUpdateCount = false;
   static $getNonActive = false;
@@ -15,11 +15,9 @@ class DdTagsItems {
   /**
    * Создает запись тэга
    *
-   * @param   string  Имя группы
-   * @param   integer ID раздела
    * @param   integer ID записи
-   * @param   array   Названия тега
-   * @return  mixed   ID в случае успеха или false в случае неудачи
+   * @param   array Названия тегов
+   * @return  mixed   Вызывать ошибку в случае попытки создания тэг-записей с древовидным типом
    */
   function create($itemId, array $titles, $strict = false) {
     if ($this->group->tree) throw new Exception("Tag Items of 'Tree' type can not be created by titles");
@@ -42,7 +40,7 @@ class DdTagsItems {
       if (!$tag) {
         if ($strict) throw new NotFoundException("Tag with title '$title' not found (strName=$strName, groupName=$groupName)");
         if (!$this->group->itemsDirected) // Если ТэгЗаписи не влияют на Тэги
-        continue;
+          continue;
         $tagId = $tags->create(['title' => $title]);
       }
       else {
@@ -73,19 +71,54 @@ class DdTagsItems {
     if ($replace) $this->delete($itemId);
     $allTagTds = [];
     if (!$collectionTagIds) return;
+    if (!$replace) {
+      // Если добавляем, то учитываем, что коллекции уже существуют
+      $lastCollectionId = db()->selectCell(<<<SQL
+SELECT collection FROM tagItems
+WHERE strName=? AND groupName=? AND itemId=?d
+GROUP BY collection
+ORDER BY collection DESC
+LIMIT 1
+SQL
+        , $this->strName, $this->group->name, $itemId);
+      foreach ($collectionTagIds as $v) {
+        $lastCollectionId++;
+        $new[$lastCollectionId] = $v;
+      }
+      $collectionTagIds = $new;
+    }
+    $useInsertLarge = (count($collectionTagIds) > 20);
     foreach ($collectionTagIds as $collection => $tagTds) {
       foreach ($tagTds as $tagId) {
         $allTagTds[] = $tagId;
-        $data[] = [
+        $d = [
           'groupName'  => $this->group->name,
           'strName'    => $this->strName,
           'tagId'      => $tagId,
           'itemId'     => $itemId,
           'collection' => $collection
         ];
+        if ($useInsertLarge) {
+          $data[] = $d;
+        }
+        else {
+          try {
+            db()->insert('tagItems', $d);
+          } catch (Exception $e) {
+            if (mysql_errno() == 1062) throw new Exception("Change collection ID. Identical collection already exists: ".getPrr($d));
+            else throw $e;
+          }
+        }
       }
     }
-    db()->insertLarge('tagItems', $data);
+    if ($useInsertLarge) {
+      try {
+        db()->insertLarge('tagItems', $data);
+      } catch (Exception $e) {
+        if (mysql_errno() == 1062) throw new Exception("Some of inserted collections already exist");
+        else throw $e;
+      }
+    }
     $this->updateCounts(array_unique($allTagTds));
   }
 
@@ -131,8 +164,6 @@ SQL
    * Удаляет все тэг-записи определенной dd-записи в группе,
    * обновляет кол-во записей в тегах
    *
-   * @param  string  Имя структуры
-   * @param  string  Имя группы
    * @param  integer ID dd-записи
    */
   function delete($itemId) {
@@ -144,21 +175,25 @@ SQL
     }
   }
 
+  function deleteByCollection($itemId, $tagId) {
+    $collection = db()->selectCell('SELECT collection FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND tagId=?d', $this->strName, $this->group->name, $itemId, $tagId);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND collection=?d', $this->strName, $this->group->name, $itemId, $collection);
+  }
+
   /**
-   * Удаляет все тег-записи определенного тэга,
-   * обновляет кол-во записей в этом тэге
+   * Удаляет все тег-записи определенного тэга, обновляет кол-во записей в этом тэге
    *
-   * @param  string  Имя структуры
-   * @param  string  Имя группы
    * @param  integer ID тэга
    */
   function deleteByTagId($tagId) {
+    // а ещё у этого тэга есть родительские tagItems. их бы тоже надо удалить
+    // get tree by $tagId
     db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
     $this->updateCount($tagId);
   }
 
   function getLastTreeNodes($itemId) {
-    if (!($nodes = $this->getTree([$itemId]))) return;
+    if (!($nodes = $this->getTree($itemId))) return;
     $r = [];
     foreach ($nodes as $node) {
       while (1) {
@@ -166,7 +201,7 @@ SQL
           $r[] = $node;
           break;
         }
-        $node = $node['childNodes'][0];
+        $node = Arr::first($node['childNodes']);
       }
     }
     return $r;
@@ -182,10 +217,9 @@ SQL
   /**
    * Возвращает тэг-записи, выстроенные в дерево
    *
-   * @param   string          Имя структуры
-   * @param   integer/array   ID dd-записей
+   * @param   integer /array   ID dd-записей
    */
-  function getTree($itemIds) {
+  function getTree_($itemIds) {
     $itemIds = (array)$itemIds;
     $items = $this->getFlat($itemIds);
     foreach (array_keys($items) as $k) {
@@ -195,6 +229,69 @@ SQL
       }
     }
     return array_values($items);
+  }
+
+  function getTree($itemIds) {
+    $itemIds = (array)$itemIds;
+    $params = [
+      'tagItems.*',
+      'tagItems.tagId AS id',
+      'CONCAT_WS("-", tagItems.tagId, tagItems.collection) AS ARRAY_KEY', // нужно для построения дерева
+      'CONCAT_WS("-", tags.parentId, tagItems.collection) AS PARENT_KEY',
+      'tags.title',
+    ];
+    /**
+     * @todo: посмотреть что это такое
+     * if ($this->group->allowEdit) {
+     * $params[] = 'tags.name';
+     * $params[] = 'tags.parentId';
+     * }
+     */
+    $params = implode(', ', $params);
+//    ;      tagItems.collection=1058 AND
+    $q = "
+    SELECT $params
+    FROM tagItems
+    LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
+    WHERE
+      tagItems.strName=? AND
+      tagItems.groupName=? AND
+      tagItems.itemId IN (".implode(', ', $itemIds).") AND
+      tagItems.active=1
+      ";
+    $r = db()->select($q, $this->strName, $this->group->name);
+    $this->hash2arrayR($r);
+    return $r;
+  }
+
+  function hash2arrayR(array &$nodes) {
+    $nodes = array_values($nodes);
+    foreach ($nodes as &$v) if (!empty($v['childNodes'])) $this->hash2arrayR($v['childNodes']);
+  }
+
+  function getFlatOld($itemIds) {
+    $itemIds = (array)$itemIds;
+    $params = [
+      'tagItems.*',
+      'tagItems.tagId AS id', // нужно для построения дерева
+      "tags.title",
+    ];
+    if ($this->group->allowEdit) {
+      $params[] = 'tags.name';
+      $params[] = 'tags.parentId';
+    }
+    $params = implode(', ', $params);
+    $q = "
+    SELECT $params
+    FROM tagItems
+    LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
+    WHERE
+      tagItems.strName=? AND
+      tagItems.groupName=? AND
+      tagItems.itemId IN (".implode(', ', $itemIds).") AND
+      tagItems.active=1
+      ";
+    return db()->select($q, $this->strName, $this->group->name);
   }
 
   function getFlat($itemIds) {
@@ -220,7 +317,7 @@ SQL
       tagItems.active=1
       ";
     $tagItems = db()->select($q, $this->strName, $this->group->name);
-    if ($this->getRelatedItems and ($items = $this->group->getRelatedItems()) !== false) {
+    if ($this->getRelatedItems and ($items = $this->group->getRelatedItems()) !== false) { // используется для подхватывания юзеров, когда они добавлены, как тэги
       foreach ($tagItems as &$v) $v = $items->getItemF($v['id']);
     }
     return $tagItems;
@@ -273,9 +370,12 @@ SQL
    * Удаляет те тэги, к которым не было найдено ниодной ТэгЗаписи
    */
   static function cleanup() {
-    db()->query('
-      SELECT tags.id, tagItems.tagId AS exists FROM tags
-      LEFT JOIN tagItems ON tagItems.tagId=tags.id');
+    db()->query(<<<SQL
+SELECT tags.id, tagItems.tagId AS exists
+FROM tags
+LEFT JOIN tagItems ON tagItems.tagId=tags.id
+SQL
+);
   }
 
 }

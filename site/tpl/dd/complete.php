@@ -56,40 +56,6 @@
   <div class="info">
     <p>Этот раздел является премодерируемым.
     Это значит, что ваша запись будет добавлена на сайт после проверки.</p>
-    
-    <? if (($path = $this->getControllerPath('notify', true)) and
-    !in_array('items_ownChange', Notify_SubscribeTypes::getUserTypes(Auth::get('id')))) { ?>
-      <p>Если вы хотите быть в курсе, когда это произойдёт, подпишитесь на её обновления.</p>
-      <p>Подписано успешно. <a href="<?= $path ?>">Управление уведомлениями</a></p>
-      <a href="" class="btn btn2" id="subscribeOwnItemsChange"><span>Подписаться на обновления</span></a>
-    <script type="text/javascript">
-    var eSubsBtn = $('subscribeOwnItemsChange');
-    //$('content').load('./?a=ajax_subscribeOwnItemsAndSetAllMethodsOn');
-    eSubsBtn.addEvent('click', function(){
-      eSubsBtn.load('<?= $path ?>?a=ajax_subscribeOwnItemsAndSetAllMethodsOn', {
-        onLoad: function() {
-          alert('!!!');
-        }
-      });
-    });
-    /*
-    eSubsBtn.addEvent('click', function(){
-      new Request({
-        url: '<?= $path ?>',
-        onComplete: function() {
-          new Element('p', {html: 'Подписано успешно. <a href="<?= $path ?>">Управление уведомлениями</a>'}).inject(eSubsBtn, 'after');
-          eSubsBtn.dispose();
-        }.bind(this)
-      }).GET({
-        'action': 'ajax_subscribeOwnItemsAndSetAllMethodsOn',
-      });
-      return false;
-    });
-    */
-    </script>
-    <div class="clear"><!-- --></div>
-    <? } ?>
-    
   </div>
   <? } ?>
 <? } ?>

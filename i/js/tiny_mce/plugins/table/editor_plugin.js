@@ -1170,14 +1170,14 @@
           var eSel = ed.dom.getParent(ed.selection.getNode(), 'table');
           if (eSel) {
             winMan.open({
-              url: '/c/tinyTableProp',
+              url: '/default/tinyTableProp',
               width: 260,
               height: 80,
               inline: 1
             });
           } else {
             winMan.open({
-              url: '/c/tinyTable',
+              url: '/default/tinyTable',
               width: 500,
               height: 170,
               inline: 1

@@ -138,8 +138,15 @@ class DbSimple_Mysql extends DbSimple_Generic_Database {
     return false;
   }
 
+  function expandQuery() {
+    $args = func_get_args();
+    $this->_expandPlaceholders($args, false);
+    return $args[0];
+  }
+
   function _performQuery($queryMain) {
     $this->_lastQuery = $queryMain;
+
     $this->_expandPlaceholders($queryMain, false);
     $result = @mysql_query($queryMain[0], $this->link);
     if ($result === false) {

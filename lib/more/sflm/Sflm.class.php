@@ -25,6 +25,11 @@ class Sflm {
     if (!isset(self::$frontend)) self::$frontend = $frontend;
   }
 
+  static function resetFrontend($frontend) {
+    if (isset(self::$frontend)) unset(self::$cache[self::$frontend]);
+    self::$frontend = $frontend;
+  }
+
   static function getTags() {
     return Sflm::flm('js')->getTags()."\n".Sflm::flm('css')->getTags();
   }
@@ -49,22 +54,23 @@ class Sflm {
    */
   static function flm($type, $frontend = null) {
     $frontend = $frontend ? : self::$frontend;
-    if (isset(self::$cache[$type.$frontend])) return self::$cache[$type.$frontend];
+    if (isset(self::$cache[$frontend][$type])) return self::$cache[$frontend][$type];
     $class = 'SflmFrontend'.ucfirst($type);
     /* @var $sflmFrontend SflmFrontend */
     $sflmFrontend = new $class(self::lm($type), $frontend);
     $sflmFrontend->store();
-    return self::$cache[$type.$frontend] = $sflmFrontend;
+    if (!isset(self::$cache[$frontend])) self::$cache[$frontend] = [];
+    return self::$cache[$frontend][$type] = $sflmFrontend;
   }
 
   static function reset($type, $frontend = null) {
     $frontend = $frontend ? : self::$frontend;
-    unset(self::$cache[$type.$frontend]);
+    unset(self::$cache[$frontend][$type]);
     return self::flm($type, $frontend);
   }
 
   static function output($s) {
-    //output($s);
+    if (self::$debug) output($s);
   }
 
 }

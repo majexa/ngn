@@ -22,19 +22,19 @@ class DdTagsTagsTree extends DdTagsTagsBase {
    *                  ]
    */
   function getParentIds(array $ids) {
-    setProcessTimeStart();
+    //setProcessTimeStart();
     $tree = $this->_getTree();
-    output("_getTree time: ".getProcessTime());
+    //output("_getTree time: ".getProcessTime());
     if (!$ids) return [];
-    setProcessTimeStart();
+    //setProcessTimeStart();
     $times = [];
     foreach ($ids as $id) {
-      setProcessTimeStart(1);
+      //setProcessTimeStart(1);
       $this->setParentIds($tree, $id);
-      $times[] = getProcessTime(1);
+      //$times[] = getProcessTime(1);
     }
-    output('times: '.implode(', ', $times));
-    output("foreach setParentIds: ".getProcessTime());
+    //output('times: '.implode(', ', $times));
+    //output("foreach setParentIds: ".getProcessTime());
     return array_values($this->parentIds);
   }
 
@@ -58,7 +58,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
     $this->curParentIds = [];
     $this->parentIds[$id] = [];
     $this->_setParentIds($nodes, $id);
-    if (empty($this->parentIds[$id])) throw new Exception("Tag ID=$id does not exists in tree");
+    if (empty($this->parentIds[$id])) throw new NotFoundException("Tag ID=$id does not exists in tree");
   }
 
   private function _setParentIds(array $nodes, $id) {

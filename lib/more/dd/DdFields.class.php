@@ -16,6 +16,10 @@ class DdFields extends Fields {
     ];
   }
 
+  /**
+   * @param string $strName
+   * @param array $options
+   */
   function __construct($strName, array $options = []) {
     Misc::checkEmpty($strName);
     $this->strName = $strName;
@@ -51,11 +55,11 @@ class DdFields extends Fields {
     ]);
   }
 
-  function getFormFields() {
+  function getFieldsF() {
     $fields = $this->getFields();
-    if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0);
-    if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0);
-    if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, false, true);
+    if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0, true);
+    if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0, true);
+    if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, true, true);
     foreach ($fields as &$v) $v = Arr::filterEmptyStrings($v);
     return $fields;
   }

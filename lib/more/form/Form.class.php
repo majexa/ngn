@@ -135,8 +135,6 @@ class Form {
 
   function isSubmitted() {
     if (!$this->fromRequest) return true;
-
-    //pr($this->id());
     return ($this->req['formId'] and $this->req['formId'] == $this->id());
   }
 
@@ -313,7 +311,6 @@ class Form {
     if ($this->disableSubmit) {
       foreach ($this->els as $k => $el) if ($el->type == 'submit') unset($this->els[$k]);
     }
-
     $html = $this->htmlFormOpen();
     if ($this->globalError) $html .= str_replace('{error}', $this->globalError, $this->templates['globalError']);
     $this->visibleRowN = -1;
@@ -365,14 +362,16 @@ class Form {
     if ($this->disableJs or $this->disableFormTag) return '';
     $this->js = '';
     $jsTypesAdded = [];
+    $typeJs = '';
     foreach ($this->els as $el) {
       if (($js = $el->jsInline()) != '') $this->jsInline .= $js;
-      if (($js = $el->js()) == '') continue;
-      if ($el->type == 'js' or !in_array($el->type, $jsTypesAdded)) {
+      if (($js = $el->js())) $this->js .= $js;
+      if (($js = $el->typeJs()) and !in_array($el->type, $jsTypesAdded)) {
         $jsTypesAdded[] = $el->type;
-        $this->js .= $js;
+        $typeJs .= $js;
       }
     }
+    $this->js .= $typeJs;
     // Call "js..." methods
     foreach (get_class_methods($this) as $method) {
       if ($method != 'js' and substr($method, 0, 2) == 'js') {
@@ -397,8 +396,8 @@ class Form {
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
       file_put_contents($file, "Ngn.frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
     }
-    //return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : BUILD);
-    return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : 0);
+    //$mtime = filemtime($file);
+    return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : filemtime($file));
   }
 
   function display() {
@@ -664,7 +663,7 @@ class Form {
       $fields = $this->fields->getRequired();
     }
     else {
-      $fields = $this->fields->getFormFields();
+      $fields = $this->fields->getFieldsF();
     }
     foreach ($fields as $v) {
       if ($this->fields->isFileType($v['name'])) {
@@ -707,7 +706,7 @@ class Form {
    */
   protected function setElementsDataDefault() {
     if ($this->elementsDefaultDefined) return false;
-    $this->setElementsData($this->defaultData);
+    $this->setElementsData($this->getDefaultData());
     $this->elementsDefaultDefined = true;
     return true;
   }

@@ -13,7 +13,6 @@ Ngn.cp.TwoPanels = new Class({
   initialize: function(eLeft, eRight, eHandler, options) {
     this.setOptions(options);
     this.eLeft = eLeft;
-    this.eLeft2 = eLeft;
     this.eRight = eRight;
     this.eHandler = eHandler;
     if (this.options.addLeftWrapper) this.eLeft = Ngn.addWrapper(this.eLeft, 'panelWrapper');

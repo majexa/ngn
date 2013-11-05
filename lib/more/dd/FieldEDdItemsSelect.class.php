@@ -20,7 +20,11 @@ class FieldEDdItemsSelect extends FieldEMultiselect {
 use DdElement;
 
   protected function init() {
-    $this->options['options'] = Arr::get(O::get('DdItems', $this->options['settings']['strName'])->getItemsSimple(), 'title', 'id');
+    if (isset($this->options['settings'])) {
+      $this->options['options'] = Arr::get(O::get('DdItems', $this->options['settings']['strName'])->getItemsSimple(), 'title', 'id');
+    } else {
+      $this->options['options'] = [];
+    }
     parent::init();
   }
 

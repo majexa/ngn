@@ -75,7 +75,7 @@ class Arr {
    *                  использовать в качестве ключа результирующего массива
    * @return  array
    */
-  static function get(array $arr, $k, $kk = null) {
+  static function get($arr, $k, $kk = null) {
     $res = [];
     if ($kk == 'KEY') foreach ($arr as $KEY => $v) $res[$KEY] = is_array($v) ? $v[$k] : $v->$k;
     elseif ($kk) foreach ($arr as $v) $res[$v[$kk]] = is_array($v) ? $v[$k] : $v->$k;

@@ -281,7 +281,10 @@ use Options;
         if (JSON_DEBUG !== true) header('Content-type: application/json');
         if (is_string($this->json)) return $this->json;
         if ($this->actionDisabled) $this->json['actionDisabled'] = true;
-        if (Sflm::$frontend and ($deltaUrl = Sflm::flm('js')->getDeltaUrl())) $this->json['sflJsDeltaUrl'] = $deltaUrl;
+        if (Sflm::$frontend) {
+          if (($deltaUrl = Sflm::flm('js')->getDeltaUrl())) $this->json['sflJsDeltaUrl'] = $deltaUrl;
+          if (($deltaUrl = Sflm::flm('css')->getDeltaUrl())) $this->json['sflCssDeltaUrl'] = $deltaUrl;
+        }
         return json_encode($this->json);
       }
     }

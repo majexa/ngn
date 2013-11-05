@@ -75,17 +75,15 @@ use Options;
     if (isset($this->req->g['logout'])) {
       Auth::logout();
       $url = 'http://'.SITE_DOMAIN.Tt()->getUrlDeletedParams($_SERVER['REQUEST_URI'], ['logout']);
-      sendHeader();
-      die("<a href='$url'>перейти</a>");
-      (new Curl)->exists($url) ? redirect($url) : redirect('/');
+      jsRedirect($url);
     }
     elseif (isset($this->req->g['clear'])) {
       Auth::clear();
       //header('Location: '.Tt()->getUrlDeletedParams($_SERVER['REQUEST_URI'], array('clear')));
     }
     else {
-      // Auth::$doNotSavePass = $_REQUEST
       Auth::setAuth();
+      if (Auth::$postAuth) jsRedirect(Tt()->getPath());
     }
   }
 

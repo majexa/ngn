@@ -35,7 +35,6 @@ define('LANG_AM_configManager_vars_admins', '
 define('LANG_AM_configManager_vars_allowedAdminModules', 'Разрешенные для Администраторов админ-модули');
 define('LANG_AM_configManager_vars_allowedConfigVars', 'Разрешенные для Администраторов конфигурационные переменные');
 define('LANG_AM_configManager_vars_gods', 'Боги');
-define('LANG_AM_configManager_vars_eventsInfo', 'Шаблоны событий');
 define('LANG_AM_configManager_vars_layout', 'Переменные оформления');
 
 define('LANG_AM_configManager_constants_config', 'Общее');

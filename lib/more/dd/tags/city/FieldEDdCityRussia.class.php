@@ -26,7 +26,7 @@ class FieldEDdCityRussia extends FieldEDdCity {
   }
 
   protected function getSelectedValues() {
-    return !empty($this->options['value'][3]) ? [
+    return isset($this->options['value'][3]) ? [
       $this->options['value'][3],
     ] : [];
   }

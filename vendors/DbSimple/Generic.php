@@ -554,7 +554,6 @@ class DbSimple_Generic_Database extends DbSimple_Generic_LastError {
       }
       else $cache_it = true;
     }
-
     if (null === $rows || true === $cache_it) {
       $this->_logQuery($query);
 

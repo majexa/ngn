@@ -1,6 +1,6 @@
 <?php
 return [
   'method' => 'mail',
-  'fromEmail' => 'noreplay@'.SITE_DOMAIN,
-  'fromName' => SITE_TITLE,
+  'fromEmail' => 'noreplay@'.(defined('SITE_DOMAIN') ? SITE_DOMAIN : 'dummy'),
+  'fromName' => defined('SITE_DOMAIN') ? SITE_DOMAIN : 'Dummy',
 ];

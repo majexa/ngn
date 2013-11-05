@@ -250,6 +250,10 @@ trait DdParamFilterCtrl {
       }
     }
     */
+    if (!$tagValue) {
+      $this->paramFilterItems()->addF('id', 0);
+      return;
+    }
     $this->paramFilterItems()->addTagFilter($tagField, is_array($tagValue) ? $tagValue : explode(',', $tagValue), $byId);
   }
 

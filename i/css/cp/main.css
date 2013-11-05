@@ -215,7 +215,9 @@ margin-top: 0px;
 .longJobs .item .cont {
 padding: 5px;
 padding-top: 8px;
+padding-right: 30px;
 display: block;
+position: relative;
 }
 
 .pagePath {
@@ -980,16 +982,6 @@ padding-top: 5px;
 }
 .newLayout #bottom {
 margin-top: 0px;
-}
-
-.filters p {
-margin: 5px 0px 0px 0px;
-}
-#treeContainerWrapper .filters .cont {
-padding: 0px 10px 10px 10px;
-}
-#treeContainerWrapper .filters select {
-max-width: 150px;
 }
 
 .pseudoLink:hover {

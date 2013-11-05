@@ -32,6 +32,8 @@ class DdCore {
    * @return DdItemsManagerPage
    */
   static function getItemsManager($pageId, array $options = []) {
+    throw new Exception('Depricated');
+    /*
     if (($page = DbModelCore::get('pages', $pageId)) === false) {
       throw new Exception("No page by id=$pageId");
     }
@@ -59,6 +61,7 @@ class DdCore {
       $im->setStaticId($options['staticId']);
     }
     return $im;
+    */
   }
 
   const masterFieldName = 'mstr';
@@ -121,6 +124,19 @@ class DdCore {
    */
   static function imSystem($strName) {
     return new DdItemsManager(new DdItems($strName), new DdForm(new DdFields($strName, ['getDisallowed' => true]), $strName));
+  }
+
+  static function exportItems($strName, DbCond $cond) {
+    $items = new DdItems($strName);
+    $items->cond = $cond;
+    $dumper = new DbDumper(null, ['noHeaders' => true]);
+    $ids = $items->getItemIds();
+    $dumper->cond->addF('id', $ids);
+    $r = $dumper->getDump(self::table($strName));
+    $dumper = new DbDumper(null, ['noHeaders' => true]);
+    $dumper->cond->addF('itemId', $ids);
+    $r .= $dumper->getDump('tagItems');
+    return $r;
   }
 
 }

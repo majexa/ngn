@@ -1,5 +1,7 @@
 <?php
 
 return [
-  'i/js/ngn/dd/Ngn.DdFilterPath.js', 'ddGrid'
+  'i/js/ngn/Ngn.GroupToggler.js',
+  'i/js/ngn/dd/Ngn.DdFilterPath.js',
+  'ddGrid'
 ];

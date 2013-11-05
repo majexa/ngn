@@ -1,5 +1,9 @@
 <?php
 
+
+require_once __DIR__.'/TestRunnerAbstract.class.php';
+
+
 class TestRunner extends TestRunnerAbstract {
 
   protected function getClasses() {

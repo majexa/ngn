@@ -1,4 +1,3 @@
-
 Ngn.Grid.Dialog = new Class({
   Extends: Ngn.Dialog,
 

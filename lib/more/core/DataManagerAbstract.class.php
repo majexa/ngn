@@ -6,6 +6,10 @@
  */
 abstract class DataManagerAbstract extends Options2 {
 
+  /**
+   * @param $id
+   * @return array
+   */
   abstract public function getItem($id);
 
   abstract protected function _create();
@@ -50,7 +54,7 @@ abstract class DataManagerAbstract extends Options2 {
 
   static $defaultImageSizes = [
     'smW' => 100,
-    'smH' => 100,
+    'smH' => 60,
     'mdW' => 400,
     'mdH' => 300
   ];
@@ -139,8 +143,6 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   public $defaultData;
-
-  //protected $isRequestUpdate
 
   /**
    * Производит обработку действия с формы перед созданием, создаёт форму, обрабатывает значения полученные в результате её создания

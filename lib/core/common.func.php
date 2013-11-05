@@ -61,7 +61,17 @@ function getPr($v, $html = true) {
 }
 
 function output($str, $output = false) {
-  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'green').">").(R::get('plainText') ? "\n" : "</p>");
+  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <$str>").(R::get('plainText') ? "\n" : "</p>");
+  LogWriter::str('output', $str);
+}
+
+function output2($str, $output = false) {
+  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'cyan').">").(R::get('plainText') ? "\n" : "</p>");
+  LogWriter::str('output', $str);
+}
+
+function output3($str, $output = false) {
+  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'red').">").(R::get('plainText') ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 
@@ -151,13 +161,12 @@ function getOS() {
 
 function redirect($path) {
   if (!strstr($path, 'http://')) $path = '/'.ltrim($path, '/');
-  $location = $path;
-  if (getConstant('JS_REDIRECT')) {
-    header('Location: /c2/jsRedirect?r='.urlencode($location));
-  } else {
-    header('Location: '.$location);
-  }
+  getConstant('JS_REDIRECT') ? jsRedirect($path) : header('Location: '.$path);
   print "\n"; // странность: если после хедера нет никакого вывода, редирект не осуществляется
+}
+
+function jsRedirect($path) {
+  header('Location: /default/jsRedirect?r='.urlencode($path));
 }
 
 function set_time_limit_q($n) {
