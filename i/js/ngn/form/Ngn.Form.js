@@ -222,7 +222,6 @@ Ngn.Form = new Class({
         this.upload = new Ngn.Form.Upload.Single(this.eForm, eInput, uploadOptions);
       } else {
         uploadOptions.url += '&multiple=1';
-        //eInput.set('name', eInput.get('name')+'[]');
         this.upload = new Ngn.Form.Upload.Multi(this.eForm, eInput, uploadOptions);
       }
     }.bind(this));
@@ -415,7 +414,7 @@ Ngn.Form.ElInit = new Class({
       var cls = eval(clsName);
       if (cls === undefined) {
         c('Init class "' + clsName + '" for element type "' + this.type + '" not found');
-        //throw new Error('Class "'+clsName+'" is not defined');
+        // throw new Error('Class "'+clsName+'" is not defined');
         return;
       }
       if (eRow.retrieve('initialized')) return;

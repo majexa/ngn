@@ -254,7 +254,6 @@ Ngn.Dialog = new Class({
 
   reduceHeight: function() {
     var maxH = window.getSize().y - 150;
-    c(maxH);
     this.message.setStyle('max-height', maxH + 'px');
     return;
     if (this.initHeight < maxH)

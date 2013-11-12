@@ -207,9 +207,12 @@ class Config {
   }
 
   static function updateVar($file, $v) {
-    $v = Arr::transformValue($v);
     Dir::make(dirname($file));
-    file_put_contents($file, "<?php\n\nreturn ".Arr::formatValue($v).";\n");
+    file_put_contents($file, self::formatVar($v));
+  }
+
+  static function formatVar($v) {
+    return "<?php\n\nreturn ".Arr::formatValue(Arr::transformValue($v)).";\n";
   }
 
   static function updateSubVar($file, $k, $v) {

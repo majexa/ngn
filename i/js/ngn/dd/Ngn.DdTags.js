@@ -74,6 +74,7 @@ Ngn.DdTags.Dialog.Flat = new Class({
           action: function(grid) {
             var title = prompt('Введите название');
             if (title) {
+              // c('!'); console.trace(); return;
               new Ngn.Request({
                 url: grid.options.basePath + '?a=ajax_create',
                 onComplete: function() {

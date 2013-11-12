@@ -207,6 +207,7 @@ use Options;
   function typeJs() {
     if (!$this->useTypeJs) return '';
     Sflm::flm('js')->addLib("formEl/$this->type");
+    Sflm::flm('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
     Sflm::flm('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
     Sflm::flm('css')->addStaticLib("formEl/$this->type.css");
     if (!$this->form) return '';

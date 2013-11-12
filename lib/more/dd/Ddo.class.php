@@ -1,7 +1,7 @@
 <?php
 
 class Ddo {
-use Options;
+  use Options;
 
   protected $debug = false;
 
@@ -151,11 +151,11 @@ use Options;
     if (isset(self::$funcByName[$data['name']])) {
       $func = self::$funcByName[$data['name']];
       //try {
-        $r = ($this->debug ? 'funcByName:'.$data['name'].'=' : ''). // debug
-          $func($data);
+      $r = ($this->debug ? 'funcByName:'.$data['name'].'=' : ''). // debug
+        $func($data);
       //} catch (Exception $e) {
 //        throw new Exception('funcByName name="'.$data['name'].'" error: '.$e->getMessage());
-  //    }
+      //    }
       return $r;
     }
     elseif (isset($ddddByName[$data['name']])) {
@@ -171,11 +171,11 @@ use Options;
     }
     elseif (isset($this->tplPathByName[$data['name']])) {
       return ($this->debug ? 'tplPathByName:name:'.$data['name'] : ''). // debug
-        Tt()->getTpl($this->tplPathByName[$data['name']], $data);
+      Tt()->getTpl($this->tplPathByName[$data['name']], $data);
     }
     elseif (isset($this->tplPathByType[$data['type']])) {
       return ($this->debug ? 'tplPathByType:type:'.$this->tplPathByType[$data['type']].'=' : ''). // debug
-        Tt()->getTpl($this->tplPathByType[$data['type']], $data);
+      Tt()->getTpl($this->tplPathByType[$data['type']], $data);
     }
     elseif (isset($this->ssssByType[$data['type']])) {
       try {
@@ -200,7 +200,7 @@ use Options;
         throw new Exception('Type "'.$data['type'].'" of field "'.$data['name'].'" has no DDO. Value for default output can not be an array');
       }
       return ($this->debug ? 'ddddDefault (type='.$data['type'].'): ' : ''). // debug
-        St::dddd($this->ddddDefault, $data);
+      St::dddd($this->ddddDefault, $data);
     }
   }
 
@@ -220,8 +220,8 @@ use Options;
   /**
    * Возвращает HTML элемента DD-записи
    *
-   * @param   array   Значение элемента записи
-   * @param   array   Имя поля
+   * @param   array Значение элемента записи
+   * @param   array Имя поля
    * @param   array   ID записи
    * @return  string  HTML
    */
@@ -251,7 +251,7 @@ use Options;
     if (FieldCore::hasAncestor($f['type'], 'file')) {
       if (isset($item[$fieldName.'_fSize'])) $tplData['fSize'] = $item[$fieldName.'_fSize'];
     }
-    return ($this->debug ? "\n\n<!-- Field=$fieldName, Value=$value. Current DdoPage class: ".get_class($this)." -->\n\n" : '').$this->htmlEl($tplData);
+    return ($this->debug ? "\n\n<!-- Field=$fieldName, Value=".(is_scalar($value) ? $value : '['.gettype($value).']').". Current DdoPage class: ".get_class($this)." -->\n\n" : '').$this->htmlEl($tplData);
   }
 
   // ------------- Elements -------------- 
@@ -285,24 +285,6 @@ use Options;
     if (isset($this->excelWriter[$file])) return $this->excelWriter[$file];
     $this->excelWriter[$file] = new ExcelWriter($file);
     return $this->excelWriter[$file];
-  }
-
-  function xls($file, $header = true) {
-    Err::noticeSwitch(false);
-    $this->check();
-    $this->text = true;
-    $this->titled = false;
-    $exl = $this->getExcelWriter($file);
-    if ($header) $exl->writeLine(Arr::get($this->fields, 'title'));
-    foreach ($this->items as $v) {
-      $row = [];
-      foreach ($this->fields as $f) {
-        if (isset($v[$f['name']])) $row[] = $this->el($v[$f['name']], $f['name'], $v['id']);
-        else $row[] = '';
-      }
-      $exl->writeLine($row);
-    }
-    Err::noticeSwitchBefore();
   }
 
   function els() {
@@ -341,6 +323,26 @@ use Options;
       $rows[] = $row;
     }
     return Tt()->getTpl('common/table', $rows);
+  }
+
+  function xls($file, $header = true) {
+    Err::noticeSwitch(false);
+    $this->check();
+    $this->text = true;
+    $this->titled = false;
+    $exl = $this->getExcelWriter($file);
+    if ($header) $exl->writeLine(Arr::get($this->fields, 'title'));
+    $rows = [];
+    foreach ($this->items as $v) {
+      $row = [];
+      foreach ($this->fields as $f) {
+        if (isset($v[$f['name']])) $row[] = $this->el($v[$f['name']], $f['name'], $v['id']);
+        else $row[] = '';
+      }
+      $exl->writeLine($row);
+      $rows[] = $row;
+    }
+    Err::noticeSwitchBefore();
   }
 
   function elsSeparate() {
@@ -389,13 +391,13 @@ use Options;
   // -------- grid --------
 
   static function getGrid($items, Ddo $ddo) {
-    $grid['head'] = Arr::get(array_map(function($v) {
+    $grid['head'] = Arr::get(array_map(function ($v) {
       if (DdFieldCore::isBoolType($v['type'])) $v['title'] = '';
       return $v;
     }, $ddo->initFields()->fields), 'title');
     $grid['fieldNames'] = Arr::get($ddo->initFields()->fields, 'name');
     $ddo->setItems($items);
-    $grid['body'] = array_map(function($v) use ($ddo) {
+    $grid['body'] = array_map(function ($v) use ($ddo) {
       return Ddo::gridRowPrepare($v, $ddo);
     }, array_values($items));
     return $grid;
