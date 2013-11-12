@@ -181,10 +181,15 @@ display: inline-block;
 margin: 10px 10px 5px 5px;
 }
 .fieldSet a.bordered {
-margin: 5px 0px 0px 5px;
+position: absolute;
+bottom: 0px;
+right: 0px;
 }
 .fieldSet .hgrp {
 clear: both;
+float: left;
+position: relative;
+padding-right: 25px;
 }
 .fieldSet .rowNumber {
 display: inline-block;

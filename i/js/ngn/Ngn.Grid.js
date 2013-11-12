@@ -58,7 +58,7 @@ Ngn.Grid = new Class({
             // ф-я function(grid) {}
             action = { action: v.action };
           } else {
-            action = (v.action || null);
+            action = v.action ? { action: v.action } : null;
           }
           if (action) {
             action.id = v.cls;
@@ -92,7 +92,6 @@ Ngn.Grid = new Class({
 
   reload: function(itemId) {
     if (itemId) this.loading(itemId, true); // показываем, что строчка обновляется
-    console.trace();
     Ngn.loading(true);
     new Ngn.Request.JSON({
       url: this.getLink(true),

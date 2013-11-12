@@ -7,7 +7,6 @@ background: url(/i/img/file.gif) no-repeat 0 3px;
 padding-left: 15px;
 }
 
-
 .mceContentBody caption,
 .contentBody caption {
 text-align: center;
@@ -16,12 +15,12 @@ padding-bottom: 5px;
 }
 
 .mceContentBody table,
-.contentBody table {
+.contentBody table,
+table.bordered {
 border-top: 1px solid #CCCCCC;
 border-left: 1px solid #CCCCCC;
 margin-bottom: 15px;
 }
-
 .mceContentBody table.fullwidth,
 .contentBody table.fullwidth {
 width: 100%;
@@ -40,11 +39,9 @@ border-color: #FF0000;
 border-style: dashed;
 }
 
-
-.mceContentBody table td,
-.contentBody table td,
-.mceContentBody table th,
-.contentBody table th {
+.mceContentBody table td, .mceContentBody table th,
+.contentBody table td, .contentBody table th,
+table.bordered td, table.bordered th {
 border-bottom: 1px solid #CCCCCC;
 border-right: 1px solid #CCCCCC;
 padding: 2px 5px 2px 5px;
@@ -78,9 +75,23 @@ margin: 10px;
 padding: 8px 3px 0px 10px;
 }
 
-.left { text-align: left; }
-.right { text-align: right; }
-.center { text-align: center; }
-img.left { float: left; margin-right: 10px; display: block; }
-img.right { float: right; margin-left: 10px; display: block; }
+.left {
+text-align: left;
+}
+.right {
+text-align: right;
+}
+.center {
+text-align: center;
+}
+img.left {
+float: left;
+margin-right: 10px;
+display: block;
+}
+img.right {
+float: right;
+margin-left: 10px;
+display: block;
+}
 

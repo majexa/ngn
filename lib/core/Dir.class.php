@@ -80,6 +80,7 @@ class Dir {
   /**
    * Удаляет содержимое директории
    *
+   *
    */
   static function clear($dirname) {
     self::remove($dirname, false);

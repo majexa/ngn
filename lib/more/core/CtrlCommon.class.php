@@ -654,6 +654,7 @@ use Options;
 
 
   /**
+   * @manual
    * Перенаправляет страницу, отключая при это вывод
    *
    * @param   string    null - редирект на страницу без QUERY_STRING

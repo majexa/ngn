@@ -146,6 +146,7 @@ EOH;
   }
 
   function writeLine($row) {
+    foreach ($row as &$v) $v = str_replace('→', '/', $v);
     $row = Misc::iconvR(CHARSET, 'cp1251', $row);
     if ($this->state != 'OPENED') return false;
     if (!is_array($row)) return false;

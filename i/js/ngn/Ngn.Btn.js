@@ -104,22 +104,7 @@ Ngn.Btn = new Class({
    */
   initialize: function(el, action, options) {
     this.setOptions(options);
-
-    if (!action) action = function() {
-    };
-
-    if (typeof(action) == 'function') this.action = { action: action };
-    else this.action = action;
-
-    if (this.action.classAction) {
-    }
-    else if (this.action.action.args) {
-      this.action.action = this.action.action.pass(action.args, this);
-    }
-    else {
-      this.action.action = this.action.action.bind(this);
-    }
-
+    this.setAction(action);
     this.el = el;
     this.initVirtualElement(this.el);
     this.toggleDisabled(true);
@@ -142,6 +127,24 @@ Ngn.Btn = new Class({
     }.bind(this));
     if (this.options.fileUpload) new Ngn.Btn.FileUpload(this, this.options.fileUpload);
     this.init();
+  },
+
+  setAction: function(action) {
+    if (!action) action = function() {
+    };
+    if (typeof(action) == 'function') this.action = { action: action };
+    else {
+      if (action.classAction) {
+        // do nothing. action is class
+      } else {
+        if (action.args) {
+          action.action = action.action.pass(action.args, this);
+        } else {
+          action.action = action.action.bind(this);
+        }
+      }
+      this.action = action;
+    }
   },
 
   runAction: function() {

@@ -123,7 +123,9 @@ class DdCore {
    * @return DdItemsManager
    */
   static function imSystem($strName) {
-    return new DdItemsManager(new DdItems($strName), new DdForm(new DdFields($strName, ['getDisallowed' => true]), $strName));
+    $class = 'DdItemsManager'.ucfirst($strName);
+    $class = class_exists($class) ? $class : 'DdItemsManager';
+    return new $class(new DdItems($strName), new DdForm(new DdFields($strName, ['getDisallowed' => true]), $strName));
   }
 
   static function exportItems($strName, DbCond $cond) {

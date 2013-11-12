@@ -6,6 +6,17 @@ class LogReader {
     return self::_get(LOGS_PATH.'/r_'.$name.'.log');
   }
 
+  static function parse($name) {
+    $r = self::get($name);
+    foreach ($r as &$v) $v['body'] = self::parseBody($v['body']);
+    return $r;
+  }
+
+  static protected function parseBody($body) {
+    if (!preg_match('/<pre>(.*)<\/pre>/sm', $body, $m)) throw new Exception('no pre in body');
+    return eval("return {$m[1]};");
+  }
+
   /**
    * Парсит лог-файл и возвращает массив
    *

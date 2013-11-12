@@ -29,6 +29,7 @@ class FieldEFontSize extends FieldESelect {
         '140px',
         '180px',
         '250px',
+        '1000px',
       ]))
     ];
   }

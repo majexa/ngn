@@ -38,7 +38,6 @@ else {
   $links = [];
   $links['pseudoLink briefcase'] = [UsersCore::getTitle(Auth::get('id')), '/c/userReg/editPass'];
   //$links['settings notext'] = ['Регистрационные данные', $this->getControllerPath('userReg').'/editPass'];
-  //$links['notifySettings'] = ['Настройка уведомлений', $this->getControllerPath('notify', true)];
   //$d['privMsgs']['newMsgsCount'] = 2;
   //$links['send'.($d['privMsgs']['newMsgsCount'] ? '2' : 'Off').' gray'] = ['Приватные сообщения', '/privMsgs'];
   //$this->tpl('slideTips/privMsgs');
