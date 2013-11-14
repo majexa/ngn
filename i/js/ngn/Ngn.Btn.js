@@ -132,7 +132,7 @@ Ngn.Btn = new Class({
   setAction: function(action) {
     if (!action) action = function() {
     };
-    if (typeof(action) == 'function') this.action = { action: action };
+    if (typeof(action) == 'function') this.action = { action: action.bind(this) };
     else {
       if (action.classAction) {
         // do nothing. action is class
