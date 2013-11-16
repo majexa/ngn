@@ -43,10 +43,10 @@ class CtrlAdminTags extends CtrlAdmin {
       $this->d['path'] = [
         [
           'title' => 'Тэги',
-          'link'  => $this->tt->getPath(2)
+          'link'  => $this->path->getPath(2)
         ], [
           'title' => $this->d['structure']['title'].': '.$this->d['field']['title'],
-          'link'  => $this->tt->getPath(4)
+          'link'  => $this->path->getPath(4)
         ],
       ];
     }
@@ -55,7 +55,7 @@ class CtrlAdminTags extends CtrlAdmin {
 
   protected function setPathTplData() {
     if ($this->req->params[3]) {
-      $this->d['path'] .= ' / <a href="'.$this->tt->getPath(4).'">'.$this->d['page']['title'].'</a>';
+      $this->d['path'] .= ' / <a href="'.$this->path->getPath(4).'">'.$this->d['page']['title'].'</a>';
     }
   }
 
@@ -135,11 +135,11 @@ class CtrlAdminTags extends CtrlAdmin {
     if (!empty($this->req->r['deleteBeforeImport'])) $this->tags->deleteAll();
     if (strstr(get_class($this->tags), 'Flat')) $this->tags->setImportSeparator($this->req->r['sep'] == 'quote' ? "," : "\n");
     $this->tags->import($this->req->rq('text'));
-    $this->redirect($this->tt->getPath(3).'/list');
+    $this->redirect($this->path->getPath(3).'/list');
   }
 
   function action_json_pageSearch() {
-    $this->json['html'] = $this->tt->getTpl('common/searchResults', [
+    $this->json['html'] = $this->path->getTpl('common/searchResults', [
         'name'  => 'pageId',
         'items' => Pages::searchPage($this->req->rq('mask'))
       ]);

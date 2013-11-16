@@ -20,7 +20,7 @@ class CtrlCommonUserLostPass extends CtrlCammon {
     $this->d['form'] = $form->html();
     if ($form->isSubmittedAndValid()) {
       $r = UsersCore::sendLostPass($form->getData()['email']);
-      $this->redirect($this->tt->getPath(2).'/'.($r ? 'complete' : 'failed'));
+      $this->redirect($this->path->getPath(2).'/'.($r ? 'complete' : 'failed'));
     }
   }
 

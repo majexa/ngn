@@ -115,7 +115,7 @@ class Form {
   static $counter = 1;
 
   /**
-   * @param array/Fields
+   * @param array /Fields
    * @param array $options
    */
   function __construct($fields, array $options = []) {
@@ -124,6 +124,11 @@ class Form {
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);
+    if ($this->options['placeholders']) {
+      $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);
+      $this->templates['input'] = str_replace('{input}', '{required}{input}', $this->templates['input']);
+      $this->templates['title'] = '';
+    }
     $this->req = empty($this->options['req']) ? O::get('Req') : $this->options['req'];
     $this->init();
   }
@@ -143,7 +148,7 @@ class Form {
   }
 
   /**
-   * @param  string  Имя поля
+   * @param  string Имя поля
    *
    * @return FieldEAbstract
    */
@@ -172,6 +177,11 @@ class Form {
     return true;
   }
 
+  protected function tagParams() {
+    if ($this->options['placeholders']) return Html::params(['class' => 'placeholders']);
+    return '';
+  }
+
   protected function dataParams() {
     return false;
   }
@@ -181,6 +191,7 @@ class Form {
   protected function htmlFormOpen() {
     if (!$this->disableFormTag) {
       $html = '<form action="'.($this->action ? $this->action : $this->req->options['uri']).'"';
+      $html .= $this->tagParams();
       if (($data = $this->dataParams())) $html .= Html::dataParams($data);
       if (!empty($this->encType)) $html .= ' enctype="'.$this->encType.'"';
       if (!empty($this->options['name'])) $html .= ' name="'.$this->options['name'].'"';
@@ -193,12 +204,13 @@ class Form {
   }
 
   protected function htmlElementInput(FieldEAbstract $el, $input) {
-    $element = str_replace('{input}', $input, $this->templates['input']);
-    $element = str_replace('{name}', $el['name'], $element);
-    $element = str_replace('{value}', is_array($el['value']) ? '' : $el['value'], $element);
-    $element = str_replace('{id}', $el['id'], $element);
-    $element = str_replace('{rowClass}', $this->htmlGetRowClassAtr($el), $element);
-    return $element;
+    $input = str_replace('{input}', $input, $this->templates['input']);
+    $input = str_replace('{required}', $el['required'] ? $this->templates['required'] : '', $input);
+    $input = str_replace('{name}', $el['name'], $input);
+    $input = str_replace('{value}', is_array($el['value']) ? '' : $el['value'], $input);
+    $input = str_replace('{id}', $el['id'], $input);
+    $input = str_replace('{rowClass}', $this->htmlGetRowClassAtr($el), $input);
+    return $input;
   }
 
   protected function htmlElementTitle(FieldEAbstract $el, $elHtml) {
@@ -514,6 +526,7 @@ class Form {
       $d['name'] = 'el'.$this->n;
       $this->n++;
     }
+    if ($this->options['placeholders'] and !empty($d['title'])) $d['placeholder'] = $d['title'];
     if (isset($this->els[$d['name']])) {
       throw new Exception('Field with name "'.$d['name'].'" already exists in <b>$this->els</b>. existing: '.getPrr($this->els[$d['name']]->options).', trying to create: '.getPrr($d));
       //."\nALL:\n".getPrr($this->els));
@@ -525,7 +538,7 @@ class Form {
   }
 
   function deleteElement($name) {
-    Arr::dropCallback($this->els, function($v) use ($name) {
+    Arr::dropCallback($this->els, function ($v) use ($name) {
       $v->options['name'] == $name;
     });
   }
@@ -567,7 +580,10 @@ class Form {
   }
 
   protected function defineOptions() {
-    return ['submitTitle' => 'Сохранить'];
+    return [
+      'placeholders' => false,
+      'submitTitle'  => 'Сохранить'
+    ];
   }
 
   private function initFSBB() {
@@ -687,7 +703,7 @@ class Form {
   /**
    * Генерирует поля и возвращает их значения
    *
-   * @param   array   Значения по умолчанию
+   * @param   array Значения по умолчанию
    * @return  array
    */
   function setElementsData(array $defaultData = [], $reset = true) {
@@ -714,7 +730,7 @@ class Form {
   /**
    * Выводит только указанные для инициализации поля
    *
-   * @param   bool  Флаг
+   * @param   bool Флаг
    */
   function outputOnlyFields($flag = true) {
     $this->disableFormTag = $flag;
@@ -731,7 +747,7 @@ class Form {
       //if ($this->defaultData) throw new Exception('default data not exists');
       $this->nospam = $this->fsbb->checkTags($this->defaultData);
       if (!$this->nospam) {
-        $this->globalError('Не прошла проверка на спам. <a href="'.Tt()->getPath().'">Попробуйте заполнить форму ещё раз</a>');
+        $this->globalError('Не прошла проверка на спам. <a href="'.Path()->getPath().'">Попробуйте заполнить форму ещё раз</a>');
       }
     }
   }
@@ -748,18 +764,18 @@ class Form {
    * Добавляемые условия используются в javascript'е для динамического
    * отображения и скрытия секций.
    *
-   * @param   string  Имя заголовочного поля, открывающее секцию или обычного поля
-   * @param   string  Имя поля, от которого зависит отображать ли секцию
-   * @param   string  Условие отображения в формате "$v == 4",
+   * @param   string Имя заголовочного поля, открывающее секцию или обычного поля
+   * @param   string Имя поля, от которого зависит отображать ли секцию
+   * @param   string Условие отображения в формате "v == 4" (javascript),
    *                  где $v - текущее значение поля $condFieldName
    * @param   string  header/field
    *
    */
-  function addVisibilityCondition($sctionName, $condFieldName, $cond, $type = 'header') {
+  function addVisibilityCondition($sctionName, $condFieldName, $jsCond, $type = 'header') {
     $this->visibilityConditions[] = [
       'headerName'    => $sctionName,
       'condFieldName' => $condFieldName,
-      'cond'          => $cond,
+      'cond'          => $jsCond,
       'type'          => $type
     ];
   }

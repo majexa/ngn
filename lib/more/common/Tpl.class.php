@@ -6,7 +6,7 @@
 class Tpl {
   
   static $master;
-	
+
   static function getSettingsFields($path) {
     preg_match(
       '/@tplSettings:(.*)\*\/\?>(.*)/U',
@@ -35,9 +35,7 @@ class Tpl {
   static function getList($masterFolder, $parentPath = null) {
     $list = [];
     $tplFolder = $masterFolder.'/'.$parentPath;
-    if (!$dir = dir($tplFolder)) {
-      return $list;
-    }
+    if (!($dir = dir($tplFolder))) return $list;
     while (false !== $entry = $dir->read()) {
       if ($entry[0] == '.') continue;
       if (is_dir($tplFolder.'/'.$entry)) {

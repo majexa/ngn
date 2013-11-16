@@ -6,7 +6,7 @@ Ngn.Form.El.Wisiwig = new Class({
   },
 
   init: function() {
-    this.form.options.dialog.setWidth(500);
+    if (this.form.options.dialog) this.form.options.dialog.setWidth(500);
     var eCol = this.eRow.getParent('.type_col');
     Ngn.whenElPresents(this.eRow, '.mceLayout', function(eMceLayout) {
       if (!eCol) return;

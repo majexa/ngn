@@ -31,7 +31,7 @@ class CtrlCommonUpdater extends CtrlCommon {
   }
   
   function action_downloadNgn() {
-    $this->redirect('/'.$this->tt->getPath(0).UPLOAD_DIR.'/temp/ngn.zip');
+    $this->redirect('/'.$this->path->getPath(0).UPLOAD_DIR.'/temp/ngn.zip');
   }
   
 }

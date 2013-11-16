@@ -3,6 +3,7 @@
 class ConfigForm extends Form {
 
   protected $configKey;
+  public $firstLevelKey;
 
   function __construct($configKey, $fields) {
     $this->configKey = $configKey;
@@ -15,7 +16,9 @@ class ConfigForm extends Form {
   }
 
   protected function _update(array $data) {
-    SiteConfig::updateVar($this->configKey, $data[$this->configKey], true);
+    $data = $data[$this->configKey];
+    if (isset($this->firstLevelKey)) $data = Arr::assoc($data, $this->firstLevelKey);
+    SiteConfig::updateVar($this->configKey, $data, true);
     Sflm::clearCache();
   }
 

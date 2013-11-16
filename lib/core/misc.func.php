@@ -48,6 +48,13 @@ function Tt() {
   return O::get('Tt');
 }
 
+/**
+ * @return Path
+ */
+function Path() {
+  return O::get('Path');
+}
+
 function none() {}
 
 function quoting(&$v) {
