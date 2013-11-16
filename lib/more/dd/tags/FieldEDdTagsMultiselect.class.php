@@ -15,4 +15,16 @@ class FieldEDdTagsMultiselect extends FieldEMultiselect {
     parent::init();
   }
 
+  function titledValue() {
+    $value = $this->value();
+    if (is_array($value)) {
+      $r = [];
+      foreach ($value as $v) $r[] = $this->options['options'][$v];
+      return Tt()->enum($r);
+    }
+    else {
+      return $this->options['options'][$value];
+    }
+  }
+
 }
