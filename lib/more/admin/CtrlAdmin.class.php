@@ -4,7 +4,7 @@
  * use config var "adminTopLinks" to extend admin menu.
  * format:
  * [
- * 'link'  => $this->tt->getPath(1).'/asd',
+ * 'link'  => $this->path->getPath(1).'/asd',
  * 'class' => 'asd',
  * 'title' => 'Asd'
  * ]
@@ -69,10 +69,10 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function prepareTplPath() {
-    if ($this->tt->exists('admin/modules/'.$this->d['adminModule'].'/'.$this->action)) {
+    if ($this->path->exists('admin/modules/'.$this->d['adminModule'].'/'.$this->action)) {
       $this->d['tpl'] = 'admin/modules/'.$this->d['adminModule'].'/'.$this->action;
     }
-    elseif ($this->tt->exists('admin/modules/'.$this->d['tpl'])) {
+    elseif ($this->path->exists('admin/modules/'.$this->d['tpl'])) {
       $this->d['tpl'] = 'admin/modules/'.$this->d['tpl'];
     }
     $this->prepareMainFormTpl();
@@ -122,7 +122,7 @@ abstract class CtrlAdmin extends CtrlCp {
     if ($this->d['adminModules']) {
       foreach ($this->d['adminModules'] as $v) {
         $links[] = [
-          'link'  => $this->tt->getPath(1).'/'.$v['name'],
+          'link'  => $this->path->getPath(1).'/'.$v['name'],
           'class' => isset($v['class']) ? $v['class'] : $v['name'],
           'sel'   => $v['name'] == $this->d['adminModule'],
           'title' => $v['title']
@@ -130,13 +130,13 @@ abstract class CtrlAdmin extends CtrlCp {
       }
     }
     $links[] = [
-      'link'   => $this->tt->getPathRoot(),
+      'link'   => $this->path->getPathRoot(),
       'class'  => 'site',
       'title'  => LANG_SITE,
       'target' => '_blank'
     ];
     $links[] = [
-      'link'  => $this->tt->getPath().'?logout=1',
+      'link'  => $this->path->getPath().'?logout=1',
       'class' => 'logout',
       'title' => LANG_EXIT
     ];
@@ -186,7 +186,7 @@ abstract class CtrlAdmin extends CtrlCp {
     foreach ($options as $name => $title) {
       $this->d['headerLinks'][] = [
         'title' => $title,
-        'link'  => $this->tt->getPath(2).'/'.$name,
+        'link'  => $this->path->getPath(2).'/'.$name,
         'class' => $class
       ];
     }

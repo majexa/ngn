@@ -87,6 +87,7 @@ class Err {
     if (!headers_sent()) header('HTTP/1.0 404 Not Found');
     $text = "Uncaught exception: <i>".$e->getMessage().'</i><br /><br />';
     self::output($e->getCode(), $text, $e->getFile(), $e->getLine(), $e->getTrace());
+    if (is_a($e, 'NotLoggableError')) die2('!!!');
     self::log($e);
   }
 

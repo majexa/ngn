@@ -257,6 +257,7 @@ Ngn.Grid = new Class({
       // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
       action = action.bind(this);
       new Ngn.Btn(el, function() {
+        c(this);
         action(row, this);
       });
     }

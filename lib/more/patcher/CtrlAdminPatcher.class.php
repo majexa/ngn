@@ -19,7 +19,7 @@ class CtrlAdminPatcher extends CtrlAdmin {
   
   function action_patch() {
     O::get('DbPatcher')->patch();
-    $this->redirect($this->tt->getPath(2));
+    $this->redirect($this->path->getPath(2));
   }
 
 }

@@ -13,7 +13,7 @@ trait CtrlFormTabs {
       if ($ctrl->actionResult) $form['submitTitle'] = $ctrl->actionResult->options['submitTitle'];
       $d['forms'][] = $form;
     }
-    $this->ajaxOutput = $this->tt->getTpl('common/auth-ajax', $d);
+    $this->ajaxOutput = $this->path->getTpl('common/auth-ajax', $d);
   }
 
 }

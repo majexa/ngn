@@ -53,7 +53,7 @@ class AdminRouter extends Router {
       return new $class($this);
     }
     else {
-      throw new Exception("Module '{$this->module}' not found. class '$class'");
+      throw new NotLoggableError("Module '{$this->module}' not found. class '$class'");
     }
   }
 

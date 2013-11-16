@@ -148,11 +148,17 @@ use Options;
    */
   public $tt;
 
+  /**
+   * @var Path
+   */
+  public $path;
+
   public function __construct(Router $router, array $options = []) {
     $this->router = $router;
     $this->setOptions($options);
     $this->req = empty($this->options['req']) ? $router->req : $this->options['req'];
     $this->tt = Tt();
+    $this->path = new Path($this->req);
     $this->d['oController'] = $this;
     $this->d['ctrlName'] = $this->getName();
     if (!isset($this->defaultAction)) {
@@ -301,7 +307,7 @@ use Options;
     if (empty($this->d['tpl'])) {
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
-    $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
+    $html = $this->path->getTpl($this->d['mainTpl'], $this->d);
     $this->d['processTime'] = getProcessTime();
     return $html;
   }
@@ -468,7 +474,7 @@ use Options;
 
   protected function ajaxFormAction(Form $oF) {
     $oF->disableSubmit = true;
-    $this->ajaxOutput = $this->tt->getTpl('common/form', ['form' => $oF->html()]);
+    $this->ajaxOutput = $this->path->getTpl('common/form', ['form' => $oF->html()]);
   }
 
   protected $actionMethod;
@@ -581,7 +587,7 @@ use Options;
       throw new Exception(
         'ajaxTpl not defined in array $this->html2ajaxActions for action '.
         $this->action.': '.getPrr($this->html2ajaxActions));
-    print $this->tt->getTpl($ajaxTpl, $this->d);
+    print $this->path->getTpl($ajaxTpl, $this->d);
   }
   */
 
@@ -673,17 +679,17 @@ use Options;
       }
     }
     elseif ($path == 'fullpath') {
-      redirect($this->tt->getPath().($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : ''));
+      redirect($this->path->getPath().($_SERVER['QUERY_STRING'] ? '?'.$_SERVER['QUERY_STRING'] : ''));
       return;
     }
     if ($path) {
-      if ($path == $this->tt->getPath() and !count($_GET) and !count($_POST)) print('Can not redirect to itself');
+      if ($path == $this->path->getPath() and !count($_GET) and !count($_POST)) print('Can not redirect to itself');
       else {
         redirect($path);
       }
     }
     elseif (count($_GET) or count($_POST)) {
-      redirect($this->tt->getPath());
+      redirect($this->path->getPath());
     }
     else
       print('Can not redirect to itself');
@@ -725,7 +731,7 @@ use Options;
   function action_json_userSearch() {
     if (! $mask = $this->req->r['mask'] or ! $name = $this->req->r['name'])
       return;
-    $this->json['html'] = $this->tt->getTpl('common/searchResults',
+    $this->json['html'] = $this->path->getTpl('common/searchResults',
       array(
         'name' => $name,
         'items' => UsersCore::searchUser($mask)
@@ -735,7 +741,7 @@ use Options;
   function action_json_pageSearch() {
     if (! $mask = $this->req->r['mask'])
       return;
-    $this->json['html'] = $this->tt->getTpl('common/searchResults',
+    $this->json['html'] = $this->path->getTpl('common/searchResults',
       array(
         'name' => 'pageId',
         'items' => Pages::searchPage($mask)
@@ -864,7 +870,7 @@ use Options;
   protected function jsonFormAction(Form $form) {
     $form->disableSubmit = true;
     $form->defaultData = $this->req->r;
-    $this->json['form'] = $this->tt->getTpl('common/form', ['form' => $form->html()]);
+    $this->json['form'] = $this->path->getTpl('common/form', ['form' => $form->html()]);
     if (!empty($form->options['title'])) $this->json['title'] = $form->options['title'];
     $this->json['submitTitle'] = $form->options['submitTitle'];
     return $form;
@@ -884,7 +890,7 @@ use Options;
 
   protected function rss(array $header, array $items) {
     header('Content-type: text/xml; charset='.CHARSET);
-    if (!isset($header['link'])) $header['link'] = Tt()->getPath();
+    if (!isset($header['link'])) $header['link'] = Path()->getPath();
     $this->hasOutput = false;
     print
       (new Rss('default'))->getXml([
