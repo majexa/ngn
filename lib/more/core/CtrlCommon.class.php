@@ -157,7 +157,7 @@ use Options;
     $this->router = $router;
     $this->setOptions($options);
     $this->req = empty($this->options['req']) ? $router->req : $this->options['req'];
-    $this->tt = Tt();
+    $this->tt = new Tt($this->req);
     $this->d['oController'] = $this;
     $this->d['ctrlName'] = $this->getName();
     if (!isset($this->defaultAction)) {
