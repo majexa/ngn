@@ -63,7 +63,7 @@ class Pagination extends Options2 {
     if ($pagesN != 0 and $pagesN != 1) {
       $links = [];
       $descN = 0;
-      $self = $this->req->pg ? Tt()->getPath(count($this->req->params)-1) : Path()->getPath();
+      $self = $this->req->pg ? Tt()->getPath(count($this->req->params)-1) : Tt()->getPath();
       for ($i = 0; $i < $pagesN; $i++) {
         $pageNumber = $i + 1;
         $descN--;

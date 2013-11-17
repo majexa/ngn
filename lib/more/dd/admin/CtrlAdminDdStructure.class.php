@@ -27,7 +27,7 @@ class CtrlAdminDdStructure extends CtrlAdmin {
     $data = $this->im->items->getItem($this->req->rq('id'));
     $this->setPageTitle('Редактирование структуры «'.$data['title'].'»');
     if ($this->im->requestUpdate($this->req->rq('id'))) {
-      $this->redirect($this->path->getPath(2));
+      $this->redirect($this->tt->getPath(2));
     }
     $this->d['form'] = $this->im->form->html();
   }
@@ -35,7 +35,7 @@ class CtrlAdminDdStructure extends CtrlAdmin {
   function action_new() {
     $this->setPageTitle(LANG_STRUCTURE_CREATING);
     if ($this->im->requestCreate()) {
-      $this->redirect($this->path->getPath(2));
+      $this->redirect($this->tt->getPath(2));
     }
     $this->d['form'] = $this->im->form->html();
   }

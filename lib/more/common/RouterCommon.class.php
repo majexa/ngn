@@ -11,7 +11,7 @@ class RouterCommon extends Router {
 
   function getController() {
     $class = ClassCore::nameToClass('CtrlCommon', $this->req->param($this->getCommonControllerParamN()));
-    if (!class_exists($class)) Err::error("Controller ($class) not found by path: ".Path()->getPath());
+    if (!class_exists($class)) Err::error("Controller ($class) not found by path: ".Tt()->getPath());
     return new $class($this);
   }
 

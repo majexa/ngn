@@ -27,10 +27,10 @@ class DdoAdmin extends Ddo {
         '`<h2><b><a href="`.Tt()->getPath(2).`/'.$this->page['settings']['slavePageId'].
         '/editContent/v.'.DdCore::masterFieldName.'.`.$id.`"title="Зайти в `.$v.`" class="tooltip">`.$v.`</a></b></h2>`';
     } else {
-      $this->ddddByName['title'] = '`<a href="`.Path()->getPath().`?a=edit&itemId=`.$id.`"><h2>`.$v.`</h2></a>`';
+      $this->ddddByName['title'] = '`<a href="`.Tt()->getPath().`?a=edit&itemId=`.$id.`"><h2>`.$v.`</h2></a>`';
     }
     */
-    //$this->ddddByName['title'] = '`<a href="`.Path()->getPath().`?a=edit&itemId=`.$id.`"><h2>`.$v.`</h2></a>`';
+    //$this->ddddByName['title'] = '`<a href="`.Tt()->getPath().`?a=edit&itemId=`.$id.`"><h2>`.$v.`</h2></a>`';
     $this->ddddByType['image'] = '$v ? `<a href="`.Misc::getFilePrefexedPath($v, `md_`, `jpg`).`" target="_blank" class="thumb" rel="ngnLightbox[set1]"><img src="`.Misc::getFilePrefexedPath($v, `sm_`, `jpg`).`" /></a><div class="clear"><!-- --></div>` : ``';
     $this->ddddByType['bool'] = '`<a href="" class="iconBtn iconFlag icon_flag`.($v ? `On` : `Off`).` flag`.($v ? `On` : `Off`).` tooltip" title="`.$title.`"><i></i></a>`';
     $this->ddddByType['author'] = '`<a href="`.Tt()->getPath(1).`/users/?a=edit&id=`.$v[`id`].`">`.$authorLogin.`</a>`';

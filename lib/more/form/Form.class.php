@@ -747,7 +747,7 @@ class Form {
       //if ($this->defaultData) throw new Exception('default data not exists');
       $this->nospam = $this->fsbb->checkTags($this->defaultData);
       if (!$this->nospam) {
-        $this->globalError('Не прошла проверка на спам. <a href="'.Path()->getPath().'">Попробуйте заполнить форму ещё раз</a>');
+        $this->globalError('Не прошла проверка на спам. <a href="'.Tt()->getPath().'">Попробуйте заполнить форму ещё раз</a>');
       }
     }
   }

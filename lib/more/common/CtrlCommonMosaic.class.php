@@ -78,7 +78,7 @@ margin: 7px 0px 7px 0px;
 
 <div class="uploader">
 <form enctype="multipart/form-data" method="post"
-	action="<?=$this->path->getPath()?>?a=uploadArchive"><input type="file"
+	action="<?=$this->tt->getPath()?>?a=uploadArchive"><input type="file"
 	name="archive" /> <input type="submit" value="Загрузить" /> Допускается
 только ZIP формат!</form>
 </div>
@@ -88,7 +88,7 @@ margin: 7px 0px 7px 0px;
       ?>
       <div class="dimensions">
 <form enctype="multipart/form-data" method="post"
-	action="<?=$this->path->getPath()?>?a=createMosaic">
+	action="<?=$this->tt->getPath()?>?a=createMosaic">
 <div class="fld">10 x 15 см = 3543 x 2362 пикселов</div>
 <div class="fld">Ширина плитки<input type="text" name="w" value="50" /></div>
 <div class="fld">Высота плитки<input type="text" name="h" value="50" /></div>
@@ -113,7 +113,7 @@ margin: 7px 0px 7px 0px;
       print '<img src="/' . $this->resultFile . '?'.rand(0, 1000).'" />';
     }
     print '<p>Загружено изображений: '.count($this->uploadedImages).'</p>';
-    print '<a href="'.$this->path->getPath().'?a=deleteAll">Удалить (без предупреждения)</a>';
+    print '<a href="'.$this->tt->getPath().'?a=deleteAll">Удалить (без предупреждения)</a>';
   }
 
 }

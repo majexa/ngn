@@ -14,7 +14,7 @@ class CtrlAdminBackup extends CtrlAdmin {
   
   function action_restore() {
     CurrentSiteBackup::restore($this->req->rq('id'));
-    $this->redirect($this->path->getPath(2).'?a=restoreComplete');
+    $this->redirect($this->tt->getPath(2).'?a=restoreComplete');
   }
   
   function action_restoreComplete() {

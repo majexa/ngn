@@ -1,12 +1,6 @@
 <?php
 
-class Path {
-
-  protected $req;
-
-  function __construct(Req $req) {
-    $this->req = $req;
-  }
+trait TtPath {
 
   /**
    * Возвращает путь до текущего раздела без учета QUERY_STRING.
@@ -63,5 +57,26 @@ class Path {
     else
       return $path.($newParam ? '/'.$newParam : '');
   }
+
+  // todo: проверить наличие вызовово этих ф-ий через Tt
+
+  /**
+   * Возвращает путь до страницы пользователя
+   *
+   * @param   integer   ID пользователя
+   * @return  string    Путь до страницы пользователя
+   */
+  function getUserPath($userId, $quitely = false) {
+    if ($quitely) {
+      if (($path = Tt()->getControllerPath('userData', true)) != '') {
+        return '//'.SITE_DOMAIN.$path.'/'.$userId;
+      }
+      return false;
+    }
+    else {
+      return '//'.SITE_DOMAIN.Tt()->getControllerPath('userData').'/'.$userId;
+    }
+  }
+
 
 }
