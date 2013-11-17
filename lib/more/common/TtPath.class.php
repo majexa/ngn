@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * @property Req $req
+ */
 trait TtPath {
 
   /**
@@ -10,13 +13,10 @@ trait TtPath {
    * Если текщий URL: http://site.com/path.to/the/page
    * Tt()->getPath(2) вернёт строку '/path.to/the'
    *
-   * @param   string  Кол-во частей пути, которое необходимо получить
+   * @param   string Кол-во частей пути, которое необходимо получить
    * @return  Путь до страницы
    */
   function getPath($paramsN = null) {
-    if (!isset($this->req)) {
-      $this->req = $req = O::get('Req');
-    }
     if ($paramsN === 0) return $this->req->getBase();
     if ($paramsN !== null) {
       for ($i = 0; $i < $paramsN; $i++) $params2[] = isset($this->req->params[$i]) ? $this->req->params[$i] : 0;
@@ -26,20 +26,16 @@ trait TtPath {
   }
 
   function getPathRoot() {
-    return ($p = Tt()->getPath(0)) ? $p : '/';
+    return ($p = $this->getPath(0)) ? $p : '/';
   }
 
   function getPathFrom($n) {
-    $params = O::get('Req')->params;
-    $s = '';
-    for ($i = count($params) - $n; $i < count($params); $i++) $s .= '/'.$params[$i];
-    return $s;
+    return implode('/', array_slice($this->req->params, $n, count($this->req->params)));
   }
 
   function getPathLast($n) {
-    $params = O::get('Req')->params;
     $s = '';
-    for ($i = count($params) - $n; $i < count($params); $i++) $s .= '/'.$params[$i];
+    for ($i = count($this->req->params) - $n; $i < count($this->req->params); $i++) $s .= '/'.$this->req->params[$i];
     return $s;
   }
 
@@ -58,8 +54,6 @@ trait TtPath {
       return $path.($newParam ? '/'.$newParam : '');
   }
 
-  // todo: проверить наличие вызовово этих ф-ий через Tt
-
   /**
    * Возвращает путь до страницы пользователя
    *
@@ -67,16 +61,7 @@ trait TtPath {
    * @return  string    Путь до страницы пользователя
    */
   function getUserPath($userId, $quitely = false) {
-    if ($quitely) {
-      if (($path = Tt()->getControllerPath('userData', true)) != '') {
-        return '//'.SITE_DOMAIN.$path.'/'.$userId;
-      }
-      return false;
-    }
-    else {
-      return '//'.SITE_DOMAIN.Tt()->getControllerPath('userData').'/'.$userId;
-    }
+    return '{depricated}';
   }
-
 
 }

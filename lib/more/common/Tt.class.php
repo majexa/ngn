@@ -7,6 +7,15 @@ class Tt {
   use TtPath;
 
   /**
+   * @var Req
+   */
+  protected $req;
+
+  function __construct(Req $req = null) {
+    $this->req = $req ? : O::get('Req');
+  }
+
+  /**
    * Выводит шаблон
    *
    * @param string $path
@@ -59,18 +68,13 @@ class Tt {
    * Проверяет существует ли шаблон с указанным путём и если он
    * существует возвращает его путь, если нет - false.
    *
-   * @param   string  Путь до шаблона
+   * @param   string Путь до шаблона
    * @return  mixed
    */
   function exists($path) {
     foreach (Ngn::$basePaths as $basePath) if (file_exists("$basePath/tpl/$path.php")) return "$basePath/tpl/$path.php";
     return false;
   }
-
-  /**
-   * @var Req
-   */
-  protected $req;
 
   function getUserTag($userId, $login, $tpl = '`<a href="`.Tt()->getUserPath($id).`">`.$login.`</a>`') {
     if (!PageControllersCore::exists('userData')) return '<span class="user">'.$login.'</span>';
@@ -86,9 +90,6 @@ class Tt {
   }
 
   /*
-  function getControllerPath($controller, $quietly = false) {
-    return '/'.PageControllersCore::getControllerPath($controller, $quietly);
-  }
 
   function getStrControllerPath($controller, $strName, $quietly = false) {
     static $paths;
@@ -107,7 +108,7 @@ class Tt {
    * Возвращает URL с исключенными из него параметрами
    *
    * @param string  URL
-   * @param array   Параметры для исключения
+   * @param array Параметры для исключения
    */
   function getUrlDeletedParams($url, $params) {
     $parts = parse_url($url);
@@ -120,10 +121,10 @@ class Tt {
    * Склеивает массив в строку с разделителями, помещая при этом значения
    * массива в шаблон.
    *
-   * @param   array   Массив с перечислением
-   * @param   string  Разделитель
-   * @param   string  Шаблон
-   * @param   string  Ключ необходим в том случае, если элементом массива является массив
+   * @param   array Массив с перечислением
+   * @param   string Разделитель
+   * @param   string Шаблон
+   * @param   string Ключ необходим в том случае, если элементом массива является массив
    *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
    *                  который необходимо использовать для склеивания
    * @return  strgin  Склеенная по шаблону строка
@@ -153,12 +154,12 @@ class Tt {
   /**
    * Тоже самое, что и Tt()->enum(), только с измененныым порядком параметров
    *
-   * @param   array   Массив с перечислением
-   * @param   string  Ключ необходим в том случае, если элементом массива является массив
+   * @param   array Массив с перечислением
+   * @param   string Ключ необходим в том случае, если элементом массива является массив
    *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
    *                  который необходимо использовать для склеивания
-   * @param   string  Разделитель
-   * @param   string  Шаблон
+   * @param   string Разделитель
+   * @param   string Шаблон
    * @return  strgin  Склеенная по шаблону строка
    */
   function enumK($arr, $key, $glue = ', ', $tpl = '$v') {
