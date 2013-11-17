@@ -29,7 +29,7 @@ class CtrlAdminPrivMsgs extends CtrlAdmin {
   
   function action_send() {
     $this->pribMsgs->sendMsg(Auth::get('id'), $this->req->r['user'], $this->req->r['text']);
-    $this->redirect($this->path->getPath(2).'/sendComplete');
+    $this->redirect($this->tt->getPath(2).'/sendComplete');
   }
   
   function action_sendComplete() {

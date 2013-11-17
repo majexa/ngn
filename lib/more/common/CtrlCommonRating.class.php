@@ -22,7 +22,7 @@ class CtrlCommonRating extends CtrlCommon {
         vu.itemId=?d
       ', $this->req->params[3], $this->req->params[4]);
       foreach ($voters as &$voter) $voter['login'] = $voter['login'].' ('.$voter['votes'].')';
-      $this->path->tpl('common/users', $voters);
+      $this->tt->tpl('common/users', $voters);
     }
     
   }

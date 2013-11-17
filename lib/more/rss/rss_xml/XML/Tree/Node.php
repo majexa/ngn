@@ -242,7 +242,7 @@ class XML_Tree_Node {
     /**
     * Gets an element by its 'path'.
     *
-    * @param  string  path
+    * @param  string  TtPath
     * @return object  element
     */
     function &getElement($path) {

@@ -44,13 +44,13 @@ class CtrlCommonUserReg extends CtrlCammon {
       //$data = $form->getData();
       //if (empty($this->conf['activation']) and !empty($this->conf['authorizeAfterReg']))
       //Auth::loginByRequest($data['login'], $data['pass']);
-      $this->redirect($this->path->getPath(1).'/complete');
+      $this->redirect($this->tt->getPath(1).'/complete');
     }
   }
 
   function action_redirectFirstEdit() {
     $this->initSubmenu();
-    $this->redirect($this->path->getPath(1).'/'.$this->d['submenu'][0]['name']);
+    $this->redirect($this->tt->getPath(1).'/'.$this->d['submenu'][0]['name']);
   }
 
   function action_json_form() {
@@ -89,7 +89,7 @@ class CtrlCommonUserReg extends CtrlCammon {
     if (!$this->page['settings']['activation']) return;
     $this->d['tpl'] = 'users/activation';
     $this->d['success'] = UsersActivation::activate($this->req->r['code']);
-    $this->redirect($this->path->getPath().'/welcome');
+    $this->redirect($this->tt->getPath().'/welcome');
   }
 
   // ----------------------------------------------------
@@ -99,28 +99,28 @@ class CtrlCommonUserReg extends CtrlCammon {
     if ($this->conf['loginEnable'] and $this->conf['allowLoginEdit']) {
       $items[] = [
         'title' => 'Изменить '.UserRegCore::getLoginTitle(),
-        'link'  => $this->path->getPath(1).'/editLogin',
+        'link'  => $this->tt->getPath(1).'/editLogin',
         'name'  => 'editLogin'
       ];
     }
     if ($this->conf['allowPassEdit']) {
       $items[] = [
         'title' => 'Изменить пароль',
-        'link'  => $this->path->getPath(1).'/editPass',
+        'link'  => $this->tt->getPath(1).'/editPass',
         'name'  => 'editPass'
       ];
     }
     if ($this->conf['emailEnable'] and $this->conf['allowEmailEdit']) {
       $items[] = [
         'title' => 'Изменить e-mail',
-        'link'  => $this->path->getPath(1).'/editEmail',
+        'link'  => $this->tt->getPath(1).'/editEmail',
         'name'  => 'editEmail'
       ];
     }
     if ($this->conf['phoneEnable'] and $this->conf['allowPhoneEdit']) {
       $items[] = [
         'title' => 'Изменить телфон',
-        'link'  => $this->path->getPath(1).'/editPhone',
+        'link'  => $this->tt->getPath(1).'/editPhone',
         'name'  => 'editPhone'
       ];
     }
@@ -128,14 +128,14 @@ class CtrlCommonUserReg extends CtrlCammon {
       if ($this->conf['allowNameEdit']) {
         $items[] = [
           'title' => 'Изменить домен',
-          'link'  => $this->path->getPath(1).'/editName',
+          'link'  => $this->tt->getPath(1).'/editName',
           'name'  => 'editName'
         ];
       }
       if ($this->conf['allowMysiteThemeEdit']) {
         $items[] = [
           'title' => 'Оформление Моего сайта',
-          'link'  => $this->path->getPath(1).'/editMysiteTheme',
+          'link'  => $this->tt->getPath(1).'/editMysiteTheme',
           'name'  => 'editMysite'
         ];
       }
@@ -317,7 +317,7 @@ class CtrlCommonUserReg extends CtrlCammon {
     if (empty($this->conf['allowMysiteThemeEdit'])) throw new Exception('MysiteTheme change not allowed');
     if (!$this->initUser()) return;
     if (file_exists(UPLOAD_PATH.'/mysite/'.$this->user['id'].'/bg.jpg')) unlink(UPLOAD_PATH.'/mysite/'.$this->user['id'].'/bg.jpg');
-    $this->redirect($this->path->getPath(1).'/editMysiteTheme');
+    $this->redirect($this->tt->getPath(1).'/editMysiteTheme');
   }
 
   function action_updateUserDataPageId() {

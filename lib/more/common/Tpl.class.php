@@ -1,8 +1,5 @@
 <?php
 
-
-// получить список главных шаблонов
-
 class Tpl {
   
   static $master;

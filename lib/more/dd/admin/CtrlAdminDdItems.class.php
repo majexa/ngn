@@ -63,7 +63,7 @@ class CtrlAdminDdItems extends CtrlAdmin {
   }
 
   function processForm(DdForm $form) {
-    $form->options['deleteFileUrl'] = $this->path->getPath(2).'/'.$this->req->param(2).'/deleteFile?id='.$this->req['id'];
+    $form->options['deleteFileUrl'] = $this->tt->getPath(2).'/'.$this->req->param(2).'/deleteFile?id='.$this->req['id'];
   }
 
 }

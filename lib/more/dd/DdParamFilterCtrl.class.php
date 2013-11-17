@@ -274,7 +274,7 @@ trait DdParamFilterCtrl {
     if ($this->page->getS('ownerMode') == 'author') {
       $name = UsersCore::name($this->d['itemsUser']);
       $this->setPageTitle($this->d['pageTitle'].' — '.$name);
-      $this->setPathData($this->path->getPath(2), $name);
+      $this->setPathData($this->tt->getPath(2), $name);
     }
     */
     /*

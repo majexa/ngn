@@ -190,7 +190,7 @@ class Html {
     foreach ($d['fields'] as $v) {
       if ($v['type'] != $type) continue;
       $name = $v['name'];
-      $deleteBtn = $v['required'] ? '' : '<a href="'.Path()->getPath().'?a=deleteFile'.(isset($d['itemId']) ? '&itemId='.$d['itemId'] : '').'&fieldName=$1" '.'target="_blank" onclick="if (confirm(\'Вы уверены?\')) window.location=this.href; '.'return false;" class="ddelete">Удалить</a>';
+      $deleteBtn = $v['required'] ? '' : '<a href="'.Tt()->getPath().'?a=deleteFile'.(isset($d['itemId']) ? '&itemId='.$d['itemId'] : '').'&fieldName=$1" '.'target="_blank" onclick="if (confirm(\'Вы уверены?\')) window.location=this.href; '.'return false;" class="ddelete">Удалить</a>';
       $d['form'] = Html::inputAppend($d['form'], $name, '<div class="iconsSet">'.'<a href="'.Tt()->getPath(0).UPLOAD_DIR.'/$2" target="_blank" class="'.$type.'"><i></i>'.$title1.'</a>'.$deleteBtn.'<div class="clear"><!-- --></div></div>');
     }
   }

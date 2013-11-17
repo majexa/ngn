@@ -4,6 +4,7 @@
  * Функции работы с html/php шаблонами через ф-ю require
  */
 class Tt {
+  use TtPath;
 
   /**
    * Выводит шаблон
@@ -70,33 +71,6 @@ class Tt {
    * @var Req
    */
   protected $req;
-
-  /**
-   * Возвращает текущий адрес сайта вместе с 'http://'
-   *
-   * @return  string
-   */
-  function getHostPath() {
-    return 'http://'.SITE_DOMAIN;
-  }
-
-  /**
-   * Возвращает путь до страницы пользователя
-   *
-   * @param   integer   ID пользователя
-   * @return  string    Путь до страницы пользователя
-   */
-  function getUserPath($userId, $quitely = false) {
-    if ($quitely) {
-      if (($path = Tt()->getControllerPath('userData', true)) != '') {
-        return '//'.SITE_DOMAIN.$path.'/'.$userId;
-      }
-      return false;
-    }
-    else {
-      return '//'.SITE_DOMAIN.Tt()->getControllerPath('userData').'/'.$userId;
-    }
-  }
 
   function getUserTag($userId, $login, $tpl = '`<a href="`.Tt()->getUserPath($id).`">`.$login.`</a>`') {
     if (!PageControllersCore::exists('userData')) return '<span class="user">'.$login.'</span>';

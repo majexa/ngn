@@ -31,7 +31,7 @@ use CtrlFormTabs;
   }
   
   function action_ajax_top() {
-    $this->ajaxOutput = $this->path->getTpl('top', ['path' => $this->req->rq('path')]);
+    $this->ajaxOutput = $this->tt->getTpl('top', ['path' => $this->req->rq('path')]);
   }
 
   function action_keyLogin() {
