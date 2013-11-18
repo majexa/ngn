@@ -109,6 +109,14 @@ class DbCond {
     ]);
   }
 
+  function addNotInFilter($key, $value) {
+    return $this->addFilter([
+      'key'   => $key,
+      'value' => $value,
+      'not'  => true
+    ]);
+  }
+
   protected function _addFilter($type, array $filter) {
     if (empty($filter['mode'])) $filter['mode'] = $this->filterMode;
     if (is_bool($filter['value'])) $filter['value'] = (int)$filter['value'];
@@ -157,10 +165,10 @@ class DbCond {
    * @param   string  Имя поля таблицы
    * @param   string/bool   Значение начала диапозона. Если false, не учитывается
    * @param   string/bool   Значение конца диапозона. Если false, не учитывается
-   * @param   string  Имя ф-ии, которую необходимо применить при вычислении значения диапозона
+   * @param   array
    * @param   bool    Строгое (>) или нестрогое (>=) неравенство
    */
-  function addRangeFilter($key, $from, $to = false, $params = null, $strict = false) {
+  function addRangeFilter($key, $from, $to = false, array $params = null, $strict = false) {
     $tablePrefix = $this->tablePrefix;
     $func = null;
     if ($params !== null) {
@@ -210,7 +218,12 @@ class DbCond {
       else {
         $tablePrefix = $this->tablePrefix;
       }
-      $this->$typeCond .= $v['mode']." ".(!empty($v['func']) ? $v['func']."(" : "")."$tablePrefix{$v['key']}".(!empty($v['func']) ? ")" : "")." IN (".$v['value'].")\n";
+      $this->$typeCond .= $v['mode']." ".
+        (!empty($v['func']) ? $v['func']."(" : "").
+        "$tablePrefix{$v['key']}".
+        (!empty($v['func']) ? ")" : "")." ".
+        (!empty($v['not']) ? 'NOT ' : '').
+        "IN (".$v['value'].")\n";
     }
     return $this;
   }

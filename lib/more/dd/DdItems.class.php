@@ -451,14 +451,7 @@ SQL
     }
   }
 
-  /**
-   * @param string
-   * @param array|integer
-   * @param bool $byId
-   * @return $this
-   * @throws Exception
-   */
-  function addTagFilter($tagField, $tagValues, $byId = true) {
+  protected function getFilterItemIds($tagField, $tagValues, $byId = null) {
     $tagValues = (array)$tagValues;
     $tags = DdTags::get($this->strName, $tagField);
     if (!$byId and $tags->group->tree) throw new Exception("Getting tags by name supportes only flat tags. '$tagField' is tree type tag.");
@@ -474,7 +467,29 @@ SQL
       $itemIds = Arr::append($itemIds, DdTags::items($this->strName, $tagField)->getIdsByTagId($tag['id']));
     }
     if (empty($itemIds)) $itemIds = -1; // Если нет тэгов, делаем значение фильтра таким, что бы выборка была нулевая
-    $this->addF('id', $itemIds);
+    return $itemIds;
+  }
+
+  /**
+   * @param string
+   * @param array|integer
+   * @param bool $byId
+   * @return $this
+   * @throws Exception
+   */
+  function addTagFilter($tagField, $tagValues, $byId = true) {
+    return $this->addF('id', $this->getFilterItemIds($tagField, $tagValues, $byId));
+  }
+
+  /**
+   * @param string
+   * @param array|integer
+   * @param bool $byId
+   * @return $this
+   * @throws Exception
+   */
+  function addNotTagFilter($tagField, $tagValues, $byId = true) {
+    $this->cond->addNotInFilter('id', $this->getFilterItemIds($tagField, $tagValues, $byId));
     return $this;
   }
 

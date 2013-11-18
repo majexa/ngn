@@ -649,12 +649,14 @@ Ngn.fixEmptyTds = function(el) {
 };
 
 Ngn.addBtnAction = function(selector, action, parent) {
-  eBtn = (parent ? parent : document).getElement(selector);
-  if (!eBtn) return;
-  action = action.pass(eBtn);
-  eBtn.addEvent('click', function(e) {
-    e.preventDefault();
-    action(e);
+  esBtn = (parent ? parent : document).getElements(selector);
+  if (!esBtn) return;
+  esBtn.each(function(eBtn) {
+    action = action.pass(eBtn);
+    eBtn.addEvent('click', function(e) {
+      e.preventDefault();
+      action(e);
+    });
   });
 };
 
