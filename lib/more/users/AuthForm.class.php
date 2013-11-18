@@ -3,10 +3,10 @@
 class AuthForm extends Form {
 
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'name'        => 'auth',
       'submitTitle' => 'Войти'
-    ];
+    ]);
   }
 
   function __construct(array $options = []) {
