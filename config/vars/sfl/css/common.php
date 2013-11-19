@@ -19,4 +19,5 @@ return [
   'i/css/milkbox/milkbox.css',
   'i/css/common/treeDialog.css',
   'i/css/common/itemsTable.css',
+  'i/css/common/auth.css',
 ];

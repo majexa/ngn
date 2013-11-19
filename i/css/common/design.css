@@ -155,20 +155,7 @@ input[type=checkbox] {
 margin-top: 1px;
 vertical-align: middle;
 }
-/* ================auth========================= */
 
-#top .iconsSet a {
-margin-bottom: 0px;
-}
-#auth {
-padding: 0px 0px 0px 15px;
-}
-#auth input.fld {
-width: 90px;
-}
-#auth a#btnLogin {
-width: 55px;
-}
 #top .item #searchBox {
 background: url(/i/img/portal/search.gif) no-repeat top right;
 }

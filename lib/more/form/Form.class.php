@@ -437,15 +437,16 @@ class Form {
     }
   }
 
-  function validate() {
+  final function validate() {
     if (!$this->isSubmitted()) return false; // throw new Exception('Validation mast be used only with submitting');
+    $this->lastError = false;
     $this->_initErrors();
     $this->initErrors();
     foreach ($this->els as $el) {
       /* @var $el FieldEAbstract */
       if (!$el->validate()) {
         if (empty($el->error)) throw new Exception('error is empty. $el: '.getPrr($el));
-        $this->lastError = $el->error; //.(getConstant(IS_DEBUG) ? " (type={$el->type}). \$el: ".getPrr($el) : '');
+        $this->lastError = $el->error;
         $this->hasErrors = true;
       }
     }
@@ -453,6 +454,7 @@ class Form {
       $this->lastError = $this->globalError;
       $this->hasErrors = true;
     }
+    if ($this->hasErrors and !$this->lastError) throw new Exception("Last error is empty. Form has errors bun don't has last error. It's strange");
     return !$this->hasErrors;
   }
 

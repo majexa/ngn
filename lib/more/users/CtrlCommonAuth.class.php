@@ -22,11 +22,15 @@ use CtrlFormTabs;
   function action_json_form() {
     $form = new AuthForm;
     $form->action = '/c/auth/json_form';
-    $this->json['title'] = 'Авторизация';
+    $this->json['title'] = 'Авторизация ';
     if ($form->isSubmittedAndValid()) {
       $this->json['success'] = true;
       return;
     }
+    $this->json['req'] = $form->req->r;
+    $this->json['req2'] = $_REQUEST;
+    $this->json['valid'] = ($form->validate() ? 'true' : $form->lastError);
+    if ($form->req['formId']) $this->json['idssss'] = $form->req['formId'].' - '.$form->id();
     return $this->jsonFormAction($form);
   }
   

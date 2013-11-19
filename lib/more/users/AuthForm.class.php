@@ -27,9 +27,14 @@ class AuthForm extends Form {
     parent::__construct(new Fields($fields), $options);
   }
 
-  function isSubmittedAndValid() {
-    if (!parent::isSubmittedAndValid()) return false;
+  function id() {
+    return 'formAuth';
+  }
+
+  function initErrors() {
+    parent::initErrors();
     $data = $this->getData();
+    //return true;
     if (!Auth::loginByRequest($data['authLogin'], $data['authPass'])) {
       if (in_array(Auth::$errors[0]['code'], [
         Auth::ERROR_AUTH_NO_LOGIN,
@@ -38,9 +43,7 @@ class AuthForm extends Form {
       ])
       ) $this->getElement('authLogin')->error(Auth::$errors[0]['text']);
       else $this->getElement('authPass')->error(Auth::$errors[0]['text']);
-      return false;
     }
-    return true;
   }
 
 }

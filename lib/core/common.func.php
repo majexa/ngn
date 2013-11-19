@@ -159,9 +159,9 @@ function getOS() {
     return 'linux';
 }
 
-function redirect($path) {
+function redirect($path, $forceHttp = false) {
   if (!strstr($path, 'http://')) $path = '/'.ltrim($path, '/');
-  getConstant('JS_REDIRECT') ? jsRedirect($path) : header('Location: '.$path);
+  (getConstant('JS_REDIRECT') and !$forceHttp) ? jsRedirect($path) : header('Location: '.$path);
   print "\n"; // странность: если после хедера нет никакого вывода, редирект не осуществляется
 }
 

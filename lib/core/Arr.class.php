@@ -549,7 +549,13 @@ class Arr {
     if ($assocKey) {
       foreach ($array as $kk => $vv) {
         $r[$kk] = $vv;
-        if ($kk == $afterKey) foreach ($values as $value) $r[$value[$assocKey]] = $value;
+        if ($kk == $afterKey)
+          foreach ($values as $value) {
+            if (!isset($value[$assocKey])) {
+              throw new Exception("no suck key ($assocKey) in value: ".getPrr($value));
+            }
+            $r[$value[$assocKey]] = $value;
+          }
       }
     }
     else {

@@ -83,7 +83,7 @@ use Options;
     }
     else {
       Auth::setAuth();
-      if (Auth::$postAuth) jsRedirect(Tt()->getPath());
+      if (Auth::$postAuth) redirect(Tt()->getPath(), true);
     }
   }
 

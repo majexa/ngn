@@ -1,0 +1,20 @@
+#top .iconsSet a {
+margin-bottom: 0px;
+}
+#auth {
+padding: 0px 0px 0px 15px;
+}
+#auth input.fld {
+width: 90px;
+}
+#auth a#btnLogin {
+width: 55px;
+}
+
+#auth_dialog #formAuth {
+padding: 6px 6px 15px 6px;
+}
+#auth_dialog #formAuth input[type=text],
+#auth_dialog #formAuth input[type=password] {
+width: 100%;
+}
