@@ -192,8 +192,6 @@ Ngn.Form = new Class({
   },
 
   submitHtml5: function() {
-    c('!!!!!!!!!');
-    return;
     this.upload.send(this.multiUpload);
   },
 
