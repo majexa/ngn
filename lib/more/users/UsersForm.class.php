@@ -7,9 +7,9 @@ use FormDbUnicCheck;
   public $strName = UsersCore::extraStrName;
 
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'active' => !(bool)Config::getVarVar('userReg', 'activation')
-    ];
+    ]);
   }
 
   public function __construct(array $options = []) {

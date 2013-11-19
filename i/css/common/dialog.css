@@ -226,18 +226,19 @@ border-bottom: 1px #ccc dashed;
 }
 .dialog-tabs .md-title-text {
 border-bottom: 0px;
+padding-bottom: 0px;
 }
 
 .md-closer {
 position: absolute;
-right: 7px;
+right: 4px;
 top: 3px;
 background-position: right 1px;
 background-image: url(/i/img/dialog/cross.png?2);
 height: 25px;
 }
 .md-closer:active {
-background-image: url(/i/img/dialog/cross-pushed.png);
+background-image: url(/i/img/dialog/cross-pushed.png?2);
 }
 .dialog-shade {
 border: 0;

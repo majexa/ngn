@@ -74,6 +74,7 @@ Ngn.Dialog.Auth = new Class({
   options: {
     //dialogClass: 'dialog fieldFullWidth',
     selectedTab: 1,
+    id: 'auth',
     url: '/c/auth/ajax_auth',
     width: 280,
     completeUrl: null,

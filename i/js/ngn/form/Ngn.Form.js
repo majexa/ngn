@@ -85,7 +85,7 @@ Ngn.Form = new Class({
           var func = eval('Ngn.frm.init.' + this.eForm.get('id'));
           if (func) func();
           //(function() {
-            this.fireEvent('jsComplete');
+          this.fireEvent('jsComplete');
           //}).delay(2000, this);
         }.bind(this)
       });
@@ -192,6 +192,8 @@ Ngn.Form = new Class({
   },
 
   submitHtml5: function() {
+    c('!!!!!!!!!');
+    return;
     this.upload.send(this.multiUpload);
   },
 
@@ -364,9 +366,7 @@ Ngn.Form = new Class({
   },
 
   submitAjax: function() {
-    if (this.options.ajaxSubmit)
-      this._submitAjax(); else
-      this._submit();
+    this.options.ajaxSubmit ? this._submitAjax() : this._submit();
   },
 
   _submitAjax: function() {
@@ -385,7 +385,6 @@ Ngn.Form = new Class({
   _submit: function() {
     this.eForm.submit();
   }
-
 
 });
 
@@ -451,7 +450,7 @@ Ngn.Form.El = new Class({
     if (Ngn.Form.ElOptions[this.name]) this.options = Ngn.Form.ElOptions[this.name];
     this.init();
   },
-  fireFormElEvent: function(event,  value) {
+  fireFormElEvent: function(event, value) {
     this.form.fireEvent('el' + ucfirst(this.name) + ucfirst(event), value);
   },
   init: function() {
