@@ -521,11 +521,11 @@ Ngn.Form.Validator = new Class({
       });
     }).delay(2000, this);
 
-    /*
-     this.getFields().each(function(field) {
-     field.addEvent('focus', this.hideLastAdvice.pass(field, this));
-     }.bind(this));
-     */
+    // убираем все эдвайсы при фокусе на поле
+    this.getFields().each(function(field) {
+      field.addEvent('focus', this.reset.bind(this));
+    }.bind(this));
+
 
   },
 
@@ -640,7 +640,7 @@ Form.Validator.addAllThese([
     }
   }],
   ['validate-name', {
-    errorMsg: 'должно содержать только латинские символы и не начинаться с цифры',
+    errorMsg: 'должно содержать только латинские символы, тире, подчеркивание и не начинаться с цифры',
     test: function(element) {
       if (!element.value) return true;
       if (element.value.match(/^[a-z][a-z0-9-_]*$/i)) return true; else return false;
