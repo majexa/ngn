@@ -1,4 +1,11 @@
-<? $ti = new TinyInit($d) ?>
+<?php
+
+/**
+ * Шаблон для генерации
+ */
+$ti = new TinyInit($d);
+
+?>
 
 Ngn.TinySettings = new Class({
 

@@ -160,9 +160,10 @@ function getOS() {
 }
 
 function redirect($path, $forceHttp = false) {
+  LogWriter::v('redirect', $path);
   if (!strstr($path, 'http://')) $path = '/'.ltrim($path, '/');
   (getConstant('JS_REDIRECT') and !$forceHttp) ? jsRedirect($path) : header('Location: '.$path);
-  print "\n"; // странность: если после хедера нет никакого вывода, редирект не осуществляется
+  print "\n"; // если после хедера нет никакого вывода, редирект не осуществляется
 }
 
 function jsRedirect($path) {
