@@ -182,13 +182,18 @@ class Form {
     return '';
   }
 
+  /*
   protected function dataParams() {
-    return false;
     $class = get_class($this);
     if ($class != 'Form') {
-      ///Sflm::
+      Sflm::flm('js')->addClass('Ngn.Form.'.$class);
       return ['class' => $class];
     }
+    return false;
+  }
+  */
+
+  protected function dataParams() {
     return false;
   }
 
