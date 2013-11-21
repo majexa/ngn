@@ -157,7 +157,7 @@ Ngn.Form = new Class({
     this.submiting = true;
     if (this.uploadType == 'html5') {
       this.submitHtml5();
-    } else if (this.uploadType == 'default' && !this.options.dialog) {
+    } else if (this.uploadType == 'default' && !this.options.ajaxSubmit) {
       this.eForm.submit();
     } else {
       this.submitAjax();
