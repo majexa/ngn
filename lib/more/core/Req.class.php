@@ -63,6 +63,11 @@ use Options;
   public $g;
 
   /**
+   * @var $_SESSION
+   */
+  public $s;
+
+  /**
    * @var $_FILES
    */
   public $files;
@@ -90,6 +95,7 @@ use Options;
     }
     $new = [];
     $this->g = $_GET;
+    //$this->s = $_SESSION;
     if (!empty($uriData['query'])) {
       parse_str($uriData['query'], $d);
       $this->g = $d;

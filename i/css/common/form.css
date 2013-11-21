@@ -346,6 +346,9 @@ display: none;
 .field-wrapper {
 position: relative;
 }
+.advice {
+font-size: 12px;
+}
 .advice-wrapper {
 position: absolute;
 left: 7px;
