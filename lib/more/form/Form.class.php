@@ -184,6 +184,12 @@ class Form {
 
   protected function dataParams() {
     return false;
+    $class = get_class($this);
+    if ($class != 'Form') {
+      ///Sflm::
+      return ['class' => $class];
+    }
+    return false;
   }
 
   public $methodPost = true;
