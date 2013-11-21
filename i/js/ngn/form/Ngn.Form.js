@@ -520,13 +520,10 @@ Ngn.Form.Validator = new Class({
         });
       });
     }).delay(2000, this);
-
     // убираем все эдвайсы при фокусе на поле
     this.getFields().each(function(field) {
       field.addEvent('focus', this.reset.bind(this));
     }.bind(this));
-
-
   },
 
   lastAdvices: {},
