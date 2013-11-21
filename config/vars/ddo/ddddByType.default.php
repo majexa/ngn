@@ -27,7 +27,7 @@ return [
   'ddCityMultiselect' => '%ddTagsTreeMultiselect',
   //'ddCityMultiselect' => '`asdasd`',
   //'ddCity' => '`44dd`',
-  'ddCity' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v[0]) : ``',
+  'ddCity' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v[0]) : ``',c
   //'ddCity' => '`CITY STRIPPED`',
   'ddCityRussia' => '%ddCity',
   //'ddCityRussia' => '`u suck`',
