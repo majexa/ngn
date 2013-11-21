@@ -388,9 +388,8 @@ Ngn.Form = new Class({
 
 Ngn.Form.factory = function(eForm, opts) {
   eForm = document.id(eForm, true);
-  var possibleCls;
-  if (eForm.get('data-class')) possibleCls = eval('Ngn.Form.' + eForm.get('data-class'));
-  return possibleCls ? new possibleCls(eForm, opts) : new Ngn.Form(eForm, opts);
+  var cls = eval('Ngn.' + (eForm.get('data-class') || 'Form'));
+  return new cls(eForm, opts);
 };
 
 Ngn.Form.forms = {};
