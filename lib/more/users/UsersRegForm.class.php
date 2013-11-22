@@ -5,11 +5,11 @@ class UsersRegForm extends UsersForm {
   public $create = true;
   
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'name' => 'userReg',
       'submitTitle' => 'Зарегистрироваться',
       'active' => !Config::getVarVar('userReg', 'activation')
-    ];
+    ]);
   }
 
   protected function _getFields() {

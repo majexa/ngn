@@ -379,6 +379,7 @@ use Options;
       $this->actionPrefix = $a[0];
       $this->actionBase = $a[1];
       if ($this->actionPrefix == 'json') {
+        $this->isAjax = true;
         $this->isJson = true;
       }
       elseif ($this->actionPrefix == 'ajax') {

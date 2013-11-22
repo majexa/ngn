@@ -18,11 +18,8 @@ Ngn.Carousel = new Class({
     }
     this.currentIndex = 0;
     this.elementWidth = this.elements[0].getSize().x;
-    c(this.elements);
     this.visibleElementsN = Math.round(this.element.getSize().x / this.elementWidth);
-    if (this.options.periodical) {
-      this.toNext.periodical(this.options.periodical, this);
-    }
+    if (this.options.periodical) this.toNext.periodical(this.options.periodical, this);
   },
 
   cacheElements: function() {

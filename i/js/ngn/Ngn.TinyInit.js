@@ -1,6 +1,6 @@
 Ngn.TinyInit = new Class({
   Implements: [Options],
-  
+
   options: {
     attachs: false,
     selector: '.type_wisiwig textarea',
@@ -11,7 +11,7 @@ Ngn.TinyInit = new Class({
     this.setOptions(options);
     this.init();
   },
-  
+
   init: function() {
     var id, settings;
     var parent = this.options.parent ? this.options.parent : document;
@@ -30,13 +30,10 @@ Ngn.TinyInit = new Class({
       if (settings.attachId)
         settings.theme_advanced_buttons1_add = 'uploadFile,uploadImage,uploadImagePreview,image';
       tinyMCE.init(settings);
-      if (Ngn.TinyInit.exists[id])
-        Ngn.TinyInit.exists[id]++;
-      else
-       	Ngn.TinyInit.exists[id] = 1;
+      Ngn.TinyInit.exists[id] ? Ngn.TinyInit.exists[id]++ : Ngn.TinyInit.exists[id] = 1;
     }.bind(this));
   }
-  
+
 });
 
 Ngn.TinyInit.exists = {};
