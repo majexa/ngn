@@ -1,37 +1,33 @@
-.pNums.pNumsTop {
+.itemsTableMenu .pNums.pNumsTop {
 padding-top: 0px;
 border-bottom: 1px solid #F1EDED;
 margin-bottom: 5px;
 }
-.pNums.pNumsBottom {
+.itemsTableMenu .pNums.pNumsBottom {
 border-bottom: 1px solid #F1EDED;
 }
-.pNums a, .pNums b {
+.itemsTableMenu .pNums a,
+.itemsTableMenu .pNums b {
 display: inline-block;
 margin-right: 0px !important; /* conflict with ".iconsSet a" margin */
 border: 1px solid #CCCCCC;
 border-radius: 15px 15px 0 0;
 border-bottom: none;
 }
-.pNums a, .pNums b, .pNums .total {
+.itemsTableMenu .pNums a,
+.itemsTableMenu .pNums b,
+.itemsTableMenu .pNums .total {
 padding: 2px 10px 6px 10px;
 }
-.pNums a:hover, .pNums b {
+.itemsTableMenu .pNums a:hover,
+.itemsTableMenu .pNums b {
 color: #555;
 border-color: #555;
 }
-.pNums b {
+.itemsTableMenu .pNums b {
 background-color: #FFF9DF;
 }
-.pNums .total, .pNums .bookmarks {
+.itemsTableMenu .pNums .total,
+.itemsTableMenu .pNums .bookmarks {
 float: left;
-}
-.pagePath .pNums {
-float: right;
-padding: 2px 15px 0px 0px;
-}
-.pagePath .pNums a, .pagePath .pNums b {
-padding: 4px 10px 3px 10px;
-background: #FFFFFF;
-border-bottom: 0px;
 }
