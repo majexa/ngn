@@ -4,7 +4,7 @@ Ngn.Form = new Class({
   options: {
     equalElementHeights: false,
     dialog: false,
-    focusFirst: true,
+    focusFirst: false,
     ajaxSubmit: false,
     disableInit: false
     //onNewElement: function(el) {}
@@ -53,6 +53,10 @@ Ngn.Form = new Class({
         if (f) f.focus();
       }
     }
+    // Если у первого элемента есть плейсхолдер, значит и у всех остальных. Инициализируем кроссбрауузерные плейсхолдеры (для IE9)
+    var eFirstTextInput = this.eForm.getElement(Ngn.frm.textSelector);
+    if (eFirstTextInput.get('placeholder')) new Ngn.PlaceholderSupport();
+
     this.eForm.getElements('input[type=text],input[type=password]').each(function(el) {
       el.addEvent('keypress', function(e) {
         if (e.key == 'enter') this.submit();

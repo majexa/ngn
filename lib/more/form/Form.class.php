@@ -125,6 +125,7 @@ class Form {
     self::$counter++;
     $this->setOptions($options);
     if ($this->options['placeholders']) {
+      Sflm::flm('js')->addClass('Ngn.PlaceholderSupport');
       $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);
       $this->templates['input'] = str_replace('{input}', '{required}{input}', $this->templates['input']);
       $this->templates['title'] = '';
