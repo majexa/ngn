@@ -4,7 +4,7 @@ Ngn.Form = new Class({
   options: {
     equalElementHeights: false,
     dialog: false,
-    focusFirst: true,
+    focusFirst: false,
     ajaxSubmit: false,
     disableInit: false
     //onNewElement: function(el) {}
@@ -53,6 +53,10 @@ Ngn.Form = new Class({
         if (f) f.focus();
       }
     }
+    // Если у первого элемента есть плейсхолдер, значит и у всех остальных. Инициализируем кроссбрауузерные плейсхолдеры (для IE9)
+    var eFirstTextInput = this.eForm.getElement(Ngn.frm.textSelector);
+    if (eFirstTextInput.get('placeholder')) new Ngn.PlaceholderSupport();
+
     this.eForm.getElements('input[type=text],input[type=password]').each(function(el) {
       el.addEvent('keypress', function(e) {
         if (e.key == 'enter') this.submit();
@@ -157,7 +161,7 @@ Ngn.Form = new Class({
     this.submiting = true;
     if (this.uploadType == 'html5') {
       this.submitHtml5();
-    } else if (this.uploadType == 'default' && !this.options.dialog) {
+    } else if (this.uploadType == 'default' && !this.options.ajaxSubmit) {
       this.eForm.submit();
     } else {
       this.submitAjax();
@@ -520,13 +524,10 @@ Ngn.Form.Validator = new Class({
         });
       });
     }).delay(2000, this);
-
-    /*
-     this.getFields().each(function(field) {
-     field.addEvent('focus', this.hideLastAdvice.pass(field, this));
-     }.bind(this));
-     */
-
+    // убираем все эдвайсы при фокусе на поле
+    this.getFields().each(function(field) {
+      field.addEvent('focus', this.reset.bind(this));
+    }.bind(this));
   },
 
   lastAdvices: {},
@@ -640,7 +641,7 @@ Form.Validator.addAllThese([
     }
   }],
   ['validate-name', {
-    errorMsg: 'должно содержать только латинские символы и не начинаться с цифры',
+    errorMsg: 'должно содержать только латинские символы, тире, подчеркивание и не начинаться с цифры',
     test: function(element) {
       if (!element.value) return true;
       if (element.value.match(/^[a-z][a-z0-9-_]*$/i)) return true; else return false;

@@ -87,9 +87,8 @@ Ngn.Request.JSON = new Class({
 
 });
 
-Ngn.Request.JSON.throwServerError = function(error) {
-  c(error);
-  throw new Error(error.message + "\n----------\n" + error.trace)
+Ngn.Request.JSON.throwServerError = function(r) {
+  throw new Error(r.error.message + "\n----------\n" + r.error.trace)
 };
 
 Ngn.Request.sflJsDeltaUrlOnLoad = false;

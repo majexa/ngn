@@ -125,6 +125,7 @@ class Form {
     self::$counter++;
     $this->setOptions($options);
     if ($this->options['placeholders']) {
+      Sflm::flm('js')->addClass('Ngn.PlaceholderSupport');
       $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);
       $this->templates['input'] = str_replace('{input}', '{required}{input}', $this->templates['input']);
       $this->templates['title'] = '';
@@ -181,6 +182,17 @@ class Form {
     if ($this->options['placeholders']) return Html::params(['class' => 'placeholders']);
     return '';
   }
+
+  /*
+  protected function dataParams() {
+    $class = get_class($this);
+    if ($class != 'Form') {
+      Sflm::flm('js')->addClass('Ngn.Form.'.$class);
+      return ['class' => $class];
+    }
+    return false;
+  }
+  */
 
   protected function dataParams() {
     return false;
