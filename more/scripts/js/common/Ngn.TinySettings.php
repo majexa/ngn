@@ -3,7 +3,7 @@
 /**
  * Базовый
  */
-$ti = new TinyInit($d);
+$ti = new TinyInit(['themeType' => 'admin']);
 
 ?>
 
