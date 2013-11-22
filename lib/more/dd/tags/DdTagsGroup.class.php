@@ -52,6 +52,10 @@ class DdTagsGroup {
       $p['global'] = true;
       $p['table'] = 'tagCities';
     }
+    elseif ((FieldCore::hasAncestor($this->p['fieldType'], 'ddMetro') or FieldCore::hasAncestor($this->p['fieldType'], 'ddMetroMultiselect'))) {
+      $p['global'] = true;
+      $p['table'] = 'tagMetro';
+    }
     return $p;
   }
 
