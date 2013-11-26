@@ -4,7 +4,7 @@ class WorkerInstaller {
 
   protected $projectName, $demon, $workersCount, $c;
 
-  function __construct($projectName, $demon, $workersCount = 1) {
+  function __construct($projectName, $demon, $workersCount) {
     $this->projectName = $projectName;
     $this->demon = $demon;
     $this->workersCount = $workersCount;
