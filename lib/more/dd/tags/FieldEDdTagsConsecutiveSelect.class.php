@@ -44,14 +44,19 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
       'required' => !empty($this->options['required'])
     ];
     if (empty($this->options['value'])) {
-      $d['items'] = [[
-        'options' => $this->getRootOptions()
-      ]];
-    } else {
-      $d['items'] = [[
-        'default' => isset($this->options['value'][2]) ? $this->options['value'][2] : '123',
-        'options' => $this->getRootOptions()
-      ]];
+      $d['items'] = [
+        [
+          'options' => $this->getRootOptions()
+        ]
+      ];
+    }
+    else {
+      $d['items'] = [
+        [
+          'default' => isset($this->options['value'][2]) ? $this->options['value'][2] : '123',
+          'options' => $this->getRootOptions()
+        ]
+      ];
       if (count($this->options['value'] > 1)) {
         $this->selectedValue = $this->getSelectedValues();
         $this->parentId = $this->getSecondParentId();
@@ -69,6 +74,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
   }
 
   protected function getRootOptions() {
+    if (isset($this->options['rootTagId'])) $this->rootTagId = $this->options['rootTagId'];
     return Arr::get($this->tags->getTags($this->rootTagId), 'title', 'id');
   }
 
