@@ -506,11 +506,9 @@ Ngn.Form.Validator = new Class({
     this.parent(form.eForm, options);
     this.addEvents({
       elementFail: function(eInput, name) {
-        //eInput.getParents('.element')[0].addClass('errorRow');
         this.resetVisibilityConditionOfFieldSection(eInput);
       }.bind(form),
       elementPass: function(eInput, name) {
-        //eInput.getParents('.element')[0].removeClass('errorRow');
         this.resetVisibilityConditionOfFieldSection(eInput);
       }.bind(form)
     });

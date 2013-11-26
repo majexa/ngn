@@ -20,9 +20,6 @@ return [
     'type' => 'hash'
   ],
   // Стандартные 
-  'developer-ips'            => [
-    'title' => 'IP адреса разработчиков'
-  ],
   'lang'                     => [
     'title'  => 'Языки',
     'fields' => [
@@ -291,11 +288,6 @@ return [
       'allowMysiteThemeEdit' => [
         'title' => 'Разрешить изменение оформления Моего сайта',
         'type'  => 'bool'
-      ],
-      'pageIds'              => [
-        'title'      => 'Дополнительные разделы в блоке авторизованого пользователя',
-        'type'       => 'fieldList',
-        'fieldsType' => 'pageId',
       ],
       'redirectToFirstPage'  => [
         'title' => 'Перенаправлять после авторизации с фронтенда на первый раздел из указанных выше',

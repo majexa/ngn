@@ -76,6 +76,7 @@ Ngn.Dialog = new Class({
 
   initialize: function(_opts) {
     this.setOptions(_opts);
+    document.getElement('body').addClass('noscroll');
     if (this.options.id == 'dlg') {
       this.options.id = 'dlg' + Ngn.randString(5);
       if (this.options.savePosition) throw new Error('Can not save position on random ID');
@@ -416,6 +417,7 @@ Ngn.Dialog = new Class({
   },
 
   finishClose: function() {
+    document.getElement('body').removeClass('noscroll');
     if ($(this.dialog)) {
       this.closed = true;
       if ($defined(this.grabbed)) {

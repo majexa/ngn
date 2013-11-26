@@ -20,6 +20,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
 
   protected function init() {
     parent::init();
+    if (isset($this->options['rootTagId'])) $this->rootTagId = $this->options['rootTagId'];
     $this->tags = DdTags::get($this->form->strName, $this->baseName);
   }
 

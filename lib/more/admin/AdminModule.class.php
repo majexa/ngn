@@ -21,34 +21,32 @@ class AdminModule {
 
   static function getListModules() {
     return Arr::filterFunc(self::getModules(), function($v) {
+
       return AdminModule::isListAllowed($v);
     });
   }
 
-  static function isAllowed($module) {
+  static function isAllowed($moduleName) {
     if (Misc::isGod()) return true;
-    return self::_isAllowed($module);
+    return self::_isAllowed($moduleName);
   }
 
-  static function isListAllowed($v) {
-    if (!empty($v['alwaysOnMenu'])) return true;
-    if (empty($v['onMenu'])) return false;
+  static function isListAllowed(array $module) {
+    if (!empty($module['alwaysOnMenu'])) return true;
+    if (empty($module['onMenu'])) return false;
     if (O::get('Req')->params[0] == 'god' and Misc::isGod()) return true;
-    return self::_isAllowed($v);
+    //return self::_isAllowed($module['name']);
   }
 
-  static function _isAllowed($module) {
+  static protected function _isAllowed($moduleName) {
     // Модуль 'default' по умолчанию разрешен
-    if ($module == 'default') return true;
-    return in_array($module, self::getAllowedModules());
+    if ($moduleName == 'default') return true;
+    //pr([$module, in_array($module, self::getAllowedModules()), self::getAllowedModules()]);
+    return in_array($moduleName, self::getAllowedModules());
   }
-
-  static protected $allowedAdminModules;
 
   static function getAllowedModules() {
-    if (isset(self::$allowedAdminModules)) return self::$allowedAdminModules;
-    self::$allowedAdminModules = Config::getVarVar('adminPriv', 'allowedAdminModules', true);
-    return self::$allowedAdminModules;
+    return Config::getVarVar('adminPriv', 'allowedAdminModules', true);
   }
 
   static function getProperties($name) {
