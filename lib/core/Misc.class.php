@@ -34,20 +34,6 @@ class Misc {
   }
 
   /**
-   * Проверяет является ли текущий пользователь разработчиком
-   *
-   * @return bool
-   */
-  static function isDeveloper() {
-    if (in_array($_SERVER['REMOTE_ADDR'], Config::getVar('developer-ips')) or
-    (defined('IS_DEVELOPER') and IS_DEVELOPER === true)
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
    * Проверяет является ли текущий пользователь богом, т.е. имеет неограниченные
    * права доступа на сайте
    *
@@ -58,7 +44,7 @@ class Misc {
       if (!$quietly) throw new Exception('God mod not allowed');
       return false;
     }
-    if (!($gods = Config::getVar('gods'))) return false;
+    if (!($gods = Config::getVar('gods', false, false))) return false;
     return in_array(Auth::get('id'), $gods);
   }
 

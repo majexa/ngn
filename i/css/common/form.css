@@ -236,10 +236,6 @@ width: 20%;
 .apeform .type_col {
 display: table-cell;
 }
-
-.apeform .type_col, .apeform .type_co2 {
-border-left: 1px solid #CCCCCC;
-}
 .apeform .type_col:first-child {
 border-left: none;
 }

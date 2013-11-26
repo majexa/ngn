@@ -418,8 +418,8 @@ class AgiBase {
    */
   function get_variable($variable, $getvalue = FALSE) {
     $res = $this->evaluate("GET VARIABLE $variable");
-    if ($getvalue == FALSE) return ($res);
-    return ($res['data']);
+    if ($getvalue == FALSE) return $res;
+    return $res['data'];
   }
 
 
@@ -1669,7 +1669,7 @@ class AgiBase {
     if ($ret['code'] != AGIRES_OK) // some sort of error
     {
       $ret['data'] = $str;
-      $this->conlog(print_r($ret, true));
+      $this->conlog($command."\n".getPr($ret, false));
     }
     else // normal AGIRES_OK response
     {

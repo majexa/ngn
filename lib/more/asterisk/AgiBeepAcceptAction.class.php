@@ -4,16 +4,15 @@ abstract class AgiBeepAcceptAction extends AgiAction {
 
   function action() {
     LogWriter::v('posled', 'playback intro');
+    $this->agi->conlog('playback intro');
     $this->agi->playback($this->options['introSound']);
-    //LogWriter::v('posled', 'usleep');
-    //usleep(0.3 * 1000000);
-    LogWriter::v('posled', 'set dummy true');
+    $this->agi->conlog('set dummy true');
     $this->agi->setVar('dummy', true);
-    LogWriter::v('posled', 'set actionComplete true');
+    $this->agi->conlog('set actionComplete true');
     $this->agi->setVar('actionComplete', true);
-    LogWriter::v('posled', 'accept');
+    $this->agi->conlog('accept');
     $this->accept();
-    LogWriter::v('posled', 'ok sound');
+    $this->agi->conlog('ok sound');
     $this->agi->playback($this->options['okSound']);
   }
 

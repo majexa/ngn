@@ -23,7 +23,7 @@ class FieldEDdTagsMultiselect extends FieldEMultiselect {
       return Tt()->enum($r);
     }
     else {
-      return $this->options['options'][$value];
+      return isset($this->options['options'][$value]) ? $this->options['options'][$value] : '';
     }
   }
 

@@ -16,32 +16,7 @@ if (isset($_REQUEST['debugUri'])) {
   $_SERVER['HTTP_HOST'] = 'localhost';
 }
 
-if (!is_file(WEBROOT_PATH.'/index.php'))
-  die2('Dir "'.WEBROOT_PATH.'" or "index.php" not exists');
-
-/*
-if (IS_DEBUG and isset($_REQUEST['XDEBUG_PROFILE'])) {
-  $file = glob('~/xdebug/*')[0];
-  Dir::make(UPLOAD_PATH.'/temp');
-  'tar -czf '.UPLOAD_PATH.'/temp/'.basename($file);
-  //tgz $file';
-
-}
-*/
-
-/*
-if (get_magic_quotes_gpc()) {
-  function stripslashes_deep($value) {
-    $value = is_array($value) ? array_map('stripslashes_deep', $value) : stripslashes(
-      $value);
-    return $value;
-  }
-  $_POST = array_map('stripslashes_deep', $_POST);
-  $_GET = array_map('stripslashes_deep', $_GET);
-  $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
-  $_REQUEST = array_map('stripslashes_deep', $_REQUEST);
-}
-*/
+if (!is_file(WEBROOT_PATH.'/index.php')) die2('Dir "'.WEBROOT_PATH.'" or "index.php" not exists');
 
 R::set('processTimeStart', getMicrotime());
 if (isset($_REQUEST['plain'])) R::set('plainText', true);
