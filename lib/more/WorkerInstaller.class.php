@@ -28,7 +28,7 @@ for N in '.$for.'
 do
   DESC="'.$project.' '.$file.' daemon ${N}"
   PIDFILE="/var/run/${NAME}${N}.pid"
-  START_OPTS="--start ${QUIET} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS} ${N}"
+  START_OPTS="--start ${QUIET} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS}"
   STOP_OPTS="--stop --pidfile ${PIDFILE}"
   test -x $DAEMON || exit 0
   set -e
