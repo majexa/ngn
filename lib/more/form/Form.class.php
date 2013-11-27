@@ -543,7 +543,6 @@ class Form {
     if ($this->options['placeholders'] and !empty($d['title'])) $d['placeholder'] = $d['title'];
     if (isset($this->els[$d['name']])) {
       throw new Exception('Field with name "'.$d['name'].'" already exists in <b>$this->els</b>. existing: '.getPrr($this->els[$d['name']]->options).', trying to create: '.getPrr($d));
-      //."\nALL:\n".getPrr($this->els));
     }
     if (isset($d['maxlength']) and $d['maxlength'] == 0) unset($d['maxlength']);
     $this->els[$d['name']] = $el = FieldCore::get($d['type'], $d, $this);
@@ -830,7 +829,6 @@ eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
 
   function debugElements() {
     $this->setElementsDataDefault();
-    die2(Arr::get($this->els, 'options'));
   }
 
   public $tinyInitialized = false;
