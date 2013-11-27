@@ -22,7 +22,7 @@ class TinyFileManager extends TinyUploadManager {
   function process($v) {
     $exp = File::getExtension($v['tmp_name']);
     Dir::make($this->folderPath);
-    if (!$fileName = Misc::translate($v['name'], true))
+    if (!$fileName = Misc::transit($v['name'], true))
       File::getUnicName($this->folderPath, $exp);
     copy($v['tmp_name'], $this->folderPath.'/'.$fileName);
     $r = [

@@ -76,7 +76,10 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   protected function defineOptions() {
-    return ['strict' => true];
+    return [
+      'strict' => true,
+      'ignoreExisting' => false
+    ];
   }
 
   protected function init() {
@@ -118,6 +121,7 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   function create(array $data, $throwFormErrors = true) {
+    if ($this->options['ignoreExisting'] and $this->form->fields->exists($data['name'])) return false;
     $this->form->fromRequest = false;
     $this->form->create = true;
     $this->setFormElementsData($data);
@@ -195,7 +199,6 @@ abstract class DataManagerAbstract extends Options2 {
 
   protected function setFormElementsData(array $data) {
     $this->beforeFormElementsInit();
-    //$this->form->defaultData = $data;
     $this->form->setElementsData($data);
   }
 

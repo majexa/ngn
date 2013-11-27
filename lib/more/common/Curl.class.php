@@ -78,6 +78,7 @@ class Curl {
   function get($url) {
     if (!$this->fSocket) return false;
     $this->output('curl get: '.$url);
+    //$this->output('curl get: '.$url."\n".getBacktrace(false));
     //$this->setopt(CURLOPT_HEADER, 1);
     $this->setopt(CURLOPT_NOBODY, 0);
     $this->setopt(CURLOPT_POST, 0);

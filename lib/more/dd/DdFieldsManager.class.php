@@ -315,7 +315,7 @@ class DdFieldsManager extends DbItemsManager {
     Arr::incr($this->typeCount, $d['type']);
     if (!isset($d['name'])) $d['name'] = $d['type'].$this->typeCount[$d['type']];
     if (!isset($d['title'])) $d['title'] = $d['name'];
-    return parent::create($d);
+    return parent::create($d, $throwFormErrors);
   }
 
 }

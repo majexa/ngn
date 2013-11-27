@@ -32,7 +32,7 @@ class DdTags {
   }
 
   static function title2name($title) {
-    return trim(Misc::translate($title, true), '-');
+    return trim(Misc::transit($title, true), '-');
   }
 
   static function rebuildCounts() {

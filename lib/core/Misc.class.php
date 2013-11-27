@@ -68,7 +68,7 @@ class Misc {
    * @return  string
    */
   static function camelCase($str, $sep = '-') {
-    return preg_replace_callback('/'.$sep.'\D/', create_function('$m', 'return strtoupper($m[0][1]);'), $str);
+    return str_replace('-', '', preg_replace_callback('/'.$sep.'\D/', create_function('$m', 'return strtoupper($m[0][1]);'), $str));
   }
 
   /**
@@ -126,7 +126,7 @@ class Misc {
   }
 
   static function domain($s) {
-    $s = Misc::translate($s, true);
+    $s = Misc::transit($s, true);
     $s = str_replace('_', '-', $s);
     $s = str_replace('.', '-', $s);
     while (is_numeric($s[0])) $s = substr($s, 1, strlen($s));
@@ -174,7 +174,7 @@ class Misc {
     return preg_replace('/(.*\/)[a-z]+_([\w-_]+\.\w+)/', '$1$2', $path);
   }
 
-  static function translate($in, $toLower = false) {
+  static function transit($in, $toLower = false) {
     $out = [];
     $replacers = [
 
@@ -281,7 +281,7 @@ class Misc {
     return $out;
   }
 
-  static function detranslate($in, $toLower = false) {
+  static function detranslit($in, $toLower = false) {
     $out = [];
     $replacers = array_flip([
       'а' => 'a',
