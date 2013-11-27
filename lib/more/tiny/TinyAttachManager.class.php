@@ -174,7 +174,7 @@ class TinyAttachManager {
     Dir::make($folderPath);
     $oCurl = new Curl();
     foreach ($remoteLinks as $link) {
-      $name = Misc::translate(basename($link));
+      $name = Misc::transit(basename($link));
       try {
         $oCurl->copy($link, $folderPath.'/'.$name);
         $html = Html::replaceParam2($html, 'img', 'src', $link, '/'.$folder.'/'.$name);

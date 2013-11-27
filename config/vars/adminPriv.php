@@ -8,23 +8,10 @@ return [
     'photoImport',
     'stat',
     //'slices'
-    //'backup',
+    'users',
     'tags'
   ],
   'hideAdminModules' => [
-  ],
-  'allowedPageModules' => [
-    //'link',
-    'content',
-    //'contacts',
-    'photo',
-    'photoalbum',
-    //'faq',
-    'news',
-    'events',
-    //'sitemap',
-    //'video',
-    //'forum',
   ],
   'allowPageDelete' => true,
   'allowedPageControllers' => [],

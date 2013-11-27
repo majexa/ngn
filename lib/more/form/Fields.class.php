@@ -134,6 +134,7 @@ class Fields extends ArrayAccesseble {
   }
 
   function hasAncestor($name, $ancestorType) {
+    Misc::checkEmpty($name, 'WHY? :(');
     return FieldCore::hasAncestor($this->fields[$name]['type'], $ancestorType);
   }
 

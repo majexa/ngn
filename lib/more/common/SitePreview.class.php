@@ -13,7 +13,7 @@ class SitePreview {
   static protected $filename;
   
   static protected function _file($_url) {
-    self::$filename = Misc::translate(str_replace('http://', '', Misc::clearLastSlash($_url))).'.png';
+    self::$filename = Misc::transit(str_replace('http://', '', Misc::clearLastSlash($_url))).'.png';
     $url = Config::getVarVar('url', 'sitePreviewUrl').'?url='.$_url.'&forceCache=1';
     if (!Url::exists($url)) {
       return false;

@@ -440,7 +440,7 @@ class Db extends DbSimple_Mysql {
   }
 
   static function normalize($s) {
-    $s = Misc::translate($s);
+    $s = Misc::transit($s);
     $s = Misc::hyphenate($s);
     $s = str_replace(' ', '_', $s);
     return str_replace('-', '_', $s);

@@ -695,7 +695,8 @@ class Form {
     else {
       $fields = $this->fields->getFieldsF();
     }
-    foreach ($fields as $v) {
+    foreach ($fields as $n => $v) {
+      if (!is_array($v)) throw new Exception("Field #$n is not array");
       if ($this->fields->isFileType($v['name'])) {
         $value = BracketName::getValue($this->defaultData, $v['name'], BracketName::modeString);
       }

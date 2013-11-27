@@ -141,4 +141,9 @@ class DdCore {
     return $r;
   }
 
+  static function translitFieldName($string) {
+    return lcfirst(Misc::camelCase(str_replace('/', '-', Misc::transit($string))));
+  }
+
+
 }
