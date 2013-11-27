@@ -79,7 +79,7 @@ class QueueWorker extends QueueBase {
   }
 
   protected function isDebug() {
-    return false;
+    return true;
   }
 
 }
