@@ -55,7 +55,7 @@ Ngn.Form = new Class({
     }
     // Если у первого элемента есть плейсхолдер, значит и у всех остальных. Инициализируем кроссбрауузерные плейсхолдеры (для IE9)
     var eFirstTextInput = this.eForm.getElement(Ngn.frm.textSelector);
-    if (eFirstTextInput.get('placeholder')) new Ngn.PlaceholderSupport();
+    if (eFirstTextInput && eFirstTextInput.get('placeholder')) new Ngn.PlaceholderSupport();
 
     this.eForm.getElements('input[type=text],input[type=password]').each(function(el) {
       el.addEvent('keypress', function(e) {
