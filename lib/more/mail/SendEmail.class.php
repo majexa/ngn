@@ -48,7 +48,7 @@ class SendEmail {
   function send($emails, $subject, $message, $html = true) {
     Misc::checkEmpty($emails, '$emails');
     if (defined('ALLOW_SEND') and ALLOW_SEND === false) {
-      LogWriter::v('email', "$subject\n--------------\n$message");
+      $this->log($emails, $subject, $message);
       return true;
     }
     if ($html and $this->addHostToLinks) {
@@ -82,8 +82,14 @@ class SendEmail {
     else {
       $e->MsgHTML($message);
     }
-    LogWriter::v('email', "$subject\n--------------\n$message");
+    $this->log($emails, $subject, $message);
     return $e->Send();
+  }
+
+  function log($emails, $subject, $message) {
+    LogWriter::v('emailMessage', "$subject\n--------------\n$message");
+    LogWriter::v('email', "$emails: $subject");
+    LogWriter::str('email', "$emails: $subject");
   }
 
 }
