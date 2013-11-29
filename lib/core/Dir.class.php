@@ -164,52 +164,19 @@ class Dir {
     return self::_getFiles($dirPath, $recursive, $pattern, self::DIR);
   }
 
+  /**
+   * @depricated
+   */
   static function get($dirPath) {
-    if (!file_exists($dirPath)) throw new Exception("Folder '$dirPath' does not exists");
-    $dirs = [];
-    $d = dir($dirPath);
-    while (($entry = $d->read()) !== false) {
-      if ($entry == '.' or $entry == '..') {
-        continue;
-      }
-      $dirs[] = $entry;
-    }
-    $d->close();
-    return $dirs;
+    return glob($dirPath.'/*');
   }
 
+  /**
+   * @depricated
+   */
   static function dirs($dirPath) {
-    $dirs = [];
-    if (!file_exists($dirPath)) return [];
-    if (!($d = dir($dirPath))) throw new Exception("Can't open dir \"$dirPath\"");
-    while (($entry = $d->read()) !== false) {
-      if ($entry == '.' or $entry == '..') {
-        continue;
-      }
-      if (is_dir($dirPath.'/'.$entry)) {
-        $dirs[] = $entry;
-      }
-    }
-    $d->close();
-    sort($dirs);
-    return $dirs;
+    return glob($dirPath.'/*', GLOB_ONLYDIR);
   }
-
-  /*
-  static $_dirs;
-  
-  static function dirsR($dirPath) {
-    self::$_dirs = array();
-    return self::_dirsR($dirPath);
-  }
-  
-  static function _dirsR($dirPath) {
-    foreach (glob($dirPath.'/*') as $v) {
-      self::$_dirs[] = $v;
-      if (is_dir($v));
-    }
-  }
-  */
 
   static function dirsDetail($dirPath) {
     $_dirs = [];
@@ -358,8 +325,6 @@ class Dir {
     }
     return $r;
   }
-
-  ////////////////////////////////////////////////////
 
   private static $modifTime = 0;
 

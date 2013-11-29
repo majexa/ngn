@@ -1,6 +1,7 @@
 <?php
 
 /**
+ * @manual
  * Шаблон для генерации
  */
 $ti = new TinyInit($d);
