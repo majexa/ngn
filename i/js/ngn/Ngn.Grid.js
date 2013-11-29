@@ -12,6 +12,7 @@ Ngn.Grid = new Class({
     itemElementSelector: 'tbody .item',
     checkboxes: false,
     filterPath: null,
+    id: null,
     toolActions: {},
     toolLinks: {},
     eParent: 'table',
@@ -25,6 +26,7 @@ Ngn.Grid = new Class({
   btns: {},
 
   init: function() {
+    //if (!this.options.id) throw new Ngn.EmptyError('this.options.id');
     if (!this.options.eParent) throw new Ngn.EmptyError('this.options.eParent');
     if (this.options.basePath == '/') this.options.basePath = '';
     this.eParent = $(this.options.eParent);
@@ -257,7 +259,6 @@ Ngn.Grid = new Class({
       // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
       action = action.bind(this);
       new Ngn.Btn(el, function() {
-        c(this);
         action(row, this);
       });
     }

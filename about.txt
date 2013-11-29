@@ -1,5 +1,6 @@
+NGN - это такая штука, которая порабощает всё, чего касается
+============================================================
 
-asd
 - core
   - cache
   - autoload
@@ -16,19 +17,21 @@ asd
     - static files managment
     - html templates
     - dd
-  
+
     - site
       - db with all nessesery tables
       - db version control
       - admin
       - users
       - hooks
-    
-      - sb. site builder [project]
+
+...................................
+
+      - [project] sb. site builder
         - siteSet
         - layout
         - blocks
         - slices
 
-      - site draw [project]
+      - [project] site draw
         - components panel

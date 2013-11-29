@@ -13,9 +13,9 @@ class Err {
   /**
    * Выводит сообщение об ошибке, если включен режим отладки
    *
-   * @param   string  Текст ошибки (опционально)
-   * @param   bool    Прекращать ли выполнение скрипта
-   * @param   bool    Отправляет сообщение об ошибке на e-mail администратора
+   * @param   string Текст ошибки (опционально)
+   * @param   bool Прекращать ли выполнение скрипта
+   * @param   bool Отправляет сообщение об ошибке на e-mail администратора
    */
   static protected function output($errno, $errstr, $errfile, $errline, array $trace = []) {
     self::$last = [
@@ -29,16 +29,17 @@ class Err {
     if (!defined('IS_DEBUG') or IS_DEBUG === false) return;
     $plainText = R::get('plainText');
     print $plainText ? "\n" : '<p class="error">';
-    print "Error ($errno): ";
+    //print "Error ($errno): ";
+    //print "Error: ";
     if (!$plainText) $errstr = str_replace("\n", "<br />", $errstr);
     else $errstr = strip_tags($errstr);
     print $errstr ? $errstr.($plainText ? "\n---------------\n" : '<hr />') : '';
     print empty($trace) ? getBacktrace(!$plainText) : _getBacktrace(Arr::append([
-        [
-          'file' => $errfile,
-          'line' => $errline
-        ]
-      ], $trace), !$plainText);
+      [
+        'file' => $errfile,
+        'line' => $errline
+      ]
+    ], $trace), !$plainText);
     print($plainText ? "\n" : '</p>');
   }
 
@@ -58,7 +59,7 @@ class Err {
   /**
    * Критическая ошибка. Приостановить выполнение всей программы
    *
-   * @param   string  Текст ошибки
+   * @param   string Текст ошибки
    */
   static function error($text) {
     self::_error(0, $text, 'DUMMY', 123);
@@ -67,7 +68,7 @@ class Err {
   /**
    * Выводит сообщение об ошибке, но не влияет на ход выполнения программы
    *
-   * @param   string  Текст ошибки
+   * @param   string Текст ошибки
    */
   static protected function _warning($errno, $errstr, $errfile, $errline) {
     self::output($errno, $errstr, $errfile, $errline);
@@ -77,7 +78,7 @@ class Err {
   /**
    * Выводит сообщение об ошибке, но не влияет на ход выполнения программы
    *
-   * @param   string  Текст ошибки
+   * @param   string Текст ошибки
    */
   static function warning($text) {
     self::_warning(0, $text, 'DUMMY', 123);
@@ -94,10 +95,12 @@ class Err {
   static function shutdownHandler() {
     $error = error_get_last();
     if ($error !== null) {
-      LogWriter::v('errors', $error['message'], [[
-        'file' => $error['file'],
-        'line' => $error['line']
-      ]]);
+      LogWriter::v('errors', $error['message'], [
+        [
+          'file' => $error['file'],
+          'line' => $error['line']
+        ]
+      ]);
     }
   }
 
@@ -116,7 +119,8 @@ class Err {
     }
     if ($errno === E_NOTICE) {
       if (self::$showNotices) throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
-    } else {
+    }
+    else {
       throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
     }
     /*
@@ -169,7 +173,7 @@ class Err {
   /**
    * Переключает режим отображения нотисов
    *
-   * @param   bool  Включить/выключить
+   * @param   bool Включить/выключить
    */
   static function noticeSwitch($flag) {
     self::$showNoticesLast = self::$showNotices;
