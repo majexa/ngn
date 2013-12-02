@@ -9,7 +9,7 @@ class ProjectQueue extends Queue {
   }
 
   function addDefault($method, $data) {
-    $this->add([
+     $this->add([
       'class'  => ucfirst($this->exName).'QueueActions',
       'method' => $method,
       'data'   => $data
