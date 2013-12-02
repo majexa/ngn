@@ -3,7 +3,6 @@
 class Queue extends QueueBase {
 
   function add(array $data) {
-
     Arr::checkEmpty($data, ['class', 'method']);
     if ($data['class'] == 'object') {
       Arr::checkEmpty($data, 'object');
