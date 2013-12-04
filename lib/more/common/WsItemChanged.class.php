@@ -19,7 +19,7 @@ trait WsItemChanged {
 
   function sendWS($args) {
     $id = (int)(is_array($args[0]) ? $args[0]['host'] : $args[0]);
-    $config = Config::getVar('ws');
+    $config = Config::getVar('wss');
     try {
       $c = (new WsClient($config['host'], $config['port']))->connect();
       if ($c) $c->sendData(json_encode(['changed', $id])); // js command
