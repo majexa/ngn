@@ -53,7 +53,7 @@ class SendEmail {
     }
     if ($html and $this->addHostToLinks) {
       $message = str_replace("<a href=", "\n<a href=", $message);
-      $message = preg_replace('/(href=["\'])(?!https?:\/\/)\.*\/*(.*)(["\'])/imu', '$1'.SITE_WWW.'/$2$3', $message);
+      $message = preg_replace('/(href=["\'])(?!https?:\/\/|mailto:)\.*\/*(.*)(["\'])/imu', '$1'.SITE_WWW.'/$2$3', $message);
       $message = preg_replace('/(src=["\'])(?!https?:\/\/)\.*\/*(.*)(["\'])/imu', '$1'.SITE_WWW.'/$2$3', $message);
     }
     if (!is_array($emails)) {
