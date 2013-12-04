@@ -9,4 +9,12 @@ DdFieldCore::registerType('ddMetro', [
   'tagsTree' => true
 ]);
 
-class FieldEDdMetro extends FieldEDdTagsConsecutiveSelect {}
+class FieldEDdMetro extends FieldEDdTagsConsecutiveSelect {
+
+ protected function getRootOptions() {
+   $r = array_merge([''=>' — ', '0'=>''], parent::getRootOptions());
+   unset($r[0]);
+   return $r;
+  }
+
+}
