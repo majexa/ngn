@@ -17,7 +17,6 @@ class Asterisk {
   function addOutgoingCall($phone, $id, array $data = []) {
     if (empty($data['project'])) $data['project'] = PROJECT_KEY;
     if (empty($data['actionName'])) $data['actionName'] = $data['project'];
-    LogWriter::v('addOutgoingCall', "$phone, $id, ".getPrr($data));
     if (!ALLOW_SEND) return;
     $class = AgiAction::getClass($data['actionName']);
     if ($class::recall()) $this->addStartCalling($data['project'], $phone, $id);
@@ -39,8 +38,7 @@ CALL;
     LogWriter::str('addCall', $s);
     file_put_contents($tmpFile, $s);
     $file = '/var/spool/asterisk/outgoing/'.time().'-'.rand(100, 999).'.call';
-    //`sudo chown user:user $tmpFile`;
-    `sudo mv $tmpFile $file`;
+    rename($tmpFile, $file);
   }
 
   function getRetryTime($attemptNumber) {

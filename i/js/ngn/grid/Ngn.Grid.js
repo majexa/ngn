@@ -20,7 +20,8 @@ Ngn.Grid = new Class({
     listAction: null,
     listAjaxAction: 'json_getItems',
     valueContainerClass: 'v',
-    basePath: window.location.pathname
+    basePath: window.location.pathname,
+    resizeble: false
   },
 
   btns: {},
@@ -31,7 +32,7 @@ Ngn.Grid = new Class({
     if (this.options.basePath == '/') this.options.basePath = '';
     this.eParent = $(this.options.eParent);
     this.initMenu();
-    this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
+    this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable' + (this.options.resizeble ? ' resizeble' : '') + '"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
     this.eHeadTr = this.options.eItems.getElement('thead tr');
     if (this.options.checkboxes) {
       Elements.from('<th class="tools"><input type="checkbox" id="checkAll" title="Выделить всё" class="tooltip" /></th>')[0].inject(this.eHeadTr);
@@ -127,6 +128,7 @@ Ngn.Grid = new Class({
     if (data.body) this.initBody(data.body);
     if (data.pagination) this.initPagination(data.pagination, fromAjax);
     this.initItems();
+    if (this.options.resizeble) new Ngn.Grid.Resizeble(this);
   },
 
   initHead: function(head) {
