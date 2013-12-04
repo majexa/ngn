@@ -3,7 +3,10 @@
 class DdTagsTagsFlat extends DdTagsTagsBase {
 
   function getByTitle($title) {
-    return db()->selectRow('SELECT * FROM '.$this->group->table.$this->getSelectCond()->addF('title', $title)->all());
+    $cond = clone $this->getSelectCond();
+    $q = 'SELECT * FROM '.$this->group->table.$cond->addF('title', $title)->all();
+    $r = db()->selectRow($q);
+    return $r;
   }
 
   function delete($id) {

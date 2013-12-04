@@ -318,4 +318,8 @@ class DdFieldsManager extends DbItemsManager {
     return parent::create($d, $throwFormErrors);
   }
 
+  function exists($name) {
+    return (bool)$this->items->getItemByField('name', $name);
+  }
+
 }

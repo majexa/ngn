@@ -40,12 +40,8 @@ class WsClient {
 
   function sendData($string) {
     if ((@fwrite($this->socket, "\x00".$string."\xff")) === false) {
-      throw new Exception("Can't write to socket ($errno:$errstr)");
+      throw new Exception("Can't write to socket");
     }
-    //print "*** data sent: $string";
-    //$wsData = fread($this->_Socket, 2000);
-    //$retData = trim($wsData, "\x00\xff");
-    //return $retData;
   }
 
   private function generateRandomString($length = 10, $addSpaces = true, $addNumbers = true) {

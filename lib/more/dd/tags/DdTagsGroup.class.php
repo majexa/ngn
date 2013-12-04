@@ -22,11 +22,11 @@ class DdTagsGroup {
   function __construct($strName, $name) {
     Misc::checkEmpty($strName, '$strName');
     Misc::checkEmpty($name, '$name');
-    //try {
+    // try {
     $this->p = self::getData($strName, $name);
-    //} catch (Exception $e) {
-    //throw new Exception("tag group $strName::$name does not exists");
-    //}
+    // } catch (Exception $e) {
+    // throw new Exception("tag group $strName::$name does not exists");
+    // }
     if (empty($this->p['fieldType'])) throw new Exception('Field for tag "'.$name.'" of "'.$strName.'" structure does not exists');
     $this->p['tagsGetterStrName'] = empty($this->p['masterStrName']) ? $this->p['strName'] : $this->p['masterStrName'];
     $this->p['tree'] = DdTags::isTagTreeType($this->p['fieldType']);
@@ -89,7 +89,7 @@ class DdTagsGroup {
       tagGroups.name=?
 SQL
       , $strName, $name);
-    if ($strict) Misc::checkEmpty($r);
+    if ($strict) Misc::checkEmpty("Group $strName/$name does not exists");
     return $r;
   }
 

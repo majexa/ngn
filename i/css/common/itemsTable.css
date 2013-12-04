@@ -72,3 +72,38 @@ vertical-align: top;
 padding-top: 5px;
 padding-bottom: 5px;
 }
+
+
+/*---------------resizeble---------------*/
+.itemsTable.resizeble table {
+width: auto;
+}
+.itemsTable.resizeble .wr {
+overflow-x: hidden;
+white-space: nowrap;
+background: aquamarine;
+}
+.itemsTable.resizeble .wr .cont {
+padding: 2px 10px;
+}
+.itemsTable.resizeble th {
+position: relative;
+}
+.itemsTable.resizeble th, .itemsTable.resizeble td {
+border-left: 1px solid #555;
+background: lightslategray;
+padding: 0px;
+}
+.itemsTable.resizeble .handler {
+width: 10px;
+height: 10px;
+border-radius: 2px;
+border: 1px solid #ccc;
+background: #fff;
+position: absolute;
+left: -10px;
+}
+.itemsTable.resizeble .handler:hover {
+border-color: #555;
+background: yellow;
+}
