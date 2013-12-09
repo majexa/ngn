@@ -37,14 +37,16 @@ class DdItemsManager extends DbItemsManager {
   }
 
   protected function _create() {
+    $data = [];
     foreach($this->data as $k => $v) if(DdTags::isTagType($this->form->fields->getType($k)) === false) $data[$k] = $v;
     return $this->items->create($data);
   }
 
   protected function _update() {
     foreach($this->data as $k => $v) if(DdTags::isTagType($this->form->fields->getType($k)) === false) $data[$k] = $v;
-    $this->items->update($this->id, $data);
+    if(!empty($data))$this->items->update($this->id, $data);
   }
+  
   /**
    * Добавляет ID раздела в данные создаваемой записи
    *
