@@ -55,8 +55,8 @@ class SiteConfig {
     return Config::getConstants(NGN_PATH.'/config/constants/'.$name.'.php');
   }
 
-  static function getConstant($name, $k) {
-    return Config::getConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k);
+  static function getConstant($name, $k, $quitely = false) {
+    return Config::getConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k, $quitely);
   }
 
   static function getNgnConstant($name, $k) {

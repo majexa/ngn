@@ -1,10 +1,43 @@
 <? $this->tpl('admin/modules/ddStructure/header') ?>
 
-<style>
-.descr .smIcons a, .descr a.smIcons {
-margin-right: 2px;
-}
-</style>
+<?
+
+$d['items'] = array_values($d['items']);
+$d['grid'] = [
+  'head' => ['Название', 'Имя', 'Тип', '', 'Описание'],
+  'body' => array_map(function($v) use ($d) {
+    $r = array_merge(Arr::filterByKeys($v, ['id', 'tagGroup']), [
+      'rowClass' => 't_'.$v['type'].($v['defaultDisallow'] ? ' disallow' : ''),
+      'data'  => [
+        $v['title'].($v['required'] ? '<span style="color:#FF0000">*</span>' : ''),
+        $v['name'],
+        '<img src="'.DdFieldCore::getIconPath($v['type']).'" title="'.$v['type'].'">',
+        '<small>'.
+        ($v['notList'] ? '<nobr>{не выводится}</nobr>' : '').
+        ($v['system'] ? '<nobr>{системное}</nobr>' : '').
+        ($v['defaultDisallow'] ? '<nobr>{не доступно}</nobr>' : '').
+        (!$v['editable'] ? '<nobr>{не редактируется}</nobr>' : '').
+        ($v['filterable'] ? '<nobr>{фильтруемое}</nobr>' : '').
+        '&nbsp;</small>',
+        $v['descr']
+      ]
+    ]);
+    if ($v['editable']) {
+      $r['tools'] = [
+        'delete' => 'Удалить'
+      ];
+      if (!$v['system'] or Misc::isGod()) {
+        $r['tools']['edit'] = 'Редактировать';
+        if ($v['tagGroup'] and $v['tagGroup']['allowEdit'] and !$d['filterableStr']) $r['tools']['tags'] = 'Редактировать теги';
+      }
+    }
+    return $r;
+  }, $d['items'])
+];
+
+if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
+
+?>
 
 <? if ($d['items']) { ?>
 <table cellpadding="0" cellspacing="0" id="itemsTable" class="itemsTable valign structures">
@@ -37,7 +70,6 @@ margin-right: 2px;
       <? } else { ?>
         <span class="smIcons dynamic tooltip" title="Динамическая структура"><i></i></span>
       <? } ?>
-      
       <? if ($v['locked']) { ?>
         <span class="smIcons lock tooltip" title="Структура с ограниченным доступом"><i></i></span>
       <? } ?>

@@ -3,7 +3,7 @@
 class FieldEHeaderToggle extends FieldEHeaderAbstract {
 
   function _html() {
-    if (!empty($this->options['help'])) {
+    if (!empty($this->options['thelp'])) {
       if (preg_match('/(.*)\[(.*)\](.*)/', $this->options['help'], $m)) {
         $this->options['help'] = $m[1].$m[3];
         $text = $this->options['help'];

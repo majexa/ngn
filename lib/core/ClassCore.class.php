@@ -135,7 +135,7 @@ class ClassCore {
       else
         return false;
     }
-    return eval('return '.$class.'::$'.$prop.';');
+    return $class::$prop;
   }
 
   static function staticPropertyNotEmpty($class, $prop) {

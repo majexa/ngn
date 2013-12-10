@@ -29,7 +29,7 @@ class LogReader {
     foreach (explode('=====+=====', file_get_contents($file)) as $v) {
       if (!preg_match('/(\d+.\d+.\d+ \d+.\d+.\d+): \((.*)\)\n(.*)\n<body>(.*)<\/body>\n<trace>(.*)<\/trace>/ms', $v, $m)) continue;
       $i['time'] = strtotime($m[1]);
-      $i['body'] = $m[4];
+      $i['body'] = str_replace("\\'", '', $m[4]);
       $i['file'] = $file;
       $i['trace'] = $m[5];
       if ($m[3]) {

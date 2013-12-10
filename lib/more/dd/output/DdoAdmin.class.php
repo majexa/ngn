@@ -12,8 +12,11 @@ class DdoAdmin extends Ddo {
 
   function initFields() {
     parent::initFields();
+    $this->fields = array_filter($this->fields, function($f) {
+      if (FieldCore::hasAncestor($f['type'], 'header')) return false;
+      return true;
+    });
     foreach ($this->fields as &$f) {
-      if (!isset($f['type'])) die2($f);
       if (FieldCore::hasAncestor($f['type'], 'bool')) $f['forceEmpty'] = true;
     }
     return $this;

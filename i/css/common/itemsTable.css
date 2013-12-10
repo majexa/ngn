@@ -23,7 +23,6 @@ padding: 3px 15px 3px 0px;
 }
 .itemsTable table td {
 border: none;
-padding: 0px;
 }
 .itemsTable th, .itemsTableMenu {
 /*background-color: #F1F0DF;*/
@@ -58,15 +57,6 @@ padding-right: 10px;
 background-color: #fff;
 margin: 0px !important;
 }
-
-/*======== нечто сомнительное ============*/
-.itemsTable td, .itemsTable th {
-padding: 3px 15px 3px 0px;
-border-bottom: 1px solid #CCCCCC;
-}
-.itemsTable p {
-margin-top: 0px;
-}
 .itemsTable.valign td {
 vertical-align: top;
 padding-top: 5px;
@@ -75,13 +65,21 @@ padding-bottom: 5px;
 
 
 /*---------------resizeble---------------*/
+
+.itemsTable table td {
+padding: 0px;
+}
 .itemsTable.resizeble table {
+margin: 3px 0px;
+}
+
+.itemsTable.resizeble {
 width: auto;
 }
 .itemsTable.resizeble .wr {
 overflow-x: hidden;
 white-space: nowrap;
-background: aquamarine;
+padding-top: 4px;
 }
 .itemsTable.resizeble .wr .cont {
 padding: 2px 10px;
@@ -89,21 +87,25 @@ padding: 2px 10px;
 .itemsTable.resizeble th {
 position: relative;
 }
-.itemsTable.resizeble th, .itemsTable.resizeble td {
-border-left: 1px solid #555;
-background: lightslategray;
+.itemsTable.resizeble > thead > tr > th,
+.itemsTable.resizeble > tbody > tr > td {
+border-right: 1px solid #E8E8E8;
 padding: 0px;
 }
+.itemsTable.resizeble > thead > tr > th {
+padding-bottom: 4px;
+}
 .itemsTable.resizeble .handler {
+margin-top: 1px;
 width: 10px;
-height: 10px;
-border-radius: 2px;
-border: 1px solid #ccc;
-background: #fff;
+height: 100%;
+background: #fff url(/i/img/handler/vHandler2.png) top center;
 position: absolute;
-left: -10px;
+left: -5px;
+top: -1px;
+cursor: col-resize;
+opacity: 0.3;
 }
 .itemsTable.resizeble .handler:hover {
-border-color: #555;
-background: yellow;
+opacity: 1;
 }

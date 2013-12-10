@@ -19,6 +19,8 @@ DdFieldCore::registerType('ddItemsSelect', [
 class FieldEDdItemsSelect extends FieldEMultiselect {
 use DdElement;
 
+  static $multi = true;
+
   protected function init() {
     if (isset($this->options['settings'])) {
       $this->options['options'] = Arr::get(O::get('DdItems', $this->options['settings']['strName'])->getItemsSimple(), 'title', 'id');

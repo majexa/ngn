@@ -20,7 +20,9 @@ class DdTags {
   }
 
   static function isMulti($type) {
-    return strstr(strtolower($type), 'multi');
+    $class = FieldCore::getClass($type);
+    if (isset($class::$multi)) return $class::$multi;
+    return false;
   }
 
   static function isTagItemsDirectedType($type) {
