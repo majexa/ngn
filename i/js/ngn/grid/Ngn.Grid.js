@@ -128,7 +128,12 @@ Ngn.Grid = new Class({
     if (data.body) this.initBody(data.body);
     if (data.pagination) this.initPagination(data.pagination, fromAjax);
     this.initItems();
-    if (this.options.resizeble) new Ngn.Grid.Resizeble(this);
+    if (this.options.resizeble) {
+      this.resizeble = new Ngn.Grid.Resizeble(this);
+      window.addEvent('resize', function() {
+        this.resizeble.resizeLastCol();
+      }.bind(this));
+    }
   },
 
   initHead: function(head) {

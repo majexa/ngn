@@ -34,6 +34,7 @@ class DdItemsManager extends DbItemsManager {
   function __construct(DdItems $items, Form $form, array $options = []) {
     parent::__construct($items, $form, $options);
     $this->strName = $items->strName;
+
   }
 
   /**

@@ -154,8 +154,11 @@ Ngn.Form = new Class({
   },
 
   submit: function() {
+    c('1');
     if (this.submiting) return false;
+    c('2');
     if (!this.validator.validate()) return false;
+    c('3');
     this.fireEvent('submit');
     this.disable(true);
     this.submiting = true;
@@ -531,6 +534,7 @@ Ngn.Form.Validator = new Class({
   lastAdvices: {},
 
   makeAdvice: function(className, field, error, warn) {
+    console.trace();
     var errorMsg = (warn) ? this.warningPrefix : this.errorPrefix;
     errorMsg += (this.options.useTitles) ? field.title || error : error;
     var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
@@ -579,6 +583,7 @@ Ngn.Form.Validator = new Class({
   },
 
   insertAdvice: function(advice, field) {
+    c('insertAdvice');
     advice.inject(field.getParent('.field-wrapper'), 'after');
   },
 

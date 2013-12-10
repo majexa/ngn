@@ -39,9 +39,12 @@ class DdTagsGroup {
 
   function getTypeProperties() {
     $p = [];
+    if (DdTags::isTagType($this->p['fieldType'])) {
+
+    }
+    $field = O::get('DdFields', $this->strName, ['getHidden' => true])->getField($this->p['name']);
     if (DdTags::isDdItemsType($this->p['fieldType'])) {
-      $field = O::get('DdFields', $this->strName, ['getHidden' => true])->getField($this->p['name']);
-      if (isset($field['settings']['strName'])) {
+      if (!empty($field['settings']['strName'])) {
         $strName = $field['settings']['strName'];
         $p['table'] = DdCore::table($strName);
       }
@@ -55,6 +58,9 @@ class DdTagsGroup {
     elseif ((FieldCore::hasAncestor($this->p['fieldType'], 'ddMetro') or FieldCore::hasAncestor($this->p['fieldType'], 'ddMetroMultiselect'))) {
       $p['global'] = true;
       $p['table'] = 'tagMetro';
+    }
+    elseif (!empty($field['settings']['tagsStrName'])) {
+      $p['tagsGetterStrName'] = $field['settings']['tagsStrName'];
     }
     return $p;
   }

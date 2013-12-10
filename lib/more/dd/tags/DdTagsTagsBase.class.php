@@ -51,7 +51,7 @@ abstract class DdTagsTagsBase implements DbTreeInterface {
   }
 
   /**
-   * Удаляет все все теги текущей группы
+   * Удаляет все теги текущей группы
    */
   function deleteAll() {
     db()->query("DELETE FROM {$this->group->table} WHERE strName=? AND groupName=?", $this->group->strName, $this->group->name);

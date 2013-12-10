@@ -91,9 +91,7 @@ class Db extends DbSimple_Mysql {
   }
 
   function cols($table) {
-    return $this->selectCol("
-    SELECT COLUMN_NAME FROM information_schema.`COLUMNS`
-    WHERE TABLE_SCHEMA=? AND TABLE_NAME=?", $this->name, $table);
+    return $this->selectCol("SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA=? AND TABLE_NAME=?", $this->name, $table);
   }
 
   function colTypes($table) {

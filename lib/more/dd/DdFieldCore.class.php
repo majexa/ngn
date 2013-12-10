@@ -48,6 +48,14 @@ class DdFieldCore {
     ]);
     Arr::checkEmpty($data, 'dbType');
     if (!preg_match('/(.*TEXT|DATE|TIME|DATETIME)/', $data['dbType'])) Arr::checkEmpty($data, 'dbLength');
+    if (!empty($data['tags'])) {
+      if (!isset($data['fields'])) $data['fields'] = [];
+      $data['fields'][] = [
+        'type'  => 'ddStructure',
+        'title' => 'Структура из которой брать тэги',
+        'name'  => 'tagsStrName'
+      ];
+    }
     self::$types[$type] = $data;
   }
 
@@ -79,7 +87,7 @@ class DdFieldCore {
    */
   static function getTypes() {
     foreach (ClassCore::getClassesByPrefix('FieldE') as $class) // Регистрация типа dd-поля происходит в классе элмента
-    Lib::required($class);
+      Lib::required($class);
     return Arr::sortByOrderKey(self::$types, 'order');
   }
 

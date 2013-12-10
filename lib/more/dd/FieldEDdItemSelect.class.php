@@ -19,7 +19,7 @@ DdFieldCore::registerType('ddItemSelect', [
 class FieldEDdItemSelect extends FieldESelect {
 
   protected function init() {
-    $this->options['options'] = ['' => '—'] + Arr::get(O::get('DdItems', $this->options['settings']['strName'])->getItemsSimple(), 'id', 'id');
+    $this->options['options'] = ['' => '—'] + Arr::get(O::get('DdItems', $this->options['settings']['strName'])->getItemsSimple(), 'title', 'id');
     parent::init();
   }
 

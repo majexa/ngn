@@ -91,7 +91,7 @@ exit 0';
     $cmd = "su user -c 'sudo /etc/init.d/$projectName-$demon start'";
     $begin = "# ngn auto-generated workers begin\nsleep 15";
     $end = '# ngn auto-generated workers end';
-    if ($this->isVirgin()) {
+    if ($this->rcLocalIsVirgin()) {
       $a = "\n\n$begin\n$cmd\n$end\n\n";
       $c = preg_replace('/^(.*this script does nothing.)(\s+)(.*)$/ms', '$1'.$a.'$3', $this->c);
       file_put_contents('/etc/rc.local', $c);
@@ -103,12 +103,13 @@ exit 0';
       }
       else {
         $c = preg_replace("/($begin)(.*)($end)/ms", '$1$2'."$cmd\n".'$3', $this->c);
-        file_put_contents('/etc/rc.local', $c);
+        file_put_contents('/tmp/rc.local', $c);
+        `sudo mv /tmp/rc.local /etc/rc.local`;
       }
     }
   }
 
-  function isVirgin() {
+  function rcLocalIsVirgin() {
     preg_match('/^.*this script does nothing.\s+(.*)$/ms', $this->c, $m);
     return !$this->hasNgnWorkers($m[1]);
   }
