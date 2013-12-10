@@ -104,6 +104,7 @@ class Rss {
       $image = $x->getImages();
       $array['images'] = $image[0];
       $array['items'] = $x->getItems();
+
       return $array;
     }
     throw new Exception('Error: temporary file create '.$tf);

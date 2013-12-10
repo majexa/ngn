@@ -502,6 +502,7 @@ use Options;
     if (!$this->action) throw new Exception('$this->action not defined');
     $this->checkActionParams($this->action);
     $actionMethod = 'action_'.$this->action;
+    //die2(get_class($this).'::'.$actionMethod);
     $action = $this->getActionObject($this->action);
     if ($action !== false) {
       $this->isAction = true;
