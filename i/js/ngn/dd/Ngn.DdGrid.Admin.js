@@ -29,6 +29,9 @@ Ngn.DdGrid.Admin = new Class({
  * @returns Ngn.DdGrid.Admin
  */
 Ngn.DdGrid.Admin.factory = function(strName, options) {
+  options = options || {};
+  options.resizeble = true;
+  options.id = 'dd' + strName;
   var clsP = eval('Ngn.DdGrid.Admin.' + ucfirst(strName));
   if (Ngn.projectKey && clsP) {
     var cls = eval('Ngn.DdGrid.Admin.' + ucfirst(strName) + '.' + ucfirst(Ngn.projectKey));
