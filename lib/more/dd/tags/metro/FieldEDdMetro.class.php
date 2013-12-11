@@ -11,10 +11,13 @@ DdFieldCore::registerType('ddMetro', [
 
 class FieldEDdMetro extends FieldEDdTagsConsecutiveSelect {
 
- protected function getRootOptions() {
-   $r = array_merge([''=>' — ', '0'=>''], parent::getRootOptions());
-   unset($r[0]);
-   return $r;
+  protected function getRootOptions() {
+    if (!empty($this->options['rootTagId'])) {
+      $r = array_merge(['' => ' — ', '0' => ''], parent::getRootOptions());
+      unset($r[0]);
+      return $r;
+    }
+    else return parent::getRootOptions();
   }
 
 }
