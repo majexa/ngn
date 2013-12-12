@@ -2,7 +2,7 @@
 
 class Sflm {
 
-  static $debug = true;
+  static $debug = false;
 
   static $forceCache = false;
 

@@ -73,17 +73,17 @@ class SflmJsClasses {
    * @throws Exception
    */
   function addClass($class, $source, Closure $success = null, Closure $failure = null) {
-    output("Try to add class '$class'. ($source)");
+    Sflm::output("Try to add class '$class'. ($source)");
     if (in_array($class, $this->existingClasses)) {
-      output("class '$class' exists");
+      Sflm::output("class '$class' exists");
       return;
     }
     if (!isset($this->classesPaths[$class])) {
       if ($failure) $failure($source);
-      output("class '$class' from '$source' not found");
+      Sflm::output("class '$class' from '$source' not found");
       return false;
     }
-    output("Adding new class '$class' ($source)");
+    Sflm::output("Adding new class '$class' ($source)");
     $path = $this->classesPaths[$class];
     $this->processPath($path, $success);
     $this->frontend->incrementVersion();
