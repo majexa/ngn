@@ -1,0 +1,15 @@
+{
+  "methodCalls": [
+    {
+      "class": "\\O",
+      "method": "get",
+      "position": 0
+    },
+    {
+      "class": "\\O",
+      "method": "gett",
+      "position": 0
+    }
+  ]
+}
+
