@@ -14,7 +14,6 @@ Ngn.frm.emptify = function(eInput) {
 };
 
 /**
- *
  * @param Element|array of Element
  * @returns {*}
  */
@@ -32,6 +31,25 @@ Ngn.frm.getValue = function(el) {
         r = el.get('value');
     } else {
       r = el.get('value');
+    }
+  });
+  return r;
+};
+
+Ngn.frm.getValues = function(el) {
+  if (el.length === undefined) {
+    var elements = el.getElements(Ngn.frm.selector);
+  } else {
+    var elements = el;
+  }
+  var r = [];
+  elements.each(function(el){
+    var type = el.get('type');
+    if (type == 'radio' || type == 'checkbox') {
+      if (el.get('checked'))
+        r.push(el.get('value'));
+    } else {
+      r = [el.get('value')];
     }
   });
   return r;

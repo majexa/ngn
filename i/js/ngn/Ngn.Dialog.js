@@ -50,7 +50,7 @@ Ngn.Dialog = new Class({
     baseZIndex: 300,
     savePosition: false,
     vResize: false,
-    //'maxHeight: null,
+    //maxHeight: null,
     onComplete: $empty(),
     onClose: $empty(),
     onOkClose: $empty(),
