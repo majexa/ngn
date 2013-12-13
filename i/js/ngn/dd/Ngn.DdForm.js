@@ -80,8 +80,13 @@ Ngn.Form.El.DdTagsTreeSelect = new Class({
     this.initEls(this.eRow);
   },
 
+  getNodesParent: function() {
+    return this.eRow;
+  },
+
   initEls: function(eParent) {
     eParent.getElements('a').each(function(el) {
+      //var eUl = this.eRow;
       var eUl = this.eRow.getElement('.nodes_' + el.get('data-id'));
       eUl.setStyle('display', 'none');
       el.addEvent('click', function(e) {

@@ -35,6 +35,25 @@ Ngn.frm.getValue = function(el) {
   return r;
 };
 
+Ngn.frm.getValues = function(el) {
+  if (el.length === undefined) {
+    var elements = el.getElements(Ngn.frm.selector);
+  } else {
+    var elements = el;
+  }
+  var r = [];
+  elements.each(function(el){
+    var type = el.get('type');
+    if (type == 'radio' || type == 'checkbox') {
+      if (el.get('checked'))
+        r.push(el.get('value'));
+    } else {
+      r = [el.get('value')];
+    }
+  });
+  return r;
+};
+
 Ngn.frm.getElements = function(name, parent) {
   var elements = [];
   var n = 0;
