@@ -71,6 +71,8 @@ Ngn.Form = new Class({
       //opts.scrollElement = this.options.dialog.message;
     }
     this.validator = new Ngn.Form.Validator(this, opts);
+    c(this.validator.test(this.validator.getFields()[0]));
+
     /*
      var eFirstError = this.eForm.getElement('.advice-wrapper');
      if (eFirstError) {
@@ -154,11 +156,8 @@ Ngn.Form = new Class({
   },
 
   submit: function() {
-    c('1');
     if (this.submiting) return false;
-    c('2');
     if (!this.validator.validate()) return false;
-    c('3');
     this.fireEvent('submit');
     this.disable(true);
     this.submiting = true;
@@ -388,6 +387,7 @@ Ngn.Form = new Class({
   },
 
   _submit: function() {
+    c('_submit');
     this.eForm.submit();
   }
 
@@ -583,7 +583,6 @@ Ngn.Form.Validator = new Class({
   },
 
   insertAdvice: function(advice, field) {
-    c('insertAdvice');
     advice.inject(field.getParent('.field-wrapper'), 'after');
   },
 

@@ -589,7 +589,9 @@ class Misc {
   }
 
   static function removeSuffix($suffix, $str) {
+    $suffix = str_replace('\\', '\\\\', $suffix);
     $suffix = str_replace('/', '\\/', $suffix);
+    $suffix = str_replace('.', '\\.', $suffix);
     return preg_replace("/(.*)$suffix$/", '$1', $str);
   }
 
@@ -601,7 +603,9 @@ class Misc {
   }
 
   static function hasSuffix($suffix, $str) {
+    $suffix = str_replace('\\', '\\\\', $suffix);
     $suffix = str_replace('/', '\\/', $suffix);
+    $suffix = str_replace('.', '\\.', $suffix);
     return preg_match("/.*$suffix$/", $str);
   }
 

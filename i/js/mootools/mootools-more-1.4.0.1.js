@@ -3924,6 +3924,7 @@ var InputValidator = this.InputValidator = new Class({
 	},
 
 	getError: function(field, props){
+    c('');
 		field = document.id(field);
 		var err = this.options.errorMsg;
 		if (typeOf(err) == 'function') err = err(field, props || this.getProps(field));
@@ -4459,11 +4460,17 @@ Form.Validator.Inline = new Class({
 	initialize: function(form, options){
 		this.parent(form, options);
 		this.addEvent('onElementValidate', function(isValid, field, className, warn){
+      //c([isValid, field, className, warn]);
 			var validator = this.getValidator(className);
+      c(field);
+      if (field.get('type') == 'hidden') {
+        c([isValid, validator.getError(field)]);
+      }
 			if (!isValid && validator.getError(field)){
 				if (warn) field.addClass('warning');
 				var advice = this.makeAdvice(className, field, validator.getError(field), warn);
 				this.insertAdvice(advice, field);
+        c(field);
 				this.showAdvice(className, field);
 			} else {
 				this.hideAdvice(className, field);
