@@ -95,13 +95,11 @@ Ngn.DdFilterPath.Interface = new Class({
     if (!this.grid.options.filterPath) throw new Error('Grid must be initialized with filterPath option');
     this.filterPath = this.grid.options.filterPath;
     this.filtersForm = filtersForm;
-
     new Element('input', {type: 'reset', value: ' Сбросить фильтры ', 'class': 'resetAll'}).inject(this.filtersForm.eForm, 'top').addEvent('click', function(e) {
       this.filterPath.reset();
       this.grid.reload();
       this.resetMarkers();
     }.bind(this));
-
     if (this.options.groupToggler) this.groupToggler = new Ngn.GroupToggler(this.filtersForm.eForm);
     this.initFromPath();
     this.initEvents(this.filtersForm.eForm);
