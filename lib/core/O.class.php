@@ -2,9 +2,10 @@
 
 /**
  * Класс для подключения библиотек и создания объектов
- *
  */
 class O {
+
+  const CLASS_NAME = __CLASS__;
 
   static private $storage;
 

@@ -6,14 +6,12 @@ class DdGridFilters {
 
   static function getAll($strName, array $names = null) {
     $filters = [];
-    /*
     $filters[] = [
       'title'          => 'ID',
       'name'           => 'id',
       'type'           => 'num',
       'pathFilterType' => 'v'
     ];
-    */
     $filters[] = [
       'title' => 'Дата создания',
       'name'  => 'dateCreate',

@@ -74,6 +74,7 @@ Ngn.Request.JSON = new Class({
       return;
     }
     if (this.response.json.error) {
+      c(this.response.json);
       Ngn.Request.JSON.throwServerError(this.response.json);
       return;
     }
