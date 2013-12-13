@@ -89,7 +89,7 @@ Ngn.Form.Upload.Single = new Class({
     this.eInput.addEvents({
       change: function() {
         this.file = this.eInput.files[0];
-        c([this.a, this.file]);
+        //c([this.a, this.file]);
       }.bind(this)
     });
   },
@@ -104,6 +104,7 @@ Ngn.Form.Upload.Single = new Class({
       this.fireEvent('complete');
       return;
     }
+    c('!');
     this.uploadReq.append(this.eInput.get('name'), this.file);
     this.uploadReq.send();
   }

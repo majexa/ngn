@@ -65,11 +65,6 @@ class Err {
     self::_error(0, $text, 'DUMMY', 123);
   }
 
-  /**
-   * Выводит сообщение об ошибке, но не влияет на ход выполнения программы
-   *
-   * @param   string Текст ошибки
-   */
   static protected function _warning($errno, $errstr, $errfile, $errline) {
     self::output($errno, $errstr, $errfile, $errline);
     LogWriter::v('warnings', $errstr);
