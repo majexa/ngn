@@ -2468,7 +2468,7 @@ Element.implement({
 		return this.getStyle('display') != 'none';
 	},
 
-	isVisible: function(){
+	isVisible: function() {
 		var w = this.offsetWidth,
 			h = this.offsetHeight;
 		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.style.display != 'none';
@@ -3924,7 +3924,6 @@ var InputValidator = this.InputValidator = new Class({
 	},
 
 	getError: function(field, props){
-    c('');
 		field = document.id(field);
 		var err = this.options.errorMsg;
 		if (typeOf(err) == 'function') err = err(field, props || this.getProps(field));
@@ -4117,7 +4116,7 @@ Form.Validator = new Class({
 		if (warn != null) warn = false;
 		if (this.hasValidator(field, 'warnOnly')) warn = true;
 		var isValid = this.hasValidator(field, 'ignoreValidation') || (validator ? validator.test(field) : true);
-		if (validator && field.isVisible()) {
+		if (validator && (field.get('type') == 'hidden' || field.isVisible())) { // masted change
       this.fireEvent('elementValidate', [isValid, field, className, warn]);
     }
 		if (warn) return true;
@@ -4460,17 +4459,11 @@ Form.Validator.Inline = new Class({
 	initialize: function(form, options){
 		this.parent(form, options);
 		this.addEvent('onElementValidate', function(isValid, field, className, warn){
-      //c([isValid, field, className, warn]);
 			var validator = this.getValidator(className);
-      c(field);
-      if (field.get('type') == 'hidden') {
-        c([isValid, validator.getError(field)]);
-      }
 			if (!isValid && validator.getError(field)){
 				if (warn) field.addClass('warning');
 				var advice = this.makeAdvice(className, field, validator.getError(field), warn);
 				this.insertAdvice(advice, field);
-        c(field);
 				this.showAdvice(className, field);
 			} else {
 				this.hideAdvice(className, field);

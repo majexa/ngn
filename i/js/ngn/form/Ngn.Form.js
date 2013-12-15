@@ -71,7 +71,14 @@ Ngn.Form = new Class({
       //opts.scrollElement = this.options.dialog.message;
     }
     this.validator = new Ngn.Form.Validator(this, opts);
-    c(this.validator.test(this.validator.getFields()[0]));
+
+    /*
+    (function() {
+      this.validator.test('validate-multiUpload-required', this.validator.getFields()[1]);
+    }.bind(this)).delay(1000);
+    */
+
+    //c(this.validator.test('validate-multiUpload-required', this.validator.getFields()[0]));
 
     /*
      var eFirstError = this.eForm.getElement('.advice-wrapper');
@@ -208,16 +215,17 @@ Ngn.Form = new Class({
         type: 'hidden',
         'class': eInput.hasClass('required') ? 'validate-multiUpload-required' : 'validate-multiUpload'
       }).inject(eInput, 'after');
+      if (eInput.get('data-file')) eInputValidator.set('value', 1);
       var name = eInput.get('name');
       var uploadOptions = {
         url: this.uploadOptions.url.replace('{fn}', name),
         loadedFiles: this.uploadOptions.loadedFiles,
-        fileOptions: {
-          onAdd: function() {
-            //eInputValidator.set('value', 1);
+        fileEvents: {
+          change: function() {
+            eInputValidator.set('value', 1);
           },
-          onEmpty: function() {
-            //eInputValidator.set('value', '');
+          empty: function() {
+            eInputValidator.set('value', '');
           }
         },
         onComplete: function() {
@@ -387,7 +395,6 @@ Ngn.Form = new Class({
   },
 
   _submit: function() {
-    c('_submit');
     this.eForm.submit();
   }
 
@@ -534,7 +541,6 @@ Ngn.Form.Validator = new Class({
   lastAdvices: {},
 
   makeAdvice: function(className, field, error, warn) {
-    console.trace();
     var errorMsg = (warn) ? this.warningPrefix : this.errorPrefix;
     errorMsg += (this.options.useTitles) ? field.title || error : error;
     var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
@@ -594,6 +600,7 @@ Ngn.Form.Validator = new Class({
     var par = this.options.scrollElement || document.id(this).getParent();
     return new Fx.Scroll(par, this.options.scrollFxOptions);
   }
+
 
 });
 
