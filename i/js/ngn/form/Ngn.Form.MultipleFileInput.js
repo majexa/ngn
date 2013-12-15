@@ -8,20 +8,15 @@ Ngn.Form.MultipleFileInput = new Class({
   initialize: function(eInput, eContainer, options) {
     this.eInput = document.id(eInput);
     this.eContainer = document.id(eContainer);
-    c(this.eContainer);
     this.setOptions(options);
     var drop = this.drop = document.id(this.options.drop);
-
     var name = this.eInput.get('name');
-    //if (name.slice(-2) != '[]') this.eInput.set('name', name + '[]');
     this.eInput.set('multiple', true);
-
     this.inputEvents = {
       change: function() {
         Array.each(this.eInput.files, this.add, this);
       }.bind(this)
     };
-
     this.dragEvents = drop && (typeof document.body.draggable != 'undefined') ? {
       dragenter: this.fireEvent.bind(this, 'dragenter'),
       dragleave: this.fireEvent.bind(this, 'dragleave'),
@@ -37,7 +32,6 @@ Ngn.Form.MultipleFileInput = new Class({
         this.fireEvent('drop', event);
       }.bind(this)
     } : null;
-
     this.attach();
   },
   
@@ -55,7 +49,7 @@ Ngn.Form.MultipleFileInput = new Class({
 
   add: function(file) {
     this._files.push(file);
-    this.fireEvent('add', file);
+    this.fireEvent('change', file);
     this.eContainer.set('html', 'Добавлено: '+this._files.length+' шт.');
     return this;
   },

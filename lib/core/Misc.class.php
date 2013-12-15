@@ -651,10 +651,6 @@ class Misc {
     return $returnAsString ? implode($seperator, $rgbArray) : $rgbArray; // returns the rgb string or the associative array
   }
 
-  static function addParam($url, $k, $v) {
-    return $url.(strstr($url, '?') ? '&' : '?')."$k=$v";
-  }
-
   static function plural2single($s) {
     return preg_replace('/^(.*)s$/', '$1', $s);
   }

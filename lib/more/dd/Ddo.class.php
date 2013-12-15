@@ -71,7 +71,7 @@ class Ddo {
 
   function initFields() {
     if (isset($this->fields)) return $this;
-    $fields = new DdoFields($this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
+    $fields = new DdoFields($this-> settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
     $fields->isItemsList = $this->list;
     $this->fields = $fields->getFields();
     return $this;
