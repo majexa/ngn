@@ -25,7 +25,7 @@ class AdminRouter extends Router {
     return 'admin';
   }
 
-  function getController() {
+  function _getController() {
     if (empty($this->req->params[0])) {
       redirect('admin');
       return;
@@ -40,10 +40,10 @@ class AdminRouter extends Router {
     }
     $this->allowedAdminModules = AdminModule::getAllowedModules();
     Sflm::$frontend = 'admin';
-    return $this->_getController();
+    return $this->__getController();
   }
 
-  protected function _getController() {
+  protected function __getController() {
     if ($this->req->params[0] == 'god' and Auth::get('id') and !Misc::isGod()) {
       throw new Exception("God mode not allowed:\n"."Possible reasons:\n"."* Current user is not god\n"."* Current IP is not presents in developers IPs list\n");
     }

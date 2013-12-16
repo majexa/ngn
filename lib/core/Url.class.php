@@ -120,4 +120,8 @@ class Url {
     return true;
   }
 
+  static function addParam($url, $k, $v) {
+    return $url.(strstr($url, '?') ? '&' : '?')."$k=$v";
+  }
+
 }

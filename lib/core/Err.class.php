@@ -65,11 +65,6 @@ class Err {
     self::_error(0, $text, 'DUMMY', 123);
   }
 
-  /**
-   * Выводит сообщение об ошибке, но не влияет на ход выполнения программы
-   *
-   * @param   string Текст ошибки
-   */
   static protected function _warning($errno, $errstr, $errfile, $errline) {
     self::output($errno, $errstr, $errfile, $errline);
     LogWriter::v('warnings', $errstr);
@@ -105,7 +100,13 @@ class Err {
   }
 
   static function log(Exception $e) {
-    self::_log($e->getMessage(), getFullTrace($e));
+    LogWriter::html('errors', $e->getMessage(), getFullTrace($e), [
+      'exceptionClass' => get_class($e)
+    ]);
+  }
+
+  static function logWarning(Exception $e) {
+    LogWriter::html('warnings', $e->getMessage(), getFullTrace($e));
   }
 
   static function _log($text, array $trace) {

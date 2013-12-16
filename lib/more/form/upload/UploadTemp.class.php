@@ -87,9 +87,9 @@ class UploadTemp extends Options2 {
     $files = Req::convertFiles($ut->getFiles());
     if (!empty($files)) $form->options['files'] = $files;
     if (!$uploadUrl) $uploadUrl = '/c2/uploadTemp';
-    $uploadUrl = Misc::addParam($uploadUrl, 'formId', $form->id());
-    $uploadUrl = Misc::addParam($uploadUrl, 'tempId', $ut->tempId);
-    $uploadUrl = Misc::addParam($uploadUrl, 'fn', '{fn}');
+    $uploadUrl = Url::addParam($uploadUrl, 'formId', $form->id());
+    $uploadUrl = Url::addParam($uploadUrl, 'tempId', $ut->tempId);
+    $uploadUrl = Url::addParam($uploadUrl, 'fn', '{fn}');
     $form->options['uploadOptions'] = [
       'url'         => $uploadUrl,
       'loadedFiles' => Arr::filterByKeys2($files, ['name', 'size'])

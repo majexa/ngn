@@ -1,8 +1,11 @@
 <?php
 
 /**
- * - Преобразует данные из формы в формат для сохранения
- * - Преобразует данные в формат для формы
+ * Осуществляет фильтрацию, добавление, изменение и редактирование данных
+ * Фильтрация осуществляется классом формы и её полями
+ * Преобразует данные из формы в формат для сохранения
+ * Преобразует данные в формат формы
+ *
  */
 abstract class DataManagerAbstract extends Options2 {
 
@@ -420,6 +423,11 @@ abstract class DataManagerAbstract extends Options2 {
 
   public $tempId;
 
+  /**
+   * Инициализирует ID для аплоада файлов
+   *
+   * @return $this
+   */
   protected function initTempId() {
     $tempId = session_id();
     if (!$tempId) {
@@ -567,7 +575,7 @@ new Ngn.TinyInit($merge(
   public $ut;
 
   /**
-   * Добавляет в объект формы опции для инициализации fancyUpload
+   * Добавляет в объект формы опции для инициализации загрузки файлов
    */
   protected function initTempUpload() {
     $this->ut = UploadTemp::extendFormOptions($this->form);

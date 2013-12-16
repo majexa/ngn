@@ -57,12 +57,15 @@ Ngn.Form.Upload.Multi = new Class({
   afterInit: function() {
     //this.eInput.set('name', this.eInput.get('name').replace('[]', ''));
     //c(this.eInput);
-    this.inputFiles = new Ngn.Form.MultipleFileInput(this.eInput, this.eFiles, $merge({}, this.options.fileOptions)/*, {
+    this.inputFiles = new Ngn.Form.MultipleFileInput(this.eInput, this.eFiles);
+    this.inputFiles.addEvents(this.options.fileEvents);
+
+    /*, {
      drop: drop,
      onDragenter: drop.addClass.pass('hover', drop),
      onDragleave: drop.removeClass.pass('hover', drop),
      onDrop: drop.removeClass.pass('hover', drop)
-     }*/);
+     }*/
     /*
      drop = new Element('div.fileDroppable', {
      text: this.options.dropMsg
@@ -85,11 +88,10 @@ Ngn.Form.Upload.Single = new Class({
   Extends: Ngn.Form.Upload,
 
   beforeInit: function() {
-    this.a = 1;
+    this.eInput.addEvents(this.options.fileEvents);
     this.eInput.addEvents({
       change: function() {
         this.file = this.eInput.files[0];
-        c([this.a, this.file]);
       }.bind(this)
     });
   },

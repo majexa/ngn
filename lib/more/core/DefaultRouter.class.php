@@ -10,7 +10,15 @@ class DefaultRouter extends Router {
     return 'Ctrl';
   }
 
-  function getController() {
+  /**
+   * Какие у нас бывают роутинги
+   * Ctrl[ProjectName]Default
+   * CtrlDefault
+   * Ctrl[param 0]
+   *
+   * @return bool
+   */
+  function _getController() {
     if (isset($this->req->params[0])) {
       $class = $this->prefix().ucfirst($this->req->params[0]);
     }

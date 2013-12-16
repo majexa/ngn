@@ -44,7 +44,7 @@ use Options;
   }
 
   function dispatch() {
-    $this->controller = $this->getController();
+    $this->controller = $this->_getController();
     if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
     if (!is_object($this->controller)) throw new Exception('Controller not initialized');
     // В этом месте, после диспатчинга контроллера, может произойти его подмена
@@ -94,7 +94,13 @@ use Options;
     if (empty($this->options['disableHeaders']) and empty($this->options['disableSession'])) Session::init();
   }
 
-  abstract function getController();
+  abstract function _getController();
+
+  final function getController() {
+    $controller = $this->_getController();
+    if ($this->req['showRouter']) die2("Current controller is: <u>".get_class($controller)."</u>");//"\nPath: ".Lib::getPath($class));
+    return $controller;
+  }
 
   protected function afterOutput() {
   }

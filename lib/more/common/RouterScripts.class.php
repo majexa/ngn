@@ -28,7 +28,7 @@ class RouterScripts extends RouterCommon {
     return 1;
   }
 
-  function getController() {
+  function _getController() {
     if ($this->controllerType == 'scripts') {
       // Для JavaScript'ов и CSS:
       // - включить PLAIN TEXT режим
@@ -41,7 +41,7 @@ class RouterScripts extends RouterCommon {
       return $controller;
     }
     else {
-      return parent::getController();
+      return parent::_getController();
     }
   }
 
