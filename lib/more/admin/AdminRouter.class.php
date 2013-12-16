@@ -25,7 +25,7 @@ class AdminRouter extends Router {
     return 'admin';
   }
 
-  function getController() {
+  function _getController() {
     if (empty($this->req->params[0])) {
       redirect('admin');
       return;
