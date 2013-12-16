@@ -18,7 +18,7 @@ class DefaultRouter extends Router {
    *
    * @return bool
    */
-  function getController() {
+  function _getController() {
     if (isset($this->req->params[0])) {
       $class = $this->prefix().ucfirst($this->req->params[0]);
     }
@@ -29,7 +29,6 @@ class DefaultRouter extends Router {
       else $class = 'CtrlDefault';
       if (!class_exists($class)) return false; // throw new NotFoundException("ctrl $class");
     }
-    if ($this->req['showRouter']) die2("Current controller is: <u>$class</u>");//"\nPath: ".Lib::getPath($class));
     return new $class($this);
   }
 
