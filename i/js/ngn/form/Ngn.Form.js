@@ -71,6 +71,15 @@ Ngn.Form = new Class({
       //opts.scrollElement = this.options.dialog.message;
     }
     this.validator = new Ngn.Form.Validator(this, opts);
+
+    /*
+    (function() {
+      this.validator.test('validate-multiUpload-required', this.validator.getFields()[1]);
+    }.bind(this)).delay(1000);
+    */
+
+    //c(this.validator.test('validate-multiUpload-required', this.validator.getFields()[0]));
+
     /*
      var eFirstError = this.eForm.getElement('.advice-wrapper');
      if (eFirstError) {
@@ -154,11 +163,8 @@ Ngn.Form = new Class({
   },
 
   submit: function() {
-    c('1');
     if (this.submiting) return false;
-    c('2');
     if (!this.validator.validate()) return false;
-    c('3');
     this.fireEvent('submit');
     this.disable(true);
     this.submiting = true;
@@ -209,16 +215,17 @@ Ngn.Form = new Class({
         type: 'hidden',
         'class': eInput.hasClass('required') ? 'validate-multiUpload-required' : 'validate-multiUpload'
       }).inject(eInput, 'after');
+      if (eInput.get('data-file')) eInputValidator.set('value', 1);
       var name = eInput.get('name');
       var uploadOptions = {
         url: this.uploadOptions.url.replace('{fn}', name),
         loadedFiles: this.uploadOptions.loadedFiles,
-        fileOptions: {
-          onAdd: function() {
-            //eInputValidator.set('value', 1);
+        fileEvents: {
+          change: function() {
+            eInputValidator.set('value', 1);
           },
-          onEmpty: function() {
-            //eInputValidator.set('value', '');
+          empty: function() {
+            eInputValidator.set('value', '');
           }
         },
         onComplete: function() {
@@ -534,7 +541,6 @@ Ngn.Form.Validator = new Class({
   lastAdvices: {},
 
   makeAdvice: function(className, field, error, warn) {
-    console.trace();
     var errorMsg = (warn) ? this.warningPrefix : this.errorPrefix;
     errorMsg += (this.options.useTitles) ? field.title || error : error;
     var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
@@ -583,7 +589,6 @@ Ngn.Form.Validator = new Class({
   },
 
   insertAdvice: function(advice, field) {
-    c('insertAdvice');
     advice.inject(field.getParent('.field-wrapper'), 'after');
   },
 
@@ -595,6 +600,7 @@ Ngn.Form.Validator = new Class({
     var par = this.options.scrollElement || document.id(this).getParent();
     return new Fx.Scroll(par, this.options.scrollFxOptions);
   }
+
 
 });
 

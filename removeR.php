@@ -12,4 +12,3 @@ foreach ($objects as $name => $object) {
     echo "$name\n";
     file_put_contents($object, str_replace("\r\n", "\n", $c));
   }
-}

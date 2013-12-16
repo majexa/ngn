@@ -237,4 +237,11 @@ class Lib {
     return self::$list;
   }
 
+  static function requireFolder($name) {
+    foreach (glob(LIB_PATH."/more/$name/*.php") as $file) {
+      if (Misc::hasPrefix('Test', basename($file))) continue;
+      require_once $file;
+    }
+  }
+
 }

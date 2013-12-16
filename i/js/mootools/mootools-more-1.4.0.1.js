@@ -2468,7 +2468,7 @@ Element.implement({
 		return this.getStyle('display') != 'none';
 	},
 
-	isVisible: function(){
+	isVisible: function() {
 		var w = this.offsetWidth,
 			h = this.offsetHeight;
 		return (w == 0 && h == 0) ? false : (w > 0 && h > 0) ? true : this.style.display != 'none';
@@ -4116,7 +4116,7 @@ Form.Validator = new Class({
 		if (warn != null) warn = false;
 		if (this.hasValidator(field, 'warnOnly')) warn = true;
 		var isValid = this.hasValidator(field, 'ignoreValidation') || (validator ? validator.test(field) : true);
-		if (validator && field.isVisible()) {
+		if (validator && (field.get('type') == 'hidden' || field.isVisible())) { // masted change
       this.fireEvent('elementValidate', [isValid, field, className, warn]);
     }
 		if (warn) return true;

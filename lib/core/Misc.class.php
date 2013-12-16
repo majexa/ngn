@@ -589,7 +589,9 @@ class Misc {
   }
 
   static function removeSuffix($suffix, $str) {
+    $suffix = str_replace('\\', '\\\\', $suffix);
     $suffix = str_replace('/', '\\/', $suffix);
+    $suffix = str_replace('.', '\\.', $suffix);
     return preg_replace("/(.*)$suffix$/", '$1', $str);
   }
 
@@ -601,7 +603,9 @@ class Misc {
   }
 
   static function hasSuffix($suffix, $str) {
+    $suffix = str_replace('\\', '\\\\', $suffix);
     $suffix = str_replace('/', '\\/', $suffix);
+    $suffix = str_replace('.', '\\.', $suffix);
     return preg_match("/.*$suffix$/", $str);
   }
 
@@ -645,10 +649,6 @@ class Misc {
       return false; //Invalid hex color code
     }
     return $returnAsString ? implode($seperator, $rgbArray) : $rgbArray; // returns the rgb string or the associative array
-  }
-
-  static function addParam($url, $k, $v) {
-    return $url.(strstr($url, '?') ? '&' : '?')."$k=$v";
   }
 
   static function plural2single($s) {
