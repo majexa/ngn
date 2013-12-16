@@ -240,7 +240,6 @@ class Ddo {
       'id'           => $itemId,
       'f'            => $f,
       'type'         => $f['type'],
-      'even'         => ($this->even === true) ? $f['even'] : '',
       'title'        => isset($f['title']) ? $f['title'] : '',
       'name'         => $f['name'],
       'ddddItemLink' => $this->ddddItemLink,
@@ -257,11 +256,16 @@ class Ddo {
 
   // ------------- Elements -------------- 
 
+  function hgrpBeginDddd($type, $name, $evenNum) {
+    ($this->even === true) ? $even = ' even_'.$evenNum : $even = '';
+    return '<!-- Open fields group --><div class="hgrp hgrpt_'.$type.' hgrp_'.$name.' '.$even.'">';
+  }
+
   public $ddddItemsBegin = '`<div class="items ddItems str_`.$strName.`">`';
   public $tplPathItem = 'dd/elements';
   public $ddddItemsEnd = '`</div><!-- Конец цикла вывода записей по списку полей структуры "`.$strName.`" -->`';
   public $premoder = false;
-  public $hgrpBeginDddd = '`<!-- Open fields group --><div class="hgrp hgrpt_`.$type.` hgrp_`.$name.` even_`.$event.`">`';
+  //public $hgrpBeginDddd = '`<!-- Open fields group --><div class="hgrp hgrpt_`.$type.` hgrp_`.$name.` even_`.$evenNum.`">`';
   public $elBeginDddd = '`<div class="element f_`.$name.` t_`.$type.`">`';
   public $elEnd = '</div>';
 

@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Escaper
  *
  * Escapes all the backslashes which are not translated correctly in the Flash -> JavaScript Interface
