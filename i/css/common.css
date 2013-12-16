@@ -55,8 +55,8 @@ color: #555555;
 .dgray, .dgray a {
 color: #666666 !important;
 }
-.dgray a:hover {
-color: #000000;
+.dgray a:hover, a.dgray:hover {
+color: #000000 !important;
 }
 input {
 box-sizing: border-box;

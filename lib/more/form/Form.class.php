@@ -715,12 +715,16 @@ class Form {
   }
 
   /**
-   * Генерирует поля и возвращает их значения
+   * Определяет данные полей и создаёт объекты элементов формы
    *
+   * @manual form
    * @param   array Значения по умолчанию
    * @return  array
    */
   function setElementsData(array $defaultData = [], $reset = true) {
+
+    //pr($defaultData);
+
     $this->defaultData = $defaultData;
     $this->elementsData = $defaultData;
     if ($this->isSubmitted() and $this->fromRequest) $this->elementsData = $this->req->p;
@@ -835,6 +839,7 @@ eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
 
   protected function jsInlineUpload() {
     $opt = empty($this->options['uploadOptions']) ? '' : Arr::jsObj($this->options['uploadOptions']);
+    $t = getBacktrace(false);
     return "
 (function() {
   Ngn.Form.forms.{$this->id()}.initUpload($opt);

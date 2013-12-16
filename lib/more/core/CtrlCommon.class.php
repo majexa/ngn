@@ -882,10 +882,10 @@ use Options;
     return $form;
   }
 
-  protected function processForm(Form $oF) {
+  protected function processForm(Form $form) {
     $this->d['tpl'] = 'common/form';
-    if ($oF->update()) return true;
-    $this->d['form'] = $oF->html();
+    if ($form->update()) return true;
+    $this->d['form'] = $form->html();
     return false;
   }
 
