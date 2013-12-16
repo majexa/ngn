@@ -18,7 +18,7 @@ print '<div class="itemBody">';
 $fields = array_values($ddo->fields);
 for ($n=0; $n<count($fields); $n++) {
   $f =& $fields[$n];
-  ($n%2 == 0)? $f['float']='floatLeft' : $f['float']='floatRight';
+  $f['even'] = $n%2;
   // Открывающийся тэг группы
   if ($n == 0 or DdFieldCore::isGroup($f['type'])) {
     // Если это первый элемент или это элемент после Заголовока
@@ -34,7 +34,7 @@ for ($n=0; $n<count($fields); $n++) {
   }
   // Закрывающийся тэг группы
   if (
-  isset($fields[$n + 1]) and 
+  isset($fields[$n + 1]) and
   DdFieldCore::isGroup($fields[$n+1]['type'])
   ) {
     // Если это последний элемент или элемент перед Заголовком

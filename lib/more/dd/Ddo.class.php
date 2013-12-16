@@ -8,7 +8,7 @@ class Ddo {
   /**
    * Массив всех полей, присутствующих в этих записях
    *
-   * @var array
+   * @var a
    */
   public $fields;
 
@@ -40,7 +40,7 @@ class Ddo {
    */
   public $strName;
 
-  public $titled = false, $text = false, $float = false, $titledSettings;
+  public $titled = false, $text = false, $even = false, $titledSettings;
 
   function __construct($strName, $layoutName, array $options = []) {
     $this->setOptions($options);
@@ -71,7 +71,7 @@ class Ddo {
 
   function initFields() {
     if (isset($this->fields)) return $this;
-    $fields = new DdoFields($this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
+    $fields = O::gett('DdoFields', $this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
     $fields->isItemsList = $this->list;
     $this->fields = $fields->getFields();
     return $this;
@@ -240,7 +240,7 @@ class Ddo {
       'id'           => $itemId,
       'f'            => $f,
       'type'         => $f['type'],
-      'float'         => $this->float === true ? $f['float'] : '',
+      'even'         => ($this->even === true) ? $f['even'] : '',
       'title'        => isset($f['title']) ? $f['title'] : '',
       'name'         => $f['name'],
       'ddddItemLink' => $this->ddddItemLink,
@@ -261,7 +261,7 @@ class Ddo {
   public $tplPathItem = 'dd/elements';
   public $ddddItemsEnd = '`</div><!-- Конец цикла вывода записей по списку полей структуры "`.$strName.`" -->`';
   public $premoder = false;
-  public $hgrpBeginDddd = '`<!-- Open fields group --><div class="hgrp hgrpt_`.$type.` hgrp_`.$name.` `.$float.`">`';
+  public $hgrpBeginDddd = '`<!-- Open fields group --><div class="hgrp hgrpt_`.$type.` hgrp_`.$name.` even_`.$event.`">`';
   public $elBeginDddd = '`<div class="element f_`.$name.` t_`.$type.`">`';
   public $elEnd = '</div>';
 
