@@ -40,7 +40,7 @@ class Ddo {
    */
   public $strName;
 
-  public $titled = false, $text = false, $titledSettings;
+  public $titled = false, $text = false, $float = false, $titledSettings;
 
   function __construct($strName, $layoutName, array $options = []) {
     $this->setOptions($options);
@@ -240,6 +240,7 @@ class Ddo {
       'id'           => $itemId,
       'f'            => $f,
       'type'         => $f['type'],
+      'float'         => $this->float === true ? $f['float'] : '',
       'title'        => isset($f['title']) ? $f['title'] : '',
       'name'         => $f['name'],
       'ddddItemLink' => $this->ddddItemLink,
@@ -260,6 +261,7 @@ class Ddo {
   public $tplPathItem = 'dd/elements';
   public $ddddItemsEnd = '`</div><!-- Конец цикла вывода записей по списку полей структуры "`.$strName.`" -->`';
   public $premoder = false;
+  public $hgrpBeginDddd = '`<!-- Open fields group --><div class="hgrp hgrpt_`.$type.` hgrp_`.$name.` `.$float.`">`';
   public $elBeginDddd = '`<div class="element f_`.$name.` t_`.$type.`">`';
   public $elEnd = '</div>';
 
