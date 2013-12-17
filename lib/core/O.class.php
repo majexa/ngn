@@ -30,7 +30,7 @@ class O {
   /**
    * Возвращает объект
    *
-   * @param   string  Путь до класса без расширения. Пример: "dd/DdItemsPage"
+   * @param   string Путь до класса без расширения. Пример: "dd/DdItemsPage"
    * @return  mixed
    */
   static function get($path) {
@@ -80,8 +80,8 @@ class O {
 
   static function registerInjection($classToRewrite, $classRewriter, $args = [], $strict = true) {
     self::$injections[$classToRewrite][] = [
-      'class' => $classRewriter,
-      'args' => $args,
+      'class'  => $classRewriter,
+      'args'   => $args,
       'strict' => $strict
     ];
   }
