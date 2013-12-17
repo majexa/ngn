@@ -3,21 +3,13 @@
 class DbTreeTpl {
   
   protected $nodes;
-  
   protected $nodeTpl;
-  
   protected $nodesBeginTpl;
-  
   protected $nodesEndTpl;
-  
   protected $leafTpl;
-  
   protected $depth = 1;
-  
   protected $extData;
-  
   protected $depthLimit = 9;
-  
   protected $separator;
   
   function setNodes($nodes) {
