@@ -8,32 +8,37 @@ Ngn.Form.El.DdTagsTreeSelect = new Class({
     this.initEls(this.eRow);
   },
 
-  getNodesParent: function() {
-    return this.eRow;
+  getNodes: function(eParent) {
+    if (!eParent) eParent = this.eRow;
+    var r = [];
+    eParent.getElements('a').each(function(eA) {
+      var eUl = this.eRow.getElement('.nodes_' + eA.get('data-id'));
+      if (!eUl) return;
+      r.push([eA, eUl]);
+    }.bind(this));
+    return r;
   },
 
   initEls: function(eParent) {
-    eParent.getElements('a').each(function(el) {
-      //var eUl = this.eRow;
-      var eUl = this.eRow.getElement('.nodes_' + el.get('data-id'));
-      if (!eUl) throw new Error('Nodes with ID=' + el.get('data-id') + ' is absent');
-      eUl.setStyle('display', 'none');
-      el.addEvent('click', function(e) {
+    this.getNodes().each(function(els) {
+      var eA = els[0], eUl = els[1];
+      this.toggle(eUl, false);
+      eA.addEvent('click', function(e) {
         e.preventDefault();
-        if (!!el.get('data-loadChildren') && !el.retrieve('loaded')) {
+        if (!!eA.get('data-loadChildren') && !eA.retrieve('loaded')) {
           new Ngn.Request.Loading({
-            url: '/c/ddTagsTreeMultiselect/' + this.strName + '/' + Ngn.frm.getPureName(this.eRow.getElement('input').get('name')) + '/' + el.get('data-id'),
+            url: '/c/ddTagsTreeMultiselect/' + this.strName + '/' + Ngn.frm.getPureName(this.eRow.getElement('input').get('name')) + '/' + eA.get('data-id'),
             onComplete: function(html) {
-              el.store('loaded', true);
+              eA.store('loaded', true);
               eUl.set('html', Elements.from(html)[0].get('html'));
-              eUl.setStyle('display', 'block');
+              this.toggle(eUl, true);
               this.initEls(eUl);
               this.form.fireEvent('newElement', eUl);
             }.bind(this)
           }).send();
           return;
         }
-        eUl.setStyle('display', eUl.getStyle('display') == 'block' ? 'none' : 'block');
+        this.toggle(eUl);
       }.bind(this));
     }.bind(this));
     eParent.getElements('input').each(function(el) {
@@ -44,8 +49,22 @@ Ngn.Form.El.DdTagsTreeSelect = new Class({
   openUp: function(el) {
     var eUl = el.getParent('ul');
     if (!eUl) return;
-    eUl.setStyle('display', 'block');
+    this.toggle(eUl, true);
     this.openUp(eUl);
+  },
+
+  toggle: function(eUl, flag) {
+    if (flag === undefined) flag = eUl.getStyle('display') == 'block' ? false : true;
+    eUl.setStyle('display', flag ? 'block' : 'none');
+  },
+
+  selectOnlyFirstLevel: function() {
+    var uls = this.getNodes();
+    for (var i=0; i<uls.length; i++) this.toggle(uls[i], false);
+    this.eRow.getElements('input').each(function(el) {
+      el.set('checked', false);
+    });
+    c(uls);
   }
 
 });

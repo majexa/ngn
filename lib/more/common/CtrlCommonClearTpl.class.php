@@ -2,8 +2,11 @@
 
 class CtrlCommonClearTpl extends CtrlCommon {
 
-  function action_default() {
+  protected function init() {
     $this->d['mainTpl'] = 'clearTpl';
+  }
+
+  function action_default() {
     $this->d['tpl'] = 'clearTpl/'.$this->req->path(2);
   }
 

@@ -4,14 +4,14 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
   <meta content="NGN" name="generator"/>
   <title><?= $d['pageHeadTitle'] ?></title>
-  <?/*<script type="text/javascript" src="/i/js/tiny_mce/tiny_mce.js"></script>*/?>
+  <? /*<script type="text/javascript" src="/i/js/tiny_mce/tiny_mce.js"></script>*/ ?>
   <?= Sflm::flm('js')->getTags('site') ?>
   <?= Sflm::flm('css')->getTags('site') ?>
 </head>
 <body>
 <div id="layout" class="pageName_<?= Misc::name2id($d['page']['name'])?><?= $d['settings']['defaultAction'] == 'blocks' ? ' blocksLayout' : '' ?>">
   <div class="container showgrid">
-    <? Tt()->tpl($d['tpl'], $d) ?>
+    <? $this->tpl($d['tpl'], $d) ?>
   </div>
 </div>
 </body> 

@@ -330,7 +330,7 @@ SQL
           $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id'])[0]['tagId'];
         }
         else {
-          $item[$fieldName] = TreeCommon::getFlatParams(DdTags::items($this->strName, $fieldName)->getTree($item['id']), 'id');
+          $item[$fieldName] = Arr::get(DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']), 'tagId');
         }
       }
       else {
