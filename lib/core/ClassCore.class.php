@@ -75,7 +75,7 @@ class ClassCore {
         'class' => $class,
         'name'  => self::classToName($prefix, $class)
       ];
-      if (self::staticPropertyExists($class, 'title')) $classes[$n]['title'] = self::getStaticProperty($class, 'title');
+      if (isset($class::$title)) $classes[$n]['title'] = self::getStaticProperty($class, 'title');
       $n++;
     }
     return $classes;
@@ -111,7 +111,7 @@ class ClassCore {
     $properties = [];
     foreach (array_keys(Lib::getClassesListCached()) as $class) {
       if (preg_match('/'.$classPrefix.'(.*)/', $class, $m)) {
-        if (!self::staticPropertyExists($class, $prop)) continue;
+        if (!isset($class::$$prop)) continue;
         if ($orderProp) {
           $properties[lcfirst($m[1])] = [
             $prop      => self::getStaticProperty($class, $prop),
@@ -130,25 +130,12 @@ class ClassCore {
   }
 
   static function getStaticProperty($class, $prop, $strict = true) {
-    if (!self::staticPropertyExists($class, $prop)) {
+    if (!isset($class::$$prop)) {
       if ($strict) throw new Exception("Static proprty '$prop' does not exists in class '$class'");
       else
         return false;
     }
     return $class::$prop;
-  }
-
-  static function staticPropertyNotEmpty($class, $prop) {
-    if (!class_exists($class)) throw new Exception("class '$class' does not exists");
-    return eval('return !empty('.$class.'::$'.$prop.');');
-  }
-
-  static function staticPropertyExists($class, $prop) {
-    return eval('return isset('.$class.'::$'.$prop.');');
-  }
-
-  static function getStaticPropertyByType($classPrefix, $type, $prop) {
-    return self::getStaticProperty($classPrefix.ucfirst($type), $prop);
   }
 
   static function getClassesByPrefix($prefix) {

@@ -14,7 +14,7 @@ abstract class FieldEInput extends FieldEAbstract {
   protected function getTagsParams() {
     $opts = $this->options;
     if (isset($opts['value'])) $opts['value'] = $this->prepareInputValue($opts['value']);
-    $opt = Arr::filterByKeys($opts, ['name', 'maxlength', 'value', 'disabled', 'placeholder']);
+    $opt = Arr::filterByKeys($opts, ['name', 'maxlength', 'value', 'disabled', 'placeholder', 'autocomplete']);
     if (!empty($opts['data'])) foreach ($opts['data'] as $k => $v) $opt["data-$k"] = $v;
     if (!empty($this->options['multiple'])) $opts['multiple'] = null;
     htmlspecialcharsR($opt);

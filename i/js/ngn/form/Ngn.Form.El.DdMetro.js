@@ -8,8 +8,7 @@ Ngn.Dialog.DdMetro = new Class({
 });
 
 Ngn.Form.El.DdMetro = new Class({
-  //Extends: Ngn.Form.El.DdTagsTreeMultiselectDialogable,
-  Extends: Ngn.Form.El.DdTagsTreeMultiselect,
+  Extends: Ngn.Form.El.DdTagsTreeMultiselectDialogable,
 
   options: {
     selectText: 'Выбрать станцию метро'

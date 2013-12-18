@@ -1,5 +1,6 @@
 Ngn.Form.El.DateRange = new Class({
   Extends: Ngn.Form.El.DialogSelect,
+
   getDialogClass: function() {
     return Ngn.DateRangeDialog;
   },

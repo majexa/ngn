@@ -722,9 +722,6 @@ class Form {
    * @return  array
    */
   function setElementsData(array $defaultData = [], $reset = true) {
-
-    //pr($defaultData);
-
     $this->defaultData = $defaultData;
     $this->elementsData = $defaultData;
     if ($this->isSubmitted() and $this->fromRequest) $this->elementsData = $this->req->p;

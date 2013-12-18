@@ -1,7 +1,7 @@
 <?php
 
 class UsersForm extends Form {
-use FormDbUnicCheck;
+  use FormDbUnicCheck;
 
   protected $filterFields = ['login', 'user', 'pass', 'email', 'name', 'phone', 'extra'];
   public $strName = UsersCore::extraStrName;
@@ -21,10 +21,11 @@ use FormDbUnicCheck;
     if (Config::getVarVar('userReg', 'loginEnable')) $fields[] = UserRegCore::getLoginField();
     if (Config::getVarVar('userReg', 'emailEnable')) {
       $fields[] = [
-        'name'     => 'email',
-        'title'    => 'E-mail',
-        'type'     => 'email',
-        'required' => true
+        'name'         => 'email',
+        'title'        => 'E-mail',
+        'type'         => 'email',
+        'required'     => true,
+        'autocomplete' => 'off'
       ];
     }
     if (Config::getVarVar('userReg', 'phoneEnable')) {
@@ -37,10 +38,10 @@ use FormDbUnicCheck;
       ];
     }
     $fields[] = [
-      'name'     => 'pass',
-      'title'    => 'Пароль',
-      'type'     => 'password',
-      'required' => true
+      'name'         => 'pass',
+      'title'        => 'Пароль',
+      'type'         => 'password',
+      'required'     => true
     ];
     if (Config::getVarVar('userReg', 'extraData')) {
       $fields = array_merge($fields, [
@@ -48,7 +49,7 @@ use FormDbUnicCheck;
           'type'  => 'header',
           'title' => 'Дополнительно'
         ]
-      ], array_map(function($v) {
+      ], array_map(function ($v) {
         $v['name'] = 'extra['.$v['name'].']';
         return $v;
       }, (new DdFields(UsersCore::extraStrName, $this->extraFieldsOptions()))->getFieldsF()));
