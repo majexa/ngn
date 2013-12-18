@@ -193,7 +193,7 @@ SQL
   }
 
   function getLastTreeNodes($itemId) {
-    if (!($nodes = $this->getTree($itemId))) return;
+    if (!($nodes = $this->getTree($itemId))) return [];
     $r = [];
     foreach ($nodes as $node) {
       while (1) {
