@@ -20,6 +20,7 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);
     // delete tag by id does not work. need to check if it is a collection
     $tagItems->updateCounts($deleteTagIds);
+    
   }
 
 }
