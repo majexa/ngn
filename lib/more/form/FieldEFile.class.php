@@ -17,6 +17,7 @@ class FieldEFile extends FieldEFileBase {
       $uploadedFileValue = null;
       if (!empty($files)) {
         $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
+        if (!$uploadedFileValue) die2([get_class($this), $files, $this->options['name']]);
         empty($this->options['multiple']) ? $this->processSingle($uploadedFileValue) : $this->processMultiple($uploadedFileValue);
       }
     }
