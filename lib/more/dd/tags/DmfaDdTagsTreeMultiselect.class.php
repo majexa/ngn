@@ -9,8 +9,8 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     }
     $tagItems = DdTags::items($this->dm->strName, $k);
     $currentTags = $this->dm->getItem($this->dm->id)[$k]; // не зачем получать всю запись
-    //$currentTagIds = $currentTags ? Arr::get($currentTags, 'id') : [];
-    $currentTagIds = $currentTags;
+    $currentTagIds = $currentTags ? Arr::get($currentTags, 'id') : [];
+    //$currentTagIds = $currentTags;
     $newTagIds = [];
     $deleteTagIds = [];
     foreach ($tagIds as $id) if (!in_array($id, $currentTagIds)) $newTagIds[] = $id;
