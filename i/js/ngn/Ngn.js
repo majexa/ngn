@@ -749,6 +749,10 @@ Ngn.equalItemHeights = function(esItems, minHeight) {
   });
 };
 
+Ngn.cut = function(str, length) {
+  return length < str.length ? str.substring(0, str.length) + '...' : str;
+};
+
 Ngn.cutElementText = function(el, length) {
   if (el.get('text').length <= length) return;
   var text = el.get('text');
@@ -848,13 +852,6 @@ Ngn.EmptyError = new Class({
   }
 
 });
-
-Ngn.cutLengthAdv = function(el, subSelector, maxWordLength) {
-  new Element({
-    'class': 'cont'
-  }).inject(el);
-  //el.getElements()
-};
 
 function http_build_query(formdata, numeric_prefix, arg_separator) {
   var key, use_val, use_key, i = 0, tmp_arr = [];

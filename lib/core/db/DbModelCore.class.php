@@ -62,7 +62,7 @@ class DbModelCore {
       self::update($table, $id, $data, $filterByFields);
       self::$replaceCreate = false;
     } else {
-      if (!ClassCore::getStaticProperty(self::getClass($table), 'hasAutoIncrement')) {
+      if (!ClassCore::getStaticProperty(self::getClass($table), 'hasAutoIncrement', false)) {
         $data['id'] = $id;
         self::create($table, $data, $filterByFields);
       } else {

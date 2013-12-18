@@ -9,12 +9,12 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     }
     $tagItems = DdTags::items($this->dm->strName, $k);
     $currentTags = $this->dm->getItem($this->dm->id)[$k]; // не зачем получать всю запись
-    $currentTagIds = $currentTags ? Arr::get($currentTags, 'id') : [];
+    //$currentTagIds = $currentTags ? Arr::get($currentTags, 'id') : [];
+    $currentTagIds = $currentTags;
     $newTagIds = [];
     $deleteTagIds = [];
     foreach ($tagIds as $id) if (!in_array($id, $currentTagIds)) $newTagIds[] = $id;
     foreach ($currentTagIds as $id) if (!in_array($id, $tagIds)) $deleteTagIds[] = $id;
-    //if ($k == 'regRegion') prr([$tagIds, $currentTagIds, $newTagIds, $deleteTagIds]);
     $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($newTagIds);
     foreach ($deleteTagIds as $id) $tagItems->deleteByCollection($this->dm->id, $id);
     $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);
