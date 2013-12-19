@@ -1,4 +1,5 @@
 <?php
+
 foreach (db()->selectCol('SELECT name FROM dd_structures') as $strName) {
   $m = new DdFields($strName);
   foreach (db()->cols("dd_i_$strName") as $name){

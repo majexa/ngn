@@ -3,18 +3,13 @@
 // NGN core
 require_once NGN_PATH.'/init/core.php';
 
+Ngn::addBasePath(NGN_PATH.'/more', 1);
+
 // Определение этой константы должно проходить в "project/site/config/constants/core"
 if (PROJECT_KEY == '') die('Constant PROJECT_KEY is empty');
 
 // Для удачной инициализации NGN необходимо, что бы были определены следующие константы:
 if (!is_dir(NGN_PATH)) die('Dir "'.NGN_PATH.'" not exists');
-
-// Проверка конфигурации веб-сервера:
-// ================================================
-// Проверка наличия установленного mod_rewrite
-// @todo в некоторых случаях эта функция не существует. Например в апаче, 
-// встроенном в Zend Studio 6. Для него не учитываем данную ситуацию ошибки
-if (function_exists('apache_get_modules') and !in_array('mod_rewrite', apache_get_modules())) die('Apache module "mod_rewrite" is not installed');
 
 if (!function_exists('imagecreate')) die('Extension "gd" is not loaded');
 if (!function_exists('mb_strstr')) die('Extension "mbstring" is not loaded');

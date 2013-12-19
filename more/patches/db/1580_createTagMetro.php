@@ -1,4 +1,5 @@
 <?php
+
 q("CREATE TABLE IF NOT EXISTS `tagMetro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) NOT NULL,
@@ -11,7 +12,7 @@ q("CREATE TABLE IF NOT EXISTS `tagMetro` (
   `dateCreate` datetime NOT NULL,
   `dateUpdate` datetime NOT NULL,
    PRIMARY KEY (`id`)
-   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=274 ;");
+   ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
   
 q("INSERT INTO `tagMetro` (`id`, `parentId`, `oid`, `groupName`, `strName`, `title`, `name`, `cnt`, `dateCreate`, `dateUpdate`) VALUES
 (1, 271, 0, '', '', 'Сокольническая линия', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),

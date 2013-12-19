@@ -4,7 +4,7 @@ DdFieldCore::registerType('ddCityRussia', [
   'dbType'   => 'VARCHAR',
   'dbLength' => 255,
   'title'    => 'Город России',
-  'order'    => 301,
+  'order'    => 292,
   'tags'     => true,
   'tagsTree' => true
 ]);
