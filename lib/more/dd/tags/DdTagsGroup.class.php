@@ -39,10 +39,7 @@ class DdTagsGroup {
 
   function getTypeProperties() {
     $p = [];
-    if (DdTags::isTagType($this->p['fieldType'])) {
-
-    }
-    $field = O::get('DdFields', $this->strName, ['getHidden' => true])->getField($this->p['name']);
+    $field = (new DdFields($this->strName, ['getHidden' => true]))->getField($this->p['name']);
     if (DdTags::isDdItemsType($this->p['fieldType'])) {
       if (!empty($field['settings']['strName'])) {
         $strName = $field['settings']['strName'];

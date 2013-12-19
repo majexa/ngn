@@ -25,7 +25,7 @@ class DdFieldsManagerFilter extends DdFieldsManager {
 
   protected function getFilterType($filterableType) {
     if (FieldCore::hasAncestor($filterableType, 'ddCity')) return 'ddCityMultiselect';
-    elseif (FieldCore::hasAncestor($filterableType, 'ddMetro')) return 'ddMetroMultiselect';
+    //elseif (FieldCore::hasAncestor($filterableType, 'ddMetro')) return 'ddMetroMultiselect';
     else return DdTags::isTagTreeType($filterableType) ? 'ddTagsTreeMultiselect' : 'ddTagsMultiselect';
   }
 

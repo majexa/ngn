@@ -2,9 +2,6 @@
 
 require __DIR__.'/config_core.php';
 
-Ngn::addBasePath(NGN_PATH.'/more', 1);
-Ngn::addBasePath(SITE_PATH, 5);
-
 define('TEMP_PATH', SITE_PATH.'/temp');
 
 //if (!defined('SITE_DOMAIN') or !constant('SITE_DOMAIN')) throw new Exception('Constant SITE_DOMAIN can not by empty');

@@ -3,6 +3,7 @@
 class TestDdAllFields extends TestDd {
 
   function testCreate() {
+    Sflm::setFrontend('default');
     SiteConfig::updateVar("fieldE/configSelect1", [1, 2, 3]);
     /* @var $fm DdFieldsManager */
     $fm = O::gett('DdFieldsManager', 'a');
@@ -33,7 +34,7 @@ class TestDdAllFields extends TestDd {
   }
 
   /*
-  function testCreateData() {
+  function testCreate() {
   }
   */
 
