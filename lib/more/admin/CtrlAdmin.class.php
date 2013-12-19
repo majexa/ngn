@@ -173,7 +173,7 @@ abstract class CtrlAdmin extends CtrlCp {
 
   protected function extendTplData() {
     parent::extendTplData();
-    foreach (Hook::paths('admin/common') as $path) include $path;
+    if (($paths = Hook::paths('admin/common'))) foreach ($paths as $path) include $path;
     $this->extendMainContentCssClass('am_'.$this->d['adminModule']);
   }
 
