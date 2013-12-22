@@ -22,10 +22,10 @@ class DdGridFilters {
       'getDisallowed' => true,
       'getSystem'     => true
     ]))->getFields() as $v) {
-      if (DdTags::isTagType($v['type'])) {
+      if (DdTags::isTag($v['type'])) {
         $filters[] = [
           'title'          => $v['title'],
-          'tree'           => DdTags::isTagTreeType($v['type']),
+          'tree'           => DdTags::isTree($v['type']),
           'name'           => $v['name'],
           'options'        => Html::defaultOption() + Arr::get(DdTags::get($strName, $v['name'])->getData(), 'title', 'id'),
           'pathFilterType' => 't2'

@@ -10,7 +10,7 @@ DdFieldCore::registerType('ddTagsMultiselect', [
 
 class FieldEDdTagsMultiselect extends FieldEMultiselect {
 
-  static $multi = true;
+  static $ddTags = true, $ddTagsMulti = true;
 
   protected function init() {
     $this->options['options'] = Arr::get(DdTags::get($this->form->strName, $this->options['name'])->getTags(), 'title', 'id');

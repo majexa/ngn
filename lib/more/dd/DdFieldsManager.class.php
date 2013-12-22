@@ -103,8 +103,8 @@ class DdFieldsManager extends DbItemsManager {
 
   protected function afterCreate() {
     $groupId = null;
-    if (DdTags::isTagType($this->data['type'])) {
-      $groupId = DdTagsGroup::create($this->strName, $this->data['name'], DdTags::isTagItemsDirectedType($this->data['type']), true, DdTags::isTagTreeType($this->data['type']));
+    if (DdTags::isTag($this->data['type'])) {
+      $groupId = DdTagsGroup::create($this->strName, $this->data['name'], DdTags::isItemsDirected($this->data['type']), true, DdTags::isTree($this->data['type']));
     }
     $this->createFilter();
     $this->typeAction($this->data['type'], 'updateCreate', $this->data['name']);
@@ -116,13 +116,13 @@ class DdFieldsManager extends DbItemsManager {
       $this->renameImages($this->beforeUpdateData['name'], $this->data['name']);
       $this->renameDdo($this->beforeUpdateData['name'], $this->data['name']);
     }
-    if (DdTags::isTagType($this->data['type'])) {
+    if (DdTags::isTag($this->data['type'])) {
       if (!DdTagsGroup::getData($this->strName, $this->beforeUpdateData['name'], false)) {
         // Если тэг-группы ещё не существовало
-        DdTagsGroup::create($this->strName, $this->data['name'], DdTags::isTagItemsDirectedType($this->data['type']), true, DdTags::isTagTreeType($this->data['type']));
+        DdTagsGroup::create($this->strName, $this->data['name'], DdTags::isItemsDirected($this->data['type']), true, DdTags::isTree($this->data['type']));
       }
       else {
-        DdTagsGroup::update($this->strName, $this->beforeUpdateData['name'], $this->data['name'], DdTags::isTagItemsDirectedType($this->data['type']), true, DdTags::isTagTreeType($this->data['type']));
+        DdTagsGroup::update($this->strName, $this->beforeUpdateData['name'], $this->data['name'], DdTags::isItemsDirected($this->data['type']), true, DdTags::isTree($this->data['type']));
       }
     }
     $this->updateFilter();
@@ -240,7 +240,7 @@ class DdFieldsManager extends DbItemsManager {
       $this->dbDeleteField($this->data['name'].'From');
       $this->dbDeleteField($this->data['name'].'To');
     }
-    elseif (DdTags::isTagType($this->data['type'])) {
+    elseif (DdTags::isTag($this->data['type'])) {
       (new DdTagsGroup($this->strName, $this->data['name']))->delete();
     }
     $this->deleteFilter();

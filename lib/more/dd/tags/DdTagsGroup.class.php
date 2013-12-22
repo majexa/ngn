@@ -29,7 +29,7 @@ class DdTagsGroup {
     // }
     if (empty($this->p['fieldType'])) throw new Exception('Field for tag "'.$name.'" of "'.$strName.'" structure does not exists');
     $this->p['tagsGetterStrName'] = empty($this->p['masterStrName']) ? $this->p['strName'] : $this->p['masterStrName'];
-    $this->p['tree'] = DdTags::isTagTreeType($this->p['fieldType']);
+    $this->p['tree'] = DdTags::isTree($this->p['fieldType']);
     $this->p['multi'] = DdTags::isMulti($this->p['fieldType']);
     $this->p['global'] = false;
     $this->p['table'] = 'tags';
@@ -40,7 +40,7 @@ class DdTagsGroup {
   function getTypeProperties() {
     $p = [];
     $field = (new DdFields($this->strName, ['getHidden' => true]))->getField($this->p['name']);
-    if (DdTags::isDdItemsType($this->p['fieldType'])) {
+    if (DdTags::isDdItems($this->p['fieldType'])) {
       if (!empty($field['settings']['strName'])) {
         $strName = $field['settings']['strName'];
         $p['table'] = DdCore::table($strName);
@@ -146,7 +146,7 @@ SQL
    * @return DdItems|false
    */
   function getRelatedItems() {
-    if (DdTags::isDdItemsType($this->p['fieldType'])) {
+    if (DdTags::isDdItems($this->p['fieldType'])) {
       $strName = O::get('DdFields', $this->p['strName'], ['getHidden' => true])->getField($this->p['name'])['settings']['strName'];
       return new DdItems($strName);
     }

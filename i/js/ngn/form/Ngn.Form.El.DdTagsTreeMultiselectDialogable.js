@@ -2,6 +2,18 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
   Extends: Ngn.Form.El.DdTagsTreeMultiselect,
   Implements: Options,
 
+  initUpdate: function(eContainer) {
+    eContainer.getElements('input').each(function(el) {
+      el.addEvent('change', function() {
+        this.update();
+      }.bind(this));
+    }.bind(this));
+  },
+
+  branchLoaded: function(eParent) {
+    this.initUpdate(eParent);
+  },
+
   update: function() {
     this._update(Ngn.frm.getValues(this.eParent.getElements('ul input')));
   },

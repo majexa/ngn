@@ -261,13 +261,14 @@ abstract class DataManagerAbstract extends Options2 {
     }
     if (empty($id)) throw new Exception('id is empty. check what '.get_class($this).'::_create returns. create data: '.getPrr($this->data));
     $this->id = $id;
-    $this->_afterCreate($id);
-    return $id;
+    $this->_afterCreate();
+    return $this->id;
   }
 
-  protected function _afterCreate($id) {
-    $this->elementTypeAction('afterCreateUpdate', $id);
-    $this->elementTypeAction('afterCreate', $id);
+  protected function _afterCreate() {
+    Misc::checkEmpty($this->id, '$this->id');
+    $this->elementTypeAction('afterCreate');
+    $this->elementTypeAction('afterCreateUpdate');
     $this->afterCreate();
     $this->afterCreateUpdate();
   }
@@ -303,11 +304,15 @@ abstract class DataManagerAbstract extends Options2 {
       $this->form->globalError($e->getMessage());
       return false;
     }
-    $this->elementTypeAction('afterCreateUpdate');
+    $this->_afterUpdate();
+    return true;
+  }
+
+  protected function _afterUpdate() {
     $this->elementTypeAction('afterUpdate');
+    $this->elementTypeAction('afterCreateUpdate');
     $this->afterUpdate();
     $this->afterCreateUpdate();
-    return true;
   }
 
   abstract function _updateField($id, $fieldName, $value);
