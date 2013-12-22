@@ -5,12 +5,12 @@ DdFieldCore::registerType('ddTagsTreeMultiselect', [
   'dbLength' => 255,
   'title'    => 'Древовидный выбор нескольких тэгов',
   'order'    => 250,
-  'tags'     => true,
-  'tagsTree' => true
 ]);
 
 class FieldEDdTagsTreeMultiselect extends FieldEText {
   use DdElement;
+
+  static $ddTags = true, $ddTagsTree = true, $ddTagsMulti = true;
 
   protected $useTypeJs = true;
 
@@ -19,13 +19,13 @@ class FieldEDdTagsTreeMultiselect extends FieldEText {
   }
 
   function _html() {
-    $data = self::getTplData(new DdTagsTagsTree(new DdTagsGroup($this->strName, $this->options['name'])), $this->options['name'], $this->options['value'], $this->options['rootTagId'], false, !empty($this->options['value']));
+    $data = self::getTplData(new DdTagsTagsTree(new DdTagsGroup($this->strName, $this->options['name'])), $this->options['name'], $this->options['value'], $this->options['rootTagId'], !empty($this->options['value']));
     return Tt()->getTpl('dd/tagsTreeMultiselect', array_merge($data, [
       'dataParams' => isset($this->options['dataParams']) ? $this->options['dataParams'] : []
     ]));
   }
 
-  static function getTplData(DdTagsTagsTree $tags, $fieldName, $value, $parentId = null, $inner = false, $forceNodesLimit = false) {
+  static function getTplData(DdTagsTagsTree $tags, $fieldName, $value, $parentId = null, $forceNodesLimit = false) {
     $tree = $tags->getTree($parentId);
     if (!$forceNodesLimit and $tags->getNodesTotalCount() > 200) {
       foreach ($tree as &$v) {

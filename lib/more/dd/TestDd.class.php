@@ -19,6 +19,7 @@ abstract class TestDd extends ProjectTestCase {
       'title' => 'a',
       'name' => 'a'
     ]);
+    Sflm::setFrontend('default');
   }
 
   static function tearDownAfterClass() {

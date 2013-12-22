@@ -49,9 +49,13 @@ Ngn.Form.El.DdTagsTreeSelect = new Class({
         eUl.set('html', Elements.from(html)[0].get('html'));
         this.toggle(eUl, true);
         this.initEls(eUl);
+        this.branchLoaded(eUl);
         this.form.fireEvent('newElement', eUl);
       }.bind(this)
     }).send();
+  },
+
+  branchLoaded: function(eParent) {
   },
 
   openUp: function(el) {
@@ -62,9 +66,6 @@ Ngn.Form.El.DdTagsTreeSelect = new Class({
   },
 
   toggle: function(eUl, flag) {
-    if (!flag) {
-      //throw new Error('!');
-    }
     if (flag === undefined) flag = eUl.getStyle('display') == 'block' ? false : true;
     eUl.setStyle('display', flag ? 'block' : 'none');
   },

@@ -22,5 +22,11 @@ class FieldCore {
   static function hasAncestor($type, $ancestorType) {
     return ClassCore::hasAncestor(self::getClass($type), self::getClass($ancestorType));
   }
+
+  static function staticProperty($type, $prop) {
+    $class = FieldCore::getClass($type);
+    if (isset($class::$$prop)) return $class::$$prop;
+    return false;
+  }
   
 }

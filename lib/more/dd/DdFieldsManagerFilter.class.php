@@ -14,7 +14,7 @@ class DdFieldsManagerFilter extends DdFieldsManager {
     $this->data['filterable'] = false;
     // Фильтруемая структура та, у которой указана в виде фильтра структура текущего менеджера полей
     $this->filterableStr = DbModelCore::get('dd_structures', $this->strName, 'filterStrName');
-    if (DdTags::isTagType($this->data['type'])) {
+    if (DdTags::isTag($this->data['type'])) {
       $this->data['type'] = $this->getFilterType($this->data['type']);
       $this->data['required'] = false;
     } elseif (DdFieldCore::isNumberType($this->data['type'])) {
@@ -26,7 +26,7 @@ class DdFieldsManagerFilter extends DdFieldsManager {
   protected function getFilterType($filterableType) {
     if (FieldCore::hasAncestor($filterableType, 'ddCity')) return 'ddCityMultiselect';
     //elseif (FieldCore::hasAncestor($filterableType, 'ddMetro')) return 'ddMetroMultiselect';
-    else return DdTags::isTagTreeType($filterableType) ? 'ddTagsTreeMultiselect' : 'ddTagsMultiselect';
+    else return DdTags::isTree($filterableType) ? 'ddTagsTreeMultiselect' : 'ddTagsMultiselect';
   }
 
   protected function afterCreateUpdate() {

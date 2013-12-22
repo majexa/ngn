@@ -9,5 +9,5 @@ DdFieldCore::registerType('ddMetroMultiselect', [
   'tagsTree' => true
 ]);
 
-class FieldEDdMetroMultiselect extends FieldEDdTagsTreeMultiselect {
+class FieldEDdMetroMultiselect extends FieldEDdTagsTreeMultiselectDialogable {
 }

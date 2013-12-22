@@ -3,6 +3,7 @@ Ngn.Dialog.DdTagsTreeMultiselectDialog = new Class({
 
   options: {
     id: 'metro',
+    dialogClass: 'treeMultiselectDialog',
     title: '',
     textInfo: '',
     height: 400,
@@ -38,12 +39,8 @@ Ngn.Dialog.DdTagsTreeMultiselectDialog = new Class({
     }.bind(this));
     this.formEl.eTree.inject(this.container);
     this.formEl.eParent = this.container;
-    this.container.getElements('input').each(function(el) {
-      el.addEvent('change', function() {
-        this.formEl.update();
-      }.bind(this));
-    }.bind(this));
+    this.formEl.initUpdate(this.container);
     return this.container;
-  },
+  }
 
 });

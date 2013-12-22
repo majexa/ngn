@@ -33,9 +33,4 @@ class TestDdAllFields extends TestDd {
     DdItemsManager::getDefault('a')->form->setElementsData()->html();
   }
 
-  /*
-  function testCreate() {
-  }
-  */
-
 }

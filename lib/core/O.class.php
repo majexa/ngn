@@ -59,6 +59,10 @@ class O {
     return $obj;
   }
 
+  static function supportsCaching($class) {
+    return self::getStoreId($class, func_get_args());
+  }
+
   static function gett($class) {
     $args = func_get_args();
     if (isset(self::$injections[$class])) {

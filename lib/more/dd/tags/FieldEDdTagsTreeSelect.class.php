@@ -5,11 +5,11 @@ DdFieldCore::registerType('ddTagsTreeSelect', [
   'dbLength' => 255,
   'title' => 'Древовидный выбор одного тэга',
   'order' => 240,
-  'tags' => true,
-  'tagsTree' => true
 ]);
 
 class FieldEDdTagsTreeSelect extends FieldEText {
+
+  static $ddTags = true, $ddTagsTree = true;
 
   protected function getTags() {
     return new DdTagsTagsTree(new DdTagsGroup($this->form->strName, $this->options['name']));

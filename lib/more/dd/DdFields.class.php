@@ -85,7 +85,7 @@ class DdFields extends Fields {
 
   function getTagFields() {
     return array_filter($this->initFields, function (&$v) {
-      return DdTags::isTagType($v['type']);
+      return DdTags::isTag($v['type']);
     });
   }
 

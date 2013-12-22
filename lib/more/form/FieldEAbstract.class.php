@@ -204,12 +204,21 @@ use Options;
     return empty($this->cssClasses) ? false : $this->cssClasses;
   }
 
+  /*
+  protected function addElCss() {
+    foreach (Sflm::jsClass()->parents('Ngn.Form.El.'.ucfirst($this->type)) as $class) {
+      $type = lcfirst(str_replace('Ngn.Form.El.', '', $class));
+      Sflm::flm('css')->addLib("formEl/$type");
+    }
+  }
+  */
+
   function typeJs() {
     if (!$this->useTypeJs) return '';
     Sflm::flm('js')->addLib("formEl/$this->type");
     Sflm::flm('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
     Sflm::flm('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
-    Sflm::flm('css')->addStaticLib("formEl/$this->type.css");
+    Sflm::flm('css')->addLib("formEl/$this->type");
     if (!$this->form) return '';
     return "\n// ------- type: {$this->type} -------\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }

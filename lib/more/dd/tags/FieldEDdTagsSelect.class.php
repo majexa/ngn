@@ -5,11 +5,12 @@ DdFieldCore::registerType('ddTagsSelect', [
   'dbLength' => 255,
   'title'    => 'Выбор одного тэга',
   'order'    => 220,
-  'tags'     => true
 ]);
 
 class FieldEDdTagsSelect extends FieldESelect {
 use DdElement;
+
+  static $ddTags = true;
 
   protected function init() {
     $opts = Arr::get(DdTags::get($this->strName, $this->options['name'])->getTags(), 'title', 'id');

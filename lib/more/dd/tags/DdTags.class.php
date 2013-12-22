@@ -2,31 +2,24 @@
 
 class DdTags {
 
-  static function isTagType($type) {
-    if (($r = DdFieldCore::getTypeData($type, false)) === false) return false;
-    return !empty($r['tags']);
+  static function isTag($type) {
+    return FieldCore::staticProperty($type, 'ddTags');
   }
 
-  static function isTagTreeType($type) {
-    return array_key_exists('tagsTree', DdFieldCore::getTypeData($type));
+  static function isTree($type) {
+    return FieldCore::staticProperty($type, 'ddTagsTree');
   }
 
-  static function isFlatType($type) {
-    return DdTags::isTagType($type) and !DdTags::isTagTreeType($type);
-  }
-
-  static function isDdItemsType($type) {
+  static function isDdItems($type) {
     return !empty(DdFieldCore::getTypeData($type, false)['ddItems']);
   }
 
   static function isMulti($type) {
-    $class = FieldCore::getClass($type);
-    if (isset($class::$multi)) return $class::$multi;
-    return false;
+    return FieldCore::staticProperty($type, 'ddTagsMulti');
   }
 
-  static function isTagItemsDirectedType($type) {
-    return array_key_exists('tagsItemsDirected', DdFieldCore::getTypeData($type));
+  static function isItemsDirected($type) {
+    return FieldCore::staticProperty($type, 'ddTagsItemsDirected');
   }
 
   static function getLink($path, array $tag, $id = false) {

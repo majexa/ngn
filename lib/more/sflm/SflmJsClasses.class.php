@@ -1,45 +1,6 @@
 <?php
 
-class SflmJsClasses {
-
-  public $classesPaths, $existingClasses, $frontend;
-
-  function __construct(SflmFrontendJs $frontend) {
-    $this->frontend = $frontend;
-    $this->initClassesPaths();
-    $this->initExistingClasses();
-  }
-
-  protected function initClassesPaths() {
-    if (($this->classesPaths = NgnCache::c()->load('jsClassesPaths'))) return;
-    $this->_initClassesPaths();
-  }
-
-  protected function _initClassesPaths() {
-    $this->classesPaths = [];
-    $files = [];
-    foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
-    //foreach (Ngn::$basePaths as $path) $files = Arr::append($files, Dir::getFilesR($path.'/scripts/js', '[A-Z]*'));
-    foreach ($files as $file) $this->classesPaths[Misc::removeSuffix('.js', basename($file))] = $this->frontend->sflm->getPath($file, 'adding to init classes paths');
-    NgnCache::c()->save($this->classesPaths, 'jsClassesPaths');
-  }
-
-  protected function initExistingClasses() {
-    if (($this->existingClasses = NgnCache::c()->load('jsExistingClasses'))) return;
-    $this->existingClasses = [];
-    $storedPaths = [];
-    foreach ($this->frontend->getPaths() as $path) if (preg_match('/.*\/[A-Z][A-Za-z.]+\.js/', $path)) $storedPaths[] = $path;
-    foreach ($storedPaths as $path) $this->addClassesToExisting($path);
-  }
-
-  protected function addClassesToExisting($path) {
-    $this->existingClasses = array_merge($this->existingClasses, $this->parseClassesDefinition(file_get_contents($this->frontend->sflm->getAbsPath($path))));
-  }
-
-  protected function parseClassesDefinition($c) {
-    if (preg_match_all('/([A-Za-z.]+)\s+=\s+new Class/', $c, $m)) return $m[1];
-    return [];
-  }
+class SflmJsClasses extends SflmJsClassesBase {
 
   protected function parseParentClasses($c) {
     if (preg_match_all('/Extends:\s+([A-Z][A-Za-z.]+)/', $c, $m)) return $m[1];
@@ -62,8 +23,8 @@ class SflmJsClasses {
     //}
   }
 
-  protected function parseNewNgnClasses($c) {
-    if (preg_match_all('/new\s+(Ngn\.[A-Za-z., ]+)/', $c, $m)) return $m[1];
+  function parseNewNgnClasses($c) {
+    if (preg_match_all('/\s+(Ngn\.[A-Za-z., ]+)/', $c, $m)) return $m[1];
     return [];
   }
 
