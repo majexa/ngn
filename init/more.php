@@ -11,10 +11,12 @@ if (PROJECT_KEY == '') die('Constant PROJECT_KEY is empty');
 // Для удачной инициализации NGN необходимо, что бы были определены следующие константы:
 if (!is_dir(NGN_PATH)) die('Dir "'.NGN_PATH.'" not exists');
 
+/*
 if (!function_exists('imagecreate')) die('Extension "gd" is not loaded');
 if (!function_exists('mb_strstr')) die('Extension "mbstring" is not loaded');
 if (!function_exists('mysql_connect')) die('Extension "mysql" is not loaded');
 if (!function_exists('finfo_file')) die('Extension "fileinfo" is not loaded');
+*/
 
 // Проверка версии PHP
 list($ver) = explode('.', phpversion());
