@@ -39,7 +39,13 @@ class DdItemsManager extends DbItemsManager {
 
   protected function _create() {
     $data = [];
-    foreach ($this->data as $k => $v) if (DdTags::isTag($this->form->fields->getType($k)) === false) $data[$k] = $v;
+    foreach ($this->data as $k => $v) {
+      if (!($type = $this->form->fields->getType($k))) {
+        $data[$k] = $v;
+        continue;
+      }
+      if (!DdTags::isTag($type)) $data[$k] = $v;
+    }
     return $this->items->create($data);
   }
 

@@ -34,8 +34,11 @@ class DbModelCore {
           if (!isset($data[$k])) $data[$k] = $v;
         }
       }
+      /* @var $class DbModel */
       if (method_exists($class, 'beforeCreateUpdate')) $class::beforeCreateUpdate($data);
-      if (method_exists($class, '_create')) $id = $class::_create($data, $filterByFields); else {
+      if (method_exists($class, '_create')) {
+        $id = $class::_create($data, $filterByFields);
+      } else {
         $id = $class::create($table, $data, $filterByFields);
       }
       if (method_exists($class, 'afterCreateUpdate')) $class::afterCreateUpdate($id);

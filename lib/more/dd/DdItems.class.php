@@ -236,26 +236,23 @@ class DdItems extends Items {
   private function extendItemTags(&$item) {
     $this->setFieldTagTypes();
     foreach (array_keys($item) as $fieldName) {
-      if (isset($this->fieldTagTypes[$fieldName]) and
-        ($fieldType = $this->fieldTagTypes[$fieldName])
-      ) {
-        if (FieldCore::hasAncestor($fieldType, 'ddTagsSelect')) {
-          if (($tagItems = DdTags::items($this->strName, $fieldName)->getItems($item['id']))) {
-            $item[$fieldName] = $tagItems[0];
-          }
-          else $item[$fieldName] = null;
+      if (!isset($this->fieldTagTypes[$fieldName])) continue;
+      $fieldType = $this->fieldTagTypes[$fieldName];
+      if (DdTags::isTree($fieldType) and DdTags::isMulti($fieldType)) {
+        $item[$fieldName] = [];
+        foreach (DdTags::items($this->strName, $fieldName)->getFlat($item['id']) as $tag) {
+          $item[$fieldName][$tag['collection']][] = $tag;
         }
-        elseif ($fieldType == 'tagsTreeMultiselect') {
-          $item[$fieldName] = [];
-          // Формируем массив с разбитием на коллекции тэговых записей
-          foreach (DdTags::items($this->strName, $fieldName)->getFlat($item['id']) as $tag) {
-            $item[$fieldName][$tag['collection']][] = $tag;
-          }
+      }
+      else {
+        $tagItems = DdTags::items($this->strName, $fieldName);
+        $tagItems->getRelatedItems = true;
+        $r = $tagItems->getItems($item['id']);
+        if (DdTags::isMulti($fieldType)) {
+          $item[$fieldName] = $r;
         }
         else {
-          $tagItems = DdTags::items($this->strName, $fieldName);
-          $tagItems->getRelatedItems = true;
-          $item[$fieldName] = $tagItems->getItems($item['id']);
+          $item[$fieldName] = $r ? $r[0] : null;
         }
       }
     }
@@ -308,8 +305,18 @@ class DdItems extends Items {
   protected function extendItemTagIds(&$item) {
     $this->setFieldTagTypes();
     foreach (array_keys($item) as $fieldName) {
-      if (empty($this->fieldTagTypes[$fieldName])) continue;
+      if (!isset($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
+      if (DdTags::isTree($fieldType)) {
+        $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
+      }
+      else {
+        $r = DdTags::items($this->strName, $fieldName)->getItems($item['id']);
+        $item[$fieldName] = DdTags::isMulti($fieldType) ? $r : $r[0];
+      }
+      continue;
+
+
       if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
         $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
       }
@@ -338,7 +345,8 @@ SQL
         $r = Arr::get(DdTags::items($this->strName, $fieldName)->getItems($item['id']), 'id');
         if (DdTags::isMulti($fieldType)) {
           $item[$fieldName] = $r;
-        } elseif ($r) {
+        }
+        elseif ($r) {
           $item[$fieldName] = $r[0];
         }
       }
@@ -348,12 +356,9 @@ SQL
   protected $fieldTagTypes;
 
   private function setFieldTagTypes() {
-    // Если уже определены ничего не делаем
     if (isset($this->fieldTagTypes)) return;
     $this->fieldTagTypes = Arr::get($this->fields()->getTagFields(), 'type', 'name');
   }
-
-// ------ User Extender ------
 
   private function extendItemsUsers(&$items) {
     foreach ($this->fields()->getFields() as $name => $v) {

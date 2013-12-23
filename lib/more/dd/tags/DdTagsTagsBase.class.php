@@ -12,6 +12,7 @@ abstract class DdTagsTagsBase implements DbTreeInterface {
   }
 
   function create(array $data) {
+    Arr::checkEmpty($data, 'title');
     $data['strName'] = $this->group->strName;
     $data['groupName'] = $this->group->name;
     return DbModelCore::create($this->group->table, $data);

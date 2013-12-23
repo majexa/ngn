@@ -191,9 +191,7 @@ class Tt {
     $o = new DbTreeTpl();
     $o->setNodes($tree);
     if ($extData) $o->setExtData($extData);
-    if (!$tplLeaf) {
-      $o->setTpl($tplNode);
-    }
+    if (!$tplLeaf) $o->setTpl($tplNode);
     else {
       $o->setNodeTpl($tplNode);
       $o->setLeafTpl($tplLeaf);

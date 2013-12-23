@@ -20,6 +20,7 @@ class FieldEDdTagsTreeSelect extends FieldEText {
     if (!empty($this->form->ctrl->userGroup)) {
       $tags->getCond($this->form->strName)->addF('userGroupId', $this->form->ctrl->userGroup['id']);
     }
+    die2($this->options['value']);
     return Tt()->getTpl('dd/tagsTreeSelect', [
       'name' => $this->options['name'],
       'value' => $this->options['value'],
