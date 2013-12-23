@@ -2,6 +2,10 @@
 
 class DmfaDdTagsSelect extends DmfaDdTagsAbstract {
 
+  function source2formFormat($v) {
+    return $v['id'];
+  }
+
   function afterCreateUpdate($v, $k) {
     if (empty($v)) {
       $this->deleteTagItems($k);

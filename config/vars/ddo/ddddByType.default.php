@@ -13,9 +13,10 @@ return [
   'fieldList' => 'Tt()->enum($v, `, `, `($k+1).") $v"`)',
   'imagePreview' => '$v ? `<div class="thumbCont"><a href="`.$v.`" class="thumb" target="_blank"><img src="`.Misc::getFilePrefexedPath($v, `sm_`).`" /></a></div>` : `<div class="thumbCont"></div>`',
   'ddUserImage' => '%imagePreview',
-  'ddTagsMultiselect' => '$v ? Tt()->enumDddd($v, `$title`) : ``',
-  //'ddTagsSelect' => '$v ? `<a href="`.Tt()->getPath(0).$pagePath.`/t2.`.$v[`groupName`].`.`.$v[`id`].`" class="dgray">`.$v[`title`].`</a>` : ``',
+
+  'ddTags' => 'Tt()->enumDddd($v, `$title`)',
   'ddTagsSelect' => '$v ? $v[`title`] : ``',
+  'ddTagsMultiselect' => '$v ? Tt()->enumDddd($v, `$title`) : ``',
   'ddTagsSelectName' => '%ddTagsSelect',
   'ddTagsTreeSelect' => '`<span class="dgray"><b class="title">`.$title.`:</b> `.DdTagsHtml::treeArrowsLinks(array(`pagePath` => $pagePath, `tags` => $v)).`</span>`', // выводим только последний
   'ddTagsConsecutiveSelect' => 'DdTagsHtml::treeArrowsLinks(array(`pagePath` => $pagePath, `tags` => $v))',
@@ -26,6 +27,7 @@ return [
   'ddCityRussia' => '%ddCity',
   'ddMetroMultiselect' => '%ddTagsTreeMultiselect',
   'ddMetro' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v[0]) : ``',
+
   'date' => 'date_reformat($v, `d.m.Y`, `Y-m-d`)',
   'datetime' => '$v ? datetimeStrSql($v) : ``',
   'birthDate' => '$v ? ageFromBirthDate(date_reformat($v, `d.m.Y`, `Y-m-d`)).` лет` : ``',

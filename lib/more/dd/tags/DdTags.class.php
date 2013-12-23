@@ -2,20 +2,20 @@
 
 class DdTags {
 
-  static function isTag($type) {
-    return FieldCore::staticProperty($type, 'ddTags');
+  static function isTag($fieldType) {
+    return FieldCore::staticProperty($fieldType, 'ddTags');
   }
 
-  static function isTree($type) {
-    return FieldCore::staticProperty($type, 'ddTagsTree');
+  static function isTree($fieldType) {
+    return FieldCore::staticProperty($fieldType, 'ddTagsTree');
   }
 
-  static function isDdItems($type) {
-    return !empty(DdFieldCore::getTypeData($type, false)['ddItems']);
+  static function isDdItems($fieldType) {
+    return !empty(DdFieldCore::getTypeData($fieldType, false)['ddItems']);
   }
 
-  static function isMulti($type) {
-    return FieldCore::staticProperty($type, 'ddTagsMulti');
+  static function isMulti($fieldType) {
+    return FieldCore::staticProperty($fieldType, 'ddTagsMulti');
   }
 
   static function isItemsDirected($type) {

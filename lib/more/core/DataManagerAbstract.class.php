@@ -114,6 +114,7 @@ abstract class DataManagerAbstract extends Options2 {
    * @return bool|integer
    */
   function requestCreate(array $default = []) {
+    $this->form->fromRequest = true;
     $this->form->create = true;
     $this->initTinyInitJs();
     $this->setFormElementsData($default);
@@ -173,6 +174,7 @@ abstract class DataManagerAbstract extends Options2 {
     $this->defaultData = $this->getItem($id);
     $this->fieldTypeAction('source2formFormat', $this->defaultData);
     $this->source2formFormat();
+    $this->form->fromRequest = true;
     $this->initTinyInitJs($id);
     $this->setFormElementsData($this->defaultData);
     $this->afterFormElementsInit();
