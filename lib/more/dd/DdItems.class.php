@@ -308,12 +308,12 @@ class DdItems extends Items {
       if (!isset($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
       if (DdTags::isTree($fieldType)) {
-        $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
+        $r = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
       }
       else {
         $r = DdTags::items($this->strName, $fieldName)->getItems($item['id']);
-        $item[$fieldName] = DdTags::isMulti($fieldType) ? $r : $r[0];
       }
+      $item[$fieldName] = DdTags::isMulti($fieldType) ? $r : $r[0];
       continue;
 
 

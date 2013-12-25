@@ -6,7 +6,7 @@ Lib::addPearAutoloader('PHP');
 
 class TestRunnerAbstract {
 
-  protected $filterClasses = [];
+  protected $filterClasses = [], $filterPrefix;
 
   /**
    * @var PHPUnit_Framework_TestSuite
@@ -15,11 +15,15 @@ class TestRunnerAbstract {
 
   function __construct($filterNames = null) {
     R::set('plainText', true);
+    $this->suite = new PHPUnit_Framework_TestSuite('one');
     if ($filterNames) {
+      if (is_string($filterNames) and $filterNames[strlen($filterNames)-1] == '*') {
+        $this->filterPrefix = ucfirst(rtrim($filterNames, '*'));
+        return;
+      }
       $filterNames = (array)$filterNames;
       foreach ($filterNames as $v) $this->filterClasses[] = 'Test'.ucfirst($v);
     }
-    $this->suite = new PHPUnit_Framework_TestSuite('one');
   }
 
   function addTestSuite($class) {
@@ -36,14 +40,21 @@ class TestRunnerAbstract {
   }
 
   protected function getClasses() {
+    $filter = false;
+    if (isset($this->filterPrefix)) {
+      $filter = function($class) {
+        //prr([$this->filterPrefix, $class]);
+        return Misc::hasPrefix('Test'.$this->filterPrefix, $class);
+      };
+    } elseif ($this->filterClasses) {
+      $filter = function($class) {
+        return in_array($class, $this->filterClasses);
+      };
+    }
     $r = array_map(function ($v) {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
-    if ($this->filterClasses) {
-      $r = array_filter($r, function($class) {
-        return in_array($class, $this->filterClasses);
-      });
-    }
+    if ($filter) $r = array_filter($r, $filter);
     return $r;
   }
 
