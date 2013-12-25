@@ -8,12 +8,12 @@ trait WsItemChanged {
       return;
     }
     try {
-      LogWriter::v('queue', [$method, $args]);
+      //LogWriter::v('queue', [$method, $args]);
       call_user_func_array([$this, '_'.$method], $args);
     } catch (Exception $e) {
       Err::log($e);
     }
-    LogWriter::v('itemChangedCall', [$method, $args]);
+    //LogWriter::v('itemChangedCall', [$method, $args]);
     $this->sendWS($args);
   }
 
