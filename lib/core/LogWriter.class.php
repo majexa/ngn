@@ -12,6 +12,7 @@ class LogWriter {
    * @param   array   Дополнительные параметры
    */
   static function v($name, $var, array $trace = [], array $params = []) {
+    if (getConstant('DO_NOT_LOG')) return;
     $str = var_export($var, true);
     if (self::$output) print "\n$str";
     self::html($name, "<pre>$str</pre>", $trace, $params);
