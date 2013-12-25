@@ -87,8 +87,8 @@ class SendEmail {
   }
 
   function log($emails, $subject, $message) {
-    LogWriter::v('emailMessage', "$subject\n--------------\n$message");
-    LogWriter::v('email', "$emails: $subject");
+    //LogWriter::v('emailMessage', "$subject\n--------------\n$message");
+    //LogWriter::v('email', "$emails: $subject");
     LogWriter::str('email', "$emails: $subject");
   }
 

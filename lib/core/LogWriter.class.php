@@ -25,7 +25,7 @@ class LogWriter {
    * @param   string  Строка, которую нужно записать в лог-файл
    * @param   array   Дополнительные параметры
    */
-  static function html($name, $html, array $trace = [], array $params = []) {
+  static function html($name, $html, array $trace = [], array $params = [], $force = false) {
     $s = '('.__FILE__.':'.__LINE__.")\n";
     if (isset($_SERVER['REQUEST_URI'])) {
       $s .= 'url: '.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$_SERVER['REQUEST_URI'].', referer: '.(!empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
@@ -40,7 +40,7 @@ class LogWriter {
       $s .= "\n<post>".print_r($_POST, true)."</post>";
     }
     $s .= "\n=====+=====\n";
-    self::str('r_'.$name, $s);
+    self::str('r_'.$name, $s, null, $force);
   }
 
   /**
@@ -48,10 +48,12 @@ class LogWriter {
    *
    * @param   string  Имя лога
    * @param   string  Строка, которую нужно записать в лог-файл
+   * @param   string  Путь к папке с логами
+   * @param   string  Записывать лог в любом случае независимо от флага DO_NOT_LOG
    */
-  static function str($name, $str, $logsPath = null) {
-    if (getConstant('DO_NOT_LOG')) return;
-    if (!defined('LOGS_PATH')) return;
+  static function str($name, $str, $logsPath = null, $force = false) {
+    if (!$force and getConstant('DO_NOT_LOG')) return;
+    if (!defined('LOGS_PATH') and !$logsPath) return;
     if (self::$output) print "$str\n";
     $str = date('d.m.Y H:i:s').": $str\n";
     $dir = $logsPath ? $logsPath : LOGS_PATH;
