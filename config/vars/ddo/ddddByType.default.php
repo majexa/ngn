@@ -18,7 +18,8 @@ return [
   'ddTagsSelect' => '$v ? $v[`title`] : ``',
   'ddTagsMultiselect' => '$v ? Tt()->enumDddd($v, `$title`) : ``',
   'ddTagsSelectName' => '%ddTagsSelect',
-  'ddTagsTreeSelect' => '`<span class="dgray"><b class="title">`.$title.`:</b> `.DdTagsHtml::treeArrowsLinks(array(`pagePath` => $pagePath, `tags` => $v)).`</span>`', // выводим только последний
+  'ddTagsTreeSelect' => '`<span class="dgray"><b class="title">`.$title.`:</b> `.DdTagsHtml::treeArrowsLinks([`pagePath` => $pagePath, `tags` => [$v]]).`</span>`', // выводим только последний
+  //'ddTagsTreeSelect' => 'getPrr($v)',
   'ddTagsConsecutiveSelect' => 'DdTagsHtml::treeArrowsLinks(array(`pagePath` => $pagePath, `tags` => $v))',
   //'ddTagsTreeMultiselect' => '`<ul>`.DdTagsHtml::treeArrows3(array(`pagePath` => $pagePath, `tags` => $v)).`</ul>`',
   'ddTagsTreeMultiselect' => '$v ? Tt()->enum($v, ``, `"<div><small style=\\`white-space:nowrap\\`>&bull; ".TreeCommon::lastInBranch($v)["title"]."</small></div>"`) : ``',

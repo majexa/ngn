@@ -576,10 +576,15 @@ class Misc {
     return substr_count(SITE_DOMAIN, '.') + 1;
   }
 
+  static function escapeForRegexp($str) {
+    $str = str_replace('\\', '\\\\', $str);
+    $str = str_replace('/', '\\/', $str);
+    $str = str_replace('.', '\\.', $str);
+    return $str;
+  }
+
   static function removePrefix($prefix, $str) {
-    $prefix = str_replace('\\', '\\\\', $prefix);
-    $prefix = str_replace('/', '\\/', $prefix);
-    $prefix = str_replace('.', '\\.', $prefix);
+    $prefix = self::escapeForRegexp($prefix);
     try {
       preg_replace("/^$prefix(.*)/", '$1', $str);
     } catch (Exception $e) {
@@ -589,24 +594,15 @@ class Misc {
   }
 
   static function removeSuffix($suffix, $str) {
-    $suffix = str_replace('\\', '\\\\', $suffix);
-    $suffix = str_replace('/', '\\/', $suffix);
-    $suffix = str_replace('.', '\\.', $suffix);
-    return preg_replace("/(.*)$suffix$/", '$1', $str);
+    return preg_replace("/(.*)".self::escapeForRegexp($suffix)."$/", '$1', $str);
   }
 
   static function hasPrefix($prefix, $str) {
-    $prefix = str_replace('\\', '\\\\', $prefix);
-    $prefix = str_replace('/', '\\/', $prefix);
-    $prefix = str_replace('.', '\\.', $prefix);
-    return preg_match("/^$prefix.*/", $str);
+    return preg_match("/^".self::escapeForRegexp($prefix).".*/", $str);
   }
 
   static function hasSuffix($suffix, $str) {
-    $suffix = str_replace('\\', '\\\\', $suffix);
-    $suffix = str_replace('/', '\\/', $suffix);
-    $suffix = str_replace('.', '\\.', $suffix);
-    return preg_match("/.*$suffix$/", $str);
+    return preg_match("/.*".self::escapeForRegexp($suffix)."/", $str);
   }
 
   static function notRealized() {

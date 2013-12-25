@@ -9,7 +9,7 @@ DdFieldCore::registerType('ddTags', [
 
 class FieldEDdTags extends FieldEText {
 
-  static $ddTags = true, $ddTagsItemsDirected = true;
+  static $ddTags = true, $ddTagsItemsDirected = true, $ddTagsMulti = true;
 
   protected $useTypeJs = true;
 

@@ -1,6 +1,6 @@
 <?php
 
-class TestFieldDdTagsBase extends TestDd {
+abstract class TestFieldDdTagsAbstract extends TestDd {
 
   /**
    * @var DdItemsManager
@@ -19,6 +19,22 @@ class TestFieldDdTagsBase extends TestDd {
     self::$im = DdItemsManager::getDefault('a');
   }
 
-  protected $v1 = 'one', $v2 = 'two';
+  protected $v1 = 'one', $v2 = 'two', $v3 = 'three', $itemId;
+
+  function createTags() {
+  }
+
+  /**
+   * @return integer Item ID
+   */
+  abstract function createItem();
+
+  abstract function runTests();
+
+  function test() {
+    $this->createTags();
+    $this->itemId = $this->createItem();
+    $this->runTests();
+  }
 
 }

@@ -1,22 +1,14 @@
 <?php
 
-class TestFieldDdTagsTreeSelect extends TestFieldDdTagsBase {
+class TestFieldDdTagsTreeSelect extends TestFieldDdTagsTreeAbstract {
 
-  function test() {
-    $tagId1 = DdTags::get('a', 'sample')->create(['title' => $this->v1]);
-    $tagId2 = DdTags::get('a', 'sample')->create([
-      'title' => $this->v2,
-      'parentId' => $tagId1
-    ]);
-    $id = static::$im->create(['sample' => [$tagId2]]);
-    die2(static::$im->items->getItemF($id));
-
-    static::$im->requestUpdate($id);
-    die2(static::$im->form->html());
-    //die2(static::$im->items->getItem($id));
-    //$this->a($this->v1, $tagId1, $id);
-    //static::$im->update($id, ['sample' => [$tagId2]]);
-    //$this->a($this->v2, $tagId2, $id);
+  function a($tagId2, $v) {
+    $item = static::$im->items->getItemF($this->itemId);
+    $this->assertTrue($item['sample']['id'] == $this->tagId1);
+    $this->assertTrue($item['sample']['childNodes'][0]['id'] == $tagId2);
+    static::$im->requestUpdate($this->itemId);
+    $this->assertTrue((bool)strstr(static::$im->form->html(), 'name="sample" value="'.$tagId2.'" id="f_sample_'.$tagId2.'" checked />'));
+    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), '<span><a href="//t2.sample.'.$this->tagId1.'">'.$this->v1.'</a> → <a href="//t2.sample.'.$tagId2.'">'.$v.'</a></span>'));
   }
 
 }

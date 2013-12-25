@@ -4,9 +4,10 @@ class ProjectTestRunner extends TestRunnerAbstract {
 
   protected $project;
 
-  function __construct(array $filterNames = null) {
+  function __construct($filterNames = null) {
     $this->project = PROJECT_KEY;
     parent::__construct($filterNames);
+
   }
 
   protected function getClasses() {
