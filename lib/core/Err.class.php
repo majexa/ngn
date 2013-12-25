@@ -102,7 +102,7 @@ class Err {
   static function log(Exception $e) {
     LogWriter::html('errors', $e->getMessage(), getFullTrace($e), [
       'exceptionClass' => get_class($e)
-    ]);
+    ], true);
   }
 
   static function logWarning(Exception $e) {

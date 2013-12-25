@@ -58,8 +58,11 @@ define('DATA_DIR', 'data');
  */
 define('UPLOAD_DIR', 'u');
 
-// ------------------ core constants -----------------
+// ------------------ ngn-env -----------------
 
+setConstant('NGN_ENV_PATH', dirname(NGN_PATH));
+
+// ---------------- core constants -----------------
 
 require NGN_PATH.'/config/constants/core.php';
 
