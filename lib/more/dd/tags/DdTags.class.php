@@ -93,7 +93,8 @@ class DdTags {
    * @return  DdTagsTagsBase
    */
   static function get($strName, $groupName) {
-    $group = O::get('DdTagsGroup', $strName, $groupName);
+    $group = new DdTagsGroup($strName, $groupName);
+    //$group = O::get('DdTagsGroup', $strName, $groupName);
     return $group->tree ? new DdTagsTagsTree($group) : new DdTagsTagsFlat($group);
   }
 
