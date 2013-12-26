@@ -228,8 +228,6 @@ class DdItems extends Items {
     }
   }
 
-  public $a = 1;
-
   /**
    * Добавляет данные для тэгов в массив записи
    *

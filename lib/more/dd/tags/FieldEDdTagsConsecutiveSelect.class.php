@@ -24,6 +24,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
     $this->tags = DdTags::get($this->form->strName, $this->baseName);
   }
 
+  /*
   protected function preparePostValue() {
     $this->options['value'] = (int)$this->options['value'];
     if (!empty($this->options['value'])) {
@@ -34,6 +35,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
       }
     }
   }
+  */
 
   protected $rootTagId = 0, $parentId, $selectedValue;
 
@@ -53,11 +55,11 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
     else {
       $d['items'] = [
         [
-          'default' => isset($this->options['value'][2]) ? $this->options['value'][2] : '123',
+          'default' => isset($this->options['value'][0]) ? $this->options['value'][0] : null,
           'options' => $this->getRootOptions()
         ]
       ];
-      if (count($this->options['value'] > 1)) {
+      if (count($this->options['value']) > 1) {
         $this->selectedValue = $this->getSelectedValues();
         $this->parentId = $this->getSecondParentId();
         for ($i = 0; $i < count($this->selectedValue); $i++) {
