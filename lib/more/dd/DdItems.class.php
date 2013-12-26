@@ -21,7 +21,7 @@ class DdItems extends Items {
    */
   protected function fields() {
     if (isset($this->fields)) return $this->fields;
-    return $this->fields = O::get('DdFields', $this->strName, ['getHidden' => true]);
+    return $this->fields = new DdFields($this->strName, ['getHidden' => true]);
   }
 
   function getItems() {
@@ -228,6 +228,8 @@ class DdItems extends Items {
     }
   }
 
+  public $a = 1;
+
   /**
    * Добавляет данные для тэгов в массив записи
    *
@@ -245,7 +247,7 @@ class DdItems extends Items {
         }
       }
       else {
-        $tagItems = DdTags::items($this->strName, $fieldName);
+        $tagItems = new DdTagsItems($this->strName, $fieldName);
         $tagItems->getRelatedItems = true;
         $r = $tagItems->getItems($item['id']);
         if (DdTags::isMulti($fieldType)) {
@@ -353,7 +355,7 @@ SQL
     }
   }
 
-  protected $fieldTagTypes;
+  public $fieldTagTypes;
 
   private function setFieldTagTypes() {
     if (isset($this->fieldTagTypes)) return;

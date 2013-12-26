@@ -13,8 +13,7 @@ class TestFieldDdTagsSelect extends TestFieldDdTagsFlatAbstract {
   }
 
   function a($v, $tagId) {
-    //prr();
-    die2(static::$im->items->getItem($this->itemId));
+    static::$im->items->a = '666';
     $this->assertTrue(static::$im->items->getItem($this->itemId)['sample']['title'] == $v);
     $item = static::$im->items->getItemF($this->itemId);
     $this->assertTrue($item['sample']['title'] == $v);

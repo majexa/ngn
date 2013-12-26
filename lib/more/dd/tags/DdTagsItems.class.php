@@ -240,15 +240,7 @@ SQL
       'CONCAT_WS("-", tags.parentId, tagItems.collection) AS PARENT_KEY',
       'tags.title',
     ];
-    /**
-     * @todo: посмотреть что это такое
-     * if ($this->group->allowEdit) {
-     * $params[] = 'tags.name';
-     * $params[] = 'tags.parentId';
-     * }
-     */
     $params = implode(', ', $params);
-//    ;      tagItems.collection=1058 AND
     $q = "
     SELECT $params
     FROM tagItems

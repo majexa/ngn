@@ -181,6 +181,7 @@ class DdStructuresManager extends DbItemsManager {
 
   function deleteByName($name) {
     if (!($id = db()->selectCell("SELECT id FROM dd_structures WHERE name=?", $name))) return;
+    O::delete('DdFields', $name);
     $this->delete($id);
   }
 
