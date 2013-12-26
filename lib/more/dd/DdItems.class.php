@@ -313,7 +313,7 @@ class DdItems extends Items {
       else {
         $r = DdTags::items($this->strName, $fieldName)->getItems($item['id']);
       }
-      $item[$fieldName] = DdTags::isMulti($fieldType) ? $r : $r[0];
+      $item[$fieldName] = $r ? (DdTags::isMulti($fieldType) ? $r : $r[0]) : null;
       continue;
 
 
