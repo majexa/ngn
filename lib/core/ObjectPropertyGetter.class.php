@@ -5,7 +5,12 @@ trait ObjectPropertyGetter {
   public $p = [];
 
   function __get($k) {
-    if (isset($this->p[$k])) return $this->p[$k];
+    if (isset($this->p[$k])) {
+
+      if ($k == 'tree' and !$this->p[$k] and DdTags::isTree($this->p['fieldType'])) throw new Exception('!');
+
+      return $this->p[$k];
+    }
     else throw new Exception("Property '$k' not exists");
   }
 

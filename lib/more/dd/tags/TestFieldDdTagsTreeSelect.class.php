@@ -3,6 +3,7 @@
 class TestFieldDdTagsTreeSelect extends TestFieldDdTagsTreeAbstract {
 
   function a($tagId2, $v) {
+    static::$im->items->a = 2;
     $item = static::$im->items->getItemF($this->itemId);
     $this->assertTrue($item['sample']['id'] == $this->tagId1);
     $this->assertTrue($item['sample']['childNodes'][0]['id'] == $tagId2);

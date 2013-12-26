@@ -9,7 +9,6 @@ abstract class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsAbstract {
     $this->a($this->v1, $tagId1, $id);
     static::$im->update($id, ['sample' => $tagId2]);
     $this->a($this->v2, $tagId2, $id);
-
   }
 
 }
