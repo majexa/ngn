@@ -5,7 +5,7 @@ class DbModelCore {
   static $forceCache = true;
 
   /**
-   * @return DbModel
+   * @retur DbModel
    */
   static function get($table, $value, $param = 'id') {
     if ($param == 'id' and !$value) return false;

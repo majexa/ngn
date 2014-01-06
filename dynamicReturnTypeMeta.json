@@ -9,6 +9,12 @@
       "class": "\\O",
       "method": "gett",
       "position": 0
+    },
+    {
+      "class": "\\DbModelCore",
+      "method": "get",
+      "position": 0,
+      "mask": "DbModel%s"
     }
   ]
 }
