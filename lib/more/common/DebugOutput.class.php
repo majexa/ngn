@@ -3,7 +3,7 @@
 trait DebugOutput {
 
   protected function isDebug() {
-    return false;
+    return true;
   }
 
   protected function output($s) {
