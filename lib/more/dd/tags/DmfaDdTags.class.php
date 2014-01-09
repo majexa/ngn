@@ -3,7 +3,7 @@
 class DmfaDdTags extends DmfaDdTagsAbstract {
 
   function source2formFormat($v) {
-    return implode(',', Arr::get($v, 'title'));
+    return $v ? implode(',', Arr::get($v, 'title')) : '';
   }
 
   function afterCreateUpdate($v, $k) {

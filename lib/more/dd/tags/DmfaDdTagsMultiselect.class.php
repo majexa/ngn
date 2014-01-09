@@ -3,7 +3,7 @@
 class DmfaDdTagsMultiselect extends DmfaDdTagsAbstract {
 
   function source2formFormat($v) {
-    return Arr::get($v, 'id');
+    return $v ? Arr::get($v, 'id') : '';
   }
 
   function afterCreateUpdate($v, $k) {

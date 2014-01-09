@@ -25,14 +25,8 @@ class FieldEDdCityRussia extends FieldEDdCity {
     return ['' => '—'] + Arr::get($tags, 'title', 'id');
   }
 
-  protected function getSelectedValues() {
-    return isset($this->options['value'][3]) ? [
-      $this->options['value'][3],
-    ] : [];
-  }
-
-  protected function getSecondParentId() {
-    return $this->options['value'][2];
+  protected function firstN() {
+    return 2;
   }
 
 }

@@ -3,7 +3,7 @@
 class DmfaDdTagsSelect extends DmfaDdTagsAbstract {
 
   function source2formFormat($v) {
-    return $v['id'];
+    return $v ? $v['id'] : '';
   }
 
   function afterCreateUpdate($v, $k) {

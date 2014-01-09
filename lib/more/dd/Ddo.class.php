@@ -3,7 +3,7 @@
 class Ddo {
   use Options;
 
-  protected $debug = false;
+  protected $debug = true;
 
   /**
    * Массив всех полей, присутствующих в этих записях
@@ -146,7 +146,9 @@ class Ddo {
 
   protected function _htmlEl($data) {
     $data['ddddItemLink'] = St::dddd($data['ddddItemLink'], $data);
+    die2([$this->ddddByType, self::$_ddddByType]);
     $ddddByType = array_merge($this->ddddByType, self::$_ddddByType);
+    die2($ddddByType);
     $ddddByName = array_merge($this->ddddByName, self::$_ddddByName);
     if (isset(self::$funcByName[$data['name']])) {
       $func = self::$funcByName[$data['name']];

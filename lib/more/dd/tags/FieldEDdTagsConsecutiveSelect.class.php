@@ -55,23 +55,24 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
     else {
       $d['items'] = [
         [
-          'default' => isset($this->options['value'][0]) ? $this->options['value'][0] : null,
+          'default' => isset($this->options['value'][$this->firstN()]) ? $this->options['value'][$this->firstN()] : null,
           'options' => $this->getRootOptions()
         ]
       ];
       if (count($this->options['value']) > 1) {
-        $this->selectedValue = $this->getSelectedValues();
-        $this->parentId = $this->getSecondParentId();
-        for ($i = 0; $i < count($this->selectedValue); $i++) {
-          $tagId = $this->selectedValue[$i];
+        $selectedValues = $this->getSelectedValues();
+        $parentId = $this->getSecondParentId();
+        for ($i = 0; $i < count($selectedValues); $i++) {
+          $tagId = $selectedValues[$i];
           $d['items'][] = [
             'default' => $tagId,
-            'options' => ['' => '—'] + Arr::get($this->tags->getTags($this->parentId), 'title', 'id')
+            'options' => ['' => '—'] + Arr::get($this->tags->getTags($parentId), 'title', 'id')
           ];
-          $this->parentId = $tagId;
+          $parentId = $tagId;
         }
       }
     }
+    //if ($this->options['name'] == 'factRegion') die2([$this->options['value'], $d]);
     return Tt()->getTpl('dd/consecutiveSelect', $d);
   }
 
@@ -80,12 +81,16 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
     return Arr::get($this->tags->getTags($this->rootTagId), 'title', 'id');
   }
 
+  protected function firstN() {
+    return 0;
+  }
+
   protected function getSelectedValues() {
-    return Arr::sliceFrom($this->options['value'], 1);
+    return Arr::sliceFrom($this->options['value'], $this->firstN() + 1);
   }
 
   protected function getSecondParentId() {
-    return $this->options['value'][0];
+    return $this->options['value'][$this->firstN()];
   }
 
 } 

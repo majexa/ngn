@@ -1,6 +1,6 @@
 <?php
 
-class TestFieldDdTagsConsecutiveSelect extends TestFieldDdTagsTreeSelect {
+class UestFieldDdCityRussia extends TestFieldDdTagsConsecutiveSelect {
 
   function formTest($html, $tagId2, $v) {
     $this->assertTrue((bool)strstr($html, '<option value="'.$this->tagId1.'" selected>'.$this->v1.'</option>'));
