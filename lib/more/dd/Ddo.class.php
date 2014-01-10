@@ -3,7 +3,7 @@
 class Ddo {
   use Options;
 
-  protected $debug = true;
+  protected $debug = false;
 
   /**
    * Массив всех полей, присутствующих в этих записях
@@ -146,9 +146,7 @@ class Ddo {
 
   protected function _htmlEl($data) {
     $data['ddddItemLink'] = St::dddd($data['ddddItemLink'], $data);
-    die2([$this->ddddByType, self::$_ddddByType]);
     $ddddByType = array_merge($this->ddddByType, self::$_ddddByType);
-    die2($ddddByType);
     $ddddByName = array_merge($this->ddddByName, self::$_ddddByName);
     if (isset(self::$funcByName[$data['name']])) {
       $func = self::$funcByName[$data['name']];
@@ -184,17 +182,17 @@ class Ddo {
         $r = ($this->debug ? 'ssssByType:'.$data['type'].'=' : ''). // debug
           St::ssss($this->ssssByType[$data['type']], $data);
       } catch (Exception $e) {
-        throw new Exception('ssssByType type="'.$data['type'].', name="'.$data['name'].'", current class='.get_class($this).'". error: '.$e->getMessage());
+        throw new DdoException($e, 'ssssByType type="'.$data['type'].', name="'.$data['name'].'", current class='.get_class($this).'". error: '.$e->getMessage());
       }
       return $r;
     }
     elseif (isset($ddddByType[$data['type']])) {
-      try {
+      //try {
         $r = ($this->debug ? 'ddddByType:'.$data['type'].'=' : ''). // debug
           St::dddd($ddddByType[$data['type']], $data);
-      } catch (Exception $e) {
-        throw new Exception('ddddByType type="'.$data['type'].', name="'.$data['name'].'", itemId='.$data['id'].' current class='.get_class($this).'". error: '.$e->getMessage());
-      }
+      //} catch (Exception $e) {
+      //  throw new DdoException($e, 'ddddByType type="'.$data['type'].', name="'.$data['name'].'", itemId='.$data['id'].' current class='.get_class($this).'". error: '.$e->getMessage());
+      //}
       return $r;
     }
     else {

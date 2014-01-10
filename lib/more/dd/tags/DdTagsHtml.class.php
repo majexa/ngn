@@ -87,7 +87,6 @@ class DdTagsHtml {
 
   private static function _tagsTreeArrowsNode(array &$titles, array $node, $dddd, $showNullCountTags) {
     $titles[] = St::dddd($dddd, $node);
-    die2($node);
     if (isset($node['childNodes'][0])) {
       self::_tagsTreeArrowsNode($titles, $node['childNodes'][0], $dddd,
         $showNullCountTags);

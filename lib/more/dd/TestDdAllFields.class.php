@@ -29,7 +29,7 @@ class TestDdAllFields extends TestDd {
   static function tearDownAfterClass() {
   }
 
-  function testUpdate() {
+  function testRenderForm() {
     DdItemsManager::getDefault('a')->form->setElementsData()->html();
   }
 
