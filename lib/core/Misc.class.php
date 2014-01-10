@@ -594,15 +594,15 @@ class Misc {
   }
 
   static function removeSuffix($suffix, $str) {
-    return preg_replace("/(.*)".self::escapeForRegexp($suffix)."$/", '$1', $str);
+    return preg_replace("/^(.*)".self::escapeForRegexp($suffix)."$/", '$1', $str);
   }
 
   static function hasPrefix($prefix, $str) {
-    return preg_match("/^".self::escapeForRegexp($prefix).".*/", $str);
+    return preg_match("/^".self::escapeForRegexp($prefix).".*$/", $str);
   }
 
   static function hasSuffix($suffix, $str) {
-    return preg_match("/.*".self::escapeForRegexp($suffix)."/", $str);
+    return preg_match("/^.*".self::escapeForRegexp($suffix)."$/", $str);
   }
 
   static function notRealized() {
