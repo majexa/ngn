@@ -207,26 +207,26 @@ class Config {
   }
 
   static function updateVar($file, $v) {
-    Dir::make(dirname($file));
-    file_put_contents($file, self::formatVar($v));
-    $key = str_replace('.php', '', explode('/vars/', $file)[1]);
-    if (isset(self::$vars[$key])) unset(self::$vars[$key]);
-  }
-
-  static function formatVar($v) {
-    return "<?php\n\nreturn ".Arr::formatValue(Arr::transformValue($v)).";\n";
+    if (!strstr($file, '/vars/')) throw new Exception('Use FileVar class for that');
+    FileVar::updateVar($file, $v);
+    self::cleanCache($file);
   }
 
   static function updateSubVar($file, $k, $v) {
-    $r = file_exists($file) ? include $file : [];
-    $r[$k] = $v;
-    self::updateVar($file, $r);
+    if (!strstr($file, '/vars/')) throw new Exception('Use FileVar class for that');
+    FileVar::updateSubVar($file, $k, $v);
+    self::cleanCache($file);
   }
 
   static function removeSubVar($file, $k) {
-    $r = include $file;
-    unset($r[$k]);
-    self::updateVar($file, $r);
+    if (!strstr($file, '/vars/')) throw new Exception('Use FileVar class for that');
+    FileVar::removeSubVar($file, $k);
+    self::cleanCache($file);
+  }
+
+  static function cleanCache($file) {
+    $key = str_replace('.php', '', explode('/vars/', $file)[1]);
+    if (isset(self::$vars[$key])) unset(self::$vars[$key]);
   }
 
   /**
