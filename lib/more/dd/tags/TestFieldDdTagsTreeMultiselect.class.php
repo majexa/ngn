@@ -17,7 +17,7 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
   }
 
   function updateItem() {
-    static::$im->update($this->itemId, ['sample' => $this->tagId3]);
+    static::$im->update($this->itemId, ['sample' => [$this->tagId3]]);
   }
 
   function a($tagId, $v) {

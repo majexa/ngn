@@ -74,6 +74,8 @@ done
 
 exit 0';
     file_put_contents("/tmp/$project-$file", $c);
+    print Cli::shell("php ~/ngn-env/pm/pm.php localProject updateSubVar $this->projectName queue workers 4");
+    print Cli::shell("php ~/ngn-env/pm/pm.php localProject updateIndex $this->projectName");
     print Cli::shell("sudo mv /tmp/$project-$file /etc/init.d/$project-$file");
     print Cli::shell("sudo chmod +x /etc/init.d/$project-$file");
     print Cli::shell("sudo /etc/init.d/$project-$file restart");

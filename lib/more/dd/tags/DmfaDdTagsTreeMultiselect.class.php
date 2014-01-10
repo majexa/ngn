@@ -12,20 +12,14 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
       return;
     }
     $tagItems = DdTags::items($this->dm->strName, $k);
-    $currentTags = $this->dm->items->getItem($this->dm->id)[$k];
-    //die2([$this->dm->id, $currentTags]);
-    //die2($this->dm->items->getItemF($this->dm->id));
-    //$currentTagIds = $currentTags ? Arr::get($currentTags, 'id') : [];
-    $currentTagIds = $currentTags;
+    if (($currentTags = $this->dm->items->getItem($this->dm->id)[$k])) $currentTagIds = Arr::get($currentTags, 'id');
     $newTagIds = [];
     $deleteTagIds = [];
     foreach ($tagIds as $id) if (!in_array($id, $currentTagIds)) $newTagIds[] = $id;
-    foreach ($currentTagIds as $id) if (!in_array($id, $tagIds)) $deleteTagIds[] = $id;
-    die2($deleteTagIds);
+    if (isset($currentTagIds)) foreach ($currentTagIds as $id) if (!in_array($id, $tagIds)) $deleteTagIds[] = $id;
     $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($newTagIds);
-    foreach ($deleteTagIds as $id) $tagItems->deleteByCollection($this->dm->id, $id);
+    foreach ($deleteTagIds as $id) $tagItems->deleteByCollection($this->dm->id, $id); // delete tag by id does not work. need to check if it is a collection
     $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);
-    // delete tag by id does not work. need to check if it is a collection
     $tagItems->updateCounts($deleteTagIds);
   }
 

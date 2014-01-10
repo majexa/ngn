@@ -2,8 +2,8 @@
 
 class QueueWorkerInstaller extends WorkerInstaller {
 
-  function __construct($projectName) {
-    parent::__construct($projectName, 'queue', 3);
+  function __construct($projectName, $workersCount) {
+    parent::__construct($projectName, 'queue', $workersCount);
   }
 
 }
