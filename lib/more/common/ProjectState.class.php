@@ -14,11 +14,11 @@ class ProjectState {
   }
 
   static function update($key, $data) {
-    Config::updateVar(self::file($key), $data);
+    FileVar::updateVar(self::file($key), $data);
   }
 
   static function updateSub($key, $subKey, $data) {
-    Config::updateSubVar(self::file($key), $subKey, $data);
+    FileVar::updateSubVar(self::file($key), $subKey, $data);
   }
 
 }

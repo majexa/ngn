@@ -61,7 +61,7 @@ CALL;
     $retryTime = $this->getRetryTime($this->attemptNumber);
     $scFolder = self::scFolder($project);
     if (!file_exists($scFolder)) `sudo mkdir --mode=0777 $scFolder`;
-    Config::updateVar("$scFolder/$id.php", [
+    FileVar::updateVar("$scFolder/$id.php", [
       'phone' => $phone,
       'startCallingTime' => time(),
       'attemptNumber' => $this->attemptNumber,
