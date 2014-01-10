@@ -16,16 +16,13 @@ abstract class TestFieldDdTagsTreeAbstract extends TestFieldDdTagsAbstract {
     ]);
   }
 
-  function createItem() {
-    return static::$im->create(['sample' => $this->tagId2]);
-  }
-
   function runTests() {
     $this->a($this->tagId2, $this->v2);
-    static::$im->update($this->itemId, ['sample' => $this->tagId3]);
+    $this->updateItem();
     $this->a($this->tagId3, $this->v3);
   }
 
-  abstract function a($tagId2, $v);
+  abstract function a($tagId, $v);
+  abstract function updateItem();
 
 }

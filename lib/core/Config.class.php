@@ -209,6 +209,8 @@ class Config {
   static function updateVar($file, $v) {
     Dir::make(dirname($file));
     file_put_contents($file, self::formatVar($v));
+    $key = str_replace('.php', '', explode('/vars/', $file)[1]);
+    if (isset(self::$vars[$key])) unset(self::$vars[$key]);
   }
 
   static function formatVar($v) {
@@ -265,8 +267,9 @@ class Config {
     return $v[$k2];
   }
 
-  static function getSubVar($key, $subKey) {
+  static function getSubVar($key, $subKey, $strict = false) {
     $v = self::getVar($key);
+    if ($strict and !isset($v[$subKey])) throw new Exception("SubKey $subKey not defined");
     return isset($v[$subKey]) ? $v[$subKey] : null;
   }
 

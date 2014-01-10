@@ -41,7 +41,7 @@ function pr($var, $html = true, $trace = true) {
 }
 
 function prr($var, $html = true) {
-  pr($var, $html, true);
+  pr($var, $html, false);
 }
 
 function getPrr($v, $html = true) {
@@ -111,7 +111,7 @@ function getFullTrace(Exception $e) {
       'file' => $e->getFile(),
       'line' => $e->getLine()
     ]
-  ], $e->getTrace());
+  ], method_exists($e, 'getBacktrace') ? $e->getBacktrace() : $e->getTrace());
 }
 
 function die2($t = '', $html = true) {

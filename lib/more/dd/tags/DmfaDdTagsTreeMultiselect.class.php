@@ -2,6 +2,10 @@
 
 class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
 
+  function source2formFormat($v) {
+    return $v ? Arr::get($v, 'id') : '';
+  }
+
   function afterUpdate($tagIds, $k) {
     if (empty($tagIds)) {
       $this->deleteTagItems($k);

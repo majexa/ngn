@@ -11,12 +11,20 @@ class TestFieldDdTagsTreeSelect extends TestFieldDdTagsTreeAbstract {
     $this->ddoTest($item, $tagId2, $v);
   }
 
-  function formTest($html, $tagId2, $v) {
-    $this->assertTrue((bool)strstr($html, 'name="sample" value="'.$tagId2.'" id="f_sample_'.$tagId2.'" checked />'));
+  function createItem() {
+    return static::$im->create(['sample' => $this->tagId2]);
   }
 
-  function ddoTest($item, $tagId2, $v) {
-    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), '<span><a href="//t2.sample.'.$this->tagId1.'">'.$this->v1.'</a> → <a href="//t2.sample.'.$tagId2.'">'.$v.'</a></span>'));
+  function updateItem() {
+    static::$im->update($this->itemId, ['sample' => $this->tagId3]);
+  }
+
+  function formTest($html, $tagId, $v) {
+    $this->assertTrue((bool)strstr($html, 'name="sample" value="'.$tagId.'" id="f_sample_'.$tagId.'" checked />'));
+  }
+
+  function ddoTest($item, $tagId, $v) {
+    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), '<span><a href="//t2.sample.'.$this->tagId1.'">'.$this->v1.'</a> → <a href="//t2.sample.'.$tagId.'">'.$v.'</a></span>'));
   }
 
 }
