@@ -4,12 +4,12 @@ class TestDdXls extends TestDd {
 
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    (new QueueWorkerInstaller('test'))->install();
+    (new ProjectQueueWorkerInstaller)->install();
   }
 
   static function tearDownAfterClass() {
     parent::tearDownAfterClass();
-    (new QueueWorkerInstaller('test'))->uninstall();
+    (new ProjectQueueWorkerInstaller)->uninstall();
   }
 
   function test() {
@@ -35,11 +35,12 @@ class TestDdXls extends TestDd {
     $ddo->text = true;
     File::delete(UPLOAD_PATH.'/temp/1.xls');
     $im->items->cond->setOrder();
-    $lj = new DdXlsFake($im->items);
+    $lj = new DdXlsFake($im->items->strName, $im->items);
     LongJobCore::state($lj->id())->delete(true);
     LongJobCore::run($lj);
     sleep(3);
     $url = LongJobCore::state($lj->id())->data();
+    $this->assertFalse(empty($url));
     output("'$url' formed");
     $file = WEBROOT_PATH.$url;
     $c = file_get_contents($file.'.ids');
