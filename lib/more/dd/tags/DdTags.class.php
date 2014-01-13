@@ -11,7 +11,7 @@ class DdTags {
   }
 
   static function isDdItems($fieldType) {
-    return !empty(DdFieldCore::getTypeData($fieldType, false)['ddItems']);
+    return FieldCore::staticProperty($fieldType, 'ddTagItems');
   }
 
   static function isMulti($fieldType) {

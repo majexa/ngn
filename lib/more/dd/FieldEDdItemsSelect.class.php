@@ -5,8 +5,6 @@ DdFieldCore::registerType('ddItemsSelect', [
   'dbLength' => 11,
   'title'    => 'Выбор dd-записей',
   'order'    => 300,
-  'tags'     => true,
-  'ddItems'  => true,
   'fields'   => [
     [
       'type'  => 'ddStructure',
@@ -19,7 +17,7 @@ DdFieldCore::registerType('ddItemsSelect', [
 class FieldEDdItemsSelect extends FieldEMultiselect {
 use DdElement;
 
-  static $multi = true;
+  static $ddTags = true, $ddTagsMulti = true, $ddTagItems = true;
 
   protected function init() {
     if (isset($this->options['settings'])) {
