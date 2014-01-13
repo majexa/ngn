@@ -234,6 +234,8 @@ class DdItems extends Items {
    * @param   array Массив записи
    */
   private function extendItemTags(&$item) {
+
+
     $this->setFieldTagTypes();
     foreach (array_keys($item) as $fieldName) {
       if (!isset($this->fieldTagTypes[$fieldName])) continue;
