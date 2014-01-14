@@ -159,12 +159,12 @@ class Ddo {
       return $r;
     }
     elseif (isset($ddddByName[$data['name']])) {
-      $r = ($this->debug ? 'ddddByName:'.$data['name'].'=' : '').St::dddd($ddddByName[$data['name']], $data);
-      //try {
-      //  $r = ($this->debug ? 'ddddByName:'.$data['name'].'=' : '').St::dddd($ddddByName[$data['name']], $data);
-      //} catch (Exception $e) {
-      //  throw new Exception('ddddByName name="'.$data['name'].'" error: '.$e->getMessage());
-      //}
+      //$r = ($this->debug ? 'ddddByName:'.$data['name'].'=' : '').St::dddd($ddddByName[$data['name']], $data);
+      try {
+        $r = ($this->debug ? 'ddddByName:'.$data['name'].'=' : '').St::dddd($ddddByName[$data['name']], $data);
+      } catch (Exception $e) {
+        throw new Exception('ddddByName name="'.$data['name'].'" error: '.$e->getMessage());
+      }
       return $r;
     }
     elseif (isset($this->d[$data['type']])) {
@@ -187,12 +187,12 @@ class Ddo {
       return $r;
     }
     elseif (isset($ddddByType[$data['type']])) {
-      //try {
+      try {
         $r = ($this->debug ? 'ddddByType:'.$data['type'].'=' : ''). // debug
           St::dddd($ddddByType[$data['type']], $data);
-      //} catch (Exception $e) {
-      //  throw new DdoException($e, 'ddddByType type="'.$data['type'].', name="'.$data['name'].'", itemId='.$data['id'].' current class='.get_class($this).'". error: '.$e->getMessage());
-      //}
+      } catch (Exception $e) {
+        throw new DdoException($e, 'ddddByType: ['.$ddddByType[$data['type']].'], type="'.$data['type'].', name="'.$data['name'].'", itemId='.$data['id'].' current class='.get_class($this).'". error: '.$e->getMessage());
+      }
       return $r;
     }
     else {
