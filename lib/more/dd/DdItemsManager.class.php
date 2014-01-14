@@ -97,8 +97,4 @@ class DdItemsManager extends DbItemsManager {
     if (($paths = Hook::paths('dd/itemsManagerReplaceData')) !== false) foreach ($paths as $path) include $path;
   }
 
-  static function getDefault($strName, array $options = []) {
-    return new self(new DdItems($strName), new DdForm(new DdFields($strName), $strName), $options);
-  }
-
 }

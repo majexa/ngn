@@ -24,7 +24,7 @@ class TestDdXls extends TestDd {
       'name'  => 'flagg',
       'type' => 'bool'
     ]);
-    $im = DdItemsManager::getDefault('a');
+    $im = DdCore::imDefault('a');
     for ($i=1; $i<=130; $i++) {
       $im->create([
         'sampleSttrrr' => 'stringNumber'.$i,

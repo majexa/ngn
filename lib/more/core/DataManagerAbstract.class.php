@@ -184,6 +184,17 @@ abstract class DataManagerAbstract extends Options2 {
     return false;
   }
 
+  /**
+   * Возвращает данные в формате формы
+   * @param integer ID записи
+   * @return array
+   */
+  function formData($id) {
+    $data = $this->getItem($id);
+    $this->fieldTypeAction('source2formFormat', $data);
+    return $data;
+  }
+
   protected function beforeFormElementsInit() {
   }
 

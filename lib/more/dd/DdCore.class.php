@@ -116,16 +116,28 @@ class DdCore {
     ];
   }
 
+  static function imClass($strName) {
+    $class = 'DdItemsManager'.ucfirst($strName);
+    return class_exists($class) ? $class : 'DdItemsManager';
+  }
+
   /**
-   * Возвращает ItemsManager с возможностью изменения недоступных полей и системных
+   * Возвращает DdItemsManager с возможностью изменения недоступных полей и системных
    * @static
    * @param $strName
    * @return DdItemsManager
    */
   static function imSystem($strName) {
-    $class = 'DdItemsManager'.ucfirst($strName);
-    $class = class_exists($class) ? $class : 'DdItemsManager';
+    $class = self::imClass($strName);
     return new $class(new DdItems($strName), new DdForm(new DdFields($strName, ['getDisallowed' => true]), $strName));
+  }
+
+  /**
+   * @return DdItemsManager
+   */
+  static function imDefault($strName, array $options = []) {
+    $class = self::imClass($strName);
+    return new $class(new DdItems($strName), new DdForm(new DdFields($strName), $strName), $options);
   }
 
   static function exportItems($strName, DbCond $cond) {
