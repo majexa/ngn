@@ -10,7 +10,7 @@ class TestDdImage extends TestDd {
       'name' => 'image',
       'type' => 'imagePreview'
     ]);
-    $im = DdItemsManager::getDefault('a');
+    $im = DdCore::imDefault('a');
     $im->form->req['formId'] = $im->form->id();
     $id = $im->requestCreate();
     $this->assertTrue(file_exists(UPLOAD_PATH."/dd/a/$id/image.jpg"));

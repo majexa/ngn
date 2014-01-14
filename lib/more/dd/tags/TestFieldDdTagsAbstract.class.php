@@ -16,7 +16,7 @@ abstract class TestFieldDdTagsAbstract extends TestDd {
       'title' => 'sample',
       'type'  => $fieldType
     ]);
-    self::$im = DdItemsManager::getDefault('a');
+    self::$im = DdCore::imDefault('a');
   }
 
   protected $v1 = 'one', $v2 = 'two', $v3 = 'three', $itemId;

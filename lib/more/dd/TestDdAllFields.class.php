@@ -30,7 +30,7 @@ class TestDdAllFields extends TestDd {
   }
 
   function testRenderForm() {
-    DdItemsManager::getDefault('a')->form->setElementsData()->html();
+    DdCore::imDefault('a')->form->setElementsData()->html();
   }
 
 }
