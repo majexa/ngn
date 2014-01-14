@@ -23,6 +23,9 @@ class TestFieldDdTags extends TestFieldDdTagsAbstract {
     static::$im->requestUpdate($this->itemId);
     $this->assertTrue((bool)strstr(static::$im->form->html(), 'name="sample" value="'.$this->v1.','.$this->v2.'" />'));
     $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), '<div class="element f_sample t_ddTags">'.$this->v1.', '.$this->v2.'</div>'));
+
+    $items = static::$im->items->addF('id', $this->itemId)->getItems();
+    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItems'))->setItems($items)->els(), '<div class="element f_sample t_ddTags">'.$this->v1.', '.$this->v2.'</div>'));
   }
 
 }

@@ -42,13 +42,7 @@ use ObjectProcessorCtrl;
   }
 
   protected function getGrid() {
-    $r = Ddo::getGrid($this->items()->getItems(), $this->ddo());
-    /*
-    $r['body'][0]['data'] = array_slice($r['body'][0]['data'], 0, 4);
-    $r['head'] = array_slice($r['head'], 0, 4);
-    $r['fieldNames'] = array_slice($r['fieldNames'], 0, 4);
-    */
-    return $r;
+    return Ddo::getGrid($this->items()->getItems(), $this->ddo());
   }
 
   protected $im;

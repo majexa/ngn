@@ -7,7 +7,11 @@ class QueueBase {
 
   function __construct() {
     $connection = new AMQPConnection;
-    $connection->connect();
+    try {
+      $connection->connect();
+    } catch (Exception $e) {
+      throw new Exception('RabbitMQ server connection error');
+    }
     if (!$connection->isConnected()) throw new Exception('Can not connect');
     $this->channel = new AMQPChannel($connection);
     $this->getExchange();
