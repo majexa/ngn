@@ -1,6 +1,6 @@
 <?php
 
-class TestFieldDdCityRussia extends TestFieldDdTagsFlatAbstract {
+abstract class TestFieldDdCityRussia extends TestFieldDdTagsFlatAbstract {
 
   protected $tagId1, $tagId2;
 
