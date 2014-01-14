@@ -50,7 +50,11 @@ class DdItemsManager extends DbItemsManager {
   }
 
   protected function _update() {
-    foreach ($this->data as $k => $v) if (DdTags::isTag($this->form->fields->getType($k)) === false) $data[$k] = $v;
+    foreach ($this->data as $k => $v) {
+      if (!($type = $this->form->fields->getType($k))) continue;
+      if (DdTags::isTag($type)) continue;
+      $data[$k] = $v;
+    }
     if (!empty($data)) $this->items->update($this->id, $data);
   }
 

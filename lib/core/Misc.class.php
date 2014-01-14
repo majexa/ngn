@@ -147,9 +147,9 @@ class Misc {
   }
 
   static function quoted2arr($s) {
-    $arr = explode(',', $s);
-    foreach ($arr as &$v) $v = trim($v);
-    return $arr;
+    $s = trim($s);
+    if (!$s) return [];
+    return array_map('trim', explode(',', $s));
   }
 
   static function getFileExtension($filePath) {
@@ -458,7 +458,7 @@ class Misc {
   }
 
   static function checkNumeric($v) {
-    if (!is_numeric($v)) throw new Exception(getPrr($v).' is not numeric');
+    if (!is_numeric($v)) throw new Exception('"'.getPrr($v).'" is not numeric');
   }
 
   static function checkUrl($url) {
