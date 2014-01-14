@@ -22,19 +22,13 @@ class DdTagsTagsTree extends DdTagsTagsBase {
    *                  ]
    */
   function getParentIds(array $ids) {
-    //setProcessTimeStart();
     $tree = $this->_getTree();
-    //output("_getTree time: ".getProcessTime());
     if (!$ids) return [];
-    //setProcessTimeStart();
-    $times = [];
-    foreach ($ids as $id) {
-      //setProcessTimeStart(1);
-      $this->setParentIds($tree, $id);
-      //$times[] = getProcessTime(1);
+    try {
+    foreach ($ids as $id) $this->setParentIds($tree, $id);
+    } catch (Exception $e) {
+      throw new Exception($e->getMessage().'. $ids: '.getPrr($ids));
     }
-    //output('times: '.implode(', ', $times));
-    //output("foreach setParentIds: ".getProcessTime());
     return array_values($this->parentIds);
   }
 
