@@ -46,7 +46,7 @@ function prr($var, $html = true) {
 
 function getPrr($v, $html = true) {
   ob_start();
-  prr($v, $html); // var_export($v, true); - в случаях рекурсий объектов вызывает fatal-ошибку
+  pr($v, $html); // var_export($v, true); - в случаях рекурсий объектов вызывает fatal-ошибку
   $c = ob_get_contents();
   ob_end_clean();
   return $c;
