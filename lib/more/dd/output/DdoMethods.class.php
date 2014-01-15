@@ -214,8 +214,7 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
         ],
         'control' => [
            'title' => 'элемент управления',
-           'dddd' => 'getPrr($v)',
-           'dddd2' => '(new FieldEDdTagsSelect([
+           'dddd' => '(new FieldEDdTagsSelect([
              `strName` => `orders`,
              `name` => $name,
              `value` => $v[`id`],
