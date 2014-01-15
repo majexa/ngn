@@ -254,6 +254,7 @@ class DdItems extends Items {
         }
         else {
           $item[$fieldName] = $r ? $r[0] : null;
+          //if ($fieldName == 'region') die2($item[$fieldName]);
         }
       }
     }

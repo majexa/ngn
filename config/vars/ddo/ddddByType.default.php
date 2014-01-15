@@ -23,7 +23,6 @@ return [
   'ddCityMultiselect' => '%ddTagsTreeMultiselect',
   'ddCity' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v) : ``',
   'ddCityRussia' => '$v ? ($v[`childNodes`][0][`childNodes`][0][`title`].`, `.$v[`childNodes`][0][`childNodes`][0][`childNodes`][0][`title`]) : ``',
-  //'ddCityRussia' => '`<pre>`.getPrr($v)',
   'ddMetroMultiselect' => '%ddTagsTreeMultiselect',
   'ddMetro' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v[0]) : ``',
   'date' => 'date_reformat($v, `d.m.Y`, `Y-m-d`)',
