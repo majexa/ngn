@@ -35,7 +35,7 @@ $d['grid'] = [
       ];
       if (!$v['system'] or Misc::isGod()) {
         $r['tools']['edit'] = 'Редактировать';
-        if ($v['tagGroup'] and $v['tagGroup']['allowEdit'] and !$d['filterableStr']) $r['tools']['tags'] = 'Редактировать теги';
+        if ($v['tagGroup'] and $v['tagGroup']['allowEdit']/* and !$d['filterableStr']*/) $r['tools']['tags'] = 'Редактировать теги';
       }
     }
     return $r;
