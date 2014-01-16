@@ -17,7 +17,7 @@ class SendEmail {
     $this->mailer->SetFrom(Config::getVarVar('mail', 'fromEmail'), Config::getVarVar('mail', 'fromName'));
     $this->mailer->CharSet = CHARSET;
     $this->mailer->Mailer = Config::getVarVar('mail', 'method');
-    $this->mailer->Encoding = 'base64';//"8bit", "7bit", "binary", "base64", and "quoted-printable".
+    $this->mailer->Encoding = 'base64'; //"8bit", "7bit", "binary", "base64", and "quoted-printable".
     if ($this->mailer->Mailer == 'smtp') {
       $smtp = Config::getVar('smtp');
       $this->mailer->Host = $smtp['server'];
@@ -46,6 +46,7 @@ class SendEmail {
    * @return  bool
    */
   function send($emails, $subject, $message, $html = true) {
+    output("Try sending email to $emails");
     Misc::checkEmpty($emails, '$emails');
     if (defined('ALLOW_SEND') and ALLOW_SEND === false) {
       $this->log($emails, $subject, $message);
@@ -82,14 +83,9 @@ class SendEmail {
     else {
       $e->MsgHTML($message);
     }
-    $this->log($emails, $subject, $message);
-    return $e->Send();
-  }
-
-  function log($emails, $subject, $message) {
-    //LogWriter::v('emailMessage', "$subject\n--------------\n$message");
-    //LogWriter::v('email', "$emails: $subject");
     LogWriter::str('email', "$emails: $subject");
+    output("Sending email to $emails");
+    return $e->Send();
   }
 
 }
