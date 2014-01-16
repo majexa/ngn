@@ -180,13 +180,15 @@ Ngn.Items.toolActions = {
 
   inlineTextEdit: {
     init: function(items, cls, row) {
-      Ngn.Items.toolActions.inlineTextEdit.initTd(items, cls, row, row.el.getChildren('td')[row.tools[cls].elN + 1], row.tools[cls].elN);
+      Ngn.Items.toolActions.inlineTextEdit.initTd(items, cls, row, row.tools[cls].elN + 1);
     },
-    initTd: function(items, cls, row, eTd, n) {
+    initTd: function(items, cls, row, n) {
+      var data = Object.values(row.data);
+      var eTd = row.el.getChildren('td')[n];
       if (!eTd) throw new Ngn.EmptyError('eTd');
       eTd.set('html', '');
       eTd.store('eInput', new Element('input', {
-        value: row.data[row.tools[cls].elN],
+        value: data[n - 1],
         styles: {
           display: 'none',
           'border': '0px',
@@ -214,7 +216,7 @@ Ngn.Items.toolActions = {
         f();
       });
       eTd.store('eText', new Element('div', {
-        html: row.data[row.tools[cls].elN]
+        html: data[n - 1]
       }).inject(eTd));
       eTd.store('edit', false);
       items.createToolBtn(cls, row, Ngn.Items.toolActions.inlineTextEdit.switchInput.pass(eTd));

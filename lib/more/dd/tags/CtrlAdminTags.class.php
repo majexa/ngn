@@ -81,7 +81,7 @@ class CtrlAdminTags extends CtrlAdmin {
   protected function getGrid() {
     $group = DdTagsGroup::getById($this->groupId);
     return Items::grid([
-      'head' => ['Тэг','Кол-во записей'],
+      'head' => ['ID', 'Тэг','Кол-во записей'],
       'body' => array_map(function($v) {
         return [
           'id' => $v['id'],
@@ -91,17 +91,16 @@ class CtrlAdminTags extends CtrlAdmin {
               'type' => 'inlineTextEdit',
               'action' => 'ajax_rename',
               'paramName' => 'title',
-              'elN' => 0
+              'elN' => 1
             ]
           ],
-          'data' => [
-            $v['title'],
-            $v['cnt']
-          ]
+          'data' => Arr::filterByKeys($v, ['id', 'title', 'cnt'])
         ];
       }, (new DdTagsTagsFlat($group))->getTags())
     ]);
+  }
 
+  function action_list() {
   }
 
   function action_json_getItems() {
