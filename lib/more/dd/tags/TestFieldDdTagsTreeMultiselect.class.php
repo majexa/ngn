@@ -12,21 +12,32 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
     ]);
   }
 
+  function runTests() {
+    $this->a($this->tagId3, $this->v2);
+    $this->updateItem();
+    $this->a($this->tagId4, $this->v4);
+  }
+
   function createItem() {
     return static::$im->create(['sample' => [$this->tagId2, $this->tagId3]]);
   }
 
   function updateItem() {
-    static::$im->update($this->itemId, ['sample' => [$this->tagId3]]);
+    static::$im->update($this->itemId, ['sample' => [$this->tagId2, $this->tagId4]]);
   }
 
-  function a($tagId, $v) {
+  function a($tagId2, $v) {
+    $item = static::$im->items->getItemF($this->itemId);
+    $values = array_values($item['sample']);
+    $this->assertTrue($values[0][1]['tagId'] == $this->tagId2);
+    $this->assertTrue($values[1][1]['tagId'] == $tagId2);
     static::$im->requestUpdate($this->itemId);
     $html = static::$im->form->html();
-    $this->assertTrue((bool)strstr($html, 'id="sample_'.$tagId.'" checked />'));
-    $this->assertTrue((bool)strstr($html, 'id="sample_'.$tagId.'" checked />'));
+    $this->assertTrue((bool)strstr($html, 'id="sample_'.$this->tagId2.'" checked />'));
+    $this->assertTrue((bool)strstr($html, 'id="sample_'.$tagId2.'" checked />'));
+    $html = (new Ddo('a', 'siteItem'))->setItem($item)->els();
+    $this->assertTrue((bool)strstr($html, "$this->v1 → $this->v2"), "$this->v1 → $this->v2");
+    $this->assertTrue((bool)strstr($html, "$this->v1 → $v"), "$this->v1 → $v");
   }
-
-  function ddoTest($item, $tagId, $v) {}
 
 }

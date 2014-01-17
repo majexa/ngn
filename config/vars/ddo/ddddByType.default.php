@@ -19,7 +19,7 @@ return [
   'ddTagsSelectName' => '%ddTagsSelect',
   'ddTagsTreeSelect' => '`<span class="dgray"><b class="title">`.$title.`:</b> `.DdTagsHtml::treeArrowsLinks([`pagePath` => $pagePath, `tags` => [$v]]).`</span>`', // выводим только последний
   'ddTagsConsecutiveSelect' => 'DdTagsHtml::treeArrowsLinks([`pagePath` => $pagePath, `tags` => [$v]])',
-  'ddTagsTreeMultiselect' => '$v ? Tt()->enum($v, ``, `"<div><small style=\\`white-space:nowrap\\`>&bull; ".TreeCommon::lastInBranch($v)["title"]."</small></div>"`) : ``',
+  'ddTagsTreeMultiselect' => '$v ? Tt()->enum($v, ``, `"<div><small style=\\`white-space:nowrap\\`>&bull; ".Tt()->enumSsss($v, \\`$title\\`, \\` → \\`)."</small></div>"`) : ``',
   'ddCityMultiselect' => '%ddTagsTreeMultiselect',
   'ddCity' => '$v ? DdTagsHtml::tagsTreeArrowsNode($v) : ``',
   'ddCityRussia' => '$v ? ($v[`childNodes`][0][`childNodes`][0][`title`].`, `.$v[`childNodes`][0][`childNodes`][0][`childNodes`][0][`title`]) : ``',
