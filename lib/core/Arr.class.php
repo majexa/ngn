@@ -440,7 +440,7 @@ class Arr {
       foreach ($v as &$vv) $vv = Arr::transformValue($vv);
       return $v;
     }
-    elseif (is_numeric($v)) return (int)$v;
+    elseif (is_int($v)) return (int)$v;
     else return $v;
   }
 
