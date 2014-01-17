@@ -388,6 +388,7 @@ class Form {
     $jsTypesAdded = [];
     $typeJs = '';
     foreach ($this->els as $el) {
+      /* @var $el FieldEAbstract */
       if (($js = $el->jsInline()) != '') $this->jsInline .= $js;
       if (($js = $el->js())) $this->js .= $js;
       if (($js = $el->typeJs()) and !in_array($el->type, $jsTypesAdded)) {
@@ -836,7 +837,6 @@ eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
 
   protected function jsInlineUpload() {
     $opt = empty($this->options['uploadOptions']) ? '' : Arr::jsObj($this->options['uploadOptions']);
-    $t = getBacktrace(false);
     return "
 (function() {
   Ngn.Form.forms.{$this->id()}.initUpload($opt);
