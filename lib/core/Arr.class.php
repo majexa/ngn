@@ -440,8 +440,8 @@ class Arr {
       foreach ($v as &$vv) $vv = Arr::transformValue($vv);
       return $v;
     }
-    elseif (is_numeric($v)) return (int)$v;
-    else return $v;
+    elseif (is_int($v)) return (int)$v;
+    else return $v; 
   }
 
   static function checkEmpty(array $arr, $keys, $quitely = false) {
