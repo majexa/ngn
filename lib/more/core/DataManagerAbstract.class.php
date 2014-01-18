@@ -62,11 +62,6 @@ abstract class DataManagerAbstract extends Options2 {
     'mdH' => 300
   ];
 
-  /**
-   * @var Request
-   */
-  //protected $req;
-
   function __construct(Form $form, array $options = []) {
     if (!is_object($form)) throw new Exception('$form is not object');
     $this->form = $form;

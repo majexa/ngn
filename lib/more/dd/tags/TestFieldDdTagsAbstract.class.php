@@ -7,16 +7,27 @@ abstract class TestFieldDdTagsAbstract extends TestDd {
    */
   static $im;
 
+  /**
+   * @var DdFieldsManager
+   */
+  static $fm;
+
+  static $fieldId;
+
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    $fm = O::gett('DdFieldsManager', 'a');
+    self::$fm = O::gett('DdFieldsManager', 'a');
     $fieldType = lcfirst(Misc::removePrefix('TestField', get_called_class()));
-    $fm->create([
+    self::$fieldId = self::$fm->create(static::fieldData($fieldType));
+    self::$im = DdCore::imDefault('a');
+  }
+
+  static protected function fieldData($fieldType) {
+    return [
       'name'  => 'sample',
       'title' => 'sample',
       'type'  => $fieldType
-    ]);
-    self::$im = DdCore::imDefault('a');
+    ];
   }
 
   protected $v1 = 'one', $v2 = 'two', $v3 = 'three', $itemId;

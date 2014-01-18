@@ -239,6 +239,9 @@ class DdItems extends Items {
     foreach (array_keys($item) as $fieldName) {
       if (!isset($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
+
+
+
       if (DdTags::isTree($fieldType) and DdTags::isMulti($fieldType)) {
         $item[$fieldName] = [];
         foreach (DdTags::items($this->strName, $fieldName)->getFlat($item['id']) as $tag) {
