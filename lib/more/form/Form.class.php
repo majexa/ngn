@@ -98,13 +98,13 @@ class Form {
   public $disableSubmit = false;
 
   /**
-   * @var FormSpamBotBlocker
+   * @var FormSpamBlocker
    */
-  public $fsbb;
+  public $fsb;
 
   public $nospam;
 
-  public $enableFSBB = true;
+  public $enableFsb = true;
 
   public $elementsData = [];
 
@@ -353,7 +353,7 @@ class Form {
     }
     $html = $html.str_replace('{input}', $elsHtml, $this->templates['form']);
     $html .= $this->htmlVisibilityConditions();
-    if (isset($this->fsbb)) $html .= $this->fsbb->makeTags();
+    if (isset($this->fsb)) $html .= $this->fsb->makeTags();
     if (!$this->disableFormTag) $html .= '</form>';
     return $html.$this->js();
   }
@@ -384,7 +384,7 @@ class Form {
 
   function js() {
     if ($this->disableJs or $this->disableFormTag) return '';
-    $this->js = '';
+    $this->js = $this->jsInline = '';
     $jsTypesAdded = [];
     $typeJs = '';
     foreach ($this->els as $el) {
@@ -400,12 +400,10 @@ class Form {
     // Call "js..." methods
     foreach (get_class_methods($this) as $method) {
       if ($method != 'js' and substr($method, 0, 2) == 'js') {
-        if (Misc::hasPrefix('jsInline', $method)) {
-          if (($c = $this->$method()) != '') {
-            $this->jsInline .= "\n// ------- $method ------- \n".$c;
-          }
+        if (($c = $this->$method()) != '') {
+          if (Misc::hasPrefix('jsInline', $method)) $this->jsInline .= "\n// -- $method -- \n".$c;
+          else $this->js .= "\n// -- $method -- \n".$c;
         }
-        elseif (($c = $this->$method()) != '') $this->js .= "\n// ------- $method ------- \n".$c;
       }
     }
     $r = '';
@@ -421,7 +419,6 @@ class Form {
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
       file_put_contents($file, "Ngn.frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
     }
-    //$mtime = filemtime($file);
     return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : filemtime($file));
   }
 
@@ -562,8 +559,7 @@ class Form {
     foreach ($this->getElements() as $name => $el) {
       if (!empty($el['noValue'])) continue;
       // Если в элементе или форме есть флаг 'filterEmpties' и значение элемента пусто
-      if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties']))
-        and $el->isEmpty()
+      if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties'])) and $el->isEmpty()
       ) continue;
       $value = $el->value();
       BracketName::setValue($r, $name, $value === null ? '' : $value);
@@ -584,7 +580,6 @@ class Form {
       foreach ($ff as $k => $v) if ($v != $this->lastFields[$k]) die2([$v, $this->lastFields[$k]]);
       //die2([$this->lastFields, $this->fields->getFields()]);
     }
-
     $this->lastFields = $this->fields->getFields();
     return $this->_id;
     */
@@ -600,12 +595,11 @@ class Form {
     ];
   }
 
-  private function initFSBB() {
-    // Init FormSpamBotBlocker
-    if ($this->enableFSBB) {
-      if ($this->fsbb) return;
-      $this->fsbb = new FormSpamBotBlocker;
-      $this->fsbb->hasSession = false;
+  private function initFsb() {
+    if ($this->enableFsb) {
+      if ($this->fsb) return;
+      $this->fsb = new FormSpamBotBlocker;
+      $this->fsb->hasSession = false;
       $this->nospam = false; // Если FSBB включен, определяем включаем флаг отсутствия спама
     }
     else {
@@ -613,7 +607,9 @@ class Form {
     }
   }
 
-  // Action Field
+  /**
+   * @var string Action Field
+   */
   protected $defaultActionName = 'action';
 
   protected $hiddenFieldsData = [];
@@ -754,14 +750,14 @@ class Form {
     $this->disableJs = $flag;
   }
 
-  function fsbb() {
+  function fsb() {
     if ($this->hasErrors) return;
-    $this->initFSBB();
+    $this->initFsb();
     // Проверяем на спам, если есть сабмит и добавляем ошибку, если проверку не прошла
-    if ($this->enableFSBB and $this->isSubmitted()) {
+    if ($this->enableFsb and $this->isSubmitted()) {
       // Ах да.. только в том случае, если засабмичено
       //if ($this->defaultData) throw new Exception('default data not exists');
-      $this->nospam = $this->fsbb->checkTags($this->defaultData);
+      $this->nospam = $this->fsb->checkTags($this->defaultData);
       if (!$this->nospam) {
         $this->globalError('Не прошла проверка на спам. <a href="'.Tt()->getPath().'">Попробуйте заполнить форму ещё раз</a>');
       }
