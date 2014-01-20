@@ -2,6 +2,8 @@
 
 class TestWsClient extends ProjectTestCase {
 
+  static $local = true;
+
   function test() {
     if (!($config = Config::getVar('wss', true))) return;
     Dir::remove(LOGS_PATH.'/wss.log');
