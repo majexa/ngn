@@ -9,6 +9,13 @@ class ProjectTestRunner extends TestRunnerAbstract {
     parent::__construct($filterNames);
   }
 
+  protected function run() {
+    PHPUnit_TextUI_TestRunner::run($this->suite, [
+        'printer' => new ProjectTestPrinter($this->project)
+      ]
+    );
+  }
+
   protected function getClasses() {
     return array_filter(parent::getClasses(), function($class) {
       $r = ClassCore::hasAncestor($class, 'ProjectTestCase');
