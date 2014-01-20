@@ -31,17 +31,12 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2. Версии до store() и после не совпадают");
 
     $filesize1 = filesize(Sflm::flm('js')->cacheFile());
-    file_put_contents('/tmp/1/111', file_get_contents(Sflm::flm('js')->cacheFile()));
-
     $this->assertFalse((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is not preset in complete file');
     (new FieldEPhone(['name' => 'dummy'], new Form([])))->typeJs();
     $this->assertTrue((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is preset in complete file');
-    return;
 
     $filesize2 = filesize(Sflm::flm('js')->cacheFile());
     $this->assertTrue($filesize2 > $filesize1, "File size is larger then initial ($filesize2 > $filesize1)");
-    file_put_contents('/tmp/1/222', file_get_contents(Sflm::flm('js')->cacheFile()));
-
 
     // reset - эмитация 2-го открытия страницы. без очистки кэша!
     $v1 = Sflm::flm('js')->version();
