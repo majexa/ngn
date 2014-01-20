@@ -27,8 +27,6 @@ class TestRunnerAbstract {
   }
 
   function addTestSuite($class) {
-    //$path = Lib::getPath($class);
-    //if (file_exists(dirname($path).'/init.php')) require_once dirname($path).'/init.php';
     $rc = new ReflectionClass($class);
     if ($rc->isAbstract()) return;
     $this->suite->addTestSuite($rc);
@@ -43,7 +41,6 @@ class TestRunnerAbstract {
     $filter = false;
     if (isset($this->filterPrefix)) {
       $filter = function($class) {
-        //prr([$this->filterPrefix, $class]);
         return Misc::hasPrefix('Test'.$this->filterPrefix, $class);
       };
     } elseif ($this->filterClasses) {
