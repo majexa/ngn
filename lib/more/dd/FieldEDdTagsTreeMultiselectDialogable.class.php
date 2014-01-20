@@ -2,6 +2,8 @@
 
 class FieldEDdTagsTreeMultiselectDialogable extends FieldEDdTagsTreeMultiselect {
 
+  protected $useTypeJs = true;
+
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'rowClass' => 'treeMultiselectDialogable'
@@ -9,8 +11,8 @@ class FieldEDdTagsTreeMultiselectDialogable extends FieldEDdTagsTreeMultiselect 
   }
 
   function typeJs() {
-    if (!parent::typeJs()) return '';
     Sflm::flm('css')->addLib('i/css/common/treeMultiselectDialogable.css');
+    return parent::typeJs();
   }
 
 }

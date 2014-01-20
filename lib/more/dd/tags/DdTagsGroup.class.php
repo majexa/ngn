@@ -66,7 +66,7 @@ class DdTagsGroup {
     db()->query('DELETE FROM tagGroups WHERE id=?d', $this->p['id']);
     db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=?', $this->p['strName'], $this->p['name']);
     db()->query('DELETE FROM tags WHERE strName=? AND groupName=?', $this->p['strName'], $this->p['name']);
-    O::delete(get_class($this), $this->p['name']);
+    O::delete('DdTagsItems', $this->p['strName'], $this->p['name']);
   }
 
   // ================================= STATIC ================================

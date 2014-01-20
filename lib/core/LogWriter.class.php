@@ -31,7 +31,10 @@ class LogWriter {
       $s .= 'url: '.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$_SERVER['REQUEST_URI'].', referer: '.(!empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
       if ($params) $s .= ', ';
     }
-    if ($params) $s .= Tt()->enum($params, ', ', '$k.`: `.$v');
+    $r = [];
+    foreach ($params as $k => $v) $r[] = "$k: $v";
+    $s .= implode(', ', $r);
+    // if ($params) $s .= Tt()->enum($params, ', ', '$k.`: `.$v');
     $s .= "\n";
     $s .= "<body>".$html."</body>";
     $html = false;
