@@ -15,7 +15,9 @@ class FieldEDdTagsTreeMultiselect extends FieldEText {
   protected $useTypeJs = true;
 
   protected function defineOptions() {
-    return ['rootTagId' => 0];
+    return [
+      'rootTagId' => 0
+    ];
   }
 
   function _html() {

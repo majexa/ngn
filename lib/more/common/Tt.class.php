@@ -130,6 +130,8 @@ class Tt {
    * @return  strgin  Склеенная по шаблону строка
    */
   function enum($arr, $glue = ', ', $tpl = '$v', $key = null) {
+    //die2(func_get_args());
+    //prr(func_get_args());
     if (empty($arr) or !is_array($arr)) return '';
     foreach ($arr as $k => $v) {
       if ($key) $v = $v[$key];

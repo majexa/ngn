@@ -46,7 +46,6 @@ class SendEmail {
    * @return  bool
    */
   function send($emails, $subject, $message, $html = true) {
-    output("Try sending email to $emails");
     Misc::checkEmpty($emails, '$emails');
     if (defined('ALLOW_SEND') and ALLOW_SEND === false) {
       $this->log($emails, $subject, $message);

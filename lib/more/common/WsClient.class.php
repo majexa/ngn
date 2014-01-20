@@ -30,7 +30,7 @@ class WsClient {
       if ($strict) throw new Exception("Can't write to socket ($errno:$errstr)");
       return false;
     }
-    $r = fread($this->socket, 1000);
+    fread($this->socket, 1000);
     return $this;
   }
 
@@ -42,6 +42,7 @@ class WsClient {
     if ((@fwrite($this->socket, "\x00".$string."\xff")) === false) {
       throw new Exception("Can't write to socket");
     }
+    output("Sent data: $this->host, $this->port");
   }
 
   private function generateRandomString($length = 10, $addSpaces = true, $addNumbers = true) {

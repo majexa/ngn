@@ -45,6 +45,15 @@ class DdFieldsManager extends DbItemsManager {
         $this->form->fields->fields = array_merge($this->form->fields->fields, Arr::assoc($type['fields'], 'name'));
       }
     }
+    else {
+      // for direct change on create
+      $this->form->fields->fields = array_merge($this->form->fields->fields, Arr::assoc([
+        [
+          'type' => 'hidden',
+          'name' => 'settings'
+        ]
+      ], 'name'));
+    }
   }
 
   protected function replaceData() {
@@ -52,7 +61,8 @@ class DdFieldsManager extends DbItemsManager {
     if (!empty($this->data['type'])) {
       // Заменяем значения из формы, дозволеными статическими значениями из типа поля
       $this->data = array_merge($this->data, Arr::filterByKeys(DdFieldCore::getTypeData($this->data['type']), [
-        'notList', 'system'
+        'notList',
+        'system'
       ]));
     }
     $this->data['filterable'] = $this->filterable();
@@ -141,9 +151,7 @@ class DdFieldsManager extends DbItemsManager {
   }
 
   protected function getCharsetCond(array $type) {
-    if ($type['dbType'] == 'VARCHAR' or
-      $type['dbType'] == 'TEXT' or
-      $type['dbType'] == 'LONGTEXT'
+    if ($type['dbType'] == 'VARCHAR' or $type['dbType'] == 'TEXT' or $type['dbType'] == 'LONGTEXT'
     ) {
       return 'CHARACTER SET '.db()->charset.' COLLATE '.db()->collate;
     }

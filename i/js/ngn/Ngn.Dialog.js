@@ -841,7 +841,8 @@ Ngn.Dialog.HtmlPage = new Class({
 
   options: {
     noPadding: false,
-    footer: false
+    footer: false,
+    reduceHeight: true
   }
 
 });

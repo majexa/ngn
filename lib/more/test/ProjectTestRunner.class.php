@@ -27,9 +27,6 @@ class ProjectTestRunner extends TestRunnerAbstract {
 
   function _global() {
     $this->_run(array_filter($this->getClasses(), function($class) {
-      //if (!in_array($class, [
-      //  ''
-      //])) return false;
       return !strstr(Lib::getClassPath($class), "projects/$this->project/");
     }));
   }
