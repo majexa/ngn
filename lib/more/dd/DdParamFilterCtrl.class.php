@@ -56,7 +56,9 @@ trait DdParamFilterCtrl {
     }
     elseif ($k == 'v') {
       // Четко по значению поля. Пример /asd.asd/v.title.Какой-то заголовок
-      list($fieldName, $value) = explode('.', $v);
+      //list($fieldName, $value) = explode('.', $v);
+      $fieldName = strstr($v, '.', true);
+      $value = substr(strstr($v, '.'), 1);
       $value = $value == 'none' ? '' : $value;
       $value = urldecode($value);
       if (isset(DdCore::$pathTranslation[$fieldName])) {
