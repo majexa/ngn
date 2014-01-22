@@ -2,7 +2,7 @@
 
 class Sflm {
 
-  static $debug;
+  static $debug = false;
 
   static $forceCache;
 
@@ -79,14 +79,13 @@ class Sflm {
   }
 
   static function output($s) {
-    if (self::$debug) output($s);
+    if (IS_DEBUG) output($s);
   }
 
 }
 
 Sflm::$debug = getConstant('DEBUG_STATIC_FILES');
 Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
-
 Sflm::$absBasePaths = [
   //'u' => WEBROOT_PATH.'/'.UPLOAD_DIR,
   'm' => WEBROOT_PATH.'/m',

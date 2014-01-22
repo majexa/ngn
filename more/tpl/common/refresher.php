@@ -7,7 +7,6 @@
 <div class="refresher">
   <? $this->tpl($d['subTpl'], $d) ?>
 </div>
-
 <script>
   (function() {
     var eWorkflow = document.getElement('.refresher');

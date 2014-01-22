@@ -11,12 +11,12 @@ class SflmJsClassesBase {
   }
 
   protected function initExistingClasses() {
-    if (($r = NgnCache::c()->load('jsExistingClasses'))) {
+    if (($r = NgnCache::c()->load('jsExistingClasses'.$this->frontend->frontend))) {
       list($this->existingClassesPaths, $this->existingClasses) = $r;
       return;
     }
-    $this->existingClasses = [];
     $this->existingClassesPaths = [];
+    $this->existingClasses = [];
     $storedPaths = [];
     foreach ($this->frontend->getPaths() as $path) if (preg_match('/.*\/[A-Z][A-Za-z.]+\.js/', $path)) $storedPaths[] = $path;
     foreach ($storedPaths as $path) {
@@ -24,7 +24,7 @@ class SflmJsClassesBase {
       foreach ($classes as $class) $this->existingClassesPaths[$class] = $path;
       $this->existingClasses = array_merge($this->existingClasses, $classes);
     }
-    NgnCache::c()->save([$this->existingClassesPaths, $this->existingClasses], 'jsExistingClasses');
+    NgnCache::c()->save([$this->existingClassesPaths, $this->existingClasses], 'jsExistingClasses'.$this->frontend->frontend);
   }
 
   protected function initClassesPaths() {
@@ -36,7 +36,6 @@ class SflmJsClassesBase {
     $classesPaths = [];
     $files = [];
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
-    //foreach (Ngn::$basePaths as $path) $files = Arr::append($files, Dir::getFilesR($path.'/scripts/js', '[A-Z]*'));
     foreach ($files as $file) $classesPaths[Misc::removeSuffix('.js', basename($file))] = $this->frontend->sflm->getPath($file, 'adding to init classes paths');
     $this->classesPaths = array_merge($this->existingClassesPaths, $classesPaths);
     NgnCache::c()->save($this->classesPaths, 'jsClassesPaths');

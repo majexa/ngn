@@ -16,12 +16,14 @@ Ngn.DdGrid = new Class({
     this.options.eItems.getElements('select').each(function(el) {
       var itemId = el.getParent('.item').get('data-id');
       el.addEvent('change', function() {
+
         new Ngn.Request.Loading({
           url: this.getLink() + '?a=ajax_updateField&field=' + el.get('name') + '&value=' + el.get('value') + '&' + this.options.idParam + '=' + itemId,
           onComplete: function() {
             this.reload(itemId);
           }.bind(this)
         }).send();
+
       }.bind(this));
     }.bind(this));
     /*
