@@ -2,6 +2,7 @@
 <script>
   (function() {
     var menu = Ngn.Grid.defaultMenu;
+    <? if (Misc::isGod()) { ?>
     menu.push({
       title: 'Настройки',
       cls: 'settings',
@@ -14,6 +15,7 @@
         });
       }
     });
+    <? } ?>
     var opt = {
       menu: menu,
       toolActions: Ngn.Grid.toolActions,

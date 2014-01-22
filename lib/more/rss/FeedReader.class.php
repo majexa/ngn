@@ -31,7 +31,6 @@ class FeedReader_Common {
   }
 
   function getFeedOutputData() {
-    //$this->outputData = Misc::iconvR('UTF-8', $this->charsetOut, $this->outputData);
     return $this->outputData;
   }
 
@@ -40,7 +39,6 @@ class FeedReader_Common {
   }
 
   function parseFeed() {
-    //if (!$data = @file_get_contents_ie($this->feedUrl)) return false;
     if (!$data = @file_get_contents($this->feedUrl)) return false;
     $this->feedReader = xml_parser_create();
     xml_set_object($this->feedReader, $this);
