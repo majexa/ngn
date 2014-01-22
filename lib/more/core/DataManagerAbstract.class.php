@@ -1,4 +1,4 @@
-<?php
+c<?php
 
 /**
  * Осуществляет фильтрацию, добавление, изменение и редактирование данных
@@ -120,6 +120,7 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   function create(array $data, $throwFormErrors = true) {
+
     if ($this->options['ignoreExisting'] and $this->form->fields->exists($data['name'])) return false;
     $this->form->fromRequest = false;
     $this->form->create = true;

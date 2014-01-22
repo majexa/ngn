@@ -175,7 +175,7 @@ abstract class SflmBase {
     if (!$this->isPackage($lib)) return [$lib];
     if (isset($this->packagesCache[$lib])) return $this->packagesCache[$lib];
     $this->packagesCache[$lib] = $this->getPackageLibsR($lib);
-    Sflm::output("Got package '$lib' libs recursive:\n".implode("\n", $this->packagesCache[$lib]));
+    Sflm::output("Got package '$lib' libs recursive: ".implode(", ", $this->packagesCache[$lib]));
     return $this->packagesCache[$lib];
   }
 

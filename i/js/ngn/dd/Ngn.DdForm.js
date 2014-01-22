@@ -6,6 +6,8 @@ Ngn.DdForm = new Class({
   initialize: function(eForm, options) {
     this.strName = eForm.get('data-strName');
     this.parent(eForm, options);
+    window.fireEvent('ddFormAfterInit'+this.strName);
+    //);
   }
 
   /*
