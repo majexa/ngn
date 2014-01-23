@@ -1,7 +1,7 @@
 Ngn.faviconTimer = {
   
   start: function() {
-    favicon.animate([
+    Ngn.favicon.animate([
       './i/img/icons/l/loader1.ico',
       './i/img/icons/l/loader2.ico',
       './i/img/icons/l/loader3.ico',
@@ -10,7 +10,7 @@ Ngn.faviconTimer = {
   },
   
   stop: function() {
-    favicon.stop();
+    Ngn.favicon.stop();
   }
   
 }

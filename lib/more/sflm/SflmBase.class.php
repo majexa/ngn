@@ -191,8 +191,10 @@ abstract class SflmBase {
         $libs = Arr::append($libs, $this->getPackageLibsR($lib));
       }
       else {
-        //$this->processPathOnAdd($lib);
-        $libs[] = $lib;
+        if (Misc::hasPrefix('i/', basename($lib))) {
+          File::checkExists($this->getAbsPath($lib), "Path '$lib' in package '$package' does not exists");
+        }
+        if (file_exists($this->getAbsPath($lib))) $libs[] = $lib;
       }
     }
     return $libs;
