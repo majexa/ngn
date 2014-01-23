@@ -56,16 +56,21 @@ Ngn.Items = new Class({
   initToolActions: function() {
     this.addBtnsActions([
       ['.delete', function(id, eBtn, eItem) {
-        if (!confirm('Вы уверены?')) return;
-        this.loading(id, true);
-        var g = {};
-        g[this.options.idParam] = id;
-        new Request({
-          url: this.getLink() + '?a=ajax_' + this.options.deleteAction,
-          onComplete: function() {
-            this.options.reloadOnDelete ? this.reload() : eItem.destroy();
+        new Ngn.Dialog.Confirm.Mem({
+          id: 'itemsDelete',
+          notAskSomeTime: true,
+          onOkClose: function() {
+            this.loading(id, true);
+            var g = {};
+            g[this.options.idParam] = id;
+            new Request({
+              url: this.getLink() + '?a=ajax_' + this.options.deleteAction,
+              onComplete: function() {
+                this.options.reloadOnDelete ? this.reload() : eItem.destroy();
+              }.bind(this)
+            }).GET(g);
           }.bind(this)
-        }).GET(g);
+        });
       }.bind(this)],
       ['a[class~=flagOn],a[class~=flagOff]', function(id, eBtn) {
         /*
