@@ -20,7 +20,8 @@ class SflmJsClasses extends SflmJsClassesBase {
   }
 
   function parseNewNgnClasses($c) {
-    if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]+)/', $c, $m)) return $m[1];
+    //if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]+)/', $c, $m)) return $m[1];
+    if (preg_match_all('/\s+(Ngn\.[A-Za-z._]+)/', $c, $m)) return $m[1];
     return [];
   }
 
@@ -58,6 +59,7 @@ class SflmJsClasses extends SflmJsClassesBase {
    * @param $path
    */
   function processPath($path) {
+    output("Processing contents of '$path'");
     $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
     foreach ($this->parseClassesDefinition($c) as $class) {
       // Эти классы уже определены
@@ -76,7 +78,11 @@ class SflmJsClasses extends SflmJsClassesBase {
   }
 
   function processNewNgnClasses($code, $path = 'default') {
-    foreach ($this->parseNewNgnClasses($code) as $v) $this->addClass($v, "$path new");
+    output("processNewNgnClasses of '$path'");
+    foreach ($this->parseNewNgnClasses($code) as $class) {
+      output("* $class");
+      $this->addClass($class, "$path new");
+    }
   }
 
 }
