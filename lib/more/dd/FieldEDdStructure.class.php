@@ -3,7 +3,6 @@
 class FieldEDdStructure extends FieldESelect {
 
   protected function init() {
-    die2(1);
     $this->options['options'] = ['' => '—'];
     $items = new DdStructureItems;
     if (!empty($this->options['allowedType'])) {
