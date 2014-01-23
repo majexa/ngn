@@ -12,7 +12,7 @@ class Queue extends QueueBase {
     $this->output("Adding data. Exchange: $this->exName, queue: $this->queueName");
     $body = json_encode($data);
     if ($this->isDebug()) LogWriter::v('publishBody', $body);
-       if (!($this->getExchange()->publish($body, 'global', AMQP_NOPARAM, $attr))) {
+    if (!($this->getExchange()->publish($body, 'global', AMQP_NOPARAM, $attr))) {
       throw new Exception('Publish data error');
     }
   }

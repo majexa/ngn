@@ -16,7 +16,7 @@ class SflmFrontendJs extends SflmFrontend {
     return $code;
   }
 
-  function addClass($class, $source = 'default', $strict = false) {
+  function addClass($class, $source = 'direct', $strict = false) {
     $frontend = $this;
     $this->classes->addClass($class, $source, function($path) use ($frontend) {
       $frontend->addLib($path);
