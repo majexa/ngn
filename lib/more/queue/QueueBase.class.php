@@ -21,7 +21,7 @@ class QueueBase {
     if (isset($this->exchange)) return $this->exchange;
     $this->exchange = new AMQPExchange($this->channel);
     $this->exchange->setName($this->exName);
-    $this->exchange->setType('direct');
+    $this->exchange->setType('fanout');
     $this->exchange->declare();
     return $this->exchange;
   }
