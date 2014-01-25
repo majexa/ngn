@@ -23,7 +23,7 @@ class Cli {
 
   static function formatRunCmd($code, $includes, $runBasePath = null) {
     $code = str_replace("'", '"', $code);
-    $code = str_replace('"', '\\"', $code);
+
     return "'".self::addRunPaths($code, $includes, $runBasePath)."'";
   }
 
