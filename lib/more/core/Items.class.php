@@ -188,6 +188,7 @@ class Items extends DbItems {
 
   function updateField($id, $k, $v) {
     parent::updateField($id, $k, $v);
+
     $this->cc($id);
   }
 

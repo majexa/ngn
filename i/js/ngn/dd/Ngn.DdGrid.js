@@ -19,7 +19,7 @@ Ngn.DdGrid = new Class({
         new Ngn.Request.Loading({
           url: this.getLink() + '?a=ajax_updateField&field=' + el.get('name') + '&value=' + el.get('value') + '&' + this.options.idParam + '=' + itemId,
           onComplete: function() {
-            this.reload(itemId);
+            this.reload(itemId, true);
           }.bind(this)
         }).send();
       }.bind(this));

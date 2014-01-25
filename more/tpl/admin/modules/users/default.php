@@ -1,5 +1,11 @@
+<style>
+  #user_message {
+    padding-bottom: 10px;
+  }
+</style>
 <div id="table"></div>
 <script>
+var w = 300;
 new Ngn.Grid({
   isSorting: false,
   id: 'users',
@@ -11,6 +17,8 @@ new Ngn.Grid({
       action: function(grid) {
         new Ngn.Dialog.RequestForm({
           url: grid.options.basePath + '?a=json_new',
+          width: w,
+          id: 'user',
           onOkClose: function() {
             grid.reload();
           }.bind(this)
@@ -22,6 +30,8 @@ new Ngn.Grid({
     edit: function(row) {
       new Ngn.Dialog.RequestForm({
         url: '/admin/users/json_edit?id='+row.id,
+        width: w,
+        id: 'user',
         onOkClose: function() {
           this.reload();
         }.bind(this)

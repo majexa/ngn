@@ -61,7 +61,6 @@ function getPr($v, $html = true) {
 }
 
 function output($str, $output = false) {
-
   if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <$str>").(R::get('plainText') ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }

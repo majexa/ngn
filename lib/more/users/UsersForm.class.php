@@ -46,7 +46,7 @@ class UsersForm extends Form {
     if (Config::getVarVar('userReg', 'extraData')) {
       $fields = array_merge($fields, [
         [
-          'type'  => 'header',
+          'type'  => 'headerToggle',
           'title' => 'Дополнительно'
         ]
       ], array_map(function ($v) {

@@ -30,6 +30,7 @@ class DdTags {
     return trim(Misc::transit($title, true), '-');
   }
 
+
   static function rebuildCounts() {
     db()->select('UPDATE tags SET cnt=0');
     foreach ((db()->select('
