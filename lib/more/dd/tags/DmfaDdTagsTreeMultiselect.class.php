@@ -25,6 +25,7 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     if (isset($currentTagIds)) foreach ($currentTagIds as $id) if (!in_array($id, $tagIds)) $deleteTagIds[] = $id;
     $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($newTagIds);
     foreach ($deleteTagIds as $id) $tagItems->deleteByCollection($this->dm->id, $id); // delete tag by id does not work. need to check if it is a collection
+    die2($collectionTagIds);
     $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);
     $tagItems->updateCounts($deleteTagIds);
   }

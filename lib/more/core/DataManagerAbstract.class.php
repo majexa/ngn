@@ -329,6 +329,7 @@ abstract class DataManagerAbstract extends Options2 {
   function updateField($id, $fieldName, $value) {
     $this->form->fields->fields = Arr::filterByKeys($this->form->fields->fields, $fieldName);
     $this->update($id, [$fieldName => $value]);
+
   }
 
   function updateData($id, $data) {

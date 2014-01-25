@@ -14,4 +14,4 @@ define('LOGS_PATH', SITE_PATH.'/logs');
 require_once NGN_PATH.'/init/core.php';
 require_once NGN_PATH.'/init/web.php';
 
-Ngn::addBasePath(SITE_PATH);
+Ngn::addBasePath(SITE_PATH, 5);

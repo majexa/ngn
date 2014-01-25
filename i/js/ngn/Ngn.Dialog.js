@@ -572,9 +572,8 @@ Ngn.Dialog.Confirm.Mem = new Class({
       if (this.timeoutId) clearTimeout(this.timeoutId);
       this.timeoutId = (function() {
         Ngn.storage.remove(this.options.id + 'confirmMem');
-      }).delay(60000, this);
+      }).delay(120000, this);
     }
-    c([this.options.id + 'confirmMem', Ngn.storage.get(this.options.id + 'confirmMem')]);
     if (Ngn.storage.get(this.options.id + 'confirmMem')) {
       this.fireEvent('okClose');
       return;
