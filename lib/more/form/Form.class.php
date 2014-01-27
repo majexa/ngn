@@ -323,6 +323,7 @@ class Form {
 
   protected $js = '';
   protected $jsInline = '';
+  protected $jsInlineDynamic = '';
 
   /**
    * Возвращает HTML формы
@@ -358,7 +359,7 @@ class Form {
     return $html.$this->js();
   }
 
-  protected function initElementsInlinsJs() {
+  protected function initElementsInlineJs() {
     $jsTypesAdded = [];
     $elsHtml = '';
     foreach ($this->els as $el) {
@@ -408,6 +409,7 @@ class Form {
     }
     $r = '';
     if (($url = $this->getCachedJsUrl()) !== false) $r .= "\n<div id=\"{$this->id()}js\" style=\"display:none\">$url</div>";
+    if ($this->jsInlineDynamic) $this->jsInline .= "\n".$this->jsInlineDynamic;
     if ($this->jsInline) $r .= "\n<div id=\"{$this->id()}jsInline\" style=\"display:none\">{$this->jsInline}</div>";
     return $r;
   }

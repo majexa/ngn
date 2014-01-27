@@ -79,7 +79,7 @@ class Sflm {
   }
 
   static function output($s) {
-    if (getConstant('IS_DEBUG')) output($s);
+    //if (getConstant('IS_DEBUG')) output($s);
   }
 
 }

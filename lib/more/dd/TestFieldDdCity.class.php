@@ -10,7 +10,7 @@ class TestFieldDdCity extends TestFieldDdTagsAbstract {
   }
 
   function runTests() {
-    die2(static::$im->items->getItem($this->itemId));
+    //die2(static::$im->items->getItem($this->itemId));
   }
 
   //function test() {
