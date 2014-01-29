@@ -56,6 +56,7 @@ class DdItemsManager extends DbItemsManager {
       $data[$k] = $v;
     }
     if (!empty($data)) $this->items->update($this->id, $data);
+    else $this->items->updateField($this->id, 'dateUpdate', dbCurTime());
   }
 
   /**
