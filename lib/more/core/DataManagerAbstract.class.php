@@ -120,6 +120,7 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   function create(array $data, $throwFormErrors = true) {
+
     if ($this->options['ignoreExisting'] and $this->form->fields->exists($data['name'])) return false;
     $this->form->fromRequest = false;
     $this->form->create = true;
@@ -328,6 +329,7 @@ abstract class DataManagerAbstract extends Options2 {
   function updateField($id, $fieldName, $value) {
     $this->form->fields->fields = Arr::filterByKeys($this->form->fields->fields, $fieldName);
     $this->update($id, [$fieldName => $value]);
+
   }
 
   function updateData($id, $data) {

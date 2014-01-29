@@ -58,6 +58,7 @@ class CtrlAdminUsers extends CtrlAdmin {
     return [
       'head' => Arr::append($head, Arr::get($exFields, 'title')),
       'body' => array_map(function($item) use ($exItems, $exFields, $config) {
+        // @todo эту вещь нужно реализовать через DDO
         $exItem = isset($exItems[$item['id']]) ? Arr::filterByKeys($exItems[$item['id']], array_keys($exFields)) : [];
         foreach ($exFields as $f) {
           if (isset($exItem[$f['name']]) and FieldCore::hasAncestor($f['type'], 'select')) {
@@ -68,6 +69,7 @@ class CtrlAdminUsers extends CtrlAdmin {
             }
           }
         }
+
         $data = [$item['id']];
         if ($config['loginEnable']) $data[] = $item['login'];
         if ($config['emailEnable']) $data[] = $item['email'];

@@ -15,20 +15,13 @@ Ngn.DdGrid = new Class({
   initItems: function() {
     this.options.eItems.getElements('select').each(function(el) {
       var itemId = el.getParent('.item').get('data-id');
-      el.addEvent('change', function() {
-        var callback = function() {
-          new Ngn.Request.Loading({
-            url: this.getLink() + '?a=ajax_updateField&field=' + el.get('name') + '&value=' + el.get('value') + '&' + this.options.idParam + '=' + itemId,
-            onComplete: function() {
-              this.reload(itemId);
-            }.bind(this)
-          }).send();
-        }.bind(this);
-        if (Ngn.DdGrid.selectOnchange['orders']) {
-          Ngn.DdGrid.selectOnchange['orders'](callback);
-        } else {
-          callback();
-        }
+      el.addEvent('change', function() { 
+        new Ngn.Request.Loading({
+          url: this.getLink() + '?a=ajax_updateField&field=' + el.get('name') + '&value=' + el.get('value') + '&' + this.options.idParam + '=' + itemId,
+          onComplete: function() {
+            this.reload(itemId, true);
+          }.bind(this)
+        }).send();
       }.bind(this));
     }.bind(this));
     /*

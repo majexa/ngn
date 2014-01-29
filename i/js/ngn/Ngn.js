@@ -157,20 +157,20 @@ Array.prototype.max = function() {
 };
 
 Array.prototype.get = function(k, v) {
-  for (var i=0; i<this.length; i++) {
+  for (var i = 0; i < this.length; i++) {
     if (this[i][k] == v) return this[i];
   }
   return false;
 };
 
 /*
-Array.prototype.getIndex = function(k, v) {
-  for (var i=0; i<this.length; i++) {
-    if (this[i][k] == v) return i;
-  }
-  return false;
-};
-*/
+ Array.prototype.getIndex = function(k, v) {
+ for (var i=0; i<this.length; i++) {
+ if (this[i][k] == v) return i;
+ }
+ return false;
+ };
+ */
 
 Arr = {};
 Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists in an array
@@ -487,10 +487,14 @@ Ngn.storage = {
     if (v == 'false') return false; else if (v == 'true') return true; else return v;
   },
   set: function(key, value) {
-    if (localStorage)
-      localStorage.setItem(key, value); else
+    if (localStorage) {
+      localStorage.setItem(key, value)
+    } else {
       Cookie.write(key, value);
-    //new Ngn.Request.JSON('/c/userStorage/'+key, value).send();
+    }
+  },
+  remove: function(key) {
+    localStorage.removeItem(key);
   },
   bget: function(key, value) {
     return !!this.get(key);

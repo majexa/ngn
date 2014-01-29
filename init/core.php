@@ -34,8 +34,8 @@ if (!defined('VENDORS_PATH')) die('VENDORS_PATH not defined (core/init)'); // @L
 if (!file_exists(VENDORS_PATH)) die('Folder "'.VENDORS_PATH.'" does not exists (core/init)'); // @LibStorageRemove
 
 // Здесь ищем сторонние библиотеки
-define('INCL_PATH_DELIMITER', getOS() == 'win' ? ';' : ':');
-set_include_path(VENDORS_PATH.INCL_PATH_DELIMITER.get_include_path());  // @LibStorageRemove
+//define('INCL_PATH_DELIMITER', getOS() == 'win' ? ';' : ':');
+set_include_path(VENDORS_PATH.PATH_SEPARATOR.get_include_path());  // @LibStorageRemove
 
 set_exception_handler(['Err', 'exceptionHandler']);
 set_error_handler(['Err', 'errorHandler']);

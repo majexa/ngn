@@ -92,8 +92,8 @@ Ngn.Grid = new Class({
     return this.options.basePath + (action ? '/' + action : '') + (this.options.filterPath ? this.options.filterPath.toPathString() : '') + (this.currentPage == 1 ? '' : '/pg' + this.currentPage);
   },
 
-  reload: function(itemId) {
-    if (itemId) this.loading(itemId, true); // показываем, что строчка обновляется
+  reload: function(itemId, skipLoader) {
+    if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.loading(true);
     new Ngn.Request.JSON({
       url: this.getLink(true),

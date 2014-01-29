@@ -17,14 +17,11 @@ class SflmJsClasses extends SflmJsClassesBase {
 
   protected function parseRequiredAfterClasses($c) {
     return $this->parseRequired($c, 'after');
-    // does not work properly
-    //if (preg_match_all('/new\s+([A-Z][A-Za-z.]+)/', $c, $m)) {
-      //foreach ($m[1] as $class) if ($class != 'Class') $r[] = $class;
-    //}
   }
 
   function parseNewNgnClasses($c) {
-    if (preg_match_all('/\s+(Ngn\.[A-Za-z., ]+)/', $c, $m)) return $m[1];
+    //if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]+)/', $c, $m)) return $m[1];
+    if (preg_match_all('/\s+(Ngn\.[A-Za-z._]+)/', $c, $m)) return $m[1];
     return [];
   }
 
@@ -34,17 +31,18 @@ class SflmJsClasses extends SflmJsClassesBase {
    * @throws Exception
    */
   function addClass($class, $source, Closure $success = null, Closure $failure = null) {
-    Sflm::output("Try to add class '$class'. ($source)");
+    if ($class == 'Ngn.DdGrid.Admin') LogWriter::v('Ngn.DdGrod.Admin', 'trace');
+    $prefix = "Try to add class '$class'. ($source). ";
     if (in_array($class, $this->existingClasses)) {
-      Sflm::output("class '$class' exists");
+      Sflm::output($prefix."EXISTS");
       return;
     }
     if (!isset($this->classesPaths[$class])) {
       if ($failure) $failure($source);
-      Sflm::output("class '$class' from '$source' not found");
+      Sflm::output($prefix."NOT FOUND");
       return false;
     }
-    Sflm::output("Adding new class '$class' ($source)");
+    Sflm::output($prefix."ADDING");
     $path = $this->classesPaths[$class];
     $this->processPath($path, $success);
     $this->frontend->incrementVersion();
@@ -54,24 +52,25 @@ class SflmJsClasses extends SflmJsClassesBase {
 
   /**
    * Должно вызываться уже после добавления пути в фронтенд-библиотеку. Ф-я проверит наличие классов, определенных
-   * в в файле по этому пути, добавит их в существующие, а потом проверит все, классы, используемые
+   * в файле по этому пути, добавит их в существующие, а потом проверит все классы, используемые
    * в этом файле на присутствие. Если какого-то класса не будет среди определённых, то ф-я получит путь
-   * к файлу, где лежит этот класс и добавит этот путь во фронтенд-библиотеку
+   * к файлу, где лежит этот класс, и добавит этот путь во фронтенд-библиотеку
    *
    * @param $path
    */
   function processPath($path) {
+    output("Processing contents of '$path'");
     $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
-    foreach ($this->parseClassesDefinition($c) as $v) {
+    foreach ($this->parseClassesDefinition($c) as $class) {
       // Эти классы уже определены
-      Sflm::output("Class '$v' exists in $path. (definition)");
-      $this->existingClasses[] = $v;
+      Sflm::output("Class '$class' exists in $path. (definition)");
+      $this->existingClasses[] = $class;
     }
-    foreach ($this->parseRequired($c) as $v) $this->addSomething($v, "$path required");
-    foreach ($this->parseParentClasses($c) as $v) $this->addSomething($v, "$path parent");
+    foreach ($this->parseRequired($c) as $class) $this->addSomething($class, "$path required");
+    foreach ($this->parseParentClasses($c) as $class) $this->addSomething($class, "$path parent");
     $this->frontend->addLib($path, true);
     $this->processNewNgnClasses($c, $path);
-    foreach ($this->parseRequiredAfterClasses($c) as $v) $this->addSomething($v, "$path requiredAfter");
+    foreach ($this->parseRequiredAfterClasses($c) as $class) $this->addSomething($class, "$path requiredAfter");
   }
 
   protected function addSomething($str, $descr = null) {
@@ -79,7 +78,11 @@ class SflmJsClasses extends SflmJsClassesBase {
   }
 
   function processNewNgnClasses($code, $path = 'default') {
-    foreach ($this->parseNewNgnClasses($code) as $v) $this->addClass($v, "$path new");
+    output("processNewNgnClasses of '$path'");
+    foreach ($this->parseNewNgnClasses($code) as $class) {
+      output("* $class");
+      $this->addClass($class, "$path new");
+    }
   }
 
 }
