@@ -559,6 +559,7 @@ class Form {
   function getData() {
     $r = [];
     foreach ($this->getElements() as $name => $el) {
+      /* @var FieldEAbstract $el */
       if (!empty($el['noValue'])) continue;
       // Если в элементе или форме есть флаг 'filterEmpties' и значение элемента пусто
       if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties'])) and $el->isEmpty()
@@ -568,8 +569,6 @@ class Form {
     }
     return $r;
   }
-
-  //protected $_id;
 
   /**
    * @return string Уникальный идентификатор формы

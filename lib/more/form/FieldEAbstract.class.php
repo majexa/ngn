@@ -56,10 +56,9 @@ use Options;
     if (method_exists($this, 'beforeInit')) $this->beforeInit();
     $this->init();
     if ($this->form and !empty($this->options['name'])) {
-      if (!$this->form->req) die2($this->form->req);
       $this->isPostValue = (BracketName::getValue($this->form->req->p, $this->options['name'], BracketName::modeFalse) !== false);
     }
-    if ($this->isPostValue) $this->preparePostValue();
+    if ($this->isPostValue) $this->options['value'] = $this->preparePostValue();
     $this->initDefaultValue();
   }
 
@@ -68,6 +67,7 @@ use Options;
   }
 
   protected function preparePostValue() {
+    return null;
   }
 
   protected function prepareValue() {

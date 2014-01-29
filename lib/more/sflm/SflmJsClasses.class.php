@@ -59,7 +59,7 @@ class SflmJsClasses extends SflmJsClassesBase {
    * @param $path
    */
   function processPath($path) {
-    output("Processing contents of '$path'");
+    Sflm::output("Processing contents of '$path'");
     $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
     foreach ($this->parseClassesDefinition($c) as $class) {
       // Эти классы уже определены
@@ -78,9 +78,9 @@ class SflmJsClasses extends SflmJsClassesBase {
   }
 
   function processNewNgnClasses($code, $path = 'default') {
-    output("processNewNgnClasses of '$path'");
+    Sflm::output("processNewNgnClasses of '$path'");
     foreach ($this->parseNewNgnClasses($code) as $class) {
-      output("* $class");
+      Sflm::output("* $class");
       $this->addClass($class, "$path new");
     }
   }

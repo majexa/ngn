@@ -29,8 +29,8 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
   function a($tagId2, $v) {
     $item = static::$im->items->getItemF($this->itemId);
     $values = array_values($item['sample']);
-    $this->assertTrue($values[0][1]['tagId'] == $this->tagId2);
-    $this->assertTrue($values[1][1]['tagId'] == $tagId2);
+    $this->assertTrue($values[0][1]['tagId'] == $this->tagId2, "{$values[0][1]['tagId']} != $this->tagId2");
+    $this->assertTrue($values[1][1]['tagId'] == $tagId2, "{$values[1][1]['tagId']} != $tagId2");
     static::$im->requestUpdate($this->itemId);
     $html = static::$im->form->html();
     $this->assertTrue((bool)strstr($html, 'id="sample_'.$this->tagId2.'" checked />'));

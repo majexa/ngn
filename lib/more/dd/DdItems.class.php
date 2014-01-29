@@ -176,7 +176,7 @@ class DdItems extends Items {
   }
 
   // ********************************************
-  // -------------- Data Extenders ---------------
+  // -------------- Data Extenders --------------
   // ********************************************
 
   private function extendItemsTags(&$items) {
@@ -239,9 +239,6 @@ class DdItems extends Items {
     foreach (array_keys($item) as $fieldName) {
       if (!isset($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
-
-
-
       if (DdTags::isTree($fieldType) and DdTags::isMulti($fieldType)) {
         $item[$fieldName] = [];
         foreach (DdTags::items($this->strName, $fieldName)->getFlat($item['id']) as $tag) {
@@ -259,6 +256,23 @@ class DdItems extends Items {
           $item[$fieldName] = $r ? $r[0] : null;
         }
       }
+    }
+  }
+
+  protected function extendItemTagIds(&$item) {
+    $this->extendItemTags($item);
+    return;
+    $this->setFieldTagTypes();
+    foreach (array_keys($item) as $fieldName) {
+      if (!isset($this->fieldTagTypes[$fieldName])) continue;
+      $fieldType = $this->fieldTagTypes[$fieldName];
+      if (DdTags::isTree($fieldType)) {
+        $r = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
+      }
+      else {
+        $r = DdTags::items($this->strName, $fieldName)->getItems($item['id']);
+      }
+      $item[$fieldName] = $r ? (DdTags::isMulti($fieldType) ? $r : $r[0]) : null;
     }
   }
 
@@ -305,57 +319,6 @@ class DdItems extends Items {
     $item[$field['name']] = O::get('DdItems', $field['settings']['strName'])->getItemSimple($item[$field['name']]);
   }
   */
-
-  protected function extendItemTagIds(&$item) {
-    $this->setFieldTagTypes();
-    foreach (array_keys($item) as $fieldName) {
-      if (!isset($this->fieldTagTypes[$fieldName])) continue;
-      $fieldType = $this->fieldTagTypes[$fieldName];
-      if (DdTags::isTree($fieldType)) {
-        $r = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
-      }
-      else {
-        $r = DdTags::items($this->strName, $fieldName)->getItems($item['id']);
-      }
-      $item[$fieldName] = $r ? (DdTags::isMulti($fieldType) ? $r : $r[0]) : null;
-      continue;
-
-
-      if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeMultiselectAc')) {
-        $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
-      }
-      elseif (FieldCore::hasAncestor($fieldType, 'ddTags')) {
-        $tags = db()->selectCol(<<<SQL
-SELECT tags.title FROM tagItems, tags
-WHERE
-  tagItems.groupName =? AND
-  tagItems.strName =? AND
-  tagItems.itemId =?d AND
-  tagItems.tagId = tags.id
-SQL
-          , $fieldName, $this->strName, $item['id']);
-        $item[$fieldName] = implode(', ', $tags);
-      }
-      elseif (DdTags::isTree($fieldType)) {
-        if (FieldCore::hasAncestor($fieldType, 'ddTagsTreeSelect')) {
-          $item[$fieldName] = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id'])[0]['tagId'];
-        }
-        else {
-          //$item[$fieldName] = Arr::get(DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']), 'tagId');
-          $item[$fieldName] = TreeCommon::getFlatParams(DdTags::items($this->strName, $fieldName)->getTree($item['id']), 'id');
-        }
-      }
-      else {
-        $r = Arr::get(DdTags::items($this->strName, $fieldName)->getItems($item['id']), 'id');
-        if (DdTags::isMulti($fieldType)) {
-          $item[$fieldName] = $r;
-        }
-        elseif ($r) {
-          $item[$fieldName] = $r[0];
-        }
-      }
-    }
-  }
 
   public $fieldTagTypes;
 
