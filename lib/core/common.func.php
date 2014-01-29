@@ -29,14 +29,10 @@ function pr($var, $html = true, $trace = true) {
   if (R::get('plainText')) $html = false;
   if ($html) print '<pre>';
   if ($html) htmlspecialcharsR($var);
-  print_r($var);
+  print (new CliColors)->getColoredString(print_r($var, true), 'cyan');
   if ($html) print '</pre>';
   if (!$html) print "\n";
-  if ($trace) {
-    //print '<trace>';
-    print getBacktrace($html);
-    //print '</trace>';
-  }
+  if ($trace) print getBacktrace($html);
   print $html ? '<hr />' : "-----------END-OF-PR----------\n";
 }
 

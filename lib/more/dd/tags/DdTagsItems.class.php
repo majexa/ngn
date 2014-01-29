@@ -67,12 +67,18 @@ class DdTagsItems {
     $this->updateCount($tagId);
   }
 
+  /**
+   * @param $itemId
+   * @param array [[1, 3], [1, 5]]
+   * @param bool $replace
+   * @throws Exception
+   */
   function createByIdsCollection($itemId, array $collectionTagIds, $replace = true) {
     if ($replace) $this->delete($itemId);
     $allTagTds = [];
     if (!$collectionTagIds) return;
     if (!$replace) {
-      // Если добавляем, то учитываем, что коллекции уже существуют
+      // Если добавляем, то учитываем, что коллекции уже существуют. Нужно получить ID последней
       $lastCollectionId = db()->selectCell(<<<SQL
 SELECT collection FROM tagItems
 WHERE strName=? AND groupName=? AND itemId=?d
@@ -175,9 +181,8 @@ SQL
     }
   }
 
-  function deleteByCollection($itemId, $tagId) {
-    $collection = db()->selectCell('SELECT collection FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND tagId=?d', $this->strName, $this->group->name, $itemId, $tagId);
-    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND collection=?d', $this->strName, $this->group->name, $itemId, $collection);
+  function deleteByCollection($itemId, $tagId, $collection) {
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND tagId=?d AND collection=?d', $this->strName, $this->group->name, $itemId, $tagId, $collection);
   }
 
   /**
@@ -371,6 +376,15 @@ FROM tags
 LEFT JOIN tagItems ON tagItems.tagId=tags.id
 SQL
 );
+  }
+
+  static function groupByCollection(array $tagItems) {
+    $collections = [];
+    foreach ($tagItems as $node) {
+      if (!isset($collections[$node['collection']])) $collections[$node['collection']] = [];
+      $collections[$node['collection']][] = $node;
+    }
+    return $collections;
   }
 
 }
