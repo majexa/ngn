@@ -19,6 +19,7 @@ trait TtPath {
   function getPath($paramsN = null) {
     if ($paramsN === 0) return '/'.$this->req->getBase();
     if ($paramsN !== null) {
+      $params2 = [];
       for ($i = 0; $i < $paramsN; $i++) $params2[] = isset($this->req->params[$i]) ? $this->req->params[$i] : 0;
       return '/'.$this->req->getBase().implode('/', $params2);
     }

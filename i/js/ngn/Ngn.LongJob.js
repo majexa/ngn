@@ -23,7 +23,8 @@ Ngn.LongJob = new Class({
   },
 
   build: function() {
-    this.el = Elements.from('<div class="item dgray"><div class="cont"><div class="icon-button md-closer"></div><div class="result"></div></div></div>')[0].inject(document.getElement('.longJobs'));
+    var eParent = this.options.eParent || document.getElement('.longJobs');
+    this.el = Elements.from('<div class="item dgray"><div class="cont"><div class="icon-button md-closer"></div><div class="result"></div></div></div>')[0].inject(eParent);
     this.btnClose = this.el.getElement('.icon-button');
     this.eResult = this.el.getElement('.cont .result');
     Ngn.opacityBtn(this.btnClose).addEvent('click', function() {

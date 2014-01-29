@@ -167,6 +167,7 @@ Ngn.Items.toolActions = {
     }
   },
 
+  /*
   'delete': {
     init: function(items, cls, row) {
       items.createToolBtn(cls, row, function() {
@@ -177,6 +178,7 @@ Ngn.Items.toolActions = {
       });
     }
   },
+  */
 
   inlineTextEdit: {
     init: function(items, cls, row) {

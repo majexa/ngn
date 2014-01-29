@@ -121,7 +121,7 @@ class SflmFrontend {
     }
     Sflm::output("Adding lib '$lib'");
     $newPaths = $this->sflm->getPaths($lib);
-    foreach ($newPaths as $n => $path) {
+    foreach ($newPaths as $path) {
       if (in_array($path, $this->getPathsCache())) {
         Sflm::output("New path '$path' already exists");
         continue;
@@ -130,7 +130,7 @@ class SflmFrontend {
     }
     if ($this->changed) {
       NgnCache::c()->save($this->paths, $this->pathsCacheKey());
-      Sflm::output("update stored file after adding lib '$lib'");
+      Sflm::output("Update stored file after adding lib '$lib'");
       $this->store();
       $this->incrementVersion();
     }

@@ -1079,8 +1079,8 @@ application/x-httpd-php-source  phps
     copy($file, $folder.'/'.basename($file));
   }
 
-  static function checkExists($file) {
-    if (!file_exists($file)) throw new Exception("File '$file' not exists");
+  static function checkExists($file, $exceptionText = null) {
+    if (!file_exists($file)) throw new Exception($exceptionText ? : "File '$file' not exists");
     return $file;
   }
 

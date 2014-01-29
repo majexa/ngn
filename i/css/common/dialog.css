@@ -417,3 +417,20 @@ cursor: s-resize;
 .vResize .dialog-footer, .vResize .dialog-message.mav-no-footer {
 margin-bottom: 12px;
 }
+
+.dialog-confirm h3 {
+text-align: center;
+}
+.dialog-confirm .checkbox {
+margin-left: 5px;
+width: 200px;
+height: 40px;
+white-space: normal;
+}
+.dialog-confirm .checkbox label {
+position: absolute;
+padding-left: 5px;
+}
+.dialog-confirm .checkbox {
+position: relative;
+}
