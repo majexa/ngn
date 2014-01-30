@@ -135,7 +135,9 @@ class Form {
   }
 
   protected function getDefaultData() {
-    if (!$this->isSubmitted() and !empty($this->options['defaultsFromReq'])) return $this->req->r;
+    if ($this->isSubmitted() and !empty($this->options['defaultsFromReq'])) {
+      return $this->req->r;
+    }
     return $this->defaultData;
   }
 
@@ -720,6 +722,7 @@ class Form {
    * @return  array
    */
   function setElementsData(array $defaultData = [], $reset = true) {
+    //pr($defaultData);
     $this->defaultData = $defaultData;
     $this->elementsData = $defaultData;
     if ($this->isSubmitted() and $this->fromRequest) $this->elementsData = $this->req->p;

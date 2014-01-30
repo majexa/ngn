@@ -214,9 +214,7 @@ abstract class DataManagerAbstract extends Options2 {
    */
   protected function setFormElementsData(array $data, $dataPostFormat = true) {
     $this->beforeFormElementsInit();
-    //if (get_class($this) == 'DdItemsManager') prr([$dataPostFormat, $data]);
     if ($dataPostFormat) $this->fieldTypeAction('post2formFormat', $data);
-    //if (get_class($this) == 'DdItemsManager') pr([$dataPostFormat, $data]);
     $this->form->setElementsData($data);
   }
 

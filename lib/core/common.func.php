@@ -29,7 +29,7 @@ function pr($var, $html = true, $trace = true) {
   if (R::get('plainText')) $html = false;
   if ($html) print '<pre>';
   if ($html) htmlspecialcharsR($var);
-  print (new CliColors)->getColoredString(print_r($var, true), 'cyan');
+  print $html ? print_r($var, true) : (new CliColors)->getColoredString(print_r($var, true), 'cyan');
   if ($html) print '</pre>';
   if (!$html) print "\n";
   if ($trace) print getBacktrace($html);
