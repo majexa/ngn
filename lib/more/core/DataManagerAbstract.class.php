@@ -120,7 +120,6 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   function create(array $data, $throwFormErrors = true) {
-
     if ($this->options['ignoreExisting'] and $this->form->fields->exists($data['name'])) return false;
     $this->form->fromRequest = false;
     $this->form->create = true;
@@ -172,7 +171,7 @@ abstract class DataManagerAbstract extends Options2 {
     $this->source2formFormat();
     $this->form->fromRequest = true;
     $this->initTinyInitJs($id);
-    $this->setFormElementsData($this->defaultData);
+    $this->setFormElementsData($this->defaultData, false);
     $this->afterFormElementsInit();
     if ($this->form->isSubmittedAndValid()) {
       return $this->makeUpdate($id);
@@ -209,8 +208,15 @@ abstract class DataManagerAbstract extends Options2 {
   protected function form2sourceFormat() {
   }
 
-  protected function setFormElementsData(array $data) {
+  /**
+   * @param array $data
+   * @param bool  Данные используют формат POST запроса
+   */
+  protected function setFormElementsData(array $data, $dataPostFormat = true) {
     $this->beforeFormElementsInit();
+    //if (get_class($this) == 'DdItemsManager') prr([$dataPostFormat, $data]);
+    if ($dataPostFormat) $this->fieldTypeAction('post2formFormat', $data);
+    //if (get_class($this) == 'DdItemsManager') pr([$dataPostFormat, $data]);
     $this->form->setElementsData($data);
   }
 
@@ -253,6 +259,7 @@ abstract class DataManagerAbstract extends Options2 {
       // Данные необходимо обязательно получать из формы, т.к. обработка их происходит внутри
       // элементов полей. Форма будет возвращать единственно правильный вариант данных
       $this->beforeUpdateData = $this->data = $this->form->getData();
+      //if (get_class($this) == 'DdItemsManager') die2($this->data);
       if ($this->beforeCreateAction) call_user_func($this->beforeCreateAction, $this);
       $this->addCreateData();
       $this->elementTypeAction('beforeCreateUpdate');

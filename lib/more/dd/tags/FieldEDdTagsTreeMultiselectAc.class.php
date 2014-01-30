@@ -2,7 +2,7 @@
 
 class FieldEDdTagsTreeMultiselectAc extends FieldEDdTags {
 
-  static $ddTagsTree, $ddTagsMulti = true;
+  static $ddTagsTree = true, $ddTagsMulti = true;
 
   protected function prepareInputValue($v) {
     return '';

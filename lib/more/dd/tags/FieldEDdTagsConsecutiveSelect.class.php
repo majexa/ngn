@@ -55,7 +55,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
     else {
       $d['items'] = [
         [
-          'default' => isset($this->options['value'][$this->firstN()]) ? $this->options['value'][$this->firstN()] : null,
+          'default' => isset($this->options['value'][$this->firstN()]) ? $this->options['value'][$this->firstN()]['id'] : null,
           'options' => $this->getRootOptions()
         ]
       ];
@@ -72,7 +72,6 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
         }
       }
     }
-    //if ($this->options['name'] == 'factRegion') die2([$this->options['value'], $d]);
     return Tt()->getTpl('dd/consecutiveSelect', $d);
   }
 
@@ -86,11 +85,11 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
   }
 
   protected function getSelectedValues() {
-    return Arr::sliceFrom($this->options['value'], $this->firstN() + 1);
+    return Arr::get(Arr::sliceFrom($this->options['value'], $this->firstN() + 1), 'id');
   }
 
   protected function getSecondParentId() {
-    return $this->options['value'][$this->firstN()];
+    return $this->options['value'][$this->firstN()]['id'];
   }
 
 } 
