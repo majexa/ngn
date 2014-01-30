@@ -5,7 +5,7 @@ class DmfaDdTagsTreeSelect extends DmfaDdTagsAbstract {
   static $firstElementInSet = true;
 
   function source2formFormat($v) {
-    return $v ? $v['id'] : '';
+    return $v ? TreeCommon::lastInBranch($v)['id'] : '';
   }
 
   protected function getTags($name) {

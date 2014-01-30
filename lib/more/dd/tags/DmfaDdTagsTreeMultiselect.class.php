@@ -3,7 +3,14 @@
 class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
 
   function source2formFormat($v) {
-    return $v ? Arr::get($v, 'id') : '';
+    if (!$v) return '';
+    $ids = [];
+    foreach ($v as $collection) {
+      foreach ($collection as $tag) {
+        if (!in_array($tag['id'], $ids)) $ids[] = $tag['id'];
+      }
+    }
+    return $ids;
   }
 
   function form2sourceFormat($v) {
@@ -17,17 +24,28 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     }
     if (!empty($tagIds) and !is_array($tagIds)) throw new Exception("$k tagIds: ".getPrr($tagIds));
     $currentTagIds = [];
-    $newTagIds = [];
-    $deleteTagIds = [];
+    $deleteCollectionTags = [];
+    $currentCollectionTags = $this->dm->items->getItem($this->dm->id)[$k];
+    if (isset($currentCollectionTags)) {
+      foreach ($currentCollectionTags as $i => $tags) $currentTagIds[$i] = Arr::last($tags)['id'];
+      foreach ($currentTagIds as $i => $currentTagId) {
+        if (!in_array($currentTagId, $tagIds)) $deleteCollectionTags[] = $currentCollectionTags[$i];
+      }
+      foreach ($tagIds as $id) if (!in_array($id, $currentTagIds)) $newTagIds[] = $id;
+    }
+    if (!$deleteCollectionTags and !$newTagIds) return;
     $tagItems = DdTags::items($this->dm->strName, $k);
-    if (($currentTags = $this->dm->items->getItem($this->dm->id)[$k])) $currentTagIds = Arr::get($currentTags, 'id');
-    foreach ($tagIds as $id) if (!in_array($id, $currentTagIds)) $newTagIds[] = $id;
-    if (isset($currentTagIds)) foreach ($currentTagIds as $id) if (!in_array($id, $tagIds)) $deleteTagIds[] = $id;
-    $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($newTagIds);
-    foreach ($deleteTagIds as $id) $tagItems->deleteByCollection($this->dm->id, $id); // delete tag by id does not work. need to check if it is a collection
-    die2($collectionTagIds);
-    $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);
-    $tagItems->updateCounts($deleteTagIds);
+    if ($deleteCollectionTags) {
+      foreach ($deleteCollectionTags as $tags) {
+        foreach ($tags as $tag) {
+          $tagItems->deleteByCollection($this->dm->id, $tag['id'], $tag['collection']);
+        }
+      }
+    }
+    if ($newTagIds) {
+      $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($newTagIds);
+      $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);
+    }
   }
 
   function afterCreate($tagIds, $k) {

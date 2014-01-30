@@ -20,7 +20,8 @@ abstract class Dmfa {
    * В чем разница между?
    * form2sourceFormat и beforeCreateUpdate
    */
-  
+
+  // function post2formFormat($v) { return $v }
   // function form2sourceFormat($v) { return $v }
   // function source2formFormat($v) { return $v }
   // function elBeforeCreateUpdate(FieldEAbstract $el) {}
