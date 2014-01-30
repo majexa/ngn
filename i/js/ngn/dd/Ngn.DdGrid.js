@@ -12,18 +12,24 @@ Ngn.DdGrid = new Class({
     this.parent(data, fromAjax);
   },
 
+  selectChange: function() {
+    new Ngn.Request.Loading({
+      url: this.getLink() + '?a=ajax_updateField&field=' + el.get('name') + '&value=' + el.get('value') + '&' + this.options.idParam + '=' + itemId,
+      onComplete: function() {
+        this.reload(itemId);
+      }.bind(this)
+    }).send();
+  },
+
   initItems: function() {
     this.options.eItems.getElements('select').each(function(el) {
       var itemId = el.getParent('.item').get('data-id');
-      el.addEvent('change', function() { 
-        new Ngn.Request.Loading({
-          url: this.getLink() + '?a=ajax_updateField&field=' + el.get('name') + '&value=' + el.get('value') + '&' + this.options.idParam + '=' + itemId,
-          onComplete: function() {
-            this.reload(itemId, true);
-          }.bind(this)
-        }).send();
+      el.addEvent('change', function() {
+        this.selectChange(el, itemId);
       }.bind(this));
     }.bind(this));
+
+
     /*
      this.options.eItems.getElements('.iconFlag').each(function(el) {
      var itemId = el.getParent('.item').get('data-id');

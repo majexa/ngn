@@ -8,6 +8,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     getFormData: function() {
       return Ngn.frm.toObj(this.form.eForm);
     },
+    onFormRequest: $empty,
     onSubmitSuccess: $empty
   },
 
@@ -52,7 +53,6 @@ Ngn.Dialog.RequestFormBase = new Class({
     if (r.title) this.setTitle(r.title);
     if (r.submitTitle) this.setOkText(r.submitTitle);
     if (r.jsOptions) {
-      //this.setOptions(r.jsOptions);
       if (r.jsOptions.onOkClose)
         this.addEvent('okClose', r.jsOptions.onOkClose);
     }
@@ -66,6 +66,11 @@ Ngn.Dialog.RequestFormBase = new Class({
     // Даилога не будет содержать созданого объекта Формы
     this.form.init();
     this.fireEvent('formResponse');
+
+
+    this.fireEvent('asd');
+
+
     //this.form.addEvent('jsComplete', function(r) {
     //new Fx.Scroll(document.body).toElement(this.dialog, 'y');
     //}.bind(this));
@@ -128,18 +133,18 @@ Ngn.Dialog.RequestFormBase = new Class({
       opt.url = this.response.nextFormUrl;
       new Ngn.Dialog.RequestForm(opt);
       /*
-      new Request.JSON({
-        url: this.response.nextFormUrl,
-        onComplete: function(r) {
-          if (r.error) Ngn.Request.JSON.throwServerError(r.error);
-          if (!r.form) throw new Error('Form does not exists in next form url "' + this.response.nextFormUrl + '"');
-          var opt = { staticResponse: r };
-          if (this.options.nextFormOptions) opt = $merge(opt, this.options.nextFormOptions);
-          if (this.response.nextFormOptions) opt = $merge(opt, this.response.nextFormOptions);
-          new Ngn.Dialog.RequestForm.Static(opt);
-        }.bind(this)
-      }).send();
-      */
+       new Request.JSON({
+       url: this.response.nextFormUrl,
+       onComplete: function(r) {
+       if (r.error) Ngn.Request.JSON.throwServerError(r.error);
+       if (!r.form) throw new Error('Form does not exists in next form url "' + this.response.nextFormUrl + '"');
+       var opt = { staticResponse: r };
+       if (this.options.nextFormOptions) opt = $merge(opt, this.options.nextFormOptions);
+       if (this.response.nextFormOptions) opt = $merge(opt, this.response.nextFormOptions);
+       new Ngn.Dialog.RequestForm.Static(opt);
+       }.bind(this)
+       }).send();
+       */
     }
   }
 
@@ -167,8 +172,7 @@ Ngn.Dialog.RequestForm = new Class({
 
   options: {
     autoSave: false,
-    formEvents: false,
-    formRequest: $empty
+    formEvents: false
   },
 
   _submit: function() {
