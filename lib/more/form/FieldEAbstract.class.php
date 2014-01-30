@@ -58,7 +58,7 @@ use Options;
     if ($this->form and !empty($this->options['name'])) {
       $this->isPostValue = (BracketName::getValue($this->form->req->p, $this->options['name'], BracketName::modeFalse) !== false);
     }
-    if ($this->isPostValue) $this->options['value'] = $this->preparePostValue();
+    if ($this->isPostValue and ($postValue = $this->preparePostValue())) $this->options['value'] = $postValue;
     $this->initDefaultValue();
   }
 
