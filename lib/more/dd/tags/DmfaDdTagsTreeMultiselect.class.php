@@ -13,10 +13,6 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
     return $ids;
   }
 
-  function form2sourceFormat($v) {
-    return array_map('intval', $v);
-  }
-
   function afterUpdate($tagIds, $k) {
     if (empty($tagIds)) {
       $this->deleteTagItems($k);
