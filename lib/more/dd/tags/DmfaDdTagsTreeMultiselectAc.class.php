@@ -22,11 +22,15 @@ class DmfaDdTagsTreeMultiselectAc extends DmfaDdTagsTreeMultiselect {
   }
 
   function afterUpdate($tags, $k) {
-    if (!is_array($tags)) die2($tags);
-    parent::afterUpdate(Arr::get($tags, 'id'), $k);
+    if (empty($tags)) parent::afterUpdate(null, $k);
+    else {
+      if (!is_array($tags)) die2($tags);
+      parent::afterUpdate(Arr::get($tags, 'id'), $k);
+    }
   }
 
   function afterCreate($tags, $k) {
+    if (empty($tags)) return;
     parent::afterCreate(Arr::get($tags, 'id'), $k);
   }
 

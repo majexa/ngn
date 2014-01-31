@@ -47,7 +47,7 @@ abstract class TestFieldDdTagsAbstract extends TestDd {
     }
   }
 
-  function updateItem($data, $request) {
+  function updateItem($data, $request = false) {
     if ($request) {
       static::$im->form->req->r['formId'] = static::$im->form->getAllData()['formId'];
       static::$im->form->req->p = $this->createData();
@@ -68,6 +68,7 @@ abstract class TestFieldDdTagsAbstract extends TestDd {
     $this->createTags();
     $this->createItem();
     $this->runTests();
+    $this->updateItem(['sample' => '']);
     self::$im = DdCore::imDefault('a');
     $this->createItem(true);
     $this->runTests();
