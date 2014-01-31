@@ -48,7 +48,7 @@ class SendEmail {
   function send($emails, $subject, $message, $html = true) {
     Misc::checkEmpty($emails, '$emails');
     if (defined('ALLOW_SEND') and ALLOW_SEND === false) {
-      $this->log($emails, $subject, $message);
+      LogWriter::str('email', "$emails: $subject");
       return true;
     }
     if ($html and $this->addHostToLinks) {

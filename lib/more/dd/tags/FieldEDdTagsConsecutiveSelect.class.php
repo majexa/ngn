@@ -53,6 +53,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
       ];
     }
     else {
+      die2($this->options['value']);
       $d['items'] = [
         [
           'default' => isset($this->options['value'][$this->firstN()]) ? $this->options['value'][$this->firstN()]['id'] : null,

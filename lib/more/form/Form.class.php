@@ -145,7 +145,7 @@ class Form {
 
   function isSubmitted() {
     if (!$this->fromRequest) return true;
-    return ($this->req['formId'] and $this->req['formId'] == $this->id());
+    return $this->req['formId'] and $this->req['formId'] == $this->id();
   }
 
   protected function elementExists($name) {
@@ -589,11 +589,17 @@ class Form {
     return $r;
   }
 
+  protected $_id;
+
   /**
    * @return string Уникальный идентификатор формы
    */
   function id() {
-    return 'f'.md5(serialize($this->fields->getFields()));;
+    $this->callOnce('initId');
+    return $this->_id;
+    if (empty($_POST)) ProjectData::update('Fuk', $this->fields->getFields());
+    if (!empty($_POST)) ProjectData::update('Fak', $this->fields->getFields());
+    return 'f'.md5(serialize($this->fields->getFields()));
     /*
     if (isset($this->lastFields) and ($this->lastFields != $this->fields->getFields())) {
       $ff = $this->fields->getFields();
@@ -652,9 +658,13 @@ class Form {
     $this->hiddenFields[] = $data;
   }
 
+  protected function initId() {
+    $this->_id = 'f'.md5(serialize($this->fields->getFields()));
+  }
+
   function addField(array $v, $after = false) {
-    if (isset($this->_id)) throw new Exception('Can not add fields after form ID was formed');
     $this->fields->addField($v, $after);
+    $this->initId();
   }
 
   protected function initDefaultHiddenFields() {
