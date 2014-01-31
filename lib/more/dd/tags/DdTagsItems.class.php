@@ -236,6 +236,12 @@ SQL
     return array_values($items);
   }
 
+  /**
+   * returns node of tree
+   *
+   * @param $itemIds
+   * @return array|null|void
+   */
   function getTree($itemIds) {
     $itemIds = (array)$itemIds;
     $params = [

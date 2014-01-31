@@ -109,7 +109,7 @@ class DdItems extends Items {
   function getItem($id) {
     $this->setTStampCond();
     if (($item = parent::getItem($id)) == false) return false;
-    $this->extendItemTagIds($item);
+    $this->extendItemTags($item);
     $this->extendItemNumberRange($item);
     return $item;
   }
@@ -241,8 +241,8 @@ class DdItems extends Items {
       $fieldType = $this->fieldTagTypes[$fieldName];
       if (DdTags::isTree($fieldType) and DdTags::isMulti($fieldType)) {
         $item[$fieldName] = [];
-        foreach (DdTags::items($this->strName, $fieldName)->getFlat($item['id']) as $tag) {
-          $item[$fieldName][$tag['collection']][] = $tag;
+        foreach (DdTags::items($this->strName, $fieldName)->getTree($item['id']) as $node) {
+          $item[$fieldName][$node['collection']] = TreeCommon::flat([$node]);
         }
       }
       else {

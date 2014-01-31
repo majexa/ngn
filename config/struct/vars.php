@@ -3,10 +3,10 @@
 /**
  * Формат "visibilityConditions":
  * array(
-'headerName' => 'имя поля хедера',
-'condFieldName' => 'имя элемента условие для которго проверяется',
-'cond' => 'условие (javascript-код)',
-)
+ * 'headerName' => 'имя поля хедера',
+ * 'condFieldName' => 'имя элемента условие для которго проверяется',
+ * 'cond' => 'условие (javascript-код)',
+ * )
  *
  */
 
@@ -16,11 +16,11 @@ $enable = [
 ];
 
 return [
-  'lang-admin-en'            => [
+  'lang-admin-en'          => [
     'type' => 'hash'
   ],
   // Стандартные 
-  'lang'                     => [
+  'lang'                   => [
     'title'  => 'Языки',
     'fields' => [
       'admin' => [
@@ -33,7 +33,7 @@ return [
       ]
     ]
   ],
-  'adminExtras'              => [
+  'adminExtras'            => [
     'title'  => 'Админ: дополнения',
     'fields' => [
       'homeHtml' => [
@@ -43,17 +43,17 @@ return [
       ]
     ]
   ],
-  'admins'                   => [
+  'admins'                 => [
     'title'      => 'Админы',
     'type'       => 'fieldList',
     'fieldsType' => 'user'
   ],
-  'gods'                     => [
+  'gods'                   => [
     'title'      => 'Боги',
     'type'       => 'fieldList',
     'fieldsType' => 'user'
   ],
-  'dd'                       => [
+  'dd'                     => [
     'title'  => 'Динамические данные',
     'fields' => [
       'forceCache'              => [
@@ -122,7 +122,7 @@ return [
       ]
     ]
   ],
-  'watermark'                => [
+  'watermark'              => [
     'title'                => 'Водяной знак',
     'fields'               => [
       'enable'       => [
@@ -158,7 +158,7 @@ return [
       ]
     ]
   ],
-  'mail'                     => [
+  'mail'                   => [
     'title'  => 'Почта',
     'fields' => [
       'method'    => [
@@ -184,7 +184,7 @@ return [
       ],
     ]
   ],
-  'smtp'                     => [
+  'smtp'                   => [
     'title'                => 'SMTP',
     'fields'               => [
       'server'    => [
@@ -218,7 +218,7 @@ return [
       ]
     ]
   ],
-  'userReg'                  => [
+  'userReg'                => [
     'title'                => 'Пользователи',
     'fields'               => [
       'enable'               => [
@@ -315,7 +315,7 @@ return [
       ['phoneConfirm', 'phoneEnable']
     ],
   ],
-  'role'                     => [
+  'role'                   => [
     'title'                => 'Роли',
     'fields'               => [
       'enable' => [
@@ -331,10 +331,12 @@ return [
             'title' => 'Имя роли',
             'name'  => 'name',
             'type'  => 'name'
-          ], [
+          ],
+          [
             'title' => 'Название роли',
             'name'  => 'title'
-          ], [
+          ],
+          [
             'title' => 'Описание роли',
             'name'  => 'text',
             'type'  => 'textarea'
@@ -348,17 +350,18 @@ return [
           [
             'title' => 'Имя роли',
             'name'  => 'role',
-
             //'type' => 'select',
             //'options' => Config::getVarVar('role', 'roles', true)
-          ], [
+          ],
+          [
             'title' => 'Раздел',
             'name'  => 'pageId',
             'type'  => 'pageId'
 
             //'type' => 'select',
             //'options' => Config::getVarVar('role', 'roles', true)
-          ], [
+          ],
+          [
             'title' => 'Разрешенная привелегия',
             'name'  => 'priv'
           ]
@@ -373,15 +376,18 @@ return [
       ]
     ]
   ],
-  'adminPriv'                => [
+  'adminPriv'              => [
     'title'  => 'Админ: привелегии',
     'fields' => [
-      ['type' => 'col'], [
+      ['type' => 'col'],
+      [
         'name'       => 'allowedAdminModules',
         'title'      => 'Доступные модули панели управления',
         'type'       => 'fieldList',
         'fieldsType' => 'adminModules'
-      ], ['type' => 'col'], [
+      ],
+      ['type' => 'col'],
+      [
         'name'   => 'allowedPageModules',
         'title'  => 'Доступные модули разделов сайта',
         'type'   => 'fieldSet',
@@ -417,7 +423,7 @@ return [
       */
     ]
   ],
-  'tiny'                     => [
+  'tiny'                   => [
     'title'  => 'Визуальный редактор',
     'fields' => [
       'typo' => [
@@ -426,10 +432,10 @@ return [
       ]
     ]
   ],
-  'tiny.admin.allowedTags'   => [
+  'tiny.admin.allowedTags' => [
     'title' => 'Админ: доступные HTML-тэги'
   ],
-  'tiny.admin.classes'       => [
+  'tiny.admin.classes'     => [
     'title'  => 'Админ: доступные CSS-классы',
     'fields' => [
       'title' => [
@@ -440,7 +446,7 @@ return [
       ]
     ]
   ],
-  'tiny.admin.disableBtns'   => [
+  'tiny.admin.disableBtns' => [
     'title'  => 'Админ: выключеные кнопки',
     'fields' => [
       [
@@ -458,7 +464,7 @@ return [
       ]
     ]
   ],
-  'url'                      => [
+  'url'                    => [
     'title'  => 'URL',
     'fields' => [
       'cache'          => [
@@ -470,7 +476,7 @@ return [
       ],
     ]
   ],
-  'google'                   => [
+  'google'                 => [
     'title'  => 'Google',
     'fields' => [
       'mapKey' => [
@@ -478,7 +484,7 @@ return [
       ]
     ]
   ],
-  'yandex'                   => [
+  'yandex'                 => [
     'title'  => 'Яндекс',
     'fields' => [
       'verification' => [
@@ -486,7 +492,7 @@ return [
       ]
     ]
   ],
-  'piwik'                    => [
+  'piwik'                  => [
     'title'  => 'Сервер статистики',
     'fields' => [
       'url'       => [
@@ -498,7 +504,7 @@ return [
       ]
     ]
   ],
-  'stat'                     => [
+  'stat'                   => [
     'title'  => 'Статистика',
     'fields' => [
       'enable' => [
@@ -512,7 +518,7 @@ return [
       ]
     ]
   ],
-  'vk'                       => [
+  'vk'                     => [
     'title'  => 'Вконтакте',
     'fields' => [
       'appId'  => [
@@ -523,7 +529,7 @@ return [
       ]
     ]
   ],
-  'vkAuth'                   => [
+  'vkAuth'                 => [
     'title'  => 'Вконтакте: авторизация',
     'fields' => [
       'login' => [
@@ -535,7 +541,7 @@ return [
       ]
     ]
   ],
-  'userGroup'                => [
+  'userGroup'              => [
     'title'  => 'Сообщества',
     'fields' => [
       'enable' => [
@@ -544,7 +550,7 @@ return [
       ]
     ],
   ],
-  'littleSms'                => [
+  'littleSms'              => [
     'title'  => 'Little SMS',
     'fields' => [
       'user' => [

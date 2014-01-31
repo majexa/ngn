@@ -172,7 +172,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
   protected function getChildrenIds($parentId, $includeParent = true) {
     $node = $this->findNode($parentId, $this->_getTree());
     $ids = $includeParent ? [$parentId] : [];
-    return Arr::append($ids, TreeCommon::getFlatParams($node['childNodes'], 'id'));
+    return Arr::append($ids, TreeCommon::flat($node['childNodes'], 'id'));
   }
 
   protected function findNode($id, $nodes) {

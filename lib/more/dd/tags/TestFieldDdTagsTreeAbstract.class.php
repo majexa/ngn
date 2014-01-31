@@ -16,13 +16,4 @@ abstract class TestFieldDdTagsTreeAbstract extends TestFieldDdTagsAbstract {
     ]);
   }
 
-  function runTests() {
-    $this->a($this->tagId2, $this->v2);
-    $this->updateItem();
-    $this->a($this->tagId3, $this->v3);
-  }
-
-  abstract function a($tagId, $v);
-  abstract function updateItem();
-
 }

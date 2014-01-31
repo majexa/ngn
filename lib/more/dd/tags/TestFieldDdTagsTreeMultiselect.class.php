@@ -12,18 +12,14 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
     ]);
   }
 
-  function runTests() {
+  function runTests($request = false) {
     $this->a($this->tagId3, $this->v2);
-    $this->updateItem();
+    $this->updateItem(['sample' => [$this->tagId2, $this->tagId4]], $request);
     $this->a($this->tagId4, $this->v4);
   }
 
-  function createItem() {
-    return static::$im->create(['sample' => [$this->tagId2, $this->tagId3]]);
-  }
-
-  function updateItem() {
-    static::$im->update($this->itemId, ['sample' => [$this->tagId2, $this->tagId4]]);
+  function createData() {
+    return ['sample' => [$this->tagId2, $this->tagId3]];
   }
 
   function a($tagId2, $v) {
@@ -31,7 +27,7 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
     $values = array_values($item['sample']);
     $this->assertTrue($values[0][1]['tagId'] == $this->tagId2, "{$values[0][1]['tagId']} != $this->tagId2");
     $this->assertTrue($values[1][1]['tagId'] == $tagId2, "{$values[1][1]['tagId']} != $tagId2");
-    static::$im->requestUpdate($this->itemId);
+    $this->fillForm();
     $html = static::$im->form->html();
     $this->assertTrue((bool)strstr($html, 'id="sample_'.$this->tagId2.'" checked />'));
     $this->assertTrue((bool)strstr($html, 'id="sample_'.$tagId2.'" checked />'));

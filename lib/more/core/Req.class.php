@@ -1,11 +1,7 @@
 <?php
 
-define('PAGE_PARAM_TYPE_ID', 1);
-define('PAGE_PARAM_TYPE_NAME', 2);
-define('PAGE_PARAM_TYPE_DATE', 3);
-
 class Req extends ArrayAccesseble {
-use Options;
+  use Options;
 
   /**
    * Cтрока запроса
@@ -159,19 +155,6 @@ use Options;
     return $this->params;
   }
 
-  /**
-   * Получает тип параметра
-   *
-   * @param   mixed   Параметр
-   * @return  integer Тип параметра
-   */
-  private function getParamType($param) {
-    if ((int)substr($param, 0, 1) and strstr($param, '-') and (int)$param) return PAGE_PARAM_TYPE_DATE;
-    elseif ((int)substr($param, 0, 1)) return PAGE_PARAM_TYPE_ID;
-    else
-      return PAGE_PARAM_TYPE_NAME;
-  }
-
   protected $base;
 
   function getBase() {
@@ -212,7 +195,7 @@ use Options;
   }
 
   function path($offset = 0, $limit = 0) {
-    return implode('/', array_slice($this->params, $offset, $limit ?: count($this->params)));
+    return implode('/', array_slice($this->params, $offset, $limit ? : count($this->params)));
   }
 
   /**

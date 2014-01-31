@@ -8,6 +8,7 @@
  *
  */
 abstract class DataManagerAbstract extends Options2 {
+  use CallOnce;
 
   /**
    * @param $id
@@ -75,7 +76,7 @@ abstract class DataManagerAbstract extends Options2 {
 
   protected function defineOptions() {
     return [
-      'strict' => true,
+      'strict'         => true,
       'ignoreExisting' => false
     ];
   }
@@ -215,7 +216,12 @@ abstract class DataManagerAbstract extends Options2 {
   protected function setFormElementsData(array $data, $dataPostFormat = true) {
     $this->beforeFormElementsInit();
     if ($dataPostFormat) $this->fieldTypeAction('post2formFormat', $data);
+    $this->callOnce('formatFormPostData');
     $this->form->setElementsData($data);
+  }
+
+  protected function formatFormPostData() {
+    $this->fieldTypeAction('post2formFormat', $this->form->req->p);
   }
 
   function update($id, array $data, $throwFormErrors = true) {
@@ -410,7 +416,7 @@ abstract class DataManagerAbstract extends Options2 {
    *
    * @param  string $method
    * @param  array $data
-   * @param  integer/null  $id
+   * @param  integer /null  $id
    */
   protected function fieldTypeAction($method, array &$data) {
     foreach (array_keys($data) as $k) {
@@ -453,7 +459,7 @@ abstract class DataManagerAbstract extends Options2 {
     if (!$tempId) {
       $tempId = isset($_POST['tempId']) ? $_POST['tempId'] : Misc::randString(8);
     }
-    $this->form->addHiddenField([
+    $this->form->addNoValueHiddenField([
       'name'  => 'tempId',
       'value' => $tempId
     ]);
