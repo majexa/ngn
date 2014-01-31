@@ -37,7 +37,7 @@ class DdTagsHtml {
       if (empty($v['childNodes']) and !$v['cnt'] and !$showNullCountTags) continue;
       $titles[$n] = [St::dddd($dddd, $v)];
       if (!empty($v['childNodes'])) {
-        $titles[$n] = Arr::append($titles[$n], TreeCommon::getFlatDddd($v['childNodes'], $dddd));
+        $titles[$n] = Arr::append($titles[$n], TreeCommon::flatDddd($v['childNodes'], $dddd));
       }
       $n++;
     }

@@ -23,6 +23,7 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
       return;
     }
     if (!empty($tagIds) and !is_array($tagIds)) throw new Exception("$k tagIds: ".getPrr($tagIds));
+    $newTagIds = [];
     $currentTagIds = [];
     $deleteCollectionTags = [];
     $currentCollectionTags = $this->dm->items->getItem($this->dm->id)[$k];

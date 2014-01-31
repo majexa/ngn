@@ -2,13 +2,13 @@
 
 class TestFieldDdTagsSelect extends TestFieldDdTagsFlatAbstract {
 
-  function createItem() {
-    return static::$im->create(['sample' => $this->tagId1]);
+  function createData() {
+    return ['sample' => $this->tagId1];
   }
 
-  function runTests() {
+  function runTests($request = false) {
     $this->a($this->v1, $this->tagId1);
-    static::$im->update($this->itemId, ['sample' => $this->tagId2]);
+    $this->updateItem(['sample' => $this->tagId2], $request);
     $this->a($this->v2, $this->tagId2);
   }
 
@@ -16,7 +16,7 @@ class TestFieldDdTagsSelect extends TestFieldDdTagsFlatAbstract {
     $this->assertTrue(static::$im->items->getItem($this->itemId)['sample']['title'] == $v);
     $item = static::$im->items->getItemF($this->itemId);
     $this->assertTrue($item['sample']['title'] == $v);
-    static::$im->requestUpdate($this->itemId);
+    $this->fillForm();
     $this->assertTrue((bool)strstr(static::$im->form->html(), '<option value="'.$tagId.'" selected>'.$v.'</option>'));
     $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), '<div class="element f_sample t_ddTagsSelect">'.$v.'</div>'));
   }

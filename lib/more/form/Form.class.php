@@ -1,7 +1,9 @@
 <?php
 
 class Form {
-  use Options;
+  use Options, CallOnce;
+
+  public $asd = false;
 
   public $templates = [
     'form'        => '{input}<div class="clear"></div>',
@@ -163,7 +165,6 @@ class Form {
 
   function getElements() {
     $this->setElementsDataDefault();
-    if (!isset($this->els)) throw new Exception('Elements not initialized');
     return $this->els;
   }
 
@@ -334,7 +335,6 @@ class Form {
    */
   function html() {
     $this->setElementsDataDefault();
-    $this->initDefaultElements();
     if ($this->disableSubmit) {
       foreach ($this->els as $k => $el) if ($el->type == 'submit') unset($this->els[$k]);
     }
@@ -558,15 +558,32 @@ class Form {
     });
   }
 
+  /**
+   * Возвращает значения значимых полей
+   *
+   * @return array
+   */
   function getData() {
     $r = [];
     foreach ($this->getElements() as $name => $el) {
-      /* @var FieldEAbstract $el */
-      if (!empty($el['noValue'])) continue;
+      if ($el['noValue']) continue;
       // Если в элементе или форме есть флаг 'filterEmpties' и значение элемента пусто
-      if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties'])) and $el->isEmpty()
-      ) continue;
+      if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties'])) and $el->isEmpty()) continue;
       $value = $el->value();
+      BracketName::setValue($r, $name, $value === null ? '' : $value);
+    }
+    return $r;
+  }
+
+  /**
+   * Возвращает значения значимых полей
+   *
+   * @return array
+   */
+  function getAllData() {
+    $r = [];
+    foreach ($this->getElements() as $name => $el) {
+      $value = $el['value'];
       BracketName::setValue($r, $name, $value === null ? '' : $value);
     }
     return $r;
@@ -615,7 +632,7 @@ class Form {
    */
   protected $defaultActionName = 'action';
 
-  protected $hiddenFieldsData = [];
+  protected $hiddenFields = [];
 
   protected $actionFieldValue;
 
@@ -623,10 +640,16 @@ class Form {
     $this->actionFieldValue = $v;
   }
 
-  function addHiddenField($data) {
-    if (!isset($data['name'])) throw new Exception('Name not defined in: '.getPrr($data));
+  function addNoValueHiddenField($data) {
+    if (!isset($data['name'])) {
+      throw new Exception('Name not defined in: '.getPrr($data));
+    }
+    if (($v = Arr::getValueByKey($this->hiddenFields, 'name', $data['name']))) {
+      throw new Exception("{$data['name']} already exists: {$v['value']}. Trying to replace by '{$data['value']}'");
+    }
     $data['type'] = 'hidden';
-    $this->hiddenFieldsData[] = $data;
+    $data['noValue'] = true;
+    $this->hiddenFields[] = $data;
   }
 
   function addField(array $v, $after = false) {
@@ -634,40 +657,37 @@ class Form {
     $this->fields->addField($v, $after);
   }
 
-  protected $defaultElementsDefined = false;
-
-  protected function initDefaultElements() {
-    if ($this->defaultElementsDefined) return;
-    if ($this->disableFormTag) return;
-    $this->addHiddenField([
-      'name'    => 'formId',
-      'value'   => $this->id(),
-      'noValue' => true
+  protected function initDefaultHiddenFields() {
+    $this->addNoValueHiddenField([
+      'name'  => 'formId',
+      'value' => $this->id()
     ]);
     if (!empty($this->actionFieldValue)) {
-      $this->addHiddenField([
-        'name'    => $this->defaultActionName,
-        'value'   => $this->actionFieldValue,
-        'noValue' => true
+      $this->addNoValueHiddenField([
+        'name'  => $this->defaultActionName,
+        'value' => $this->actionFieldValue
       ]);
     }
     if (isset($_SERVER['HTTP_REFERER'])) {
-      $this->addHiddenField([
-        'name'    => 'referer',
-        'value'   => $_SERVER['HTTP_REFERER'],
-        'noValue' => true
+      $this->addNoValueHiddenField([
+        'name'  => 'referer',
+        'value' => $_SERVER['HTTP_REFERER']
       ]);
-    }
-    foreach ($this->hiddenFieldsData as $v) {
-      $this->createElement($v);
-    }
-    $this->defaultElementsDefined = true;
-    if (!empty($this->defaultElements)) foreach ($this->defaultElements as $v) {
-      $this->createElement($v);
     }
   }
 
   public $defaultElements;
+
+  protected function initDefaultElements() {
+    if ($this->disableFormTag) return;
+    $this->callOnce('initDefaultHiddenFields');
+    foreach ($this->hiddenFields as $v) $this->createElement($v);
+    if (!empty($this->defaultElements)) {
+      foreach ($this->defaultElements as $v) {
+        $this->createElement($v);
+      }
+    }
+  }
 
   protected $noDataTypes = [
     'html'
@@ -684,7 +704,10 @@ class Form {
   protected $elementsInitialized = false;
 
   protected function initElements($reset = false) {
-    if ($reset) $this->els = [];
+    if ($reset) {
+      $this->els = [];
+      $this->initDefaultElements();
+    }
     if ($this->elementsInitialized and !$reset) return;
     $this->elementsInitialized = true;
     $this->hasErrors = false;
@@ -722,10 +745,11 @@ class Form {
    * @return  array
    */
   function setElementsData(array $defaultData = [], $reset = true) {
-    //pr($defaultData);
     $this->defaultData = $defaultData;
     $this->elementsData = $defaultData;
-    if ($this->isSubmitted() and $this->fromRequest) $this->elementsData = $this->req->p;
+    if ($this->isSubmitted() and $this->fromRequest) {
+      $this->elementsData = $this->req->p;
+    }
     $this->initElements($reset);
     return $this;
   }
@@ -831,6 +855,7 @@ eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
 
   function debugElements() {
     $this->setElementsDataDefault();
+    foreach ($this->els as $el) prr($el->options);
   }
 
   public $tinyInitialized = false;

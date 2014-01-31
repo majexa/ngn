@@ -29,7 +29,7 @@ function pr($var, $html = true, $trace = true) {
   if (R::get('plainText')) $html = false;
   if ($html) print '<pre>';
   if ($html) htmlspecialcharsR($var);
-  print $html ? print_r($var, true) : (new CliColors)->getColoredString(print_r($var, true), 'cyan');
+  print print_r($var, true);
   if ($html) print '</pre>';
   if (!$html) print "\n";
   if ($trace) print getBacktrace($html);
@@ -40,9 +40,13 @@ function prr($var, $html = true) {
   pr($var, $html, false);
 }
 
+function prrc($var) {
+  print (new CliColors)->getColoredString(print_r($var, true), 'cyan')."\n--\n";
+}
+
 function getPrr($v, $html = true) {
   ob_start();
-  pr($v, $html); // var_export($v, true); - в случаях рекурсий объектов вызывает fatal-ошибку
+  prr($v, $html); // var_export($v, true); - в случаях рекурсий объектов вызывает fatal-ошибку
   $c = ob_get_contents();
   ob_end_clean();
   return $c;

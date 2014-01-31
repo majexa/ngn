@@ -22,6 +22,7 @@ class DmfaDdTagsTreeMultiselectAc extends DmfaDdTagsTreeMultiselect {
   }
 
   function afterUpdate($tags, $k) {
+    if (!is_array($tags)) die2($tags);
     parent::afterUpdate(Arr::get($tags, 'id'), $k);
   }
 
