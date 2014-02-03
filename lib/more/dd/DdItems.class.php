@@ -135,8 +135,9 @@ class DdItems extends Items {
    * @param   integer   ID записи
    * @return  array     Массив записи
    */
-  function getItemF($id) {
+  function _getItemF($id) {
     if (!($item = parent::getItem($id))) return false;
+    output($this->strName.' - '.$id);
     $this->extendItemFilePaths($item);
     $this->extendItemTags($item);
     $this->extendItemUsers($item);
@@ -180,7 +181,9 @@ class DdItems extends Items {
   // ********************************************
 
   private function extendItemsTags(&$items) {
-    foreach ($items as &$item) $this->extendItemTags($item);
+    foreach ($items as &$item) {
+      $this->extendItemTags($item);
+    }
     return;
 
     $itemIds = array_keys($items);
@@ -236,6 +239,7 @@ class DdItems extends Items {
    */
   private function extendItemTags(&$item) {
     $this->setFieldTagTypes();
+    $memBefore = memory_get_usage();
     foreach (array_keys($item) as $fieldName) {
       if (!isset($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
@@ -257,6 +261,8 @@ class DdItems extends Items {
         }
       }
     }
+    $memAfter = memory_get_usage() - $memBefore;
+    //output($item['id'].':  '.Misc::formatPrice($memAfter).'. Total:  '.Misc::formatPrice(memory_get_usage()));
   }
 
   protected function extendItemTagIds(&$item) {

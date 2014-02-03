@@ -2,7 +2,7 @@
 
 class ConfigManagerForm extends Form {
 
-  protected $configType, $configName, $configValues, $configStruct, $configFields, $configDefaultData, $alert;
+  protected $configType, $configName, $configValues, $configStruct, $configFields, $configDefaultData, $alert, $noRootKeys = false;
 
   /**
    * @param string  Тип конфигурации (vars/constants)
@@ -15,9 +15,12 @@ class ConfigManagerForm extends Form {
     if ($this->configType == 'vars') $this->configValues = Config::getVar($this->configName, true);
     else
       $this->configValues = SiteConfig::getConstants($this->configName, true);
-    //die2($this->configValues);
     if (!$this->configValues) $this->configValues = [];
     $this->initStruct();
+    if (count($this->configStruct['fields']) == 1 and Arr::first($this->configStruct['fields'])['type'] == 'fieldList') {
+      $this->noRootKeys = Arr::firstKey($this->configStruct['fields']);
+      $this->configValues[$this->configName] = $this->configValues;
+    }
     if (!empty($this->configStruct['dependRequire'])) $this->dependRequire = $this->configStruct['dependRequire'];
     if (!empty($this->configStruct['visibilityConditions'])) {
       foreach ($this->configStruct['visibilityConditions'] as $cond) {
@@ -28,6 +31,7 @@ class ConfigManagerForm extends Form {
   }
 
   protected function init() {
+    if (count($this->configValues) == 1 and isset($this->configValues[$this->configName])) $this->configValues = $this->configValues[$this->configName];
     $this->setElementsData(!isset($this->configStruct['type']) ? $this->configValues : [$this->configName => $this->configValues]);
     if ($this->configType == 'constants') {
       $this->alert = 'Внимание! Изменение этих параметров может повлиять на работоспособность сайта';
@@ -71,6 +75,7 @@ class ConfigManagerForm extends Form {
 
   protected function _update(array $data) {
     if (isset($this->configStruct['type']) and $data) $data = $data[$this->configName];
+    if ($this->noRootKeys) $data = $data[$this->configName];
     if ($this->configType == 'vars') {
       SiteConfig::updateVar($this->configName, $data);
     }

@@ -137,7 +137,7 @@ class DdCore {
    */
   static function imDefault($strName, array $options = []) {
     $class = self::imClass($strName);
-    return new $class(new DdItems($strName), new DdForm(new DdFields($strName), $strName), $options);
+    return new $class(new DdItems($strName), new DdForm(new DdFields($strName), $strName, isset($options['formOptions']) ? $options['formOptions'] : []), $options);
   }
 
   static function exportItems($strName, DbCond $cond) {

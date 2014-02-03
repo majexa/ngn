@@ -31,7 +31,6 @@ class SflmJsClasses extends SflmJsClassesBase {
    * @throws Exception
    */
   function addClass($class, $source, Closure $success = null, Closure $failure = null) {
-    if ($class == 'Ngn.DdGrid.Admin') LogWriter::v('Ngn.DdGrod.Admin', 'trace');
     $prefix = "Try to add class '$class'. ($source). ";
     if (in_array($class, $this->existingClasses)) {
       Sflm::output($prefix."EXISTS");

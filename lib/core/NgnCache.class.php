@@ -62,6 +62,9 @@ class NgnCache {
 
   static protected $fileCache;
 
+  /**
+   * File Cache
+   */
   static function fc(array $frontendOptions = []) {
     if (empty($frontendOptions) and isset(self::$fileCache)) return self::$fileCache;
     self::$fileCache = self::_fc($frontendOptions);
