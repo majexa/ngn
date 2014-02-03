@@ -239,7 +239,7 @@ class DdItems extends Items {
    */
   private function extendItemTags(&$item) {
     $this->setFieldTagTypes();
-    $memBefore = memory_get_usage();
+    //$memBefore = memory_get_usage();
     foreach (array_keys($item) as $fieldName) {
       if (!isset($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
@@ -261,7 +261,7 @@ class DdItems extends Items {
         }
       }
     }
-    $memAfter = memory_get_usage() - $memBefore;
+    //$memAfter = memory_get_usage() - $memBefore;
     //output($item['id'].':  '.Misc::formatPrice($memAfter).'. Total:  '.Misc::formatPrice(memory_get_usage()));
   }
 
