@@ -251,9 +251,9 @@ class DbCond {
     return $this;
   }
 
-  function setLimit($limit) {
-    if (!$limit) return $this;
-    $this->limitCond = 'LIMIT '.mysql_real_escape_string($limit);
+  function setLimit($limit, $limit2 = null) {
+    if (!$limit and !$limit2) return $this;
+    $this->limitCond = 'LIMIT '.mysql_real_escape_string($limit).($limit2 ? ', '.mysql_real_escape_string($limit2) : '');
     return $this;
   }
 

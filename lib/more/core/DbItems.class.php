@@ -42,7 +42,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
   }
 
   function count() {
-    return $this->db->selectCell("SELECT COUNT(*) FROM {$this->table}".$this->cond->where());
+    return $this->db->selectCell("SELECT COUNT(*) FROM {$this->table}".$this->cond->all());
   }
 
   function getItem($id) {
