@@ -13,7 +13,7 @@ abstract class FieldEInput extends FieldEAbstract {
 
   protected function getTagsParams() {
     $opts = $this->options;
-    if (isset($opts['value'])) $opts['value'] = $this->prepareInputValue($opts['value']);
+    if (isset($opts['value'])) $opts['value'] = $this->prepareInputValue($this->postValue());
     $opt = Arr::filterByKeys($opts, ['name', 'maxlength', 'value', 'disabled', 'placeholder', 'autocomplete']);
     if (!empty($opts['data'])) foreach ($opts['data'] as $k => $v) $opt["data-$k"] = $v;
     if (!empty($this->options['multiple'])) $opts['multiple'] = null;
@@ -26,7 +26,9 @@ abstract class FieldEInput extends FieldEAbstract {
   }
 
   function _html() {
-    return '<input size="40" type="'.$this->inputType.'" '.'id="'.Misc::name2id($this->options['name']).'i" '.Tt()->tagParams($this->getTagsParams()).$this->getClassAtr().' />';
+    return '<input size="40" type="'.$this->inputType.'" '.'id="'.
+    Misc::name2id($this->options['name']).'i" '.
+    Tt()->tagParams($this->getTagsParams()).$this->getClassAtr().' />';
   }
 
 }

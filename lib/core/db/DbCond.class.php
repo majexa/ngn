@@ -55,9 +55,9 @@ class DbCond {
   function getConditions(array $except = []) {
     $conds = $this->_getConditions($except);
     return array_merge(Arr::filterByExceptKeys($conds, ['limit', 'order']), Arr::filterByKeys($conds, [
-        'limit',
-        'order'
-      ]) // эти должны быть в конце
+      'limit',
+      'order'
+    ]) // эти должны быть в конце
     );
   }
 
@@ -113,7 +113,7 @@ class DbCond {
     return $this->addFilter([
       'key'   => $key,
       'value' => $value,
-      'not'  => true
+      'not'   => true
     ]);
   }
 
@@ -134,7 +134,8 @@ class DbCond {
         if ($f == $filter) $n = $k;
       }
       if (!isset($n)) $n = count($this->filters[$type]);
-    } else {
+    }
+    else {
       $n = 0;
     }
     $this->filters[$type][$n] = $filter;
@@ -163,8 +164,8 @@ class DbCond {
    * Добавляет фильтр по заданому диапозону значений
    *
    * @param   string  Имя поля таблицы
-   * @param   string/bool   Значение начала диапозона. Если false, не учитывается
-   * @param   string/bool   Значение конца диапозона. Если false, не учитывается
+   * @param   string /bool   Значение начала диапозона. Если false, не учитывается
+   * @param   string /bool   Значение конца диапозона. Если false, не учитывается
    * @param   array
    * @param   bool    Строгое (>) или нестрогое (>=) неравенство
    */
@@ -179,11 +180,11 @@ class DbCond {
     }
     if ($from !== false and !is_numeric($from)) $from = "'".mysql_real_escape_string($from)."'";
     if ($to !== false and !is_numeric($to)) $to = "'".mysql_real_escape_string($to)."'";
-    $this->rangeFilterCond = $this->filterMode." ".
-      ($from !== false ? ($func ? $func."(" : "").
-        "$tablePrefix$key".($func ? ")" : "").
-        (($strict == self::strictBoth or $strict == self::strictFrom) ? ' > ' : ' >= ').$from : '').
-      ($to !== false ? (($from !== false ? ' AND ' : '').($func ? $func."(" : "")."$tablePrefix$key".($func ? ")" : "").(($strict == self::strictBoth or $strict == self::strictTo) ? ' < ' : ' <= ').$to) : '');
+    $this->rangeFilterCond = $this->filterMode." ". //
+      ($from !== false ? ($func ? $func."(" : "")."$tablePrefix$key".($func ? ")" : ""). //
+        (($strict == self::strictBoth or $strict == self::strictFrom) ? ' > ' : ' >= ').$from : ''). //
+      ($to !== false ? (($from !== false ? ' AND ' : '').($func ? $func."(" : "")."$tablePrefix$key".($func ? ")" : ""). //
+        (($strict == self::strictBoth or $strict == self::strictTo) ? ' < ' : ' <= ').$to) : '');
     return $this;
   }
 
@@ -215,7 +216,7 @@ class DbCond {
   function addExprFilter($key, $expr) {
     $this->filters['expr'][] = [
       'mode' => $this->filterMode,
-      'key' => $key,
+      'key'  => $key,
       'expr' => $expr
     ];
     $this->setFiltersCond('expr');
@@ -232,13 +233,12 @@ class DbCond {
       else {
         $tablePrefix = $this->tablePrefix;
       }
-      $this->$typeCond .= $v['mode']." ".
-        (!empty($v['func']) ? $v['func']."(" : "").
-        "$tablePrefix{$v['key']}".
-        (!empty($v['func']) ? ")" : "")." ".
-        (!empty($v['not']) ? 'NOT ' : '').
-        (!empty($v['expr']) ? $v['expr'] : '').
-        (!empty($v['value']) ? "IN (".$v['value'].")\n":"\n");
+      $this->$typeCond .= $v['mode']." ". //
+        (!empty($v['func']) ? $v['func']."(" : "")."$tablePrefix{$v['key']}". //
+        (!empty($v['func']) ? ")" : "")." ". //
+        (!empty($v['not']) ? 'NOT ' : ''). //
+        (!empty($v['expr']) ? $v['expr'] : ''). //
+        (isset($v['value']) ? "IN (".$v['value'].")\n" : "\n");
     }
     return $this;
   }
@@ -254,7 +254,11 @@ class DbCond {
   function addRange2RangeFilter($keyBegin, $keyEnd, $from, $to, $func = null, $strict = false) {
     if (!is_numeric($from)) $from = "'".mysql_real_escape_string($from)."'";
     if (!is_numeric($to)) $to = "'".mysql_real_escape_string($to)."'";
-    $this->range2rangeFilterCond = $this->filterMode." ".($func ? $func."(" : "")."{$this->tablePrefix}$keyEnd".($func ? ")" : "").($strict ? ' > ' : ' >= ').$from.' AND '.($func ? $func."(" : "")."{$this->tablePrefix}$keyBegin".($func ? ")" : "").($strict ? ' < ' : ' <= ').$to;
+    $this->range2rangeFilterCond = $this->filterMode." ". //
+      ($func ? $func."(" : "")."{$this->tablePrefix}$keyEnd".($func ? ")" : ""). //
+      ($strict ? ' > ' : ' >= ').$from.' AND '. //
+      ($func ? $func."(" : "")."{$this->tablePrefix}$keyBegin".($func ? ")" : ""). //
+      ($strict ? ' < ' : ' <= ').$to;
     return $this;
   }
 

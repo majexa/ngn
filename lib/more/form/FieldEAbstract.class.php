@@ -55,11 +55,15 @@ use Options;
     $this->setOptions($options);
     if (method_exists($this, 'beforeInit')) $this->beforeInit();
     $this->init();
-    if ($this->form and !empty($this->options['name'])) {
-      $this->isPostValue = (BracketName::getValue($this->form->req->p, $this->options['name'], BracketName::modeFalse) !== false);
+    if (!$this->form->valueFormated and ($value = $this->formatValue())) {
+      $this->options['inputValue'] = $this->options['value'];
+      $this->options['value'] = $value;
     }
-    if ($this->isPostValue and ($postValue = $this->preparePostValue())) $this->options['value'] = $postValue;
     $this->initDefaultValue();
+  }
+
+  protected function formatValue() {
+    return false;
   }
 
   protected function &getArrayRef() {
@@ -122,6 +126,11 @@ use Options;
    */
   function value() {
     if (!empty($this->options['noValue'])) return null;
+    return $this->postValue();
+  }
+
+  function postValue() {
+    if (isset($this->options['inputValue'])) return $this->options['inputValue'];
     return isset($this->options['value']) ? $this->options['value'] : null;
   }
 
@@ -213,15 +222,6 @@ use Options;
     if (!$this->form) return '';
     return "\n// ------- type: {$this->type} -------\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }
-
-  /*
-  protected function addElCss() {
-    foreach (Sflm::jsClass()->parents('Ngn.Form.El.'.ucfirst($this->type)) as $class) {
-      $type = lcfirst(str_replace('Ngn.Form.El.', '', $class));
-      Sflm::flm('css')->addLib("formEl/$type");
-    }
-  }
-  */
 
   public $errorBacktrace;
 

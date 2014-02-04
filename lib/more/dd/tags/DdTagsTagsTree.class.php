@@ -101,7 +101,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
    */
   function getTags($parentId) {
     $cond = clone $this->getSelectCond();
-    $cond->addF('parentId', $parentId);
+    $cond->addF('parentId', (int)$parentId);
     return db()->select("SELECT * FROM {$this->group->table}".$cond->all());
   }
 
