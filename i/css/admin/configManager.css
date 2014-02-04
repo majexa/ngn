@@ -2,15 +2,6 @@
 float: right;
 width: 350px;
 }
-.am_configManager .mbody #vars input {
-padding: 3px;
-}
-.am_configManager .mbody #vars input, .am_configManager .mbody #vars select {
-margin-right: 3px;
-}
-.am_configManager .mbody #vars .nl,.am_configManager .mbody #vars h2 {
-clear: both;
-}
 .am_configManager .mbody .element {
 /*float: left; было актуально, когда елемент мог содержать несколько полей */
 }
