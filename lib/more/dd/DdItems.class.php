@@ -135,17 +135,15 @@ class DdItems extends Items {
    * @param   integer   ID записи
    * @return  array     Массив записи
    */
-  function _getItemF($id) {
-    if (!($item = parent::getItem($id))) return false;
-    output($this->strName.' - '.$id);
+  function getItemF($id) {
+    if (!($item = $this->getItem($id))) return false;
     $this->extendItemFilePaths($item);
-    $this->extendItemTags($item);
     $this->extendItemUsers($item);
     //$this->extendItemExif($item);
     $this->formatItemText($item);
     $this->extendItemNumberRange($item);
     //$this->extendItemDd($item);
-    $this->extendItem($item);
+    //$this->extendItem($item);
     $modelClass = 'DdItemF'.ucfirst($this->strName);
     if (class_exists($modelClass)) $item = new $modelClass($item);
     return $item;
