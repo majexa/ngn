@@ -35,7 +35,6 @@ abstract class CliHelp {
         }
       }
       $this->extraHelp();
-      print implode(', ', Arr::get((new PmLocalProjectRecords)->getRecords(), 'name'))."\n";
     } else {
       $class = ucfirst($this->prefix()).ucfirst($class);
       $opt = array_slice($argv, 3);
