@@ -207,6 +207,20 @@ class DbCond {
     $this->addRangeFilter($key, false, $to, $func, $strict);
   }
 
+  /**
+   * Добавляет фильтр по выражению
+   * @param $key string Имя поля таблицы
+   * @param $expr string Экспрешн ( >= LALALA )
+   */
+  function addExprFilter($key, $expr) {
+    $this->filters['expr'][] = [
+      'mode' => $this->filterMode,
+      'key' => $key,
+      'expr' => $expr
+    ];
+    $this->setFiltersCond('expr');
+  }
+
   protected function setFiltersCond($type) {
     $this->$type = ''; // Очищаем текущий фильтр
     $typeCond = $type.'Cond';
@@ -223,7 +237,8 @@ class DbCond {
         "$tablePrefix{$v['key']}".
         (!empty($v['func']) ? ")" : "")." ".
         (!empty($v['not']) ? 'NOT ' : '').
-        "IN (".$v['value'].")\n";
+        (!empty($v['expr']) ? $v['expr'] : '').
+        (!empty($v['value']) ? "IN (".$v['value'].")\n":"\n");
     }
     return $this;
   }
@@ -251,9 +266,9 @@ class DbCond {
     return $this;
   }
 
-  function setLimit($limit) {
-    if (!$limit) return $this;
-    $this->limitCond = 'LIMIT '.mysql_real_escape_string($limit);
+  function setLimit($limit, $limit2 = null) {
+    if (!$limit and !$limit2) return $this;
+    $this->limitCond = 'LIMIT '.mysql_real_escape_string($limit).($limit2 ? ', '.mysql_real_escape_string($limit2) : '');
     return $this;
   }
 
