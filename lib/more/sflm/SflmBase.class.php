@@ -159,7 +159,7 @@ abstract class SflmBase {
   }
 
   protected function getPackageLibs($package) {
-    return Config::getVar("sfl/".$this->type."/$package");
+    return Config::getVar("sfl/".$this->type."/$package", false, false);
   }
 
   public $packagesCache = [];
