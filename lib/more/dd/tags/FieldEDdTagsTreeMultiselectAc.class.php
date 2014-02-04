@@ -4,7 +4,14 @@ class FieldEDdTagsTreeMultiselectAc extends FieldEDdTags {
 
   static $ddTagsTree = true, $ddTagsMulti = true;
 
-  protected function prepareInputValue($v) {
+  protected function formatValue() {
+    $tags = DdTags::get($this->form->strName, $this->baseName);
+    $ids = explode(',', $this->options['value']);
+    $tags->getSelectCond()->addF('id', $ids);
+    return $tags->getData();
+  }
+
+  protected function prepareInputValue($value) {
     return '';
   }
 
