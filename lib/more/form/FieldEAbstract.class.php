@@ -55,7 +55,7 @@ use Options;
     $this->setOptions($options);
     if (method_exists($this, 'beforeInit')) $this->beforeInit();
     $this->init();
-    if (!$this->form->valueFormated and ($value = $this->formatValue())) {
+    if (isset($this->form) and !$this->form->valueFormated and ($value = $this->formatValue())) {
       $this->options['inputValue'] = $this->options['value'];
       $this->options['value'] = $value;
     }
