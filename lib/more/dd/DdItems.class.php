@@ -139,11 +139,7 @@ class DdItems extends Items {
     if (!($item = $this->getItem($id))) return false;
     $this->extendItemFilePaths($item);
     $this->extendItemUsers($item);
-    //$this->extendItemExif($item);
     $this->formatItemText($item);
-    $this->extendItemNumberRange($item);
-    //$this->extendItemDd($item);
-    //$this->extendItem($item);
     $modelClass = 'DdItemF'.ucfirst($this->strName);
     if (class_exists($modelClass)) $item = new $modelClass($item);
     return $item;
@@ -295,6 +291,7 @@ class DdItems extends Items {
   }
 
   protected function extendNumberRange($field, &$item) {
+    if (!isset($item[$field['name'].'From'])) throw new Exception('Item "'.$field['name'].'From" field is empty');
     $item[$field['name']] = [
       'from' => $item[$field['name'].'From'],
       'to'   => $item[$field['name'].'To']
