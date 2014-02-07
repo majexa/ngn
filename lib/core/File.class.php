@@ -1080,7 +1080,7 @@ application/x-httpd-php-source  phps
   }
 
   static function checkExists($file, $exceptionText = null) {
-    if (!file_exists($file)) throw new Exception($exceptionText ? : "File '$file' not exists");
+    if (!file_exists($file)) throw new Exception($exceptionText ? : "File '$file' does not exists");
     return $file;
   }
 

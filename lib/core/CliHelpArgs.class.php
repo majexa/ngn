@@ -12,7 +12,7 @@ abstract class CliHelpArgs extends CliHelp {
       $r[] = [
         'name'     => $param->getName(),
         'optional' => $param->isOptional(),
-        'variants' => (isset($meta[$i][1]) and strstr($meta[$i][1], '|')) ? str_replace('|', ',', $meta[$i][1]) : false,
+        'variants' => (isset($meta[$i][1]) and strstr($meta[$i][1], '|')) ? $meta[$i][1] : false,
         'descr' => (isset($meta[$i][1]) and !strstr($meta[$i][1], '|')) ? $meta[$i][1] : false,
       ];
     }
