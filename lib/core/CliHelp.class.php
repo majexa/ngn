@@ -35,6 +35,7 @@ abstract class CliHelp {
 
   protected function _getMethods($class) {
     return array_filter((new ReflectionClass($class))->getMethods(), function (ReflectionMethod $method) use ($class) {
+      if ($method->isConstructor()) return false;
       return $method->isPublic();
     });
   }
@@ -42,7 +43,6 @@ abstract class CliHelp {
   protected function help() {
     print O::get('CliColors')->getColoredString('name', 'darkGray')." - optional param\n";
     print O::get('CliColors')->getColoredString('[...]', 'green')." - param options\n";
-    print "---------\n";
     print O::get('CliColors')->getColoredString('Supported commands:', 'yellow')."\n";
     foreach ($this->getClasses() as $v) {
       foreach ($this->getMethods($v['class']) as $vv) {
