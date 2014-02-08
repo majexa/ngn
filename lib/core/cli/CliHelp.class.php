@@ -10,6 +10,8 @@ abstract class CliHelp {
 
   function __construct($argv) {
     if (is_string($argv)) $argv = explode(' ', $argv);
+    elseif (is_array($argv)) $argv = array_slice($argv, 1, count($argv));
+    else throw new Exception('Wrong type');
     $this->argv = $argv;
     if (empty($this->argv[0]) or $this->argv[0] == 'help') {
       $this->help();
@@ -49,13 +51,17 @@ abstract class CliHelp {
         $name = $this->oneEntry ? '' : $v['name'].' ';
         print O::get('CliColors')->getColoredString($this->runner(), 'brown')." $name{$vv['method']} ".$this->renderOptions($vv['options'])."\n";
       }
-      $manyClass = $v['class'].'s';
-      if (class_exists($manyClass)) {
+      if ($this->hasMultiWrapper($v['class'])) {
         $cmdName = lcfirst(Misc::removePrefix(ucfirst($this->prefix()), $v['class']));
         print O::get('CliColors')->getColoredString($this->runner(), 'brown')." {$cmdName}s ".O::get('CliColors')->getColoredString("{the same options as $cmdName}", 'cyan')."\n";
       }
     }
     $this->extraHelp();
+  }
+
+  protected function hasMultiWrapper($class) {
+    $class = $class.'s';
+    return class_exists($class) and is_subclass_of($class, 'CliHelpMultiWrapper');
   }
 
   protected function run() {
@@ -65,51 +71,35 @@ abstract class CliHelp {
       $params = array_slice($this->argv, 1, count($this->argv));
     }
     else {
-      $class = $this->argv[0];
+      $class = ucfirst($this->prefix()).ucfirst($this->argv[0]);
       $method = $this->argv[1];
       $params = array_slice($this->argv, 2, count($this->argv));
     }
+    if (!$this->check($class, $method, $params)) return;
+    $this->_run($class, $method, $params);
+  }
 
-    $methods = Arr::get($this->getMethods($class), 'options', 'method');
+  protected function check($class, $method, $params) {
+    if (is_subclass_of($class, 'CliHelpMultiWrapper')) $_class = Misc::removeSuffix('s', $class);
+    else $_class = $class;
+    $methods = Arr::get($this->getMethods($_class), 'options', 'method');
     if (!isset($methods[$method])) {
       output("Method '$method' does not exists in class '$class'");
-      return;
+      return false;
     }
-    foreach ($methods[$method] as $n => $param) {
-      if ($param['optional']) continue;
-      if (!isset($params[$n])) {
-        output("Param #".($n+1)." '{$param['name']}' is required");
-        return;
+    if (!is_subclass_of($class, 'CliHelpMultiWrapper')) {
+      foreach ($methods[$method] as $n => $param) {
+        if ($param['optional']) continue;
+        if (!isset($params[$n])) {
+          output("Param #".($n + 1)." '{$param['name']}' is required");
+          return false;
+        }
       }
     }
-    call_user_func_array([new $class, $method], $params);
+    return true;
   }
 
-
-  /*
-  protected function run($argv) {
-    $class = ucfirst($this->prefix()).ucfirst($class);
-    $opt = array_slice($argv, 3);
-    $options = [];
-    $method = 'a_'.$argv[2];
-    foreach ($class::$requiredOptions as $i => $name) $options[$name] = $opt[$i];
-    if (!empty($class::$set)) {
-      // If static property $set exists, it is multiple wrapper for single processor. And we need to
-      // get method options from single processor class.
-      if (method_exists($class, $method)) {
-        $options = $this->getClassMethodOptions($argv, $class, $method);
-      }
-      else {
-        $options = $this->getClassMethodOptions($argv, $this->getSingleProcessorClass($class), $method);
-      }
-      (new $class(array_merge($options, $options)))->action($argv[2]);
-    }
-    else {
-      $_options = $this->getClassMethodOptions($argv, $class, $method, count($options));
-      (new $class(array_merge($_options, $options)))->$method();
-    }
-  }
-  */
+  abstract protected function _run($class, $method, $params);
 
   protected function renderOptions($options) {
     return implode(' ', array_map(function ($v) {
@@ -150,28 +140,6 @@ abstract class CliHelp {
       ];
     }, $this->_getMethods($class));
     return $methods;
-  }
-
-  protected function getClassMethodOptions(array $argv, $class, $method, $argvOffset = 0) {
-    $options = [];
-    if (($optionNames = ($this->getMethodOptions((new ReflectionMethod($class, $method)))))) {
-      $args = array_slice($argv, 3 + $argvOffset);
-      foreach ($optionNames as $i => $opt) {
-        if (!isset($args[$i])) throw new Exception("Option '$opt' for method '$method' not defined");
-        $options[$opt] = $args[$i];
-      }
-    }
-    return $options;
-  }
-
-  protected function getMethodOptions(ReflectionMethod $method) {
-    $optionNames = $this->getMethodOptionsWithMeta($method);
-    foreach ($optionNames as &$v) $v = Misc::removePrefix('@', $v);
-    return $optionNames;
-  }
-
-  protected function getSingleProcessorClass($multipleProcessorClass) {
-    return rtrim($multipleProcessorClass, 's');
   }
 
 }
