@@ -23,4 +23,8 @@ abstract class CliHelpArgs extends CliHelp {
     return $method->getName();
   }
 
+  protected function _run($class, $method, $params) {
+    call_user_func_array([new $class, $method], $params);
+  }
+
 }
