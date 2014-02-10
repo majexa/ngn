@@ -16,7 +16,7 @@ class CliTestRunner extends CliHelpDirectClassesArgs {
   }
 
   protected function runner() {
-    return 'test';
+    return 'ngn-test';
   }
 
 }
