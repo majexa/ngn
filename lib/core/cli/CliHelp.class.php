@@ -13,7 +13,7 @@ abstract class CliHelp extends CliHelpAbstract {
         ]
       ];
     }
-    return array_filter(array_map(function ($class) {
+    $classes = array_filter(array_map(function ($class) {
       if ($prefix = $this->prefix()) {
         $name = lcfirst(Misc::removePrefix(ucfirst($this->prefix()), $class));
       }
@@ -25,6 +25,7 @@ abstract class CliHelp extends CliHelpAbstract {
         'name'  => $name
       ];
     }, ClassCore::getClassesByPrefix(ucfirst($this->prefix()))));
+    return $classes;
     /*
     if (!$this->filter) return $classes;
     return array_filter($classes, function ($v) {
