@@ -52,6 +52,7 @@ class TestRunnerAbstract {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
     if ($filter) $r = array_filter($r, $filter);
+    die2($r);
     return $r;
   }
 
