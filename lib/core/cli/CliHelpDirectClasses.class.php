@@ -3,11 +3,11 @@
 abstract class CliHelpDirectClasses extends CliHelpAbstract {
 
   protected function class2name($class) {
-    return Arr::get($this->getClasses(), $class, 'class')['name'];
+    return Arr::get($this->getClasses(), 'name', 'class')[$class];
   }
 
   protected function name2class($name) {
-    return Arr::get($this->getClasses(), $name, 'name')['class'];
+    return Arr::get($this->getClasses(), 'class', 'name')[$name];
   }
 
   protected function run() {

@@ -61,7 +61,6 @@ abstract class CliHelpAbstract {
     return class_exists($class) and is_subclass_of($class, 'CliHelpMultiWrapper');
   }
 
-
   protected function getMethodDescr($method) {
   }
 
