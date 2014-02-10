@@ -82,6 +82,7 @@ class ClassCore {
   }
 
   static function classToName($prefix, $class) {
+    $prefix = ucfirst($prefix);
     if (is_object($class)) $class = get_class($class);
     return lcfirst(Misc::removePrefix($prefix, $class));
   }
