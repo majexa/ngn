@@ -234,7 +234,6 @@ class Ddo {
     if (isset($item[$fieldName.'_f'])) $value = $item[$fieldName.'_f'];
     if (empty($this->fields[$fieldName])) throw new Exception("No field for field name=$fieldName. Fields:".getPrr($this->fields));
     $f = $this->fields[$fieldName];
-    if (!isset($f['type'])) $f['type'] = 'text';
     $tplData = [
       'pagePath'     => $this->getPagePath(),
       'id'           => $itemId,

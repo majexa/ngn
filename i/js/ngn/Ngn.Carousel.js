@@ -57,9 +57,13 @@ Ngn.Carousel = new Class({
     return this;
   },
 
+  curEl: null,
+
   toElement: function(el) {
     //if (this.checkLink()) return this;
     this.parent(el);
+    if (this.curEl) this.curEl.removeClass('sel');
+    this.curEl = el.addClass('sel');
     this.fireEvent('toElement');
   },
 
