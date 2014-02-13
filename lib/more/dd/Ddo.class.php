@@ -261,9 +261,11 @@ class Ddo {
     return '<!-- Open fields group --><div class="hgrp hgrpt_'.$type.' hgrp_'.$name.' '.$even.'">';
   }
 
+  public $groupElementsColsN = false;
+
   public $ddddItemsBegin = '`<div class="items ddItems str_`.$strName.`">`';
-  public $tplPathItem = 'dd/elements';
-  public $ddddItemsEnd = '`</div><!-- Конец цикла вывода записей по списку полей структуры "`.$strName.`" -->`';
+  public $tplPathItem = 'dd/elements/default';
+  public $ddddItemsEnd = '`</div><!-- Ddo elements end "`.$strName.`" -->`';
   public $premoder = false;
   //public $hgrpBeginDddd = '`<!-- Open fields group --><div class="hgrp hgrpt_`.$type.` hgrp_`.$name.` even_`.$evenNum.`">`';
   public $elBeginDddd = '`<div class="element f_`.$name.` t_`.$type.`">`';
@@ -307,7 +309,7 @@ class Ddo {
       }
       return $text;
     }
-    $html = '<!-- Начало цикла вывода записей по списку элементов структуры "'.$this->strName.'" -->'."\n";
+    $html = '<!-- Ddo elements begin "'.$this->strName.'" -->'."\n";
     $html .= $this->itemsBegin();
     foreach ($this->items as $v) $html .= $this->elsItem($v);
     $html .= $this->itemsEnd();
