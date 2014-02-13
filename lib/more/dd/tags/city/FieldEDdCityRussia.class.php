@@ -15,13 +15,12 @@ class FieldEDdCityRussia extends FieldEDdCity {
 
   protected function getRootOptions() {
     $this->tags->getSelectCond()->setOrder('title');
-    $tags = $this->tags->getTags($this->rootTagId);
-    $_tags = $this->tags->getTags(Arr::get($tags, 'id'));
+    $initRegionTags = $this->tags->getTags(Arr::get($this->tags->getTags($this->rootTagId), 'id'));
     $tags = [];
     $topIds = [50, 779, 780, 47]; // Московкая обл, Москва, Питер, Лен.обл.
-    foreach ($_tags as $v) if (in_array($v['id'], $topIds)) $tags[] = $v;
+    foreach ($initRegionTags as $v) if (in_array($v['id'], $topIds)) $tags[] = $v;
     $tags = Arr::sortByOrderKey($tags, 'oid');
-    foreach ($_tags as $v) if (!in_array($v['id'], $topIds)) $tags[] = $v;
+    foreach ($initRegionTags as $v) if (!in_array($v['id'], $topIds)) $tags[] = $v;
     return ['' => '—'] + Arr::get($tags, 'title', 'id');
   }
 

@@ -82,6 +82,7 @@ class ClassCore {
   }
 
   static function classToName($prefix, $class) {
+    $prefix = ucfirst($prefix);
     if (is_object($class)) $class = get_class($class);
     return lcfirst(Misc::removePrefix($prefix, $class));
   }
@@ -181,11 +182,22 @@ class ClassCore {
     return clone $obj;
   }
 
-  static function getDocComment($str, $tag) {
-    $tag = '@'.$tag;
-    if (!preg_match("/".$tag."\s+(.*)(\\r\\n|\\r|\\n)/s", $str, $m)) return false;
-    if (!empty($m[1])) return trim($m[1]);
-    return false;
+  static function getDocComment($str, $_tag) {
+    $tag = '@'.$_tag;
+    if ($_tag == 'options') {
+      if (!preg_match("/".$tag."\\s+(.*)(\\r\\n|\\r|\\n)/s", $str, $m)) return false;
+      if (!empty($m[1])) return trim($m[1]);
+      return false;
+    } elseif ($_tag == 'param') {
+      if (!preg_match_all("/\\*\\s".$tag."\\s+([^\n]+)\n/sm", $str, $m)) return false;
+      $r = $m[1];
+      foreach ($r as &$v) {
+        if (preg_match('/(\\S+)\\s+(.+)/', $v, $m)) $v = [$m[1], $m[2]];
+      }
+      return $r;
+    } else {
+      throw new Exception("Tag '$_tag' npt realized'");
+    }
   }
 
   static function hasTrait($class, $trait) {

@@ -16,6 +16,7 @@ return [
   'ddTags' => 'Tt()->enumDddd($v, `$title`)',
   'ddTagsSelect' => '$v ? $v[`title`] : ``',
   'ddTagsMultiselect' => '$v ? Tt()->enumDddd($v, `$title`) : ``',
+  'ddTagsMultiselectDropdown' => '%ddTagsMultiselect',
   'ddTagsSelectName' => '%ddTagsSelect',
   'ddTagsTreeSelect' => '`<span class="dgray"><b class="title">`.$title.`:</b> `.DdTagsHtml::treeArrowsLinks([`pagePath` => $pagePath, `tags` => [$v]]).`</span>`', // выводим только последний
   'ddTagsConsecutiveSelect' => 'DdTagsHtml::treeArrowsLinks([`pagePath` => $pagePath, `tags` => [$v]])',
