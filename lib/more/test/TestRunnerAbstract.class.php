@@ -26,15 +26,10 @@ class TestRunnerAbstract {
     }
   }
 
-  function addTestSuite($class) {
+  protected function addTestSuite($class) {
     $rc = new ReflectionClass($class);
     if ($rc->isAbstract()) return;
     $this->suite->addTestSuite($rc);
-  }
-
-  function __call($name, $args) {
-    if (method_exists($this, "_$name")) call_user_func_array([$this, "_$name"], $args);
-    else $this->_test($name);
   }
 
   protected function getClasses() {
@@ -52,6 +47,7 @@ class TestRunnerAbstract {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
     if ($filter) $r = array_filter($r, $filter);
+    die2($r);
     return $r;
   }
 

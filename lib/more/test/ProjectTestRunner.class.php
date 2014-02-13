@@ -23,7 +23,7 @@ class ProjectTestRunner extends TestRunnerAbstract {
     });
   }
 
-  function _local($checkErrors = true) {
+  function locl($checkErrors = true) {
     if ($checkErrors) (new Errors)->clear();
     $classes = array_filter($this->getClasses(), function($class) {
       return strstr(Lib::getClassPath($class), "projects/$this->project/") or !empty($class::$local);
@@ -32,13 +32,13 @@ class ProjectTestRunner extends TestRunnerAbstract {
     $this->_run($classes);
   }
 
-  function _global() {
+  function globl() {
     $this->_run(array_filter($this->getClasses(), function($class) {
       return !strstr(Lib::getClassPath($class), "projects/$this->project/");
     }));
   }
 
-  function _all() {
+  function all() {
     $this->_run($this->getClasses());
   }
 

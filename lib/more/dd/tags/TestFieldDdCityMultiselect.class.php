@@ -3,12 +3,12 @@
 class TestFieldDdCityMultiselect extends TestFieldDdTagsAbstract {
 
   function createData() {
-    return ['sample' => '822,779'];
+    return ['sample' => '779,822'];
   }
 
   function runTests($request = false) {
     static::$im->items->addTagFilter('sample', 300);
-    $this->assertTrue(!empty(static::$im->items->getItems()[$this->itemId]));
+    $this->assertTrue(!empty(static::$im->items->getItems()[$this->itemId]), 'tag add fails');
     $item = static::$im->items->getItem($this->itemId);
     $this->assertTrue($item['sample'][1][3]['title'] == 'Москва');
     $this->assertTrue($item['sample'][2][3]['title'] == 'Нижний Новгород');

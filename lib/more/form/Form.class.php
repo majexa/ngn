@@ -713,6 +713,13 @@ class Form {
 
   protected $elementsInitialized = false;
 
+  /**
+   * Значение отформатировано
+   *
+   * @var bool
+   */
+  public $valueFormated = false;
+
   protected function initElements($reset = false) {
     if ($reset) {
       $this->els = [];
