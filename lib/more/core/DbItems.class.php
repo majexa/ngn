@@ -213,7 +213,6 @@ CREATE TABLE IF NOT EXISTS `$name` (
   }
 
   function addF($key, $value) {
-    if ($value === -1) die2('!');
     $this->cond->addF($key, $value);
     return $this;
   }
