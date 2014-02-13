@@ -262,6 +262,7 @@ class Ddo {
   }
 
   public $groupElementsColsN = false;
+  public $groupElements = true;
 
   public $ddddItemsBegin = '`<div class="items ddItems str_`.$strName.`">`';
   public $tplPathItem = 'dd/elements/default';
