@@ -2,24 +2,37 @@
 
 abstract class CliHelpAbstract {
 
+  abstract function prefix();
+
   /**
    * @return mixed [['name' => 'asd', 'class' => 'Wsd]]
    */
-  abstract protected function getClasses();
+  abstract public function getClasses();
 
-  abstract protected function runner();
+  protected function runner($color = 'brown') {
+    return O::get('CliColors')->getColoredString($this->_runner(), $color);
+  }
+
+  abstract protected function _runner();
 
   abstract protected function run();
 
-  abstract protected function class2name($class);
+
+  public function class2name($class) {
+    $r = Arr::get($this->getClasses(), 'name', 'class');
+    if (!isset($r[$class])) throw new EmptyException("$r[$class]");
+    return $r[$class];
+  }
+
+  public function name2class($name) {
+    $r = Arr::get($this->getClasses(), 'class', 'name');
+    if (!isset($r[$name])) throw new EmptyException("$r[$name]");
+    return $r[$name];
+  }
 
   abstract protected function _getOptions(ReflectionMethod $method, $class);
 
-  protected $filter = [];
-
-  protected $oneClass = false;
-
-  protected $argv;
+  public $argv, $oneClass = false;
 
   function __construct($argv) {
     if (is_string($argv)) $argv = explode(' ', $argv);
@@ -37,7 +50,16 @@ abstract class CliHelpAbstract {
   protected function _getMethods($class) {
     return array_filter((new ReflectionClass($class))->getMethods(), function (ReflectionMethod $method) use ($class) {
       if ($method->isConstructor()) return false;
+      if ($method->isStatic()) return false;
       return $method->isPublic();
+    });
+  }
+
+  protected $separateParentMethods = false;
+
+  protected function getMethodsWithoutParents($class) {
+    return array_filter($this->getMethods($class), function($v) use ($class) {
+      return (new ReflectionMethod($class, $v['method']))->getDeclaringClass()->getName() == $class;
     });
   }
 
@@ -47,10 +69,31 @@ abstract class CliHelpAbstract {
     $classes = $this->getClasses();
     if ($classes) {
       print O::get('CliColors')->getColoredString('Supported commands:', 'yellow')."\n";
-      foreach ($classes as $v) {
-        print $this->renderMethods($v['class']);
+      if ($this->separateParentMethods) {
+        $parentClassesOutputed = [];
+        foreach ($classes as $v) {
+          if (($parents = ClassCore::getParents($v['class']))) {
+            $parentClass = $parents[0];
+            if (!isset($parentClassesOutputed[$parentClass])) {
+              print $this->_renderMethods($v['class'], $this->getMethods($parentClass), 'green');
+              $parentClassesOutputed[$parentClass] = $v['class'];
+            } else {
+              print "the same options as: ".$this->runner('green').' '.$this->class2name($parentClassesOutputed[$parentClass])."\n";
+            }
+            print $this->_renderMethods($v['class'], $this->getMethodsWithoutParents($v['class']));
+          }
+          else {
+            print $this->renderMethods($v['class']);
+          }
+        }
       }
-    } else {
+      else {
+        foreach ($classes as $v) {
+          print $this->renderMethods($v['class']);
+        }
+      }
+    }
+    else {
       print O::get('CliColors')->getColoredString('No supported commands', 'red')."\n";
     }
     $this->extraHelp();
@@ -58,58 +101,89 @@ abstract class CliHelpAbstract {
 
   protected function hasMultiWrapper($class) {
     $class = $class.'s';
-    return class_exists($class) and is_subclass_of($class, 'CliHelpMultiWrapper');
-  }
-
-  protected function getMethodDescr($method) {
-  }
-
-  protected function renderMethods($class) {
-    $name = $this->oneClass ? false : $this->class2name($class);
-    $s = '';
-    foreach ($this->getMethods($class) as $method) {
-      $nameCmd = $name ? $name.' ' : '';
-      $s .= O::get('CliColors')->getColoredString($this->runner(), 'brown')." $nameCmd{$method['method']} ".$this->renderOptions($method['options'])."\n";
-    }
-    if ($name and $this->isMultiWrapper($class)) {
-      $s .= //
-        O::get('CliColors')->getColoredString($this->runner(), 'brown')." {$name}s ". //
-        O::get('CliColors')->getColoredString("{the same options as $name}", 'cyan')."\n";
-    }
-    return $s;
+    return class_exists($class) and $this->isMultiWrapper($class);
   }
 
   protected function isMultiWrapper($class) {
     return is_subclass_of($class, 'CliHelpMultiWrapper');
   }
 
-  protected function check($class, $method, $params) {
-    if ($this->isMultiWrapper($class)) $_class = Misc::removeSuffix('s', $class);
-    else $_class = $class;
+  protected function renderMethods($class) {
+    if (!($methods = $this->getMethods($class))) {
+      if ($this->isMultiWrapper($class)) return $this->_renderMethods($class, []);
+      return O::get('CliColors')->getColoredString("No supported methods in class '$class'", 'red')."\n";
+    }
+    return $this->_renderMethods($class, $methods);
+  }
 
-    if (empty($method)) {
+  protected function cmdName($class) {
+    return $this->oneClass ? false : $this->class2name($class);
+  }
+
+  protected function _renderMethods($class, array $methods, $runnerColor = 'brown') {
+    $name = $this->cmdName($class);
+    $s = '';
+    // program class
+    foreach ($methods as $method) {
+      $nameCmd = $name ? $name.' ' : '';
+      $s .= //
+        $this->runner($runnerColor). //
+        " $nameCmd{$method['method']} ".$this->renderOptions($method['options']). //
+        ($method['title'] ? O::get('CliColors')->getColoredString(' -- '.$method['title'], 'cyan') : '').
+        "\n"; //
+    }
+    if ($name and $this->isMultiWrapper($class)) {
+      $s .= //
+        $this->runner()." $name ". //
+        O::get('CliColors')->getColoredString("{the same options as $name}", 'cyan')."\n";
+    }
+    return $s;
+  }
+
+  protected function getConstructorParams($class) {
+    if (!($constructor = (new ReflectionClass($class))->getConstructor())) return [];
+    return $constructor->getParameters();
+  }
+
+  protected function getConstructorParamsImposed($class, array $imposeParams) {
+    $r = [];
+    foreach (array_keys($this->getConstructorParams($class)) as $n) {
+      //if (!)) throw new EmptyException("\$imposeParams[$n]");
+      $r[$n] = isset($imposeParams[$n]) ? $imposeParams[$n] : "DUMMY-$n";
+    }
+    return $r;
+  }
+
+  protected function check(CliArgs $args) {
+    if ($this->isMultiWrapper($args->class)) $_class = Misc::removeSuffix('s', $args->class);
+    else $_class = $args->class;
+    if (empty($args->method)) {
       output("Choose method (#3 param)");
-      print $this->renderMethods($class);
+      print $this->renderMethods($args->class);
       return false;
     }
     $methods = Arr::get($this->getMethods($_class), 'options', 'method');
-    if (!isset($methods[$method])) {
-      output("Method '$method' does not exists in class '$class'");
-      return false;
+    if (!isset($methods[$args->method])) {
+      throw new Exception("Method '{$args->method}' does not exists in class '{$args->class}'");
     }
-    if (!is_subclass_of($class, 'CliHelpMultiWrapper')) {
-      foreach ($methods[$method] as $n => $param) {
-        if ($param['optional']) continue;
-        if (!isset($params[$n])) {
-          output("Param #".($n + 1)." '{$param['name']}' is required");
-          return false;
-        }
+    foreach ($this->getConstructorParams($args->class) as $n => $param) {
+      if ($param->isOptional()) continue;
+      if (!isset($args->params[$n])) {
+        output("Param #".($n + 1)." '".$param->getName()."' is required");
+        return false;
+      }
+    }
+    foreach ($methods[$args->method] as $n => $param) {
+      if ($param['optional']) continue;
+      if (!isset($args->params[$n])) {
+        output("Param #".($n + 1)." '{$param['name']}' is required");
+        return false;
       }
     }
     return true;
   }
 
-  abstract protected function _run($class, $method, $params);
+  abstract protected function _run(CliArgs $args);
 
   protected function renderOptions($options) {
     return implode(' ', array_map(function ($v) {
@@ -136,8 +210,10 @@ abstract class CliHelpAbstract {
 
   protected function getMethods($class) {
     $methods = array_map(function (ReflectionMethod $method) use ($class) {
+      ClassCore::getDocComment($method->getDocComment(), 'title');
       return [
         'options' => $this->getOptions($method, $class),
+        'title' => ClassCore::getDocComment($method->getDocComment(), 'title'),
         'method'  => $this->getMethod($method)
       ];
     }, $this->_getMethods($class));

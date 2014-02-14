@@ -1022,7 +1022,7 @@ class HTML_Node {
   protected function toString_attributes() {
     $s = '';
     foreach ($this->attributes as $a => $v) {
-      $s .= ' '.$a.(((!$this->attribute_shorttag) || ($this->attributes[$a] !== $a)) ? '="'.htmlspecialchars($this->attributes[$a], ENT_QUOTES, '', false).'"' : '');
+      $s .= ' '.$a.(((!$this->attribute_shorttag) || ($this->attributes[$a] !== $a)) ? '="'.htmlspecialchars($this->attributes[$a], ENT_QUOTES, 'UTF-8', false).'"' : '');
     }
     return $s;
   }

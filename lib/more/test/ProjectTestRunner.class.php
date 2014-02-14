@@ -23,6 +23,11 @@ class ProjectTestRunner extends TestRunnerAbstract {
     });
   }
 
+  /**
+   * Запускает проектные тесты только из папки проекта
+   *
+   * @param bool $checkErrors
+   */
   function locl($checkErrors = true) {
     if ($checkErrors) (new Errors)->clear();
     $classes = array_filter($this->getClasses(), function($class) {
@@ -32,12 +37,18 @@ class ProjectTestRunner extends TestRunnerAbstract {
     $this->_run($classes);
   }
 
+  /**
+   * Запускает все проектные тесты, кроме тех, что есть в проекте
+   */
   function globl() {
     $this->_run(array_filter($this->getClasses(), function($class) {
       return !strstr(Lib::getClassPath($class), "projects/$this->project/");
     }));
   }
 
+  /**
+   * Запускает все проектные тесты
+   */
   function all() {
     $this->_run($this->getClasses());
   }

@@ -183,6 +183,13 @@ class ClassCore {
   }
 
   static function getDocComment($str, $_tag) {
+    if ($_tag == 'title') {
+      $str = preg_replace('/^\s*\*\s*\n/m', '', $str);
+      if (!preg_match_all('/^\s*\*\s+(?!@)([^\n]*)$/m', $str, $m)) return false;
+      $r = implode(' ', $m[1]);
+      if (($r = trim($r))) return $r;
+      return false;
+    }
     $tag = '@'.$_tag;
     if ($_tag == 'options') {
       if (!preg_match("/".$tag."\\s+(.*)(\\r\\n|\\r|\\n)/s", $str, $m)) return false;

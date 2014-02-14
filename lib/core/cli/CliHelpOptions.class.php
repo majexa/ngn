@@ -2,7 +2,7 @@
 
 abstract class CliHelpOptions extends CliHelp {
 
-  protected function getClasses() {
+  public function getClasses() {
     return ClassCore::getDescendants('ArrayAccessebleOptions', ucfirst($this->prefix()));
   }
 
@@ -40,31 +40,35 @@ abstract class CliHelpOptions extends CliHelp {
     return Misc::removePrefix('a_', $method->getName());
   }
 
-  protected function _run($class, $method, $params) {
-    $method = 'a_'.$method;
-    if (is_subclass_of($class, 'CliHelpMultiWrapper')) {
-      $this->runMultiWrapper($class, $method, $params);
+  protected function _run(CliArgs $args) {
+    $method = 'a_'.$args->method;
+    if (is_subclass_of($args->class, 'CliHelpMultiWrapper')) {
+      $this->runMultiWrapper($args->class, $method, $args->params);
     }
     else {
       $requiredOptions = [];
-      foreach ($class::$requiredOptions as $i => $name) $requiredOptions[$name] = $params[$i];
-      (new $class(array_merge($requiredOptions, $this->getMethodOptionsWithParams($class, $method, $params))))->$method();
+      $class = $args->class;
+      foreach ($class::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
+      (new $class(array_merge($requiredOptions, $this->getMethodOptionsWithParams($args))))->$method();
     }
   }
 
-  protected function runMultiWrapper($class, $method, $params) {
-    $realClass = method_exists($class, $method) ? $class : $this->getSingleProcessorClass($class);
+  protected function runMultiWrapper(CliArgs $args) {
+    $realClass = method_exists($args->class, $args->method) ? $args->class : $this->getSingleProcessorClass($args->class);
     $requiredOptions = [];
-    foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $params[$i];
-    $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams($realClass, $method, $params));
+    foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
+    $realArgs = clone $args;
+    $realArgs->class = $realClass;
+    $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams($realArgs));
     /* @var CliHelpMultiWrapper $multiWrapper */
+    $class = $args->class;
     $multiWrapper = (new $class($options));
-    $multiWrapper->action($method);
+    $multiWrapper->action($args->method);
   }
 
-  protected function getMethodOptionsWithParams($class, $method, $params) {
-    if (($options = ($this->getMethodOptions((new ReflectionMethod($class, $method)))))) {
-      foreach ($options as $i => $opt) $options[$opt['name']] = $params[$i];
+  protected function getMethodOptionsWithParams(CliArgs $args) {
+    if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
+      foreach ($options as $i => $opt) $options[$opt['name']] = $args->params[$i];
     }
     return $options;
   }

@@ -26,7 +26,7 @@ class NgnCache {
   /**
    * Usage:
    * self::c()->load('key');
-   * self::c()->save($data, 'key', array('tag_1', 'tag_2'));
+   * self::c()->save($data, 'key', ['tag_1', 'tag_2']);
    *
    * @return Zend_Cache_Core
    */
@@ -81,7 +81,9 @@ class NgnCache {
 
   static function func($func, $id, $force = false) {
     $cache = self::c();
-    if (!$force and ($r = $cache->load($id)) !== false) return $r;
+    if (!$force and ($r = $cache->load($id)) !== false) {
+      return $r;
+    }
     $r = $func();
     $cache->save($r, $id);
     return $r;

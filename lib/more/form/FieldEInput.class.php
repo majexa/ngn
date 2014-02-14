@@ -25,10 +25,14 @@ abstract class FieldEInput extends FieldEAbstract {
     return $value;
   }
 
+  protected function inputId() {
+    return Misc::name2id($this->options['name']).'i';
+  }
+
   function _html() {
-    return '<input size="40" type="'.$this->inputType.'" '.'id="'.
-    Misc::name2id($this->options['name']).'i" '.
-    Tt()->tagParams($this->getTagsParams()).$this->getClassAtr().' />';
+    return //
+      '<input size="40" type="'.$this->inputType.'" '.'id="'.$this->inputId().'"'. //
+      Tt()->tagParams($this->getTagsParams()).$this->getClassAtr().' />';
   }
 
 }
