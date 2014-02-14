@@ -64,7 +64,12 @@ class Url {
     return preg_replace('/^[^\s]+ (\d+) .*$/', '$1', self::$headers[$url][0]);
   }
 
-  static function getContents($url) {
+  static function getContents($url, $cached = true) {
+    if ($cached) {
+      return NgnCache::func(function () use ($url) {
+        return (new Curl($url))->get($url);
+      }, md5($url));
+    }
     self::init($url);
     return self::$contents[$url];
   }

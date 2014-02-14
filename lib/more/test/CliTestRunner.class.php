@@ -1,8 +1,12 @@
 <?php
 
-class CliTestRunner extends CliHelpDirectClassesArgs {
+class CliTestRunner extends CliHelpDirectClasses {
 
-  protected function getClasses() {
+  public function prefix() {
+    return false;
+  }
+
+  public function getClasses() {
     return [
       [
         'class' => 'ProjectTestRunner',
@@ -15,7 +19,7 @@ class CliTestRunner extends CliHelpDirectClassesArgs {
     ];
   }
 
-  protected function runner() {
+  protected function _runner() {
     return 'ngn-test';
   }
 

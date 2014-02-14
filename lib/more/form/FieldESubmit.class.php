@@ -9,7 +9,7 @@ class FieldESubmit extends FieldEInput {
     'noValue' => true,
     'type' => 'submit'
   ];
-  
+
   function value() {
     return null;
   }
