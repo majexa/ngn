@@ -13,7 +13,7 @@ class TestRunnerAbstract {
    */
   protected $suite;
 
-  function __construct($filterNames = null) {
+  function __construct($filterNames) {
     R::set('plainText', true);
     $this->suite = new PHPUnit_Framework_TestSuite('one');
     if ($filterNames) {
@@ -47,7 +47,6 @@ class TestRunnerAbstract {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
     if ($filter) $r = array_filter($r, $filter);
-    die2($r);
     return $r;
   }
 

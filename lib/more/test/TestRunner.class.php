@@ -10,10 +10,16 @@ class TestRunner extends TestRunnerAbstract {
     });
   }
 
+  /**
+   * Запускает все тесты ядра
+   */
   function globl() {
     $this->_run($this->getClasses());
   }
 
+  /**
+   * Запускает все тесты указанной библиотеки
+   */
   function locl($libPath) {
     $this->_run(array_filter($this->getClasses(), function($v) use ($libPath) {
       return strstr(Lib::getClassPath($v), $libPath);

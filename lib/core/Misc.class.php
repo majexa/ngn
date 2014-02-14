@@ -453,6 +453,11 @@ class Misc {
     return $v;
   }
 
+  static function checkString($v) {
+    if (!is_string($v)) throw new Exception("'$v' is not string");
+    return $v;
+  }
+
   static function checkArray($v, $title = '$v is not array') {
     if (!is_array($v)) throw new Exception($title);
   }

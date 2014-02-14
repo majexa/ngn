@@ -7,7 +7,7 @@ class CliHelpMultiWrapper extends ArrayAccessebleOptions {
       $this->$method();
       return;
     }
-    $singleClass = Misc::removeSuffix('s', get_class($this));
+    $singleClass = rtrim(get_class($this), 's');
     foreach ($this->records as $v) {
       $this->options['name'] = $v['name'];
       (new $singleClass($this->options))->$method();

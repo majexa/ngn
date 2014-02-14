@@ -2,7 +2,7 @@
 
 class CliHelpArgsFixture extends CliHelpArgs {
 
-  protected function prefix() {
+  public function prefix() {
     return 'clihelp';
   }
 
