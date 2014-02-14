@@ -1,59 +1,61 @@
 <?php
 
+// name -
 abstract class CliHelp extends CliHelpAbstract {
 
-  abstract protected function prefix();
+  protected function name($class) {
+    if (($prefix = $this->prefix())) {
+      return lcfirst(Misc::removePrefix(ucfirst($this->prefix()), $class));
+    }
+    else {
+      return lcfirst($class);
+    }
+  }
 
-  protected function getClasses() {
+  public function getClasses() {
+    static $classes;
+    if (isset($classes)) return $classes;
     if ($this->oneClass) {
-      return [
+      $classes = [
         [
           'class' => $this->oneClass,
-          'name'  => lcfirst($this->oneClass)
+          'name'  => $this->name($this->oneClass)
         ]
       ];
     }
-    $classes = array_filter(array_map(function ($class) {
-      if ($prefix = $this->prefix()) {
-        $name = lcfirst(Misc::removePrefix(ucfirst($this->prefix()), $class));
-      }
-      else {
-        $name = lcfirst($class);
-      }
-      return [
-        'class' => $class,
-        'name'  => $name
-      ];
-    }, ClassCore::getClassesByPrefix(ucfirst($this->prefix()))));
+    else {
+      $classes = array_filter(array_map(function ($class) {
+        return [
+          'class' => $class,
+          'name'  => $this->name($class)
+        ];
+      }, ClassCore::getClassesByPrefix(ucfirst($this->prefix()))));
+    }
     return $classes;
-    /*
-    if (!$this->filter) return $classes;
-    return array_filter($classes, function ($v) {
-      return in_array($v['name'], $this->filter);
-    });
-    */
   }
 
   protected function run() {
-    if ($this->oneClass) {
-      $class = $this->oneClass;
-      $method = $this->argv[0];
-      $params = array_slice($this->argv, 1, count($this->argv));
+    $args = $this->getArgs();
+    if (!$this->check($args)) return;
+    if (($r = $this->_run($args)) and $r instanceof CliResultClass) {
+      $argsSub = clone $args;
+      $argsSub->class = $r->class;
+      $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));
+      $argsSub->method = $args->params[1];
+      $argsSub->params = array_merge($argsSub->params, //
+        array_slice($args->params, count($this->getConstructorParams($r->class)) + 1, count($args->params)));
+      new CliHelpArgsSingleSub($argsSub, $this->_runner(), $r->name);
     }
-    else {
-      $class = ucfirst($this->prefix()).ucfirst($this->argv[0]);
-      $method = $this->argv[1];
-      $params = array_slice($this->argv, 2, count($this->argv));
-    }
-    if (!$this->check($class, $method, $params)) return;
-    $this->_run($class, $method, $params);
   }
 
-  protected function class2name($class) {
-    return ClassCore::classToName($this->prefix(), $class);
+  /**
+   * @return CliArgs
+   */
+  protected function getArgs() {
+    return new CliArgs($this);
   }
 
-  protected function runner() {
+  protected function _runner() {
     return $this->prefix();
   }
 

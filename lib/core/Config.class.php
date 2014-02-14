@@ -269,7 +269,7 @@ class Config {
 
   static function getSubVar($key, $subKey, $strict = false) {
     $v = self::getVar($key);
-    if ($strict and !isset($v[$subKey])) throw new Exception("SubKey $subKey not defined");
+    if ($strict and !isset($v[$subKey])) throw new Exception("SubKey '$subKey' of '$key' section not defined");
     return isset($v[$subKey]) ? $v[$subKey] : null;
   }
 
