@@ -27,19 +27,17 @@ Ngn.frm.getValue = function(el) {
   var i = 0;
   elements.each(function(el) {
     var type = el.get('type');
-    if ( type == 'checkbox') {
+    if (type == 'checkbox') {
       if (el.get('checked')) res[i] = el.get('value');
-      i ++;
-    }
-    else if (type == 'radio') {
+      i++;
+    } else if (type == 'radio') {
       if (el.get('checked'))
         r = el.get('value');
     } else {
       r = el.get('value');
     }
   });
-  if(res) r = res;
-  c(r);
+  if (res.length != 0) r = res;
   return r;
 };
 
@@ -50,7 +48,7 @@ Ngn.frm.getValues = function(el) {
     var elements = el;
   }
   var r = [];
-  elements.each(function(el){
+  elements.each(function(el) {
     var type = el.get('type');
     if (type == 'radio' || type == 'checkbox') {
       if (el.get('checked'))
