@@ -2,6 +2,26 @@
 
 abstract class CliHelpArgs extends CliHelp {
 
+  protected function init() {
+    $this->checkConsistency();
+  }
+
+  protected function renderClassOptions($class) {
+    $params = $this->getConstructorParams($class);
+    $options = Arr::get(array_filter($params, function(ReflectionParameter $p) {
+      return $p->isOptional();
+    }), 'name');
+    return ($options ? ' '.O::get('CliColors')->getColoredString(implode(' ', $options), 'darkGray') : '');
+  }
+
+  protected function renderClassRequiredOptions($class) {
+    $params = $this->getConstructorParams($class);
+    $options = Arr::get(array_filter($params, function(ReflectionParameter $p) {
+      return !$p->isOptional();
+    }), 'name');
+    return ($options ? ' '.implode(' ', $options) : '');
+  }
+
   protected function _getOptions(ReflectionMethod $method, $class) {
     $params = $method->getParameters();
     $r = [];
@@ -27,7 +47,7 @@ abstract class CliHelpArgs extends CliHelp {
     $refl = (new ReflectionClass($args->class));
     if (($constructor = $refl->getConstructor()) and ($_constructorParams = $constructor->getParameters())) {
       $constructorParams = array_slice($args->params, 0, count($_constructorParams));
-      $params = array_slice($args->params, count($_constructorParams), count($args->params));
+      $params = array_slice($args->params, count($_constructorParams));
       $obj = $refl->newInstanceArgs($constructorParams);
       return call_user_func_array([$obj, $args->method], $params);
     } else {

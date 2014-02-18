@@ -1,14 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddCityRussia', [
-  'dbType'   => 'VARCHAR',
-  'dbLength' => 255,
-  'title'    => 'Город России',
-  'order'    => 292,
-  'tags'     => true,
-  'tagsTree' => true
-]);
-
 class FieldEDdCityRussia extends FieldEDdCity {
 
   protected $rootTagId = 300;

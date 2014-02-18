@@ -2,6 +2,40 @@
 
 abstract class CliHelpAbstract {
 
+  function __construct($argv) {
+    if (is_string($argv)) $argv = explode(' ', $argv);
+    elseif (is_array($argv)) $argv = array_slice($argv, 1);
+    else throw new Exception('Wrong type');
+    $this->argv = $argv;
+    $this->init();
+    if (empty($this->argv[0]) or $this->argv[0] == 'help') {
+      $this->help();
+    }
+    else {
+      $this->run();
+    }
+  }
+
+  protected function init() {}
+
+  protected function checkConsistency() {
+    foreach ($this->getClasses() as $v) {
+      if (($optionalArgs = $this->classHasOptionalConstructorArgs($v['class']))) {
+        foreach ($this->getMethods($v['class']) as $m) {
+          if (empty($m['options'])) continue;
+          $constructorArgs = Tt()->enum(Arr::get($optionalArgs, 'name'), ', ', '`"`.$v.`"`');
+          $methodArgs = Tt()->enum(Arr::get($m['options'], 'name'), ', ', '`"`.$v.`"`');
+          throw new Exception(<<<TEXT
+CliHelp system does not supports both usage of constructor optional arguments & method arguments.
+* Remove arguments $methodArgs from "{$m['method']}" method of "{$v['class']}" class OR
+* Remove optional arguments $constructorArgs from class "{$v['class']}" constructor
+TEXT
+          );
+        }
+      }
+    }
+  }
+
   abstract function prefix();
 
   /**
@@ -17,7 +51,6 @@ abstract class CliHelpAbstract {
 
   abstract protected function run();
 
-
   public function class2name($class) {
     $r = Arr::get($this->getClasses(), 'name', 'class');
     if (!isset($r[$class])) throw new EmptyException("$r[$class]");
@@ -26,26 +59,13 @@ abstract class CliHelpAbstract {
 
   public function name2class($name) {
     $r = Arr::get($this->getClasses(), 'class', 'name');
-    if (!isset($r[$name])) throw new EmptyException("$r[$name]");
+    if (!isset($r[$name])) throw new EmptyException("\$r[$name]");
     return $r[$name];
   }
 
   abstract protected function _getOptions(ReflectionMethod $method, $class);
 
   public $argv, $oneClass = false;
-
-  function __construct($argv) {
-    if (is_string($argv)) $argv = explode(' ', $argv);
-    elseif (is_array($argv)) $argv = array_slice($argv, 1, count($argv));
-    else throw new Exception('Wrong type');
-    $this->argv = $argv;
-    if (empty($this->argv[0]) or $this->argv[0] == 'help') {
-      $this->help();
-    }
-    else {
-      $this->run();
-    }
-  }
 
   protected function _getMethods($class) {
     return array_filter((new ReflectionClass($class))->getMethods(), function (ReflectionMethod $method) use ($class) {
@@ -58,7 +78,7 @@ abstract class CliHelpAbstract {
   protected $separateParentMethods = false;
 
   protected function getMethodsWithoutParents($class) {
-    return array_filter($this->getMethods($class), function($v) use ($class) {
+    return array_filter($this->getMethods($class), function ($v) use ($class) {
       return (new ReflectionMethod($class, $v['method']))->getDeclaringClass()->getName() == $class;
     });
   }
@@ -77,7 +97,8 @@ abstract class CliHelpAbstract {
             if (!isset($parentClassesOutputed[$parentClass])) {
               print $this->_renderMethods($v['class'], $this->getMethods($parentClass), 'green');
               $parentClassesOutputed[$parentClass] = $v['class'];
-            } else {
+            }
+            else {
               print "the same options as: ".$this->runner('green').' '.$this->class2name($parentClassesOutputed[$parentClass])."\n";
             }
             print $this->_renderMethods($v['class'], $this->getMethodsWithoutParents($v['class']));
@@ -120,17 +141,24 @@ abstract class CliHelpAbstract {
     return $this->oneClass ? false : $this->class2name($class);
   }
 
+  abstract protected function renderClassOptions($class);
+
+  abstract protected function renderClassRequiredOptions($class);
+
   protected function _renderMethods($class, array $methods, $runnerColor = 'brown') {
     $name = $this->cmdName($class);
     $s = '';
-    // program class
     foreach ($methods as $method) {
       $nameCmd = $name ? $name.' ' : '';
+      $rOptions = $this->renderOptions($method['options']);
+      $rOptions = $rOptions ? ' '.$rOptions : '';
       $s .= //
-        $this->runner($runnerColor). //
-        " $nameCmd{$method['method']} ".$this->renderOptions($method['options']). //
-        ($method['title'] ? O::get('CliColors')->getColoredString(' -- '.$method['title'], 'cyan') : '').
-        "\n"; //
+        $this->runner($runnerColor). // runner
+        " $nameCmd{$method['method']}". // method
+        $this->renderClassRequiredOptions($class).
+        $this->renderClassOptions($class).
+        $rOptions. // options
+        ($method['title'] ? O::get('CliColors')->getColoredString(' -- '.$method['title'], 'cyan') : '')."\n"; //
     }
     if ($name and $this->isMultiWrapper($class)) {
       $s .= //
@@ -140,9 +168,17 @@ abstract class CliHelpAbstract {
     return $s;
   }
 
+
   protected function getConstructorParams($class) {
     if (!($constructor = (new ReflectionClass($class))->getConstructor())) return [];
     return $constructor->getParameters();
+  }
+
+  protected function getConstructorRequiredParams($class) {
+    if (!($constructor = (new ReflectionClass($class))->getConstructor())) return [];
+    return array_filter($constructor->getParameters(), function (ReflectionParameter $param) {
+      return !$param->isOptional();
+    });
   }
 
   protected function getConstructorParamsImposed($class, array $imposeParams) {
@@ -154,8 +190,14 @@ abstract class CliHelpAbstract {
     return $r;
   }
 
+  protected function classHasOptionalConstructorArgs($class) {
+    return array_filter((new ReflectionClass($class))->getConstructor()->getParameters(), function (ReflectionParameter $param) {
+      return $param->isOptional();
+    });
+  }
+
   protected function check(CliArgs $args) {
-    if ($this->isMultiWrapper($args->class)) $_class = Misc::removeSuffix('s', $args->class);
+    if ($this->isMultiWrapper($args->class)) return true; // $_class = Misc::removeSuffix('s', $args->class);
     else $_class = $args->class;
     if (empty($args->method)) {
       output("Choose method (#3 param)");
@@ -169,14 +211,14 @@ abstract class CliHelpAbstract {
     foreach ($this->getConstructorParams($args->class) as $n => $param) {
       if ($param->isOptional()) continue;
       if (!isset($args->params[$n])) {
-        output("Param #".($n + 1)." '".$param->getName()."' is required");
+        output("Param-- #".($n + 1)." '".$param->getName()."' is required");
         return false;
       }
     }
     foreach ($methods[$args->method] as $n => $param) {
       if ($param['optional']) continue;
       if (!isset($args->params[$n])) {
-        output("Param #".($n + 1)." '{$param['name']}' is required");
+        output("Param++ #".($n + 1)." '{$param['name']}' is required");
         return false;
       }
     }
@@ -213,7 +255,7 @@ abstract class CliHelpAbstract {
       ClassCore::getDocComment($method->getDocComment(), 'title');
       return [
         'options' => $this->getOptions($method, $class),
-        'title' => ClassCore::getDocComment($method->getDocComment(), 'title'),
+        'title'   => ClassCore::getDocComment($method->getDocComment(), 'title'),
         'method'  => $this->getMethod($method)
       ];
     }, $this->_getMethods($class));

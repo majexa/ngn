@@ -37,6 +37,7 @@ CALL;
     $tmpFile = '/tmp/'.rand(10, 10000);
     LogWriter::str('addCall', $s);
     file_put_contents($tmpFile, $s);
+    chown($tmpFile, 'user');
     $file = '/var/spool/asterisk/outgoing/'.time().'-'.rand(100, 999).'.call';
     rename($tmpFile, $file);
   }
