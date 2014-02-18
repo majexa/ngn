@@ -1,13 +1,13 @@
 <?php
 
-class DdFieldTypeDdTagsTreeSelect extends DdFieldType {
+class DdFieldTypeDdTagsTreeSelect extends DdFieldTypeSelectTagsStructure {
 
   static protected function _get() {
     return [
-      'dbType' => 'VARCHAR',
+      'dbType'   => 'VARCHAR',
       'dbLength' => 255,
-      'title' => 'Древовидный выбор одного тэга',
-      'order' => 240,
+      'title'    => 'Древовидный выбор одного тэга',
+      'order'    => 240,
     ];
   }
 

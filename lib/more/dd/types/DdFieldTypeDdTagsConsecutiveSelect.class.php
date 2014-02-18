@@ -1,6 +1,6 @@
 <?php
 
-class DdFieldTypeDdTagsConsecutiveSelect extends DdFieldType {
+class DdFieldTypeDdTagsConsecutiveSelect extends DdFieldTypeSelectTagsStructure {
 
   static protected function _get() {
     return [

@@ -1,6 +1,6 @@
 <?php
 
-class DdFieldTypeDdTagsTreeMultiselect extends DdFieldType {
+class DdFieldTypeDdTagsTreeMultiselect extends DdFieldTypeSelectTagsStructure {
 
   static protected function _get() {
     return [
