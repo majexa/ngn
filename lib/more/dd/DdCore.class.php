@@ -157,5 +157,4 @@ class DdCore {
     return lcfirst(Misc::camelCase(str_replace('/', '-', Misc::transit($string))));
   }
 
-
 }
