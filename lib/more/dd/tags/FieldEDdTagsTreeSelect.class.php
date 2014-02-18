@@ -1,12 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddTagsTreeSelect', [
-  'dbType' => 'VARCHAR',
-  'dbLength' => 255,
-  'title' => 'Древовидный выбор одного тэга',
-  'order' => 240,
-]);
-
 class FieldEDdTagsTreeSelect extends FieldEText {
 
   static $ddTags = true, $ddTagsTree = true;

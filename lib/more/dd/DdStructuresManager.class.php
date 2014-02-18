@@ -11,11 +11,13 @@ class DdStructuresManager extends DbItemsManager {
     $fields = [
       [
         'type' => 'col'
-      ], [
+      ],
+      [
         'name'     => 'title',
         'title'    => 'Название структуры',
         'required' => true
-      ], [
+      ],
+      [
         'name'     => 'name',
         'title'    => 'Имя',
         'type'     => 'ddStructureName',
@@ -33,27 +35,32 @@ class DdStructuresManager extends DbItemsManager {
     $fields = Arr::append($fields, [
       [
         'type' => 'col'
-      ], [
+      ],
+      [
         'name'    => 'type',
         'title'   => 'Тип структуры',
         'type'    => 'select',
         'options' => DdStructureCore::getTypes(),
         'help'    => 'Статические структуры используются для разделов, предполагающих только одну единственную запись. Например простой текстовый раздел, где страница - это одна запись.'
-      ], [
+      ],
+      [
         'name'  => 'locked',
         'title' => 'структура с ограниченным доступом',
         'type'  => 'bool',
         'value' => false,
         'help'  => 'Для структур с ограниченным доступом в папку с файлами "u/strName" добавляется файл ".htaccess", запрещающий доступ к файлам.
 Все файлы из этой папки получаются только через метод "action_getLockFile"'
-      ], [
+      ],
+      [
         'name'  => 'indx',
         'title' => 'разрешить индексацию структуры',
         'type'  => 'bool',
         'help'  => 'Такие структуры, как, например, "Баннеры" не нуждаются в индексации, т.к. поиск по ним не нужен'
-      ], [
+      ],
+      [
         'type' => 'col'
-      ], [
+      ],
+      [
         'name'  => 'descr',
         'title' => 'Описание',
         'type'  => 'textarea',
@@ -68,11 +75,8 @@ class DdStructuresManager extends DbItemsManager {
   }
 
   protected function afterCreateUpdate() {
-    if (isset($this->data['type']) and
-      ($this->data['type'] == 'static' or $this->data['type'] == 'variant')
-    ) {
-      $oFM = new DdFieldsManager($this->data['name']);
-      $oFM->create([
+    if (isset($this->data['type']) and ($this->data['type'] == 'static' or $this->data['type'] == 'variant')) {
+      (new DdFieldsManager($this->data['name']))->create([
         'name'     => 'static_id',
         'title'    => 'static_id',
         'type'     => 'num',

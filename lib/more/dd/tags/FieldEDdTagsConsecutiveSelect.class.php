@@ -1,12 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddTagsConsecutiveSelect', [
-  'dbType'   => 'VARCHAR',
-  'dbLength' => 255,
-  'title'    => 'Последовательный выбор тэга',
-  'order'    => 260,
-]);
-
 class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
 
   static $ddTags = true, $ddTagsTree = true;

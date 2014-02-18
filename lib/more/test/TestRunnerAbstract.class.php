@@ -13,7 +13,7 @@ class TestRunnerAbstract {
    */
   protected $suite;
 
-  function __construct($filterNames) {
+  function __construct($filterNames = null) {
     R::set('plainText', true);
     $this->suite = new PHPUnit_Framework_TestSuite('one');
     if ($filterNames) {
@@ -53,10 +53,10 @@ class TestRunnerAbstract {
   protected function _run(array $classes) {
     output("running tests: ".implode(', ', $classes));
     foreach ($classes as $class) $this->addTestSuite($class);
-    $this->run();
+    $this->__run();
   }
 
-  protected function run() {
+  protected function __run() {
     PHPUnit_TextUI_TestRunner::run($this->suite);
   }
 

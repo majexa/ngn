@@ -14,8 +14,8 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
 
   function runTests($request = false) {
     $this->a($this->tagId3, $this->v2);
-    $this->updateItem(['sample' => [$this->tagId2, $this->tagId4]], $request);
-    $this->a($this->tagId4, $this->v4);
+    //$this->updateItem(['sample' => [$this->tagId2, $this->tagId4]], $request);
+    //$this->a($this->tagId4, $this->v4);
   }
 
   function createData() {
