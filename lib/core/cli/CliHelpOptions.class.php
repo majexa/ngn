@@ -2,7 +2,15 @@
 
 abstract class CliHelpOptions extends CliHelp {
 
-  public function getClasses() {
+  protected function renderClassOptions($class) {
+    return '';
+  }
+
+  protected function renderClassRequiredOptions($class) {
+    return '';
+  }
+
+  function getClasses() {
     return ClassCore::getDescendants('ArrayAccessebleOptions', ucfirst($this->prefix()));
   }
 
@@ -41,15 +49,15 @@ abstract class CliHelpOptions extends CliHelp {
   }
 
   protected function _run(CliArgs $args) {
-    $method = 'a_'.$args->method;
+    $args->method = 'a_'.$args->method;
     if (is_subclass_of($args->class, 'CliHelpMultiWrapper')) {
-      $this->runMultiWrapper($args->class, $method, $args->params);
+      $this->runMultiWrapper($args);
     }
     else {
       $requiredOptions = [];
       $class = $args->class;
       foreach ($class::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
-      (new $class(array_merge($requiredOptions, $this->getMethodOptionsWithParams($args))))->$method();
+      (new $class(array_merge($requiredOptions, $this->getMethodOptionsWithParams($args))))->{$args->method}();
     }
   }
 
@@ -63,7 +71,7 @@ abstract class CliHelpOptions extends CliHelp {
     /* @var CliHelpMultiWrapper $multiWrapper */
     $class = $args->class;
     $multiWrapper = (new $class($options));
-    $multiWrapper->action($args->method);
+    $multiWrapper->action($realArgs->method);
   }
 
   protected function getMethodOptionsWithParams(CliArgs $args) {

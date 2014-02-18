@@ -62,11 +62,6 @@ abstract class TestFieldAbstract extends TestDd {
   function test() {
     $this->createItem();
     $this->runTests();
-    return;
-    $this->updateItem(['sample' => '']);
-    self::$im = DdCore::imDefault('a');
-    $this->createItem(true);
-    $this->runTests();
   }
 
 }

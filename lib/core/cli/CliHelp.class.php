@@ -43,7 +43,7 @@ abstract class CliHelp extends CliHelpAbstract {
       $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));
       $argsSub->method = $args->params[1];
       $argsSub->params = array_merge($argsSub->params, //
-        array_slice($args->params, count($this->getConstructorParams($r->class)) + 1, count($args->params)));
+        array_slice($args->params, count($this->getConstructorParams($r->class)) + 1));
       new CliHelpArgsSingleSub($argsSub, $this->_runner(), $r->name);
     }
   }

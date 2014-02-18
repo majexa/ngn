@@ -1,19 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddItemsSelect', [
-  'dbType'   => 'INT',
-  'dbLength' => 11,
-  'title'    => 'Выбор dd-записей',
-  'order'    => 300,
-  'fields'   => [
-    [
-      'type'  => 'ddStructure',
-      'title' => 'Структура',
-      'name'  => 'strName'
-    ]
-  ]
-]);
-
 class FieldEDdItemsSelect extends FieldEMultiselect {
 use DdElement;
 

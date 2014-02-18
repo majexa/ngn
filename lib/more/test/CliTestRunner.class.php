@@ -2,19 +2,23 @@
 
 class CliTestRunner extends CliHelpDirectClasses {
 
-  public function prefix() {
+  function prefix() {
     return false;
   }
 
-  public function getClasses() {
+  function getClasses() {
     return [
       [
-        'class' => 'ProjectTestRunner',
+        'class' => 'TestRunnerProject',
         'name' => 'proj'
       ],
       [
-        'class' => 'TestRunner',
+        'class' => 'TestRunnerNgn',
         'name' => 'ngn'
+      ],
+      [
+        'class' => 'TestRunnerLib',
+        'name' => 'lib'
       ],
     ];
   }

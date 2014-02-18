@@ -1,11 +1,5 @@
 <?php
 
-DdFieldCore::registerType('fieldList', [
-  'dbType' => 'TEXT',
-  'title'  => 'Набор текстовых полей',
-  'order'  => 110
-]);
-
 class FieldEFieldList extends FieldEFieldSetAbstract {
 
   protected function defineOptions() {

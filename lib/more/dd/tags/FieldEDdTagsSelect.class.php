@@ -1,12 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddTagsSelect', [
-  'dbType'   => 'VARCHAR',
-  'dbLength' => 255,
-  'title'    => 'Выбор одного тэга',
-  'order'    => 220,
-]);
-
 class FieldEDdTagsSelect extends FieldESelect {
 use DdElement;
 

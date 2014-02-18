@@ -1,12 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddTagsTreeMultiselect', [
-  'dbType'   => 'VARCHAR',
-  'dbLength' => 255,
-  'title'    => 'Древовидный выбор нескольких тэгов',
-  'order'    => 250,
-]);
-
 class FieldEDdTagsTreeMultiselect extends FieldEText {
   use DdElement;
 

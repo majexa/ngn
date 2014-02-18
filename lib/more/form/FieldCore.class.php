@@ -1,7 +1,5 @@
 <?php
 
-die2(class_exists('FieldEDdTagsMultiselect'));
-
 class FieldCore {
 
   const FIELD_ELEMENT_CLASS_PREFIX = 'FieldE';
@@ -29,7 +27,6 @@ class FieldCore {
     Misc::checkEmpty($type, '$type');
     $class = FieldCore::getClass($type);
     if (!class_exists($class)) die2(Lib::getClassesListCached()[$class]);
-    //die2();
     if (isset($class::$$prop)) return $class::$$prop;
     return false;
   }
