@@ -13,7 +13,12 @@ class DdFieldTypeDdItemsSelect extends DdFieldType {
           'type'  => 'ddStructure',
           'title' => 'Структура',
           'name'  => 'strName'
-        ]
+        ],
+        [
+          'type'  => 'ddStructure',
+          'title' => 'По какому полю фильтровать',
+          'name'  => 'filterField'
+        ],
       ]
     ];
   }
