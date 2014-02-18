@@ -11,8 +11,8 @@ class CliHelpArgsSingle extends CliHelpArgs {
     parent::__construct($argv);
   }
 
-  public function prefix() {
-    return 'sman';
+  function prefix() {
+    return false;
   }
 
   protected function _runner() {

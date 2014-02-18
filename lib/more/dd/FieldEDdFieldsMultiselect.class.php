@@ -1,28 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddFieldsMultiselect', [
-  'dbType' => 'TEXT',
-  'title'  => 'Выбор нескольких dd-полей',
-  'order'  => 300,
-  'fields' => [
-    [
-      'type'  => 'ddStructure',
-      'title' => 'Структура',
-      'name'  => 'strName'
-    ],
-    [
-      'type'  => 'bool',
-      'title' => 'показывать системные',
-      'name'  => 'getSystem'
-    ],
-    [
-      'type'  => 'bool',
-      'title' => 'показывать неразрешенные',
-      'name'  => 'getDisallowed'
-    ],
-  ]
-]);
-
 class FieldEDdFieldsMultiselect extends FieldEMultiselect {
 
   protected function init() {

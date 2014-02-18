@@ -1,12 +1,5 @@
 <?php
 
-DdFieldCore::registerType('ddTagsMultiselect', [
-  'dbType'   => 'VARCHAR',
-  'dbLength' => 255,
-  'title'    => 'Выбор нескольких тэгов',
-  'order'    => 230
-]);
-
 class FieldEDdTagsMultiselect extends FieldEMultiselect {
 
   static $ddTags = true, $ddTagsMulti = true;

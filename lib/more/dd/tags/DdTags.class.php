@@ -119,16 +119,4 @@ WHERE tagItems.strName='$strName' AND $table.id IS NULL");
     }
   }
 
-  static function registerType($type, array $data) {
-    if (DdTags::isTag($type)) {
-      if (!isset($data['fields'])) $data['fields'] = [];
-      $data['fields'][] = [
-        'type'  => 'ddStructure',
-        'title' => 'Структура из которой брать тэги',
-        'name'  => 'tagsStrName'
-      ];
-    }
-    DdFieldCore::registerType($type, $data);
-  }
-
 }
