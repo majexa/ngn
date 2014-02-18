@@ -23,15 +23,23 @@ Ngn.frm.getValue = function(el) {
     var elements = el;
   }
   var r = null;
+  var res = [];
+  var i = 0;
   elements.each(function(el) {
     var type = el.get('type');
-    if (type == 'radio' || type == 'checkbox') {
+    if ( type == 'checkbox') {
+      if (el.get('checked')) res[i] = el.get('value');
+      i ++;
+    }
+    else if (type == 'radio') {
       if (el.get('checked'))
         r = el.get('value');
     } else {
       r = el.get('value');
     }
   });
+  if(res) r = res;
+  c(r);
   return r;
 };
 

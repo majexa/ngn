@@ -10,6 +10,8 @@ class QueueBase {
     try {
       $connection->connect();
     } catch (Exception $e) {
+      LogWriter::v('rabbitErr', $e->getMessage());
+      (new SendEmail)->send('anges_91@mail.ru', 'RabbitMQ server connection error', $e->getMessage(),false);
       throw new Exception('RabbitMQ server connection error');
     }
     if (!$connection->isConnected()) throw new Exception('Can not connect');
