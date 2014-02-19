@@ -23,7 +23,7 @@ abstract class LongJobAbstract {
   abstract protected function _total();
   abstract protected function step();
   abstract function iteration();
-  abstract protected function result();
+  abstract public function result();
 
   protected function complete() {
     return $this->n >= $this->total();
@@ -35,6 +35,7 @@ abstract class LongJobAbstract {
     $this->output("Start long job cycle. Class: ".get_class($this));
     $this->state->started();
     $total = $this->total();
+    if (!$total) throw new Exception('Nothing to do');
     $this->output("items total: $total");
     if (!$total) {
       $this->state->finish(false);

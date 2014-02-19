@@ -67,7 +67,7 @@ class Sflm {
     $class = 'SflmFrontend'.ucfirst($type);
     /* @var $sflmFrontend SflmFrontend */
     $sflmFrontend = new $class(self::lm($type), $frontend);
-    //$sflmFrontend->store();
+    // $sflmFrontend->store();
     if (!isset(self::$cache[$frontend])) self::$cache[$frontend] = [];
     return self::$cache[$frontend][$type] = $sflmFrontend;
   }
@@ -79,7 +79,7 @@ class Sflm {
   }
 
   static function output($s) {
-    //if (getConstant('IS_DEBUG')) output($s);
+    if (getConstant('IS_DEBUG')) output($s);
   }
 
 }

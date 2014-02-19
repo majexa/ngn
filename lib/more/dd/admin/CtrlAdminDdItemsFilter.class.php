@@ -29,4 +29,10 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
     $this->d['bodyClass'] = 'noOverflow';
   }
 
+  function action_HARD_VIGRUZKA() {
+    $longJob = O::gett('DdXls', $this->items()->strName, $this->items());
+    $longJob->cycle();
+    $this->redirect($longJob->result());
+  }
+
 }

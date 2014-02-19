@@ -116,7 +116,7 @@ class SflmFrontend {
    */
   function addLib($lib, $strict = false) {
     if (!$strict and !$this->sflm->exists($lib)) {
-      Sflm::output("Lib '$lib' already exists");
+      Sflm::output("Lib '$lib' does not exists");
       return;
     }
     Sflm::output("Adding lib '$lib'");
@@ -130,7 +130,7 @@ class SflmFrontend {
     }
     if ($this->changed) {
       NgnCache::c()->save($this->paths, $this->pathsCacheKey());
-      Sflm::output("Update stored file after adding lib '$lib'");
+      Sflm::output("Update collected file after adding lib '$lib'");
       $this->store();
       $this->incrementVersion();
     }

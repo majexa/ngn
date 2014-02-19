@@ -28,7 +28,7 @@ class SampleLongJob extends LongJobAbstract {
     usleep(0.1 * 1000000);
   }
 
-  protected function result() {
+  public function result() {
     return ['all ok'];
   }
 
