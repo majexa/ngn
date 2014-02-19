@@ -10,18 +10,32 @@ Ngn.Form.El.DdTagsMultiselectDropdown = new Class({
     this.toggleDropdown();
     new Element('select').grab(this.eOption).inject(this.eFieldWrapper, 'top');
     this.eSelectOverride = new Element('div', {'class': 'select-override'}).addEvent('click', function(e) {
+      e.stopPropagation();
       e.preventDefault();
       this.toggleDropdown();
     }.bind(this)).inject(this.eFieldWrapper, 'top');
+    /*
     (new Element(
       'div', {
         'class': 'iconsSet',
         html: '<div class="image-button ok"><a id="time_ok" href="javascript:void(0)" class="btn" tabindex="0"><span><i></i>OK</span></a></div>'
       }
     )).cloneEvents(this.eSelectOverride).inject(this.eChbxs, 'bottom');
+    */
     this.eChbxs.getElements('input').addEvent('click', function(e) {
+      clearTimeout(this.delayId);
+      this.startHide();
       this.updateTitle();
     }.bind(this));
+    //window.addEvent('click', function() {
+      //this.eChbxs.setStyle('left', '-1111111111px');
+    //}.bind(this));
+  },
+
+  startHide: function() {
+    this.delayId = (function() {
+      this.eChbxs.setStyle('left', '-1111111111px');
+    }).delay(3000, this);
   },
 
   toggleDropdown: function() {
