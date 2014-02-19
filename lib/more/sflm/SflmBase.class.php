@@ -15,6 +15,7 @@ abstract class SflmBase {
   protected function getFileContents($path, $strict = true, $r = []) {
     if (!is_file($path)) {
       $error = "File '$path' does not exists";
+      Sflm::output($error);
       if ($strict) Err::_log($error, debug_backtrace());
       return "\n/*----------[ $error ]---------*/\n";
     }
@@ -80,6 +81,17 @@ abstract class SflmBase {
       return (bool)Config::getVar("sfl/".$this->type."/$lib", true);
     }
     else {
+      return file_exists($this->getAbsPath($lib));
+    }
+  }
+
+  function where($lib) {
+    if ($this->isPackage($lib)) {
+      die2("\n111");
+      return (bool)Config::getVar("sfl/".$this->type."/$lib", true);
+    }
+    else {
+      die2("\n222");
       return file_exists($this->getAbsPath($lib));
     }
   }

@@ -29,8 +29,6 @@ class DdXls extends LongJobAbstract {
   }
 
   protected function getItems() {
-    //LogWriter::str('ddXlsCond', $this->items->cond->all());
-    //LogWriter::str('ddXlsCond', 'count: '.count($this->items->getItemIds()));
     return $this->items->getItems();
   }
 
@@ -48,7 +46,7 @@ class DdXls extends LongJobAbstract {
     $this->ddo->setItems($this->getItems())->xls(UPLOAD_PATH.$this->fileName, !(bool)$this->n);
   }
 
-  protected function result() {
+  public function result() {
     return '/'.UPLOAD_DIR.$this->fileName;
   }
 
