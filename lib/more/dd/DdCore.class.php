@@ -7,7 +7,7 @@ class DdCore {
   }
 
   static function tables() {
-    return array_filter(db()->tables(), function($table) {
+    return array_filter(db()->tables(), function ($table) {
       return preg_match('/^dd_i_.*?/', $table);
     });
   }
@@ -155,6 +155,20 @@ class DdCore {
 
   static function translitFieldName($string) {
     return lcfirst(Misc::camelCase(str_replace('/', '-', Misc::transit($string))));
+  }
+
+  static function cleanupDdImages() {
+    foreach (DdCore::tables() as $table) {
+      $ids = db()->ids($table);
+      $strName = str_replace('dd_i_', '', $table);
+      foreach (glob(UPLOAD_PATH."/dd/$strName/*") as $folder) {
+        $id = basename($folder);
+        if (!in_array($id, $ids)) {
+          output("delete $folder");
+          Dir::remove($folder);
+        }
+      }
+    }
   }
 
 }
