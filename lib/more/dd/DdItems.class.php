@@ -367,7 +367,9 @@ class DdItems extends Items {
     $types = $this->fields()->getTypes();
     foreach (array_keys($this->fields()->getFileFields()) as $name) {
       if (empty($item[$name]) or !file_exists(UPLOAD_PATH.'/'.$item[$name])) {
-        $item[$name] = ''; // $item[$name].' not exists';
+        $item[$name] = '';
+        $item['sm_'.$name] = '';
+        $item['md_'.$name] = '';
         continue;
       }
       else {

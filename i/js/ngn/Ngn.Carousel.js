@@ -20,6 +20,7 @@ Ngn.Carousel = new Class({
     this.elementWidth = this.elements[0].getSize().x;
     this.visibleElementsN = Math.round(this.element.getSize().x / this.elementWidth);
     if (this.options.periodical) this.toNext.periodical(this.options.periodical, this);
+    if (this.elements) this.toElementForce(this.elements[this.currentIndex]);
   },
 
   cacheElements: function() {
@@ -37,6 +38,13 @@ Ngn.Carousel = new Class({
     }
     this.elements = els;
     return this;
+  },
+
+  curEl: null,
+
+  setSelectedElement: function(el) {
+    if (this.curEl) this.curEl.removeClass('sel');
+    this.curEl = el.addClass('sel');
   },
 
   toNext: function() {
@@ -57,14 +65,20 @@ Ngn.Carousel = new Class({
     return this;
   },
 
-  curEl: null,
-
   toElement: function(el) {
-    //if (this.checkLink()) return this;
     this.parent(el);
-    if (this.curEl) this.curEl.removeClass('sel');
-    this.curEl = el.addClass('sel');
+    this.setSelectedElement(el);
     this.fireEvent('toElement');
+  },
+
+  toElementForce: function(el){
+    var axes = ['x', 'y'];
+    var scroll = this.element.getScroll();
+    var position = Object.map(document.id(el).getPosition(this.element), function(value, axis){
+      return axes.contains(axis) ? value + scroll[axis] : false;
+    });
+    this.set(this.calculateScroll(position.x, position.y));
+    this.setSelectedElement(el);
   },
 
   setRight: function() {
