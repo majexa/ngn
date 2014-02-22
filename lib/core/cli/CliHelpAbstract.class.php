@@ -12,7 +12,11 @@ abstract class CliHelpAbstract {
       $this->help();
     }
     else {
-      $this->run();
+      try {
+        $this->run();
+      } catch (EmptyException $e) {
+        output3("Wrong syntax (".$e->getMessage().")");
+      }
     }
   }
 
@@ -59,7 +63,7 @@ TEXT
 
   public function name2class($name) {
     $r = Arr::get($this->getClasses(), 'class', 'name');
-    if (!isset($r[$name])) throw new EmptyException("\$r[$name]");
+    if (!isset($r[$name])) throw new EmptyException("Class by name '$name' does not exists");
     return $r[$name];
   }
 

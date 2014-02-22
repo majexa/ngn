@@ -1,16 +1,20 @@
 <?php
 
-class CliHelpMultiWrapper extends ArrayAccessebleOptions {
+abstract class CliHelpMultiWrapper extends ArrayAccessebleOptions {
+
+  /**
+   * @return array
+   */
+  abstract protected function records();
 
   function action($method) {
-    if (method_exists($this, $method)) {
-      $this->$method();
-      return;
-    }
+    if (method_exists($this, $method)) $this->$method();
     $singleClass = rtrim(get_class($this), 's');
-    foreach ($this->records as $v) {
-      $this->options['name'] = $v['name'];
-      (new $singleClass($this->options))->$method();
+    if (method_exists($singleClass, $method)) {
+      foreach ($this->records() as $v) {
+        $this->options['name'] = $v['name'];
+        (new $singleClass($this->options))->$method();
+      }
     }
   }
 
