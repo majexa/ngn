@@ -4,15 +4,14 @@ class TestRunnerLib extends TestRunnerNgn {
 
   protected $libPath;
 
-  function __construct($libPath, $filterNames = null) {
-    $this->libPath = $libPath;
-    parent::__construct($filterNames);
+  static function replace($path) {
+    foreach (['NGN_PATH', 'NGN_ENV_PATH'] as $v) $path = str_replace($v, constant($v), $path);
+    return $path;
   }
 
-  protected function getClasses() {
-    return array_filter(parent::getClasses(), function ($v) {
-      return !is_subclass_of($v, 'ProjectTestCase');
-    });
+  function __construct($libPath, $filterNames = null) {
+    $this->libPath = static::replace($libPath);
+    parent::__construct($filterNames);
   }
 
   /**
