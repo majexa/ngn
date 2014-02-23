@@ -195,7 +195,8 @@ TEXT
   }
 
   protected function classHasOptionalConstructorArgs($class) {
-    return array_filter((new ReflectionClass($class))->getConstructor()->getParameters(), function (ReflectionParameter $param) {
+    if (!($constructor = (new ReflectionClass($class))->getConstructor())) return false;
+    return (bool)array_filter($constructor->getParameters(), function (ReflectionParameter $param) {
       return $param->isOptional();
     });
   }
