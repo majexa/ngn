@@ -491,9 +491,4 @@ class DdItems extends Items {
     DbShift::items($ids, $this->table);
   }
 
-  function update($id, array $data) {
-    parent::update($id, $data);
-    $this->getItem_cache($id);
-  }
-
 }
