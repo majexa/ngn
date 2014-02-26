@@ -25,17 +25,19 @@ class DdItems extends Items {
   }
 
   function getItems() {
-    $this->setTStampCond();
-    if (!($items = parent::getItems())) return [];
-    $this->extendItemsFilePaths($items);
-    $this->extendItemsTags($items);
-    $this->extendItemsUsers($items);
-    $this->formatItemsText($items);
-    $this->extendItemsNumberRange($items);
-    if (($paths = Hook::paths('dd/extendItems')) !== false) foreach ($paths as $path) include $path;
-    foreach ($items as &$item) $item = Arr::unserialize($item);
-    $this->extendItems($items);
+    if (!($items = $this->getItems_cache())) return [];
     return $items;
+//    $this->setTStampCond();
+//    if (!($items = parent::getItems())) return [];
+//    $this->extendItemsFilePaths($items);
+//    $this->extendItemsTags($items);
+//    $this->extendItemsUsers($items);
+//    $this->formatItemsText($items);
+//    $this->extendItemsNumberRange($items);
+//    if (($paths = Hook::paths('dd/extendItems')) !== false) foreach ($paths as $path) include $path;
+//    foreach ($items as &$item) $item = Arr::unserialize($item);
+//    $this->extendItems($items);
+//    return $items;
   }
 
   protected function _prepareItemsConds() {
@@ -56,20 +58,13 @@ class DdItems extends Items {
 
   function getItems_cache() {
     $ids = $this->getItemIds();
-    $cache = NgnCache::c();
-    $items = [];
-    foreach ($ids as $id) {
-      if (!($item = $cache->load('ddItem'.$this->strName.$id))) {
-        $item = $this->getItemF($id);
-        $cache->save($item, 'ddItem'.$this->strName.$id);
-      }
-      $items[$id] = $item;
-    }
+    foreach ($ids as $id) $items[$id] = $this->getItem_cache($id);
     return $items;
   }
 
   protected function cc($id) {
     NgnCache::c()->remove('ddItem'.$this->strName.$id);
+    NgnCacheDdi::c()->remove('ddItem'.$this->strName.$id);
   }
 
   // --------------------- Варианты кэширования -------------------------
@@ -118,6 +113,14 @@ class DdItems extends Items {
     if (!($item = NgnCache::c()->load('ddItem'.$this->strName.$id))) {
       $item = $this->getItemF($id);
       NgnCache::c()->save($item, 'ddItem'.$this->strName.$id);
+    }
+    return $item;
+  }
+
+  function getItem_cache($id) {
+    if (!($item = NgnCacheDdi::c()->load('ddItem'.$this->strName.$id))) {
+      $item = $this->getItem($id);
+      NgnCacheDdi::c()->save($item, 'ddItem'.$this->strName.$id, [], NULL);
     }
     return $item;
   }
@@ -469,6 +472,11 @@ class DdItems extends Items {
 
   function reorderItems($ids) {
     DbShift::items($ids, $this->table);
+  }
+
+  function update($id, array $data) {
+    parent::update($id, $data);
+    $this->getItem_cache($id);
   }
 
 }
