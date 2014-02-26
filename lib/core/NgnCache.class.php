@@ -60,7 +60,7 @@ class NgnCache {
     return self::$cache;
   }
 
-  static protected $fileCache;
+  static protected $fileCache, $folder = '/cache';
 
   /**
    * File Cache
@@ -75,8 +75,8 @@ class NgnCache {
     require_once 'Zend/Cache/Backend/File.php';
     if (!defined('DATA_PATH')) throw new Exception('DATA_PATH not defined');
     $frontendOptions['automatic_serialization'] = true;
-    if (!file_exists(DATA_PATH.'/cache')) Dir::make(DATA_PATH.'/cache');
-    return Zend_Cache::factory('Core', 'File', $frontendOptions, ['cache_dir' => DATA_PATH.'/cache']);
+    if (!file_exists(DATA_PATH.static::$folder)) Dir::make(DATA_PATH.static::$folder);
+    return Zend_Cache::factory('Core', 'File', $frontendOptions, ['cache_dir' => DATA_PATH.static::$folder]);
   }
 
   static function func($func, $id, $force = false) {
@@ -90,3 +90,9 @@ class NgnCache {
   }
 
 }
+
+class NgnCacheDdi extends NgnCache {
+  static $folder = '/cacheddi';
+}
+
+
