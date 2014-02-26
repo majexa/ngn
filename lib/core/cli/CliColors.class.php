@@ -33,6 +33,7 @@ class CliColors {
   }
 
   function getColoredString($string, $foregroundColor = null, $backgroundColor = null) {
+    if (getOS() == 'win') return $string;
     $colored = "";
     if (isset($this->foregroundColors[$foregroundColor])) {
       $colored .= "\033[".$this->foregroundColors[$foregroundColor]."m";

@@ -215,5 +215,9 @@ class ClassCore {
     return false;
   }
 
+  static function hasInterface($class, $interace) {
+    return in_array($interace, (new ReflectionClass($class))->getInterfaceNames());
+  }
+
 }
 
