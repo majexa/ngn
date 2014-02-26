@@ -50,7 +50,7 @@ abstract class CliHelpOptions extends CliHelp {
 
   protected function _run(CliArgs $args) {
     $args->method = 'a_'.$args->method;
-    if (is_subclass_of($args->class, 'CliHelpMultiWrapper')) {
+    if (is_subclass_of($args->class, 'CliHelpOptionsMultiWrapper')) {
       $this->runMultiWrapper($args);
     }
     else {
@@ -68,7 +68,7 @@ abstract class CliHelpOptions extends CliHelp {
     $realArgs = clone $args;
     $realArgs->class = $realClass;
     $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams($realArgs));
-    /* @var CliHelpMultiWrapper $multiWrapper */
+    /* @var CliHelpOptionsMultiWrapper $multiWrapper */
     $class = $args->class;
     $multiWrapper = (new $class($options));
     $multiWrapper->action($realArgs->method);

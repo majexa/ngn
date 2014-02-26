@@ -3,6 +3,12 @@
 // name -
 abstract class CliHelp extends CliHelpAbstract {
 
+  /**
+   * Используется для формирования имени класса при генерации списка классов
+   *
+   * @param $class
+   * @return string
+   */
   protected function name($class) {
     if (($prefix = $this->prefix())) {
       return lcfirst(Misc::removePrefix(ucfirst($this->prefix()), $class));
@@ -12,11 +18,12 @@ abstract class CliHelp extends CliHelpAbstract {
     }
   }
 
-  public function getClasses() {
-    static $classes;
-    if (isset($classes)) return $classes;
+  protected $classes;
+
+  function getClasses() {
+    if (isset($this->classes)) return $this->classes;
     if ($this->oneClass) {
-      $classes = [
+      $this->classes = [
         [
           'class' => $this->oneClass,
           'name'  => $this->name($this->oneClass)
@@ -24,20 +31,21 @@ abstract class CliHelp extends CliHelpAbstract {
       ];
     }
     else {
-      $classes = array_filter(array_map(function ($class) {
+      $this->classes = array_filter(array_map(function ($class) {
         return [
           'class' => $class,
           'name'  => $this->name($class)
         ];
       }, ClassCore::getClassesByPrefix(ucfirst($this->prefix()))));
     }
-    return $classes;
+    return $this->classes;
   }
 
   protected function run() {
     $args = $this->getArgs();
-    if (!$this->check($args)) return;
+    //if (!$this->check($args)) return;
     if (($r = $this->_run($args)) and $r instanceof CliResultClass) {
+      if ($this->classHasOptionalConstructorArgs($r->class)) throw new Exception('Sub-action class can not has optional constructor arguments');
       $argsSub = clone $args;
       $argsSub->class = $r->class;
       $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));

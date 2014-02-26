@@ -2,7 +2,10 @@
 
 abstract class CliHelpAbstract {
 
+  protected $initArgv;
+
   function __construct($argv) {
+    $this->initArgv = $argv;
     if (is_string($argv)) $argv = explode(' ', $argv);
     elseif (is_array($argv)) $argv = array_slice($argv, 1);
     else throw new Exception('Wrong type');
@@ -45,7 +48,7 @@ TEXT
   /**
    * @return mixed [['name' => 'asd', 'class' => 'Wsd]]
    */
-  abstract public function getClasses();
+  abstract function getClasses();
 
   protected function runner($color = 'brown') {
     return O::get('CliColors')->getColoredString($this->_runner(), $color);
@@ -55,13 +58,13 @@ TEXT
 
   abstract protected function run();
 
-  public function class2name($class) {
+  function class2name($class) {
     $r = Arr::get($this->getClasses(), 'name', 'class');
     if (!isset($r[$class])) throw new EmptyException("$r[$class]");
     return $r[$class];
   }
 
-  public function name2class($name) {
+  function name2class($name) {
     $r = Arr::get($this->getClasses(), 'class', 'name');
     if (!isset($r[$name])) throw new EmptyException("Class by name '$name' does not exists");
     return $r[$name];
@@ -75,6 +78,7 @@ TEXT
     return array_filter((new ReflectionClass($class))->getMethods(), function (ReflectionMethod $method) use ($class) {
       if ($method->isConstructor()) return false;
       if ($method->isStatic()) return false;
+      if (Misc::hasPrefix('__', $method->name)) return false;
       return $method->isPublic();
     });
   }
@@ -130,7 +134,7 @@ TEXT
   }
 
   protected function isMultiWrapper($class) {
-    return is_subclass_of($class, 'CliHelpMultiWrapper');
+    return is_subclass_of($class, 'CliHelpOptionsMultiWrapper');
   }
 
   protected function renderMethods($class) {
@@ -171,7 +175,6 @@ TEXT
     }
     return $s;
   }
-
 
   protected function getConstructorParams($class) {
     if (!($constructor = (new ReflectionClass($class))->getConstructor())) return [];
@@ -216,14 +219,14 @@ TEXT
     foreach ($this->getConstructorParams($args->class) as $n => $param) {
       if ($param->isOptional()) continue;
       if (!isset($args->params[$n])) {
-        output("Param-- #".($n + 1)." '".$param->getName()."' is required");
+        output("Param #".($n + 1)." '".$param->getName()."' is required");
         return false;
       }
     }
     foreach ($methods[$args->method] as $n => $param) {
       if ($param['optional']) continue;
       if (!isset($args->params[$n])) {
-        output("Param++ #".($n + 1)." '{$param['name']}' is required");
+        output("Param #".($n + 1)." '{$param['name']}' is required");
         return false;
       }
     }
@@ -255,16 +258,29 @@ TEXT
     return $options;
   }
 
+  /**
+   * @var bool Брать метода только из текущего класса, а не из его предков
+   */
+  protected $filterByCurrentClass = false;
+
   protected function getMethods($class) {
-    $methods = array_map(function (ReflectionMethod $method) use ($class) {
+    if (ClassCore::hasInterface($class, 'CliHelpMultiWrapper')) {
+      $class = $class::singleClass();
+    }
+    $methods = $this->_getMethods($class);
+    if ($this->filterByCurrentClass) {
+      $methods = array_filter($methods, function(ReflectionMethod $method) use ($class) {
+        return $method->class == $class;
+      });
+    }
+    return array_map(function (ReflectionMethod $method) use ($class) {
       ClassCore::getDocComment($method->getDocComment(), 'title');
       return [
         'options' => $this->getOptions($method, $class),
         'title'   => ClassCore::getDocComment($method->getDocComment(), 'title'),
         'method'  => $this->getMethod($method)
       ];
-    }, $this->_getMethods($class));
-    return $methods;
+    }, $methods);
   }
 
 
