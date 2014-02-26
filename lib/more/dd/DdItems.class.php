@@ -40,6 +40,20 @@ class DdItems extends Items {
 //    return $items;
   }
 
+  function getItems2() {
+    $this->setTStampCond();
+    if (!($items = parent::getItems())) return [];
+    $this->extendItemsFilePaths($items);
+    $this->extendItemsTags($items);
+    $this->extendItemsUsers($items);
+    $this->formatItemsText($items);
+    $this->extendItemsNumberRange($items);
+    if (($paths = Hook::paths('dd/extendItems')) !== false) foreach ($paths as $path) include $path;
+    foreach ($items as &$item) $item = Arr::unserialize($item);
+    $this->extendItems($items);
+    return $items;
+  }
+
   protected function _prepareItemsConds() {
     $structure = (new DdStructureItems)->getItemByField('name', $this->strName);
     if (empty($structure)) throw new Exception('Structure "'.$this->strName.'" does not exists');
@@ -64,7 +78,7 @@ class DdItems extends Items {
 
   protected function cc($id) {
     NgnCache::c()->remove('ddItem'.$this->strName.$id);
-    NgnCacheDdi::c()->remove('ddItem'.$this->strName.$id);
+    DdiCache::c()->remove('ddItem'.$this->strName.$id);
   }
 
   // --------------------- Варианты кэширования -------------------------
@@ -106,6 +120,7 @@ class DdItems extends Items {
     if (($item = parent::getItem($id)) == false) return false;
     $this->extendItemTags($item);
     $this->extendItemNumberRange($item);
+    $this->extendItemUsers($item);
     return $item;
   }
 
@@ -118,9 +133,9 @@ class DdItems extends Items {
   }
 
   function getItem_cache($id) {
-    if (!($item = NgnCacheDdi::c()->load('ddItem'.$this->strName.$id))) {
+    if (!($item = DdiCache::c()->load('ddItem'.$this->strName.$id))) {
       $item = $this->getItem($id);
-      NgnCacheDdi::c()->save($item, 'ddItem'.$this->strName.$id, [], NULL);
+      DdiCache::c()->save($item, 'ddItem'.$this->strName.$id, [], null);
     }
     return $item;
   }
@@ -336,7 +351,7 @@ class DdItems extends Items {
       if ($v['type'] == 'user') $names[] = $name;
     }
     if (!isset($names)) return;
-    //foreach ($items as &$item) foreach ($names as $name) $item[$name] = DbModelCore::get('users', $item[$name]);
+    foreach ($items as &$item) foreach ($names as $name) $item[$name] = DbModelCore::get('users', $item[$name]);
   }
 
   private function extendItemUsers(&$item) {
@@ -344,6 +359,7 @@ class DdItems extends Items {
     foreach ($this->fields()->getFields() as $name => $v) {
       if (!isset($item[$name])) continue;
       if ($v['type'] == 'user') {
+        if ($item[$name] and !is_numeric($item[$name])) throw new Exception("FUCK $this->strName {$item['id']}");
         $item[$name] = DbModelCore::get('users', $item[$name]);
       }
     }

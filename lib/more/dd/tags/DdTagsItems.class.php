@@ -322,7 +322,7 @@ SQL
     $tagItems = db()->select($q, $this->strName, $this->group->name);
     if ($this->getRelatedItems and ($items = $this->group->getRelatedItems()) !== false) { // используется для подхватывания юзеров, когда они добавлены, как тэги
       foreach ($tagItems as $k => &$v) {
-        $v = $items->getItemF($v['id']);
+        $v = $items->getItem($v['id']);
         if ($v === false) unset($tagItems[$k]);
       }
     }

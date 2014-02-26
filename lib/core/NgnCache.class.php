@@ -90,9 +90,3 @@ class NgnCache {
   }
 
 }
-
-class NgnCacheDdi extends NgnCache {
-  static $folder = '/cacheddi';
-}
-
-
