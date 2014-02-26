@@ -172,7 +172,6 @@ abstract class DataManagerAbstract extends Options2 {
     $this->source2formFormat();
     $this->form->fromRequest = true;
     $this->initTinyInitJs($id);
-    LogWriter::v('asdasdasd', $_POST);
     $this->setFormElementsData($this->defaultData, true);
     $this->afterFormElementsInit();
     if ($this->form->isSubmittedAndValid()) {
