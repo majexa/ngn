@@ -121,6 +121,7 @@ class DdItems extends Items {
     $this->extendItemTags($item);
     $this->extendItemNumberRange($item);
     $this->extendItemUsers($item);
+    $this->extendItemFilePaths($item);
     return $item;
   }
 
