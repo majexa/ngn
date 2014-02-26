@@ -18,6 +18,10 @@ class CliHelpArgsSingleSub extends CliHelpArgsSingle {
     parent::__construct(array_merge([null, $args->method], $args->params), $args->class);
   }
 
+  protected function renderClassRequiredOptions($class) {
+    return '';
+  }
+
   protected function cmdName($class) {
     return $this->class2name($class).$this->cmdNameSuffix;
   }
