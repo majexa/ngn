@@ -57,7 +57,7 @@ class DdItems extends Items {
   protected function _prepareItemsConds() {
     $structure = (new DdStructureItems)->getItemByField('name', $this->strName);
     if (empty($structure)) throw new Exception('Structure "'.$this->strName.'" does not exists');
-    if (!empty($structure['settings']['getNonActive'])) $this->getNonActive = $structure['settings']['getNonActive'];
+    if (!isset($this->getNonActive) and !empty($structure['settings']['getNonActive'])) $this->getNonActive = $structure['settings']['getNonActive'];
     if (!empty($structure['settings']['enableManualOrder'])) $this->cond->setOrder('oid');
     elseif (!isset($this->cond->orderCond)) $this->cond->setOrder('dateCreate DESC');
     parent::_prepareItemsConds();
@@ -71,6 +71,7 @@ class DdItems extends Items {
   }
 
   function getItems_cache() {
+    $items = [];
     $ids = $this->getItemIds();
     foreach ($ids as $id) $items[$id] = $this->getItem_cache($id);
     return $items;
@@ -489,11 +490,6 @@ class DdItems extends Items {
 
   function reorderItems($ids) {
     DbShift::items($ids, $this->table);
-  }
-
-  function update($id, array $data) {
-    parent::update($id, $data);
-    $this->getItem_cache($id);
   }
 
 }
