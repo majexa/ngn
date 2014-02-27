@@ -23,4 +23,12 @@ class FileVar {
     self::updateVar($file, $r);
   }
 
+  static function getVar($file) {
+    return require $file;
+  }
+
+  static function touch($file) {
+    if (!file_exists($file)) self::updateVar($file, []);
+  }
+
 }
