@@ -71,6 +71,7 @@ class DdItems extends Items {
   }
 
   function getItems_cache() {
+    $items = [];
     $ids = $this->getItemIds();
     foreach ($ids as $id) $items[$id] = $this->getItem_cache($id);
     return $items;
