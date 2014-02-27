@@ -71,6 +71,7 @@ class DdItems extends Items {
   }
 
   function getItems_cache() {
+    $items = [];
     $ids = $this->getItemIds();
     foreach ($ids as $id) $items[$id] = $this->getItem_cache($id);
     return $items;
@@ -135,7 +136,7 @@ class DdItems extends Items {
 
   function getItem_cache($id) {
     if (!($item = DdiCache::c()->load('ddItem'.$this->strName.$id))) {
-      $item = $this->getItem($id);
+      $item = $this->getIXtem($id);
       DdiCache::c()->save($item, 'ddItem'.$this->strName.$id, [], null);
     }
     return $item;
