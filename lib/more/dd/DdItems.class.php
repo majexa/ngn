@@ -57,7 +57,7 @@ class DdItems extends Items {
   protected function _prepareItemsConds() {
     $structure = (new DdStructureItems)->getItemByField('name', $this->strName);
     if (empty($structure)) throw new Exception('Structure "'.$this->strName.'" does not exists');
-    if (!empty($structure['settings']['getNonActive'])) $this->getNonActive = $structure['settings']['getNonActive'];
+    if (!isset($this->getNonActive) and !empty($structure['settings']['getNonActive'])) $this->getNonActive = $structure['settings']['getNonActive'];
     if (!empty($structure['settings']['enableManualOrder'])) $this->cond->setOrder('oid');
     elseif (!isset($this->cond->orderCond)) $this->cond->setOrder('dateCreate DESC');
     parent::_prepareItemsConds();
