@@ -12,6 +12,20 @@ class ItemsManager extends DataManagerAbstract {
     parent::__construct($form, $options);
   }
 
+  protected function _afterUpdate() {
+    parent::_afterUpdate();
+    $this->createItemCache($this->id);
+  }
+
+  protected function _afterCreate() {
+    parent::_afterCreate();
+    $this->createItemCache($this->id);
+  }
+
+  protected function createItemCache($id) {
+    $this->items->getItem_cache($id);
+  }
+
   public function getItem($id) {
     return $this->items->getItem($id);
   }
