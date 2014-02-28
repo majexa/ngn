@@ -10,7 +10,7 @@ abstract class FieldEAutocompleter extends FieldEInput {
         'name' => $this->options['name'], 
         'actionKey' => $this->type, 
         'acDefault' => $acDefault, 
-        'default' => $this->options['value'], 
+        'default' => $this->options['value'],
         'noJS' => true
       ]);
   }

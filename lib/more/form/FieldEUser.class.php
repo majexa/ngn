@@ -14,6 +14,9 @@ class FieldEUser extends FieldEAutocompleter {
   
   function _html() {
     if (empty($this->options['value'])) $title = null;
+    elseif ($this->options['value'] instanceof DbModelUsers) {
+      $title = UsersCore::getTitle($this->options['value']);
+    }
     elseif (($user = DbModelCore::get('users', $this->options['value'])) !== false) {
       $title = UsersCore::getTitle($user);
     }
