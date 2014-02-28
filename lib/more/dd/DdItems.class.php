@@ -27,17 +27,6 @@ class DdItems extends Items {
   function getItems() {
     if (!($items = $this->getItems_cache())) return [];
     return $items;
-//    $this->setTStampCond();
-//    if (!($items = parent::getItems())) return [];
-//    $this->extendItemsFilePaths($items);
-//    $this->extendItemsTags($items);
-//    $this->extendItemsUsers($items);
-//    $this->formatItemsText($items);
-//    $this->extendItemsNumberRange($items);
-//    if (($paths = Hook::paths('dd/extendItems')) !== false) foreach ($paths as $path) include $path;
-//    foreach ($items as &$item) $item = Arr::unserialize($item);
-//    $this->extendItems($items);
-//    return $items;
   }
 
   function getItems2() {
