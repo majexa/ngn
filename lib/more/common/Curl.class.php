@@ -155,6 +155,12 @@ class Curl {
     return $this->detectUTF8($this->getParsed($text, '<title>', '</title>')) ? $text : iconv($this->defaultInputEncoding, $this->encoding.'//IGNORE', $text);
   }
 
+  function info($url, $opt) {
+    $this->setopt(CURLOPT_URL, $url);
+    $this->exec();
+    return curl_getinfo($this->fSocket, $opt);
+  }
+
   protected function compilePostData($postData) {
     return http_build_query($postData);
   }

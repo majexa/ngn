@@ -153,8 +153,12 @@ class Dir {
       if ((is_file($entry) and $mode == self::FILE) or (is_dir($entry) and $mode == self::DIR)) {
         if (self::$pattern == '*' or preg_match('/^'.self::$pattern.'$/', $entry)) $files[] = $entry;
       }
-      elseif ($recursive and is_dir($entry)) {
-        $files = Arr::append($files, self::_getFiles($entry, $recursive, $pattern, $mode));
+    }
+    if ($recursive) {
+      foreach ($r as $entry) {
+        if (is_dir($entry)) {
+          $files = Arr::append($files, self::_getFiles($entry, $recursive, $pattern, $mode));
+        }
       }
     }
     return $files;

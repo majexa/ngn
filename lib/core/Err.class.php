@@ -81,8 +81,7 @@ class Err {
 
   static function exceptionHandler(Exception $e) {
     if (!headers_sent()) header('HTTP/1.0 404 Not Found');
-    $text = "Uncaught exception: <i>".$e->getMessage().'</i><br /><br />';
-    self::output($e->getCode(), $text, $e->getFile(), $e->getLine(), $e->getTrace());
+    self::output($e->getCode(), "Uncaught exception: <i>".$e->getMessage().'</i><br /><br />', $e->getFile(), $e->getLine(), $e->getTrace());
     if (is_a($e, 'NotLoggableError')) die2('!!!');
     self::log($e);
   }
@@ -119,10 +118,16 @@ class Err {
       return;
     }
     if ($errno === E_NOTICE) {
-      if (self::$showNotices) throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+      if (self::$showNotices) {
+        //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+        self::output($errno, $errstr, $errfile, $errline);
+        self::_log($errstr, getBacktrace(false));
+      }
     }
     else {
-      throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+      //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+      self::output($errno, $errstr, $errfile, $errline);
+      self::_log($errstr, getBacktrace(false));
     }
     /*
     switch ($errno) {
