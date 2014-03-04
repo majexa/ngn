@@ -44,7 +44,7 @@ use Options;
   }
 
   function dispatch() {
-    $this->controller = $this->_getController();
+    $this->controller = $this->getController();
     if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
     if (!is_object($this->controller)) throw new Exception('Controller not initialized');
     // В этом месте, после диспатчинга контроллера, может произойти его подмена
@@ -98,7 +98,7 @@ use Options;
 
   final function getController() {
     $controller = $this->_getController();
-    if ($this->req['showRouter']) die2("Current controller is: <u>".get_class($controller)."</u>");//"\nPath: ".Lib::getPath($class));
+    if ($this->req['showController']) die2("Current controller is: <u>".get_class($controller)."</u>");//"\nPath: ".Lib::getPath($class));
     return $controller;
   }
 
