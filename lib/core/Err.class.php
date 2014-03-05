@@ -121,13 +121,13 @@ class Err {
       if (self::$showNotices) {
         //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
         self::output($errno, $errstr, $errfile, $errline);
-        self::_log($errstr, getBacktrace(false));
+        self::_log($errstr, debug_backtrace());
       }
     }
     else {
       //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
       self::output($errno, $errstr, $errfile, $errline);
-      self::_log($errstr, getBacktrace(false));
+      self::_log($errstr, debug_backtrace());
     }
     /*
     switch ($errno) {

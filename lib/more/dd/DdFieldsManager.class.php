@@ -228,7 +228,6 @@ class DdFieldsManager extends DbItemsManager {
   protected function __dbFieldAction($word, $type, $length, $charsetCond, $default = null) {
     if (in_array(strtolower($type), ['int', 'float'])) $default = (int)$default;
     $q = "ALTER TABLE ".DdCore::table($this->strName)." $word $type ".($length ? '('.$length.')' : '')." $charsetCond NULL".($default !== null ? " DEFAULT '$default'" : '');
-    LogWriter::str('queryes', $q);
     db()->query($q);
   }
 

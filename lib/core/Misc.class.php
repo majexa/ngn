@@ -714,4 +714,11 @@ class Misc {
     return mb_strtoupper($chr, CHARSET) == $chr;
   }
 
+  /**
+   * http://stackoverflow.com/questions/3197885/php-function-to-create-8-chars-long-hash-a-z-no-numbers-allowed
+   */
+  static function shortHash($string) {
+    return substr(strtolower(preg_replace('/[0-9_\/]+/', '', base64_encode(sha1($string)))), 0, 8);
+  }
+
 }

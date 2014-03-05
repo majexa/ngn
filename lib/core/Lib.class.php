@@ -225,9 +225,23 @@ class Lib {
     return self::$list;
   }
 
+  static protected $cachePrefix;
+
+  /**
+   * Caching the list of added classes
+   *
+   * @param $string
+   */
+  static function cache($string) {
+    self::$cachePrefix = Misc::shortHash($string);
+    self::$isCache = true;
+  }
+
   static function getClassesListCached() {
     if (isset(self::$list)) return self::$list;
-    $cache = NgnCache::c();
+    $options = [];
+    if (isset(self::$cachePrefix)) $options['file_name_prefix'] = self::$cachePrefix;
+    $cache = FileCache::c($options);
     if (!(self::$list = $cache->load('classesList'))) {
       self::initClassesList();
       $cache->save(self::$list, 'classesList');

@@ -15,7 +15,7 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::flm('js')->addLib('Ngn.Form.El.Phone');
     Sflm::clearCache();
     // ни статического ни динамического кэша не существует
-    $this->assertFalse((bool)NgnCache::c()->load(Sflm::flm('js')->pathsCacheKey()), 'Dynamic cache must be empty');
+    $this->assertFalse((bool)FileCache::c()->load(Sflm::flm('js')->pathsCacheKey()), 'Dynamic cache must be empty');
     $this->assertFalse(file_exists(Sflm::flm('js')->cacheFile()), 'Static cache file can not exists. '.Sflm::flm('js')->cacheFile());
 
     Sflm::flm('js')->store();

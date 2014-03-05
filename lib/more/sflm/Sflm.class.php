@@ -13,7 +13,7 @@ class Sflm {
   static function clearCache() {
     Dir::clear(UPLOAD_PATH.'/js');
     Dir::clear(UPLOAD_PATH.'/css');
-    NgnCache::clean();
+    FileCache::clean();
     O::delete('SflmJs');
     O::delete('SflmCss');
     self::$cache = [];
@@ -79,7 +79,7 @@ class Sflm {
   }
 
   static function output($s) {
-    if (getConstant('IS_DEBUG')) output($s);
+    //if (getConstant('IS_DEBUG')) output($s);
   }
 
 }

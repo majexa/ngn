@@ -144,7 +144,7 @@ class LibStorage {
   ];
 
   public $ignoreClasses = [
-    'NgnCache'
+    'FileCache'
   ];
 
   private $depth = 0;

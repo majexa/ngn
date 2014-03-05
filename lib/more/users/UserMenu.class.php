@@ -3,7 +3,7 @@
 class UserMenu {
 
   static function get(DbModelUsers $user, $curPageId, $curAction) {
-    $cache = NgnCache::c();
+    $cache = FileCache::c();
     if (1 or ($items = $cache->load('userMenu'.$user['id'])) === false) {
       $page = DbModelCore::get('pages', 'userData', 'controller');
       $items = [

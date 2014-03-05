@@ -237,7 +237,8 @@ TEXT
 
   protected function renderOptions($options) {
     return implode(' ', array_map(function ($v) {
-      return (!empty($v['optional']) ? O::get('CliColors')->getColoredString($v['name'], 'darkGray') : $v['name']). //
+      //return (!empty($v['optional']) ? O::get('CliColors')->getColoredString($v['name'], 'darkGray') : $v['name']). //
+      return (!empty($v['optional']) ? '{'.O::get('CliColors')->getColoredString($v['name'], 'darkGray').'}' : $v['name']). //
       ($v['variants'] ? O::get('CliColors')->getColoredString("[{$v['variants']}]", 'green') : '');
     }, $options));
   }

@@ -39,14 +39,12 @@ require LIB_PATH.'/more/config.php';
 if (!is_writable(SITE_PATH.'/'.DATA_DIR.'/cache')) die('"'.SITE_PATH.'/'.DATA_DIR.'/cache" is not writable (init/more.php)');
 
 // Включаем кэширование списка классов
-// Кэшировать нужно с помощью NgnCache. Значит нужно его подключить
+// Кэшировать нужно с помощью FileCache. Значит нужно его подключить
 if (!defined('DATA_PATH')) define('DATA_PATH', SITE_PATH.'/'.DATA_DIR);
 
-require_once LIB_PATH.'/core/NgnCache.class.php';
-// Очитка кэша. Нельзя помещать в web-init, потому что web-init включается уже после 
+// Очитка кэша. Нельзя помещать в web-init, потому что web-init включается уже после
 // включения кэширования библиотек
-
-if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) NgnCache::clean();
+if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) FileCache::clean();
 
 // Переключаем загрузку классов на кэширующий метод
 Lib::$isCache = true;
@@ -57,7 +55,7 @@ if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) {
   require_once LIB_PATH.'/core/Memc.class.php';
   require_once LIB_PATH.'/core/Mem.class.php';
   require_once LIB_PATH.'/more/core/UrlCache.class.php';
-  NgnCache::clean();
+  FileCache::clean();
   Mem::clean();
   UrlCache::clearCache();
   require_once LIB_PATH.'/more/sflm/SflmBase.class.php';

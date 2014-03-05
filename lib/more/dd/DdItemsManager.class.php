@@ -36,6 +36,20 @@ class DdItemsManager extends DbItemsManager {
     $this->strName = $items->strName;
   }
 
+  protected function _afterUpdate() {
+    parent::_afterUpdate();
+    $this->createItemCache($this->id);
+  }
+
+  protected function _afterCreate() {
+    parent::_afterCreate();
+    $this->createItemCache($this->id);
+  }
+
+  protected function createItemCache($id) {
+    $this->items->getItem_cache($id);
+  }
+
   protected function _create() {
     $data = [];
     foreach ($this->data as $k => $v) {

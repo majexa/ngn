@@ -14,12 +14,15 @@ class FieldEFile extends FieldEFileBase {
     parent::init();
     if ($this->form->fromRequest) {
       $files = isset($this->form->options['files']) ? $this->form->options['files'] : $this->form->req->files;
+      $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
+      /*
       $uploadedFileValue = null;
       if (!empty($files)) {
         $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
         if (!$uploadedFileValue) die2([get_class($this), $files, $this->options['name']]);
         empty($this->options['multiple']) ? $this->processSingle($uploadedFileValue) : $this->processMultiple($uploadedFileValue);
       }
+      */
     }
     else {
       $uploadedFileValue = !empty($this->options['value']) ? $this->options['value'] : null;
