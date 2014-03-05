@@ -547,6 +547,7 @@ class Form {
       throw new Exception('Field with name "'.$d['name'].'" already exists in <b>$this->els</b>. existing: '.getPrr($this->els[$d['name']]->options).', trying to create: '.getPrr($d));
     }
     if (isset($d['maxlength']) and $d['maxlength'] == 0) unset($d['maxlength']);
+    if (isset($this->options['fieldOptions'][$d['name']])) $d = array_merge($d, $this->options['fieldOptions'][$d['name']]);
     $this->els[$d['name']] = $el = FieldCore::get($d['type'], $d, $this);
     if (isset($el->inputType) and $el->inputType == 'file') $this->encType = 'multipart/form-data';
     return $el;
