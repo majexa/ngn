@@ -6,6 +6,7 @@ class FieldEDdTagsMultiselect extends FieldEMultiselect {
 
   protected function init() {
     $this->options['options'] = Arr::get(DdTags::get($this->form->strName, $this->options['name'])->getTags(), 'title', 'id');
+    if (!empty($this->options['ddFilter'])) $this->options['options'] = Arr::filterByKeys($this->options['options'], $this->options['ddFilter']);
     parent::init();
   }
 
