@@ -29,11 +29,11 @@ class SflmFrontend {
   }
 
   protected function getLastPaths() {
-    return NgnCache::c()->load('sflmLastPaths'.$this->sflm->type.$this->frontend) ? : [];
+    return FileCache::c()->load('sflmLastPaths'.$this->sflm->type.$this->frontend) ? : [];
   }
 
   protected function storeLastPaths() {
-    NgnCache::c()->save($this->getPaths(), 'sflmLastPaths'.$this->sflm->type.$this->frontend);
+    FileCache::c()->save($this->getPaths(), 'sflmLastPaths'.$this->sflm->type.$this->frontend);
   }
 
   /**
@@ -42,7 +42,7 @@ class SflmFrontend {
    * @return array
    */
   function getPathsCache() {
-    return NgnCache::c()->load($this->pathsCacheKey()) ? : [];
+    return FileCache::c()->load($this->pathsCacheKey()) ? : [];
   }
 
   /**
@@ -129,7 +129,7 @@ class SflmFrontend {
       $this->addPath($path, "package '$lib'");
     }
     if ($this->changed) {
-      NgnCache::c()->save($this->paths, $this->pathsCacheKey());
+      FileCache::c()->save($this->paths, $this->pathsCacheKey());
       Sflm::output("Update collected file after adding lib '$lib'");
       $this->store();
       $this->incrementVersion();

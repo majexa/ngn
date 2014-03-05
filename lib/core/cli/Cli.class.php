@@ -14,7 +14,7 @@ class Cli {
 
   static function runCode($server, $code, $includes, $runBasePath = null) {
     $code = self::formatRunCmd($code, $includes, $runBasePath);
-    return sys("ssh $server $code");
+    return sys("ssh $server $code", true);
   }
 
   static function ssh($server, $cmd) {
@@ -39,6 +39,16 @@ class Cli {
   static function shell($cmd, $output = true) {
     if ($output) output($cmd);
     return `$cmd`;
+  }
+
+  static function confirm($text) {
+    print "$text\nEnter 'y' if agree.\n";
+    $fp = fopen('php://stdin', 'r');
+    $lastLine = false;
+    while (!$lastLine) {
+      $nextLine = fgets($fp, 1024);
+      return 'y' == lcfirst(trim($nextLine)) ? true : false;
+    }
   }
 
 }

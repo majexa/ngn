@@ -59,6 +59,10 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
          href="<?= $this->getPath(1) ?>/ddField/<?= $v['name'] ?>"><i></i></a>
       <a class="iconBtn list" title="Управление выводом"
          href="<?= $this->getPath(1) ?>/ddo/<?= $v['name'] ?>"><i></i></a>
+      <? if ($d['params'][0] == 'god') { ?>
+        <a class="iconBtn list" title="Редактировать записи"
+           href="<?= $this->getPath(1) ?>/ddItems/<?= $v['name'] ?>"><i></i></a>
+      <? } ?>
     </td>
     <td><?= $v['title'] ?></td>
     <td><i><?= $v['name'] ?></i></td>

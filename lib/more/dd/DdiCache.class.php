@@ -1,7 +1,14 @@
 <?php
 
-class DdiCache extends NgnCache {
+class DdiCache extends FileCache {
 
-  static $folder = '/cacheddi';
+  function __construct(array $options) {
+    Arr::checkEmpty($options, 'strName');
+    parent::__construct($options);
+  }
+
+  protected function folder() {
+    return DATA_PATH.'/ddiCache/'.$this->options['strName'];
+  }
 
 }

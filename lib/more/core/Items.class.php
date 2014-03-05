@@ -120,7 +120,7 @@ class Items extends DbItems {
   }
 
   function getItems_cache() {
-    $cache = NgnCache::c();
+    $cache = FileCache::c();
     if (($items = $cache->load($this->getCacheId())) === false) {
       $items = $this->getItems_nocache();
       if (!empty($items)) $cache->save($items, $this->getCacheId());

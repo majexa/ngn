@@ -71,7 +71,7 @@ class NgnMorph {
 
   static function __callStatic($name, $args) {
     $id = $name.md5(serialize($args));
-    $c = NgnCache::c();
+    $c = FileCache::c();
     if (($r = $c->load($id)) !== false) return $r;
     $r = forward_static_call_array(['self', '_'.$name], $args);
     $c->save($r, $id);

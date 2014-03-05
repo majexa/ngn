@@ -320,12 +320,12 @@ class Dir {
 
   static function getSize($path, $lifetime = 43200) {
     $key = str_replace(['/', '.', '-'], '_', str_replace(':', '', $path));
-    if (($r = NgnCache::c([
+    if (($r = FileCache::c([
       'lifetime' => $lifetime
     ])->load($key)) === false
     ) {
       $r = self::_getSizeSys($path);
-      NgnCache::c()->save($r, $key);
+      FileCache::c()->save($r, $key);
     }
     return $r;
   }

@@ -173,19 +173,18 @@ class DdStructuresManager extends DbItemsManager {
   }
 
   protected function beforeDelete() {
-    //(new DdoSettings($this->data['name']))->delete();
-    (new DdFieldsManager($this->data['name']))->deleteFields(); // Удаление полей
-    $this->deleteTable($this->data['name']);
-    Dir::remove(UPLOAD_PATH.'/'.DdCore::filesDir($this->data['name']));
+    $this->cleanupStructure($this->data['name']);
   }
 
-  protected function deleteTable($name) {
-    db()->delete(DdCore::table($name));
+  protected function cleanupStructure($name) {
+    (new DdFieldsManager($name))->deleteFields(); // Удаление полей
+    O::delete('DdFields', $name);
+    db()->delete(DdCore::table($name), false);
+    Dir::remove(UPLOAD_PATH.'/'.DdCore::filesDir($name));
   }
 
   function deleteByName($name) {
     if (!($id = db()->selectCell("SELECT id FROM dd_structures WHERE name=?", $name))) return;
-    O::delete('DdFields', $name);
     $this->delete($id);
   }
 

@@ -88,6 +88,12 @@ exit 0';
     sys("sudo rm /etc/init.d/$this->projectName-$this->demon");
   }
 
+  protected function rcLocalWrite($c) {
+    $tmpFile = "/tmp/$this->projectName-$this->demon";
+    file_put_contents($tmpFile, $c);
+    `sudo mv $tmpFile /etc/rc.local`;
+  }
+
   function addToRc($projectName, $demon) {
     $cmd = "su user -c 'sudo /etc/init.d/$projectName-$demon start'";
     $begin = "# ngn auto-generated workers begin\nsleep 15";
@@ -95,7 +101,7 @@ exit 0';
     if ($this->rcLocalIsVirgin()) {
       $a = "\n\n$begin\n$cmd\n$end\n\n";
       $c = preg_replace('/^(.*this script does nothing.)(\s+)(.*)$/ms', '$1'.$a.'$3', $this->c);
-      file_put_contents('/etc/rc.local', $c);
+      $this->rcLocalWrite($c);
     }
     else {
       if (!preg_match("/$begin(.*)$end/ms", $this->c, $m)) throw new Exception('something wrong');
@@ -103,9 +109,7 @@ exit 0';
         output("Worker '$projectName-$demon' already in rc.local");
       }
       else {
-        $c = preg_replace("/($begin)(.*)($end)/ms", '$1$2'."$cmd\n".'$3', $this->c);
-        file_put_contents('/tmp/rc.local', $c);
-        `sudo mv /tmp/rc.local /etc/rc.local`;
+        $this->rcLocalWrite(preg_replace("/($begin)(.*)($end)/ms", '$1$2'."$cmd\n".'$3', $this->c));
       }
     }
   }

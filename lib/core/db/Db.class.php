@@ -286,11 +286,11 @@ class Db extends DbSimple_Mysql {
     $processTime = round(getMicrotime() - $startTime, 3);
   }
 
-  function delete($tables = null) {
+  function delete($tables = null, $strict = true) {
     $tables = (array)$tables;
     foreach ($this->tables() as $table) {
       if ($tables and !in_array($table, $tables)) continue;
-      $this->query("DROP TABLE $table");
+      $this->query("DROP TABLE ".($strict ? '' : 'IF EXISTS ')."$table");
     }
   }
 
@@ -447,7 +447,7 @@ class Db extends DbSimple_Mysql {
   static function getSize(Db $db = null) {
     if (!$db) $db = db();
     $key = 'dbSize'.$db->name;
-    if (($r = NgnCache::c()->load($key)) !== false) return $r;
+    if (($r = FileCache::c()->load($key)) !== false) return $r;
     $r =  round($db->selectCell("
 SELECT
   SUM(DATA_LENGTH + INDEX_LENGTH) AS size
@@ -455,7 +455,7 @@ FROM information_schema.TABLES
 WHERE table_schema = '{$db->name}'
 GROUP BY TABLE_SCHEMA
 "));
-    NgnCache::c()->save($r, $key);
+    FileCache::c()->save($r, $key);
     return $r;
   }
 

@@ -79,8 +79,9 @@ class DdItems extends Items {
   }
 
   protected function cc($id) {
-    NgnCache::c()->remove('ddItem'.$this->strName.$id);
-    DdiCache::c()->remove('ddItem'.$this->strName.$id);
+    $cache = DdiCache::c(['strName' => $this->strName]);
+    $cache->remove('i'.$id);
+    $cache->remove('fi'.$id);
   }
 
   // --------------------- Варианты кэширования -------------------------
@@ -88,7 +89,7 @@ class DdItems extends Items {
   /*
 
   function getItems_cache2() {
-    $cache = NgnCache::c();
+    $cache = FileCache::c();
     if (!($items = $cache->load('ddItems'.$this->strName))) {
       $items = $this->getItems_nocache();
       $cache->save($items, 'ddItems'.$this->strName);
@@ -128,17 +129,19 @@ class DdItems extends Items {
   }
 
   function getItemF_cache($id) {
-    if (!($item = DdiCache::c()->load('ddItemF'.$this->strName.$id))) {
+    $cache = DdiCache::c(['strName' => $this->strName]);
+    if (!($item = $cache->load('fi'.$id))) {
       $item = $this->getItemF($id);
-      NgnCache::c()->save($item, 'ddItemF'.$this->strName.$id);
+      $cache->save($item, 'fi'.$id);
     }
     return $item;
   }
 
   function getItem_cache($id) {
-    if (!($item = DdiCache::c()->load('ddItem'.$this->strName.$id))) {
+    $cache = DdiCache::c(['strName' => $this->strName]);
+    if (!($item = $cache->load('i'.$id))) {
       $item = $this->getItem($id);
-      DdiCache::c()->save($item, 'ddItem'.$this->strName.$id, [], null);
+      $cache->save($item, 'i'.$id, [], null);
     }
     return $item;
   }

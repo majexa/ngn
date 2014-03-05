@@ -66,7 +66,7 @@ class Url {
 
   static function getContents($url, $cached = true) {
     if ($cached) {
-      return NgnCache::func(function () use ($url) {
+      return FileCache::func(function () use ($url) {
         return (new Curl($url))->get($url);
       }, md5($url));
     }
