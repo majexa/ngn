@@ -44,6 +44,7 @@ return [
   'skype' => '$v ? `<a href="skype:`.$v.`?call" class="dgray"><img src="/i/img/icons/skype.gif" class="icon18" />`.$v.`</a>` : ``',
   'url' => '$v ? `<a href="`.$v.`" target="_blank" class="dgray"><img src="http://www.google.com/s2/favicons?domain=`.Misc::getHost($v).`" class="icon18" />`.Misc::cut(clearUrl($v), 22).`</a>` : ``',
   'ddItemSelect' => '$v ? $v[`title`] : ``',
+  'ddItemSelectDepending' => '%ddItemSelect',
   'ddItemsSelect' => '%ddTagsMultiselect',
   'ddSlaveItemsSelect' => '%ddItemSelect',
   'configSelect' => '$v ? Config::getVar(`fieldE/`.$name)[$v] : ``',
