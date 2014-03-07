@@ -149,9 +149,9 @@ Ngn.Dialog = new Class({
     this.message = new Element('div', {
       'id': this.options.id + '_message',
       'class': this.options.messageAreaClass + (this.options.title === false ? ' ' + this.options.noTitleClass : '') + (this.options.footer === false ? ' ' + this.options.noFooterClass : '')
-    }).inject(this.eMessage).setStyle('max-height', (this.options.height == 'auto' ? 'auto' : this.options.height.toInt() + 'px'));
+    }).inject(this.eMessage);
+    if (this.options.height != 'auto') this.message.setStyle('max-height', this.options.height.toInt() + 'px');
     if (this.options.height != 'auto') this.message.setStyle('overflow-y', 'auto');
-
     this.beforeInitRequest();
     if ($defined(this.options.url)) {
       this.dotter = new Ngn.Dotter(this.message);
