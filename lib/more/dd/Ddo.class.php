@@ -340,7 +340,6 @@ class Ddo {
     $this->titled = false;
     $exl = $this->getExcelWriter($file);
     if ($header) $exl->writeLine(Arr::get($this->fields, 'title'));
-    $rows = [];
     foreach ($this->items as $v) {
       $row = [];
       foreach ($this->fields as $f) {
@@ -348,8 +347,29 @@ class Ddo {
         else $row[] = '';
       }
       $exl->writeLine($row);
-      $rows[] = $row;
     }
+    Err::noticeSwitchBefore();
+  }
+
+  function csv($file, $header = true) {
+    $this->write(new CsvWriter($file), $header);
+  }
+
+  function write(LineWriterInterface $writer, $header = true) {
+    Err::noticeSwitch(false);
+    $this->check();
+    $this->text = true;
+    $this->titled = false;
+    if ($header) $writer->writeLine(Arr::get($this->fields, 'title'));
+    foreach ($this->items as $v) {
+      $row = [];
+      foreach ($this->fields as $f) {
+        if (isset($v[$f['name']])) $row[] = trim($this->el($v[$f['name']], $f['name'], $v['id']));
+        else $row[] = '';
+      }
+      $writer->writeLine($row);
+    }
+    unset($csv);
     Err::noticeSwitchBefore();
   }
 

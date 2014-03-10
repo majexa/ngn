@@ -15,11 +15,11 @@ abstract class CliHelpAbstract {
       $this->help();
     }
     else {
-      try {
+      //try {
         $this->run();
-      } catch (EmptyException $e) {
-        output3("Wrong syntax (".$e->getMessage().")");
-      }
+      //} catch (EmptyException $e) {
+      //  output3("Wrong syntax (".$e->getMessage().")");
+      //}
     }
   }
 
@@ -223,6 +223,7 @@ TEXT
         return false;
       }
     }
+    // check method required params
     foreach ($methods[$args->method] as $n => $param) {
       if ($param['optional']) continue;
       if (!isset($args->params[$n])) {

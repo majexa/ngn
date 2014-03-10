@@ -1,6 +1,6 @@
 <?php
 
-class CliResultClass {
+class CliHelpResultClass {
 
   public $class, $name;
 

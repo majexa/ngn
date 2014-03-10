@@ -267,6 +267,22 @@ SQL
     return $r;
   }
 
+  function getTreeCount($itemIds) {
+    if (!$itemIds) return 0;
+    $itemIds = (array)$itemIds;
+    $q = "
+    SELECT COUNT(*)
+    FROM tagItems
+    LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
+    WHERE
+      tagItems.strName=? AND
+      tagItems.groupName=? AND
+      tagItems.itemId IN (".implode(', ', $itemIds).") AND
+      tagItems.active=1
+      ";
+    return db()->selectCell($q, $this->strName, $this->group->name);
+  }
+
   function hash2arrayR(array &$nodes) {
     $nodes = array_values($nodes);
     foreach ($nodes as &$v) if (!empty($v['childNodes'])) $this->hash2arrayR($v['childNodes']);
@@ -322,7 +338,7 @@ SQL
     $tagItems = db()->select($q, $this->strName, $this->group->name);
     if ($this->getRelatedItems and ($items = $this->group->getRelatedItems()) !== false) { // используется для подхватывания юзеров, когда они добавлены, как тэги
       foreach ($tagItems as $k => &$v) {
-        $v = $items->getItem($v['id']);
+        $v = $items->getItem_cache($v['id']);
         if ($v === false) unset($tagItems[$k]);
       }
     }

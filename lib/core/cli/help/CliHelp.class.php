@@ -43,10 +43,10 @@ abstract class CliHelp extends CliHelpAbstract {
 
   protected function run() {
     $args = $this->getArgs();
-    //if (!$this->check($args)) return;
-    if (($r = $this->_run($args)) and $r instanceof CliResultClass) {
+    if (($r = $this->_run($args)) and $r instanceof CliHelpResultClass) {
       if ($this->classHasOptionalConstructorArgs($r->class)) throw new Exception('Sub-action class can not has optional constructor arguments');
       $argsSub = clone $args;
+      if ((new ReflectionClass($r->class))->isAbstract()) throw new Exception('Can not be abstract');
       $argsSub->class = $r->class;
       $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));
       $argsSub->method = $args->params[1];
