@@ -11,6 +11,8 @@ abstract class CliHelpArgs extends CliHelp {
     $options = Arr::get(array_filter($params, function(ReflectionParameter $p) {
       return $p->isOptional();
     }), 'name');
+
+
     return ($options ? ' '.O::get('CliColors')->getColoredString(implode(' ', $options), 'darkGray') : '');
   }
 
@@ -51,6 +53,7 @@ abstract class CliHelpArgs extends CliHelp {
       $obj = $refl->newInstanceArgs($constructorParams);
       return call_user_func_array([$obj, $args->method], $params);
     } else {
+      if (!$this->check($args)) return false;
       return call_user_func_array([new $args->class, $args->method], $args->params);
     }
   }

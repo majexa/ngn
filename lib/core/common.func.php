@@ -71,7 +71,7 @@ function output2($str, $output = false) {
 }
 
 function output3($str, $output = false) {
-  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'red').">").(R::get('plainText') ? "\n" : "</p>");
+  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'yellow').">").(R::get('plainText') ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 

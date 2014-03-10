@@ -8,8 +8,8 @@ trait WsItemChanged {
       return;
     }
     try {
-      //LogWriter::v('queue', [$method, $args]);
-      call_user_func_array([$this, '_'.$method], $args);
+      if (method_exists($this, '_'.$method)) call_user_func_array([$this, '_'.$method], $args);
+      else new NoMethodException(__CLASS__.'::_'.$method);
     } catch (Exception $e) {
       Err::log($e);
     }

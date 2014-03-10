@@ -71,6 +71,13 @@ class DdItems extends Items {
     return $items;
   }
 
+  function getItems_nocache() {
+    $items = [];
+    $ids = $this->getItemIds();
+    foreach ($ids as $id) $items[$id] = $this->getItem($id);
+    return $items;
+  }
+
   function getItemsF_cache() {
     $items = [];
     $ids = $this->getItemIds();
@@ -146,6 +153,14 @@ class DdItems extends Items {
     return $item;
   }
 
+  function getItem_cache_($id) {
+    if (!($item = Mem::get('i'.$id))) {
+      $item = $this->getItem($id);
+      Mem::set('i'.$id, $item);
+    }
+    return $item;
+  }
+
   protected function extendItem(array &$item) {
   }
 
@@ -161,7 +176,6 @@ class DdItems extends Items {
    */
   function getItemF($id) {
     if (!($item = $this->getItem($id))) return false;
-    $this->extendItemFilePaths($item);
     $this->extendItemUsers($item);
     $this->formatItemText($item);
     $modelClass = 'DdItemF'.ucfirst($this->strName);
@@ -250,21 +264,38 @@ class DdItems extends Items {
     }
   }
 
+  protected function replaceItemByOnDemandObject(&$item, $fieldName) {
+    if (is_object($item)) {
+      if ($item instanceof DdItemOnDemand) {
+        $item->onDemandFields[] = $fieldName;
+        return;
+      } else {
+        throw new Exception('Wrong object type');
+      }
+    }
+    $item = new DdItemOnDemand($this->strName, $item);
+    $item->onDemandFields[] = $fieldName;
+  }
+
   /**
    * Добавляет данные для тэгов в массив записи
    *
    * @param   array Массив записи
    */
-  private function extendItemTags(&$item) {
+  protected function extendItemTags(&$item) {
     $this->setFieldTagTypes();
-    //$memBefore = memory_get_usage();
     foreach (array_keys($item) as $fieldName) {
       if (!isset($this->fieldTagTypes[$fieldName])) continue;
       $fieldType = $this->fieldTagTypes[$fieldName];
       if (DdTags::isTree($fieldType) and DdTags::isMulti($fieldType)) {
         $item[$fieldName] = [];
-        foreach (DdTags::items($this->strName, $fieldName)->getTree($item['id']) as $node) {
-          $item[$fieldName][$node['collection']] = TreeCommon::flat([$node]);
+        $r = DdTags::items($this->strName, $fieldName);
+        if ($r->getTreeCount($item['id']) > 50) {
+          $this->replaceItemByOnDemandObject($item, $fieldName);
+        } else {
+          foreach (DdTags::items($this->strName, $fieldName)->getTree($item['id']) as $node) {
+            $item[$fieldName][$node['collection']] = TreeCommon::flat([$node]);
+          }
         }
       }
       else {
