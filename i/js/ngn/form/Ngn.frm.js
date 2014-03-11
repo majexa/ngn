@@ -316,7 +316,10 @@ Ngn.frm.toObj = function(eContainer, except) {
     if (el.get('tag') == 'textarea' && el.get('aria-hidden')) {
       // Значит из этой texarea был сделан tinyMce
       pushValue = tinyMCE.get(el.get('id')).getContent();
-    } else if ((el.get('tag') == 'input' && el.type.match(new RegExp('^' + typeMatch + '$', 'i'))) || el.get('tag') == 'textarea' || (el.get('type').match(/^checkbox|radio$/i) && el.get('checked'))) {
+      //} else if ((el.get('tag') == 'input' && el.type.match(new RegExp('^' + typeMatch + '$', 'i'))) || el.get('tag') == 'textarea' || (el.get('type').match(/^checkbox|radio$/i) && el.get('checked'))) {
+    } else if ((el.get('tag') == 'input' && el.type.match(new RegExp('^' + typeMatch + '$', 'i'))) || el.get('tag') == 'textarea' || (el.get('type').match(/^radio$/i) && el.get('checked'))) {
+      pushValue = el.value;
+    } else if ((el.get('tag') == 'input' && el.type.match(new RegExp('^' + typeMatch + '$', 'i'))) || el.get('tag') == 'textarea' || (el.get('type').match(/^checkbox$/i) && el.get('checked'))) {
       pushValue = el.value;
     } else if (el.get('tag') == 'select') {
       if (el.multiple) {
