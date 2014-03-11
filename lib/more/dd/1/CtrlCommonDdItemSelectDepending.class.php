@@ -11,6 +11,7 @@ class CtrlCommonDdItemSelectDepending extends CtrlCommon {
     $this->tt->tpl('dd/consecutiveSelectAjax', [
       'name'    => $this->req->reqNotEmpty('fieldName'),
       'options' => Arr::get($opt, 'title', 'id'),
+      'default' => key(Arr::get($opt, 'title', 'id')),
     ]);
   }
 
