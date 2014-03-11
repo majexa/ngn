@@ -60,12 +60,14 @@ Ngn.frm.ConsecutiveSelect = new Class({
  * @returns object of class Ngn.frm.ConsecutiveSelect
  */
 Ngn.frm.ConsecutiveSelect.factory = function(formEl, cls) {
-  return new cls(formEl.eRow, formEl.fieldName, formEl.strName, formEl.parentTagFieldName, {
+  var options = {
     onRequest: function(eSelect) {
       formEl.form.validator.resetField(eSelect);
     }.bind(formEl),
     onComplete: function() {
       formEl.form.validator.rewatchFields();
     }.bind(formEl)
-  });
+  };
+  if (formEl)return new cls(formEl.eRow, formEl.fieldName, formEl.strName, formEl.parentTagFieldName, options);
+  return new cls(options);
 };
