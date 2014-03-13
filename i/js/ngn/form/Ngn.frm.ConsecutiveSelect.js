@@ -68,6 +68,6 @@ Ngn.frm.ConsecutiveSelect.factory = function(formEl, cls) {
       formEl.form.validator.rewatchFields();
     }.bind(formEl)
   };
-  if (formEl)return new cls(formEl.eRow, formEl.fieldName, formEl.strName, formEl.parentTagFieldName, options);
+  if (formEl)return new cls(formEl.eRow, formEl.fieldName, formEl.strName, formEl.parentTagFieldName, formEl.itemSort, options);
   return new cls(options);
 };
