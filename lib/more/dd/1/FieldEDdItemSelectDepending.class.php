@@ -7,13 +7,16 @@ class FieldEDdItemSelectDepending extends FieldEAbstract {
   static $ddTags = true, $ddTagItems = true;
 
   function _html() {
-    $parentOptions = Arr::get((new DdItems($this->options['settings']['parentStrName']))->getItems(), 'title', 'id');
+    $items = (new DdItems($this->options['settings']['parentStrName']));
+    if ($this->options['settings']['itemSort']) $items->cond->setOrder($this->options['settings']['itemSort'].' ASC');
+    $parentOptions = Arr::get($items->getItems(), 'title', 'id');
     if (!empty($this->options['ddFilter'])) $parentOptions = Arr::filterByKeys($parentOptions, $this->options['ddFilter']);
     $parentOpts['class'] = $this->options['settings']['parentStrName'];
     $opts['class'] = $this->options['settings']['strName'];
     if (empty($this->options['value'])) $selectedParentId = key($parentOptions);
     else $selectedParentId = (new DdItems($this->options['settings']['strName']))->getItem($this->options['value'])[$this->options['settings']['parentTagFieldName']]['id'];
     $items = new DdItems($this->options['settings']['strName']);
+    if ($this->options['settings']['itemSort']) $items->cond->setOrder($this->options['settings']['itemSort'].' ASC');
     if ($selectedParentId) $items->addTagFilter($this->options['settings']['parentTagFieldName'], $selectedParentId);
     $this->options['options'] = Arr::get($items->getItemsSimple(), 'title', 'id');
     if (!$this->options['value']) $this->options['value'] = key($this->options['options']);
@@ -22,7 +25,8 @@ class FieldEDdItemSelectDepending extends FieldEAbstract {
     $html .= '<div class="data" '.Html::dataParams([
         'parentTagFieldName' => $this->options['settings']['parentTagFieldName'],
         'strName'            => $this->options['settings']['strName'],
-        'fieldName'          => $this->options['name']
+        'fieldName'          => $this->options['name'],
+        'itemSort'           => $this->options['settings']['itemSort'],
       ]).'></div>';
     return $html;
   }
