@@ -4,7 +4,7 @@ class CtrlCommonDdItemSelectDepending extends CtrlCommon {
 
   function action_ajax_default() {
     $tags = new DdItems($this->req->reqNotEmpty('strName'));
-    if (!empty($this->req->r['itemSort'])) $tags->cond->setOrder($this->req->r['itemSort'].' ASC');
+    if (!empty($this->req->r['itemsSort'])) $tags->cond->setOrder($this->req->r['itemsSort']);
     $tags->addTagFilter($this->req->reqNotEmpty('parentTagFieldName'), $this->req->r['id']);
     $opt = $tags->getItems();
     if (empty($opt)) return;
