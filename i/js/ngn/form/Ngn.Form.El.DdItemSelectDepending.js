@@ -7,7 +7,7 @@ Ngn.Form.El.DdItemSelectDepending = new Class({
       strName: data.get('data-strName'),
       parentTagFieldName: data.get('data-parentTagFieldName'),
       fieldName: data.get('data-fieldName'),
-      itemSort: data.get('data-itemSort')
+      itemsSort: data.get('data-itemsSort')
     });
   }
 
