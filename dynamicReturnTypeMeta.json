@@ -15,7 +15,13 @@
       "method": "get",
       "position": 0,
       "mask": "DbModel%s"
-    }
+    },
+    {
+      "class": "\\Sflm",
+      "method": "flm",
+      "position": 0,
+      "mask": "SflmFrontend%s"
+    },
   ]
 }
 

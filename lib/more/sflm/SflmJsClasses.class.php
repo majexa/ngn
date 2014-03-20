@@ -2,8 +2,8 @@
 
 class SflmJsClasses extends SflmJsClassesBase {
 
-  protected function parseParentClasses($c) {
-    if (preg_match_all('/Extends:\s+([A-Z][A-Za-z.]+)/', $c, $m)) return $m[1];
+  protected function parseNgnExtendsClasses($c) {
+    if (preg_match_all('/Extends:\s+(Ngn\.[A-Z][A-Za-z.]+)/', $c, $m)) return $m[1];
     return [];
   }
 
@@ -19,10 +19,30 @@ class SflmJsClasses extends SflmJsClassesBase {
     return $this->parseRequired($c, 'after');
   }
 
-  function parseNewNgnClasses($c) {
-    //if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]+)/', $c, $m)) return $m[1];
-    if (preg_match_all('/\s+(Ngn\.[A-Za-z._]+)/', $c, $m)) return $m[1];
-    return [];
+  protected function namespaceParents($class) {
+    if (substr_count($class, '.') < 2) return [];
+    $parents = explode('.', $class);
+    $r = [];
+    for ($i = 2; $i < count($parents); $i++) {
+      $r[] = implode('.', array_slice($parents, 0, $i));
+    }
+    return $r;
+  }
+
+  protected function isClass($class) {
+    $parts = explode('.', $class);
+    if (count($parts) > 1 and !Misc::firstIsUpper($parts[count($parts)-1])) return false;
+    return true;
+  }
+
+  protected function addClassStrict($class, $source) {
+    $this->addClass($class, $source, null, function() use ($class, $source) {
+      throw new Exception($this->captionPrefix($class, $source)."NOT FOUND");
+    });
+  }
+
+  protected function captionPrefix($class, $source) {
+    return "Try to add class '$class'. ($source). ";
   }
 
   /**
@@ -30,11 +50,24 @@ class SflmJsClasses extends SflmJsClassesBase {
    * @param string Описание источника, откуда происходит добавление класса
    * @throws Exception
    */
-  function addClass($class, $source, Closure $success = null, Closure $failure = null) {
-    $prefix = "Try to add class '$class'. ($source). ";
+  function addClass($class, $source, Closure $success = null, Closure $failure = null, $ignoreNamespaceParents = false) {
+    $prefix = $this->captionPrefix($class, $source);
+    if (!$this->isClass($class)) throw new Exception("'$class' is not class. Skipped");
     if (in_array($class, $this->existingClasses)) {
       Sflm::output($prefix."EXISTS");
-      return;
+      return false;
+    }
+    if (!$ignoreNamespaceParents and ($namespaceParents = $this->namespaceParents($class))) {
+      // Проверяем всех предков. Подключены ли они. Если вызов происходит не из файла содержащего вероятного родителя
+      foreach ($namespaceParents as $parent) {
+        if (!in_array($parent, $this->existingClasses)) {
+          $this->addClassStrict($parent, "'$class' parent namespace");
+        }
+      }
+    }
+    if (in_array($class, $this->existingClasses)) {
+      Sflm::output($prefix."EXISTS AFTER PARSING NAMESPACE PARENTS");
+      return false;
     }
     if (!isset($this->classesPaths[$class])) {
       if ($failure) $failure($source);
@@ -44,7 +77,9 @@ class SflmJsClasses extends SflmJsClassesBase {
     Sflm::output($prefix."ADDING");
     $path = $this->classesPaths[$class];
     $this->processPath($path, $success);
-    $this->frontend->incrementVersion();
+    if ($this->frontend->incrementVersion()) {
+      Sflm::output("Increment version on adding '$class' class from $source");
+    }
     $this->_initClassesPaths();
     return true;
   }
@@ -61,26 +96,35 @@ class SflmJsClasses extends SflmJsClassesBase {
     Sflm::output("Processing contents of '$path'");
     $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
     foreach ($this->parseClassesDefinition($c) as $class) {
+      if (in_array($class, $this->existingClasses)) continue;
       // Эти классы уже определены
       Sflm::output("Class '$class' exists in $path. (definition)");
       $this->existingClasses[] = $class;
     }
     foreach ($this->parseRequired($c) as $class) $this->addSomething($class, "$path required");
-    foreach ($this->parseParentClasses($c) as $class) $this->addSomething($class, "$path parent");
+    foreach ($this->parseNgnExtendsClasses($c) as $class) $this->addClassStrict($class, "$path extends");
     $this->frontend->addLib($path, true);
-    $this->processNewNgnClasses($c, $path);
+    $this->processNgnClasses($c, $path);
     foreach ($this->parseRequiredAfterClasses($c) as $class) $this->addSomething($class, "$path requiredAfter");
   }
 
-  protected function addSomething($str, $descr = null) {
-    Misc::firstIsUpper($str) ? $this->addClass($str, $descr) : $this->frontend->addLib($str);
+  function addSomething($str, $descr = null) {
+    Misc::firstIsUpper($str) ? $this->addClassStrict($str, $descr) : $this->frontend->addLib($str);
   }
 
-  function processNewNgnClasses($code, $path = 'default') {
-    Sflm::output("processNewNgnClasses of '$path'");
-    foreach ($this->parseNewNgnClasses($code) as $class) {
-      Sflm::output("* $class");
-      $this->addClass($class, "$path new");
+  function parseNgnClasses($c) {
+    if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]+)/', $c, $m)) {
+      return array_filter($m[1], function($class) {
+        return $this->isClass($class);
+      });
+    }
+    return [];
+  }
+
+  function processNgnClasses($code, $path = 'default') {
+    Sflm::output("Process ' Ngn.[Upper]*' patterns by '$path'");
+    foreach ($this->parseNgnClasses($code) as $class) {
+      $this->addClassStrict($class, "$path ' Ngn.Upper*' pattern");
     }
   }
 

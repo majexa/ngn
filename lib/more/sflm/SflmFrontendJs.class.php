@@ -12,11 +12,17 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   function processCode($code) {
-    $this->classes->processNewNgnClasses($code, explode("\n", getBacktrace(false))[1].' processing');
+    throw new Exception('Not using');
+    $this->classes->processNgnClasses($code, explode("\n", getBacktrace(false))[1].' processing');
     return $code;
   }
 
+  function processPath($path) {
+    $this->classes->processPath($path);
+  }
+
   function addClass($class, $source = 'direct', $strict = false) {
+    if (strstr($class, 'User')) die2(31);
     $frontend = $this;
     $this->classes->addClass($class, $source, function($path) use ($frontend) {
       $frontend->addLib($path);
@@ -34,10 +40,6 @@ class SflmFrontendJs extends SflmFrontend {
       return;
     }
     parent::addPath($path, $addingFrom);
-  }
-
-  protected function code_____() {
-    return parent::code()."\nNgn.sflVersion = { js: '.$this->version().', css: '.Sflm::get('css', $this->frontend)->version().' };\n";
   }
 
 }

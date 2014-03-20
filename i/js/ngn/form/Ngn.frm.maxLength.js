@@ -1,4 +1,4 @@
-Ngn.frm.maxLength = function(eForm, defaultMaxLength) {
+Ngn.Frm.maxLength = function(eForm, defaultMaxLength) {
   eForm.getElements('textarea').each(function(eInput){
     var eLabel = eInput.getParent('.element').getElement('.label');
     var maxlength = eInput.get('maxlength');

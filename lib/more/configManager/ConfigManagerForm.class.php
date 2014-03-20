@@ -27,7 +27,26 @@ class ConfigManagerForm extends Form {
         $this->addVisibilityCondition($cond['headerName'], $cond['condFieldName'], $cond['cond']);
       }
     }
+    foreach ($this->configStruct['fields'] as $k => $f) $this->isDisabled($k);
     parent::__construct(new Fields(Fields::keyAsName($this->configStruct['fields'])));
+  }
+
+  static function cmd($code) {
+    //$fieldName
+    $p = WEBROOT_PATH;
+    return `php $p/cmd.php "$code"`;
+  }
+
+  protected function isDisabled($fieldName) {
+    if ($this->configType == 'vars') return false;
+    $curValue = $this->configValues[$fieldName];
+    SiteConfig::replaceConstant($this->configName, $fieldName, 'changed');
+    //$disabled = self::cmd("print($fieldName)") == $curValue;
+    SiteConfig::replaceConstant($this->configName, $fieldName, $curValue);
+    //return $disabled;
+    //$curValue
+    //die($fieldName);
+    //$this->update();
   }
 
   protected function init() {

@@ -21,7 +21,7 @@ abstract class CliHelpOptions extends CliHelp {
     });
   }
 
-  protected function _getOptions(ReflectionMethod $method, $class) {
+  protected function _getParameters(ReflectionMethod $method, $class) {
     $options = [];
     $options = array_merge($options, $class::$requiredOptions);
     foreach ($options as &$v) $v = $this->option($v);
@@ -75,10 +75,11 @@ abstract class CliHelpOptions extends CliHelp {
   }
 
   protected function getMethodOptionsWithParams(CliArgs $args) {
+    $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
-      foreach ($options as $i => $opt) $options[$opt['name']] = $args->params[$i];
+      foreach ($options as $i => $opt) $r[$opt['name']] = $args->params[$i];
     }
-    return $options;
+    return $r;
   }
 
   protected function getMethodOptions(ReflectionMethod $method) {

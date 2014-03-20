@@ -29,16 +29,16 @@ Ngn.Request.Loading = new Class({
 
 });
 
-Ngn.JSON = {};
-Ngn.JSON.decode = function(text, secure) {
-  return Ngn.JSON.process(JSON.decode(text, secure));
+Ngn.json = {};
+Ngn.json.decode = function(text, secure) {
+  return Ngn.json.process(JSON.decode(text, secure));
 };
 
-Ngn.JSON.process = function(json) {
+Ngn.json.process = function(json) {
   if (!json) return json;
   for (var i in json) {
     if (typeof(json[i]) == 'object' || typeof(json[i]) == 'array') {
-      json[i] = Ngn.JSON.process(json[i]);
+      json[i] = Ngn.json.process(json[i]);
     } else if (typeOf(json[i]) == 'string') {
       if (json[i].test(/^func: .*/)) {
         json[i] = json[i].replace(/^func: (.*)/, '$1');
@@ -53,7 +53,7 @@ Ngn.Request.JSON = new Class({
   Extends: Request.JSON,
 
   success: function(text) {
-    this.response.json = Ngn.JSON.decode(text, this.options.secure);
+    this.response.json = Ngn.json.decode(text, this.options.secure);
     if (this.response.json === null) {
       this.onSuccess({});
       return;

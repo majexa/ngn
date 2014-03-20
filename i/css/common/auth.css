@@ -1,7 +1,7 @@
-#auth_dialog #formAuth {
-padding: 6px 6px 15px 6px;
+#auth_dialog .apeform {
+padding: 2px 3px 5px 3px;
 }
-#auth_dialog #formAuth input[type=text],
-#auth_dialog #formAuth input[type=password] {
+#auth_dialog .apeform input[type=text],
+#auth_dialog .apeform input[type=password] {
 width: 100%;
 }

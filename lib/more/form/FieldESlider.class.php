@@ -21,7 +21,7 @@ class FieldESlider extends FieldEText {
   }
 
   //function jsInline() {
-    //return 'Ngn.Form.ElOptionsName["'.$this->options['name'].'"] = '.json_encode($this->options['jsOptions']).";\n";
+    //return 'Ngn.Form.elOptionsName["'.$this->options['name'].'"] = '.json_encode($this->options['jsOptions']).";\n";
   //}
 
   function _html() {

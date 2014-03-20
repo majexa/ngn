@@ -2,23 +2,38 @@
 
 class TestSflmJs extends ProjectTestCase {
 
-  function test() {
-    Sflm::$frontend = 'default';
+  static function setUpBeforeClass() {
+    Sflm::$frontend = 'custom';
+  }
+
+  function testSecondRunClassAdding() {
+    Sflm::flm('js')->addClass('Ngn.Frm');
+    Sflm::reset('js');
+    Sflm::flm('js')->addClass('Ngn.Frm');
+  }
+
+  function uestEmptyNewPathsAfterReset() {
     Sflm::clearCache();
     Sflm::flm('js')->store();
     (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
     Sflm::flm('js')->getDeltaUrl();
-
     $newPaths = Sflm::reset('js')->newPaths;
     $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
+  }
+
+  function uestClearCache() {
     Sflm::flm('js')->store();
     Sflm::flm('js')->addLib('Ngn.Form.El.Phone');
     Sflm::clearCache();
     // ни статического ни динамического кэша не существует
     $this->assertFalse((bool)FileCache::c()->load(Sflm::flm('js')->pathsCacheKey()), 'Dynamic cache must be empty');
     $this->assertFalse(file_exists(Sflm::flm('js')->cacheFile()), 'Static cache file can not exists. '.Sflm::flm('js')->cacheFile());
+  }
 
-    Sflm::flm('js')->store();
+  function uest() {
+    //Sflm::flm('js')->addClass('Ngn.Grid.Dialog', 'direct', true);
+    //Sflm::flm('js')->store();
+    //die2('-');
     $this->assertFalse((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone'), 'PHONE?:(');
 
     $v1 = Sflm::flm('js')->version();
@@ -33,7 +48,8 @@ class TestSflmJs extends ProjectTestCase {
     $filesize1 = filesize(Sflm::flm('js')->cacheFile());
     $this->assertFalse((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is not preset in complete file');
     (new FieldEPhone(['name' => 'dummy'], new Form([])))->typeJs();
-    $this->assertTrue((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is preset in complete file');
+    Sflm::flm('js')->getTags();
+    $this->assertTrue((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone = new'), 'Check if class is preset in complete file '.Sflm::flm('js')->cacheFile());
 
     $filesize2 = filesize(Sflm::flm('js')->cacheFile());
     $this->assertTrue($filesize2 > $filesize1, "File size is larger then initial ($filesize2 > $filesize1)");

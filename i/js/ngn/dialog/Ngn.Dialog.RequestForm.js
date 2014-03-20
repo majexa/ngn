@@ -6,7 +6,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     jsonRequest: true,
     autoSave: false,
     getFormData: function() {
-      return Ngn.frm.toObj(this.form.eForm);
+      return Ngn.Frm.toObj(this.form.eForm);
     },
     onFormRequest: $empty,
     onSubmitSuccess: $empty
@@ -93,7 +93,7 @@ Ngn.Dialog.RequestFormBase = new Class({
 
     this.resizeByCols();
     if (this.options.autoSave) {
-      new Ngn.frm.Saver(this.form.eForm, {
+      new Ngn.Frm.Saver(this.form.eForm, {
         url: this.options.submitUrl,
         jsonRequest: true
       });
@@ -204,7 +204,7 @@ Ngn.Dialog.RequestForm.Static = new Class({
   // }
 
   initFormResponse: function() {
-    this.formResponse(Ngn.JSON.process(this.options.staticResponse));
+    this.formResponse(Ngn.json.process(this.options.staticResponse));
   }
 
 });

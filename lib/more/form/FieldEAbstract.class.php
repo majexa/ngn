@@ -192,7 +192,7 @@ use Options;
   function js() {
     $js = '';
     if (!empty($this->options['jsOptions'])) {
-      $js .= 'Ngn.Form.ElOptions.'.$this->options['name'].' = '.json_encode($this->options['jsOptions'])."\n";
+      $js .= 'Ngn.Form.elOptions.'.$this->options['name'].' = '.json_encode($this->options['jsOptions'])."\n";
     }
     $js = $js.$this->_js();
     return $js;
@@ -216,7 +216,7 @@ use Options;
   function typeJs() {
     if (!$this->useTypeJs) return '';
     Sflm::flm('js')->addLib("formEl/$this->type");
-    Sflm::flm('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
+    Sflm::flm('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init", false);
     Sflm::flm('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
     Sflm::flm('css')->addLib("i/css/formEl/$this->type.css");
     if (!$this->form) return '';

@@ -1,14 +1,14 @@
-Ngn.frm = {};
-Ngn.frm.init = {}; // объект для хранения динамических функций иниыиализации
-Ngn.frm.html = {};
-Ngn.frm.selector = 'input,select,textarea';
-Ngn.frm.textSelector = 'input[type=text],input[type=password],textarea';
+Ngn.Frm = {};
+Ngn.Frm.init = {}; // объект для хранения динамических функций иниыиализации
+Ngn.Frm.html = {};
+Ngn.Frm.selector = 'input,select,textarea';
+Ngn.Frm.textSelector = 'input[type=text],input[type=password],textarea';
 
-Ngn.frm.getValueByName = function(name, parent) {
-  return Ngn.frm.getValue(Ngn.frm.getElements(name, parent));
+Ngn.Frm.getValueByName = function(name, parent) {
+  return Ngn.Frm.getValue(Ngn.Frm.getElements(name, parent));
 };
 
-Ngn.frm.emptify = function(eInput) {
+Ngn.Frm.emptify = function(eInput) {
   if (eInput.get('type') == 'checkbox') eInput.set('checked', false); else eInput.get('value', '');
 };
 
@@ -16,9 +16,9 @@ Ngn.frm.emptify = function(eInput) {
  * @param Element|array of Element
  * @returns {*}
  */
-Ngn.frm.getValue = function(el) {
+Ngn.Frm.getValue = function(el) {
   if (el.length === undefined) {
-    var elements = el.getElements(Ngn.frm.selector);
+    var elements = el.getElements(Ngn.Frm.selector);
   } else {
     var elements = el;
   }
@@ -41,9 +41,9 @@ Ngn.frm.getValue = function(el) {
   return r;
 };
 
-Ngn.frm.getValues = function(el) {
+Ngn.Frm.getValues = function(el) {
   if (el.length === undefined) {
-    var elements = el.getElements(Ngn.frm.selector);
+    var elements = el.getElements(Ngn.Frm.selector);
   } else {
     var elements = el;
   }
@@ -60,12 +60,12 @@ Ngn.frm.getValues = function(el) {
   return r;
 };
 
-Ngn.frm.getElements = function(name, parent) {
+Ngn.Frm.getElements = function(name, parent) {
   var elements = [];
   var n = 0;
   var _name;
   parent = parent || document;
-  parent.getElements(Ngn.frm.selector).each(function(el) {
+  parent.getElements(Ngn.Frm.selector).each(function(el) {
     _name = el.get('name');
     if (!_name) return;
     if (_name.replace('[]', '') != name) return;
@@ -75,13 +75,13 @@ Ngn.frm.getElements = function(name, parent) {
   return elements;
 };
 
-Ngn.frm.disable = function(eForm, flag) {
-  eForm.getElements(Ngn.frm.selector).each(function(el) {
+Ngn.Frm.disable = function(eForm, flag) {
+  eForm.getElements(Ngn.Frm.selector).each(function(el) {
     el.set('disabled', flag);
   });
-  //c(Ngn.frm.virtualElements);
-  for (var i = 0; i < Ngn.frm.virtualElements.length; i++) {
-    var o = Ngn.frm.virtualElements[i];
+  //c(Ngn.Frm.virtualElements);
+  for (var i = 0; i < Ngn.Frm.virtualElements.length; i++) {
+    var o = Ngn.Frm.virtualElements[i];
     c([o, o.getForm()]);
     //if (o.getForm() && o.getForm().get('id') != eForm.get('id')) return;
     //o.toggleDisabled(!flag);
@@ -89,8 +89,8 @@ Ngn.frm.disable = function(eForm, flag) {
   ;
 };
 
-Ngn.frm.virtualElements = [];
-Ngn.frm.virtualElement = {
+Ngn.Frm.virtualElements = [];
+Ngn.Frm.virtualElement = {
   // abstract toggleDisabled: function(flag) {},
   parentForm: null,
   initVirtualElement: function(el) {
@@ -104,16 +104,16 @@ Ngn.frm.virtualElement = {
 
 // формат callback ф-ии должен быть следующим:
 // function (fieldValue, args) {}
-Ngn.frm.addEvent = function(event, name, callback, args) {
-  var elements = Ngn.frm.getElements(name);
+Ngn.Frm.addEvent = function(event, name, callback, args) {
+  var elements = Ngn.Frm.getElements(name);
   elements.each(function(el) {
     el.addEvent(event, function(e) {
-      callback.run([Ngn.frm.getValue(elements), args], el);
+      callback.run([Ngn.Frm.getValue(elements), args], el);
     });
   });
 }
 
-Ngn.frm.VisibilityCondition = new Class({
+Ngn.Frm.VisibilityCondition = new Class({
 
   initialize: function(eForm, sectionName, condFieldName, cond) {
     this.sectionName = sectionName;
@@ -157,33 +157,33 @@ Ngn.frm.VisibilityCondition = new Class({
           flag ? this.fx.slideIn() : this.fx.slideOut();
       } else {
         this.eSection.setStyle('display', flag ? 'block' : 'none');
-        this.eSection.getElements(Ngn.frm.selector).each(function(el) {
+        this.eSection.getElements(Ngn.Frm.selector).each(function(el) {
           el.set('disabled', !flag);
         });
       }
     }.bind(this);
-    toggleSection(Ngn.frm.getValueByName(condFieldName), false);
-    Ngn.frm.addEvent('change', condFieldName, toggleSection, true);
-    Ngn.frm.addEvent('focus', condFieldName, toggleSection, true);
+    toggleSection(Ngn.Frm.getValueByName(condFieldName), false);
+    Ngn.Frm.addEvent('change', condFieldName, toggleSection, true);
+    Ngn.Frm.addEvent('focus', condFieldName, toggleSection, true);
   }
 
 });
 
-Ngn.frm.VisibilityCondition.Header = new Class({
-  Extends: Ngn.frm.VisibilityCondition,
+Ngn.Frm.VisibilityCondition.Header = new Class({
+  Extends: Ngn.Frm.VisibilityCondition,
   initSectionSelector: function() {
     this.sectionSelector = '.hgrp_' + this.sectionName;
   }
 });
 
-Ngn.frm.VisibilityCondition.Field = new Class({
-  Extends: Ngn.frm.VisibilityCondition,
+Ngn.Frm.VisibilityCondition.Field = new Class({
+  Extends: Ngn.Frm.VisibilityCondition,
   initSectionSelector: function() {
     this.sectionSelector = '.name_' + this.sectionName;
   }
 });
 
-Ngn.frm.headerToggleFx = function(btns) {
+Ngn.Frm.headerToggleFx = function(btns) {
   btns.each(function(btn) {
     var eToggle = btn.getParent().getParent();
     btn.getParent().inject(eToggle, 'before');
@@ -213,13 +213,13 @@ Ngn.frm.headerToggleFx = function(btns) {
   });
 };
 
-Ngn.frm.headerToggle = function(esBtns) {
+Ngn.Frm.headerToggle = function(esBtns) {
   esBtns.each(function(el) {
-    new Ngn.frm.HeaderToggle(el);
+    new Ngn.Frm.HeaderToggle(el);
   });
 };
 
-Ngn.frm.HeaderToggle = new Class({
+Ngn.Frm.HeaderToggle = new Class({
   Implements: [Options, Events],
 
   opened: false,
@@ -256,11 +256,11 @@ Ngn.enumm = function(arr, tpl, glue) {
   return arr.join(glue);
 };
 
-Ngn.frm.getPureName = function($bracketName) {
+Ngn.Frm.getPureName = function($bracketName) {
   return $bracketName.replace(/(\w)\[.*/, '$1');
 };
 
-Ngn.frm.getBracketNameKeys = function(name) {
+Ngn.Frm.getBracketNameKeys = function(name) {
   var m;
   m = name.match(/([^[]*)\[/);
   if (!m) return [name];
@@ -273,18 +273,18 @@ Ngn.frm.getBracketNameKeys = function(name) {
   return keys;
 };
 
-Ngn.frm.fillEmptyObject = function(object, keys) {
+Ngn.Frm.fillEmptyObject = function(object, keys) {
   for (var i = 0; i < keys.length - 1; i++) {
     var p = 'object' + (Ngn.enumm(keys.slice(0, i + 1), "['{v}']"));
     eval('if (!$defined(' + p + ')) ' + p + ' = {}');
   }
 };
 
-Ngn.frm.setValueByBracketName = function(o, name, value) {
+Ngn.Frm.setValueByBracketName = function(o, name, value) {
   var _name = name.replace('[]', '');
   if (!(o instanceof Object)) throw new Error('o is not object');
-  var keys = Ngn.frm.getBracketNameKeys(_name);
-  Ngn.frm.fillEmptyObject(o, keys);
+  var keys = Ngn.Frm.getBracketNameKeys(_name);
+  Ngn.Frm.fillEmptyObject(o, keys);
   var p = 'o';
   for (var i = 0; i < keys.length; i++) p += "['" + keys[i] + "']";
   if (name.contains('[]')) {
@@ -296,19 +296,19 @@ Ngn.frm.setValueByBracketName = function(o, name, value) {
   return o;
 };
 
-Ngn.frm.objTo = function(eContainer, obj) {
+Ngn.Frm.objTo = function(eContainer, obj) {
   for (var i in obj) {
     eContainer.getElement('input[name=' + i + ']').set('value', obj[i]);
   }
 };
 
-Ngn.frm.toObj = function(eContainer, except) {
+Ngn.Frm.toObj = function(eContainer, except) {
   var rv = {};
   var name;
   except = except || [];
   eContainer = $(eContainer);
   var typeMatch = 'text' + (!except.contains('hidden') ? '|hidden' : '') + (!except.contains('password') ? '|password' : '');
-  var elements = eContainer.getElements(Ngn.frm.selector);
+  var elements = eContainer.getElements(Ngn.Frm.selector);
   for (var i = 0; i < elements.length; i++) {
     var el = elements[i];
     if (!el.name) continue;
@@ -330,13 +330,13 @@ Ngn.frm.toObj = function(eContainer, except) {
       }
     }
     if (pushValue != undefined) {
-      Ngn.frm.setValueByBracketName(rv, el.name, pushValue);
+      Ngn.Frm.setValueByBracketName(rv, el.name, pushValue);
     }
   }
   return rv;
 };
 
-Ngn.frm.initTranslateField = function(eMasterField, eTranslatedField) {
+Ngn.Frm.initTranslateField = function(eMasterField, eTranslatedField) {
   var eMasterField = $(eMasterField);
   var eTranslatedField = $(eTranslatedField);
   //if (!eMasterField || !eTranslatedField) return;
@@ -354,7 +354,7 @@ Ngn.frm.initTranslateField = function(eMasterField, eTranslatedField) {
   });
 };
 
-Ngn.frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
+Ngn.Frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
   if (!$defined(param)) param = 'value';
   var eSelectField = $(eSelectField);
   var eSlaveField = $(eSlaveField);
@@ -368,11 +368,11 @@ Ngn.frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
   });
 };
 
-Ngn.frm.initCopySelectTitle = function(eSelectField, eSlaveField) {
-  Ngn.frm.initCopySelectValue(eSelectField, eSlaveField, 'text');
+Ngn.Frm.initCopySelectTitle = function(eSelectField, eSlaveField) {
+  Ngn.Frm.initCopySelectValue(eSelectField, eSlaveField, 'text');
 };
 
-Ngn.frm.makeDialogabble = function(eLink, action, options) {
+Ngn.Frm.makeDialogabble = function(eLink, action, options) {
   eLink.addEvent('click', function(e) {
     e.preventDefault();
     new Ngn.Dialog.RequestForm(Object.merge({
@@ -384,7 +384,7 @@ Ngn.frm.makeDialogabble = function(eLink, action, options) {
   });
 };
 
-Ngn.frm.storable = function(eInput) {
+Ngn.Frm.storable = function(eInput) {
   if (!eInput.get('id')) throw new Error('ID param mast be defined');
   var store = function() {
     Ngn.storage.set(eInput.get('id'), eInput.get('value'));

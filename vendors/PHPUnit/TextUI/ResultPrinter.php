@@ -252,11 +252,9 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
         } else {
             $testName = get_class($failedTest);
         }
-
         $this->write(
           sprintf(
             "\n%d) %s\n",
-
             $count,
             $testName
           )

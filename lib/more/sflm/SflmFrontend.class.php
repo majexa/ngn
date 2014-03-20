@@ -5,7 +5,12 @@
  */
 class SflmFrontend {
 
-  public $frontend, $sflm, $paths, $newPaths = [], $id, $debug = false;
+  /**
+   * @var string Имя фронтенда
+   */
+  public $frontend;
+
+  public $sflm, $paths, $newPaths = [], $id, $debug = false;
 
   function addClass($class, $source = 'default') {
     throw new Exception('Realized only for js type');
@@ -62,6 +67,7 @@ class SflmFrontend {
   }
 
   function getTags() {
+    $this->storeIfChanged('getTags');
     return $this->sflm->getTags($this->frontend, $this->code());
   }
 
@@ -117,7 +123,7 @@ class SflmFrontend {
   function addLib($lib, $strict = false) {
     if (!$strict and !$this->sflm->exists($lib)) {
       Sflm::output("Lib '$lib' does not exists");
-      return;
+      return $this;
     }
     Sflm::output("Adding lib '$lib'");
     $newPaths = $this->sflm->getPaths($lib);
@@ -128,12 +134,17 @@ class SflmFrontend {
       }
       $this->addPath($path, "package '$lib'");
     }
-    if ($this->changed) {
-      FileCache::c()->save($this->paths, $this->pathsCacheKey());
-      Sflm::output("Update collected file after adding lib '$lib'");
-      $this->store();
-      $this->incrementVersion();
+    return $this;
+  }
+
+  protected function storeIfChanged($place = null) {
+    if (!$this->changed) {
+      Sflm::output("No changes. Storing skipped");
+      return;
     }
+    FileCache::c()->save($this->paths, $this->pathsCacheKey());
+    Sflm::output("Update collected file after adding lib ".($place ? "from '$place' place" : ''));
+    $this->store();
   }
 
   function getDeltaUrl() {
@@ -159,10 +170,15 @@ class SflmFrontend {
     return ProjectState::get($this->versionCacheKey(), true) ? : 0;
   }
 
+  protected $incremented = false;
+
   function incrementVersion() {
+    if ($this->incremented) return false;
+    $this->incremented = true;
     $version = $this->version() + 1;
     ProjectState::update($this->versionCacheKey(), $version);
     $this->sflm->version = $version;
+    return true;
   }
 
 }

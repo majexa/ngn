@@ -4,12 +4,12 @@ class TestDdXls extends TestDd {
 
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    (new ProjectQueueWorkerInstaller)->install();
+    (new DaemonInstaller('queue'))->install();
   }
 
   static function tearDownAfterClass() {
     parent::tearDownAfterClass();
-    (new ProjectQueueWorkerInstaller)->uninstall();
+    (new DaemonInstaller('queue'))->uninstall();
   }
 
   function test() {

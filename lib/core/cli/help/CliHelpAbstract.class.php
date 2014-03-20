@@ -1,10 +1,12 @@
 <?php
 
 abstract class CliHelpAbstract {
+  use Options;
 
   protected $initArgv;
 
-  function __construct($argv) {
+  function __construct($argv, array $options = []) {
+    $this->setOptions($options);
     $this->initArgv = $argv;
     if (is_string($argv)) $argv = explode(' ', $argv);
     elseif (is_array($argv)) $argv = array_slice($argv, 1);
@@ -70,7 +72,7 @@ TEXT
     return $r[$name];
   }
 
-  abstract protected function _getOptions(ReflectionMethod $method, $class);
+  abstract protected function _getParameters(ReflectionMethod $method, $class);
 
   public $argv, $oneClass = false;
 
@@ -190,9 +192,8 @@ TEXT
 
   protected function getConstructorParamsImposed($class, array $imposeParams) {
     $r = [];
-    foreach (array_keys($this->getConstructorParams($class)) as $n) {
-      //if (!)) throw new EmptyException("\$imposeParams[$n]");
-      $r[$n] = isset($imposeParams[$n]) ? $imposeParams[$n] : "DUMMY-$n";
+    foreach ($this->getConstructorParams($class) as $n => $param) {
+      $r[$n] = isset($imposeParams[$n]) ? $imposeParams[$n] : $param->getName();
     }
     return $r;
   }
@@ -250,9 +251,9 @@ TEXT
   abstract protected function getMethod(ReflectionMethod $method);
 
   protected function getOptions(ReflectionMethod $method, $class) {
-    $options = $this->_getOptions($method, $class);
+    $options = $this->_getParameters($method, $class);
     foreach ($options as &$opt) {
-      if ($opt['name'][0] != '@') continue;
+      if ($opt['name'][0] != '@' and $opt['descr'] != '@') continue;
       $opt['name'] = Misc::removePrefix('@', $opt['name']);
       $helpMethod = 'helpOpt_'.$opt['name'];
       if (method_exists($class, $helpMethod)) $opt['variants'] = $class::$helpMethod();

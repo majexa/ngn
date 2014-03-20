@@ -1,1 +1,0 @@
-<?//= Sflm::flm('css')->getCode('tinyContent');

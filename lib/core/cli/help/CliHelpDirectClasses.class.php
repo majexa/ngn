@@ -2,6 +2,8 @@
 
 abstract class CliHelpDirectClasses extends CliHelpArgs {
 
+  /*
+   * somee old shit
   protected function run_() {
     throw new Exception('check, run refactor');
     $class = $this->name2class($this->argv[0]);
@@ -10,5 +12,6 @@ abstract class CliHelpDirectClasses extends CliHelpArgs {
     if (!$this->check($class, $method, $params)) return;
     $this->_run($class, $method, $params);
   }
+  */
 
 }

@@ -68,7 +68,9 @@ class SiteConfig {
   }
 
   static function updateVar($k, $v, $ignoreExistence = false) {
-    $defaultValue = Config::getFileVar(Config::getFilePaths($k, 'vars')[0]);
+    if (($vars = Config::getFilePaths($k, 'vars')) !== false) {
+      $defaultValue = Config::getFileVar($vars[0]);
+    }
     if (is_array($v) and !$ignoreExistence) {
       foreach ($v as $key => $value)
         if (!isset($defaultValue[$key]) or $defaultValue[$key] != $value) $newValue[$key] = $value;

@@ -8,7 +8,7 @@ Ngn.Dialog.NewPageBase = new Class({
   getOpt: function() {
     return {
       getFormData: function() {
-        var data = Ngn.frm.toObj(this.form.eForm);
+        var data = Ngn.Frm.toObj(this.form.eForm);
         data.parentId = this.options.pageId;
         return data;
       }
@@ -30,7 +30,7 @@ Ngn.Dialog.NewPage = new Class({
   
   formResponse: function(r) {
     this.parent(r);
-    Ngn.frm.initTranslateField('titlei', 'namei');
+    Ngn.Frm.initTranslateField('titlei', 'namei');
     this.message.getElement('input[name=title]').focus();
   }
   
@@ -55,9 +55,9 @@ Ngn.Dialog.NewModulePage = new Class({
   },
   
   afterFormResponse: function() {
-    Ngn.frm.initTranslateField('titlei', 'namei');
-    Ngn.frm.initCopySelectValue('modulei', 'namei');
-    Ngn.frm.initCopySelectTitle('modulei', 'titlei');
+    Ngn.Frm.initTranslateField('titlei', 'namei');
+    Ngn.Frm.initCopySelectValue('modulei', 'namei');
+    Ngn.Frm.initCopySelectTitle('modulei', 'titlei');
   }
   
 });

@@ -24,7 +24,7 @@ abstract class CliHelpArgs extends CliHelp {
     return ($options ? ' '.implode(' ', $options) : '');
   }
 
-  protected function _getOptions(ReflectionMethod $method, $class) {
+  protected function _getParameters(ReflectionMethod $method, $class) {
     $params = $method->getParameters();
     $r = [];
     $meta = ClassCore::getDocComment($method, 'param');

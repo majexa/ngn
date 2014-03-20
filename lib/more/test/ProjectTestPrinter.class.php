@@ -17,7 +17,7 @@ class ProjectTestPrinter extends PHPUnit_TextUI_ResultPrinter {
     else {
       $testName = get_class($failedTest);
     }
-    $this->write(sprintf("%d) Project \"%s\": %s\n", $count, $this->projectName, $testName));
+    $this->write(sprintf("%d) project \"%s\": %s\n", $count, $this->projectName, $testName));
   }
 
 }

@@ -1,21 +1,25 @@
 <?php
 
-class WorkerInstaller {
+abstract class DaemonInstallerAbstract {
 
-  protected $projectName, $demon, $workersCount, $c;
+  protected $projectName, $daemon, $c;
 
-  function __construct($projectName, $demon, $workersCount) {
+  function __construct($projectName, $demon) {
     $this->projectName = $projectName;
-    $this->demon = $demon;
-    $this->workersCount = $workersCount;
+    $this->daemon = $demon;
     $this->c = file_get_contents('/etc/rc.local');
   }
 
+  /**
+   * @return mixed Количесво воркеров демона
+   */
+  abstract protected function workersCount();
+
   function install() {
     $for = '';
-    $file = $this->demon;
+    $file = $this->daemon;
     $project = $this->projectName;
-    for ($i = 1; $i <= $this->workersCount; $i++) $for .= " $i";
+    for ($i = 1; $i <= $this->workersCount(); $i++) $for .= " $i";
     $c = '#! /bin/sh
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
@@ -78,18 +82,18 @@ exit 0';
     print Cli::shell("sudo mv /tmp/$project-$file /etc/init.d/$project-$file");
     print Cli::shell("sudo chmod +x /etc/init.d/$project-$file");
     print Cli::shell("sudo /etc/init.d/$project-$file restart");
-    $this->addToRc($this->projectName, $this->demon);
+    $this->addToRc($this->projectName, $this->daemon);
     usleep(0.1 * 1000000);
   }
 
   function uninstall() {
-    $ids = str_replace("\n", ' ', `ps aux | grep test/$this->demon | grep -v grep | awk '{print $2}'`);
+    $ids = str_replace("\n", ' ', `ps aux | grep test/$this->daemon | grep -v grep | awk '{print $2}'`);
     if ($ids) sys("sudo kill $ids");
-    sys("sudo rm /etc/init.d/$this->projectName-$this->demon");
+    sys("sudo rm /etc/init.d/$this->projectName-$this->daemon");
   }
 
   protected function rcLocalWrite($c) {
-    $tmpFile = "/tmp/$this->projectName-$this->demon";
+    $tmpFile = "/tmp/$this->projectName-$this->daemon";
     file_put_contents($tmpFile, $c);
     `sudo mv $tmpFile /etc/rc.local`;
   }

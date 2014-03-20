@@ -21,7 +21,7 @@ class SflmJsClassesBase {
     foreach ($this->frontend->getPaths() as $path) if (preg_match('/.*\/[A-Za-z.]+\.js/', $path)) {
       $storedPaths[] = $path;
     }
-    //foreach ($this->frontend->getPaths() as $path) if (preg_match('/.*\/[A-Z][A-Za-z.]+\.js/', $path)) $storedPaths[] = $path;
+    die2($this->frontend->getPaths()) ;
     foreach ($storedPaths as $path) {
       $classes = $this->parseClassesDefinition(file_get_contents($this->frontend->sflm->getAbsPath($path)));
       foreach ($classes as $class) $this->existingClassesPaths[$class] = $path;
@@ -39,7 +39,23 @@ class SflmJsClassesBase {
     $classesPaths = [];
     $files = [];
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
-    foreach ($files as $file) $classesPaths[Misc::removeSuffix('.js', basename($file))] = $this->frontend->sflm->getPath($file, 'adding to init classes paths');
+    foreach ($files as $file) {
+      $class = Misc::removeSuffix('.js', basename($file));
+      if (!strstr($class, '.')) continue; // Пропускаем корневые классы. Они не подключаются динамически
+      $classesPaths[$class] = $this->frontend->sflm->getPath($file, 'adding to init classes paths');
+    }
+    // -- s2/js/path/to/Ngn.Class.php --
+    foreach (Ngn::$basePaths as $path) {
+      if (($r = Dir::getFilesR($path.'/scripts/js/', '[A-Z]*'))) {
+        foreach ($r as $p) {
+          $p = 's2'.Misc::removePrefix($path.'/scripts', Misc::removeSuffix('.php', $p));
+          $class = basename($p);
+          if (!strstr($class, '.')) continue; // Пропускаем корневые классы. Они не подключаются динамически
+          if (isset($classesPaths[$class])) throw new Exception("Class '$class' already exists in \$classesPaths. Trying to add path '$p'");
+          $classesPaths[$class] = $p;
+        }
+      }
+    }
     $this->classesPaths = array_merge($this->existingClassesPaths, $classesPaths);
     FileCache::c()->save($this->classesPaths, 'jsClassesPaths');
   }

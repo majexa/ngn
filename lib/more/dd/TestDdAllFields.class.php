@@ -9,8 +9,12 @@ class TestDdAllFields extends TestDd {
     $fm = O::gett('DdFieldsManager', 'a');
     foreach (DdFieldCore::getTypes() as $type => $v) {
       if (in_array($type, [
-        'ddFieldsMultiselect', 'ddItemsSelect','ddItemSelect'
-      ])) continue;
+        'ddItemSelectDepending',
+        'ddFieldsMultiselect',
+        'ddItemsSelect',
+        'ddItemSelect'
+      ])
+      ) continue;
       if (DdFieldCore::isFileType($type)) {
         copy(__DIR__.'/dummy.jpg', TEMP_PATH."/$type.jpg");
         $fm->form->req->files[$type.'1'] = [

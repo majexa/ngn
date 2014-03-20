@@ -49,7 +49,7 @@ abstract class CliHelp extends CliHelpAbstract {
       if ((new ReflectionClass($r->class))->isAbstract()) throw new Exception('Can not be abstract');
       $argsSub->class = $r->class;
       $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));
-      $argsSub->method = $args->params[1];
+      $argsSub->method = isset($args->params[1]) ? $args->params[1] : false;
       $argsSub->params = array_merge($argsSub->params, //
         array_slice($args->params, count($this->getConstructorParams($r->class)) + 1));
       new CliHelpArgsSingleSub($argsSub, $this->_runner(), $r->name);

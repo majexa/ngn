@@ -1,6 +1,6 @@
-Ngn.frm.DdConsecutiveSelect = new Class({
+Ngn.Frm.DdConsecutiveSelect = new Class({
   /*
-  Extends: Ngn.frm.ConsecutiveSelect,
+  Extends: Ngn.Frm.ConsecutiveSelect,
 
   initialize: function(eParent, strName, options) {
     this.strName = strName;
