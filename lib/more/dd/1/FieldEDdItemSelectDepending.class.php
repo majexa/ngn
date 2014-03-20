@@ -11,6 +11,7 @@ class FieldEDdItemSelectDepending extends FieldEAbstract {
     if (isset($this->options['settings']['itemsSort'])) $items->cond->setOrder($this->options['settings']['itemsSort']);
     $parentOptions = Arr::get($items->getItems(), 'title', 'id');
     if (!empty($this->options['ddFilter'])) $parentOptions = Arr::filterByKeys($parentOptions, $this->options['ddFilter']);
+    asort($parentOptions);
     $parentOpts['class'] = $this->options['settings']['parentStrName'];
     $opts['class'] = $this->options['settings']['strName'];
     if (empty($this->options['value'])) $selectedParentId = key($parentOptions);
@@ -26,7 +27,7 @@ class FieldEDdItemSelectDepending extends FieldEAbstract {
         'parentTagFieldName' => $this->options['settings']['parentTagFieldName'],
         'strName'            => $this->options['settings']['strName'],
         'fieldName'          => $this->options['name'],
-        'itemsSort'           => isset($this->options['settings']['itemsSort']) ? $this->options['settings']['itemsSort'] : '',
+        'itemsSort'          => isset($this->options['settings']['itemsSort']) ? $this->options['settings']['itemsSort'] : '',
       ]).'></div>';
     return $html;
   }
