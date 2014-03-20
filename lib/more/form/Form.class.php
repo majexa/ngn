@@ -421,7 +421,7 @@ class Form {
     Dir::make(UPLOAD_PATH.'/js/cache/form');
     $file = UPLOAD_PATH.'/js/cache/form/'.$this->id().'.js';
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
-      file_put_contents($file, "Ngn.frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
+      file_put_contents($file, "Ngn.Frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
     }
     return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : filemtime($file));
   }
@@ -848,7 +848,7 @@ class Form {
   protected function jsVisibilityConditions() {
     if (empty($this->visibilityConditions)) return '';
     foreach ($this->visibilityConditions as $v)
-      $s .= "Ngn.frm.visibilityCondition(
+      $s .= "Ngn.Frm.visibilityCondition(
 eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
     return $s;
   }
@@ -892,7 +892,7 @@ eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
    */
   protected function jsMaxLength() {
     return "
-Ngn.frm.maxLength($('{$this->id()}'), ".FieldEInput::defaultMaxLength.");
+Ngn.Frm.maxLength($('{$this->id()}'), ".FieldEInput::defaultMaxLength.");
 ";
   }
 

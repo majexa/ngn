@@ -1,4 +1,4 @@
-Ngn.frm.imagedRadio = function(el) {
+Ngn.Frm.imagedRadio = function(el) {
   var elements = el.getElements('.radio');
   if (!elements.length) return;
   var items = [], n = 0, selectedN = false;

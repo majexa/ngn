@@ -10,6 +10,8 @@ class Sflm {
 
   static $absBasePaths;
 
+  static $strictMode;
+
   static function clearCache() {
     Dir::clear(UPLOAD_PATH.'/js');
     Dir::clear(UPLOAD_PATH.'/css');
@@ -20,7 +22,7 @@ class Sflm {
   }
 
   /**
-   * @var Ключ для кэширования библиотек. Должен определяться в роутере
+   * @var string Ключ для кэширования библиотек. Должен определяться в роутере
    */
   static $frontend;
 
@@ -67,7 +69,6 @@ class Sflm {
     $class = 'SflmFrontend'.ucfirst($type);
     /* @var $sflmFrontend SflmFrontend */
     $sflmFrontend = new $class(self::lm($type), $frontend);
-    // $sflmFrontend->store();
     if (!isset(self::$cache[$frontend])) self::$cache[$frontend] = [];
     return self::$cache[$frontend][$type] = $sflmFrontend;
   }
@@ -79,11 +80,12 @@ class Sflm {
   }
 
   static function output($s) {
-    //if (getConstant('IS_DEBUG')) output($s);
+    if (getConstant('IS_DEBUG')) output($s);
   }
 
 }
 
+Sflm::$strictMode = IS_DEBUG;
 Sflm::$debug = getConstant('DEBUG_STATIC_FILES');
 Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 Sflm::$absBasePaths = [

@@ -1,10 +1,13 @@
 <style>
   .error404 {
-    border: 3px solid #CCC;
-    border-radius: 50px;
+    border: 2px solid #CCC;
+    border-radius: 20px;
     padding: 30px;
-    font-size: 30px;
+    font-size: 15px;
     margin: 20px;
+  }
+  .error404 hr {
+    border-bottom: 0px;
   }
 </style>
 

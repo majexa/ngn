@@ -42,7 +42,7 @@ class UserRegPhoneForm extends Form {
     return <<<JS
 var form = Ngn.Form.forms['{$this->id()}'];
 var eBtn = form.eForm.getElement('.name_send .btn');
-Ngn.frm.phoneConfirm = function(method) {
+Ngn.Frm.phoneConfirm = function(method) {
   btn.toggleDisabled(false);
   new Ngn.Request.JSON({
     url: '/c/userRegPhone/json_send' + ucfirst(method),
@@ -60,7 +60,7 @@ Ngn.frm.phoneConfirm = function(method) {
 
 var btn = new Ngn.Btn(eBtn, function(e) {
   if (!form.validator.validateField('phonei')) return;
-  Ngn.frm.phoneConfirm(Ngn.frm.getValueByName('method', form.eForm));
+  Ngn.Frm.phoneConfirm(Ngn.Frm.getValueByName('method', form.eForm));
 });
 JS;
   }

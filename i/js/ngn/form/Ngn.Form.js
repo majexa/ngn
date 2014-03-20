@@ -1,3 +1,4 @@
+// @requires Ngn.Frm
 Ngn.Form = new Class({
   Implements: [Options, Events, Class.Occlude],
 
@@ -49,12 +50,12 @@ Ngn.Form = new Class({
         }
       }
       if (!focused) {
-        var f = this.eForm.getElement(Ngn.frm.textSelector);
+        var f = this.eForm.getElement(Ngn.Frm.textSelector);
         if (f) f.focus();
       }
     }
     // Если у первого элемента есть плейсхолдер, значит и у всех остальных. Инициализируем кроссбрауузерные плейсхолдеры (для IE9)
-    var eFirstTextInput = this.eForm.getElement(Ngn.frm.textSelector);
+    var eFirstTextInput = this.eForm.getElement(Ngn.Frm.textSelector);
     if (eFirstTextInput && eFirstTextInput.get('placeholder')) new Ngn.PlaceholderSupport();
 
     this.eForm.getElements('input[type=text],input[type=password]').each(function(el) {
@@ -95,7 +96,7 @@ Ngn.Form = new Class({
     if (js) {
       Asset.javascript(js.get('html'), {
         onLoad: function() {
-          var func = eval('Ngn.frm.init.' + this.eForm.get('id'));
+          var func = eval('Ngn.Frm.init.' + this.eForm.get('id'));
           if (func) func();
           //(function() {
           this.fireEvent('jsComplete');
@@ -126,7 +127,7 @@ Ngn.Form = new Class({
   },
 
   initActive: function() {
-    this.eForm.getElements(Ngn.frm.textSelector).each(function(el) {
+    this.eForm.getElements(Ngn.Frm.textSelector).each(function(el) {
       this.initActiveEl(el);
     }.bind(this));
   },
@@ -152,7 +153,7 @@ Ngn.Form = new Class({
 
   disable: function(flag) {
     if (this.options.ajaxSubmit) {
-      Ngn.frm.disable(this.eForm, flag);
+      Ngn.Frm.disable(this.eForm, flag);
     } else {
       eSubmit = this.eForm.getElement('input[type=submit]');
       if (eSubmit) {
@@ -250,7 +251,7 @@ Ngn.Form = new Class({
     var ht = [];
     if (htBtns) {
       for (var i = 0; i < htBtns.length; i++)
-        ht.push(new Ngn.frm.HeaderToggle(htBtns[i]));
+        ht.push(new Ngn.Frm.HeaderToggle(htBtns[i]));
     }
     if (this.options.equalElementHeights) {
       this.setEqualHeights();
@@ -276,7 +277,7 @@ Ngn.Form = new Class({
     if (!vc) return;
     vc = JSON.decode(vc.get('html'));
     for (var i = 0; i < vc.length; i++) {
-      var cls = eval('Ngn.frm.VisibilityCondition.' + ucfirst(vc[i][3]));
+      var cls = eval('Ngn.Frm.VisibilityCondition.' + ucfirst(vc[i][3]));
       this.visibilityConditions[vc[i][0]] = new cls(this.eForm, vc[i][0], vc[i][1], vc[i][2]);
     }
   },
@@ -391,7 +392,7 @@ Ngn.Form = new Class({
         }
         this.fireEvent('complete', r);
       }.bind(this)
-    }).post(Ngn.frm.toObj(this.eForm));
+    }).post(Ngn.Frm.toObj(this.eForm));
   },
 
   _submit: function() {
@@ -407,7 +408,7 @@ Ngn.Form.factory = function(eForm, opts) {
 };
 
 Ngn.Form.forms = {};
-Ngn.Form.ElOptions = {};
+Ngn.Form.elOptions = {};
 
 Ngn.Form.ElInit = new Class({
 
@@ -448,18 +449,18 @@ Ngn.Form.getElType = function(el) {
   return el.get('class').replace(/.*type_(\w+).*/, '$1');
 };
 
-Ngn.Form.ElN = 0;
+Ngn.Form.elN = 0;
 Ngn.Form.El = new Class({
   options: {},
   initialize: function(type, form, eRow) {
     this.type = type;
     this.form = form;
-    Ngn.Form.ElN++;
+    Ngn.Form.elN++;
     this.eRow = eRow;
-    this.eRow.n = Ngn.Form.ElN;
+    this.eRow.n = Ngn.Form.elN;
     this.name = eRow.get('class').replace(/(.* )?name_(\w+)( .*)?/, '$2');
     this.form.els[this.name] = this;
-    if (Ngn.Form.ElOptions[this.name]) this.options = Ngn.Form.ElOptions[this.name];
+    if (Ngn.Form.elOptions[this.name]) this.options = Ngn.Form.elOptions[this.name];
     this.init();
   },
   fireFormElEvent: function(event, value) {
@@ -470,31 +471,6 @@ Ngn.Form.El = new Class({
 });
 
 // ------------------- Form Elements Framework End -------------------
-
-Ngn.Form.El.Autocompleter = new Class({
-  Extends: Ngn.Form.El,
-
-  init: function() {
-    new Ngn.Autocompleter(this.eRow.getElement('input.fld'), this.form.options.dialog ? {zIndex: this.form.options.dialog.options.baseZIndex + 10 } : {});
-  }
-
-});
-
-Ngn.Form.El.User = new Class({
-  Extends: Ngn.Form.El.Autocompleter
-});
-
-Ngn.Form.El.Textarea = new Class({
-  Extends: Ngn.Form.El,
-
-  resizebleOptions: {},
-
-  init: function() {
-    if (this.form.options.dialog && this.form.options.dialog.options.vResize) return;
-    new Ngn.ResizableTextarea(this.eRow);
-  }
-
-});
 
 Ngn.Form.Validator = new Class({
   Extends: Form.Validator.Inline,

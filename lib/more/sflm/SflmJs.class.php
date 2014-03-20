@@ -8,15 +8,4 @@ class SflmJs extends SflmBase {
     return '<script src="'.$path.'" type="text/javascript"></script>'."\n";
   }
 
-  protected function getPackageCodeR($package) {
-    Err::noticeSwitch(false);
-    $code = parent::getPackageCodeR($package);
-    Err::noticeSwitchBefore();
-    return $code;
-  }
-
-  static function processCode($code) {
-    Sflm::flm('js')->processCode($code);
-  }
-
 }

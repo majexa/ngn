@@ -125,8 +125,8 @@ abstract class SflmBase {
     $path = Misc::clearFirstSlash($path);
     if (preg_match('/^s2\/(.*)/', $path)) {
       $path2 = preg_replace('/^s2\/(.*)/', '$1', $path);
-      foreach ($this->pathVariants($path2) as $_path) if (($__path = Lib::getFilePath($_path, ''))) return $__path;
-      throw new Exception('Script by path "'.$path2.'" not found');
+      //foreach ($this->pathVariants($path2) as $_path) if (($__path = Lib::getFilePath($_path, ''))) return $__path;
+      if (!($path = Lib::getFilePath("scripts/$path2"))) throw new Exception('Script by path "'.$path2.'" not found');
     }
     return $path;
   }
@@ -171,7 +171,11 @@ abstract class SflmBase {
   }
 
   protected function getPackageLibs($package) {
-    return Config::getVar("sfl/".$this->type."/$package", false, false);
+    if (($r = Config::getVar("sfl/".$this->type."/$package", true, false)) === false) {
+      Sflm::output("Package '$package' does not exists");
+      return [];
+    }
+    return $r;
   }
 
   public $packagesCache = [];

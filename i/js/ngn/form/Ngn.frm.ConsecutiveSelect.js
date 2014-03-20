@@ -1,4 +1,4 @@
-Ngn.frm.ConsecutiveSelect = new Class({
+Ngn.Frm.ConsecutiveSelect = new Class({
   Implements: [Events, Options],
 
   initialize: function(eParent, options) {
@@ -47,7 +47,7 @@ Ngn.frm.ConsecutiveSelect = new Class({
         this.init();
       }.bind(this)
     }).GET({
-        name: Ngn.frm.getPureName(eChangedSelect.get('name')),
+        name: Ngn.Frm.getPureName(eChangedSelect.get('name')),
         id: eChangedSelect.get('value')
       });
   }
@@ -56,10 +56,10 @@ Ngn.frm.ConsecutiveSelect = new Class({
 
 /**
  * @param Ngn.Form.El.Dd
- * @param Ngn.frm.ConsecutiveSelect
- * @returns object of class Ngn.frm.ConsecutiveSelect
+ * @param Ngn.Frm.ConsecutiveSelect
+ * @returns object of class Ngn.Frm.ConsecutiveSelect
  */
-Ngn.frm.ConsecutiveSelect.factory = function(formEl, cls) {
+Ngn.Frm.ConsecutiveSelect.factory = function(formEl, cls) {
   return new cls(formEl.eRow, formEl.fieldName, formEl.strName, formEl.parentTagFieldName, {
     onRequest: function(eSelect) {
       formEl.form.validator.resetField(eSelect);

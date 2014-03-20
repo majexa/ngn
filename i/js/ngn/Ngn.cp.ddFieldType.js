@@ -20,9 +20,9 @@ Ngn.cp.ddFieldType.Properties = new Class({
         }
       }
     }
-    Ngn.frm.addEvent('change', name, init);
-    init(Ngn.frm.getValueByName(name));
-    var selType = Ngn.frm.getValueByName(name);
+    Ngn.Frm.addEvent('change', name, init);
+    init(Ngn.Frm.getValueByName(name));
+    var selType = Ngn.Frm.getValueByName(name);
     if (Ngn.cp.ddFieldType.types[selType].virtual) init(selType);
   }
 

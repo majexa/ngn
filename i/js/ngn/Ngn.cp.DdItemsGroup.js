@@ -29,7 +29,7 @@ Ngn.cp.DdItemsGroup = new Class({
       new Ngn.Dialog.Loader.Simple({title: 'Идёт удаление. Подождите'});
       new Request({
         url: Ngn.getPath() + '?a=ajax_deleteGroup&' +
-          Hash.toQueryString(Ngn.frm.toObj(this.eItemsForm)),
+          Hash.toQueryString(Ngn.Frm.toObj(this.eItemsForm)),
         onComplete: function() {
           (function() {
             //window.location.reload(true);

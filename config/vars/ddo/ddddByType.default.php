@@ -38,7 +38,7 @@ return [
   'user' => '$v ? UsersCore::getTitle($v) : ``',
   //'author' => '%user',
   'procent' => '$v ? $v.`%` : ``',
-  'price' => '$v ? Misc::formatPrice($v).` Ᵽ` : ``',
+  'price' => '$v ? Misc::formatPrice($v).` <span class="currency">Ᵽ</span>` : ``',
   'phone' => '$v ? Misc::parsePhone($v) : ``',
   'icq' => '$v ? `<span><img src="http://status.icq.com/online.gif?icq=`.$v.`&img=5" alt="Статус ICQ" class="icon18" /></span>`.$v : ``',
   'skype' => '$v ? `<a href="skype:`.$v.`?call" class="dgray"><img src="/i/img/icons/skype.gif" class="icon18" />`.$v.`</a>` : ``',

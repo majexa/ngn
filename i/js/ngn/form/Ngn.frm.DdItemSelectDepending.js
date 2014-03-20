@@ -1,5 +1,5 @@
-Ngn.frm.DdItemSelectDepending = new Class({
-  Extends: Ngn.frm.ConsecutiveSelect,
+Ngn.Frm.DdItemSelectDepending = new Class({
+  Extends: Ngn.Frm.ConsecutiveSelect,
 
   initialize: function(eParent, fieldName, strName, parentTagFieldName, options) {
     this.fieldName = fieldName;

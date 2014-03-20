@@ -6,12 +6,12 @@ $this->tpl('common/form', [
 ])
 ?>
 
-<script type="text/javascript" src="/i/js/ngn/Ngn.frm.stmEditFieldsSaver.js"></script>
+<script type="text/javascript" src="/i/js/ngn/Ngn.Frm.stmEditFieldsSaver.js"></script>
 <script type="text/javascript">
 var form = Ngn.Form.factory(document.getElement('.apeform form'), {
   equalElementHeights: true
 });
-Ngn.frm.stmEditFieldsSaver.delay(500, null, {
+Ngn.Frm.stmEditFieldsSaver.delay(500, null, {
   formId: form.eForm.get('id'), 
   updateAction: 'ajax_updateMenu',
   fancyUploadAction: 'json_menuFancyUpload',

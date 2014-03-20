@@ -127,7 +127,7 @@ Ngn.FieldSet = new Class({
   },
 
   addRowNumber: function(eRow) {
-    var index = this.firstIndex(eRow.getElement(Ngn.frm.selector).get('name'));
+    var index = this.firstIndex(eRow.getElement(Ngn.Frm.selector).get('name'));
     new Element('span', {
       html: index + ' — ',
       'class': 'rowNumber'
@@ -192,7 +192,7 @@ Ngn.FieldSet = new Class({
       caption: this.options.cleanupTitle,
       cls: 'cleanup'
     }, function() {
-      eRow.getElements(Ngn.frm.selector).set('value', '');
+      eRow.getElements(Ngn.Frm.selector).set('value', '');
     });
   },
 
@@ -202,15 +202,15 @@ Ngn.FieldSet = new Class({
     var lastRowN = this.getN(eLastRow);
     var nextRowN = this.getNextN(eLastRow);
     var eLabel;
-    var lastRowElements = eLastRow.getElements(Ngn.frm.selector);
+    var lastRowElements = eLastRow.getElements(Ngn.Frm.selector);
     c(lastRowElements);
     eNewRow.getElements('.element').each(function(eElement, i) {
       //c(eElement.get('class').replace('-' + curN + '-', '-' + nextN + '-'));
       //c('(.*)-' + lastRowN + '-(.*)');
       eElement.set('class', eElement.get('class').replace(new RegExp('(.*)-0-(.*)'), '$1-' + nextRowN + '-$2'));
     });
-    eNewRow.getElements(Ngn.frm.selector).each(function(eInput, i) {
-      Ngn.frm.emptify(eInput);
+    eNewRow.getElements(Ngn.Frm.selector).each(function(eInput, i) {
+      Ngn.Frm.emptify(eInput);
       //if (eInput.get('value')) eInput.set('value', '');
       //if (eInput.get('checked')) eInput.set('checked', false);
       //c(nextRowN);
@@ -240,7 +240,7 @@ Ngn.FieldSet = new Class({
 
   getN: function(eRow, plus) {
     plus = plus || 0;
-    var els = eRow.getElements(Ngn.frm.selector);
+    var els = eRow.getElements(Ngn.Frm.selector);
     var name;
     for (var i = 0; i < els.length; i++) {
       name = els[i].get('name');
@@ -257,7 +257,7 @@ Ngn.FieldSet = new Class({
 
   regenInputNames: function() {
     this.eContainer.getElements(this.options.rowElementSelector).each(function(eRow, n) {
-      eRow.getElements(Ngn.frm.selector).each(function(eInput) {
+      eRow.getElements(Ngn.Frm.selector).each(function(eInput) {
         eInput.set('name', this.getInputName(eInput, n));
       }.bind(this));
     }.bind(this));

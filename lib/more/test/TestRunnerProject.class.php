@@ -9,10 +9,10 @@ class TestRunnerProject extends TestRunnerAbstract {
     parent::__construct($filterNames);
   }
 
-  protected function run() {
+  protected function __run() {
     PHPUnit_TextUI_TestRunner::run($this->suite, [
-        'printer' => new ProjectTestPrinter($this->projectName)
-      ]);
+      'printer' => new ProjectTestPrinter($this->projectName)
+    ]);
   }
 
   protected function getClasses() {
@@ -24,20 +24,17 @@ class TestRunnerProject extends TestRunnerAbstract {
 
   /**
    * Запускает проектные тесты, находящиеся в папке проекта
-   *
-   * @param bool $checkErrors
    */
   function l() {
-    //if ($checkErrors) (new Errors)->clear();
     $classes = array_filter($this->getClasses(), function ($class) {
+      if (!$class::enable()) return;
       return strstr(Lib::getClassPath($class), "projects/$this->projectName/") or !empty($class::$local);
     });
-    //if ($checkErrors) $classes[] = 'TestProjectAllErrors';
     $this->_run($classes);
   }
 
   /**
-   * Запускает все проектные тесты, находящиеся не в папке проекта
+   * Запускает проектные тесты, не находящиеся в папке проекта
    */
   function g() {
     $this->_run(array_filter($this->getClasses(), function ($class) {

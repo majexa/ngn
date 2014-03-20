@@ -30,7 +30,7 @@ class TestLongJob extends ProjectTestCase {
   }
 
   function test() {
-    $qwi = new ProjectQueueWorkerInstaller;
+    $qwi = new DaemonInstaller('queue');
     $qwi->install();
     $this->assertTrue(count($this->jobIds) == Config::getSubVar('queue', 'workers'));
     $this->a();

@@ -8,7 +8,7 @@ class CtrlScripts extends CtrlCommon {
   protected function init() {
     $this->hasOutput = false;
     if (!isset($this->req->params[1])) {
-      // Если путь к с крипту не указан
+      // Если путь к скрипту не указан
       $this->printList();
       return;
     }
@@ -16,11 +16,11 @@ class CtrlScripts extends CtrlCommon {
     $path = preg_replace('/[^\/]*\/(.*)/', '$1', O::get('Req')->path);
     if (strstr($path, 'js/')) {
       header('Content-type: text/javascript; charset='.CHARSET);
-      foreach (Sflm::flm('js')->pathVariants($path) as $_path) if (Lib::required($_path, $this->req, '')) return;
+      foreach (Sflm::lm('js')->pathVariants($path) as $_path) if (Lib::required($_path, $this->req, '')) return;
     }
     elseif (strstr($path, 'css/')) {
       header('Content-type: text/css; charset='.CHARSET);
-      foreach (Sflm::flm('css')->pathVariants($path) as $_path) if (Lib::required($_path, $this->req, '')) return;
+      foreach (Sflm::lm('css')->pathVariants($path) as $_path) if (Lib::required($_path, $this->req, '')) return;
     }
     else {
       header("Content-type: text/html; charset=".CHARSET);

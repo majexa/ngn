@@ -315,9 +315,9 @@ Ngn.Form.El.Slider = new Class({
   init: function() {
     var eInput = this.eRow.getElement('input');
     var slider = new NewSlider(this.eRow.getElement('.slider'), this.eRow.getElement('.knob'), {
-      steps: Ngn.Form.ElOptions[this.name].steps,
+      steps: Ngn.Form.elOptions[this.name].steps,
       initialStep: eInput.get('value'),
-      range: Ngn.Form.ElOptions[this.name].range,
+      range: Ngn.Form.elOptions[this.name].range,
       onChange: function(value) {
         eInput.set('value', value);
         this.fireFormElEvent('change', value);
