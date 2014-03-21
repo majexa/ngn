@@ -319,8 +319,11 @@ Ngn.frm.toObj = function(eContainer, except) {
       //} else if ((el.get('tag') == 'input' && el.type.match(new RegExp('^' + typeMatch + '$', 'i'))) || el.get('tag') == 'textarea' || (el.get('type').match(/^checkbox|radio$/i) && el.get('checked'))) {
     } else if ((el.get('tag') == 'input' && el.type.match(new RegExp('^' + typeMatch + '$', 'i'))) || el.get('tag') == 'textarea' || (el.get('type').match(/^radio$/i) && el.get('checked'))) {
       pushValue = el.value;
-    } else if ((el.get('tag') == 'input' && el.type.match(new RegExp('^' + typeMatch + '$', 'i'))) || el.get('tag') == 'textarea' || (el.get('type').match(/^checkbox$/i) && el.get('checked'))) {
-      pushValue = el.value;
+    } else if ((el.get('type').match(/^checkbox$/i) && el.get('checked'))) {
+      var pushValue = [];
+      eContainer.getElement('.name_'+el.name).getElements('input').each(function(checkbox){
+        if(checkbox.get('checked'))  pushValue.push(checkbox.value);
+      });
     } else if (el.get('tag') == 'select') {
       if (el.multiple) {
         var pushValue = [];
