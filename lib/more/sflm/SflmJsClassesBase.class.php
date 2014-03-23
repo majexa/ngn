@@ -21,7 +21,6 @@ class SflmJsClassesBase {
     foreach ($this->frontend->getPaths() as $path) if (preg_match('/.*\/[A-Za-z.]+\.js/', $path)) {
       $storedPaths[] = $path;
     }
-    die2($this->frontend->getPaths()) ;
     foreach ($storedPaths as $path) {
       $classes = $this->parseClassesDefinition(file_get_contents($this->frontend->sflm->getAbsPath($path)));
       foreach ($classes as $class) $this->existingClassesPaths[$class] = $path;
