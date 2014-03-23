@@ -63,10 +63,13 @@ class DdItemsManager extends DbItemsManager {
   }
 
   protected function _update() {
-    foreach ($this->data as $k => $v) {
-      if (!($type = $this->form->fields->getType($k))) continue;
-      if (DdTags::isTag($type)) continue;
-      $data[$k] = $v;
+    foreach ($this->data as $name => $v) {
+      if (!($type = $this->form->fields->getType($name))) {
+        if (!Misc::hasSuffix('From', $name) and !Misc::hasSuffix('To', $name)) continue;
+      } else {
+        if (DdTags::isTag($type)) continue;
+      }
+      $data[$name] = $v;
     }
     if (!empty($data)) $this->items->update($this->id, $data);
     else $this->items->updateField($this->id, 'dateUpdate', dbCurTime());

@@ -127,7 +127,9 @@ class DbItems implements UpdatableItems, ArrayAccess {
     return [
       'itemsTotal' => $this->itemsTotal,
       'pagesTotal' => $this->pagesTotal,
-      'pNums'      => $this->pNums
+      'pNums'      => $this->pNums,
+      'pNext'      => $this->pNext,
+      'pPrev'      => $this->pPrev,
     ];
   }
 
@@ -158,6 +160,9 @@ class DbItems implements UpdatableItems, ArrayAccess {
    */
   public $pNums;
 
+  public $pNext;
+  public $pPrev;
+
   protected $itemsCondsPrepared = false;
 
   /**
@@ -183,7 +188,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
 
   protected function _prepareItemsConds() {
     if ($this->isPagination) {
-      list($this->pNums, $offset, $this->itemsTotal, $this->pagesTotal) = (new Pagination(['n' => $this->n]))->get($this->table, $this->cond, $this->filterSelectCond);
+      list($this->pNums, $offset, $this->itemsTotal, $this->pagesTotal, $this->pNext, $this->pPrev) = (new Pagination(['n' => $this->n]))->get($this->table, $this->cond, $this->filterSelectCond);
       $this->cond->setLimit($offset);
     }
   }

@@ -1,4 +1,4 @@
-Ngn.Frm.ConsecutiveSelect = new Class({
+Ngn.frm.ConsecutiveSelect = new Class({
   Implements: [Events, Options],
 
   initialize: function(eParent, options) {
@@ -47,7 +47,7 @@ Ngn.Frm.ConsecutiveSelect = new Class({
         this.init();
       }.bind(this)
     }).GET({
-        name: Ngn.Frm.getPureName(eChangedSelect.get('name')),
+        name: Ngn.frm.getPureName(eChangedSelect.get('name')),
         id: eChangedSelect.get('value')
       });
   }
@@ -56,16 +56,17 @@ Ngn.Frm.ConsecutiveSelect = new Class({
 
 /**
  * @param Ngn.Form.El.Dd
- * @param Ngn.Frm.ConsecutiveSelect
- * @returns object of class Ngn.Frm.ConsecutiveSelect
+ * @param Ngn.frm.ConsecutiveSelect
+ * @returns object of class Ngn.frm.ConsecutiveSelect
  */
-Ngn.Frm.ConsecutiveSelect.factory = function(formEl, cls) {
-  return new cls(formEl.eRow, formEl.fieldName, formEl.strName, formEl.parentTagFieldName, {
+Ngn.frm.ConsecutiveSelect.factory = function(cls, el, opt) {
+  opt = Object.merge({
     onRequest: function(eSelect) {
-      formEl.form.validator.resetField(eSelect);
-    }.bind(formEl),
+      this.form.validator.resetField(eSelect);
+    }.bind(el),
     onComplete: function() {
-      formEl.form.validator.rewatchFields();
-    }.bind(formEl)
-  });
+      this.form.validator.rewatchFields();
+    }.bind(el)
+  }, opt);
+  return new cls(el.eRow, opt);
 };
