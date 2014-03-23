@@ -17,7 +17,7 @@ class MockLib extends Lib {
 
 }
 
-class TestLib {
+class UestLib {
 
   function test() {
     MockLib::$list = false;
