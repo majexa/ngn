@@ -1,4 +1,4 @@
-Ngn.frm.ConsecutiveSelect = new Class({
+Ngn.Frm.ConsecutiveSelect = new Class({
   Implements: [Events, Options],
 
   initialize: function(eParent, options) {

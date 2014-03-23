@@ -101,6 +101,7 @@ Ngn.Frm.virtualElement = {
   getForm: function() {
   }
 };
+Ngn.Btn.implement(Ngn.Frm.virtualElement);
 
 // формат callback ф-ии должен быть следующим:
 // function (fieldValue, args) {}

@@ -181,7 +181,6 @@ Ngn.Btn = new Class({
   }
 
 });
-Ngn.Btn.implement(Ngn.Frm.virtualElement);
 
 Ngn.Btn.FileUpload = new Class({
   Implements: [Options],

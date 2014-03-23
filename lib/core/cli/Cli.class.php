@@ -51,4 +51,16 @@ class Cli {
     }
   }
 
+  static function prompt($caption = null) {
+    print ($caption ? : "Enter text").":\n";
+    $fp = fopen('php://stdin', 'r');
+    $nextLine = false;
+    while (!$nextLine) {
+      $nextLine = fgets($fp, 1024);
+      if ($nextLine[strlen($nextLine)-1] == "\n") break;
+    }
+    $nextLine = trim($nextLine);
+    return $nextLine;
+  }
+
 }
