@@ -174,110 +174,95 @@ class Misc {
     return preg_replace('/(.*\/)[a-z]+_([\w-_]+\.\w+)/', '$1$2', $path);
   }
 
-  static function transit($in, $toLower = false) {
+  static function transit($in, $toLower = false, $replaceSpace = true) {
     $out = [];
     $replacers = [
-
       'а' => 'a',
       'б' => 'b',
       'в' => 'v',
       'г' => 'g',
       'д' => 'd',
       'е' => 'e',
-
       'ё' => 'e',
       'ж' => 'zh',
       'з' => 'z',
       'и' => 'i',
       'й' => 'j',
       'к' => 'k',
-
       'л' => 'l',
       'м' => 'm',
       'н' => 'n',
       'о' => 'o',
       'п' => 'p',
       'р' => 'r',
-
       'с' => 's',
       'т' => 't',
       'у' => 'u',
       'ф' => 'f',
       'х' => 'h',
-
       'ц' => 'c',
       'ч' => 'ch',
       'ш' => 'sh',
       'щ' => 'sh',
       'ъ' => '',
       'ъ' => '',
-
       'ы' => 'i',
       'ь' => '',
       'э' => 'e',
       'ю' => 'u',
       'я' => 'ya',
-      ' ' => '-',
       '_' => '-',
       '.' => '-',
       '/' => '-',
-
       'А' => 'A',
       'Б' => 'B',
       'В' => 'V',
       'Г' => 'G',
       'Д' => 'D',
       'Е' => 'E',
-
       'Ё' => 'E',
       'Ж' => 'Zh',
       'З' => 'Z',
       'И' => 'I',
       'Й' => 'J',
       'К' => 'K',
-
       'Л' => 'L',
       'М' => 'M',
       'Н' => 'N',
       'О' => 'O',
       'П' => 'P',
       'Р' => 'R',
-
       'С' => 'S',
       'Т' => 'T',
       'У' => 'U',
       'Ф' => 'F',
       'Х' => 'H',
-
       'Ц' => 'C',
       'Ч' => 'Ch',
       'Ш' => 'Sh',
       'Щ' => 'Sh',
       'Ъ' => '',
       'Ь' => '',
-
       'Ы' => 'I',
       'Э' => 'E',
       'Ю' => 'U',
       'Я' => 'Ya',
-      '&' => 'n'
+      '&' => 'n',
     ];
-
     $english = explode(' ', 'q w e r t y u i o p a s d f g h j k l z x c v b n m 1 2 3 4 5 6 7 8 9 0 - _ .');
-
+    if (!$replaceSpace) $english[] = ' ';
     $in = trim($in);
     $in = strtr($in, $replacers);
-
-    for ($i = 0; $i < strlen($in); $i++) if (in_array(strtolower($in[$i]), $english, true)) $out[] = $in[$i];
-
+    $out = [];
+    for ($i = 0; $i < strlen($in); $i++) {
+      if (in_array(strtolower($in[$i]), $english, true)) {
+        $out[] = $in[$i];
+      }
+    }
     if (count($out) > 0) $out = implode($out);
-    else
-      $out = $in;
-
+    else $out = $in;
     if ($toLower) $out = strtolower($out);
-
     $out = preg_replace('/--+/', '-', $out);
-
     return $out;
   }
 
@@ -536,7 +521,9 @@ class Misc {
 
     // return the final array
     return [
-      $hours, $minutes, $seconds,
+      $hours,
+      $minutes,
+      $seconds,
     ];
   }
 
@@ -663,30 +650,30 @@ class Misc {
 
   static function str2regexp($str) {
     return str_replace([
-        '!',
-        '/',
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '|',
-        '^',
-        '?'
-      ], [
-        '\!',
-        '\\/',
-        '\\(',
-        '\\)',
-        '\\{',
-        '\\}',
-        '\\[',
-        '\\]',
-        '\\|',
-        '\\^',
-        '\\?'
-      ], $str);
+      '!',
+      '/',
+      '(',
+      ')',
+      '{',
+      '}',
+      '[',
+      ']',
+      '|',
+      '^',
+      '?'
+    ], [
+      '\!',
+      '\\/',
+      '\\(',
+      '\\)',
+      '\\{',
+      '\\}',
+      '\\[',
+      '\\]',
+      '\\|',
+      '\\^',
+      '\\?'
+    ], $str);
   }
 
   static function price($v) {
