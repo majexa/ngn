@@ -1,15 +1,8 @@
 Ngn.Frm.DdItemSelectDepending = new Class({
   Extends: Ngn.Frm.ConsecutiveSelect,
 
-  initialize: function(eParent, fieldName, strName, parentTagFieldName, options) {
-    this.fieldName = fieldName;
-    this.strName = strName;
-    this.parentTagFieldName = parentTagFieldName;
-    this.parent(eParent, strName, options);
-  },
-
   url: function() {
-    return '/c/ddItemSelectDepending/?fieldName=' + this.fieldName + '&strName=' + this.strName + '&parentTagFieldName=' + this.parentTagFieldName;
+    return '/c/ddItemSelectDepending/?fieldName=' + this.options.fieldName + '&strName=' + this.options.strName + '&parentTagFieldName=' + this.options.parentTagFieldName + '&itemsSort=' + this.options.itemsSort;
   }
 
 });

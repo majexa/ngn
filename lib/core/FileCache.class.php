@@ -18,7 +18,7 @@ class FileCache {
     if (!file_exists($this->folder())) Dir::make($this->folder());
   }
 
-  protected function folder() {
+  function folder() {
     return DATA_PATH.'/cache';
   }
 
@@ -30,9 +30,9 @@ class FileCache {
     $key = serialize($options);
     if (isset(self::$cache[$key])) return self::$cache[$key];
     $options['automatic_serialization'] = true;
-    return self::$cache[$key] = Zend_Cache::factory('Core', 'File', $options, [
+    return self::$cache[$key] = Zend_Cache::factory('Core', 'File', $options, array_merge($options, [
       'cache_dir' => (new static($options))->folder()
-    ]);
+    ]));
   }
 
   static function func($func, $id, $force = false) {
