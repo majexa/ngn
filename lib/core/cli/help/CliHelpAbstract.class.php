@@ -160,6 +160,7 @@ TEXT
       $nameCmd = $name ? $name.' ' : '';
       $rOptions = $this->renderOptions($method['options']);
       $rOptions = $rOptions ? ' '.$rOptions : '';
+      if (!empty($method['title']) and getOS() == 'win') $method['title'] = Misc::transit($method['title'], false, false);
       $s .= //
         $this->runner($runnerColor). // runner
         " $nameCmd{$method['method']}". // method

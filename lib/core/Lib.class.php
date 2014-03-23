@@ -218,7 +218,7 @@ class Lib {
     self::$list += self::getClassesListR($path);
   }
 
-  static protected $list;
+  static $list = false;
 
   static function getClassesList() {
     self::initClassesList();
@@ -238,7 +238,7 @@ class Lib {
   }
 
   static function getClassesListCached() {
-    if (isset(self::$list)) return self::$list;
+    if (self::$list !== false) return self::$list;
     $options = [];
     if (isset(self::$cachePrefix)) $options['file_name_prefix'] = self::$cachePrefix;
     $cache = FileCache::c($options);
