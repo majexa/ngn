@@ -1,6 +1,6 @@
 <?php
 
-class SflmJsClasses extends SflmJsClassesBase {
+class SflmJsClasses {
 
   public $existingObjects, $existingObjectPaths, $objectPaths, $frontend;
 
@@ -161,9 +161,11 @@ class SflmJsClasses extends SflmJsClassesBase {
     return true;
   }
 
-  protected function _addObject($class, $success) {
-    if (!$this->isClass($class)) $this->existingObjects[] = $class; // добавляем сразу, т.к. парсинг объявления объектов не поддерживается
-    $this->processPath($this->objectPaths[$class], $success);
+  protected function _addObject($name, $success) {
+    if (!$this->isClass($name)) {
+      $this->existingObjects[] = $name;
+    } // добавляем сразу, т.к. парсинг объявления объектов не поддерживается
+    $this->processPath($this->objectPaths[$name], $success);
   }
 
   /**
@@ -177,10 +179,12 @@ class SflmJsClasses extends SflmJsClassesBase {
   function processPath($path) {
     Sflm::output("Processing contents of '$path'");
     $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
+    die2($path);
     foreach ($this->parseClassesDefinition($c) as $class) {
+      prrc($class);
       if (in_array($class, $this->existingObjects)) continue;
       // Эти классы уже определены
-      Sflm::output("Class '$class' exists in $path. (definition)");
+      output("Class '$class' exists in $path. (definition)");
       $this->existingObjects[] = $class;
     }
     foreach ($this->parseRequired($c) as $class) $this->addSomething($class, "$path required");

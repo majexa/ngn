@@ -4,10 +4,6 @@ Ngn.Request = new Class({
   success: function(text, xml) {
     if (text.contains('Error: ')) {
       return;
-      new Ngn.Dialog.Error({
-        width: 600,
-        message: 'Ошибка запроса: ' + this.options.url
-      });
     }
     this.parent(text, xml);
   }
@@ -74,17 +70,11 @@ Ngn.Request.JSON = new Class({
       return;
     }
     if (this.response.json.error) {
-      c(this.response.json);
       Ngn.Request.JSON.throwServerError(this.response.json);
       return;
     }
     this.onSuccess(this.response.json, text);
   },
-
-  failure: function(xhr) {
-    //new Ngn.Dialog.Error({message: this.xhr.responseText + '<hr/>URL: ' + this.options.url});
-    this.parent();
-  }
 
 });
 
