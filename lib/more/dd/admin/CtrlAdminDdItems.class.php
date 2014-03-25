@@ -37,7 +37,7 @@ class CtrlAdminDdItems extends CtrlAdmin {
 
   protected function init() {
     $this->structure = (new DdStructureItems)->getItemByField('name', $this->getStrName());
-    Sflm::flm('js')->addClass('Ngn.DdGrid.Admin');
+    Sflm::flm('js')->addObject('Ngn.DdGrid.Admin');
   }
 
   protected function _getIm() {

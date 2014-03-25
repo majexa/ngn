@@ -75,33 +75,19 @@ Ngn.Frm.getElements = function(name, parent) {
   return elements;
 };
 
+Ngn.Frm.virtualElements = [];
 Ngn.Frm.disable = function(eForm, flag) {
   eForm.getElements(Ngn.Frm.selector).each(function(el) {
     el.set('disabled', flag);
   });
-  //c(Ngn.Frm.virtualElements);
+  // c(Ngn.Frm.virtualElements);
   for (var i = 0; i < Ngn.Frm.virtualElements.length; i++) {
-    var o = Ngn.Frm.virtualElements[i];
-    c([o, o.getForm()]);
-    //if (o.getForm() && o.getForm().get('id') != eForm.get('id')) return;
-    //o.toggleDisabled(!flag);
-  }
-  ;
-};
-
-Ngn.Frm.virtualElements = [];
-Ngn.Frm.virtualElement = {
-  // abstract toggleDisabled: function(flag) {},
-  parentForm: null,
-  initVirtualElement: function(el) {
-    var eForm = el.getParent('form');
-    if (!eForm) return;
-    eForm.storeAppend('virtualElements', this);
-  },
-  getForm: function() {
+    // var o = Ngn.Frm.virtualElements[i];
+    // c([o, o.getForm()]);
+    // if (o.getForm() && o.getForm().get('id') != eForm.get('id')) return;
+    // o.toggleDisabled(!flag);
   }
 };
-Ngn.Btn.implement(Ngn.Frm.virtualElement);
 
 // формат callback ф-ии должен быть следующим:
 // function (fieldValue, args) {}
@@ -113,76 +99,6 @@ Ngn.Frm.addEvent = function(event, name, callback, args) {
     });
   });
 }
-
-Ngn.Frm.VisibilityCondition = new Class({
-
-  initialize: function(eForm, sectionName, condFieldName, cond) {
-    this.sectionName = sectionName;
-    this.initSectionSelector();
-    this.eSection = eForm.getElement(this.sectionSelector);
-    if (!this.eSection) {
-      c('Element "' + this.sectionSelector + '" does not exists');
-      return;
-    }
-    /*
-     this.fx = new Fx.Slide(this.eSection, {
-     duration: 200,
-     transition: Fx.Transitions.Pow.easeOut
-     });
-     this.fx.hide();
-     */
-    var toggleSection = function(v, isFx) {
-      // v необходима для использования в условии $d['cond']
-      var flag = (eval(cond));
-      if (!flag) {
-        // Если скрываем секцию, необходимо снять все required css-классы в её полях
-        this.eSection.getElements('.required').each(function(el) {
-          el.removeClass('required');
-          el.addClass('required-disabled');
-        });
-      } else {
-        this.eSection.getElements('.required-disabled').each(function(el) {
-          el.removeClass('required-disabled');
-          el.addClass('required');
-        });
-      }
-      if (isFx && 0) {
-        // если нужно завернуть не развёрнутую до конца секцию,
-        // нужно просто скрыть её
-        if (flag == this.fx.open)
-          flag ? (function() {
-            this.fx.show();
-          }).delay(200, this) : (function() {
-            this.fx.hide();
-          }).delay(200, this); else
-          flag ? this.fx.slideIn() : this.fx.slideOut();
-      } else {
-        this.eSection.setStyle('display', flag ? 'block' : 'none');
-        this.eSection.getElements(Ngn.Frm.selector).each(function(el) {
-          el.set('disabled', !flag);
-        });
-      }
-    }.bind(this);
-    toggleSection(Ngn.Frm.getValueByName(condFieldName), false);
-    Ngn.Frm.addEvent('change', condFieldName, toggleSection, true);
-    Ngn.Frm.addEvent('focus', condFieldName, toggleSection, true);
-  }
-
-});
-
-Ngn.Frm.VisibilityCondition.Header = new Class({
-  Extends: Ngn.Frm.VisibilityCondition,
-  initSectionSelector: function() {
-    this.sectionSelector = '.hgrp_' + this.sectionName;
-  }
-});
-
-Ngn.Frm.VisibilityCondition.Field = new Class({
-  Extends: Ngn.Frm.VisibilityCondition,
-  initSectionSelector: function() {
-    this.sectionSelector = '.name_' + this.sectionName;
-  }
-});
 
 Ngn.Frm.headerToggleFx = function(btns) {
   btns.each(function(btn) {
@@ -377,18 +293,6 @@ Ngn.Frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
 
 Ngn.Frm.initCopySelectTitle = function(eSelectField, eSlaveField) {
   Ngn.Frm.initCopySelectValue(eSelectField, eSlaveField, 'text');
-};
-
-Ngn.Frm.makeDialogabble = function(eLink, action, options) {
-  eLink.addEvent('click', function(e) {
-    e.preventDefault();
-    new Ngn.Dialog.RequestForm(Object.merge({
-      url: eLink.get('href').replace(action, 'json_' + action),
-      onSubmitSuccess: function() {
-        window.location.reload();
-      }
-    }, options || {}));
-  });
 };
 
 Ngn.Frm.storable = function(eInput) {

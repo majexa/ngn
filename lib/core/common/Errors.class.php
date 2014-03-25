@@ -15,4 +15,10 @@ class Errors {
     File::delete(LOGS_PATH.'/r_errors.log');
   }
 
+  static function checkText($text) {
+    $t = strtolower($text);
+    if (strstr($t, 'error') or strstr($t, 'exception') or strstr($t, 'fatal')) throw new Exception("Error in text:\n$text");
+    return $text;
+  }
+
 }

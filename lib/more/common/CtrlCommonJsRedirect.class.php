@@ -7,7 +7,7 @@ class CtrlCommonJsRedirect extends CtrlBlank {
   }
   
   function action_default() {
-    Sflm::flm('js')->addClass('MooCountdown');
+    Sflm::flm('js')->addObject('MooCountdown');
     $this->d['redirect'] = $this->req->rq('r');
     $this->d['tpl'] = 'common/jsRedirect';
   }

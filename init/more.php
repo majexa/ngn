@@ -36,7 +36,7 @@ require NGN_PATH.'/config/constants/more.php';
 require LIB_PATH.'/more/config.php';
 // ---------------------------------------------------
 
-if (!is_writable(SITE_PATH.'/'.DATA_DIR.'/cache')) die('"'.SITE_PATH.'/'.DATA_DIR.'/cache" is not writable (init/more.php)');
+if (!is_writable(SITE_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.SITE_PATH.'/'.DATA_DIR.'/cache" is not writable (init/more.php)');
 
 // Включаем кэширование списка классов
 // Кэшировать нужно с помощью FileCache. Значит нужно его подключить

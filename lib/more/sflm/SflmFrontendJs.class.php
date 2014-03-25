@@ -21,13 +21,12 @@ class SflmFrontendJs extends SflmFrontend {
     $this->classes->processPath($path);
   }
 
-  function addClass($class, $source = 'direct', $strict = false) {
-    if (strstr($class, 'User')) die2(31);
+  function addObject($name, $source = 'direct', $strict = false) {
     $frontend = $this;
-    $this->classes->addClass($class, $source, function($path) use ($frontend) {
+    $this->classes->addObject($name, $source, function($path) use ($frontend) {
       $frontend->addLib($path);
-    }, function($source) use ($class, $frontend, $strict) {
-      $s = "Class '$class' from '$source' not found";
+    }, function($source) use ($name, $frontend, $strict) {
+      $s = "Class '$name' from '$source' not found";
       if ($strict) throw new Exception($s);
       $frontend->extraCode = "\n/*----------|$s|----------*/\n";
     });
