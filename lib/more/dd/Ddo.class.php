@@ -117,7 +117,7 @@ class Ddo {
       }
       $this->$type = $r;
     }
-    if (($r = Config::getVar("ddo/ddddByName", true)) !== false) $this->ddddByName = array_merge($this->ddddByName, $r);
+    if (($r = Config::getVar("ddo/ddddByName.".$this->layoutName, true)) !== false) $this->ddddByName = array_merge($this->ddddByName, $r);
   }
 
   public $ddddByName = [];

@@ -7,9 +7,9 @@ class TestSflmJs extends ProjectTestCase {
   }
 
   function testSecondRunClassAdding() {
-    Sflm::flm('js')->addClass('Ngn.Frm');
+    Sflm::flm('js')->addObject('Ngn.Frm');
     Sflm::reset('js');
-    Sflm::flm('js')->addClass('Ngn.Frm');
+    Sflm::flm('js')->addObject('Ngn.Frm');
   }
 
   function uestEmptyNewPathsAfterReset() {
@@ -31,7 +31,7 @@ class TestSflmJs extends ProjectTestCase {
   }
 
   function uest() {
-    //Sflm::flm('js')->addClass('Ngn.Grid.Dialog', 'direct', true);
+    //Sflm::flm('js')->addObject('Ngn.Grid.Dialog', 'direct', true);
     //Sflm::flm('js')->store();
     //die2('-');
     $this->assertFalse((bool)strstr(file_get_contents(Sflm::flm('js')->cacheFile()), 'Ngn.Form.El.Phone'), 'PHONE?:(');

@@ -18,7 +18,7 @@ class FileCache {
     if (!file_exists($this->folder())) Dir::make($this->folder());
   }
 
-  function folder() {
+  protected function folder() {
     return DATA_PATH.'/cache';
   }
 

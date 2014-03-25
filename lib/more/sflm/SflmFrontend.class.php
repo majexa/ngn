@@ -12,10 +12,6 @@ class SflmFrontend {
 
   public $sflm, $paths, $newPaths = [], $id, $debug = false;
 
-  function addClass($class, $source = 'default') {
-    throw new Exception('Realized only for js type');
-  }
-
   function __construct(SflmBase $sflm, $frontend = null) {
     $this->id = Misc::randString(5);
     $this->sflm = $sflm;
@@ -67,7 +63,7 @@ class SflmFrontend {
   }
 
   function getTags() {
-    $this->storeIfChanged('getTags');
+    $this->storeIfChanged('SflmFrontend::getTags');
     return $this->sflm->getTags($this->frontend, $this->code());
   }
 
@@ -143,7 +139,7 @@ class SflmFrontend {
       return;
     }
     FileCache::c()->save($this->paths, $this->pathsCacheKey());
-    Sflm::output("Update collected file after adding lib ".($place ? "from '$place' place" : ''));
+    Sflm::output("Update collected '{$this->frontend}.{$this->sflm->type}' file after adding lib ".($place ? "from '$place' place" : ''));
     $this->store();
   }
 

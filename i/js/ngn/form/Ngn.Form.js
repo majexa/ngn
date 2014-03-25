@@ -1,4 +1,5 @@
-// @requires Ngn.Frm
+// @requires Ngn.Frm, Ngn.lightbox
+
 Ngn.Form = new Class({
   Implements: [Options, Events, Class.Occlude],
 

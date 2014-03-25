@@ -51,12 +51,6 @@ class Sflm {
     return O::get('Sflm'.ucfirst($type));
   }
 
-  static function jsClass() {
-    static $o;
-    if (isset($o)) return $o;
-    return $o = new SflmJsClass(self::flm('js'));
-  }
-
   /**
    * Frontend Library Manager
    *
