@@ -22,7 +22,7 @@ Ngn.vk.massMsg.Dialog = new Class({
   init: function() {
     this.parent();
     this.eMsg = this.message.getElement('#massMsgText')
-    Ngn.Frm.storable(this.eMsg);
+    Ngn.frm.storable(this.eMsg);
     this.start();
     this.setTitle('Происходит авторизация');
     new Ngn.Request.JSON({

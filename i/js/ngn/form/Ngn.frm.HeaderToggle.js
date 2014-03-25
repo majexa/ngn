@@ -1,4 +1,4 @@
-Ngn.Frm.HeaderToggle = new Class({
+Ngn.frm.HeaderToggle = new Class({
   Implements: [Options, Events],
 
   opened: false,
@@ -29,7 +29,7 @@ Ngn.Frm.HeaderToggle = new Class({
 });
 
 
-Ngn.Frm.headerToggleFx = function(btns) {
+Ngn.frm.headerToggleFx = function(btns) {
   btns.each(function(btn) {
     var eToggle = btn.getParent().getParent();
     btn.getParent().inject(eToggle, 'before');

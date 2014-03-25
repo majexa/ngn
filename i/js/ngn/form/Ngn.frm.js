@@ -1,14 +1,14 @@
 Ngn.Frm = {};
-Ngn.Frm.init = {}; // объект для хранения динамических функций иниыиализации
-Ngn.Frm.html = {};
-Ngn.Frm.selector = 'input,select,textarea';
-Ngn.Frm.textSelector = 'input[type=text],input[type=password],textarea';
+Ngn.frm.init = {}; // объект для хранения динамических функций иниыиализации
+Ngn.frm.html = {};
+Ngn.frm.selector = 'input,select,textarea';
+Ngn.frm.textSelector = 'input[type=text],input[type=password],textarea';
 
-Ngn.Frm.getValueByName = function(name, parent) {
-  return Ngn.Frm.getValue(Ngn.Frm.getElements(name, parent));
+Ngn.frm.getValueByName = function(name, parent) {
+  return Ngn.frm.getValue(Ngn.frm.getElements(name, parent));
 };
 
-Ngn.Frm.emptify = function(eInput) {
+Ngn.frm.emptify = function(eInput) {
   if (eInput.get('type') == 'checkbox') eInput.set('checked', false); else eInput.get('value', '');
 };
 
@@ -16,9 +16,9 @@ Ngn.Frm.emptify = function(eInput) {
  * @param Element|array of Element
  * @returns {*}
  */
-Ngn.Frm.getValue = function(el) {
+Ngn.frm.getValue = function(el) {
   if (el.length === undefined) {
-    var elements = el.getElements(Ngn.Frm.selector);
+    var elements = el.getElements(Ngn.frm.selector);
   } else {
     var elements = el;
   }
@@ -41,9 +41,9 @@ Ngn.Frm.getValue = function(el) {
   return r;
 };
 
-Ngn.Frm.getValues = function(el) {
+Ngn.frm.getValues = function(el) {
   if (el.length === undefined) {
-    var elements = el.getElements(Ngn.Frm.selector);
+    var elements = el.getElements(Ngn.frm.selector);
   } else {
     var elements = el;
   }
@@ -60,12 +60,12 @@ Ngn.Frm.getValues = function(el) {
   return r;
 };
 
-Ngn.Frm.getElements = function(name, parent) {
+Ngn.frm.getElements = function(name, parent) {
   var elements = [];
   var n = 0;
   var _name;
   parent = parent || document;
-  parent.getElements(Ngn.Frm.selector).each(function(el) {
+  parent.getElements(Ngn.frm.selector).each(function(el) {
     _name = el.get('name');
     if (!_name) return;
     if (_name.replace('[]', '') != name) return;
@@ -75,14 +75,14 @@ Ngn.Frm.getElements = function(name, parent) {
   return elements;
 };
 
-Ngn.Frm.virtualElements = [];
-Ngn.Frm.disable = function(eForm, flag) {
-  eForm.getElements(Ngn.Frm.selector).each(function(el) {
+Ngn.frm.virtualElements = [];
+Ngn.frm.disable = function(eForm, flag) {
+  eForm.getElements(Ngn.frm.selector).each(function(el) {
     el.set('disabled', flag);
   });
-  // c(Ngn.Frm.virtualElements);
-  for (var i = 0; i < Ngn.Frm.virtualElements.length; i++) {
-    // var o = Ngn.Frm.virtualElements[i];
+  // c(Ngn.frm.virtualElements);
+  for (var i = 0; i < Ngn.frm.virtualElements.length; i++) {
+    // var o = Ngn.frm.virtualElements[i];
     // c([o, o.getForm()]);
     // if (o.getForm() && o.getForm().get('id') != eForm.get('id')) return;
     // o.toggleDisabled(!flag);
@@ -91,11 +91,11 @@ Ngn.Frm.disable = function(eForm, flag) {
 
 // формат callback ф-ии должен быть следующим:
 // function (fieldValue, args) {}
-Ngn.Frm.addEvent = function(event, name, callback, args) {
-  var elements = Ngn.Frm.getElements(name);
+Ngn.frm.addEvent = function(event, name, callback, args) {
+  var elements = Ngn.frm.getElements(name);
   elements.each(function(el) {
     el.addEvent(event, function(e) {
-      callback.run([Ngn.Frm.getValue(elements), args], el);
+      callback.run([Ngn.frm.getValue(elements), args], el);
     });
   });
 }
@@ -107,11 +107,11 @@ Ngn.enumm = function(arr, tpl, glue) {
   return arr.join(glue);
 };
 
-Ngn.Frm.getPureName = function($bracketName) {
+Ngn.frm.getPureName = function($bracketName) {
   return $bracketName.replace(/(\w)\[.*/, '$1');
 };
 
-Ngn.Frm.getBracketNameKeys = function(name) {
+Ngn.frm.getBracketNameKeys = function(name) {
   var m;
   m = name.match(/([^[]*)\[/);
   if (!m) return [name];
@@ -124,18 +124,18 @@ Ngn.Frm.getBracketNameKeys = function(name) {
   return keys;
 };
 
-Ngn.Frm.fillEmptyObject = function(object, keys) {
+Ngn.frm.fillEmptyObject = function(object, keys) {
   for (var i = 0; i < keys.length - 1; i++) {
     var p = 'object' + (Ngn.enumm(keys.slice(0, i + 1), "['{v}']"));
     eval('if (!$defined(' + p + ')) ' + p + ' = {}');
   }
 };
 
-Ngn.Frm.setValueByBracketName = function(o, name, value) {
+Ngn.frm.setValueByBracketName = function(o, name, value) {
   var _name = name.replace('[]', '');
   if (!(o instanceof Object)) throw new Error('o is not object');
-  var keys = Ngn.Frm.getBracketNameKeys(_name);
-  Ngn.Frm.fillEmptyObject(o, keys);
+  var keys = Ngn.frm.getBracketNameKeys(_name);
+  Ngn.frm.fillEmptyObject(o, keys);
   var p = 'o';
   for (var i = 0; i < keys.length; i++) p += "['" + keys[i] + "']";
   if (name.contains('[]')) {
@@ -147,19 +147,19 @@ Ngn.Frm.setValueByBracketName = function(o, name, value) {
   return o;
 };
 
-Ngn.Frm.objTo = function(eContainer, obj) {
+Ngn.frm.objTo = function(eContainer, obj) {
   for (var i in obj) {
     eContainer.getElement('input[name=' + i + ']').set('value', obj[i]);
   }
 };
 
-Ngn.Frm.toObj = function(eContainer, except) {
+Ngn.frm.toObj = function(eContainer, except) {
   var rv = {};
   var name;
   except = except || [];
   eContainer = $(eContainer);
   var typeMatch = 'text' + (!except.contains('hidden') ? '|hidden' : '') + (!except.contains('password') ? '|password' : '');
-  var elements = eContainer.getElements(Ngn.Frm.selector);
+  var elements = eContainer.getElements(Ngn.frm.selector);
   for (var i = 0; i < elements.length; i++) {
     var el = elements[i];
     if (!el.name) continue;
@@ -187,13 +187,13 @@ Ngn.Frm.toObj = function(eContainer, except) {
       }
     }
     if (pushValue != undefined) {
-      Ngn.Frm.setValueByBracketName(rv, el.name, pushValue);
+      Ngn.frm.setValueByBracketName(rv, el.name, pushValue);
     }
   }
   return rv;
 };
 
-Ngn.Frm.initTranslateField = function(eMasterField, eTranslatedField) {
+Ngn.frm.initTranslateField = function(eMasterField, eTranslatedField) {
   var eMasterField = $(eMasterField);
   var eTranslatedField = $(eTranslatedField);
   //if (!eMasterField || !eTranslatedField) return;
@@ -211,7 +211,7 @@ Ngn.Frm.initTranslateField = function(eMasterField, eTranslatedField) {
   });
 };
 
-Ngn.Frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
+Ngn.frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
   if (!$defined(param)) param = 'value';
   var eSelectField = $(eSelectField);
   var eSlaveField = $(eSlaveField);
@@ -225,11 +225,11 @@ Ngn.Frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
   });
 };
 
-Ngn.Frm.initCopySelectTitle = function(eSelectField, eSlaveField) {
-  Ngn.Frm.initCopySelectValue(eSelectField, eSlaveField, 'text');
+Ngn.frm.initCopySelectTitle = function(eSelectField, eSlaveField) {
+  Ngn.frm.initCopySelectValue(eSelectField, eSlaveField, 'text');
 };
 
-Ngn.Frm.storable = function(eInput) {
+Ngn.frm.storable = function(eInput) {
   if (!eInput.get('id')) throw new Error('ID param mast be defined');
   var store = function() {
     Ngn.storage.set(eInput.get('id'), eInput.get('value'));

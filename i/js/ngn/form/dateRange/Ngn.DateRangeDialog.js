@@ -20,10 +20,10 @@ Ngn.DateRangeDialog = new Class({
       from = o.from;
       to = o.to;
     }
-    Ngn.Frm.getElements('from', this.message).each(function(el, n) {
+    Ngn.frm.getElements('from', this.message).each(function(el, n) {
       el.set('value', from[n]);
     });
-    Ngn.Frm.getElements('to', this.message).each(function(el, n) {
+    Ngn.frm.getElements('to', this.message).each(function(el, n) {
       el.set('value', to[n]);
     });
     //new Element('a', { class: 'gray pseudoLink', html: 'Сегодня' }).inject(this.message);
@@ -36,10 +36,10 @@ Ngn.DateRangeDialog = new Class({
       from: [],
       to: []
     };
-    Ngn.Frm.getElements('from', this.message).each(function(el, n) {
+    Ngn.frm.getElements('from', this.message).each(function(el, n) {
       value.from.push(el.get('value'));
     });
-    Ngn.Frm.getElements('to', this.message).each(function(el, n) {
+    Ngn.frm.getElements('to', this.message).each(function(el, n) {
       value.to.push(el.get('value'));
     });
     return value;

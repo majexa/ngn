@@ -1,12 +1,12 @@
-Ngn.Frm.fieldSets = [];
+Ngn.frm.fieldSets = [];
 
-Ngn.Frm.FieldSet = new Class({
+Ngn.frm.FieldSet = new Class({
   Extends: Ngn.FieldSet.Html,
   form: null, // Ngn.Form
 
   initialize: function(form, container, options) {
     this.form = form;
-    Ngn.Frm.fieldSets.include(this);
+    Ngn.frm.fieldSets.include(this);
     this.parent(container, options);
     this.initVirtualElement(this.eContainer);
   },
@@ -21,4 +21,4 @@ Ngn.Frm.FieldSet = new Class({
 
 });
 
-Ngn.Frm.FieldSet.implement(Ngn.Frm.virtualElement);
+Ngn.frm.FieldSet.implement(Ngn.frm.virtualElement);
