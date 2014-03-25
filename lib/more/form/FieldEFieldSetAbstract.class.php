@@ -128,7 +128,7 @@ abstract class FieldEFieldSetAbstract extends FieldEAbstract {
     return "
 var id = '{$this->form->id()}';
 Ngn.Form.forms[id].eForm.getElements('.type_{$this->type}').each(function(el){
-  new Ngn.Frm.FieldSet(Ngn.Form.forms[id], el, ".Arr::jsObj($this->options['jsOptions']).");
+  new Ngn.frm.FieldSet(Ngn.Form.forms[id], el, ".Arr::jsObj($this->options['jsOptions']).");
 });
 ";
   }

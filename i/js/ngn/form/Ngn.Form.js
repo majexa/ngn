@@ -51,12 +51,12 @@ Ngn.Form = new Class({
         }
       }
       if (!focused) {
-        var f = this.eForm.getElement(Ngn.Frm.textSelector);
+        var f = this.eForm.getElement(Ngn.frm.textSelector);
         if (f) f.focus();
       }
     }
     // Если у первого элемента есть плейсхолдер, значит и у всех остальных. Инициализируем кроссбрауузерные плейсхолдеры (для IE9)
-    var eFirstTextInput = this.eForm.getElement(Ngn.Frm.textSelector);
+    var eFirstTextInput = this.eForm.getElement(Ngn.frm.textSelector);
     if (eFirstTextInput && eFirstTextInput.get('placeholder')) new Ngn.PlaceholderSupport();
 
     this.eForm.getElements('input[type=text],input[type=password]').each(function(el) {
@@ -97,7 +97,7 @@ Ngn.Form = new Class({
     if (js) {
       Asset.javascript(js.get('html'), {
         onLoad: function() {
-          var func = eval('Ngn.Frm.init.' + this.eForm.get('id'));
+          var func = eval('Ngn.frm.init.' + this.eForm.get('id'));
           if (func) func();
           //(function() {
           this.fireEvent('jsComplete');
@@ -128,7 +128,7 @@ Ngn.Form = new Class({
   },
 
   initActive: function() {
-    this.eForm.getElements(Ngn.Frm.textSelector).each(function(el) {
+    this.eForm.getElements(Ngn.frm.textSelector).each(function(el) {
       this.initActiveEl(el);
     }.bind(this));
   },
@@ -154,7 +154,7 @@ Ngn.Form = new Class({
 
   disable: function(flag) {
     if (this.options.ajaxSubmit) {
-      Ngn.Frm.disable(this.eForm, flag);
+      Ngn.frm.disable(this.eForm, flag);
     } else {
       eSubmit = this.eForm.getElement('input[type=submit]');
       if (eSubmit) {
@@ -252,7 +252,7 @@ Ngn.Form = new Class({
     var ht = [];
     if (htBtns) {
       for (var i = 0; i < htBtns.length; i++)
-        ht.push(new Ngn.Frm.HeaderToggle(htBtns[i]));
+        ht.push(new Ngn.frm.HeaderToggle(htBtns[i]));
     }
     if (this.options.equalElementHeights) {
       this.setEqualHeights();
@@ -278,7 +278,7 @@ Ngn.Form = new Class({
     if (!vc) return;
     vc = JSON.decode(vc.get('html'));
     for (var i = 0; i < vc.length; i++) {
-      var cls = eval('Ngn.Frm.VisibilityCondition.' + ucfirst(vc[i][3]));
+      var cls = eval('Ngn.frm.VisibilityCondition.' + ucfirst(vc[i][3]));
       this.visibilityConditions[vc[i][0]] = new cls(this.eForm, vc[i][0], vc[i][1], vc[i][2]);
     }
   },
@@ -393,7 +393,7 @@ Ngn.Form = new Class({
         }
         this.fireEvent('complete', r);
       }.bind(this)
-    }).post(Ngn.Frm.toObj(this.eForm));
+    }).post(Ngn.frm.toObj(this.eForm));
   },
 
   _submit: function() {

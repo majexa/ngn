@@ -1,4 +1,4 @@
-Ngn.Frm.makeDialogabble = function(eLink, action, options) {
+Ngn.frm.makeDialogabble = function(eLink, action, options) {
   eLink.addEvent('click', function(e) {
     e.preventDefault();
     new Ngn.Dialog.RequestForm(Object.merge({

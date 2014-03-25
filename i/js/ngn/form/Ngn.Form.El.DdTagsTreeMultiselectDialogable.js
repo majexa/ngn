@@ -15,7 +15,7 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
   },
 
   update: function() {
-    this._update(Ngn.Frm.getValues(this.eParent.getElements('ul input')));
+    this._update(Ngn.frm.getValues(this.eParent.getElements('ul input')));
   },
 
   _update: function(values) {
@@ -57,7 +57,7 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
 
   init: function() {
     this.parent();
-    this.name = Ngn.Frm.getPureName(this.eRow.getElement('input').get('name'));
+    this.name = Ngn.frm.getPureName(this.eRow.getElement('input').get('name'));
     this.eTree = this.eRow.getElement('.field-wrapper div');
     this.eFieldWrapper = this.eRow.getElement('.field-wrapper');
     this.eHiddens = new Element('div.hiddens').inject(this.eFieldWrapper);

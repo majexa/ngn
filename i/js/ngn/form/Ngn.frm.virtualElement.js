@@ -1,4 +1,4 @@
-Ngn.Frm.virtualElement = {
+Ngn.frm.virtualElement = {
   // abstract toggleDisabled: function(flag) {},
   parentForm: null,
   initVirtualElement: function(el) {

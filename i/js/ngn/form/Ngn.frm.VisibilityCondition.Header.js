@@ -1,5 +1,5 @@
-Ngn.Frm.VisibilityCondition.Header = new Class({
-  Extends: Ngn.Frm.VisibilityCondition,
+Ngn.frm.VisibilityCondition.Header = new Class({
+  Extends: Ngn.frm.VisibilityCondition,
   initSectionSelector: function() {
     this.sectionSelector = '.hgrp_' + this.sectionName;
   }

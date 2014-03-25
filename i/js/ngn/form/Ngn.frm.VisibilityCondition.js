@@ -1,4 +1,4 @@
-Ngn.Frm.VisibilityCondition = new Class({
+Ngn.frm.VisibilityCondition = new Class({
 
   initialize: function(eForm, sectionName, condFieldName, cond) {
     this.sectionName = sectionName;
@@ -42,14 +42,14 @@ Ngn.Frm.VisibilityCondition = new Class({
           flag ? this.fx.slideIn() : this.fx.slideOut();
       } else {
         this.eSection.setStyle('display', flag ? 'block' : 'none');
-        this.eSection.getElements(Ngn.Frm.selector).each(function(el) {
+        this.eSection.getElements(Ngn.frm.selector).each(function(el) {
           el.set('disabled', !flag);
         });
       }
     }.bind(this);
-    toggleSection(Ngn.Frm.getValueByName(condFieldName), false);
-    Ngn.Frm.addEvent('change', condFieldName, toggleSection, true);
-    Ngn.Frm.addEvent('focus', condFieldName, toggleSection, true);
+    toggleSection(Ngn.frm.getValueByName(condFieldName), false);
+    Ngn.frm.addEvent('change', condFieldName, toggleSection, true);
+    Ngn.frm.addEvent('focus', condFieldName, toggleSection, true);
   }
 
 });

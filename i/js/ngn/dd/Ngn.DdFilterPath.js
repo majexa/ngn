@@ -116,7 +116,7 @@ Ngn.DdFilterPath.Interface = new Class({
           this.addMarker('dateCreate');
         } else {
           value = value.split(',');
-          var els = Ngn.Frm.getElements(name);
+          var els = Ngn.frm.getElements(name);
           for (var i = 0; i < els.length; i++) {
             if (els[i].get('type') == 'checkbox') {
               if (Arr.inn(els[i].get('value'), value)) els[i].set('checked', true);
@@ -136,7 +136,7 @@ Ngn.DdFilterPath.Interface = new Class({
         var name, value;
         if (el.get('type') == 'checkbox' && el.getParent('.tagsTreeSelect')) {
           var pathFilterTypeDataEl = el.getParent('.tagsTreeSelect');
-          var values = Ngn.Frm.toObj(pathFilterTypeDataEl);
+          var values = Ngn.frm.toObj(pathFilterTypeDataEl);
           name = pathFilterTypeDataEl.get('data-name');
           value = values[name] ? values[name].join(',') : false;
         } else {
@@ -158,7 +158,7 @@ Ngn.DdFilterPath.Interface = new Class({
       /*
        return;
        el.getElement('.ok').addEvent('click', function() {
-       var d = Ngn.Frm.toObj(el);
+       var d = Ngn.frm.toObj(el);
        c(d);
 
        return;
@@ -175,10 +175,10 @@ Ngn.DdFilterPath.Interface = new Class({
        this.grid.reload();
        }.bind(this));
        el.getElement('.reset').addEvent('click', function() {
-       Ngn.Frm.getElements('from').each(function(el) {
+       Ngn.frm.getElements('from').each(function(el) {
        el.set('value', '');
        });
-       Ngn.Frm.getElements('to').each(function(el) {
+       Ngn.frm.getElements('to').each(function(el) {
        el.set('value', '');
        });
        this.filterPath.removeFilter('d', 'default');
@@ -188,10 +188,10 @@ Ngn.DdFilterPath.Interface = new Class({
        el.getElement('.today').addEvent('click', function() {
        var d = new Date();
        var today = [d.getDate(), d.getMonth() + 1, d.getFullYear()];
-       Ngn.Frm.getElements('from').each(function(el, n) {
+       Ngn.frm.getElements('from').each(function(el, n) {
        el.set('value', today[n]);
        });
-       Ngn.Frm.getElements('to').each(function(el, n) {
+       Ngn.frm.getElements('to').each(function(el, n) {
        el.set('value', today[n]);
        });
        });

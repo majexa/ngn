@@ -21,5 +21,5 @@ return [
   //'i/js/ngn/Ngn.Dialog.TreeEdit.Pages.js',
   //'site.userGroup',
   //'pageBlocks',
-  //'i/js/ngn/form/Ngn.Frm.ImagedRadio.js'
+  //'i/js/ngn/form/Ngn.frm.ImagedRadio.js'
 ];
