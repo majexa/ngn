@@ -5,8 +5,8 @@
   <meta content="NGN" name="generator"/>
   <title><?= $d['pageHeadTitle'] ?></title>
   <? /*<script type="text/javascript" src="/i/js/tiny_mce/tiny_mce.js"></script>*/ ?>
-  <?= Sflm::flm('js')->getTags('site') ?>
-  <?= Sflm::flm('css')->getTags('site') ?>
+  <?= Sflm::frontend('js')->getTags('site') ?>
+  <?= Sflm::frontend('css')->getTags('site') ?>
 </head>
 <body>
 <div id="layout" class="pageName_<?= Misc::name2id($d['page']['name'])?><?= $d['settings']['defaultAction'] == 'blocks' ? ' blocksLayout' : '' ?>">

@@ -1,5 +1,6 @@
 <? $this->tpl($d['name'].'/head', $d) ?>
 <body<?= $d['bodyClass'] ? ' class="'.$d['bodyClass'].'"' : ''?>>
+<? $this->tpl('common/sflmDebug') ?>
 <table cellpadding="0" cellspacing="0" height="100%" width="100%" id="body">
 <tr><td height="100%" valign="top">
 <div class="admin">

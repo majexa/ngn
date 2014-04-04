@@ -209,7 +209,7 @@ Ngn.checkboxesSelected = function(esCheckboxes) {
 function c(t) {
   if ($defined(console) && console.log) {
     console.log(t);
-    //console.trace();
+    console.trace();
   }
 };
 
@@ -820,33 +820,6 @@ Ngn.whenElPresents = function(eParent, selector, action) {
     return eParent.getElement(selector);
   }, action);
 };
-
-Ngn.dialogable = function() {
-  Ngn.addBtnsAction('a.dialogForm', function(eBtn) {
-    new Ngn.Dialog.Queue.Request.Form({
-      url: eBtn.get('href')
-    });
-    eBtn.set('href', '#')
-  });
-  /*
-   window.document.getElements('a.dialogable').each(function(eA){
-   var url = eA.get('href');
-   eA.set('href', '#');
-   eA.addEvent('click', function(e) {
-   e.preventDefault();
-   var dialog = eA.get('data-dialog');
-   if (dialog) {
-   var cls = eval('Ngn.'+ucfirst(dialog));
-   } else {
-   var cls = Ngn.Dialog;
-   }
-   new cls({
-   url: url
-   });
-   });
-   });
-   */
-}
 
 Ngn.EmptyError = new Class({
   Extends: Error,

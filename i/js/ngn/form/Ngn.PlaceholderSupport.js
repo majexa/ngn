@@ -31,7 +31,7 @@ Ngn.PlaceholderSupport = new Class({
     });
   },
 
-  LightenDarkenColor: function LightenDarkenColor(col,amt) {
+  LightenDarkenColor: function(col,amt) {
      var usePound = false;
     if ( col[0] == "#" ) {
         col = col.slice(1);

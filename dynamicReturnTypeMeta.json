@@ -18,10 +18,16 @@
     },
     {
       "class": "\\Sflm",
-      "method": "flm",
+      "method": "frontend",
       "position": 0,
       "mask": "SflmFrontend%s"
     },
+    {
+      "class": "\\Sflm",
+      "method": "resetFrontend",
+      "position": 0,
+      "mask": "SflmFrontend%s"
+    }
   ]
 }
 

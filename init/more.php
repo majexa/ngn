@@ -3,10 +3,12 @@
 // NGN core
 require_once NGN_PATH.'/init/core.php';
 
-Ngn::addBasePath(NGN_PATH.'/more', 1);
+// NGN more ----------
+define('MORE_PATH', NGN_PATH . '/more');
+Ngn::addBasePath(MORE_PATH, 1);
 
 // Определение этой константы должно проходить в "project/site/config/constants/core"
-if (PROJECT_KEY == '') die('Constant PROJECT_KEY is empty');
+if (!PROJECT_KEY) die('Constant PROJECT_KEY is empty');
 
 // Для удачной инициализации NGN необходимо, что бы были определены следующие константы:
 if (!is_dir(NGN_PATH)) die('Dir "'.NGN_PATH.'" not exists');
@@ -31,12 +33,19 @@ if (file_exists(SITE_PATH.'/config/constants/more.php')) {
   // опциональное определение констант, что определяются в следующем require
   require SITE_PATH.'/config/constants/more.php';
 }
-require NGN_PATH.'/config/constants/more.php';
+require MORE_PATH.'/config/constants/default.php';
+require MORE_PATH.'/config.php'; // what is it? name it
 // ---------------------------------------------------
-require LIB_PATH.'/more/config.php';
+require_once MORE_PATH.'/lib/sflm/SflmBase.class.php';
+require_once MORE_PATH.'/lib/sflm/SflmJs.class.php';
+require_once MORE_PATH.'/lib/sflm/SflmCss.class.php';
+require_once MORE_PATH.'/lib/sflm/Sflm.class.php';
 // ---------------------------------------------------
 
-if (!is_writable(SITE_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.SITE_PATH.'/'.DATA_DIR.'/cache" is not writable (init/more.php)');
+Sflm::$absBasePaths['m'] = WEBROOT_PATH.'/m';
+
+if (!defined('SITE_PATH')) die('Error: SITE_PATH not defined'."\n".getBacktrace(false));
+if (!is_writable(SITE_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.SITE_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
 
 // Включаем кэширование списка классов
 // Кэшировать нужно с помощью FileCache. Значит нужно его подключить
@@ -52,19 +61,15 @@ Lib::$isCache = true;
 Err::noticeSwitch(true);
 
 if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) {
-  require_once LIB_PATH.'/core/Memc.class.php';
-  require_once LIB_PATH.'/core/Mem.class.php';
-  require_once LIB_PATH.'/more/core/UrlCache.class.php';
+  require_once CORE_PATH.'/lib/Memc.class.php';
+  require_once CORE_PATH.'/lib/Mem.class.php';
+  require_once MORE_PATH.'/lib/core/UrlCache.class.php';
   FileCache::clean();
   Mem::clean();
   UrlCache::clearCache();
-  require_once LIB_PATH.'/more/sflm/SflmBase.class.php';
-  require_once LIB_PATH.'/more/sflm/SflmJs.class.php';
-  require_once LIB_PATH.'/more/sflm/SflmCss.class.php';
-  require_once LIB_PATH.'/more/sflm/Sflm.class.php';
   Sflm::clearCache();
   die('cc');
 }
 
-require LIB_PATH.'/more/common/date.func.php';
-require LIB_PATH.'/more/common/tpl.func.php';
+require MORE_PATH.'/lib/common/date.func.php';
+require MORE_PATH.'/lib/common/tpl.func.php';
