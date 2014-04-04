@@ -1,1 +1,1 @@
-<?= Sflm::flm('js')->getCode(O::get('Req')->rq('lib'));
+<?= Sflm::frontend('js')->getCode(O::get('Req')->rq('lib'));

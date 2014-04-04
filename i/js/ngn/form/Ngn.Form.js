@@ -1,4 +1,4 @@
-// @requires Ngn.Frm, Ngn.lightbox
+// @requires Ngn.frm, Ngn.lightbox, Ngn.frm.maxLength
 
 Ngn.Form = new Class({
   Implements: [Options, Events, Class.Occlude],
@@ -430,6 +430,7 @@ Ngn.Form.ElInit = new Class({
         // throw new Error('Class "'+clsName+'" is not defined');
         return;
       }
+      //c('... ' + clsName);
       if (eRow.retrieve('initialized')) return;
       new cls(this.type, this.form, eRow);
       eRow.store('initialized', true);

@@ -74,7 +74,7 @@ Ngn.Request.JSON = new Class({
       return;
     }
     this.onSuccess(this.response.json, text);
-  },
+  }
 
 });
 

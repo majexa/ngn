@@ -5,5 +5,5 @@ Ngn.vkApiId = <?= Arr::jsValue(Config::getVarVar('vk', 'appId', true)) ?>;
 Ngn.projectKey = '<?= PROJECT_KEY ?>';
 Ngn.siteTitle = '<?= SITE_TITLE ?>';
 Ngn.siteDomain = '<?= SITE_DOMAIN ?>';
-Ngn.auth = <?= Arr::jsValue(Auth::getAll()) ?>;
+Ngn.auth = <?= json_encode(Auth::getAll()) ?>;
 Ngn.fromVk = <?= Arr::jsValue((bool)isset($_SESSION['fromVk'])) ?>;

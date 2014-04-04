@@ -13,7 +13,7 @@
   <div id="treeContainer"></div></div>
 </div>
 
-<?= Sflm::flm('js')->getTags('mif.tree') ?>
+<?= Sflm::frontend('js')->getTags('mif.tree') ?>
 
 <script type="text/javascript">
 var te;

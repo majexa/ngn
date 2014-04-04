@@ -1,4 +1,4 @@
-Ngn.Frm = {};
+Ngn.frm = {};
 Ngn.frm.init = {}; // объект для хранения динамических функций иниыиализации
 Ngn.frm.html = {};
 Ngn.frm.selector = 'input,select,textarea';

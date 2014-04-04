@@ -2,6 +2,6 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <?= Sflm::flm('js')->getTags() ?>
-  <?= Sflm::flm('css')->getTags() ?>
+  <?= Sflm::frontend('js')->getTags() ?>
+  <?= Sflm::frontend('css')->getTags() ?>
 </head>

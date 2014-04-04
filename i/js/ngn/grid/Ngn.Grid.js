@@ -290,7 +290,7 @@ Ngn.Grid.defaultDialogOpts = {
 Ngn.Grid.menu = {};
 
 Ngn.GridBtnAction = new Class({
-  Extends: Ngn.BtnAction,
+  Extends: Ngn.Btn.Action,
   initialize: function(grid) {
     this.grid = grid;
     this.classAction = true;

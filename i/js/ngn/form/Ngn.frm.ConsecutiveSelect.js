@@ -30,11 +30,13 @@ Ngn.frm.ConsecutiveSelect = new Class({
   },
 
   loadSelect: function(eChangedSelect) {
+    var next;
     while (next = eChangedSelect.getNext()) next.dispose(); // убираем все элементы после
     if (!eChangedSelect.get('value')) return;
     var eRow = eChangedSelect.getParent('.element');
     eRow.addClass('hLoader');
     eChangedSelect.set('disabled', true);
+    return;
     this.fireEvent('request', [eChangedSelect]);
     new Request({
       url: this.url(),
@@ -46,7 +48,7 @@ Ngn.frm.ConsecutiveSelect = new Class({
         this.fireEvent('complete');
         this.init();
       }.bind(this)
-    }).GET({
+    }).get({
         name: Ngn.frm.getPureName(eChangedSelect.get('name')),
         id: eChangedSelect.get('value')
       });
@@ -55,9 +57,10 @@ Ngn.frm.ConsecutiveSelect = new Class({
 });
 
 /**
- * @param Ngn.Form.El.Dd
- * @param Ngn.frm.ConsecutiveSelect
- * @returns object of class Ngn.frm.ConsecutiveSelect
+ * @param cls Ngn.frm.ConsecutiveSelect class
+ * @param el Ngn.Form.El.Dd
+ * @param opt
+ * @returns Ngn.frm.ConsecutiveSelect object
  */
 Ngn.frm.ConsecutiveSelect.factory = function(cls, el, opt) {
   opt = Object.merge({
