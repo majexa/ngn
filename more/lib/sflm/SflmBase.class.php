@@ -151,6 +151,7 @@ abstract class SflmBase {
   }
 
   function getAbsPath($path) {
+    if ($this->isPackage($path)) throw new Exception("It can not be package");
     $p = parse_url($path);
     $path = $p['path'];
     foreach (Sflm::$absBasePaths as $package => $absBasePath) {
@@ -160,7 +161,7 @@ abstract class SflmBase {
     }
     $prefix = explode('/', $path)[0];
     if (in_array($prefix, RouterScripts::prefixes())) return $this->getScriptPath($path);
-    throw new Exception("Unexpected prefix '$prefix'");
+    throw new Exception("Unexpected prefix '$prefix' in path '$path'");
   }
 
   function getPath($absPath, $whyDoUWantToGetThis = null) {

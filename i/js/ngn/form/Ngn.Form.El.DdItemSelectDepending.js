@@ -4,7 +4,6 @@ Ngn.Form.El.DdItemSelectDepending = new Class({
 
   init: function() {
     var data = this.eRow.getElement('.data');
-    c('all ok');
     Ngn.frm.ConsecutiveSelect.factory(Ngn.frm.DdItemSelectDepending, this, {
       strName: data.get('data-strName'),
       parentTagFieldName: data.get('data-parentTagFieldName'),

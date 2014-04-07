@@ -93,9 +93,11 @@ abstract class SflmFrontend {
     }
     Sflm::output("Update collected '{$this->name}.{$this->sflm->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
-    if (!$this->sflm->storeLib($this->name, $this->code())) throw new Exception('it should not have happened');
-    $this->incrementVersion();
-    $this->stored = true;
+    //if (!$this->sflm->storeLib($this->name, $this->code())) throw new Exception('it should not have happened');
+    if ($this->sflm->storeLib($this->name, $this->code())) {
+      $this->incrementVersion();
+      $this->stored = true;
+    }
   }
 
   function storePaths() {
@@ -151,6 +153,7 @@ abstract class SflmFrontend {
    * @param string $path Добавляет к текущему фронтенду runtime путь
    */
   function _addPath($path) {
+    if ($this->sflm->isPackage($path)) throw new Exception("Can not add packages");
     if (in_array($path, $this->pathsCache)) {
       Sflm::output("New path '$path' already exists");
       return;

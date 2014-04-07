@@ -1,5 +1,6 @@
 <?php
 
+
 define('DISP_TYPE_TPL_BY_PATH', 1);
 define('DISP_TYPE_DB_TREE_BY_PATH', 2);
 

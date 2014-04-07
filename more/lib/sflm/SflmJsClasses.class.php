@@ -144,7 +144,7 @@ class SflmJsClasses {
 
   protected function addObjectStrict($class, $source) {
     $this->addObject($class, $source, function () use ($class, $source) {
-      throw new Exception($this->captionPrefix($source, $class)."NOT FOUND");
+      throw new Exception($this->captionPrefix($source, $class)." NOT FOUND");
     });
   }
 
@@ -236,6 +236,7 @@ class SflmJsClasses {
   }
 
   function add($str, $source = 'direct') {
+    if (!$this->isObjectOrClass($str) and $this->frontend->sflm->isPackage($str)) throw new Exception("Path '$str' can not be a package. src: $source");
     $this->isObjectOrClass($str) ? $this->addObjectStrict($str, $source) : $this->frontend->_addPath($str);
   }
 
@@ -246,16 +247,17 @@ class SflmJsClasses {
         return $this->isClass($class);
       });
     }
-    if (preg_match_all('/\s+(Ngn\.[A-Za-z]+\.[A-Z][A-Za-z_]+)/', $c, $m)) {
+    if (preg_match_all('/\s+(Ngn\.[A-Za-z]+\.[A-Z][A-Za-z_]*)/', $c, $m)) {
       foreach ($m[1] as $class) if (!in_array($class, $classes)) $classes[] = $class;
     }
     return $classes;
   }
 
   function processNgnClasses($code, $path = 'default') {
+    //die2('!');
     $code = preg_replace('!/\*.*?\*/!s', '', $code);
     Sflm::output("Process « Ngn.[Upper]*» patterns by path '$path'");
-    foreach ($this->parseNgnClasses($code, (bool)strstr($path, 'Ngn.Form.El.DdItemSelectDepending')) as $class) {
+    foreach ($this->parseNgnClasses($code) as $class) {
       $this->addObjectStrict($class, "$path ' Ngn.Upper*' pattern");
     }
   }

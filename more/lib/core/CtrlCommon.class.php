@@ -153,7 +153,7 @@ use Options;
    */
   public $path;
 
-  public function __construct(Router $router, array $options = []) {
+  function __construct(Router $router, array $options = []) {
     $this->router = $router;
     $this->setOptions($options);
     $this->req = empty($this->options['req']) ? $router->req : $this->options['req'];

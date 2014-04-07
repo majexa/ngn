@@ -2,7 +2,7 @@
 
 class Ctrl404 extends CtrlCommon {
 
-  public function __construct(Router $router, Exception $error, array $options = []) {
+  function __construct(Router $router, Exception $error, array $options = []) {
     $this->error = $error;
     parent::__construct($router, $options);
   }
