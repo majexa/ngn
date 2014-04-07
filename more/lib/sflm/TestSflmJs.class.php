@@ -7,6 +7,18 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::resetFrontend('js', 'dummy');
   }
 
+  function testChangeVersion() {
+    Sflm::frontend('js')->addObject('Ngn.sub.A');
+    $version1 = Sflm::frontend('js')->version();
+    Sflm::resetFrontend('js', 'dummy');
+    $version2 = Sflm::frontend('js')->version();
+    Sflm::frontend('js')->addObject('Ngn.sub.B');
+    Sflm::frontend('js')->version();
+    $version3 = Sflm::frontend('js')->version();
+  }
+
+  /*
+
   function testResetFrontend() {
     Sflm::resetFrontend('js', 'test/dependencies');
     $this->assertTrue(Sflm::frontendName() == 'test/dependencies');
@@ -72,5 +84,7 @@ class TestSflmJs extends ProjectTestCase {
     $newPaths = Sflm::frontend('js')->newPaths;
     $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
   }
+
+  */
 
 }

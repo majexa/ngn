@@ -15,7 +15,7 @@ class SflmFrontendJs extends SflmFrontend {
     $this->addPath($path, $source);
   }
 
-  function addPath($path, $source) {
+  function addPath($path, $source = 'direct') {
     $this->classes->processPath($path, $source);
   }
 

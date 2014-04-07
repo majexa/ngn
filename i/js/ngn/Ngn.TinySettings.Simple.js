@@ -1,6 +1,3 @@
-/**
- * @requires tiny
- */
 Ngn.TinySettings.Simple = new Class({
   Extends: Ngn.TinySettings,
 
