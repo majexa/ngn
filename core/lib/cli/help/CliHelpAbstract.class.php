@@ -159,6 +159,7 @@ TEXT
     $name = $this->cmdName($class);
     $s = '';
     foreach ($methods as $method) {
+      if ($method['method'][0] == '_') continue;
       $nameCmd = $name ? $name.' ' : '';
       $rOptions = $this->renderOptions($method['options']);
       $rOptions = $rOptions ? ' '.$rOptions : '';

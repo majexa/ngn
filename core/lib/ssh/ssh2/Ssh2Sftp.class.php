@@ -5,6 +5,7 @@ class Ssh2Sftp {
   protected $sftp;
 
   function __construct(Ssh2Connection $connection) {
+    die2('%%');
     $this->sftp = ssh2_sftp($connection());
   }
 
