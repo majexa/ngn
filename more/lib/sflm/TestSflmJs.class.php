@@ -7,6 +7,27 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::resetFrontend('js', 'dummy');
   }
 
+  function testA() {
+    Sflm::frontend('js')->addObject('Ngn.Form.Upload.Single');
+  }
+  /*
+  function testClearCache() {
+    Sflm::frontend('js')->addObject('Ngn.Form.El.Phone');
+    Sflm::frontend('js')->store();
+    Sflm::clearCache();
+    // ни статического ни динамического кэша не существует
+    $this->assertFalse((bool)FileCache::c()->load(Sflm::frontend('js')->pathsCacheKey()), 'Dynamic cache must be empty');
+    $this->assertFalse(file_exists(Sflm::frontend('js')->cacheFile()), 'Static cache file can not exists. '.Sflm::frontend('js')->cacheFile());
+  }
+
+  function testParentNamespaceInitInTheSameFile() {
+    Sflm::resetFrontend('js')->addObject('Ngn.namespace.A');
+  }
+
+  function testAddAllObjects() {
+    //Sflm::resetFrontend('js', 'default')->addObject('Ngn.Grid');
+  }
+
   function testChangeVersion() {
     Sflm::frontend('js')->addObject('Ngn.sub.A');
     $version1 = Sflm::frontend('js')->version();
@@ -16,8 +37,6 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::frontend('js')->version();
     $version3 = Sflm::frontend('js')->version();
   }
-
-  /*
 
   function testResetFrontend() {
     Sflm::resetFrontend('js', 'test/dependencies');
@@ -68,14 +87,6 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertTrue(in_array('Ngn.frm', Sflm::frontend('js')->classes->existingObjects));
   }
 
-  function testClearCache() {
-    Sflm::frontend('js')->addObject('Ngn.Form.El.Phone');
-    Sflm::frontend('js')->store();
-    Sflm::clearCache();
-    // ни статического ни динамического кэша не существует
-    $this->assertFalse((bool)FileCache::c()->load(Sflm::frontend('js')->pathsCacheKey()), 'Dynamic cache must be empty');
-    $this->assertFalse(file_exists(Sflm::frontend('js')->cacheFile()), 'Static cache file can not exists. '.Sflm::frontend('js')->cacheFile());
-  }
 
   function testEmptyNewPathsAfterReset() {
     (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
@@ -85,6 +96,6 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
   }
 
-  */
+*/
 
 }

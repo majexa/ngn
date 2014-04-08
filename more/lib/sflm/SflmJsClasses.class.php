@@ -149,7 +149,13 @@ class SflmJsClasses {
   }
 
   protected function captionPrefix($source, $name = null) {
+    if ($name[strlen($name)-1] == '.') throw new Exception("incorrect name '$name'");
     return $name ? "object '$name' (src: $source)." : "src: $source";
+  }
+
+  protected function namespaceInitExists($code, $namespace) {
+    if (preg_match("/$namespace = {}/", $code, $m)) return true;
+    return false;
   }
 
   /**
@@ -160,15 +166,26 @@ class SflmJsClasses {
    * @throws Exception
    */
   function addObject($name, $source, Closure $failure = null, Closure $success = null, $ignoreNamespaceParents = false) {
+    // if ($name[strlen($name)-1] == '.') throw new Exception("incorrect name '$name'. src: $source");
     // Добавление классов происходит ниже
     if (in_array($name, $this->existingObjects)) {
       Sflm::output('Skip adding '.$this->captionPrefix($source, $name).' EXISTS');
       return false;
     }
     if (!$ignoreNamespaceParents and ($namespaceParents = $this->namespaceParents($name))) {
+      // Неободимо найти путь к объекту $name для проверки инициализации родительских неймспейсов в файле объекта
+      if (isset($this->objectPaths[$name])) {
+        if ($failure) $failure($source);
+        throw new Exception('It should not have happened');
+      }
+      //;
+//      prrc($objectPath);
+//      if ()
+      $objectCode = file_get_contents($this->frontend->sflm->getAbsPath($objectPath));
       // Проверяем всех предков. Подключены ли они. Если вызов происходит не из файла содержащего вероятного родителя
       foreach ($namespaceParents as $parent) {
-        if (!in_array($parent, $this->existingObjects)) {
+        // Если неймспейс не найден в файле объекта и его нет в существующих объекта, пытаемся добавить
+        if (!$this->namespaceInitExists($objectCode, $parent) and !in_array($parent, $this->existingObjects)) {
           $this->addObjectStrict($parent, "[$source] ('$name' parent namespace)");
         }
       }
@@ -242,7 +259,7 @@ class SflmJsClasses {
 
   function parseNgnClasses($c) {
     $classes = [];
-    if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]+)/', $c, $m)) {
+    if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]*[A-Za-z_])/', $c, $m)) {
       $classes = array_filter($m[1], function ($class) {
         return $this->isClass($class);
       });
@@ -253,12 +270,14 @@ class SflmJsClasses {
     return $classes;
   }
 
-  function processNgnClasses($code, $path = 'default') {
+  function processNgnClasses($code, $source = 'default') {
     //die2('!');
     $code = preg_replace('!/\*.*?\*/!s', '', $code);
-    Sflm::output("Process « Ngn.[Upper]*» patterns by path '$path'");
+    Sflm::output("Process « Ngn.[Upper]*» patterns by path '$source'");
     foreach ($this->parseNgnClasses($code) as $class) {
-      $this->addObjectStrict($class, "$path ' Ngn.Upper*' pattern");
+
+
+      $this->addObjectStrict($class, "$source « Ngn.Upper*»|« Ngn.anyThing.Upper*» pattern");
     }
   }
 
