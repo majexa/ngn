@@ -10,7 +10,9 @@ class TestRunnerLib extends TestRunnerNgn {
   }
 
   function __construct($libPath, $filterNames = null) {
-    $this->libPath = static::replace($libPath);
+    $r = static::replace($libPath);
+    if (Misc::hasSuffix('.php', $r)) $r = dirname($r);
+    $this->libPath = $r;
     parent::__construct($filterNames);
   }
 

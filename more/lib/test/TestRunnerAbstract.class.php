@@ -3,6 +3,8 @@
 Lib::addPearAutoloader('PHPUnit');
 require_once 'PHPUnit/Autoload.php';
 Lib::addPearAutoloader('PHP');
+Lib::addPearAutoloader('File');
+Lib::addPearAutoloader('Text');
 
 class TestRunnerAbstract {
 
