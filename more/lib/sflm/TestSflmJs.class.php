@@ -10,6 +10,7 @@ class TestSflmJs extends ProjectTestCase {
   function testA() {
     Sflm::frontend('js')->addObject('Ngn.Form.Upload.Single');
   }
+
   /*
   function testClearCache() {
     Sflm::frontend('js')->addObject('Ngn.Form.El.Phone');

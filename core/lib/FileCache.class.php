@@ -60,7 +60,10 @@ class FileCache {
    * @param   string  Zend_Cache-тэг
    */
   static function clean() {
-    self::c()->clean(Zend_Cache::CLEANING_MODE_ALL);
+    foreach (glob((new static([]))->folder().'/*') as $file) {
+      if ($file[0] != '.') unlink($file);
+    }
+    //self::c()->clean(); @todo не работает
   }
 
 }
