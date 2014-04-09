@@ -1,1 +1,1 @@
-<?= '<h1>NGN: setup success</h1>'
+<?= '<h1>NGN: setup success</h1>';
