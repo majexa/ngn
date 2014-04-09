@@ -20,6 +20,10 @@ class CliTestRunner extends CliHelpDirectClasses {
         'class' => 'TestRunnerLib',
         'name' => 'lib'
       ],
+      [
+        'class' => 'TestCliCommon',
+        'name' => 'c'
+      ],
     ];
   }
 
