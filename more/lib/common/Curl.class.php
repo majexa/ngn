@@ -18,7 +18,6 @@ class Curl {
   }
 
   protected function init() {
-    die2(2);
     $this->fSocket = curl_init();
     $this->loadDefaults();
   }
