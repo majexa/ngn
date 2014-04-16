@@ -158,6 +158,7 @@ abstract class SflmFrontend {
       Sflm::output("New path '$path' already exists");
       return;
     }
+    //die2('*');
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
     $this->changed = true;

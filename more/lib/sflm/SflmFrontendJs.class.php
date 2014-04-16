@@ -42,6 +42,7 @@ class SflmFrontendJs extends SflmFrontend {
    * @return bool
    */
   function exists($str) {
+    die2(Sflm::frontend('js')->getPaths());
     return Arr::strExists(Sflm::frontend('js')->getPaths(), $str);
   }
 
