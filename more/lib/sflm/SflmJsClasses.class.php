@@ -44,7 +44,7 @@ class SflmJsClasses {
         return;
       }
       $classes = $this->parseClassesDefinition(file_get_contents($this->frontend->sflm->getAbsPath($path)));
-      foreach ($classes as $className) $this->existingObjectPaths[$className] = $path;
+      die2($classes);
       $this->existingObjects = array_merge($this->existingObjects, $classes);
     }
     $this->storeExistingObjects();
@@ -99,6 +99,7 @@ class SflmJsClasses {
       }
     }
     $this->objectPaths = array_merge($this->existingObjectPaths, $objectPaths);
+    //die2($this->objectPaths);
     FileCache::c()->save($this->objectPaths, 'jsObjectPaths');
   }
 
@@ -159,41 +160,42 @@ class SflmJsClasses {
   }
 
   /**
-   * Добавляет к фронтенду класс или объект
-   *
-   * @param string Имя класса или объекта
-   * @param string Описание источника, откуда происходит добавление класса
+   * @param string $name Имя класса или объекта
+   * @param string $source Описание источника, откуда происходит добавление класса
+   * @param callable $failure
+   * @param callable $success
+   * @param bool $ignoreNamespaceParents
+   * @return bool
    * @throws Exception
    */
   function addObject($name, $source, Closure $failure = null, Closure $success = null, $ignoreNamespaceParents = false) {
-    // if ($name[strlen($name)-1] == '.') throw new Exception("incorrect name '$name'. src: $source");
+    if (!isset($this->objectPaths[$name])) {
+      //die2([$this->objectPaths, $name]);
+      if ($failure) $failure($source);
+      throw new Exception("Object '$name' path does not exists. src: $source");
+    }
     // Добавление классов происходит ниже
     if (in_array($name, $this->existingObjects)) {
       Sflm::output('Skip adding '.$this->captionPrefix($source, $name).' EXISTS');
       return false;
     }
+    $this->storeExistingObjectsInObjectFile($name, $source);
     if (!$ignoreNamespaceParents and ($namespaceParents = $this->namespaceParents($name))) {
-      // Неободимо найти путь к объекту $name для проверки инициализации родительских неймспейсов в файле объекта
-      if (isset($this->objectPaths[$name])) {
-        if ($failure) $failure($source);
-        throw new Exception('It should not have happened');
-      }
-      //;
-//      prrc($objectPath);
-//      if ()
-      $objectCode = file_get_contents($this->frontend->sflm->getAbsPath($objectPath));
+      // Неободимо найти путь к файлу с объектом $name для проверки инициализации родительских неймспейсов в файле объекта
+      $objectCode = file_get_contents($this->frontend->sflm->getAbsPath($this->objectPaths[$name]));
       // Проверяем всех предков. Подключены ли они. Если вызов происходит не из файла содержащего вероятного родителя
       foreach ($namespaceParents as $parent) {
         // Если неймспейс не найден в файле объекта и его нет в существующих объекта, пытаемся добавить
         if (!$this->namespaceInitExists($objectCode, $parent) and !in_array($parent, $this->existingObjects)) {
+          output3("parent=$parent, source=$source, name=$name");
           $this->addObjectStrict($parent, "[$source] ('$name' parent namespace)");
         }
       }
     }
-    if (in_array($name, $this->existingObjects)) {
-      Sflm::output('Skip adding '.$this->captionPrefix($source, $name).' EXISTS AFTER PARSING NAMESPACE PARENTS');
-      return false;
-    }
+    //if (in_array($name, $this->existingObjects)) {
+    //  Sflm::output('Skip adding '.$this->captionPrefix($source, $name).' EXISTS AFTER PARSING NAMESPACE PARENTS');
+    //  return false;
+    //}
     $this->_addObject($name, $source, $failure);
     $this->_initObjectPaths();
     return true;
@@ -203,10 +205,10 @@ class SflmJsClasses {
   }
 
   protected function _addObject($name, $source, Closure $failure) {
-    if (!isset($this->objectPaths[$name])) {
-      if ($failure) $failure($source);
-      return;
-    }
+    //if (!isset($this->objectPaths[$name])) {
+    //  if ($failure) $failure($source);
+    //  return;
+    //}
     if (!$this->isClass($name)) {
       $this->storeExistingObject($name, 'object adding');
     } // добавляем сразу, т.к. парсинг объявления объектов не поддерживается
@@ -221,26 +223,40 @@ class SflmJsClasses {
    *
    * @param $path
    */
+
+  /**
+   * Должно вызываться уже после добавления пути в фронтенд-библиотеку. Ф-я проверит наличие классов, определенных
+   * в файле по этому пути, добавит их в существующие, а потом проверит все классы, используемые
+   * в этом файле на присутствие. Если какого-то класса не будет среди определённых, то ф-я получит путь
+   * к файлу, где лежит этот класс, и добавит этот путь во фронтенд-библиотеку
+   *
+   * @param string $path Путь к файлу
+   * @param string|null $source Описание источника, откуда происходит вызов обработки пути
+   * @param string|null $name Имя объекта/класса который должен находиться по этому пути
+   */
   function processPath($path, $source = null, $name = null) {
-    //LogWriter::str('sflm', $path);
     Sflm::output("Processing contents of '$path'");
-    $c = file_get_contents($this->frontend->sflm->getAbsPath($path));
-    foreach ($this->parseClassesDefinition($c) as $class) {
-      if (in_array($class, $this->existingObjects)) continue;
-      // Эти классы уже определены
-      Sflm::output("Class '$class' exists in $path. [definition] (src: $source)");
-      $this->storeExistingObject($class, 'definition');
-    }
-    foreach ($this->parseRequired($c) as $class) $this->add($class, "$path required");
-    foreach ($this->parseNgnExtendsClasses($c) as $class) $this->addObjectStrict($class, ($name ? : $path).' extends');
+    $code = file_get_contents($this->frontend->sflm->getAbsPath($path));
+    foreach ($this->parseRequired($code) as $class) $this->add($class, "$path required");
+    foreach ($this->parseNgnExtendsClasses($code) as $class) $this->addObjectStrict($class, ($name ? : $path).' extends');
     Sflm::output('Adding '.($source ? $this->captionPrefix($source, $name).' ' : '')."PATH $path");
     if ($source and isset($this->pathWithSourceProcessor)) {
       $pathWithSourceProcessor = $this->pathWithSourceProcessor;
       $pathWithSourceProcessor($path);
     }
     $this->frontend->_addPath($path, true);
-    $this->processNgnClasses($c, $path);
-    foreach ($this->parseRequiredAfterClasses($c) as $class) $this->add($class, "$path requiredAfter");
+    $this->processNgnClasses($code, $path);
+    foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$path requiredAfter");
+  }
+
+  protected function storeExistingObjectsInObjectFile($name, $source) {
+    $code = file_get_contents($this->frontend->sflm->getAbsPath($this->objectPaths[$name]));
+    foreach ($this->parseClassesDefinition($code) as $class) {
+      if (in_array($class, $this->existingObjects)) continue;
+      // Эти классы уже определены
+      Sflm::output("Class '$class' exists in {$this->objectPaths[$name]}. [definition] (src: $source)");
+      $this->storeExistingObject($class, 'definition');
+    }
   }
 
   /**
@@ -271,12 +287,9 @@ class SflmJsClasses {
   }
 
   function processNgnClasses($code, $source = 'default') {
-    //die2('!');
     $code = preg_replace('!/\*.*?\*/!s', '', $code);
     Sflm::output("Process « Ngn.[Upper]*» patterns by path '$source'");
     foreach ($this->parseNgnClasses($code) as $class) {
-
-
       $this->addObjectStrict($class, "$source « Ngn.Upper*»|« Ngn.anyThing.Upper*» pattern");
     }
   }

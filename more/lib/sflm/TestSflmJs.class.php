@@ -7,12 +7,8 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::resetFrontend('js', 'dummy');
   }
 
-  function testA() {
-    Sflm::frontend('js')->addObject('Ngn.Form.Upload.Single');
-  }
-
-  /*
   function testClearCache() {
+    Sflm::frontend('js')->addObject('Ngn.Form');
     Sflm::frontend('js')->addObject('Ngn.Form.El.Phone');
     Sflm::frontend('js')->store();
     Sflm::clearCache();
@@ -21,13 +17,15 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertFalse(file_exists(Sflm::frontend('js')->cacheFile()), 'Static cache file can not exists. '.Sflm::frontend('js')->cacheFile());
   }
 
+  /*
+
   function testParentNamespaceInitInTheSameFile() {
     Sflm::resetFrontend('js')->addObject('Ngn.namespace.A');
   }
 
-  function testAddAllObjects() {
+  //function testAddAllObjects() {
     //Sflm::resetFrontend('js', 'default')->addObject('Ngn.Grid');
-  }
+  //}
 
   function testChangeVersion() {
     Sflm::frontend('js')->addObject('Ngn.sub.A');
@@ -55,16 +53,6 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertTrue(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.sub.B'));
   }
 
-  // Ngn.sub, Ngn.sub.A to jsExistingObjects_custom
-  function testPathsCaching() {
-    Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
-    Sflm::frontend('js')->store(); //                сторим
-    Sflm::resetFrontend('js'); //                    резетим. нельзя получать код больше одного раза во время одного рантайма
-    $this->assertTrue(Sflm::frontend('js')->exists('Ngn.sub.A'));
-    Sflm::clearCache();
-    $this->assertFalse(Sflm::frontend('js')->exists('Ngn.sub.A'));
-  }
-
   function testCodeCaching_sameAfterReset() {
     Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
     $code = Sflm::frontend('js')->code(); //         получаем код
@@ -88,6 +76,16 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertTrue(in_array('Ngn.frm', Sflm::frontend('js')->classes->existingObjects));
   }
 
+  // Ngn.sub, Ngn.sub.A to jsExistingObjects_custom
+  function testPathsCaching() {
+    Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
+    Sflm::frontend('js')->store(); //                сторим
+    die2(Sflm::frontend('js')->getPaths());
+    Sflm::resetFrontend('js'); //                    резетим. нельзя получать код больше одного раза во время одного рантайма
+    $this->assertTrue(Sflm::frontend('js')->exists('Ngn.sub.A'));
+    Sflm::clearCache();
+    $this->assertFalse(Sflm::frontend('js')->exists('Ngn.sub.A'));
+  }
 
   function testEmptyNewPathsAfterReset() {
     (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
