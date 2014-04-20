@@ -156,6 +156,7 @@ abstract class SflmBase {
     $path = $p['path'];
     foreach (Sflm::$absBasePaths as $package => $absBasePath) {
       if (preg_match('/^\/?'.$package.'\//', $path)) {
+        if (strstr($path, 'Ngn.Request')) die2([$package, $path]);
         return "$absBasePath/".Misc::removePrefix("$package/", ltrim($path, '/'));
       }
     }
