@@ -5,6 +5,6 @@ return [
   'i/js/ac/Autocompleter.js',
   'i/js/ac/Autocompleter.Local.js',
   'i/js/ac/Autocompleter.Request.js',
-  'i/js/ngn/Ngn.Autocompleter.js',
-  'i/js/ngn/Ngn.Autocompleters.js'
+  'i/js/sflm/ngn/Ngn.Autocompleter.js',
+  'i/js/sflm/ngn/Ngn.Autocompleters.js'
 ];

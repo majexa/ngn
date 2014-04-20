@@ -3,10 +3,10 @@
 return [
   'core',
   'dialogs',
-  'i/js/ngn/Ngn.Tips.js',
+  'i/js/sflm/ngn/Ngn.Tips.js',
   'ddForm',
   'ddItems',
   'ddTags',
-  'i/js/ngn/Ngn.ResizableTextarea.js',
-  'i/js/ngn/Ngn.ResizableWisiwig.js',
+  'i/js/sflm/ngn/Ngn.ResizableTextarea.js',
+  'i/js/sflm/ngn/Ngn.ResizableWisiwig.js',
 ];

@@ -5,5 +5,5 @@ return [
   'i/js/picker/Picker.js',
   'i/js/picker/Picker.Attach.js',
   'i/js/picker/Picker.Date.js',
-  'i/js/ngn/Ngn.DatePicker.js',
+  'i/js/sflm/ngn/Ngn.DatePicker.js',
 ];

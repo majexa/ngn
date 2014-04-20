@@ -86,8 +86,7 @@ class SflmJsClasses {
     $objectPaths = [];
     $files = [];
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
-    $autoloadFolder = Sflm::$absBasePaths['i'].'/sflm';
-    die2($autoloadFolder);
+    $autoloadFolder = Sflm::$absBasePaths['i'].'/js/sflm';
     foreach ($files as $file) {
       $class = $this->getObjectName($file);
       if (!strstr($file, $autoloadFolder)) continue; // Динамически подключаются только классы находящиеся в папке $autoloadFullSupportFolder
@@ -106,7 +105,6 @@ class SflmJsClasses {
       }
     }
     $this->objectPaths = array_merge($this->existingObjectPaths, $objectPaths);
-    die2($this->objectPaths);
     FileCache::c()->save($this->objectPaths, 'jsObjectPaths');
   }
 

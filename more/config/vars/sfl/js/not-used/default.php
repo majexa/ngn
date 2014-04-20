@@ -3,10 +3,10 @@
 return [
   'common',
   //'siteAuth',
-  //'i/js/ngn/Ngn.layout.js',
-  //'i/js/ngn/Ngn.SubmitButtons.js',
-  //'i/js/ngn/Ngn.SlideTips.js',
-  //'i/js/ngn/Ngn.SlideTips.Pm.js',
+  //'i/js/sflm/ngn/Ngn.layout.js',
+  //'i/js/sflm/ngn/Ngn.SubmitButtons.js',
+  //'i/js/sflm/ngn/Ngn.SlideTips.js',
+  //'i/js/sflm/ngn/Ngn.SlideTips.Pm.js',
   //'ac',
   //'ratings',
   //'video',
@@ -14,12 +14,12 @@ return [
   //'atlas',
   //'msgs',
   'm/js/site.js',
-  //'i/js/ngn/Ngn.Dialog.BlockEdit.js',
-  //'i/js/ngn/Ngn.TreeEdit.Pages.js',
-  //'i/js/ngn/Ngn.TreeEdit.Pages.site.js',
-  //'i/js/ngn/Ngn.Dialog.NewPage.js',
-  //'i/js/ngn/Ngn.Dialog.TreeEdit.Pages.js',
+  //'i/js/sflm/ngn/Ngn.Dialog.BlockEdit.js',
+  //'i/js/sflm/ngn/Ngn.TreeEdit.Pages.js',
+  //'i/js/sflm/ngn/Ngn.TreeEdit.Pages.site.js',
+  //'i/js/sflm/ngn/Ngn.Dialog.NewPage.js',
+  //'i/js/sflm/ngn/Ngn.Dialog.TreeEdit.Pages.js',
   //'site.userGroup',
   //'pageBlocks',
-  //'i/js/ngn/form/Ngn.frm.ImagedRadio.js'
+  //'i/js/sflm/ngn/form/Ngn.frm.ImagedRadio.js'
 ];

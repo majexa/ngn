@@ -2,5 +2,5 @@
 
 return [
   'grid',
-  'i/js/ngn/dd/Ngn.DdGrid.js'
+  'i/js/sflm/ngn/dd/Ngn.DdGrid.js'
 ];
