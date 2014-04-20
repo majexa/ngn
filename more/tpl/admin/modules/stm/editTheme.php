@@ -11,7 +11,7 @@ $this->tpl('common/form', [
 $link = '/?theme[location]='.$d['params'][3].'&theme[design]='.$d['params'][5].'&theme[n]='.$d['params'][6];
 ?>
 
-<script type="text/javascript" src="/i/js/ngn/Ngn.frm.stmEditFieldsSaver.js"></script>
+<script type="text/javascript" src="/i/js/sflm/ngn/Ngn.frm.stmEditFieldsSaver.js"></script>
 <script type="text/javascript">
 
   var form = Ngn.Form.factory(document.getElement('.apeform form'), {

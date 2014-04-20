@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'i/js/ngn/test/Ngn.sub.B.js'
+  'i/js/sflm/ngn/test/Ngn.sub.B.js'
 ];

@@ -21,7 +21,6 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js')->addObject('Ngn.namespace.A');
   }
 
-
   //function testAddAllObjects() {
     //Sflm::resetFrontend('js', 'default')->addObject('Ngn.Grid');
   //}
@@ -44,6 +43,11 @@ class TestSflmJs extends ProjectTestCase {
   function testNoAutoloadOnAddingPackage() {
     Sflm::setFrontend('js', 'test/dependencies');
     $this->assertFalse(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.sub.A'));
+  }
+
+  function testObjectInPaths() {
+    $this->assertTrue(isset(Sflm::frontend('js')->classes->objectPaths['Ngn.sub.A']));
+    $this->assertFalse(isset(Sflm::frontend('js')->classes->objectPaths['Ngn.Outside']));
   }
 
   function testAutoloadOnAddingLib() {

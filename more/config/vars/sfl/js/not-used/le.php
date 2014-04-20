@@ -1,5 +1,5 @@
 <?php
 
 return [
-  'i/js/ngn/le/Ngn.LayoutMenu.js', 'i/js/ngn/le/Ngn.LayoutEditor.js',
+  'i/js/sflm/ngn/le/Ngn.LayoutMenu.js', 'i/js/sflm/ngn/le/Ngn.LayoutEditor.js',
 ];
