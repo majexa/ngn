@@ -1,6 +1,6 @@
 <?php
 
-class TestSflmStaticProjectDependencies extends ProjectTestCase {
+class UestSflmStaticProjectDependencies extends ProjectTestCase {
 
   function test() {
     // get all lists: all basepaths

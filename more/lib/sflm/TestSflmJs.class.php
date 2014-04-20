@@ -4,7 +4,7 @@ class TestSflmJs extends ProjectTestCase {
 
   protected function setUp() {
     Sflm::clearCache();
-    Sflm::resetFrontend('js', 'dummy');
+    Sflm::setFrontend('js', 'dummy');
   }
 
   function testClearCache() {
@@ -17,11 +17,10 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertFalse(file_exists(Sflm::frontend('js')->cacheFile()), 'Static cache file can not exists. '.Sflm::frontend('js')->cacheFile());
   }
 
-  /*
-
   function testParentNamespaceInitInTheSameFile() {
-    Sflm::resetFrontend('js')->addObject('Ngn.namespace.A');
+    Sflm::setFrontend('js')->addObject('Ngn.namespace.A');
   }
+
 
   //function testAddAllObjects() {
     //Sflm::resetFrontend('js', 'default')->addObject('Ngn.Grid');
@@ -30,7 +29,7 @@ class TestSflmJs extends ProjectTestCase {
   function testChangeVersion() {
     Sflm::frontend('js')->addObject('Ngn.sub.A');
     $version1 = Sflm::frontend('js')->version();
-    Sflm::resetFrontend('js', 'dummy');
+    Sflm::setFrontend('js', 'dummy');
     $version2 = Sflm::frontend('js')->version();
     Sflm::frontend('js')->addObject('Ngn.sub.B');
     Sflm::frontend('js')->version();
@@ -38,12 +37,12 @@ class TestSflmJs extends ProjectTestCase {
   }
 
   function testResetFrontend() {
-    Sflm::resetFrontend('js', 'test/dependencies');
+    Sflm::setFrontend('js', 'test/dependencies');
     $this->assertTrue(Sflm::frontendName() == 'test/dependencies');
   }
 
   function testNoAutoloadOnAddingPackage() {
-    Sflm::resetFrontend('js', 'test/dependencies');
+    Sflm::setFrontend('js', 'test/dependencies');
     $this->assertFalse(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.sub.A'));
   }
 
@@ -57,7 +56,7 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
     $code = Sflm::frontend('js')->code(); //         получаем код
     Sflm::frontend('js')->store(); //                сторим
-    Sflm::resetFrontend('js'); //                    резетим
+    Sflm::setFrontend('js'); //                    резетим
     $code2 = Sflm::frontend('js')->code(); //        получаем код
     $this->assertTrue($code == $code2);
   }
@@ -72,7 +71,7 @@ class TestSflmJs extends ProjectTestCase {
 
   function testExistsInExistingObjects() {
     Sflm::frontend('js')->addObject('Ngn.frm');
-    Sflm::resetFrontend('js');
+    Sflm::setFrontend('js');
     $this->assertTrue(in_array('Ngn.frm', Sflm::frontend('js')->classes->existingObjects));
   }
 
@@ -80,8 +79,7 @@ class TestSflmJs extends ProjectTestCase {
   function testPathsCaching() {
     Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
     Sflm::frontend('js')->store(); //                сторим
-    die2(Sflm::frontend('js')->getPaths());
-    Sflm::resetFrontend('js'); //                    резетим. нельзя получать код больше одного раза во время одного рантайма
+    Sflm::setFrontend('js'); //                    резетим. нельзя получать код больше одного раза во время одного рантайма
     $this->assertTrue(Sflm::frontend('js')->exists('Ngn.sub.A'));
     Sflm::clearCache();
     $this->assertFalse(Sflm::frontend('js')->exists('Ngn.sub.A'));
@@ -90,11 +88,9 @@ class TestSflmJs extends ProjectTestCase {
   function testEmptyNewPathsAfterReset() {
     (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
     Sflm::frontend('js')->getDeltaUrl();
-    Sflm::resetFrontend('js');
+    Sflm::setFrontend('js');
     $newPaths = Sflm::frontend('js')->newPaths;
     $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
   }
-
-*/
 
 }

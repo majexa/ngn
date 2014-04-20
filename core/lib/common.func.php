@@ -75,15 +75,22 @@ function output3($str, $output = false) {
   LogWriter::str('output', $str);
 }
 
-function getBacktrace($html = true) {
-  return _getBacktrace(debug_backtrace(), $html);
+function getBacktrace($html = true, $offset = 0) {
+  return _getBacktrace(debug_backtrace(), $html, $offset);
 }
 
-function _getBacktrace(array $trace, $html = true) {
+function _getBacktrace(array $trace, $html = true, $offset = 0, $length = 0) {
   $s = '';
-  for ($i = 0; $i < count($trace); $i++) {
+  if ($length and $length < count($trace)) {
+    $l = $offset + $length;
+  } else {
+    $l = count($trace);
+  }
+  for ($i = $offset; $i < $l; $i++) {
     if (isset($trace[$i]['file'])) {
       $s .= $trace[$i]['file'].':'.$trace[$i]['line'].($html ? '<br />' : "\n");
+    } elseif (isset($trace[$i]['class'])) {
+      $s .= $trace[$i]['class'].$trace[$i]['type'].$trace[$i]['function'].'('.implode(', ', $trace[$i]['args']).')'.($html ? '<br />' : "\n");
     }
   }
   return $s;
@@ -152,8 +159,7 @@ function getProcessTime($k = '') {
  * @return string win/unix
  */
 function getOS() {
-  if ((isset($_SERVER['SERVER_SOFTWARE']) and strstr($_SERVER['SERVER_SOFTWARE'], 'Win32')) or
-    (isset($_SERVER['OS']) and strstr($_SERVER['OS'], 'Win'))
+  if ((isset($_SERVER['SERVER_SOFTWARE']) and strstr($_SERVER['SERVER_SOFTWARE'], 'Win32')) or (isset($_SERVER['OS']) and strstr($_SERVER['OS'], 'Win'))
   ) return 'win';
   else
     return 'linux';

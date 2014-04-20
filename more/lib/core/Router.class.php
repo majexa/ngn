@@ -37,7 +37,7 @@ use Options;
 
   protected function init() {
     $this->headers();
-    if (($frontend = $this->getFrontendName())) Sflm::setFrontend($frontend);
+    if (($frontend = $this->getFrontendName())) Sflm::setFrontendName($frontend);
     if ($this->isDb) {
       $this->session();
       $this->auth();

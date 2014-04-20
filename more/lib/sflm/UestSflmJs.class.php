@@ -3,7 +3,7 @@
 class UestSflmJs extends ProjectTestCase {
 
   static function setUpBeforeClass() {
-    Sflm::setFrontend('custom');
+    Sflm::setFrontendName('custom');
   }
 
 

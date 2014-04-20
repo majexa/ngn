@@ -12,15 +12,15 @@ abstract class SflmFrontend {
 
   protected $pathsCache, $id, $debug = false;
 
-  public $sflm, $newPaths = [];
+  public $base, $newPaths = [];
 
-  function __construct(SflmBase $sflm, $name) {
+  function __construct(SflmBase $base, $name) {
     $this->id = Misc::randString(5);
-    $this->sflm = $sflm;
+    $this->base = $base;
     $this->name = $name;
     Misc::checkEmpty($this->name, '$this->frontend');
-    $this->sflm->version = $this->version();
-    $this->pathsCache = $this->getPathsCache() ? : $this->sflm->getPaths($this->name, true);
+    $this->base->version = $this->version();
+    $this->pathsCache = $this->getPathsCache() ? : $this->base->getPaths($this->name, true);
     //if ($this->getLastPaths() != $this->getPaths()) {
     //  $this->incrementVersion();
     //  $this->storeLastPaths();
@@ -36,7 +36,7 @@ abstract class SflmFrontend {
   }
 
   protected function cacheSuffix() {
-    return $this->sflm->type.$this->fKey();
+    return $this->base->type.$this->fKey();
   }
 
   function fKey() {
@@ -71,16 +71,16 @@ abstract class SflmFrontend {
   }
 
   function _code() {
-    return $this->sflm->extractCode($this->getPaths());
+    return $this->base->extractCode($this->getPaths());
   }
 
   function getTags() {
     $this->store('SflmFrontend::getTags');
-    return $this->sflm->getTags($this->name, $this->_code());
+    return $this->base->getTags($this->name, $this->_code());
   }
 
   function getTag() {
-    return $this->sflm->getTag($this->name);
+    return $this->base->getTag($this->name);
   }
 
   protected $stored = false;
@@ -91,10 +91,10 @@ abstract class SflmFrontend {
       Sflm::output("No changes. Storing skipped");
       return;
     }
-    Sflm::output("Update collected '{$this->name}.{$this->sflm->type}' file after adding lib ".($source ? "from '$source' source" : ''));
+    Sflm::output("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     //if (!$this->sflm->storeLib($this->name, $this->code())) throw new Exception('it should not have happened');
-    if ($this->sflm->storeLib($this->name, $this->code())) {
+    if ($this->base->storeLib($this->name, $this->code())) {
       $this->incrementVersion();
       $this->stored = true;
     }
@@ -105,11 +105,11 @@ abstract class SflmFrontend {
   }
 
   function filePath() {
-    return $this->sflm->filePath($this->name);
+    return $this->base->filePath($this->name);
   }
 
   function cacheFile() {
-    return $this->sflm->cacheFile($this->name);
+    return $this->base->cacheFile($this->name);
   }
 
   function pathsCacheKey() {
@@ -125,9 +125,9 @@ abstract class SflmFrontend {
    */
   function addStaticLib($lib, $strict = false) {
     foreach (Sflm::$absBasePaths as $k => $path) {
-      if (file_exists("$path/{$this->sflm->type}/$lib")) {
-        Sflm::output("add global lib $path/{$this->sflm->type}/$lib");
-        $this->addLib("$k/{$this->sflm->type}/$lib");
+      if (file_exists("$path/{$this->base->type}/$lib")) {
+        Sflm::output("add global lib $path/{$this->base->type}/$lib");
+        $this->addLib("$k/{$this->base->type}/$lib");
         return;
       }
     }
@@ -138,12 +138,12 @@ abstract class SflmFrontend {
 
   function addLib($lib, $strict = false) {
     if ($this->stored) throw new Exception("Can't add after frontend was stored. Reset or rerun frontend");
-    if (!$strict and !$this->sflm->exists($lib)) {
+    if (!$strict and !$this->base->exists($lib)) {
       Sflm::output("Lib '$lib' does not exists");
       return $this;
     }
     Sflm::output("Adding lib '$lib'");
-    foreach ($this->sflm->getPaths($lib) as $path) $this->__addPath($path, "lib '$lib'");
+    foreach ($this->base->getPaths($lib) as $path) $this->__addPath($path, "lib '$lib'");
     return $this;
   }
 
@@ -151,14 +151,14 @@ abstract class SflmFrontend {
 
   /**
    * @param string $path Добавляет к текущему фронтенду runtime путь
+   * @throws Exception
    */
   function _addPath($path) {
-    if ($this->sflm->isPackage($path)) throw new Exception("Can not add packages");
+    if ($this->base->isPackage($path)) throw new Exception("Can not add packages");
     if (in_array($path, $this->pathsCache)) {
       Sflm::output("New path '$path' already exists");
       return;
     }
-    //die2('*');
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
     $this->changed = true;
@@ -166,11 +166,11 @@ abstract class SflmFrontend {
 
   function getDeltaUrl() {
     if (!$this->newPaths) return false;
-    return $this->sflm->getUrl($this->name.'new', $this->sflm->extractCode($this->newPaths), true);
+    return $this->base->getUrl($this->name.'new', $this->base->extractCode($this->newPaths), true);
   }
 
   protected function versionCacheKey() {
-    return $this->sflm->type.ucfirst($this->name).'Version';
+    return $this->base->type.ucfirst($this->name).'Version';
   }
 
   function version() {
@@ -184,7 +184,7 @@ abstract class SflmFrontend {
     $this->incremented = true;
     $version = $this->version() + 1;
     ProjectState::update($this->versionCacheKey(), $version);
-    $this->sflm->version = $version;
+    $this->base->version = $version;
     return true;
   }
 
