@@ -84,9 +84,11 @@ class SflmJsClasses {
   protected function _initObjectPaths() {
     $objectPaths = [];
     $files = [];
+    die2(Sflm::$absBasePaths);
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
     foreach ($files as $file) {
       $class = $this->getObjectName($file);
+
       if (!strstr($class, '.')) continue; // Пропускаем корневые классы. Они не подключаются динамически
       $objectPaths[$class] = $this->frontend->base->getPath($file, 'adding to init classes paths');
     }
