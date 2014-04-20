@@ -11,13 +11,12 @@ class ProjectTestPrinter extends PHPUnit_TextUI_ResultPrinter {
 
   protected function printDefectHeader(PHPUnit_Framework_TestFailure $defect, $count) {
     $failedTest = $defect->failedTest();
-    if ($failedTest instanceof PHPUnit_Framework_SelfDescribing) {
-      $testName = $failedTest->toString();
-    }
-    else {
-      $testName = get_class($failedTest);
-    }
+    $testName = $failedTest instanceof PHPUnit_Framework_SelfDescribing ? $failedTest->toString() : get_class($failedTest);
     $this->write(sprintf("%d) project \"%s\": %s\n", $count, $this->projectName, $testName));
+  }
+
+  protected function _printDefectTrace(PHPUnit_Framework_TestFailure $defect) {
+    $this->write($defect->thrownException()->getMessage());
   }
 
 }

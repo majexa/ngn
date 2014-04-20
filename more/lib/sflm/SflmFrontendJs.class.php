@@ -20,9 +20,9 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   function _addLib($lib) {
-    if (!$this->sflm->exists($lib)) throw new Exception("Lib '$lib' does not exists");
+    if (!$this->base->exists($lib)) throw new Exception("Lib '$lib' does not exists");
     Sflm::output("Adding lib '$lib'");
-    foreach ($this->sflm->getPaths($lib) as $path) $this->_addPath($path);
+    foreach ($this->base->getPaths($lib) as $path) $this->_addPath($path);
     return $this;
   }
 
@@ -42,7 +42,6 @@ class SflmFrontendJs extends SflmFrontend {
    * @return bool
    */
   function exists($str) {
-    die2(Sflm::frontend('js')->getPaths());
     return Arr::strExists(Sflm::frontend('js')->getPaths(), $str);
   }
 

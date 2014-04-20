@@ -1,9 +1,9 @@
 <?php
 
-class TestSflmDefault extends ProjectTestCase {
+class UestSflmDefault extends ProjectTestCase {
 
   static function setUpBeforeClass() {
-    Sflm::setFrontend('default');
+    Sflm::setFrontendName('default');
   }
 
   protected function setUp() {

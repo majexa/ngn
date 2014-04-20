@@ -1,16 +1,16 @@
 <?php
 
-class TestSflmStaticDependencies extends NgnTestCase {
+class UestSflmStaticDependencies extends NgnTestCase {
 
   function test() {
     Sflm::clearCache();
-    Sflm::setFrontend('dummy');
+    Sflm::setFrontendName('dummy');
     //die2(Sflm::frontend('js')->getPaths());
     $this->checkPackage('admin');
   }
 
   protected function checkPackage($package) {
-    $frontend = Sflm::resetFrontend('js', $package);
+    $frontend = Sflm::setFrontend('js', $package);
     $frontend->addLib('core');
     //$frontend
     $allPaths = $frontend->getPaths();
