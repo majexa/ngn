@@ -36,10 +36,10 @@ abstract class SflmFrontend {
   }
 
   protected function cacheSuffix() {
-    return $this->base->type.$this->fKey();
+    return $this->base->type.$this->key();
   }
 
-  function fKey() {
+  function key() {
     return str_replace('/', '_', $this->name);
   }
 
