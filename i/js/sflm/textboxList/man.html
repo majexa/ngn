@@ -1,0 +1,1736 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+
+	<meta charset="UTF-8" />
+	
+	<title>TextboxList | Guillermo Rauch&#039;s Devthought</title>
+	
+	<link rel="profile" href="http://gmpg.org/xfn/11" />
+	<link rel="pingback" href="http://www.devthought.com/xmlrpc.php" />	
+	
+	
+	<link rel="alternate" type="application/rss+xml" title="Guillermo Rauch&#039;s Devthought &raquo; Feed" href="http://www.devthought.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Guillermo Rauch&#039;s Devthought &raquo; Comments Feed" href="http://www.devthought.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Guillermo Rauch&#039;s Devthought &raquo; TextboxList Comments Feed" href="http://www.devthought.com/projects/mootools/textboxlist/feed/" />
+<script type='text/javascript' src='http://www.devthought.com/wp-includes/js/comment-reply.js?ver=3.4.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.devthought.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.devthought.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='FeedBurnerCount' href='http://www.devthought.com/projects/wordpress/feedburnercount/' />
+<link rel='next' title='jQuery' href='http://www.devthought.com/projects/jquery/' />
+<meta name="generator" content="WordPress 3.4.2" />
+<link rel='canonical' href='http://www.devthought.com/projects/mootools/textboxlist/' />
+	
+	<link href="http://www.devthought.com/wp-content/themes/devthought/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="http://www.devthought.com/wp-content/themes/devthought/css/print.css" media="print" rel="stylesheet" type="text/css" /> 
+	
+	<link href="http://www.devthought.com/wp-content/themes/devthought/js/syntaxhighlighter/prettify/prettify.min.css" media="all" rel="stylesheet"/>
+	<link href="http://www.devthought.com/wp-content/themes/devthought/js/syntaxhighlighter/styles/style.min.css" media="all" rel="stylesheet"/>
+	<link href="http://www.devthought.com/wp-content/themes/devthought/js/syntaxhighlighter/styles/theme-devthought.min.css" media="all" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="http://www.devthought.com/wp-content/themes/devthought/css/comments.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+
+	
+	<!--[if IE]>
+	<link href="http://www.devthought.com/wp-content/themes/devthought/js/syntaxhighlighter/styles/ie.min.css" rel="stylesheet" media="all" />
+	<![endif]-->
+
+	<!--[if IE]>
+  <script>
+  // hack for IE to avoid repaints
+  if (/^#\//.test(window.location.hash)) {
+    window.location = window.location.hash.substr(1);
+    return;
+  }
+  </script>
+	<![endif]-->
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var mpq = [];
+    mpq.push(["init", "8bdd915abddaf87ca4b3e801a0366eea"]);
+    (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";
+    b.async=true;b.src=(document.location.protocol==="https:"?"https:":"http:")+
+    "//api.mixpanel.com/site_media/js/api/mixpanel.js";a=document.getElementsByTagName("script")[0];
+    a.parentNode.insertBefore(b,a);e=function(f){return function(){mpq.push(
+    [f].concat(Array.prototype.slice.call(arguments,0)))}};d=["init","track","track_links",
+    "track_forms","register","register_once","identify","name_tag","set_config"];for(c=0;c<
+    d.length;c++){mpq[d[c]]=e(d[c])}})();
+  </script>
+
+	<script src="http://www.devthought.com/wp-content/themes/devthought/js/syntaxhighlighter/prettify/prettify.min.js"></script>
+	<script src="http://www.devthought.com/wp-content/themes/devthought/js/syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"></script>
+  <script src="http://www.devthought.com/wp-content/themes/devthought/js/core.js"></script>
+
+	<script type="text/javascript" charset="utf-8">
+		
+		function applySyntax(){
+			jQuery.SyntaxHighlighter.init({'theme': 'devthought', 'themes': ['devthought'], 'baseUrl': 'http://www.devthought.com/wp-content/themes/devthought/js/syntaxhighlighter/'});
+		}
+
+		jQuery(function($){
+			applySyntax();
+		});
+		
+	</script>
+	
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-1122274-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!--
+<script type='text/javascript'>
+var __wtw_lucky_def_plan_id = 16;
+(function() {
+  var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+  wa.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://ca139850') + '.luckyorange.com/w.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+})();
+</script>
+-->
+</head>
+
+<script>
+  if (navigator && /webkit/i.test(navigator.userAgent))
+    document.write('<body class="page page-id-665 page-child parent-pageid-188 page-template page-template-project-php webkit">');
+  else
+    document.write('<body class="page page-id-665 page-child parent-pageid-188 page-template page-template-project-php no-webkit">');
+</script>
+
+  <div style="background: #FFEFC6;padding: 5px;text-align: center;font-size: 15px;text-shadow: 0 1px 0 #fff;">
+     <b style="color: green">IT IS HERE!</b> Get <a href="http://amzn.to/smashingnodekindle" data-track="Book Kindle Link" target="_blank" data-track-json='{ "location": "header", "message": "it-is-here" }'>Smashing Node.JS</a> on Amazon Kindle today!
+  </div>
+
+	<div id="live-filters">
+		
+		<div id="filters" class="homepage-shown">
+				
+								
+      <form method="post" id="filter-form" action="http://www.devthought.com/wp-admin/admin-ajax.php?action=my_special_ajax_call" >
+			
+				<fieldset>
+					<legend>Show Posts</legend>
+					
+					<ul>
+						<li class="selected">
+							<input value="code"  id="note-post-filter"  class="filter" name="show_posts[]" type="checkbox" checked />
+							<a id="code-post-filter" class="chk round" title="Code snippets" rel="tip" href="#">#code</a>
+						</li>
+						
+						<li class="selected">
+							<input value="post"  id="code-post-filter" class="filter"  name="show_posts[]" type="checkbox" checked />
+							<a id="note-post-filter" class="chk round" title="Articles" rel="tip" href="#">#article</a>
+						</li>
+						
+						<li class="selected">
+							<input value="quote" id="quote-post-filter"  class="filter" name="show_posts[]" type="checkbox" checked />
+							<a id="quote-post-filter" class="chk round" title="Quotes" rel="tip" href="#">#quote</a>
+						</li>
+						
+						<li class="selected">
+							<input value="video" id="video-post-filter"  class="filter" name="show_posts[]" type="checkbox" checked />
+							<a id="video-post-filter" class="chk round" title="Videos" rel="tip" href="#">#video</a>
+						</li>
+						
+						<li class="selected">
+							<input value="photo" id="photo-post-filter"  class="filter" name="show_posts[]" type="checkbox" checked/>
+							<a id="photo-post-filter" class="chk round" title="Photos" href="#" rel="tip">#photo</a>
+						</li>
+					</ul>
+					<input type="submit" name="submit" value="Save" id="save">
+					
+				</fieldset>
+				
+				
+			</form>
+				
+      <a class="back_to_homepage" data-state="1" href="/">&larr; Back to homepage</a>
+
+		</div>
+		
+
+
+	</div><!-- /post-toggle -->
+
+
+	<div id="wrap" class="group">
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+
+<div id="main">
+	<ul id="nav-articles">
+		<li id="previous-article"><a href="http://www.devthought.com/projects/wordpress/feedburnercount/" rel="prev"><span class="meta-nav">&larr;</span> FeedBurnerCount</a></li>
+		<li id="next-article"><a href="http://www.devthought.com/projects/jquery/" rel="next">jQuery <span class="meta-nav">&rarr;</span></a></li>
+	</ul><!-- #nav-above -->
+
+
+
+	
+
+					
+		<div id="post-665" class="note-post article group">
+
+			<div class="header group">
+
+				<a href="http://www.devthought.com/projects/mootools/textboxlist/" class="article-icon"  data-state="1" title="Permalink to TextboxList"></a>
+				<h1><a href="http://www.devthought.com/projects/mootools/textboxlist/" data-state="1" title="Permalink to TextboxList" rel="bookmark">TextboxList</a></h1>
+
+			</div><!-- /.header -->
+			
+			<div class="aside">
+
+				<ul>
+					<li class="time"><a href="#">Apr 3, 2009</a></li>
+					<li class="tweet"><a target="_blank" href="http://twitter.com/home?status=http://www.devthought.com/?p=665" title="Post to Twitter">Tweet this</a></li>
+					<li class="comments"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comments" title="Comment on TextboxList">109 Comments</a></li>
+					<li class="permalink"><a href="http://www.devthought.com/projects/mootools/textboxlist/">Permalink</a></li>
+				</ul>
+
+			</div><!-- /.aside -->
+
+			<div class="content">
+								
+				<p>TextboxList turns normal textboxes into a widget which can be navigated with the keyboard, effectively turning your input into a &#8220;list&#8221; of items that can be easily deleted. It comes with an Autocomplete plugin.</p>
+<p><a class="thumb" href="/wp-content/projects/mootools/textboxlist/Demo/"><img class="thumb" src="http://devthought.com/wp-content/uploads/2009/04/picture-1.png" alt="TextboxList" title="TextboxList" width="411" height="126" class="alignright size-full wp-image-773" /></a></p>
+<h3>Demo</h3>
+<p>Click <a href="/wp-content/projects/mootools/textboxlist/Demo/">here</a> to see it in action.</p>
+<h3>License</h3>
+<p>You can use and modify TextboxList freely for any non-commercial use. Otherwise you need to purchase a one-time per-domain license of $20, by clicking on the link on the right.</p>
+<h3>Browsers support</h3>
+<p>TextboxList has been tested and is officially supported on IE6, IE7, IE8, Firefox, Safari and Chrome. You may report bugs concerning other browsers, but they&#8217;ll get a lower priority.</p>
+<h3>Size</h3>
+<p>TextboxList + TextboxList.Autocomplete are only 4.3K minified (YUI) and gzipped.</p>
+<h3>How to use</h3>
+<p>TextboxList is essentially very easy to use, but is extremely configurable and extensible. Let&#8217;s review some sample usage scenarios:</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+new TextboxList('form_tags_input');
+</pre></div>
+<p>This turns the <code class="inline">&lt;input id="form_tags_input"&gt;</code> into a TextboxList widget. By default, as shown in the demo, the user can add new boxes by pressing enter, write between boxes, delete them with backspace and delete keys. Additionally, a delete button is shown in each of the added items. <em>All</em> these behaviors can be configured, as shown in the sections below.</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+var t = new TextboxList('form_tags_input');
+t.add('Tag 1').add('Tag 2').add('Tag 3');
+</pre></div>
+<p>In this example we call the public <code class="inline">add()</code> method of the TextboxList instance to add items from JavaScript.</p>
+<h3>The anatomy of TextboxList</h3>
+<p>This section will be useful for those interested in customizing the default behavior of TextboxList, extending the main classes or writing their own plugins.</p>
+<p>The parts that constitute a TextboxList widget are called <em>bits</em>.  These parts have common characteristics: they can be focused, blurred, deleted, hidden, they are a fragment of the overall value, etc. TextboxList has two essential bits: the <strong>editable</strong> and the <strong>box</strong> bit.</p>
+<p>Some options involved in the behavior and appearance of the widget are specific to the editable bits, and some are specific to the box bits, which are separate classes from TextboxList ((Even though they are separate classes and you can instantiate them from your code, usually you&#8217;ll want to use the <em>add</em> or <em>create</em> methods.)). To easily pass them from the main class, you use the bitsOptions property. For example, to disable the delete button in boxes bits, and use the shift key for adding items instead of the enter key:</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+new TextboxList('form_tags_input', {bitsOptions: {
+    box: {deleteButton: false},
+    editable: {addKeys: Event.Keys.shift}
+}});
+</pre></div>
+<p>Knowing this gives you more customization power. If you want to target the blur event of any bit, attach a onBitBlur listener. If you want to target boxes, you can use onBitBoxBlur. You can see a complete list of options and events at the bottom of this page.</p>
+<h3 id="bit-anatomy">The anatomy of a bit</h3>
+<p>Each bit has a <strong>value</strong> of the format <code class="inline">[id, plaintext, html]</code>. For boxes, this can mean that one that says &#8220;John Doe&#8221; really passes the value &#8220;3&#8243; when making a POST. And it even allows you to customize the content of the box by using a different HTML representation. The id and html, however, are optional, like shown in the first example above. We called add() with just the plain text, and not an id or html, which are the second and third arguments of the method ((If we had wanted to add an item with an id 31 and html, we could have done t.add(&#8216;Entry&#8217;, 31, &#8216;&lt;img src=&#8221;some_entry_image.png&#8221; /&gt; Entry&#8217;); )).</p>
+<p>There&#8217;s an abstract <code class="inline">TextboxListBit</code> class from which <code class="inline">TextboxListBit.Box</code> and <code class="inline">TextboxListBit.Editable</code> are inherited. These classes deal with the creation, focusing, blurring, removal and display of the bits, and communicate with the main class by firing events/callbacks. There&#8217;re still many tasks that have to be taken care of by the TextboxList class, such as making sure the name of bits doesn&#8217;t exceed the value the user specified with the <code class="inline">max</code> option.</p>
+<h3 id="autocompletion">Autocompletion</h3>
+<p>Autocompletion is another chapter in the TextboxList story. Again, if you plan to use Autocompletion, it&#8217;d be wise to read the sections above.</p>
+<p>Autocomplete (like other plugins) is initialized like this:</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+var t = new TextboxList('input_id', {plugins: {autocomplete: {options}});
+</pre></div>
+<p>You can then access the TextboxList.Autocomplete instance from the plugins property:</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+var autocomplete = t.plugins['autocomplete'];
+// autocomplete.someMethod();
+</pre></div>
+<p>The autocompleter plugin is independent of the datasource. In order for autocompletion to be enabled, you have to supply a valid array of would-be bits by calling <code class="inline">setValues()</code>. The searches are performed on the bit plain text.</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+// continues from the last example
+autocomplete.setValues([
+  [31, 'Bit Plain Text', 'Bit html', 'Suggestion item html'],
+  // ...
+]);
+</pre></div>
+<p>Naturally, you can call that very function with a result from Request.JSON, Request.JSONP, Swift or construct the array from DOM elements.</p>
+<h3>Autocompletion: querying the server as the user types</h3>
+<p>The autocomplete can also query the server as the user types. When the user types at least as many characters as specified by the <code class="inline">minLength</code> option, a XHR request is performed to the server, which has to respond with a subset of results in JSON.</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+var t5 = new TextboxList('form_tags_input_4', {unique: true, plugins: {autocomplete: {
+	minLength: 3,
+	queryRemote: true,
+	remote: {url: 'autocomplete2.php'}
+}}});
+</pre></div>
+<h3 id="binary_search">Autocompletion: binary search</h3>
+<p>Binary search is a very efficient searching algorithm which you can use by including the <code class="inline">TextboxList.Autocomplete.Binary.js</code> file and passing the <code class="inline">method: 'binary'</code> option to the Autocomplete plugin:</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+new TextboxList('input_id', {plugins: {autocomplete: {method: 'binary'}}});
+</pre></div>
+<p>Only use it under these conditions:</p>
+<ul>
+<li>You have <em>many</em> values to filter</li>
+<li>The values array is sorted alphabetically</li>
+<li>You can afford searching only the <em>beginning</em> of the strings</li>
+</ul>
+<p>The method works by first locating the first match of the user input in the values. As an example, if we search for &#8216;z&#8217; in the demo, it takes linear, standard filtering 62 tries to determine there&#8217;re no results. For binary search, it takes 6.</p>
+<p>Since binary search was conceived to find a single match, what the filtering method does is look up and down through the array for other matches and come up with a list of suggestions.</p>
+<h3>Custom styling</h3>
+<p>Please refer to the comments in <code class="inline">TextboxList.css</code> and <code class="inline">TextboxList.Autocomplete.css</code> for style customization guidelines.</p>
+<h3>Extending TextboxList</h3>
+<p>The core functionality can be extended easily:</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+var MyTextboxList = new Class({
+      Extends: TextboxList,
+
+      // your methods or overrides
+});
+</pre></div>
+<p>If you wish to extend the Bits, make sure you override the <code class="inline">create</code> method:</p>
+<div class="code"><pre  class='highlight ' lang="javascript">
+var MyTextboxList = new Class({
+      Extends: TextboxList,
+
+      create: function(klass, value, options){
+          // ...
+	  return new MyTextboxListBit[klass.capitalize()]...
+      }
+});
+
+MyTextboxListBit = {};
+MyTextboxListBit.Box = new Class({
+    Extends: TextboxListBit.Box,
+    // ...
+});
+MyTextboxListBit.Editable = new Class({
+    Extends: TextboxListBit.Editable,
+    // ...
+});
+</pre></div>
+<h3>API</h3>
+<p><strong>Options</strong></p>
+<ul class="api">
+<li><code class="inline">prefix</code> (default to &#8216;textboxlist&#8217;) Prefix of the HTML classes of the different parts of the widget.</li>
+<li><code class="inline">max</code> (defaults to null) If set to a value other than null or false, a maximum number of boxes that can be added.</li>
+<li><code class="inline">unique</code> (defaults to false) If set to true, an id (or plain text if id not present) of a bit can&#8217;t be repeated.</li>
+<li><code class="inline">uniqueInsensitive</code> (defaults to true) If set to true and an id is not present for a bit, the check for a repeated plain text disregards case.</li>
+<li><code class="inline">endEditableBit</code> (defaults to true) Whether an editable bit at the end of the widget is added by default.</li>
+<li><code class="inline">startEditableBit</code> (defaults to true) Whether an editable bit can be added to the left of the first box (ie: beginning of the widget)</li>
+<li><code class="inline">hideEditableBits</code> (defaults to true) Whether to hide editables bit that are not currently focused</li>
+<li><code class="inline">inBetweenEditableBits</code> (defaults to true) Whether to add editable bits between to boxes</li>
+<li><code class="inline">keys</code> (defaults to left key and right key) An object consisting of a <em>previous</em> and <em>next</em> key whose values are event codes for moving to previous and next bits.</li>
+<li><code class="inline">plugins</code> (defaults to {}) An object with maps a plugin name and its options, for initialization. The plugin name is camelcased and capitalized to find the class ((If you pass plugins: {&#8216;some-plugin&#8217;: {}} it&#8217;ll try to initialize TextboxList.SomePlugin))</li>
+<li><code class="inline">check</code> A function that filters out (and prevents the addition of) a bit. For example, if the item is not an email address.</li>
+<li><code class="inline">encode</code> A function that turns an array into the string that is sent along with the form. The default takes the values and comma-separes them. Receives all the values of all bits as parameter.</li>
+<li><code class="inline">decode</code> Does the opposite of encode. Used when initializing textboxlist, which tries to read values from the element. The default looks for commas to split the string.</li>
+</ul>
+<p><strong>Events</strong></p>
+<ul class="api">
+<li><code class="inline">focus</code>: when the widget is focused</li>
+<li><code class="inline">blur</code>: when the widget is blurred</li>
+<li><code class="inline">bitFocus</code>: when a bit is focused. Passes the bit object as parameter</li>
+<li><code class="inline">bitBlur</code>: when a bit is blurred. Passes the bit object as parameter</li>
+<li><code class="inline">bitAdd</code>: when a bit is added. Passes the bit object as parameter</li>
+<li><code class="inline">bitRemove</code>: when a bit is removed. Passes the bit object as parameter</li>
+<li><code class="inline">bitBoxFocus</code>: when a box bit is focused. Passes the bit object as parameter</li>
+<li><code class="inline">bitBoxBlur</code>: when a box bit is blurred. Passes the bit object as parameter</li>
+<li><code class="inline">bitBoxAdd</code>: when a box bit is added. Passes the bit object as parameter</li>
+<li><code class="inline">bitBoxRemove</code>: when a box bit is removed. Passes the bit object as parameter</li>
+<li><code class="inline">bitEditableFocus</code>: when a editable bit is focused. Passes the bit object as parameter</li>
+<li><code class="inline">bitEditableBlur</code>: when a editable bit is blurred. Passes the bit object as parameter</li>
+<li><code class="inline">bitEditableAdd</code>: when a editable bit is added. Passes the bit object as parameter</li>
+<li><code class="inline">bitEditableRemove</code>: when a editable bit is removed. Passes the bit object as parameter</li>
+</ul>
+<p><strong>Public Methods</strong></p>
+<ul class="api">
+<li><code class="inline">create</code> (klass, value, options) Creates a bit of class <em>klass</em>, with value <em>value</em> and options <em>options</em>. Returns the bit</li>
+<li><code class="inline">focusRelative</code> (dir, element) Moves the focus to the <em>dir</em> (previous, next) element of the element <em>element</em>, if supplied. Otherwise it uses the current element</li>
+<li><code class="inline">focusLast</code> Focuses the last bit</li>
+<li><code class="inline">add</code> (plain, id, html, afterEl) Adds a box bit with value [id, plain, html], and injects it after the last available box, unless afterEl is supplied.</li>
+<li><code class="inline">getValues</code> Returns an array with the values from all the box bits.</li>
+<li><code class="inline">setValues</code> (values) Creates the box bits from the values array.</li>
+<li><code class="inline">update</code> (values) Updates the input with the values from getValues. This is done for you automagically, and is rarely needed.</li>
+</ul>
+<p><strong>Editable Bits Options</strong></p>
+<p>Refer to the <a href="#bit-anatomy">bit anatomy</a> section to see how to pass these.</p>
+<ul class="api">
+<li><code class="inline">tabIndex</code> (defaults to null) Don&#8217;t set this option directly. Set the tabindex attribute to the original input</li>
+<li><code class="inline">grows</code> (defaults to true) Whether a GrowingInput instance is created for the input</code>
+<li><code class="inline">growingOptions</code> (defaults to {}) An options object passed to GrowingInput</li>
+<li><code class="inline">stopEnter</code> (defaults to true) Whether the event propagation is stopped when enter is pressed. Useful because enter triggers form submission</li>
+<li><code class="inline">addOnBlur</code> (defaults to false) Whether a box is added with the input content when the input is blurred.</li>
+<li><code class="inline">addKeys</code> (defaults to Event.Keys.enter) A key or array of keys that trigger adding a box with the input content.</li>
+</ul>
+<p><strong>Box Bits Options</strong></p>
+<p>Refer to the <a href="#bit-anatomy">bit anatomy</a> section to see how to pass these.</p>
+<ul class="api">
+<li><code class="inline">deleteButton</code> (defaults to true) Whether a delete button is added in the box.</li>
+</ul>
+<p><strong>Autocomplete Options</strong></p>
+<p>Refer to the <a href="#binary_search">binary search</a> section to see how to pass these.</p>
+<ul class="api">
+<li><code class="inline">minLength</code> (defaults to 1) Minimum number of characters typed in to trigger search.</li>
+<li><code class="inline">maxResults</code> (defaults to 10) Maximum number of results to display.</li>
+<li><code class="inline">insensitive</code> (defaults to true) Whether to perform a case-insensitive search</li>
+<li><code class="inline">highlight</code> (defaults to true) Whether to highlight results.</li>
+<li><code class="inline">highlightSelector</code> (defaults to null) Optionally, A CSS3 selector to determine on which elements of the autocomplete suggestion to perform highlighting.</li>
+<li><code class="inline">mouseInteraction</code> (defaults to true) Whether to allow mouse (hovering and clicking) interaction.</li>
+<li><code class="inline">onlyFromValues</code> (defaults to false) If set to true, the user can only pick values from the suggestions.</li>
+<li><code class="inline">queryRemote</code> (defaults to false) If set to true, the script attempts to retrieve suggestions from a remote URL, set by the remote option.</li>
+<li>
+<p><code class="inline">remote</code> (defaults to {}) Options object</p>
+<ul class="api">
+<li><code class="inline">url</code> URL to query by Request.JSON to retrieve the suggestions.</li>
+<li><code class="inline">param</code> (defaults to 'search') Name of the parameter in which to send the string to search</li>
+<li><code class="inline">extraParams</code> An object with extra parameters to send, or a function that returns that object.</li>
+<li><code class="inline">loadPlaceholder</code> Placeholder text to display when loading.</li>
+</ul>
+</li>
+<li><code class="inline">method</code> (defaults to 'standard') Search/highlighting method defined in TextboxList.Autocomplete.Methods</li>
+<li><code class="inline">placeholder</code> (defaults to 'Type to receive suggestions') A placeholder text to display. If it evaluates to false, placeholder is not shown or inserted.</li>
+</ul>
+<p><strong>Autocomplete Public Methods</strong></p>
+<p>Refer to <a href="#autocompletion">autocompletion</a> section to see how to call these.</p>
+<ul class="api">
+<li><code class="inline">setValues</code> (values) Seeds the autocompleter with suggestions from the <em>values</em> array.</li>
+</ul>
+<h3>Changelog</h3>
+<ul>
+<li>0.1: first release</li>
+<li>0.2: TextboxList completely rewritten (current)</li>
+<li>0.3:
+<ul>
+<li>HTML for bits not showing properly fixed</li>
+<li><code class="inline">highlightSelector</code> not working (due to a typo) fixed</li>
+<li><code class="inline">GrowingInput</code> missing pad function added (only affected if you customized growing.mini option)</li>
+<li>Improved clicking the whole widget behavior</li>
+<li>Other tiny enhancements / cleanup</li>
+</ul>
+</li>
+<li>0.4:
+<ul>
+<li><code class="inline">check</code> added, <code class="inline">filter</code> deprecated</li>
+<li><code class="inline">queryRemote</code> and <code class="inline">remote</code> added to Autocomplete</li>
+<li><code class="inline">encode</code> now receives all the values of all bits</li>
+<li>Fixed but with id 0 translating to null.</li>
+<li><code class="inline">autocomplete2.php</code> added</li>
+<li>Demos updated</li>
+</ul>
+</li>
+<li>0.5: fixes a problem with non-remote use of Autocomplete.</li>
+</ul>
+				
+				
+				<?
+				if ( comments_open() )
+				{
+				?>
+				<div id="comment">
+				
+			<div id="comments">
+
+
+			<h2 id="comments-title">109 Comments</h2>
+
+
+					<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://iphone.ttisob.nl/?p=1474' rel='external nofollow' class='url'>Gathering of Thoughts &raquo; Blog Archive &raquo; The new TextboxList is here</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://iphone.ttisob.nl/?p=1464' rel='external nofollow' class='url'>Gathering of Thoughts &raquo; Blog Archive &raquo; The new TextboxList is here</a></p>
+	</div>
+	</li>
+</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://blog.byohosting.com/2009/04/12/the-new-textboxlist-is-here/' rel='external nofollow' class='url'>The new TextboxList is here | BYOHosting.com Blogs</a></p>
+	</div>
+	</li>
+</li>
+</li>
+</li>
+</li>
+</li>
+</li>
+</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.linksweb.com.br/auto-completar-estilo-facebook/' rel='external nofollow' class='url'>Auto completar estilo Facebook | Links Web</a></p>
+	</div>
+	</li>
+</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://sourceblogg.se/lang/se/2009/05/15/textboxlist' rel='external nofollow' class='url'>TextboxList | Allt om färdiga open source lösningar för webben</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.noupe.com/css/10-intelligent-ways-of-using-form-elements.html' rel='external nofollow' class='url'>10 Intelligent Ways of using [FORM] Elements | Noupe</a></p>
+	</div>
+	</li>
+</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.tripwiremagazine.com/tools/html/45-really-essential-free-html-form-enhancements.html' rel='external nofollow' class='url'>45+ Really Essential Free HTML [Form] Enhancements&nbsp;|&nbsp;tripwire magazine</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://mabblog.com/blog/?p=221' rel='external nofollow' class='url'>Videobox &amp; Mootools 1.2.x at MAB Blog</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://bigtip.co.cc/index.php/2009/05/25/10-intelligent-ways-of-using-form-elements/' rel='external nofollow' class='url'>10 Intelligent Ways of using [FORM] Elements &laquo; A Ton tips for your life</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.seanburdick.com/200906/10-intelligent-ways-of-using-form-elements/' rel='external nofollow' class='url'>10 Intelligent Ways of using [FORM] Elements | SeanBurdick</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.tripwiremagazine.com/tools/tools/150-worth-knowing-web-developer-tools-and-techniques.html' rel='external nofollow' class='url'>150 Worth Knowing Web Developer Tools and Techniques&nbsp;|&nbsp;tripwire magazine</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://mavrick.id.au/programming/2009/useful-plugins-and-resources-for-mootools/' rel='external nofollow' class='url'>Useful Plugins and Resources For MooTools | mavrick</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://huibit05.com/tutorials/150-worth-knowing-web-developer-tools-and-techniques/' rel='external nofollow' class='url'>150 Worth Knowing Web Developer Tools and Techniques | huibit05.com</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://agungridwan.wordpress.com/2009/08/08/buat-facebook-bajakan/' rel='external nofollow' class='url'>Buat Facebook &#8216;Bajakan&#8217; &laquo; ag+ rd -&gt; sn</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.chenbaocheng.com/index.php/2009/08/959' rel='external nofollow' class='url'>陈宝成のBlog &raquo; 16个SNS网站常用JS组件</a></p>
+	</div>
+	</li>
+</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.downrex.com/tutorials/css/10-intelligent-ways-of-using-form-elements/' rel='external nofollow' class='url'>10 Intelligent Ways of using [FORM] Elements | Downrex</a></p>
+	</div>
+	</li>
+</li>
+</li>
+</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://think2free.com/website/50-must-know-web-developer-techniques/' rel='external nofollow' class='url'>Think2free.com &raquo; 50 must know web developer techniques</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://think2free.com/website/50-must-know-web-development-techniques/' rel='external nofollow' class='url'>Think2free.com &raquo; 50 must know web development techniques</a></p>
+	</div>
+	</li>
+</li>
+</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.studio404.it/2010/moduli-di-tutto-di-piu.html' rel='external nofollow' class='url'>Moduli, di tutto di più &#8212; Studio404 Web Agency</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://taipa.pl/2010/05/04/textboxlist-autouzupelnianie-w-mootools/' rel='external nofollow' class='url'>TextboxList &#8211; autouzupełnianie w MooTools | Taipa.pl</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://123doing.com/2507/textboxlist-open-source-project.html' rel='external nofollow' class='url'>TextboxList开源项目 - Ajax代码大全 - Java开源项目 - Ajax文本框自动填充控件Autocomplete - TextboxList - 开源网</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.designsvault.net/onde-encontrar-scripts-de-javascriptajax/' rel='external nofollow' class='url'>Onde encontrar 21 scripts de javascript/ajax maravilhosos | Designs Vault</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://davidwalsh.name/mootools-jquery-textbox-list' rel='external nofollow' class='url'>TextboxList for MooTools and jQuery by Guillermo Rauch</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://webdesign.katpalgnuel.com/?p=158' rel='external nofollow' class='url'>TextboxList « Devthought &#8211; h&#8230; | Web Design - HTML Website</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.webplus.me/2010/08/05/7-mootools-plugins-you-should-use-on-every-websiteii/' rel='external nofollow' class='url'>7 MooTools Plugins You Should Use on Every Website&#160;II | Webplus - web developer resource blog</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://davidwalsh.name/mootools-plugins-ii' rel='external nofollow' class='url'>7 MooTools Plugins You Should Use on Every Website II</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://cssrainbow.cn/articles/resources/1357.html' rel='external nofollow' class='url'>9大MooTools Plugins来改善网站的用户体验 | CSSrainbow.cn</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://shahverdy.co.cc/?p=67' rel='external nofollow' class='url'>7 MooTools Plugins You Should Use on Every Website&#160;II | shahverdY</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://blog.outwa.com/2010/08/9mootools_plugins-for-user-expresion/' rel='external nofollow' class='url'>9大MooTools Plugins来改善网站的用户体验 - OutWa&#039;blog</a></p>
+	</div>
+	</li>
+
+	<div class="comment group"  id="li-comment-4427">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/b563ded95d6451b574471143b155f86e?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Guest</strong> said     </div>
+		<div class="comment-post">
+				<p>For my usage I found it useful to add the following at the bottom of TextboxListBit.Editable.initialize():</p>
+<p>this.element.addEvent(&#8216;blur&#8217;, function(ev) {<br />
+	this.toBox();<br />
+}.bind(this));</p>
+<p>This way if users forget to hit enter after their last item, the last item is still added.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-4427"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	<ul class='children'>
+
+	<div class="comment group"  id="li-comment-5375">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/15bbfb1ab4be442470785d51887b8538?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>MaishN</strong> said     </div>
+		<div class="comment-post">
+				<p>Where do you make this change. Which file? Thanks for your help.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5375"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+</ul>
+</li>
+
+	<div class="comment group"  id="li-comment-4654">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/63dc97edabb7b7e4ef0e3ac9ec7e406a?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Alex</strong> said     </div>
+		<div class="comment-post">
+				<p>Is it possible to add a non existing tag?<br />
+Lets say. User types a tag and it&#8217;s not in our &#8220;tags collection&#8221;. Then the user should be asked for whether he/she want to add this tag in a modal form.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-4654"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-4778">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/b007920fb19207637e4e9070cead9134?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong><a href='http://medium.ir' rel='external nofollow' class='url'>Ahmad</a></strong> said     </div>
+		<div class="comment-post">
+				<p>Hi, that a very cool.<br />
+But where can I download it? I couldn&#8217;t find any download link for version 0.5 in your site!<br />
+Can you help me please?</p>
+<p>Thankss</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-4778"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-4918">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/0db53901eca1472a8997a38a24b38d06?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>pripa</strong> said     </div>
+		<div class="comment-post">
+				<p>I have set the search method to standard still the search is only being made from the beginning of every word not in between char of word. ex. if i have text &#8220;this is my test&#8221;. If I type &#8220;es&#8221; or &#8220;hi&#8221; then it doesn&#8217;t return anything. Its only searching for the beginning of every words.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-4918"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-4935">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/eba890500df9676acc7db00996c0ac5e?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Mike</strong> said     </div>
+		<div class="comment-post">
+				<p>Great!&#8230;.How can i download this?&#8230;Can anyone help, Thanks!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-4935"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-4960">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=100' class='pic_avatar avatar-100 photo avatar-default' height='100' width='100' /></div>
+    <div class="author">
+      <strong><a href='http://twitter.com/gregdaynes' rel='external nofollow' class='url'>Greg Daynes</a></strong> said     </div>
+		<div class="comment-post">
+				<p>For now, just download the files inside the demo page.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-4960"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5003">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/eba890500df9676acc7db00996c0ac5e?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Mike</strong> said     </div>
+		<div class="comment-post">
+				<p>Thanks Greg Daynes for the download link!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5003"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5005">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/3e7e5101d9e0ec6f0a5b2e397867aa61?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Samantha</strong> said     </div>
+		<div class="comment-post">
+				<p>The functionality that I’m trying to build into the Textboxlist is to VALIDATE users input.  </p>
+<p>If the bit does not validate then I will try to change its background color to red.  This will be real sweet and user friendly if I can add this functionality.  If any gurus out there has done this already please share.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5005"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5039">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/1b39f7ea19861fabca6be74251d396f9?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Ben</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi, I&#8217;m making an ajax web app and as I don&#8217;t reload pages, the add function tag keeps chaining. How could I clear my textarea from all the tags inside when I&#8217;m doing a new action ?</p>
+<p>Thanks !</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5039"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	<ul class='children'>
+
+	<div class="comment group"  id="li-comment-5049">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/f82919924c9b1103366cd968122b60a4?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Kim</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi Ben,</p>
+<p>This is not a full answer but hope this can give u a start on implementing what you wish.  In the file textboxlist.js look at line 105 &#8211; 109 i think thats how u remove items.  U can try to modify it for ur use.</p>
+<p>-Kim  ( Can someone help me resolve my issue i posted above?)</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5049"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6062">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/202eae6caf63adba8d17c177d7daaafe?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Tim V.</strong> said     </div>
+		<div class="comment-post">
+				<p>Here&#8217;s a method that I am using for now.  Might be a cleaner way to do it, but I am hacking at the moment.  The &#8220;id&#8221; parameter is the id of the control that TextboxList initialization was called on.</p>
+<p>	var ClearTextboxList = function( id ) {<br />
+		$(&#8220;#&#8221;+id).parent().find(&#8220;.textboxlist-bit-box-deletebutton&#8221;).each(function(){<br />
+			$(this).click();<br />
+		});<br />
+	};</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6062"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6093">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=100' class='pic_avatar avatar-100 photo avatar-default' height='100' width='100' /></div>
+    <div class="author">
+      <strong><a href='http://twitter.com/janjarfalk' rel='external nofollow' class='url'>Jan Järfalk</a></strong> said     </div>
+		<div class="comment-post">
+				<p>I just added a clear function to my version of TextboxList.<br />
+I added this code on line 159:</p>
+<p>var clear = function(){<br />
+		var values = [];<br />
+		list.children().each(function(){<br />
+			var bit = getBit(this);<br />
+			if (!bit.is(&#8216;editable&#8217;)){<br />
+				bit.remove();<br />
+			}<br />
+		});<br />
+	};</p>
+<p>And then this code on line 281:<br />
+this.clear = clear;</p>
+<p>This will then clear your TextboxList.TextboxList.clear();</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6093"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+</ul>
+</li>
+
+	<div class="comment group"  id="li-comment-5048">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/f82919924c9b1103366cd968122b60a4?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Kim</strong> said     </div>
+		<div class="comment-post">
+				<p>Has anyone notice this problem when setting  onlyFromValues = true for Autosuggest text box.</p>
+<p>In Internet Explorer when you type a letter and the Auto-suggest box appears below, that wen hovering to an item with your mouse. it does not highlight the item or takes a veeeeeerry long time to do so?</p>
+<p>How can i resolve this issue in Internet Explorer?  Thanks in advance guys! </p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5048"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5051">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/44e330dea0304e5f8005ef073510b2b1?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Tom</strong> said     </div>
+		<div class="comment-post">
+				<p>Hey Yes Auto suggest does not work in IE when setting &#8220;onlyFromValues = true&#8221;.  Help please!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5051"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5410">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/0bf11956be8f336a5fbe5b7e4005d282?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>TimHussey</strong> said     </div>
+		<div class="comment-post">
+				<p>I feel pretty dumb&#8230;<br />
+How to you get an instance of the TextBoxList after creating it from another function&#8230;</p>
+<p>So example: i&#8217;ve already created it :<br />
+var emailToField = new $.TextboxList(&#8216;#recipient&#8217;,  {<br />
+				unique: true,<br />
+				plugins: {		autocomplete: {		minLength: 0	}		},<br />
+				bitsOptions: {		box: {	deleteButton: true}, 		editable: {		addKeys: [188] 		}		}<br />
+			});</p>
+<p>but due to scoping the emailToField doesn&#8217;t exist&#8230;<br />
+is there a way to just  do something like this?</p>
+<p>var toField = $(&#8216;#recipient&#8217;).textboxlist();<br />
+without it creating ANOTHER textboxlist on that element??</p>
+<p>if anyone can help, please e-mail me</p>
+<p>timhussey &#8211; at &#8211; gmail &#8211; dot &#8211; com</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5410"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5415">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/3a64ca96138f3542ae36301dcbbf0511?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Lyx_haven</strong> said     </div>
+		<div class="comment-post">
+				<p>I found that the download projects didn&#8217;t have a dropdownlist for autocomplete while the demo really has one.<br />
+And anyone can tell me how to link database to the data in the dropdownlist?<br />
+Thinks a lot!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5415"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5513">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/b185a46f08334cee77fb3cab2f0c59e6?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>JH</strong> said     </div>
+		<div class="comment-post">
+				<p>Hello, where has the link gone for purchasing a commercial license?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5513"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5546">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/f70c6af3580f2286a7296478b8a2ffac?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>maxargentina</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi, im wonder if can be a possibility to avoid editing text&#8230; only write the tags with js</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5546"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5825">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/9fc2095b90f03a1315df31af117f2ef3?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>jlvs</strong> said     </div>
+		<div class="comment-post">
+				<p>is it beatifull</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5825"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5854">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=100' class='pic_avatar avatar-100 photo avatar-default' height='100' width='100' /></div>
+    <div class="author">
+      <strong><a href='http://www.facebook.com/profile.php?id=672070814' rel='external nofollow' class='url'>Edoardo Marcora</a></strong> said     </div>
+		<div class="comment-post">
+				<p>Thanx for sharing this great plugin! :)</p>
+<p>I have a question&#8230; is there a way to programmatically populate the textboxlist? and, more importantly, to clear it???</p>
+<p>Thanx in advance for your reply.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5854"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5906">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/2a651aac5e76736c558a6fed0e3eb0cb?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Cyngus106</strong> said     </div>
+		<div class="comment-post">
+				<p>Anyone else notice that this does not work in IE9&#8230; is there anyone who has a solution?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5906"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5907">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/2a651aac5e76736c558a6fed0e3eb0cb?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Cyngus106</strong> said     </div>
+		<div class="comment-post">
+				<p>Anyone else notice that this does not work in IE9&#8230; is there anyone who has a solution?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5907"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5911">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/465df1df010168075dabbe82af114221?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Alexander</strong> said     </div>
+		<div class="comment-post">
+				<p>It looks to me than this plugin is unfornunately not maintained any more, there is no more link for commecial licenses and not a single answer from the author on the comments. Maybe someone should take over this ?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5911"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-5919">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/2a651aac5e76736c558a6fed0e3eb0cb?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Cyngus106</strong> said     </div>
+		<div class="comment-post">
+				<p>if anyone is able and willing to help i will pay&#8230; please contact me @ <a href="mailto:cyngus106@gmail.com">cyngus106@gmail.com</a></p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5919"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	<ul class='children'>
+
+	<div class="comment group"  id="li-comment-6091">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/025e541865799cdf6e571e64057b8501?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Guest</strong> said     </div>
+		<div class="comment-post">
+				<p>just use jquery version.. is a compatible view problem.. </p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6091"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+</ul>
+</li>
+
+	<div class="comment group"  id="li-comment-5982">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/4e6ea6eda1ac602bde5b282216ae331f?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Lee Gee</strong> said     </div>
+		<div class="comment-post">
+				<p>I&#8217;m writing a non-commercial demo that will end up as a commercial service, and TextboxList looks ideal for the project. But I can&#8217;t find a mailing list for support &#8212; is there one around?  I have issues calling .update to set the initial value of the box, and with allow ENTER to submit the form if a tag is not being chosen.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-5982"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6120">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=100' class='pic_avatar avatar-100 photo avatar-default' height='100' width='100' /></div>
+    <div class="author">
+      <strong><a href='http://www.facebook.com/profile.php?id=1406494199' rel='external nofollow' class='url'>Tim Kock</a></strong> said     </div>
+		<div class="comment-post">
+				<p>Ok trying to fix the &#8220;missing clear&#8221; issue, insert this code after update: function() { somecode&#8230; }<br />
+		clear: function() {		this.list.getChildren().map(function(el){			var bit = this.getBit(el);			if (bit.is(&#8216;editable&#8217;)) return null;			bit.remove();		}, this);	}</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6120"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	<ul class='children'>
+
+	<div class="comment group"  id="li-comment-6204">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/f686e74418577db3ff207eaf345c794f?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>ldiqual</strong> said     </div>
+		<div class="comment-post">
+				<p>It&#8217;s also necessary to clear the bit index with this.index.empty():</p>
+<p>clear: function() {		this.list.getChildren().map(function(el){			var bit = this.getBit(el);			if (bit.is(&#8216;editable&#8217;)) return null;			bit.remove();	 }, this);		this.index.empty();	}  </p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6204"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+</ul>
+</li>
+
+	<div class="comment group"  id="li-comment-6126">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/648c65d28ededb82ec1637c9d93b32ae?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Barisahmet</strong> said     </div>
+		<div class="comment-post">
+				<p>You can&#8217;t use &#8220;add bit on press comma&#8221;, with autocomplete plugin enabled. I am looking forward that to get fixed. Nice work :)</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6126"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6167">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/eddf095a0c52c00880d7c4b33d6bd453?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Aasdfda</strong> said     </div>
+		<div class="comment-post">
+				<p>这个在哪下载源码？</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6167"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6172">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/a0fb5c5fe8280966795df6501f6243ab?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Mo</strong> said     </div>
+		<div class="comment-post">
+				<p>Solution to the question I just asked: I took out the MinLength setting and it works perfectly fine now.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6172"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6192">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/f752fdfef97d525e3b18178a90e1e794?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong><a href='http://www.lmc-sistemas.com.ar' rel='external nofollow' class='url'>LMC Sistemas</a></strong> said     </div>
+		<div class="comment-post">
+				<p>Just awesome code, I will read it and probably use it in my social network. Thanks for sharing.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6192"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6219">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/78349a69ba7fde953e98950abb07d518?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Whisperofcp</strong> said     </div>
+		<div class="comment-post">
+				<p> seem  not support chinese inputs,is there a way ?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6219"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6387">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/7a8e2594e0dca5963fd1365aafdb4800?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Xpallicer</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi all</p>
+<p>using {unique: true, plugins: {autocomplete: {onlyFromValues: true}</p>
+<p>¿How can autocomplete list be updated when using add()?</p>
+<p>I&#8217;m using add to add selected elements, but I need that elements to not show again in autocomplete list.</p>
+<p>Anybody else has this issue?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6387"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	<ul class='children'>
+
+	<div class="comment group"  id="li-comment-6388">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/7a8e2594e0dca5963fd1365aafdb4800?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Xpallicer</strong> said     </div>
+		<div class="comment-post">
+				<p>I guess it has something to do with index</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6388"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	<ul class='children'>
+
+	<div class="comment group"  id="li-comment-6391">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/7a8e2594e0dca5963fd1365aafdb4800?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Xpallicer</strong> said     </div>
+		<div class="comment-post">
+				<p>I&#8217;ve added this method to TextboxList.Autocomplete</p>
+<p>        setSelected: function(selected){            for (var i = 0; i &lt; selected.length; i++){                var value = selected[i];		var b = this.textboxlist.create(&#039;box&#039;, value.slice(0, 3));		if (b){			b.autoValue = value;			if (this.index != null) this.index.push(value);                        var afterEl = this.textboxlist.list.getLast(&#039;.&#039; + this.textboxlist.options.prefix + &#039;-bit-box&#039;);			b.inject(afterEl || this.textboxlist.list, afterEl ? &#039;after&#039; : &#039;top&#039;);		}            }        },</p>
+<p>I had problems at showResults:<br />
+if (this.index) results = results.filter(function(v){ return !this.index.contains(v); }, this);</p>
+<p>so id changed that line by </p>
+<p>                if(this.index.length){                    var resultsok = [];                    for (var i = 0; i &lt; this.index.length; i++){                        for (var j = 0; j &lt; results.length; j++){                            if(this.index[i][0] != results[j][0]){                                resultsok.push(results[j]);                            }                        }                    }                    results = resultsok;                }</p>
+<p>hope this can help</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6391"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+</ul>
+</li>
+</ul>
+</li>
+
+	<div class="comment group"  id="li-comment-6428">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/7d19fb6bbf8a2193ddd4f26c78945e77?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Yi Wang</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi, The project does not work in ie9. this bug can be repaired.!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6428"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6467">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=100' class='pic_avatar avatar-100 photo avatar-default' height='100' width='100' /></div>
+    <div class="author">
+      <strong><a href='http://patrick-brueckner.de/wordpress/' rel='external nofollow' class='url'>Patrick Brueckner</a></strong> said     </div>
+		<div class="comment-post">
+				<p>Gerbert Olivé Vázquez has an bugfixed jquery version in his git repository:<br />
+<a href="https://github.com/golive/TextboxList" rel="nofollow">https://github.com/golive/TextboxList</a></p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6467"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6485">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/b928bc453eac1b6614b409df3615969a?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Azim</strong> said     </div>
+		<div class="comment-post">
+				<p>I want to handle dragged or pasted text please?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6485"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-6581">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/3d99605a0e40ba8ec00983a40f1c5afe?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Sébastien</strong> said     </div>
+		<div class="comment-post">
+				<p>Any chance to have MooTools 1.3 compatible library  ?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6581"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	<ul class='children'>
+
+	<div class="comment group"  id="li-comment-6798">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/48b5be946dc90a82e1e749e3f220df5a?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Florin</strong> said     </div>
+		<div class="comment-post">
+				<p>mootools sucks&#8230;. go with jQuery </p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6798"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+</ul>
+</li>
+
+	<div class="comment group"  id="li-comment-6630">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/2661c80d1e7b178aecda881549cc3b96?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Rosario</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi, first of all, congratulations! It works really well but I am having troubles with the GrowInput. I want to stop the main box from growing, but I can&#8217;t get it working, could you please provide an example? I basically want the bits to be inserted and navigated horizontally, but not vertically, is this possible at all? Thanks!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-6630"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://jennarmour.ca/building-web-forms-to-enhance-the-user-experience/' rel='external nofollow' class='url'>building web forms to enhance the user experience | Calgary Web Designer &amp; Marketing Strategist &#8211; UxD, IxD, IA.</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://bestsmashing.com/ajax/new-ajax-textboxlist-download.html' rel='external nofollow' class='url'>New Ajax TextboxList Download | Best Smashing</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.oktilyon.com/new-ajax-textboxlist-download/' rel='external nofollow' class='url'>New Ajax TextboxList Download | Oktilyon Teknoliyon</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.forosvip.com/8107-textboxlist-input-text-con-contenido-separado-con-coma.html' rel='external nofollow' class='url'>textboxlist input text con contenido separado con coma | FOROS VIP</a></p>
+	</div>
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.dameforos.com/8089-textboxlist-input-text-con-contenido-separado-con-coma.html' rel='external nofollow' class='url'>textboxlist input text con contenido separado con coma</a></p>
+	</div>
+	</li>
+
+	<div class="comment group"  id="li-comment-7424">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/5d0938651a02e9471b16644829f9324e?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>tim</strong> said     </div>
+		<div class="comment-post">
+				<p>i cannot get anything to post from any of the autocomplete examples on my own, anything i am missing?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-7424"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-7877">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/b6e93408b5a17eee8ee4b2c48b608496?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>moeenkhurshid</strong> said     </div>
+		<div class="comment-post">
+				<p>excellent work just what I was looking for, save me the trouble of going into ajax, blah, blah&#8230;. we are using it for commercial use and you earned your 20$, yup. let me know how to pay you or your pay pal address</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-7877"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-8511">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/f10516dbf48f3664ce0c5f66f999c636?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Snehal Desai</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi, I want to buy this software. Please let me know how to buy it? I can not find any link or the contact number to call.</p>
+<p>Thanks,<br />
+Snehal</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-8511"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-8679">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/dd98d2a9f0a08874e8d9daec088f4b33?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Max</strong> said     </div>
+		<div class="comment-post">
+				<p>where can i download the file?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-8679"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://blog.theweblogix.com/facebook-like-inputs-with-jquery-or-mootools/' rel='external nofollow' class='url'>The Web logix Blog &raquo; Blog Archive &raquo; Facebook-Like Inputs With jQuery Or MooTools</a></p>
+	</div>
+	</li>
+
+	<div class="comment group"  id="li-comment-8724">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/03ee2266beb434cfe8e6e2aa48bd835e?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Amy Wong</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi,</p>
+<p>We have been able to successfully use TextBoxList on our site until recently. The person who originally implemented this has left, and it appears to have stopped working in IE 9 (the editor does not have any autocomplete functionality). Do you have any plans to update TextBoxList to support IE 9 or suggestions on how we might be able to fix it? Any help would be appreciated.</p>
+<p>Thanks,<br />
+Amy</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-8724"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-8922">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/fe2114acc8f6c1c42dcb8cfb603e7855?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Rahul</strong> said     </div>
+		<div class="comment-post">
+				<p>great man Its very use full to me when we needed some more values in one field like some mail Ids , some names etc.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-8922"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-8945">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/c7bba4aa1c4a8952c33eeb22984abd29?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>shereen</strong> said     </div>
+		<div class="comment-post">
+				<p>there are error  in file TextboxList.Autocomplete.js<br />
+if (values[i][1].test(regexp)) newvals.push(values[i]);</p>
+<p>values[i][1] undefined</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-8945"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://www.joaopauloln.com.br/2012/05/facebook-style-multi-select/' rel='external nofollow' class='url'>Facebook Style Multi Select &laquo; João Paulo Leite Nascimento</a></p>
+	</div>
+	</li>
+
+	<div class="comment group"  id="li-comment-9058">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/32be7e25bc01928144a0846fa067ba8d?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Tolgay</strong> said     </div>
+		<div class="comment-post">
+				<p>Hi How can I use &#8220;blur&#8221; ?</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-9058"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-9205">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/7781cf969ba519ff70bb7e084a82b42e?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Ralosoft</strong> said     </div>
+		<div class="comment-post">
+				<p>Sabe alguien como tendria que hacer mi archivo autocomplete2.php por que es lo unico que me faltaria, muchas gracias de antemano</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-9205"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-9206">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/7781cf969ba519ff70bb7e084a82b42e?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Ralosoft</strong> said     </div>
+		<div class="comment-post">
+				<p>Sorry i wrote in spanish,  i need to create autocomplete2.php to get the results what i wrote in the input. AnyBody can help me with a functional example?<br />
+Just i need that to finish the application.</p>
+<p>Thanks!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-9206"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-9269">
+		<div class="avatar"><img alt='' src='http://0.gravatar.com/avatar/090fdf218078a29d67e4a35b8fbf60d4?s=100&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Sedat</strong> said     </div>
+		<div class="comment-post">
+				<p>IE9 Not Working ??</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-9269"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-10094">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/b32ea93c4b04c9b6760b351166f7544e?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Brad</strong> said     </div>
+		<div class="comment-post">
+				<p>For those of you looking to not require your users to hit enter after the last entry (in case they type and then just click submit), a quick change:</p>
+<p>Line 319 in TextboxLixt.js reads:</p>
+<p>		addOnBlur: false,</p>
+<p>Change it to:</p>
+<p>		addOnBlur: true,</p>
+<p>And life gets better!</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-10094"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+
+	<div class="comment group"  id="li-comment-11473">
+		<div class="avatar"><img alt='' src='http://1.gravatar.com/avatar/ba28d09436c250f7c544376d9b94e9ef?s=100&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D100&amp;r=G' class='pic_avatar avatar-100 photo' height='100' width='100' /></div>
+    <div class="author">
+      <strong>Dav</strong> said     </div>
+		<div class="comment-post">
+				<p>Good work!<br />
+However in the Editable Bits Options is listed the &#8220;grows&#8221; attribute, that does not exist. The correct one should be &#8220;growing&#8221;.</p>
+			
+						
+			<div class="comment-meta commentmetadata"><a href="http://www.devthought.com/projects/mootools/textboxlist/#comment-11473"></a>
+			</div><!-- .comment-meta .commentmetadata -->
+		</div>
+	</div>
+
+
+
+	</li>
+	<div class="post pingback" style="display: none">
+		<p>Pingback: <a href='http://bestsmashing.com/tutorials/new-ajax-textboxlist-download/' rel='external nofollow' class='url'>New Ajax TextboxList DownloadBest Smashing | Best Smashing</a></p>
+	</div>
+	</li>
+
+
+
+
+								<div id="respond">
+				<h3 id="reply-title">Your thoughts? <small><a rel="nofollow" id="cancel-comment-reply-link" href="/projects/mootools/textboxlist/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://www.devthought.com/wp-comments-post.php" method="post" id="comment-form">
+																																						<div class="comment-form-name"><input id="name" name="author" class="required" placeholder="Name"></div><div class="comment-form-email"><input id="name" name="email" class="required email" placeholder="Email"></div>
+	<div class="comment-form-website"><input id="website" placeholder="Website (optional)" name="website"></div><div class="comment-form-comment"><textarea id="comment" name="comment" class="required" aria-required="true" placeholder="Comment"></textarea></div>												<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Submit" />
+							<input type='hidden' name='comment_post_ID' value='665' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e7fda0b371" /></p>					</form>
+							</div><!-- #respond -->
+						
+</div><!-- #comments -->
+				</div>
+				<?
+				} ?>
+
+			</div><!-- /.content -->
+
+		</div><!-- /code-post .article -->
+		
+
+
+	
+
+</div>
+
+
+
+<div id="secondary">
+  <div id="secondary-wrap">
+	<div id="flip">
+	
+		<div id="nav" class="card group">
+			
+			<div class="info-button"><a href="#">i</a></div>
+			<div class="logo"><a data-state="1" href="http://www.devthought.com/"><b>dev</b>thought</a></div>
+			
+			<ul>
+				<li class="archives"><a data-state="1" href="http://www.devthought.com/archives/">Archives</a></li>
+				<li class="projects"><a data-state="1" href="http://www.devthought.com/projects/">Projects</a></li>
+        				<li class="tweets"><a target="_blank" data-track="Twitter" data-track-json='{ "type": "tweets" }' href="http://twitter.com/rauchg">Tweets</a></li>
+                <li class="rss"><a target="_blank" data-track="RSS" data-track-json='{ "type": "sidebar" }' href="http://devthought.com/feed/">RSS</a></li>
+				<li class="search"><a data-state="1" href="http://www.devthought.com/search/">Search</a></li>
+			</ul>
+			
+		</div><!-- /nav -->
+		
+		<div id="about" class="card group">
+		
+			<div class="info-button"><a href="#">i</a></div>
+			<div class="logo"><a data-state="1" href="http://www.devthought.com/">about <b>dev</b>thought</a></div>
+			
+			<img class="portrait" src="http://www.devthought.com/wp-content/themes/devthought/images/portrait.png" alt="" />
+			
+      <p>About <strong>Guillermo Rauch</strong>:</p>
+			<p>CTO and co-founder of LearnBoost, developer, open source enthusiast, blogger.</p>
+			
+			<ul id="social" class="group">
+				<li class="rss"><a target="_blank" href="http://feeds.feedburner.com/devthought">RSS</a></li>
+				<li class="email"><a href="mailto:rauchg@gmail.com">Email</a></li>
+				<li class="git"><a target="_blank" href="http://github.com/guille">git</a></li>
+				<li class="vcard"><a target="_blank" href="http://devthought.com/rauchg.vcf">vCard</a></li>
+				<li class="twitter"><a target="_blank" href="http://twitter.com/rauchg">Twitter</a></li>
+				<li class="connect">Connect.</li>
+			</ul>
+			
+		</div><!-- /about -->
+	
+	</div><!-- /flip -->
+
+  </div>
+</div><!-- /secondary -->
+</div><!-- /wrap -->
+
+
+
+</body> 
+</html>

@@ -86,9 +86,11 @@ class SflmJsClasses {
     $objectPaths = [];
     $files = [];
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
+    $autoloadFolder = Sflm::$absBasePaths['i'].'/sflm';
+    die2($autoloadFolder);
     foreach ($files as $file) {
       $class = $this->getObjectName($file);
-      if (!strstr($class, '.')) continue; // Пропускаем корневые классы. Они не подключаются динамически
+      if (!strstr($file, $autoloadFolder)) continue; // Динамически подключаются только классы находящиеся в папке $autoloadFullSupportFolder
       $objectPaths[$class] = $this->frontend->base->getPath($file, 'adding to init classes paths');
     }
     // -- s2/js/path/to/Ngn.Class.php --
