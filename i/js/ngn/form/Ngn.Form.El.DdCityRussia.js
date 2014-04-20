@@ -1,1 +1,0 @@
-Ngn.Form.El.DdCityRussia = new Class({ Extends: Ngn.Form.El.DdCity });
