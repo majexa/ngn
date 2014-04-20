@@ -90,7 +90,13 @@ function _getBacktrace(array $trace, $html = true, $offset = 0, $length = 0) {
     if (isset($trace[$i]['file'])) {
       $s .= $trace[$i]['file'].':'.$trace[$i]['line'].($html ? '<br />' : "\n");
     } elseif (isset($trace[$i]['class'])) {
-      $s .= $trace[$i]['class'].$trace[$i]['type'].$trace[$i]['function'].'('.implode(', ', $trace[$i]['args']).')'.($html ? '<br />' : "\n");
+      continue;
+      //if (empty($trace[$i]['type'])) die2($trace[$i]);
+      //die2($trace[$i]['args']);
+      $s .=
+        $trace[$i]['class'].
+        $trace[$i]['type'].$trace[$i]['function'].
+        '('.implode(', ', $trace[$i]['args']).')'.($html ? '<br />' : "\n");
     }
   }
   return $s;
