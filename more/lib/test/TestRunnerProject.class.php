@@ -33,13 +33,17 @@ class TestRunnerProject extends TestRunnerAbstract {
     $this->_run($classes);
   }
 
+  function _g() {
+    return array_filter($this->getClasses(), function ($class) {
+      return !strstr(Lib::getClassPath($class), "projects/$this->projectName/");
+    });
+  }
+
   /**
    * Запускает проектные тесты, не находящиеся в папке проекта
    */
   function g() {
-    $this->_run(array_filter($this->getClasses(), function ($class) {
-      return !strstr(Lib::getClassPath($class), "projects/$this->projectName/");
-    }));
+    $this->_run($this->_g());
   }
 
   /**
