@@ -29,7 +29,7 @@ class SflmJsClasses {
   }
 
   function retrieveExistingObjects() {
-    return FileCache::c()->load('jsExistingObjects'.$this->frontend->fKey());
+    return FileCache::c()->load('jsExistingObjects'.$this->frontend->key());
   }
 
   protected function initExistingObjects() {
@@ -59,12 +59,13 @@ class SflmJsClasses {
       Sflm::output('Storing existing objects. Nothing to store. Skipped');
       return;
     }
+    //if (in_array('Ngn.Form.El.DdTags', $this->existingObjects)) die2(2);
     //Sflm::output('Storing existing objects: '.implode(', ', $this->existingObjects)." to jsExistingObjects".$this->frontend->fKey());
     Sflm::output('Storing existing objects. Count: '.count($this->existingObjects));
     FileCache::c()->save([
       $this->existingObjectPaths,
       $this->existingObjects
-    ], 'jsExistingObjects'.$this->frontend->fKey());
+    ], 'jsExistingObjects'.$this->frontend->key());
   }
 
   protected function storeExistingObject($name, $source) {
@@ -84,11 +85,9 @@ class SflmJsClasses {
   protected function _initObjectPaths() {
     $objectPaths = [];
     $files = [];
-    die2(Sflm::$absBasePaths);
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
     foreach ($files as $file) {
       $class = $this->getObjectName($file);
-
       if (!strstr($class, '.')) continue; // Пропускаем корневые классы. Они не подключаются динамически
       $objectPaths[$class] = $this->frontend->base->getPath($file, 'adding to init classes paths');
     }
@@ -105,6 +104,7 @@ class SflmJsClasses {
       }
     }
     $this->objectPaths = array_merge($this->existingObjectPaths, $objectPaths);
+    die2($this->objectPaths);
     FileCache::c()->save($this->objectPaths, 'jsObjectPaths');
   }
 
