@@ -210,7 +210,7 @@ class SflmJsClasses {
         }
       }
     }
-    $this->_addObject($name, $source, $failure);
+    $this->_addObject($name, $source);
     $this->_initObjectPaths();
     return true;
   }
@@ -218,7 +218,7 @@ class SflmJsClasses {
   protected function getObjectPath($name, $source, $strcit) {
   }
 
-  protected function _addObject($name, $source, Closure $failure) {
+  protected function _addObject($name, $source) {
     if (!$this->isClass($name)) {
       $this->storeExistingObject($name, 'object adding');
     } // добавляем сразу, т.к. парсинг объявления объектов не поддерживается

@@ -33,6 +33,10 @@ class Ngn {
     self::$basePaths = Arr::get(self::$_basePaths, 0);
   }
 
+  static function debugKey() {
+    return file_exists(NGN_PATH.'/.debugKey') ? file_get_contents(NGN_PATH.'/.debugKey') : false;
+  }
+
 }
 
 Ngn::addBasePath(NGN_PATH.'/core');

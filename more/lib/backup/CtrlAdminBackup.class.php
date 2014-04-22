@@ -5,7 +5,7 @@ class CtrlAdminBackup extends CtrlAdmin {
   static $properties = [
     'title' => 'Резервные копии',
     'order' => 310,
-    'onMenu' => true
+    'onMenu' => false
   ];
   
   function action_default() {

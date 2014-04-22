@@ -5,7 +5,7 @@ class CtrlAdminProfile extends CtrlAdmin {
   static $properties = [
     'title'  => 'Профиль',
     'order'  => 320,
-    'onMenu' => true
+    'onMenu' => false
   ];
 
   function action_default() {
