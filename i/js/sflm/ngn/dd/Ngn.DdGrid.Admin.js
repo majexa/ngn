@@ -1,3 +1,4 @@
+// @requires Ngn.DdFilterPath
 Ngn.DdGrid.Admin = new Class({
   Extends: Ngn.DdGrid,
   options: {
