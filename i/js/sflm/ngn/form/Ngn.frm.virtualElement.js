@@ -1,3 +1,4 @@
+/*
 Ngn.frm.virtualElement = {
   // abstract toggleDisabled: function(flag) {},
   parentForm: null,
@@ -9,3 +10,4 @@ Ngn.frm.virtualElement = {
   getForm: function() {
   }
 };
+*/

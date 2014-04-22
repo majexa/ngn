@@ -27,7 +27,7 @@ class ConfigManagerForm extends Form {
         $this->addVisibilityCondition($cond['headerName'], $cond['condFieldName'], $cond['cond']);
       }
     }
-    foreach ($this->configStruct['fields'] as $k => $f) $this->isDisabled($k);
+    //foreach ($this->configStruct['fields'] as $k => $f) $this->isDisabled($k);
     parent::__construct(new Fields(Fields::keyAsName($this->configStruct['fields'])));
   }
 

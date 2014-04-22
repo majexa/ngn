@@ -21,7 +21,6 @@ class AdminModule {
 
   static function getListModules() {
     return Arr::filterFunc(self::getModules(), function($v) {
-
       return AdminModule::isListAllowed($v);
     });
   }
@@ -34,8 +33,8 @@ class AdminModule {
   static function isListAllowed(array $module) {
     if (!empty($module['alwaysOnMenu'])) return true;
     if (empty($module['onMenu'])) return false;
-    if (O::get('Req')->params[0] == 'god' and Misc::isGod()) return true;
-    //return self::_isAllowed($module['name']);
+    if (O::get('Req')->params[0] == 'god') return true;
+    return false;
   }
 
   static protected function _isAllowed($moduleName) {
@@ -50,12 +49,13 @@ class AdminModule {
   }
 
   static function getProperties($name) {
-    return false;
+    $class = 'CtrlAdmin'.ucfirst($name);
+    return $class::getProperties();
   }
 
   static function getProperty($name, $property) {
-    $properties = self::getProperties($name);
-    return $properties[$property];
+    if (($properties = self::getProperties($name)) === false) return false;
+    return isset($properties[$property]) ? $properties[$property] : false;
   }
 
   static function sf($name) {

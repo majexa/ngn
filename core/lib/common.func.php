@@ -32,7 +32,11 @@ function pr($var, $html = true, $trace = true) {
   print print_r($var, true);
   if ($html) print '</pre>';
   if (!$html) print "\n";
-  if ($trace) print O::get('CliColors')->getColoredString(getBacktrace($html), 'green');
+  if ($trace) {
+    $backtrace = getBacktrace($html);
+    if (!$html) $backtrace = O::get('CliColors')->getColoredString($backtrace, 'green');
+    print $backtrace;
+  }
   print $html ? '<hr />' : "-----------END-OF-PR----------\n";
 }
 

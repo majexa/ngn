@@ -8,7 +8,7 @@
   <?//= PageModuleCore::sf('admin', $d['page']['module']) ?>
   <script type="text/javascript">
   window.addEvent('domready', function() {
-    Ngn.cp.init();
+    //Ngn.cp.init();
   });
   </script>
 </head>

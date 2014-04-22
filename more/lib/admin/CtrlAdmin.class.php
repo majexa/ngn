@@ -12,6 +12,8 @@
  */
 abstract class CtrlAdmin extends CtrlCp {
 
+  static $properties;
+
   static function getProperties() {
     if (!isset(static::$properties)) return false;
     return static::$properties;
@@ -81,7 +83,7 @@ abstract class CtrlAdmin extends CtrlCp {
   protected function initMainTpl() {
     if (file_exists(NGN_ENV_PATH.'/config/server.php')) {
       $server = require NGN_ENV_PATH.'/config/server.php';
-      if ($server['sType'] == 'test' and $this->req['forceAuth']) {
+      if (isset($server['sType']) and $server['sType'] == 'test' and $this->req['forceAuth']) {
         parent::initMainTpl();
         return;
       }
@@ -106,7 +108,7 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function initModules() {
-    $this->d['adminModules'] = Arr::toAssoc(AdminModule::getListModules(true), 'name');
+    $this->d['adminModules'] = Arr::toAssoc(AdminModule::getListModules(), 'name');
     // Добавляем циферку новых сообщений к ссылке на приватки
     if (isset($this->d['adminModules']['privMsgs']) and !empty($this->d['newMsgsCount'])) {
       $this->d['adminModules']['privMsgs']['title'] .= ' (<b>'.$this->d['newMsgsCount'].'</b>)';

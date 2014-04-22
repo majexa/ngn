@@ -30,7 +30,7 @@ class AdminRouter extends Router {
       redirect('admin');
       return;
     }
-    if (Auth::get('id') and isset($this->req->params[1])) {
+    if (/*Auth::get('id') and */isset($this->req->params[1])) {
       $this->module = $this->req->params[1];
       $this->moduleSubfolder = '/'.$this->module;
     }

@@ -1,5 +1,14 @@
 <? $this->tpl('admin/modules/privMsgs/header') ?>
-
+<?/*
+<script>
+  (function() {
+    throw new Error('it is a chack andreay');
+  }).delay(100);
+  (function() {
+    throw new Error("it is a second\nchack andreay");
+  }).delay(200);
+</script>
+*/?>
 <? if ($d['msgs']) { ?>
 <table cellpadding="0" cellspacing="0" id="itemsTable" class="valign">
 <? foreach ($d['msgs'] as $k => $v) { ?>
