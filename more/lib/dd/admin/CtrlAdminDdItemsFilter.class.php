@@ -1,7 +1,7 @@
 <?php
 
 class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
-  use DdParamFilterCtrl, LongJobCtrl;
+  use DdParamFilterCtrl/*, LongJobCtrl*/;
 
   protected function paramFilterItems() {
     return $this->items();

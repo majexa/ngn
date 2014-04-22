@@ -255,8 +255,15 @@ class SflmJsClasses {
       $pathWithSourceProcessor($path);
     }
     $this->frontend->_addPath($path, true);
-    $this->processNgnClasses($code, $path);
+    $this->processNgnPatterns($code, $path);
     foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$path requiredAfter");
+  }
+
+  function processCode($code, $source) {
+    foreach ($this->parseRequired($code) as $class) $this->add($class, "$source: required");
+    foreach ($this->parseNgnExtendsClasses($code) as $class) $this->addObjectStrict($class, "$source: ngn extends");
+    $this->processNgnPatterns($code, "$source: ngn patterns");
+    foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$source: requiredAfter");
   }
 
   protected function storeExistingObjectsInObjectFile($name, $source) {
@@ -306,7 +313,7 @@ class SflmJsClasses {
     return $classes;
   }
 
-  function processNgnClasses($code, $source = 'default') {
+  function processNgnPatterns($code, $source = 'default') {
     $code = preg_replace('!/\*.*?\*/!s', '', $code);
     Sflm::output("Process Ngn patterns in '$source'");
     foreach ($this->parseNgnClasses($code) as $class) {

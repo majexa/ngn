@@ -307,6 +307,11 @@ use Options;
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
+    /*
+    if (preg_match_all('/<script>(.*)<\/script>/s', $html, $m)) {
+      foreach ($m[1] as $code) Sflm::frontend('js')->classes->processCode($code, 'inline');
+    }
+    */
     $this->d['processTime'] = getProcessTime();
     return $html;
   }

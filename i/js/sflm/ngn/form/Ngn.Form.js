@@ -1,4 +1,5 @@
-// @requires Ngn.frm, Ngn.lightbox, Ngn.frm.maxLength, Ngn.Form.Upload
+// @requires Ngn.frm, Ngn.lightbox, Ngn.frm.maxLength
+// @requiresAfter Ngn.Form.Upload
 
 Ngn.Form = new Class({
   Implements: [Options, Events, Class.Occlude],

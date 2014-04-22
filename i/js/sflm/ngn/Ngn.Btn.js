@@ -104,7 +104,7 @@ Ngn.Btn = new Class({
     this.setOptions(options);
     this.setAction(action);
     this.el = el;
-    this.initVirtualElement(this.el);
+    //this.initVirtualElement(this.el);
     this.toggleDisabled(true);
     var up = function() {
       if (!this.enable) return;
