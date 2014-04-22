@@ -198,6 +198,14 @@ class Req extends ArrayAccesseble {
     return implode('/', array_slice($this->params, $offset, $limit ? : count($this->params)));
   }
 
+  function isDebug() {
+    return isset($_COOKIE['debugKey']) and ($k = Ngn::debugKey()) and $_COOKIE['debugKey'] == $k;
+  }
+
+  function forceAuth() {
+    return !empty($_COOKIE['forceAuth']) or !empty($this->r['forceAuth']);
+  }
+
   /**
    * @return Req
    */

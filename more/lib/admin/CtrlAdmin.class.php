@@ -81,15 +81,14 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function initMainTpl() {
-    if (file_exists(NGN_ENV_PATH.'/config/server.php')) {
-      $server = require NGN_ENV_PATH.'/config/server.php';
-      if (isset($server['sType']) and $server['sType'] == 'test' and $this->req['forceAuth']) {
-        parent::initMainTpl();
-        return;
-      }
+    LogWriter::v('aaa', [$_SERVER['REQUEST_URI'], $this->req->forceAuth(), $this->req->isDebug()]);
+    if ($this->req->forceAuth() and $this->req->isDebug()) {
+      parent::initMainTpl();
+      return;
     }
     if (!($this->userId = Auth::get('id')) or (!Misc::isAdmin() and !Misc::isGod())) {
       $this->actionDisabled = true;
+      Sflm::frontend('js')->classes->addObject('Ngn.Form', 'ctrl');
       $this->d['mainTpl'] = 'admin/auth';
     }
     else {

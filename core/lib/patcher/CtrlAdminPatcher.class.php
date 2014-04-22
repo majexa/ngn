@@ -4,7 +4,7 @@ class CtrlAdminPatcher extends CtrlAdmin {
 
   static $properties = [
     'title' => 'Патчи',
-    'onMenu' => true
+    'onMenu' => false
   ];
   
   function init() {
