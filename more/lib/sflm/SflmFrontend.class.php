@@ -10,7 +10,7 @@ abstract class SflmFrontend {
    */
   public $name;
 
-  protected $pathsCache, $id, $debug = false;
+  public $pathsCache, $id, $debug = false;
 
   public $base, $newPaths = [];
 

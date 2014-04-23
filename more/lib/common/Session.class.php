@@ -81,6 +81,8 @@ class Session {
   }
 
   static function init() {
+    if (!session_id()) session_start();
+    return;
     if (self::$started) return;
     //ini_set('session.cookie_domain', SITE_DOMAIN);
     ini_set('session.gc_maxlifetime', self::$expires);

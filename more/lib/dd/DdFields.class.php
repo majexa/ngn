@@ -21,7 +21,7 @@ class DdFields extends Fields {
    * @param array $options
    */
   function __construct($strName, array $options = []) {
-    Misc::checkEmpty($strName);
+    Misc::checkEmpty($strName, '$strName');
     $this->strName = $strName;
     parent::__construct([], $options);
   }
