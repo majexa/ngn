@@ -57,6 +57,11 @@ class CtrlAdminDdItems extends CtrlAdmin {
     $this->req->param(2); // required
   }
 
+  function action_form() {
+    $this->d['tpl'] = 'common/form';
+    $this->d['form'] = DdCore::imDefault($this->getStrName())->form->setElementsData()->html();
+  }
+
   function action_json_settings() {
     $this->json['title'] = 'Настройки записей';
     return $this->jsonFormActionUpdate(new AdminDdItemsSettingsForm($this->structure['id']));

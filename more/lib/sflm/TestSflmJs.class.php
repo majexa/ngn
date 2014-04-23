@@ -18,22 +18,18 @@ class TestSflmJs extends ProjectTestCase {
   }
 
   function testParentNamespaceInitInTheSameFile() {
-    Sflm::setFrontend('js')->addObject('Ngn.namespace.A');
+    Sflm::frontend('js')->addObject('Ngn.namespace.A');
   }
 
-  //function testAddAllObjects() {
-    //Sflm::resetFrontend('js', 'default')->addObject('Ngn.Grid');
+  //function testChangeVersion() {
+  //  Sflm::frontend('js')->addObject('Ngn.sub.A');
+  //  $version1 = Sflm::frontend('js')->version();
+  //  Sflm::setFrontend('js', 'dummy');
+  //  $version2 = Sflm::frontend('js')->version();
+  //  Sflm::frontend('js')->addObject('Ngn.sub.B');
+  //  Sflm::frontend('js')->version();
+  //  $version3 = Sflm::frontend('js')->version();
   //}
-
-  function testChangeVersion() {
-    Sflm::frontend('js')->addObject('Ngn.sub.A');
-    $version1 = Sflm::frontend('js')->version();
-    Sflm::setFrontend('js', 'dummy');
-    $version2 = Sflm::frontend('js')->version();
-    Sflm::frontend('js')->addObject('Ngn.sub.B');
-    Sflm::frontend('js')->version();
-    $version3 = Sflm::frontend('js')->version();
-  }
 
   function testResetFrontend() {
     Sflm::setFrontend('js', 'test/dependencies');

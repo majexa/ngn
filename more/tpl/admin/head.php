@@ -8,7 +8,9 @@
   <?//= PageModuleCore::sf('admin', $d['page']['module']) ?>
   <script type="text/javascript">
   window.addEvent('domready', function() {
-    //Ngn.cp.init();
+    document.getElements('.apeform form').each(function(eForm) {
+      Ngn.Form.factory(eForm);
+    });
   });
   </script>
 </head>

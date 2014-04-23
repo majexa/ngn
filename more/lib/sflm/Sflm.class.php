@@ -56,9 +56,12 @@ class Sflm {
    * @param $frontend
    * @throws Exception
    */
-  static function setFrontendName($frontend) {
+  static function setFrontendName($frontend, $quitely = false) {
     if (self::$frontendName) {
-      throw new Exception('Frontend name already set. Use reset. Backtrace of first set call: '."\n".O::get('CliColors')->getColoredString(self::$setFrontendBacktrace, 'darkGray'));
+      if ($quitely === false) {
+        throw new Exception('Frontend name already set. Use reset. Backtrace of first set call: '."\n".O::get('CliColors')->getColoredString(self::$setFrontendBacktrace, 'darkGray'));
+      }
+      return;
     }
     self::$frontendName = $frontend;
     self::$setFrontendBacktrace = getBacktrace(false, 1);

@@ -56,12 +56,12 @@ class SflmJsClasses {
 
   protected function storeExistingObjects() {
     if (!$this->existingObjects) {
-      Sflm::output('Storing existing objects. Nothing to store. Skipped');
+      //Sflm::output('Storing existing objects. Nothing to store. Skipped');
       return;
     }
     //if (in_array('Ngn.Form.El.DdTags', $this->existingObjects)) die2(2);
     //Sflm::output('Storing existing objects: '.implode(', ', $this->existingObjects)." to jsExistingObjects".$this->frontend->fKey());
-    Sflm::output('Storing existing objects. Count: '.count($this->existingObjects));
+    //Sflm::output('Storing existing objects. Count: '.count($this->existingObjects));
     FileCache::c()->save([
       $this->existingObjectPaths,
       $this->existingObjects
@@ -71,6 +71,7 @@ class SflmJsClasses {
   protected function storeExistingObject($name, $source) {
     if (isset($this->existingObjectPaths[$name])) throw new Exception("'$name' already exists ($source)");
     $this->existingObjects[] = $name;
+    Sflm::output("Store existing object '$name'");
     $this->storeExistingObjects();
     if ($this->frontend->incrementVersion()) {
       Sflm::output("Increment version on storing object '$name'");
@@ -86,7 +87,7 @@ class SflmJsClasses {
     $objectPaths = [];
     $files = [];
     foreach (Sflm::$absBasePaths as $path) $files = Arr::append($files, Dir::getFilesR($path, '[A-Z]*.js'));
-    $autoloadFolder = Sflm::$absBasePaths['i'].'/js/sflm';
+    $autoloadFolder = '/js/sflm/';
     foreach ($files as $file) {
       $class = $this->getObjectName($file);
       if (!strstr($file, $autoloadFolder)) continue; // Динамически подключаются только классы находящиеся в папке $autoloadFullSupportFolder
@@ -225,14 +226,7 @@ class SflmJsClasses {
     $this->processPath($this->findObjectPath($name), $source, $name);
   }
 
-  /**
-   * Должно вызываться уже после добавления пути в фронтенд-библиотеку. Ф-я проверит наличие классов, определенных
-   * в файле по этому пути, добавит их в существующие, а потом проверит все классы, используемые
-   * в этом файле на присутствие. Если какого-то класса не будет среди определённых, то ф-я получит путь
-   * к файлу, где лежит этот класс, и добавит этот путь во фронтенд-библиотеку
-   *
-   * @param $path
-   */
+  protected $processedPaths = [];
 
   /**
    * Должно вызываться уже после добавления пути в фронтенд-библиотеку. Ф-я проверит наличие классов, определенных
@@ -245,7 +239,13 @@ class SflmJsClasses {
    * @param string|null $name Имя объекта/класса который должен находиться по этому пути
    */
   function processPath($path, $source = null, $name = null) {
+    if (in_array($path, $this->frontend->pathsCache)) {
+      Sflm::output("Path '$path' in cache. Skipped");
+      return;
+    }
     Sflm::output("Processing contents of '$path'");
+    //if (isset($this->processedPaths[$path])) die2([$path, $this->processedPaths[$path]]);
+    //$this->processedPaths[$path] = getBacktrace(false);
     $code = file_get_contents($this->frontend->base->getAbsPath($path));
     foreach ($this->parseRequired($code) as $class) $this->add($class, "$path required");
     foreach ($this->parseNgnExtendsClasses($code) as $class) $this->addObjectStrict($class, ($name ? : $path).' extends');
@@ -254,7 +254,7 @@ class SflmJsClasses {
       $pathWithSourceProcessor = $this->pathWithSourceProcessor;
       $pathWithSourceProcessor($path);
     }
-    $this->frontend->_addPath($path, true);
+    $this->frontend->_addPath($path);
     $this->processNgnPatterns($code, $path);
     foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$path requiredAfter");
   }
@@ -287,12 +287,10 @@ class SflmJsClasses {
   }
 
   function add($str, $source = 'direct') {
-    // метод для добавления только объектов/классов и путей
     if (!$this->isObjectOrClass($str) and $this->frontend->base->isPackage($str)) {
-      foreach ($this->frontend->base->getPaths($str) as $path) $this->_add($path, $source);
+      foreach ($this->frontend->base->getPaths($str, true) as $path) $this->_add($path, $source);
       return;
     }
-    // if (!$this->isObjectOrClass($str) and $this->frontend->base->isPackage($str)) throw new Exception("Path '$str' can not be a package. src: $source");
     $this->_add($str, $source);
   }
 
