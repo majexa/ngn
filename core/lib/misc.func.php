@@ -65,10 +65,7 @@ function toLower($s) {
 function sys($cmd, $output = false) {
   if ($output and !getConstant('OUTPUT_DISABLE')) output('Cmd: '.$cmd, $output);
   LogWriter::str('sys', $cmd);
-  ob_start();
-  system($cmd);
-  $c = ob_get_contents();
-  ob_end_clean();
+  $r = system($cmd);
   if ($output and !getConstant('OUTPUT_DISABLE') and $c) output("Cmd output: $c", $output);
   return $c;
 }
