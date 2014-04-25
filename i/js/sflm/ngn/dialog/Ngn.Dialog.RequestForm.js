@@ -13,6 +13,8 @@ Ngn.Dialog.RequestFormBase = new Class({
   },
 
   initialize: function(options) {
+    console.trace();
+
     options = options || {};
     options.ok = this.submit.bind(this);
     if (!$defined(options.submitUrl)) {

@@ -27,7 +27,7 @@ Ngn.Dialog.Tiny = new Class({
     return this.eTextarea;
   },
   
-  closeAction: function(_canceled) {
+  closeAction: function(_canceled) {Ngn.Dialog.Tiny.Link
     this.options.callback(tinyMCE.get(this.id).getContent());
   }
   

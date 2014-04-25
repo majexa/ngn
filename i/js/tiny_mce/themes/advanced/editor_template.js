@@ -9,7 +9,7 @@
 (function(tinymce) {
   var DOM = tinymce.DOM, Event = tinymce.dom.Event, extend = tinymce.extend, each = tinymce.each, Cookie = tinymce.util.Cookie, lastExtID, explode = tinymce.explode;
 
-  Asset.javascript(tinymce.baseURL + '/themes/advanced/js/link2.js?'+Math.random(100));
+  Asset.javascript(tinymce.baseURL + '/themes/advanced/js/link.js' + (Ngn.isDebug ? '?' + Math.random(100) : ''));
   
   // Tell it to load theme specific language pack(s)
   tinymce.ThemeManager.requireLangPack('advanced');
