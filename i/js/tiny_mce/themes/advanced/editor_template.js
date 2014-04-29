@@ -9,7 +9,7 @@
 (function(tinymce) {
   var DOM = tinymce.DOM, Event = tinymce.dom.Event, extend = tinymce.extend, each = tinymce.each, Cookie = tinymce.util.Cookie, lastExtID, explode = tinymce.explode;
 
-  Asset.javascript(tinymce.baseURL + '/themes/advanced/js/link.js' + (Ngn.isDebug ? '?' + Math.random(100) : ''));
+  Asset.javascript(tinymce.baseURL + '/themes/advanced/js/link.js' + (Ngn.isDebug ? '?' + Math.random() : ''));
   
   // Tell it to load theme specific language pack(s)
   tinymce.ThemeManager.requireLangPack('advanced');
@@ -148,7 +148,7 @@
         }
       });
 
-      DOM.loadCSS(s.editor_css ? ed.documentBaseURI.toAbsolute(s.editor_css) : url + "/skins/" + ed.settings.skin + "/ui.css");
+      DOM.loadCSS(s.editor_css ? ed.documentBaseURI.toAbsolute(s.editor_css) : url + "/skins/" + ed.settings.skin + "/ui.css" + (Ngn.isDebug ? '?' + Math.random() : ''));
 
       if (s.skin_variant)
         DOM.loadCSS(url + "/skins/" + ed.settings.skin + "/ui_" + s.skin_variant + ".css");

@@ -1,5 +1,10 @@
 Ngn.TinySettings.Simple = new Class({
   Extends: Ngn.TinySettings,
+  Implements: [Options],
+
+  initialize: function(options) {
+    this.setOptions(options);
+  },
 
   getSettings: function() {
     return $merge(this.parent(), {

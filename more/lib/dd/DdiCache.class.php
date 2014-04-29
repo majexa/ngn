@@ -7,8 +7,8 @@ class DdiCache extends FileCache {
     parent::__construct($options);
   }
 
-  protected function folder() {
-    return DATA_PATH.'/ddiCache/'.$this->options['strName'];
+  static function folder(array $options) {
+    return DATA_PATH.'/ddiCache/'.$options['strName'];
   }
 
 }

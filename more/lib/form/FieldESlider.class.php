@@ -3,7 +3,7 @@
 class FieldESlider extends FieldEText {
 
   public $inputType = 'hidden';
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
   public $options = [
     'jsOptions' => [

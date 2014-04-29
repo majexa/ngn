@@ -388,6 +388,7 @@ Ngn.setToCenterBlock = function(element, eWidth) {
   });
 };
 
+/*
 MooTools.lang.set('ru-RU', 'FancyUpload', {
   'fileName': '{name}',
   'cancel': 'Отмена',
@@ -406,6 +407,7 @@ MooTools.lang.set('ru-RU', 'FancyUpload', {
   },
   'linuxWarning': 'Warning: Due to a misbehaviour of Adobe Flash Player on Linux,\nthe browser will probably freeze during the upload process.\nDo you want to start the upload anyway?'
 });
+*/
 
 Ngn.tpl = function(tpl, data) {
   return tpl.replace(/\{(\w+)\}/g, function(str, name) {

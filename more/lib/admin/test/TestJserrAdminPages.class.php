@@ -16,7 +16,6 @@ class TestJserrAdminPages extends ProjectTestCase {
   }
 
   protected function checkErrors($url) {
-    //output3("Processing: $url");
     if (($lines = `jserr $url`)) {
       foreach (explode("\n", $lines) as $v) {
         $v = json_decode($v);

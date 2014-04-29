@@ -8830,7 +8830,6 @@ tinymce.dom.TreeWalker = function(start_node, root_node) {
     setDisabled : function(s) {
       if (s != this.disabled) {
         this.setAriaProperty('disabled', s);
-
         this.setState('Disabled', s);
         this.setState('Enabled', !s);
         this.disabled = s;
@@ -11021,7 +11020,7 @@ tinymce.create('tinymce.ui.Toolbar:tinymce.ui.Container', {
           sl.add(tinymce.baseURL + '/langs/' + s.language + '.js');
 
         if (s.theme && s.theme.charAt(0) != '-' && !ThemeManager.urls[s.theme])
-          ThemeManager.load(s.theme, 'themes/' + s.theme + '/editor_template' + tinymce.suffix + '.js');
+          ThemeManager.load(s.theme, 'themes/' + s.theme + '/editor_template' + tinymce.suffix + '.js' + (Ngn.isDebug ? '?' + Math.random() : ''));
 
         each(explode(s.plugins), function(p) {
           if (p &&!PluginManager.urls[p]) {
@@ -11029,7 +11028,7 @@ tinymce.create('tinymce.ui.Toolbar:tinymce.ui.Container', {
               p = p.substr(1, p.length);
               var dependencies = PluginManager.dependencies(p);
               each(dependencies, function(dep) {
-                var defaultSettings = {prefix:'plugins/', resource: dep, suffix:'/editor_plugin' + tinymce.suffix + '.js'};
+                var defaultSettings = {prefix:'plugins/', resource: dep, suffix:'/editor_plugin' + tinymce.suffix + '.js' + (Ngn.isDebug ? '?' + Math.random() : '')};
                 var dep = PluginManager.createUrl(defaultSettings, dep);
                 PluginManager.load(dep.resource, dep);
                 

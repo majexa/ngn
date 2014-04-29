@@ -30,7 +30,7 @@ use Options;
 
   public $isPostValue = false;
 
-  protected $useTypeJs = false;
+  public $useTypeJs = false;
 
   protected function defineOptions() {
     return [

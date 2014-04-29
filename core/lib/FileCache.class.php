@@ -15,11 +15,7 @@ class FileCache {
   function __construct(array $options) {
     if (!defined('DATA_PATH')) throw new Exception('DATA_PATH not defined');
     $this->options = $options;
-    if (!file_exists($this->folder())) Dir::make($this->folder());
-  }
-
-  protected function folder() {
-    return DATA_PATH.'/cache';
+    if (!file_exists(static::folder($options))) Dir::make(static::folder($options));
   }
 
   // --
@@ -28,11 +24,15 @@ class FileCache {
 
   static function c(array $options = []) {
     $key = serialize($options);
-    if (isset(self::$cache[$key])) return self::$cache[$key];
+    if (isset(static::$cache[$key])) return static::$cache[$key];
     $options['automatic_serialization'] = true;
-    return self::$cache[$key] = Zend_Cache::factory('Core', 'File', $options, array_merge($options, [
-      'cache_dir' => (new static($options))->folder()
+    return static::$cache[$key] = Zend_Cache::factory('Core', 'File', $options, array_merge($options, [
+      'cache_dir' => static::folder($options)
     ]));
+  }
+
+  static function folder(array $options) {
+    return DATA_PATH.'/cache';
   }
 
   static function func($func, $id, $force = false) {
@@ -60,10 +60,7 @@ class FileCache {
    * @param   string  Zend_Cache-тэг
    */
   static function clean() {
-    foreach (glob((new static([]))->folder().'/*') as $file) {
-      if ($file[0] != '.') unlink($file);
-    }
-    //self::c()->clean(); @todo не работает
+    self::c()->clean();
   }
 
 }

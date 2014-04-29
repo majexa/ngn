@@ -16,25 +16,21 @@ Ngn.Dialog.Tiny.Link = new Class({
   Extends: Ngn.Dialog.Tiny,
 
   options: {
+    dialogClass: 'dialog fieldFullWidth',
     id: 'tinyLink',
-    width: 200,
+    width: 250,
+    top: 20,
     url: '/default/tinyLink'
   },
 
   formInit: function() {
     this.parent();
     this.eLink = this.message.getElement('input[name=link]');
-    this.eLinkTitle = this.message.getElement('input[name=title]');
-    this.eLink.addEvent('change', this.checkPrefix(this.eLink));
+    //this.eLink.addEvent('change', this.checkPrefix(this.eLink));
+    var eA;
     if (eA = this.editor.dom.getParent(this.editor.selection.getNode(), 'A')) {
       this.eLink.set('value', this.editor.dom.getAttrib(eA, 'href'));
-      //this.eLinkTitle.set('value', $(eA).get('html'));
     }
-    /* else {
-     if (text = $(this.editor.selection.getNode()).get('text')) {
-     this.eLinkTitle.set('value', text);
-     }
-     }*/
   },
 
   checkPrefix: function(n) {
@@ -51,7 +47,7 @@ Ngn.Dialog.Tiny.Link = new Class({
     if (!this.eLink.get('value')) {
       if (eA) {
         ed.execCommand("mceBeginUndoLevel");
-        b = ed.selection.getBookmark();
+        var b = ed.selection.getBookmark();
         ed.dom.remove(eA, 1);
         ed.selection.moveToBookmark(b);
         ed.execCommand("mceEndUndoLevel");
