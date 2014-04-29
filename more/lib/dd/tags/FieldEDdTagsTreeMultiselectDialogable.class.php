@@ -2,7 +2,7 @@
 
 class FieldEDdTagsTreeMultiselectDialogable extends FieldEDdTagsTreeMultiselect {
 
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [

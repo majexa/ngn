@@ -124,12 +124,6 @@ text-decoration: none;
 margin: 0px;
 }
 
-.date-button {
-background: url(../../i/../img/dialog/date.png) no-repeat center center;
-width: 22px;
-height: 24px;
-}
-
 .dialog {
 padding: 15px;
 margin: 0;
@@ -157,6 +151,11 @@ text-decoration: none;
 color: #000000;
 text-decoration: underline;
 }
+.dialog-footer .foot-status {
+float: left;
+padding-top: 3px;
+opacity: 0.8;
+}
 
 .dialog-title {
 background: #fff;
@@ -179,7 +178,6 @@ padding: 8px;
 font-size: 100%;
 color: #333;
 /*max-height: 400px;*/
-overflow: none;
 }
 .dialog-scroll {
 overflow-y: auto;

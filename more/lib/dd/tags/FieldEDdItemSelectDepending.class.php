@@ -2,7 +2,7 @@
 
 class FieldEDdItemSelectDepending extends FieldEAbstract {
 
-  protected $useTypeJs = true, $parentOptions;
+  public $useTypeJs = true, $parentOptions;
 
   static $ddTags = true, $ddTagItems = true;
 

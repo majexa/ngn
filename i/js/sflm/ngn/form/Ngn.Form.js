@@ -424,14 +424,10 @@ Ngn.Form.ElInit = new Class({
     var els = this.form.eForm.getElements('.type_' + this.type);
     if (!els.length) throw new Error('No ".type_' + this.type + '" elements was found. User FieldEAbstract::_html() instead of html()');
     els.each(function(eRow) {
+      if (!eRow.get('data-typejs')) return;
       var clsName = 'Ngn.Form.El.' + ucfirst(this.type)
       var cls = eval(clsName);
-      if (cls === undefined) {
-        c('Init class "' + clsName + '" for element type "' + this.type + '" not found');
-        // throw new Error('Class "'+clsName+'" is not defined');
-        return;
-      }
-      //c('... ' + clsName);
+      if (cls === undefined) throw new Error('Class "' + clsName + '" is not defined');
       if (eRow.retrieve('initialized')) return;
       new cls(this.type, this.form, eRow);
       eRow.store('initialized', true);

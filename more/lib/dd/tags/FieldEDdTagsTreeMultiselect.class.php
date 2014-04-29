@@ -5,7 +5,7 @@ class FieldEDdTagsTreeMultiselect extends FieldEText {
 
   static $ddTags = true, $ddTagsTree = true, $ddTagsMulti = true;
 
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
   protected function defineOptions() {
     return [

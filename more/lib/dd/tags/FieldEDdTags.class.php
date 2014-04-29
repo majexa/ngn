@@ -4,6 +4,6 @@ class FieldEDdTags extends FieldEText {
 
   static $ddTags = true, $ddTagsItemsDirected = true, $ddTagsMulti = true;
 
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
 }

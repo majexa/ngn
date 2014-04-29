@@ -13,8 +13,6 @@ Ngn.Dialog.RequestFormBase = new Class({
   },
 
   initialize: function(options) {
-    console.trace();
-
     options = options || {};
     options.ok = this.submit.bind(this);
     if (!$defined(options.submitUrl)) {
@@ -100,10 +98,13 @@ Ngn.Dialog.RequestFormBase = new Class({
         jsonRequest: true
       });
     }
-    this._formInit();
+    this.initEvents();
     this.formInit();
     this.initPosition();
   },
+
+  // abstract
+  initEvents: function() {},
 
   resizeByCols: function() {
     var cols = this.form.eForm.getElements('.type_col');
@@ -181,7 +182,7 @@ Ngn.Dialog.RequestForm = new Class({
     this.form.submit();
   },
 
-  _formInit: function() {
+  initEvents: function() {
     if (!this.options.formEvents) return;
     var obj = this;
     for (var i = 0; i < this.options.formEvents.length; i++) {

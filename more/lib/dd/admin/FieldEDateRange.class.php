@@ -2,6 +2,6 @@
 
 class FieldEDateRange extends FieldEText {
 
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
 }

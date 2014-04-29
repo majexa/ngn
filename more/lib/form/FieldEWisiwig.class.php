@@ -2,7 +2,7 @@
 
 class FieldEWisiwig extends FieldETextarea {
 
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
   protected $staticType;
 

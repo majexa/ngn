@@ -4,10 +4,13 @@
 Ngn.Form.El.WisiwigSimple = new Class({
   Extends: Ngn.Form.El.Wisiwig,
 
+  options: {
+    tinySettings: null
+  },
+
   init: function() {
-    //if (this.name != 'descr') return;
     this.parent();
-    var settings = new (this.getTinySettingsClass())().getSettings();
+    var settings = new (this.getTinySettingsClass())(this.getTinySettingsOptions()).getSettings();
     if (this.options.tinySettings) settings = $merge(settings, this.options.tinySettings);
     new Ngn.TinyInit({
       parent: this.form.eForm,
@@ -18,6 +21,10 @@ Ngn.Form.El.WisiwigSimple = new Class({
 
   getTinySettingsClass: function() {
     return Ngn.TinySettings.Simple;
+  },
+
+  getTinySettingsOptions: function() {
+    return {};
   }
 
 });

@@ -44,11 +44,11 @@ abstract class SflmFrontend {
   }
 
   protected function getLastPaths() {
-    return FileCache::c()->load('sflmLastPaths'.$this->cacheSuffix()) ? : [];
+    return SflmCache::c()->load('sflmLastPaths'.$this->cacheSuffix()) ? : [];
   }
 
   protected function storeLastPaths() {
-    FileCache::c()->save($this->getPaths(), 'sflmLastPaths'.$this->cacheSuffix());
+    SflmCache::c()->save($this->getPaths(), 'sflmLastPaths'.$this->cacheSuffix());
   }
 
   /**
@@ -57,7 +57,7 @@ abstract class SflmFrontend {
    * @return array
    */
   function getPathsCache() {
-    return FileCache::c()->load($this->pathsCacheKey()) ? : [];
+    return SflmCache::c()->load($this->pathsCacheKey()) ? : [];
   }
 
   protected function init() {
@@ -101,7 +101,7 @@ abstract class SflmFrontend {
   }
 
   function storePaths() {
-    FileCache::c()->save($this->getPaths(), $this->pathsCacheKey());
+    SflmCache::c()->save($this->getPaths(), $this->pathsCacheKey());
   }
 
   function filePath() {

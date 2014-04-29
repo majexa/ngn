@@ -29,7 +29,7 @@ class SflmJsClasses {
   }
 
   function retrieveExistingObjects() {
-    return FileCache::c()->load('jsExistingObjects'.$this->frontend->key());
+    return SflmCache::c()->load('jsExistingObjects'.$this->frontend->key());
   }
 
   protected function initExistingObjects() {
@@ -62,7 +62,7 @@ class SflmJsClasses {
     //if (in_array('Ngn.Form.El.DdTags', $this->existingObjects)) die2(2);
     //Sflm::output('Storing existing objects: '.implode(', ', $this->existingObjects)." to jsExistingObjects".$this->frontend->fKey());
     //Sflm::output('Storing existing objects. Count: '.count($this->existingObjects));
-    FileCache::c()->save([
+    SflmCache::c()->save([
       $this->existingObjectPaths,
       $this->existingObjects
     ], 'jsExistingObjects'.$this->frontend->key());
@@ -79,7 +79,7 @@ class SflmJsClasses {
   }
 
   protected function initObjectPaths() {
-    if (($this->objectPaths = FileCache::c()->load('jsObjectPaths'))) return;
+    if (($this->objectPaths = SflmCache::c()->load('jsObjectPaths'))) return;
     $this->_initObjectPaths();
   }
 
@@ -106,7 +106,7 @@ class SflmJsClasses {
       }
     }
     $this->objectPaths = array_merge($this->existingObjectPaths, $objectPaths);
-    FileCache::c()->save($this->objectPaths, 'jsObjectPaths');
+    SflmCache::c()->save($this->objectPaths, 'jsObjectPaths');
   }
 
   protected function parseClassesDefinition($c) {

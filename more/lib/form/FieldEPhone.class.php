@@ -2,7 +2,7 @@
 
 class FieldEPhone extends FieldEText {
 
-  protected $useTypeJs = true;
+  public $useTypeJs = true;
 
   protected function defineOptions() {
     return [

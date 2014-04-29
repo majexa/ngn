@@ -7,7 +7,7 @@ class Form {
     'form'        => '{input}<div class="clear"></div>',
     'headerOpen'  => '<div class="clearfix hgrp hgrp_{name}{class}">',
     'headerClose' => '</div>',
-    'input'       => '<div class="element{rowClass}">{title}<div class="field-wrapper">{input}</div>{error}{help}</div>',
+    'input'       => '<div class="element{rowClass}"{data}>{title}<div class="field-wrapper">{input}</div>{error}{help}</div>',
     'title'       => '<p class="label"><span class="ttl">{title}</span>{required}<span>:</span></p>',
     'error'       => '<div class="advice-wrapper static-advice" style="z-index:300"><div class="corner"></div><div class="validation-advice">{error}</div></div>',
     'globalError' => '<div class="element errorRow padBottom"><div class="validation-advice">{error}</div></div>',
@@ -223,6 +223,8 @@ class Form {
     $input = str_replace('{value}', is_array($el['value']) ? '' : $el['value'], $input);
     $input = str_replace('{id}', $el['id'], $input);
     $input = str_replace('{rowClass}', $this->htmlGetRowClassAtr($el), $input);
+    if ($el->useTypeJs) $input = str_replace('{data}', Html::dataParams(['typejs' => true]), $input);
+    else $input = str_replace('{data}', '', $input);
     return $input;
   }
 
@@ -366,6 +368,7 @@ class Form {
       if ($el['type'] == 'hidden') continue;
       $this->visibleRowN++;
       $elsHtml .= $this->htmlElement($el);
+      /* @var $el FieldEAbstract */
       if (($js = $el->js()) == '') continue;
       if ($el->type == 'js' or !in_array($el->type, $jsTypesAdded)) {
         $jsTypesAdded[] = $el->type;
@@ -596,18 +599,6 @@ class Form {
   function id() {
     $this->callOnce('initId');
     return $this->_id;
-    if (empty($_POST)) ProjectData::update('Fuk', $this->fields->getFields());
-    if (!empty($_POST)) ProjectData::update('Fak', $this->fields->getFields());
-    return 'f'.md5(serialize($this->fields->getFields()));
-    /*
-    if (isset($this->lastFields) and ($this->lastFields != $this->fields->getFields())) {
-      $ff = $this->fields->getFields();
-      foreach ($ff as $k => $v) if ($v != $this->lastFields[$k]) die2([$v, $this->lastFields[$k]]);
-      //die2([$this->lastFields, $this->fields->getFields()]);
-    }
-    $this->lastFields = $this->fields->getFields();
-    return $this->_id;
-    */
   }
 
   protected function init() {

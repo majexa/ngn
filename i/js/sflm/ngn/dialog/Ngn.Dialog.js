@@ -41,6 +41,7 @@ Ngn.Dialog = new Class({
     useFx: !Browser.Engine.trident,
     //'useFx: false,
     width: 550,
+    top: 30,
     bindBuildMessageFunction: false,
     noPadding: true,
     setMessageDelay: null,
@@ -73,6 +74,7 @@ Ngn.Dialog = new Class({
   titlebar: null,
   isOkClose: false,
   btns: {},
+  status: null,
 
   initialize: function(_opts) {
     this.setOptions(_opts);
@@ -178,16 +180,14 @@ Ngn.Dialog = new Class({
         'id': this.options.id + '_footer',
         'class': this.options.footerClass
       }).inject(this.eMessage);
-
       new Element('div', {'class': 'foot-wrap'}).inject(this.footer);
-
       if (this.options.ok !== false) {
         this.createButton('ok', this.options.id, this.options.okText, this.options.okClass, this.options.ok, !this.options.okDestroy, undefined, true).inject(this.footer.firstChild, 'top');
       }
       if (this.options.cancel !== false) {
         this.createButton('cancel', this.options.id, this.options.cancelText, this.options.cancelClass, this.options.cancel, !this.options.cancelDestroy).inject(this.footer.firstChild, 'top');
       }
-
+      this.status = new Element('div', {'class': 'foot-status'}).inject(this.footer.firstChild, 'top');
       if ($type(this.options.buttons) == 'object') {
         for (var btn in this.options.buttons) {
           btn = this.options.buttons[btn];
@@ -445,7 +445,7 @@ Ngn.Dialog = new Class({
     if (this.options.center !== 'x') {
       if (fx) new Fx.Tween(this.dialog, { duration: 'short' }).start('top', (dialogH + parScroll.y) + 'px');
       //else this.dialog.setStyle('top', (dialogH + parScroll.y) + 'px');
-      else this.dialog.setStyle('top', '30px');
+      else this.dialog.setStyle('top', this.options.top + 'px');
     }
   },
 

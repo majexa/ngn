@@ -39,7 +39,7 @@ class Sflm {
   static function clearCache() {
     Dir::clear(UPLOAD_PATH.'/js');
     Dir::clear(UPLOAD_PATH.'/css');
-    FileCache::clean();
+    SflmCache::clean();
     O::delete('SflmJs');
     O::delete('SflmCss');
     self::$cache = [];

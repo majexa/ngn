@@ -13,7 +13,7 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::frontend('js')->store();
     Sflm::clearCache();
     // ни статического ни динамического кэша не существует
-    $this->assertFalse((bool)FileCache::c()->load(Sflm::frontend('js')->pathsCacheKey()), 'Dynamic cache must be empty');
+    $this->assertFalse((bool)SflmCache::c()->load(Sflm::frontend('js')->pathsCacheKey()), 'Dynamic cache must be empty');
     $this->assertFalse(file_exists(Sflm::frontend('js')->cacheFile()), 'Static cache file can not exists. '.Sflm::frontend('js')->cacheFile());
   }
 
@@ -86,7 +86,7 @@ class TestSflmJs extends ProjectTestCase {
   }
 
   function testEmptyNewPathsAfterReset() {
-    (new FieldEWisiwigSimple2(['name' => 'dummy']))->typeJs();
+    (new FieldEWisiwigSimpleLinks(['name' => 'dummy']))->typeJs();
     Sflm::frontend('js')->getDeltaUrl();
     Sflm::setFrontend('js');
     $newPaths = Sflm::frontend('js')->newPaths;
