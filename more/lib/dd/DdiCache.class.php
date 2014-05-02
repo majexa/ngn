@@ -8,6 +8,7 @@ class DdiCache extends FileCache {
   }
 
   static function folder(array $options) {
+    Dir::make(DATA_PATH.'/ddiCache/'.$options['strName']);
     return DATA_PATH.'/ddiCache/'.$options['strName'];
   }
 
