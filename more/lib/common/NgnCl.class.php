@@ -8,9 +8,9 @@ class NgnCl {
   static function strParamsToArray($s) {
     $options = [];
     if (strstr($s, '=')) {
-      $argv3 = str_replace('+', '&', $s);
-      parse_str($argv3, $options);
-      foreach ($options as &$v) $v = Arr::formatValue2($v);
+      $argv = str_replace('+', '&', $s);
+      parse_str($argv, $options);
+      //foreach ($options as &$v) $v = Arr::formatValue2($v);
     }
     return $options;
   }
