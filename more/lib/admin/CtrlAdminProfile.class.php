@@ -29,7 +29,7 @@ class CtrlAdminProfile extends CtrlAdmin {
         'type'  => 'password',
       ],
     ]), ['filterEmpties' => true]);
-    $form->setElementsData(DbModelCore::get('users', $this->userId)->getClear());
+    $form->setElementsData(DbModelCore::get('users', $this->userId)->getClean());
     $this->d['form'] = $form->html();
     if ($form->isSubmittedAndValid()) {
       DbModelCore::update('users', $this->userId, $form->getData());
