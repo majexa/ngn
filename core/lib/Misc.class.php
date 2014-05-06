@@ -443,9 +443,13 @@ class Misc {
     return $v;
   }
 
-  static function checkArray($v, $title = '$v is not array') {
+  static function checkArray($v, $title = '$v must be array') {
     if (!is_array($v)) throw new Exception($title);
   }
+
+  //static function checkNotArray($v, $title = '$v cannot be array') {
+  //  if (is_array($v)) throw new Exception($title);
+  //}
 
   static function checkNumeric($v) {
     if (!is_numeric($v)) throw new Exception('"'.getPrr($v).'" is not numeric');
