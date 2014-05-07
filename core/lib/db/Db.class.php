@@ -32,17 +32,6 @@ class Db extends DbSimple_Mysql {
     unset($this->link);
   }
 
-  /*
-  protected function _query($query, &$total) {
-    output(getPrr($query));
-    if (!$this->link) {
-      output("no link ".$this->link);
-      throw new Exception('No link');
-    }
-    parent::_query($query, $total);
-  }
-  */
-
   function create($table, array $data, $replace = false) {
     return $this->query(($replace ? 'REPLACE' : 'INSERT')." INTO $table SET ?a", $data);
   }
@@ -157,8 +146,13 @@ class Db extends DbSimple_Mysql {
     foreach ($this->tables() as $t) if (preg_match('/^'.$prefix.'_.*/', $t)) $this->query("DROP TABLE $t");
   }
 
-  function insert($table, array $data, $replace = false) {
-    return $this->query(($replace ? 'REPLACE' : 'INSERT')." INTO $table SET ?a", $data);
+  const modeInsert = 0;
+  const modeReplace = 1;
+  const modeInsertIgnore = 2;
+
+  function insert($table, array $data, $mode = 0) {
+    $word = $mode == self::modeReplace ? 'REPLACE' : 'INSERT';
+    return $this->query($word.(self::modeInsertIgnore == $mode ? ' IGNORE' : '')." INTO $table SET ?a", $data);
   }
 
   public $insertIgnore = false;
