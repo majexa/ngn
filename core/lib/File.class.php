@@ -1141,4 +1141,8 @@ application/x-httpd-php-source  phps
     return array_map('trim', file($file));
   }
 
+  static function compareContents($file1, $fil2e) {
+
+  }
+
 }
