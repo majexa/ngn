@@ -39,6 +39,7 @@ require MORE_PATH.'/config.php'; // what is it? name it
 require_once MORE_PATH.'/lib/sflm/SflmBase.class.php';
 require_once MORE_PATH.'/lib/sflm/SflmJs.class.php';
 require_once MORE_PATH.'/lib/sflm/SflmCss.class.php';
+require_once MORE_PATH.'/lib/sflm/SflmCache.class.php';
 require_once MORE_PATH.'/lib/sflm/Sflm.class.php';
 // ---------------------------------------------------
 
