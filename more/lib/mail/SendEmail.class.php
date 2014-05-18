@@ -51,7 +51,7 @@ class SendEmail {
       LogWriter::str('email', "$emails: $subject");
       return true;
     }
-    if ($html and $this->addHostToLinks) {
+    if ($html and $this->addHostToLinks and defined('SITE_WWW')) {
       $message = str_replace("<a href=", "\n<a href=", $message);
       $message = preg_replace('/(href=["\'])(?!https?:\/\/|mailto:)\.*\/*(.*)(["\'])/imu', '$1'.SITE_WWW.'/$2$3', $message);
       $message = preg_replace('/(src=["\'])(?!https?:\/\/)\.*\/*(.*)(["\'])/imu', '$1'.SITE_WWW.'/$2$3', $message);

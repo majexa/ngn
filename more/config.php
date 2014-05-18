@@ -4,10 +4,9 @@ require __DIR__.'/config_core.php';
 
 define('TEMP_PATH', SITE_PATH.'/temp');
 
-//if (!defined('SITE_DOMAIN') or !constant('SITE_DOMAIN')) throw new Exception('Constant SITE_DOMAIN can not by empty');
-if (!defined('SITE_DOMAIN') or !constant('SITE_DOMAIN')) define('SITE_DOMAIN', $_SERVER['HTTP_HOST']);
+if ((!defined('SITE_DOMAIN') or !constant('SITE_DOMAIN')) and !empty($_SERVER['HTTP_HOST'])) define('SITE_DOMAIN', $_SERVER['HTTP_HOST']);
 
-define('SITE_WWW', 'http://'.SITE_DOMAIN);
+if (defined('SITE_DOMAIN')) define('SITE_WWW', 'http://'.SITE_DOMAIN);
 
 if (!defined('LOGS_PATH')) {
   // Абсолютный путь к каталогу с логами

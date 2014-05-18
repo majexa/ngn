@@ -7,5 +7,5 @@ setConstant('JSON_DEBUG', false);
 setConstant('SESSION_EXPIRES', 2592000);
 setConstant('ALLOW_GOD_MODE', true);
 setConstant('FIRST_URL_PARAM_N', 0);
-setConstant('ALLOW_SEND', false);
+setConstant('ALLOW_SEND', true);
 setConstant('JS_REDIRECT', false);
