@@ -427,5 +427,3 @@ $rows
   public $selYear;
 
 }
-
-?>

@@ -18,6 +18,7 @@ class TestRunnerAbstract {
   function __construct($filterNames = null) {
     R::set('plainText', true);
     $this->suite = new PHPUnit_Framework_TestSuite('one');
+
     if ($filterNames) {
       if (is_string($filterNames) and $filterNames[strlen($filterNames)-1] == '*') {
         $this->filterPrefix = ucfirst(rtrim($filterNames, '*'));
@@ -54,12 +55,17 @@ class TestRunnerAbstract {
 
   protected function _run(array $classes) {
     output("running tests: ".implode(', ', $classes));
-    foreach ($classes as $class) $this->addTestSuite($class);
+    foreach ($classes as $class) {
+      $this->addTestSuite($class);
+      //break;
+    }
     $this->__run();
   }
 
   protected function __run() {
-    PHPUnit_TextUI_TestRunner::run($this->suite);
+    PHPUnit_TextUI_TestRunner::run($this->suite, [
+      'stopOnError' => true
+    ]);
   }
 
   static $folder;

@@ -1,13 +1,13 @@
 <?php
 
-class InotifyDaemonInstaller extends DaemonInstallerAbstract {
+class InotifyDaemonInstaller extends DaemonInstaller {
 
   protected function bin() {
     return '/usr/bin/php';
   }
 
-  protected function opts() {
-    return "/home/user/ngn-env/projects/{$this->projectName}/{$this->daemon}.php";
+  protected function script() {
+    return "/home/user/ngn-env/projects/{$this->projectName}/{$this->daemonName}.php";
   }
 
 }

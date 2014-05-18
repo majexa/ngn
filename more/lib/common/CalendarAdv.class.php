@@ -49,5 +49,3 @@ class CalendarAdv extends Calendar {
   }
   
 }
-
-?>
