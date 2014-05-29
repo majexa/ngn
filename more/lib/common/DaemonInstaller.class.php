@@ -39,7 +39,7 @@ DAEMON_OPTS="'.$this->opts().'"
 NAME='.$divised.'
 QUIET="--quiet"
 
-for N in '.$for.'
+for N in'.$for.'
 do
   DESC="'.$this->projectName.' '.$this->daemonName.' daemon ${N}"
   PIDFILE="/var/run/${NAME}${N}.pid"
@@ -92,7 +92,7 @@ exit 0';
     print Cli::shell("sudo mv /tmp/$divised /etc/init.d/$divised");
     print Cli::shell("sudo chmod +x /etc/init.d/$divised");
     print Cli::shell("sudo /etc/init.d/$divised restart");
-    $this->addToRc();
+    //$this->addToRc();
     usleep(0.1 * 1000000);
   }
 
