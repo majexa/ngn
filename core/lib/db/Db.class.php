@@ -120,7 +120,9 @@ class Db extends DbSimple_Mysql {
 
   static function dbExists($db, $config = null) {
     if (defined('NGN_ENV_PATH')) $c = include NGN_ENV_PATH.'/config/server.php';
-    Arr::checkEmpty($c, ['dbHost', 'dbUser', 'dbPass']);
+    Arr::checkEmpty($c, ['dbPass']);
+    if (empty($c['dbHost'])) $c['dbHost'] = 'localhost';
+    if (empty($c['dbUser'])) $c['dbUser'] = 'root';
     $id = mysql_connect($c['dbHost'], $c['dbUser'], $c['dbPass']);
     $r = mysql_query("SHOW DATABASES", $id);
     while (($row = mysql_fetch_assoc($r)) !== false) if ($row['Database'] == $db) return true;

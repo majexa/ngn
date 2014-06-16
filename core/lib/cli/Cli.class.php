@@ -57,10 +57,17 @@ class Cli {
     $nextLine = false;
     while (!$nextLine) {
       $nextLine = fgets($fp, 1024);
-      if ($nextLine[strlen($nextLine)-1] == "\n") break;
+      if ($nextLine[strlen($nextLine) - 1] == "\n") break;
     }
     $nextLine = trim($nextLine);
     return $nextLine;
+  }
+
+  static function replaceOut($str) {
+    $numNewLines = substr_count($str, "\n");
+    echo chr(27)."[0G"; // Set cursor to first column
+    echo $str;
+    echo chr(27)."[".$numNewLines."A"; // Set cursor up x lines
   }
 
 }

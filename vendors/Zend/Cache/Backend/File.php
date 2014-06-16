@@ -646,7 +646,8 @@ class Zend_Cache_Backend_File extends Zend_Cache_Backend implements Zend_Cache_B
         $result = true;
         $prefix = $this->_options['file_name_prefix'];
         $glob = @glob($dir . $prefix . '--*');
-        if ($glob === false) {
+
+      if ($glob === false) {
             return true;
         }
         foreach ($glob as $file)  {

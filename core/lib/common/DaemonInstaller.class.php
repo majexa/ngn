@@ -4,12 +4,14 @@ class DaemonInstaller {
   use Options;
 
   protected $projectName, $daemonName, $c;
+  public $name;
 
   function __construct($projectName, $daemonName, array $options = []) {
     $this->setOptions($options);
     $this->projectName = $projectName;
     $this->daemonName = $daemonName;
     $this->c = file_get_contents('/etc/rc.local');
+    $this->name = "{$this->projectName}-{$this->daemonName}";
   }
 
   /**
@@ -30,19 +32,20 @@ class DaemonInstaller {
   function install() {
     $for = '';
     for ($i = 1; $i <= $this->workersCount(); $i++) $for .= " $i";
-    $divised = "{$this->projectName}-{$this->daemonName}";
     $c = '#! /bin/sh
+
+# ngn auto-generated worker
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON='.$this->bin().'
 DAEMON_OPTS="'.$this->opts().'"
-NAME='.$divised.'
+NAME='.$this->name.'
 QUIET="--quiet"
 
-for N in '.$for.'
+for N in'.$for.'
 do
   DESC="'.$this->projectName.' '.$this->daemonName.' daemon ${N}"
-  PIDFILE="/var/run/${NAME}${N}.pid"
+  PIDFILE="/var/run/${NAME}-${N}.pid"
   START_OPTS="--start ${QUIET} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS}"
   STOP_OPTS="--stop --pidfile ${PIDFILE}"
   test -x $DAEMON || exit 0
@@ -88,11 +91,11 @@ do
 done
 
 exit 0';
-    file_put_contents("/tmp/$divised", $c);
-    print Cli::shell("sudo mv /tmp/$divised /etc/init.d/$divised");
-    print Cli::shell("sudo chmod +x /etc/init.d/$divised");
-    print Cli::shell("sudo /etc/init.d/$divised restart");
-    $this->addToRc();
+    file_put_contents("/tmp/$this->name", $c);
+    print Cli::shell("sudo mv /tmp/$this->name /etc/init.d/$this->name");
+    print Cli::shell("sudo chmod +x /etc/init.d/$this->name");
+    print Cli::shell("sudo /etc/init.d/$this->name restart");
+    //$this->addToRc();
     usleep(0.1 * 1000000);
   }
 
@@ -130,11 +133,15 @@ exit 0';
 
   protected function rcLocalIsVirgin() {
     if (!preg_match('/^.*this opts does nothing.\s+(.*)$/ms', $this->c, $m)) return false;
-    return !$this->hasNgnWorkers($m[1]);
+    return !self::hasNgnWorkers($m[1]);
   }
 
-  protected function hasNgnWorkers($s) {
-    return strstr($s, '# ngn auto-generated workers');
+  static function hasNgnWorkers($s) {
+    return strstr($s, '# ngn auto-generated worker');
   }
+
+  //static function cleanup($prefix == null) {
+
+  //}
 
 }
