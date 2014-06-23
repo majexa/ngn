@@ -14,7 +14,7 @@ Ngn.cp = {
     this.colorizeSelects();
     //new Ngn.HidebleBar('bottom', 'down');
     //new Ngn.HidebleBar.H('header', 'up');
-    Ngn.lightbox.add(document.getElements('a.lightbox'));
+    //Ngn.lightbox.add(document.getElements('a.lightbox'));
   },
   initHelp: function() {
     $$('a[class=help]').each(function(el){

@@ -81,7 +81,6 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function initMainTpl() {
-    LogWriter::v('aaa', [$_SERVER['REQUEST_URI'], $this->req->forceAuth(), $this->req->isDebug()]);
     if ($this->req->forceAuth() and $this->req->isDebug()) {
       parent::initMainTpl();
       return;

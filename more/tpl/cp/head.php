@@ -8,7 +8,6 @@
   <?= Sflm::frontend('css')->getTags('cp') ?>
   <?= Sflm::frontend('js')->getTags('cp') ?>
   <script type="text/javascript">
-  // --
   window.addEvent('domready', function() {
     Ngn.cp.init();
   });
