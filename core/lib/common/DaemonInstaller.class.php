@@ -91,17 +91,10 @@ do
 done
 
 exit 0';
-<<<<<<< HEAD:core/lib/common/DaemonInstaller.class.php
     file_put_contents("/tmp/$this->name", $c);
     print Cli::shell("sudo mv /tmp/$this->name /etc/init.d/$this->name");
     print Cli::shell("sudo chmod +x /etc/init.d/$this->name");
     print Cli::shell("sudo /etc/init.d/$this->name restart");
-=======
-    file_put_contents("/tmp/$divised", $c);
-    print Cli::shell("sudo mv /tmp/$divised /etc/init.d/$divised");
-    print Cli::shell("sudo chmod +x /etc/init.d/$divised");
-    print Cli::shell("sudo /etc/init.d/$divised restart");
->>>>>>> 82de3053f79156a475216e9d5603bbcba9d5562f:more/lib/common/DaemonInstaller.class.php
     //$this->addToRc();
     usleep(0.1 * 1000000);
   }
