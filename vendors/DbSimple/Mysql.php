@@ -55,7 +55,7 @@ class DbSimple_Mysql extends DbSimple_Generic_Database {
   }
 
   function _performEscape($s, $isIdent = false) {
-    if (is_array($s)) throw new Exception('$s cannot be array');
+    if (is_array($s)) throw new Exception('Ecsaping string cannot be array');
     if (!$isIdent) {
       return "'".mysql_real_escape_string($s, $this->link)."'";
     }
