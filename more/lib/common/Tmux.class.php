@@ -14,6 +14,13 @@ class Tmux {
     // useful `tmux attach || tmux new; tmux list-session 2>&1 | grep -q "^$this->sessionName:" || tmux new-session -s $this->sessionName -d -n task1; tmux select-window -t $this->sessionName:task1; tmux send-keys "htop" C-m`;
   }
 
+  protected $notSplitPanes = [];
+
+  function notSplit($paneN) {
+    $this->notSplitPanes[] = $paneN;
+    return $this;
+  }
+
   function run($cmd, $n = 9) {
     $this->kill();
     $this->cmd("-2 new-session -d -s $this->sessionName");
@@ -31,7 +38,7 @@ class Tmux {
         $paneN = $j + $n * 3;
         $this->cmd("select-pane -t $paneN");
         $p = round(100 / ($rows - $j)) * ($rows - $j - 1);
-        $this->cmd("split-window -v -p $p");
+        if (!in_array($paneN, $this->notSplitPanes)) $this->cmd("split-window -v -p $p");
       }
       $n++;
       if ($n == $cols) break;
