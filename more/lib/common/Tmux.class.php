@@ -1,9 +1,13 @@
 <?php
 
 /**
+ * tmux — это менеджер терминалов, к которому удобно подключаться и отключаться, не теряя при этом процессы и историю.
+ * Класс Tmux помогает запускать несколько комманд в одном окне, не разбираясь формате команд tmux'а.
+ * Extample:
+ * (new Tmux(['php cmd.php 123']))->run()
+ *
  * https://gist.github.com/henrik/1967800
  * http://ricochen.wordpress.com/2011/11/14/tmux-techniques-by-example/
- * php ~/ngn-env/projects/sboards/cmd.php tmux
  */
 class Tmux {
 
