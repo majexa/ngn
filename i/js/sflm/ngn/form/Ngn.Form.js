@@ -405,7 +405,9 @@ Ngn.Form = new Class({
 
 Ngn.Form.factory = function(eForm, opts) {
   eForm = document.id(eForm, true);
-  var cls = eval('Ngn.' + (eForm.get('data-class') || 'Form'));
+  var name = 'Ngn.' + (eForm.get('data-class') || 'Form');
+  var cls = eval(name);
+  if (!cls) throw new Error('class ' + name + ' not found');
   return new cls(eForm, opts);
 };
 

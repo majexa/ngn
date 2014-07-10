@@ -1,6 +1,5 @@
 <?php
 
 return [
-  'core',
-  'cp'
+  'test2'
 ];
