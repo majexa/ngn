@@ -321,8 +321,8 @@ class Dir {
   static function getSize($path, $lifetime = 43200) {
     $key = str_replace(['/', '.', '-'], '_', str_replace(':', '', $path));
     if (($r = FileCache::c([
-      'lifetime' => $lifetime
-    ])->load($key)) === false
+        'lifetime' => $lifetime
+      ])->load($key)) === false
     ) {
       $r = self::_getSizeSys($path);
       FileCache::c()->save($r, $key);

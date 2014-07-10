@@ -23,6 +23,13 @@ class TestRunnerProject extends TestRunnerAbstract {
   }
 
   /**
+   * Запускает проектные тесты, не находящиеся в папке проекта
+   */
+  function g() {
+    $this->_run($this->_g());
+  }
+
+  /**
    * Запускает проектные тесты, находящиеся в папке проекта
    */
   function l() {
@@ -37,13 +44,6 @@ class TestRunnerProject extends TestRunnerAbstract {
     return array_filter($this->getClasses(), function ($class) {
       return !strstr(Lib::getClassPath($class), "projects/$this->projectName/");
     });
-  }
-
-  /**
-   * Запускает проектные тесты, не находящиеся в папке проекта
-   */
-  function g() {
-    $this->_run($this->_g());
   }
 
   /**

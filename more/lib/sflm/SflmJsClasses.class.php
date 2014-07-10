@@ -189,7 +189,7 @@ class SflmJsClasses {
    * @throws Exception
    */
   function addObject($name, $source, Closure $failure = null, Closure $success = null, $ignoreNamespaceParents = false) {
-    if (($objectPath = $this->findObjectPath($name)) === false) {
+    if (($objectPath = $this->findObjectPath($name, false)) === false) {
       if ($failure) $failure($source);
       throw new Exception("Object '$name' path does not exists. src: $source");
     }
@@ -244,8 +244,8 @@ class SflmJsClasses {
       return;
     }
     Sflm::output("Processing contents of '$path'");
-    //if (isset($this->processedPaths[$path])) die2([$path, $this->processedPaths[$path]]);
-    //$this->processedPaths[$path] = getBacktrace(false);
+    // if (isset($this->processedPaths[$path])) die2([$path, $this->processedPaths[$path]]);
+    // $this->processedPaths[$path] = getBacktrace(false);
     $code = file_get_contents($this->frontend->base->getAbsPath($path));
     foreach ($this->parseRequired($code) as $class) $this->add($class, "$path required");
     foreach ($this->parseNgnExtendsClasses($code) as $class) $this->addObjectStrict($class, ($name ? : $path).' extends');
@@ -255,6 +255,7 @@ class SflmJsClasses {
       $pathWithSourceProcessor($path);
     }
     $this->frontend->_addPath($path);
+    $this->storeExistingObjectsInCode($code);
     $this->processNgnPatterns($code, $path);
     foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$path requiredAfter");
   }
@@ -266,8 +267,11 @@ class SflmJsClasses {
     foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$source: requiredAfter");
   }
 
-  protected function storeExistingObjectsInObjectFile($name, $source) {
-    $code = file_get_contents($this->frontend->base->getAbsPath($this->findObjectPath($name)));
+  protected function storeExistingObjectsInObjectFile($name) {
+    $this->storeExistingObjectsInCode(file_get_contents($this->frontend->base->getAbsPath($this->findObjectPath($name))));
+  }
+
+  protected function storeExistingObjectsInCode($code) {
     foreach ($this->parseClassesDefinition($code) as $class) {
       if (in_array($class, $this->existingObjects)) {
         continue;
@@ -300,12 +304,12 @@ class SflmJsClasses {
 
   function parseNgnClasses($c) {
     $classes = [];
-    if (preg_match_all('/\s+(Ngn\.[A-Z][A-Za-z._]*[A-Za-z_])/', $c, $m)) {
+    if (preg_match_all('/(Ngn\.[A-Z][A-Za-z._]*[A-Za-z_])/', $c, $m)) {
       $classes = array_filter($m[1], function ($class) {
         return $this->isClass($class);
       });
     }
-    if (preg_match_all('/\s+(Ngn\.[A-Za-z]+\.[A-Z][A-Za-z_]*)/', $c, $m)) {
+    if (preg_match_all('/(Ngn\.[A-Za-z]+\.[A-Z][A-Za-z_]*)/', $c, $m)) {
       foreach ($m[1] as $class) if (!in_array($class, $classes)) $classes[] = $class;
     }
     return $classes;

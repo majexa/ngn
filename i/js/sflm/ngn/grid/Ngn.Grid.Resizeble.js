@@ -70,7 +70,7 @@ Ngn.Grid.Resizeble = new Class({
   },
 
   resizeLastCol: function() {
-    this.resizebleLastCol.resizeLast();
+    if (this.resizebleLastCol) this.resizebleLastCol.resizeLast();
   },
 
   debugCells: [],
