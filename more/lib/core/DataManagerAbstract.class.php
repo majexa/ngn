@@ -361,10 +361,8 @@ abstract class DataManagerAbstract extends Options2 {
       $this->beforeDelete();
       $this->form->setElementsData();
       $this->elementTypeAction('beforeDelete');
-      die2(111);
     } catch (Exception $e) {
-      die2(222);
-      //$this->_delete($id);
+      $this->_delete($id);
       throw $e;
     }
     $this->_delete($id);
