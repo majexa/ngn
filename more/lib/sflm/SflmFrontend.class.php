@@ -18,7 +18,7 @@ abstract class SflmFrontend {
     $this->id = Misc::randString(5);
     $this->base = $base;
     $this->name = $name;
-    Misc::checkEmpty($this->name, '$this->frontend');
+    Misc::checkEmpty($this->name, 'Frontend name not defined');
     $this->base->version = $this->version();
     $this->pathsCache = $this->getPathsCache() ? : $this->base->getPaths($this->name, true);
     //if ($this->getLastPaths() != $this->getPaths()) {
@@ -86,15 +86,19 @@ abstract class SflmFrontend {
   protected $stored = false;
 
   function store($source = 'direct') {
+    LogWriter::v('sflm_store', 1);
     if ($this->stored) throw new Exception("Can't store after frontend was already stored. Reset or rerun frontend");
     if (!$this->changed) {
+      LogWriter::v('sflm_store', 2);
       Sflm::output("No changes. Storing skipped");
       return;
     }
+    LogWriter::v('sflm_changed', 1);
     Sflm::output("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     //if (!$this->sflm->storeLib($this->name, $this->code())) throw new Exception('it should not have happened');
     if ($this->base->storeLib($this->name, $this->code())) {
+      LogWriter::v('sflm_storeLib', 1);
       $this->incrementVersion();
       $this->stored = true;
     }
@@ -119,8 +123,8 @@ abstract class SflmFrontend {
   /**
    * Добавляет путь, если библиотека существует в одном из зарегистрированных статических каталогов
    *
-   * @param string Относительный путь к библиотеке
-   * @param bool Вызывать ли ошибку, если библиотека не найдена
+   * @param string $lib Относительный путь к библиотеке
+   * @param bool $strict Вызывать ли ошибку, если библиотека не найдена
    * @throws Exception
    */
   function addStaticLib($lib, $strict = false) {
@@ -159,6 +163,7 @@ abstract class SflmFrontend {
       Sflm::output("New path '$path' already exists");
       return;
     }
+    LogWriter::v('sflm_addPath', $path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
     $this->changed = true;
@@ -166,6 +171,7 @@ abstract class SflmFrontend {
 
   function getDeltaUrl() {
     if (!$this->newPaths) return false;
+    $this->store('SflmFrontend::getDeltaUrl');
     return $this->base->getUrl($this->name.'new', $this->base->extractCode($this->newPaths), true);
   }
 

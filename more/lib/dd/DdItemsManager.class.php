@@ -75,11 +75,6 @@ class DdItemsManager extends DbItemsManager {
     else $this->items->updateField($this->id, 'dateUpdate', dbCurTime());
   }
 
-  /**
-   * Добавляет ID раздела в данные создаваемой записи
-   *
-   * @param   array Данные создаваемой записи
-   */
   protected function addCreateData() {
     parent::addCreateData();
     // Если статус активности не определён (а это значит, что пользователь просто не

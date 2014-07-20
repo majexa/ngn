@@ -313,7 +313,7 @@ class Dir {
   }
 
   static function _getSizeSys($path) {
-    $r = explode("\n", trim(sys("du $path")));
+    $r = explode("\n", trim(`du $path`));
     list($kb) = explode("\t", $r[count($r) - 1]);
     return $kb * 1000;
   }

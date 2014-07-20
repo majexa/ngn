@@ -70,4 +70,30 @@ class Cli {
     echo chr(27)."[".$numNewLines."A"; // Set cursor up x lines
   }
 
+  static function columns($columns, $highlightFirstRow = false) {
+    if (!count($columns)) return '';
+    $width = [];
+    for ($i = 0; $i < count($columns); $i++) $width[$i] = 0;
+    for ($i = 0; $i < count($columns); $i++) {
+      foreach ($columns[$i] as $word) if (strlen($word) > $width[$i]) $width[$i] = strlen($word);
+    }
+    $n = 0;
+    $rowIsEmpty = function ($n) use ($columns) {
+      for ($i = 0; $i < count($columns); $i++) if (isset($columns[$i][$n])) return false;
+      return true;
+    };
+    $r = '';
+    while (true) {
+      if ($rowIsEmpty($n)) break;
+      for ($i = 0; $i < count($columns); $i++) {
+        $s = str_pad(isset($columns[$i][$n]) ? $columns[$i][$n] : '', $width[$i] + 5);
+        if ($highlightFirstRow and $n == 0) $s = O::get('CliColors')->getColoredString($s, 'yellow');
+        $r .= $s;
+      }
+      $r .= "\n";
+      $n++;
+    }
+    return $r;
+  }
+
 }

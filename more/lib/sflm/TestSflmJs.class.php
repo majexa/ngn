@@ -7,13 +7,6 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js', 'admin');
   }
 
-  function testA() {
-    // пакет, в котором есть файл в котором определяется класс, для которого нет файла
-    Sflm::frontend('js')->getTags();
-  }
-
-  /*
-
   function testClearCache() {
     Sflm::frontend('js')->addObject('Ngn.Form');
     Sflm::frontend('js')->addObject('Ngn.Form.El.Phone');
@@ -99,7 +92,5 @@ class TestSflmJs extends ProjectTestCase {
     $newPaths = Sflm::frontend('js')->newPaths;
     $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
   }
-
-  */
 
 }

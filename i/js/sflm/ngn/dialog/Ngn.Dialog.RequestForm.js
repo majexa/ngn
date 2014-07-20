@@ -22,7 +22,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     }
     this.parent(options);
     this.toggle('ok', false);
-    this.initFormResponse();
+    //this.initFormResponse();
     this.iframeUpload = true;
     window.addEvent('keypress', function(e) {
       if (e.key != 'enter' || e.target.get('tag') == 'textarea') return;
@@ -31,22 +31,10 @@ Ngn.Dialog.RequestFormBase = new Class({
     }.bind(this));
   },
 
-  initFormResponse: function() {
-    this.addEvent('request', function(r) {
-      if (r.sflJsDeltaUrl) {
-        Ngn.Request.sflJsDeltaUrlOnLoad = function() {
-          this.formResponse(r);
-        }.bind(this);
-      } else {
-        this.formResponse(r);
-      }
-    }.bind(this));
-  },
-
   form: null,
   response: null,
 
-  formResponse: function(r) {
+  urlResponse: function(r) {
     this.response = r;
     this.toggle('ok', true);
     this.loading(false);
@@ -66,14 +54,6 @@ Ngn.Dialog.RequestFormBase = new Class({
     // Даилога не будет содержать созданого объекта Формы
     this.form.init();
     this.fireEvent('formResponse');
-
-
-    this.fireEvent('asd');
-
-
-    //this.form.addEvent('jsComplete', function(r) {
-    //new Fx.Scroll(document.body).toElement(this.dialog, 'y');
-    //}.bind(this));
 
     this.form.addEvent('submit', function(r) {
       this.fireEvent('formRequest');

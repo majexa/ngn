@@ -77,7 +77,7 @@ Ngn.Dialog.Auth = new Class({
     //dialogClass: 'dialog fieldFullWidth',
     selectedTab: 1,
     id: 'auth',
-    url: '/c/auth/ajax_auth',
+    url: '/default/auth/json_auth',
     width: 280,
     completeUrl: null,
     fromVkEnabled: false
@@ -89,7 +89,7 @@ Ngn.Dialog.Auth = new Class({
     if (this.options.fromVkEnabled && Ngn.fromVk) this.options.selectedTab = 2;
   },
 
-  urlRequest: function(_response) {
+  urlResponse: function(_response) {
     this.parent(_response);
     this.tabs.addEvent('select', function(toggle, container, index) {
       if (container.get('id') == 'vkAuth') {

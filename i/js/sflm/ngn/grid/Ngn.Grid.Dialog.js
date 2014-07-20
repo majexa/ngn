@@ -36,7 +36,7 @@ Ngn.Grid.Dialog.Request = new Class({
     this.options.url = this.grid.getLink(true);
   },
 
-  urlRequest: function (r) {
+  urlResponse: function (r) {
     this.parent(r);
     if (!r.head) throw new Ngn.EmptyError('r.head');
     this.grid.dataLoaded(r);

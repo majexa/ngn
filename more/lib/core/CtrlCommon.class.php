@@ -158,7 +158,7 @@ use Options;
     $this->setOptions($options);
     $this->req = empty($this->options['req']) ? $router->req : $this->options['req'];
     $this->tt = new Tt($this->req);
-    $this->d['oController'] = $this;
+    $this->d['controller'] = $this;
     $this->d['ctrlName'] = $this->getName();
     if (!isset($this->defaultAction)) {
       if (method_exists($this, 'action_json_default')) $this->defaultAction = 'json_default';
@@ -287,7 +287,11 @@ use Options;
         if (is_string($this->json)) return $this->json;
         if ($this->actionDisabled) $this->json['actionDisabled'] = true;
         if (Sflm::frontendName()) {
-          if (($deltaUrl = Sflm::frontend('js')->getDeltaUrl())) $this->json['sflJsDeltaUrl'] = $deltaUrl;
+          if (($deltaUrl = Sflm::frontend('js')->getDeltaUrl())) {
+            //die2(222);
+            LogWriter::str('delta', $deltaUrl);
+            $this->json['sflJsDeltaUrl'] = $deltaUrl;
+          }
           if (($deltaUrl = Sflm::frontend('css')->getDeltaUrl())) $this->json['sflCssDeltaUrl'] = $deltaUrl;
         }
         return json_encode($this->json);
@@ -477,9 +481,9 @@ use Options;
   }
   */
 
-  protected function ajaxFormAction(Form $oF) {
-    $oF->disableSubmit = true;
-    $this->ajaxOutput = $this->tt->getTpl('common/form', ['form' => $oF->html()]);
+  protected function ajaxFormAction(Form $form) {
+    $form->disableSubmit = true;
+    $this->ajaxOutput = $this->tt->getTpl('common/form', ['form' => $form->html()]);
   }
 
   protected $actionMethod;

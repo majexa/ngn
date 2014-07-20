@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 class Form {
   use Options, CallOnce;
@@ -115,8 +115,9 @@ class Form {
   static $counter = 1;
 
   /**
-   * @param array /Fields
+   * @param array|Fields $fields
    * @param array $options
+   * @throws Exception
    */
   function __construct($fields, array $options = []) {
     if (is_array($fields)) $fields = new Fields($fields);
@@ -124,6 +125,7 @@ class Form {
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);
+    Sflm::frontend('js')->addObject('Ngn.Form');
     if ($this->options['placeholders']) {
       Sflm::frontend('js')->addObject('Ngn.PlaceholderSupport');
       $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);
@@ -151,9 +153,8 @@ class Form {
   }
 
   /**
-   * @param  string Имя поля
-   *
-   * @return FieldEAbstract
+   * @param string $name Имя поля
+   * @return bool|FieldEAbstract
    */
   function getElement($name) {
     $this->setElementsDataDefault();
@@ -183,17 +184,6 @@ class Form {
     if ($this->options['placeholders']) return Html::params(['class' => 'placeholders']);
     return '';
   }
-
-  /*
-  protected function dataParams() {
-    $class = get_class($this);
-    if ($class != 'Form') {
-      Sflm::frontend('js')->addObject('Ngn.Form.'.$class);
-      return ['class' => $class];
-    }
-    return false;
-  }
-  */
 
   protected function dataParams() {
     return false;
@@ -431,11 +421,13 @@ class Form {
     print $this->html();
   }
 
+  /*
   function getValues() {
     if (!$this->_rows) return false;
     foreach ($this->_rows as $v) if ($v['value']) $values[$v['name']] = $v['value'];
     return $values;
   }
+  */
 
   protected function _initErrors() {
   }
@@ -533,8 +525,9 @@ class Form {
   protected $n = 1;
 
   /**
-   * @param array
+   * @param array $d
    * @return FieldEAbstract
+   * @throws Exception
    */
   function createElement(array $d) {
     if (!empty($d['name']) and isset($this->nameArray)) $d['name'] = $this->nameArray.'['.$d['name'].']'; // check
@@ -555,9 +548,9 @@ class Form {
   }
 
   function deleteElement($name) {
-    Arr::dropCallback($this->els, function ($v) use ($name) {
-      $v->options['name'] == $name;
-    });
+    return array_values(array_filter($this->els, function ($v) use ($name) {
+      return $v->options['name'] == $name;
+    }));
   }
 
   /**
@@ -609,18 +602,6 @@ class Form {
       'placeholders' => false,
       'submitTitle'  => 'Сохранить'
     ];
-  }
-
-  private function initFsb() {
-    if ($this->enableFsb) {
-      if ($this->fsb) return;
-      $this->fsb = new FormSpamBotBlocker;
-      $this->fsb->hasSession = false;
-      $this->nospam = false; // Если FSBB включен, определяем включаем флаг отсутствия спама
-    }
-    else {
-      $this->nospam = true;
-    }
   }
 
   /**
@@ -747,9 +728,9 @@ class Form {
   /**
    * Определяет данные полей и создаёт объекты элементов формы
    *
-   * @manual form
-   * @param   array Значения по умолчанию
-   * @return  array
+   * @param array $defaultData
+   * @param bool $reset
+   * @return $this
    */
   function setElementsData(array $defaultData = [], $reset = true) {
     $this->defaultData = $defaultData;
@@ -785,6 +766,19 @@ class Form {
     $this->disableJs = $flag;
   }
 
+  /*
+  private function initFsb() {
+    if ($this->enableFsb) {
+      if ($this->fsb) return;
+      $this->fsb = new FormSpamBotBlocker;
+      $this->fsb->hasSession = false;
+      $this->nospam = false; // Если FSBB включен, определяем включаем флаг отсутствия спама
+    }
+    else {
+      $this->nospam = true;
+    }
+  }
+
   function fsb() {
     if ($this->hasErrors) return;
     $this->initFsb();
@@ -798,6 +792,7 @@ class Form {
       }
     }
   }
+  */
 
   // ====================== Visibility Conditions ================
 
@@ -811,12 +806,10 @@ class Form {
    * Добавляемые условия используются в javascript'е для динамического
    * отображения и скрытия секций.
    *
-   * @param   string Имя заголовочного поля, открывающее секцию или обычного поля
-   * @param   string Имя поля, от которого зависит отображать ли секцию
-   * @param   string Условие отображения в формате "v == 4" (javascript),
-   *                  где $v - текущее значение поля $condFieldName
-   * @param   string  header/field
-   *
+   * @param string $sctionName Имя заголовочного поля, открывающее секцию или обычного поля
+   * @param string $condFieldName Имя поля, от которого зависит отображать ли секцию
+   * @param string $jsCond Условие отображения в формате "v == 4" (javascript), где $v - текущее значение поля $condFieldName
+   * @param string $type header/field
    */
   function addVisibilityCondition($sctionName, $condFieldName, $jsCond, $type = 'header') {
     $this->visibilityConditions[] = [
@@ -832,16 +825,6 @@ class Form {
   function addDependRequire($dependName, $requireName) {
     $this->dependRequire[] = [$dependName, $requireName];
   }
-
-  /*
-  protected function jsVisibilityConditions() {
-    if (empty($this->visibilityConditions)) return '';
-    foreach ($this->visibilityConditions as $v)
-      $s .= "Ngn.frm.visibilityCondition(
-eForm, '{$v['headerName']}', '{$v['condFieldName']}', '{$v['cond']}');";
-    return $s;
-  }
-  */
 
   protected function htmlVisibilityConditions() {
     if (empty($this->visibilityConditions)) return '';

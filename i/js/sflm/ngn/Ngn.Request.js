@@ -54,17 +54,6 @@ Ngn.Request.JSON = new Class({
       this.onSuccess({});
       return;
     }
-    if (this.response.json.sflJsDeltaUrl) {
-      Asset.javascript(this.response.json.sflJsDeltaUrl, {
-        onLoad: function() {
-          if (Ngn.Request.sflJsDeltaUrlOnLoad) {
-            Ngn.Request.sflJsDeltaUrlOnLoad();
-            Ngn.Request.sflJsDeltaUrlOnLoad = false;
-          }
-        }
-      });
-    }
-    if (this.response.json.sflCssDeltaUrl) Asset.css(this.response.json.sflCssDeltaUrl);
     if (this.response.json.actionDisabled) {
       window.location.reload(true);
       return;
@@ -73,7 +62,17 @@ Ngn.Request.JSON = new Class({
       Ngn.Request.JSON.throwServerError(this.response.json);
       return;
     }
-    this.onSuccess(this.response.json, text);
+    // sflm
+    if (this.response.json.sflJsDeltaUrl) {
+      Asset.javascript(this.response.json.sflJsDeltaUrl, {
+        onLoad: function() {
+          this.onSuccess(this.response.json, text);
+        }.bind(this)
+      });
+    } else {
+      this.onSuccess(this.response.json, text);
+    }
+    if (this.response.json.sflCssDeltaUrl) Asset.css(this.response.json.sflCssDeltaUrl);
   }
 
 });

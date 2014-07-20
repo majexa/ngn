@@ -32,8 +32,6 @@ class SflmFrontendJs extends SflmFrontend {
       $s = "Class '$name' from '$source' not found";
       if ($strict) throw new Exception($s);
       $this->extraCode = "\n/*----------|$s|----------*/\n";
-    }, function($path) {
-      $this->_addPath($path);
     });
   }
 

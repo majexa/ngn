@@ -1,8 +1,7 @@
 <?php
 
 class CtrlCommonAuth extends CtrlCammon {
-use CtrlFormTabs;
-  
+
   protected function init() {
     $this->d['mainTpl'] = 'ajax';
   }
@@ -11,12 +10,26 @@ use CtrlFormTabs;
     $this->d['tpl'] = 'common/auth-ajax';
   }
 
-  function action_ajax_auth() {
+  function action_json_auth() {
     $urls = ['/default/auth/json_form'];
     if (Config::getVarVar('userReg', 'enable')) {
       $urls[] = Config::getVarVar('userReg', 'phoneConfirm') ? '/default/userRegPhone/json_form' : '/default/userReg/json_form';
     }
     $this->processFormTabs($urls);
+  }
+
+  protected function processFormTabs(array $paths, $tpl = 'common/dialogFormTabs') {
+    foreach ($paths as $uri) {
+      $ctrl = (new RouterManager(['req' => new Req(['uri' => $uri])]))->router()->dispatch()->controller;
+      $form = [
+        'title' => $ctrl->json['title'],
+        'html' => $ctrl->json['form'],
+        'id' => Html::getParam($ctrl->json['form'], 'id')
+      ];
+      if ($ctrl->actionResult) $form['submitTitle'] = $ctrl->actionResult->options['submitTitle'];
+      $d['forms'][] = $form;
+    }
+    $this->json['tabs'] = $this->tt->getTpl('common/auth-ajax', $d);
   }
 
   function action_json_form() {
