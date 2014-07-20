@@ -59,12 +59,6 @@ class Arr {
     return $arr = $arr2 ? $arr2 : [];
   }
 
-  static function dropCallback(array $arr, $func) {
-    foreach ($arr as $v) if (!$func($v)) $r[] = $v;
-    return $r;
-  }
-
-
   /**
    * Вынимает значения из элементов хэша и возвращает их как массив
    *

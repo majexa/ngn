@@ -2,6 +2,7 @@ Ngn.Dialog.RequestFormTabs = new Class({
   Extends: Ngn.Dialog,
 
   options: {
+    jsonRequest: true,
     tabsSelector: 'h2[class=tab]',
     selectedTab: 0,
     draggable: true,
@@ -28,9 +29,10 @@ Ngn.Dialog.RequestFormTabs = new Class({
     return this.forms[this.tabs.tabs[tabIndex].name];
   },
 
-  urlRequest: function(_response) {
-    this.toggle('ok', true);
+  urlResponse: function(_response) {
     this.parent(_response);
+    this.setMessage(_response.tabs);
+    this.toggle('ok', true);
     this.tabs = new Ngn.Tabs(this.message, {
       selector: this.options.tabsSelector,
       show: this.options.selectedTab,
@@ -49,6 +51,7 @@ Ngn.Dialog.RequestFormTabs = new Class({
   },
 
   setSubmitTitle: function(tabIndex) {
+    if (!this.tabs.tabs[tabIndex]) tabIndex = 0;
     if (this.tabs.tabs[tabIndex].submitTitle) this.setOkText(this.tabs.tabs[tabIndex].submitTitle);
     else this.setOkText(this.options.okText);
   },

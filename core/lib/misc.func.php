@@ -66,8 +66,8 @@ function sys($cmd, $output = false) {
   if ($output and !getConstant('OUTPUT_DISABLE')) output('Cmd: '.$cmd, $output);
   LogWriter::str('sys', $cmd);
   $r = system($cmd);
-  if ($output and !getConstant('OUTPUT_DISABLE') and $c) output("Cmd output: $c", $output);
-  return $c;
+  if ($output and !getConstant('OUTPUT_DISABLE') and $r) output("Cmd output: $r", $output);
+  return $r;
 }
 
 function red($t) {

@@ -861,3 +861,5 @@ Ngn.clsToSelector = function(s) {
 };
 
 // -- check --
+
+Ngn.GridBtnAction

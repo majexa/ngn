@@ -5,8 +5,10 @@
 <script language="JavaScript" src="./i/js/tiny_mce/tiny_mce.js"></script>
 <?= Sflm::frontend('js')->getTags('admin') ?>
 <?= AdminModule::sf($d['adminModule']) ?>
+<!--
 <script type="text/javascript">
   window.addEvent('domready', function() {
     Ngn.cp.init();
   });
 </script>
+-->

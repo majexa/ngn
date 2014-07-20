@@ -18,6 +18,7 @@ class Sflm {
    * @param $type
    * @param null $name
    * @return SflmFrontend
+   * @throws Exception
    */
   static function frontend($type, $name = null) {
     if (!preg_match('/js|css/', $type)) throw new Exception("Unknown type '$type'");
@@ -53,17 +54,18 @@ class Sflm {
    * В рамках одного рантайма может быть определен только один фронтенд
    * Для сброса рантайма используйте resetFrontend
    *
-   * @param $frontend
+   * @param $name
+   * @param bool $quietly
    * @throws Exception
    */
-  static function setFrontendName($frontend, $quitely = false) {
+  static function setFrontendName($name, $quietly = false) {
     if (self::$frontendName) {
-      if ($quitely === false) {
+      if ($quietly === false) {
         throw new Exception('Frontend name already set. Use reset. Backtrace of first set call: '."\n".O::get('CliColors')->getColoredString(self::$setFrontendBacktrace, 'darkGray'));
       }
       return;
     }
-    self::$frontendName = $frontend;
+    self::$frontendName = $name;
     self::$setFrontendBacktrace = getBacktrace(false, 1);
   }
 

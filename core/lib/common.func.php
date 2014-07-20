@@ -64,18 +64,18 @@ function getPr($v, $html = true) {
   return $c;
 }
 
-function output($str, $output = false) {
-  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <$str>").(R::get('plainText') ? "\n" : "</p>");
+function output($str, $output = false, $forcePlain = true) {
+  if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").("LOG: <$str>").((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 
-function output2($str, $output = false) {
-  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'cyan').">").(R::get('plainText') ? "\n" : "</p>");
+function output2($str, $output = false, $forcePlain = true) {
+  if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'cyan').">").((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 
-function output3($str, $output = false) {
-  if (LOG_OUTPUT === true or $output) print (R::get('plainText') ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'yellow').">").(R::get('plainText') ? "\n" : "</p>");
+function output3($str, $output = false, $forcePlain = true) {
+  if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'yellow').">").((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 
@@ -87,20 +87,19 @@ function _getBacktrace(array $trace, $html = true, $offset = 0, $length = 0) {
   $s = '';
   if ($length and $length < count($trace)) {
     $l = $offset + $length;
-  } else {
+  }
+  else {
     $l = count($trace);
   }
   for ($i = $offset; $i < $l; $i++) {
     if (isset($trace[$i]['file'])) {
       $s .= $trace[$i]['file'].':'.$trace[$i]['line'].($html ? '<br />' : "\n");
-    } elseif (isset($trace[$i]['class'])) {
+    }
+    elseif (isset($trace[$i]['class'])) {
       continue;
       //if (empty($trace[$i]['type'])) die2($trace[$i]);
       //die2($trace[$i]['args']);
-      $s .=
-        $trace[$i]['class'].
-        $trace[$i]['type'].$trace[$i]['function'].
-        '('.implode(', ', $trace[$i]['args']).')'.($html ? '<br />' : "\n");
+      $s .= $trace[$i]['class'].$trace[$i]['type'].$trace[$i]['function'].'('.implode(', ', $trace[$i]['args']).')'.($html ? '<br />' : "\n");
     }
   }
   return $s;

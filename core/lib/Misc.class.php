@@ -37,7 +37,9 @@ class Misc {
    * Проверяет является ли текущий пользователь богом, т.е. имеет неограниченные
    * права доступа на сайте
    *
+   * @param bool $quietly
    * @return bool
+   * @throws Exception
    */
   static function isGod($quietly = true) {
     if (!getConstant('ALLOW_GOD_MODE')) {
@@ -64,8 +66,9 @@ class Misc {
   /**
    * Переводит строку формата "nasd-asd-asd" в "nasdAsdAsd"
    *
-   * @param   string  Строка формата "nasd-asd-asd"
-   * @return  string
+   * @param $str
+   * @param string $sep
+   * @return mixed
    */
   static function camelCase($str, $sep = '-') {
     return str_replace('-', '', preg_replace_callback('/'.$sep.'\D/', create_function('$m', 'return strtoupper($m[0][1]);'), $str));
@@ -74,8 +77,9 @@ class Misc {
   /**
    * Переводит строку формата "nasdAsdAsd" в "nasd-asd-asd"
    *
-   * @param   string  Строка формата "nasdAsdAsd"
-   * @return  string
+   * @param $str
+   * @param string $sep
+   * @return mixed
    */
   static function hyphenate($str, $sep = '-') {
     return preg_replace_callback('/[A-Z]/', create_function('$m', 'return "'.$sep.'".strtolower($m[0]);'), $str);
@@ -94,7 +98,6 @@ class Misc {
     $incompleteMinSec = $incompleteHourSec % self::SECONDS_MIN; // Секунд в нецеой минуте
     return "$days дней, $hours часов, $min минут, $incompleteMinSec секунд";
   }
-
 
   static function getWebFileAbsPath($webpath) {
     return WEBROOT_PATH.'/'.Misc::clearFirstSlash($webpath);
@@ -175,7 +178,6 @@ class Misc {
   }
 
   static function transit($in, $toLower = false, $replaceSpace = true) {
-    $out = [];
     $replacers = [
       'а' => 'a',
       'б' => 'b',
@@ -353,7 +355,6 @@ class Misc {
     return $out;
   }
 
-
   static function getIncluded($file, $d = []) {
     if (!file_exists($file)) throw new Exception("File '$file' not found");
     ob_start();
@@ -446,10 +447,6 @@ class Misc {
   static function checkArray($v, $title = '$v must be array') {
     if (!is_array($v)) throw new Exception($title);
   }
-
-  //static function checkNotArray($v, $title = '$v cannot be array') {
-  //  if (is_array($v)) throw new Exception($title);
-  //}
 
   static function checkNumeric($v) {
     if (!is_numeric($v)) throw new Exception('"'.getPrr($v).'" is not numeric');

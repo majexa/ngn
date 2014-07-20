@@ -1,3 +1,5 @@
+// @requires Ngn.Btn
+
 Ngn.Grid = new Class({
   Extends: Ngn.Items.Table,
 

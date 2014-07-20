@@ -240,11 +240,11 @@ position: absolute;
 right: 4px;
 top: 3px;
 background-position: right 1px;
-background-image: url(/i/img/dialog/cross.png?2);
+background-image: url(/i/img/dialog/cross.png);
 height: 25px;
 }
 .md-closer:active {
-background-image: url(/i/img/dialog/cross-pushed.png?2);
+background-image: url(/i/img/dialog/cross-pushed.png);
 }
 .dialog-shade {
 border: 0;

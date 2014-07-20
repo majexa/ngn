@@ -3,7 +3,7 @@
 class SflmJsClasses {
 
   /**
-   * @var
+   * @var array
    */
   public $existingObjects;
 
@@ -160,7 +160,7 @@ class SflmJsClasses {
   }
 
   protected function captionPrefix($source, $name = null) {
-    if ($name[strlen($name)-1] == '.') throw new Exception("incorrect name '$name'");
+    if ($name[strlen($name) - 1] == '.') throw new Exception("incorrect name '$name'");
     return $name ? "object '$name' (src: $source)." : "src: $source";
   }
 
@@ -188,7 +188,8 @@ class SflmJsClasses {
    * @return bool
    * @throws Exception
    */
-  function addObject($name, $source, Closure $failure = null, Closure $success = null, $ignoreNamespaceParents = false) {
+  function addObject($name, $source, Closure $failure = null) {
+    $ignoreNamespaceParents = false;
     if (($objectPath = $this->findObjectPath($name, false)) === false) {
       if ($failure) $failure($source);
       throw new Exception("Object '$name' path does not exists. src: $source");
@@ -211,6 +212,7 @@ class SflmJsClasses {
         }
       }
     }
+    //output2($name, true, true);
     $this->_addObject($name, $source);
     $this->_initObjectPaths();
     return true;
@@ -248,14 +250,15 @@ class SflmJsClasses {
     // $this->processedPaths[$path] = getBacktrace(false);
     $code = file_get_contents($this->frontend->base->getAbsPath($path));
     foreach ($this->parseRequired($code) as $class) $this->add($class, "$path required");
+    $this->storeExistingObjectsInCode($code);
     foreach ($this->parseNgnExtendsClasses($code) as $class) $this->addObjectStrict($class, ($name ? : $path).' extends');
     Sflm::output('Adding '.($source ? $this->captionPrefix($source, $name).' ' : '')."PATH $path");
     if ($source and isset($this->pathWithSourceProcessor)) {
       $pathWithSourceProcessor = $this->pathWithSourceProcessor;
       $pathWithSourceProcessor($path);
     }
+    //output3($path, true, true);
     $this->frontend->_addPath($path);
-    $this->storeExistingObjectsInCode($code);
     $this->processNgnPatterns($code, $path);
     foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$path requiredAfter");
   }
@@ -311,6 +314,16 @@ class SflmJsClasses {
     }
     if (preg_match_all('/(Ngn\.[A-Za-z]+\.[A-Z][A-Za-z_]*)/', $c, $m)) {
       foreach ($m[1] as $class) if (!in_array($class, $classes)) $classes[] = $class;
+    }
+    return $classes;
+  }
+
+  function parseNgnClassesDefinition($c) {
+    $classes = [];
+    if (preg_match_all('/(Ngn\.[A-Z][A-Za-z._]*[A-Za-z_.]+)\s+=\s+/', $c, $m)) {
+      $classes = array_filter($m[1], function ($class) {
+        return $this->isClass($class);
+      });
     }
     return $classes;
   }

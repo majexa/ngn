@@ -78,6 +78,7 @@ Ngn.Dialog = new Class({
 
   initialize: function(_opts) {
     this.setOptions(_opts);
+    // new Image().src = '/i/img/dialog/cross-pushed.png'; // preloading of hover cross
     if (this.options.id == 'dlg') {
       this.options.id = 'dlg' + Ngn.randString(5);
       if (this.options.savePosition) throw new Error('Can not save position on random ID');
@@ -95,7 +96,7 @@ Ngn.Dialog = new Class({
     if (this.options.bindBuildMessageFunction) this.options.message = this.buildMessage.bind(this, this.options.message);
     this.request = new (this.options.jsonRequest ? Ngn.Request.JSON : Ngn.Request)({
       evalScripts: true,
-      onSuccess: this.urlRequest.bind(this),
+      onSuccess: this.urlResponse.bind(this),
       onFailure: this.errorMessage.bind(this)
     });
     this.dialogId = this.options.id + '_dialog';
@@ -333,7 +334,7 @@ Ngn.Dialog = new Class({
   errorMessage: function(xhr) {
   },
 
-  urlRequest: function(_response) {
+  urlResponse: function(_response) {
     if (this.closed) return;
     this.startupLoading(false);
     this.dotter.stop();

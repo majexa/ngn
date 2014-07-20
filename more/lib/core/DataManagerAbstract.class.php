@@ -248,14 +248,8 @@ abstract class DataManagerAbstract extends Options2 {
   /**
    * Создает запись валидируя входные данные с помощью класса формы
    *
-   * @param   array     Пример:
-   *                    array(
-   *                      'title' => 'The title',
-   *                      'file' => array(
-   *                        'tmp_name' => '873yq2f.tmp'
-   *                      )
-   *                    )
-   * @return  mixed   Item ID или false, если валидация данных не прошла успешно
+   * @return bool|integer Item ID или false, если валидация данных не прошла успешно
+   * @throws Exception
    */
   protected function makeCreate() {
     try {
@@ -367,8 +361,10 @@ abstract class DataManagerAbstract extends Options2 {
       $this->beforeDelete();
       $this->form->setElementsData();
       $this->elementTypeAction('beforeDelete');
+      die2(111);
     } catch (Exception $e) {
-      $this->_delete($id);
+      die2(222);
+      //$this->_delete($id);
       throw $e;
     }
     $this->_delete($id);

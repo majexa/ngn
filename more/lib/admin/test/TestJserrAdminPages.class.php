@@ -2,6 +2,10 @@
 
 class TestJserrAdminPages extends ProjectTestCase {
 
+  static function enable() {
+    return false;
+  }
+
   function test() {
     $this->checkErrors(SITE_DOMAIN.'/god');
     $this->checkErrors(SITE_DOMAIN.'/god?forceAuth=1');
