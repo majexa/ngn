@@ -2,10 +2,16 @@ Ngn.Request = new Class({
   Extends: Request,
 
   success: function(text, xml) {
+    Ngn.requestLoaded = true;
     if (text.contains('Error: ')) {
       return;
     }
     this.parent(text, xml);
+  },
+
+  send: function(options) {
+    Ngn.requestLoaded = false;
+    this.parent(options);
   }
 
 });
@@ -49,6 +55,7 @@ Ngn.Request.JSON = new Class({
   Extends: Request.JSON,
 
   success: function(text) {
+    Ngn.requestLoaded = true;
     this.response.json = Ngn.json.decode(text, this.options.secure);
     if (this.response.json === null) {
       this.onSuccess({});
@@ -73,6 +80,11 @@ Ngn.Request.JSON = new Class({
       this.onSuccess(this.response.json, text);
     }
     if (this.response.json.sflCssDeltaUrl) Asset.css(this.response.json.sflCssDeltaUrl);
+  },
+
+  send: function(options) {
+    Ngn.requestLoaded = false;
+    this.parent(options);
   }
 
 });

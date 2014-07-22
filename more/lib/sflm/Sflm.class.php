@@ -109,4 +109,4 @@ Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 Sflm::$absBasePaths = [
   'i' => NGN_PATH.'/i'
 ];
-Sflm::$output = true;
+Sflm::$output = false;
