@@ -860,6 +860,6 @@ Ngn.clsToSelector = function(s) {
   }).join(' ');
 };
 
-// -- check --
+Ngn.requestLoaded = true;
 
-Ngn.GridBtnAction
+// -- check --

@@ -11,8 +11,4 @@ class CtrlCommonTestUsers extends CtrlCammon {
     $this->d['tpl'] = 'test/authDialog';
   }
 
-  function action_json_dialogAuth() {
-    $this->jsonFormAction(new DdForm(new DdFields('a'), 'a'));
-  }
-
 }

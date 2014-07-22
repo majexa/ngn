@@ -19,7 +19,10 @@ class Lib {
   /**
    * Подключает файл по пути относительно корня NGN-каталога, либо по имени класса
    *
-   * @param   string  Путь к файлу относительно корня NGN-каталога или имя класса
+   * @param string $_path Путь к файлу относительно корня NGN-каталога или имя класса
+   * @param Req $req
+   * @param string $ext
+   * @return bool
    */
   static function required($_path, Req $req = null, $ext = '.php') {
     if (!in_array($_path, self::$cl)) self::$cl[] = $_path;
@@ -30,7 +33,7 @@ class Lib {
     return true;
   }
 
-  static $paths;
+  static $paths = [];
 
   /**
    * Получает путь к файлу.
@@ -41,10 +44,14 @@ class Lib {
    * - ngn/lib/file.php
    * - site/lib/file.php
    *
-   * @param   string  Возвращает абсолютный путь к файлу
+   * @param $path
+   * @param bool $strict
+   * @param string $ext
+   * @return bool|mixed|string
    */
   static function getPath($path, $strict = true, $ext = '.php') {
     if (isset(self::$paths) and isset(self::$paths[$path])) return self::$paths[$path];
+    $existingPath = false;
     if (!strstr($path, '/')) {
       // Если в Пути нет слэша, считаем, что это имя класса
       $r = self::getClassPath($path);
@@ -56,7 +63,7 @@ class Lib {
           return false;
       }
       else {
-        $existsPath = $r;
+        $existingPath = $r;
       }
     }
     else {
@@ -69,10 +76,10 @@ class Lib {
           return false;
       }
       else
-        $existsPath = $r;
+        $existingPath = $r;
     }
-    self::$paths[$path] = $existsPath;
-    return $existsPath;
+    self::$paths[$path] = $existingPath;
+    return $existingPath;
   }
 
   static function exists($path) {
@@ -85,11 +92,11 @@ class Lib {
   }
 
   /**
-   * Возвращает абсолютный путь к файлу по пути относительно NGN-каталога
-   * либо относительно lib-каталога
+   * Возвращает абсолютный путь к файлу по пути относительно NGN-каталога либо относительно lib-каталога
    *
-   * @param   string  Путь к файлу относительно NGN-каталога
-   * @return  mixed   Абсолютный путь к файлу или false, если файл не найден
+   * @param string $path Путь к файлу относительно NGN-каталога
+   * @param string $ext
+   * @return bool|string
    */
   static function getFilePath($path, $ext = '.php') {
     foreach (Ngn::$basePaths as $basePath) {
@@ -110,10 +117,10 @@ class Lib {
   static protected $currentGetClass = '[none]';
 
   /**
-   * Возвращает абсолютный путь к файлу класса
+   * Возвращает абсолютный путь к файлу или false, если файл не найден
    *
-   * @param   string  Имя класса
-   * @return  string  Абсолютный путь к файлу или false, если файл не найден
+   * @param   string $class Имя класса
+   * @return  string
    */
   static function getClassPath($class) {
     self::$currentGetClass = $class;
@@ -123,10 +130,11 @@ class Lib {
   }
 
   /**
-   * Возвращает путь до файла с классом, если имя класса выполнено
-   * в стиле Zend Framework: Package_Lib_Sublib
+   * Возвращает Абсолютный путь к файлу с классом или false, если файл не уществует
+   * Имя класса должно быть выполнено в стиле Zend Framework: Package_Lib_Sublib
    *
-   * @return  string  Абсолютный путь к файлу или false, если файл не уществует
+   * @param $class
+   * @return bool
    */
   static protected function vendorAutoloader($class) {
     if (($pos = strpos($class, '_')) === false) return false;
@@ -147,17 +155,17 @@ class Lib {
   }
 
   /**
-   * Рекурсивно проходит данную директорию и возвращает массив с классами,
-   * найденными в ней.
+   * Рекурсивно проходит данную директорию и возвращает массив с классами, найденными в ней и возвращает вписок файлов
+   *
    * Структура массива:
    * array(
    *   'path' => 'absolute/path/to/file',
    *   'file' => 'ClassName.class.php'
    * )
    *
-   * @param   string  Корневая директория для просмотра (не изменяется)
-   * @param   string  Субдиректория
-   * @return  array   Список файлов
+   * @param   string $rootPath Корневая директория для просмотра (не изменяется)
+   * @param   string $path Субдиректория
+   * @return  array
    */
   static private function getClassesListR($rootPath, $path = null) {
     $list = [];
