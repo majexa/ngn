@@ -8,8 +8,8 @@ module.exports = new Class({
     this.parent(casper);
     this.test = JSON.decode(require('system').stdin.readLine());
     if (!this.test) throw new Error('Wrong or empty json in stdin');
-    //if (!this.casper.cli.options.test) throw new Error('option "test" is required');
-    //this.test = eval(require('fs').read(this.casper.cli.options.test));
+    // if (!this.casper.cli.options.test) throw new Error('option "test" is required');
+    // this.test = eval(require('fs').read(this.casper.cli.options.test));
     this.casper.on('page.error', function(msg, trace) {
       var t = '';
       for (var i = 0; i < trace.length; i++) {
@@ -27,6 +27,10 @@ module.exports = new Class({
         }, callback);
       });
     };
+  },
+
+  adminAuth: function() {
+    //this.casper.
   },
 
   testUrl: function(url) {
