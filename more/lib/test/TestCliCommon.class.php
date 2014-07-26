@@ -23,10 +23,12 @@ class TestCliCommon {
   /**
    * Создаёт проект "test"
    */
-  protected function createProject() {
+  function createProject() {
     $server = require NGN_ENV_PATH.'/config/server.php';
     $domain = 'test.'.$server['baseDomain'];
     print `pm localServer createProject test $domain common`;
+    print `pm localProject replaceConstant test core IS_DEBUG true`;
+    print `pm localProject cc test`;
   }
 
   /**
@@ -35,7 +37,6 @@ class TestCliCommon {
   function g($filterNames = null) {
     print `pm localProject delete test`;
     $this->createProject();
-    print `pm localProject cc test`;
     $filterNames = $filterNames ? ' '.$filterNames : '';
     print `tst proj g test$filterNames`;
   }

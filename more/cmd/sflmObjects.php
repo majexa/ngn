@@ -1,7 +1,8 @@
 <?php
 
-Sflm::setFrontendName('default');
-$existingObjectsFile = DATA_PATH.'/cache/zend_cache---'.'jsExistingObjectsdefault';
+$frontend = isset($_SERVER['argv'][2]) ? $_SERVER['argv'][2] : 'default';
+Sflm::setFrontendName($frontend);
+$existingObjectsFile = DATA_PATH.'/cache/zend_cache---'.'jsExistingObjects'.$frontend;
 if (file_exists($existingObjectsFile)) {
   $existingObjectsModification = date('d.m.Y H:i:s', filemtime($existingObjectsFile));
   $existingObjects = Sflm::frontend('js')->classes->existingObjects;
@@ -9,7 +10,7 @@ if (file_exists($existingObjectsFile)) {
   $existingObjects = [];
   $existingObjectsModification = '-';
 }
-$cacheFile = UPLOAD_PATH.'/js/cache/default.js';
+$cacheFile = UPLOAD_PATH.'/js/cache/'.$frontend.'.js';
 if (file_exists($cacheFile)) {
   $cacheClassesDefinition = Sflm::frontend('js')->classes->parseNgnClassesDefinition(file_get_contents($cacheFile));
   $cacheModification = date('d.m.Y H:i:s', filemtime($cacheFile));

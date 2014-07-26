@@ -17,11 +17,7 @@ abstract class CliHelpAbstract {
       $this->help();
     }
     else {
-      //try {
-        $this->run();
-      //} catch (EmptyException $e) {
-      //  output3("Wrong syntax (".$e->getMessage().")");
-      //}
+      $this->run();
     }
   }
 

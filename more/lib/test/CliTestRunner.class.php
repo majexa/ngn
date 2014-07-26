@@ -1,6 +1,6 @@
 <?php
 
-class CliTestRunner extends CliHelpDirectClasses {
+class CliTestRunner extends CliHelpArgs {
 
   function prefix() {
     return false;

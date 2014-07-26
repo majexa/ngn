@@ -37,10 +37,10 @@ abstract class CliHelpOptions extends CliHelp {
 
   private function option($name) {
     return [
-      'name' => $name,
+      'name'     => $name,
       'optional' => false,
       'variants' => false,
-      'descr' => false
+      'descr'    => false
     ];
   }
 
@@ -57,7 +57,10 @@ abstract class CliHelpOptions extends CliHelp {
       $requiredOptions = [];
       $class = $args->class;
       foreach ($class::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
-      (new $class(array_merge($requiredOptions, $this->getMethodOptionsWithParams($args))))->{$args->method}();
+      (new $class(array_merge( //
+        $requiredOptions, //
+        $this->getMethodOptionsWithParams($args, count($class::$requiredOptions)) //
+      )))->{$args->method}();
     }
   }
 
@@ -67,17 +70,20 @@ abstract class CliHelpOptions extends CliHelp {
     foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
     $realArgs = clone $args;
     $realArgs->class = $realClass;
-    $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams($realArgs));
+    $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams( //
+      $realArgs, //
+      count($realClass::$requiredOptions) //
+    ));
     /* @var CliHelpOptionsMultiWrapper $multiWrapper */
     $class = $args->class;
     $multiWrapper = (new $class($options));
     $multiWrapper->action($realArgs->method);
   }
 
-  protected function getMethodOptionsWithParams(CliArgs $args) {
+  protected function getMethodOptionsWithParams(CliArgs $args, $offset) {
     $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
-      foreach ($options as $i => $opt) $r[$opt['name']] = $args->params[$i];
+      foreach ($options as $i => $opt) $r[$opt['name']] = $args->params[$i + $offset];
     }
     return $r;
   }
