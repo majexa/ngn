@@ -189,6 +189,7 @@ class SflmJsClasses {
    * @throws Exception
    */
   function addObject($name, $source, Closure $failure = null) {
+    die2(22222);
     $ignoreNamespaceParents = false;
     if (($objectPath = $this->findObjectPath($name, false)) === false) {
       if ($failure) $failure($source);

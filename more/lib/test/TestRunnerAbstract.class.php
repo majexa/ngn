@@ -55,8 +55,8 @@ class TestRunnerAbstract {
     R::set('plainText', true);
     $this->suite = new PHPUnit_Framework_TestSuite('one');
     if ($filterNames) {
-      if (is_string($filterNames) and $filterNames[strlen($filterNames) - 1] == '*') {
-        $this->filterPrefix = ucfirst(rtrim($filterNames, '*'));
+      if (is_string($filterNames) and $filterNames[strlen($filterNames) - 1] == '%') {
+        $this->filterPrefix = ucfirst(rtrim($filterNames, '%'));
         return;
       }
       $filterNames = (array)$filterNames;
