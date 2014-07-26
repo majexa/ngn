@@ -183,13 +183,10 @@ class SflmJsClasses {
    * @param string $name Имя класса или объекта
    * @param string $source Описание источника, откуда происходит добавление класса
    * @param callable $failure
-   * @param callable $success
-   * @param bool $ignoreNamespaceParents
    * @return bool
    * @throws Exception
    */
   function addObject($name, $source, Closure $failure = null) {
-    die2(22222);
     $ignoreNamespaceParents = false;
     if (($objectPath = $this->findObjectPath($name, false)) === false) {
       if ($failure) $failure($source);

@@ -1,6 +1,6 @@
 <?php
 
-class TestCasperAdmin extends ProjectTestCase {
+class UestCasperAdmin extends ProjectTestCase {
 
   function test() {
     print `pm localProject cc test`;
