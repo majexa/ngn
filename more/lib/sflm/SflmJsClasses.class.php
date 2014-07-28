@@ -16,8 +16,8 @@ class SflmJsClasses {
     $this->frontend = $frontend;
     $this->initExistingObjects();
     $this->initObjectPaths();
-    $this->addCoreProperties(file_get_contents($this->frontend->base->getAbsPath($this->findObjectPath('Ngn'))));
-    $this->addCoreProperties(file_get_contents($this->frontend->base->getAbsPath('s2/js/common/Ngn')));
+    //$this->addCoreProperties(file_get_contents($this->frontend->base->getAbsPath($this->findObjectPath('Ngn'))));
+    //$this->addCoreProperties(file_get_contents($this->frontend->base->getAbsPath('s2/js/common/Ngn')));
   }
 
   protected function addCoreProperties($code) {
@@ -116,8 +116,10 @@ class SflmJsClasses {
   // --
 
   protected function parseNgnPreloadClasses($c) {
-    if (preg_match_all('/:\s+(Ngn\.[A-Za-z.]+)/', $c, $m)) return $m[1];
-    return [];
+    $r = [];
+    if (preg_match_all('/:\s+(Ngn\.[A-Z][A-Za-z.]+)/', $c, $m)) $r = $m[1];
+    if (preg_match_all('/:\s+(Ngn\.[A-Za-z]\.[A-Z][A-Za-z.]+)/', $c, $m)) $r = array_merge($r, $m[1]);
+    return $r;
   }
 
   protected function parseRequired($c, $k = '') {
