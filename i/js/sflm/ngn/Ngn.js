@@ -860,6 +860,4 @@ Ngn.clsToSelector = function(s) {
 
 Ngn.requestLoaded = true;
 
-Ngn.fileSizeMax()
-
 // -- check --

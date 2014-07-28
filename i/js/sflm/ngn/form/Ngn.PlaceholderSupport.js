@@ -9,7 +9,7 @@ Ngn.PlaceholderSupport = new Class({
     }
     this.elements.each(function(input){
       var textColor = input.getStyle('color');
-      var lighterTextColor = self.LightenDarkenColor(textColor,80);
+      var lighterTextColor = self.lightenDarkenColor(textColor,80);
       if(input.getProperty('value') === '') {
         input.setProperty('value',input.getProperty('placeholder'));
         input.setStyle('color',lighterTextColor);
@@ -31,7 +31,7 @@ Ngn.PlaceholderSupport = new Class({
     });
   },
 
-  LightenDarkenColor: function(col,amt) {
+  lightenDarkenColor: function(col,amt) {
      var usePound = false;
     if ( col[0] == "#" ) {
         col = col.slice(1);

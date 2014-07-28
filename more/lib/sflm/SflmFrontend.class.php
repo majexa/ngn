@@ -154,7 +154,6 @@ abstract class SflmFrontend {
       Sflm::output("New path '$path' already exists");
       return;
     }
-    LogWriter::v('sflm_addPath', $path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
     $this->changed = true;
