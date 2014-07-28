@@ -275,8 +275,6 @@ Ngn.regNamespace = function(namespace, lastArray) {
   for (var i = 0; i < parts.length; i++) {
     if (lastArray && i == parts.length - 1) brackets = '[]';
     var str = parts.slice(0, i + 1).join('.');
-    //c('if (!'+str+') { c(str); window.'+str+' = '+brackets+'; c("reg "+str); }');
-    //eval('if (!'+str+') { c(str); window.'+str+' = '+brackets+'; c("reg "+str); }');
     eval('if (!' + str + ') window.' + str + ' = ' + brackets);
   }
 };
@@ -861,5 +859,7 @@ Ngn.clsToSelector = function(s) {
 };
 
 Ngn.requestLoaded = true;
+
+Ngn.fileSizeMax()
 
 // -- check --

@@ -90,9 +90,6 @@ color: #FFFFFF;
 .btn2 {
 border: 1px solid #FFFFFF;
 }
-.btnSubmit span {
-font-weight: bold;
-}
 a.btnSubmitLarge {
 width: 200px;
 height: 25px;
@@ -101,7 +98,6 @@ margin-top: 5px;
 border-radius: 5px;
 font-size: 15px;
 }
-
 
 /*
 .pbt_userInfo .iconsSet {
