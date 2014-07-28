@@ -1,14 +1,11 @@
 <?php
 
 return [
-  //'sb',
-  'i/css/common/ac.css',
-  'i/css/admin/pageBlocks.css',
-  //'i/css/common/sound.css',
+  'i/css/common/autocompleter.css',
   'cp',
-  'i/css/common/adminPanel.css',
-  'i/css/common/ddo.css',
-  'm/css/common/admin.css',
+  'i/css/admin/panel.css',
+  'i/css/admin/ddo.css',
   'i/css/admin/ddFilters.css',
-  'i/css/admin/grid.css'
+  'i/css/admin/grid.css',
+  'm/css/common/admin.css',
 ];

@@ -5,19 +5,24 @@ class SflmJsClasses {
   /**
    * @var array
    */
-  public $existingObjects;
-
-  public $existingObjectPaths, $objectPaths;
+  public $existingObjects, $existingObjectPaths, $objectPaths, $ngnCoreProperties = [];
 
   /**
    * @var SflmFrontendJs
    */
-  public $frontend;
+  protected $frontend;
 
   function __construct(SflmFrontendJs $frontend) {
     $this->frontend = $frontend;
     $this->initExistingObjects();
     $this->initObjectPaths();
+    $this->addCoreProperties(file_get_contents($this->frontend->base->getAbsPath($this->findObjectPath('Ngn'))));
+    $this->addCoreProperties(file_get_contents($this->frontend->base->getAbsPath('s2/js/common/Ngn')));
+  }
+
+  protected function addCoreProperties($code) {
+    if (!preg_match_all('/(Ngn\.[a-z][A-Za-z]+)\s+=\s/', $code, $m)) return;
+    $this->ngnCoreProperties = array_merge($this->ngnCoreProperties, $m[1]);
   }
 
   protected function isObjectPath($path) {
@@ -55,13 +60,7 @@ class SflmJsClasses {
   }
 
   protected function storeExistingObjects() {
-    if (!$this->existingObjects) {
-      //Sflm::output('Storing existing objects. Nothing to store. Skipped');
-      return;
-    }
-    //if (in_array('Ngn.Form.El.DdTags', $this->existingObjects)) die2(2);
-    //Sflm::output('Storing existing objects: '.implode(', ', $this->existingObjects)." to jsExistingObjects".$this->frontend->fKey());
-    //Sflm::output('Storing existing objects. Count: '.count($this->existingObjects));
+    if (!$this->existingObjects) Sflm::output('Storing existing objects. Nothing to store. Skipped');
     SflmCache::c()->save([
       $this->existingObjectPaths,
       $this->existingObjects
@@ -116,8 +115,8 @@ class SflmJsClasses {
 
   // --
 
-  protected function parseNgnExtendsClasses($c) {
-    if (preg_match_all('/Extends:\s+(Ngn\.[A-Za-z.]+)/', $c, $m)) return $m[1];
+  protected function parseNgnPreloadClasses($c) {
+    if (preg_match_all('/:\s+(Ngn\.[A-Za-z.]+)/', $c, $m)) return $m[1];
     return [];
   }
 
@@ -150,6 +149,10 @@ class SflmJsClasses {
   }
 
   protected function addObjectStrict($class, $source) {
+    if (in_array($class, $this->ngnCoreProperties)) {
+      Sflm::output("'$class' is ngn core property. Skipped");
+      return;
+    }
     if (in_array($class, $this->existingObjects)) {
       Sflm::output("Class '$class' exists on strict adding. Skipped");
       return;
@@ -210,7 +213,6 @@ class SflmJsClasses {
         }
       }
     }
-    //output2($name, true, true);
     $this->_addObject($name, $source);
     $this->_initObjectPaths();
     return true;
@@ -244,18 +246,15 @@ class SflmJsClasses {
       return;
     }
     Sflm::output("Processing contents of '$path'");
-    // if (isset($this->processedPaths[$path])) die2([$path, $this->processedPaths[$path]]);
-    // $this->processedPaths[$path] = getBacktrace(false);
     $code = file_get_contents($this->frontend->base->getAbsPath($path));
     foreach ($this->parseRequired($code) as $class) $this->add($class, "$path required");
     $this->storeExistingObjectsInCode($code);
-    foreach ($this->parseNgnExtendsClasses($code) as $class) $this->addObjectStrict($class, ($name ? : $path).' extends');
+    foreach ($this->parseNgnPreloadClasses($code) as $class) $this->addObjectStrict($class, ($name ? : $path).' extends');
     Sflm::output('Adding '.($source ? $this->captionPrefix($source, $name).' ' : '')."PATH $path");
     if ($source and isset($this->pathWithSourceProcessor)) {
       $pathWithSourceProcessor = $this->pathWithSourceProcessor;
       $pathWithSourceProcessor($path);
     }
-    //output3($path, true, true);
     $this->frontend->_addPath($path);
     $this->processNgnPatterns($code, $path);
     foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$path requiredAfter");
@@ -263,7 +262,7 @@ class SflmJsClasses {
 
   function processCode($code, $source) {
     foreach ($this->parseRequired($code) as $class) $this->add($class, "$source: required");
-    foreach ($this->parseNgnExtendsClasses($code) as $class) $this->addObjectStrict($class, "$source: ngn extends");
+    foreach ($this->parseNgnPreloadClasses($code) as $class) $this->addObjectStrict($class, "$source: ngn extends");
     $this->processNgnPatterns($code, "$source: ngn patterns");
     foreach ($this->parseRequiredAfterClasses($code) as $class) $this->add($class, "$source: requiredAfter");
   }

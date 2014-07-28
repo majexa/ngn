@@ -93,4 +93,4 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
   }
 
-}
+ }

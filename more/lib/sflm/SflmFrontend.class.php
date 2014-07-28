@@ -21,10 +21,6 @@ abstract class SflmFrontend {
     Misc::checkEmpty($this->name, 'Frontend name not defined');
     $this->base->version = $this->version();
     $this->pathsCache = $this->getPathsCache() ? : $this->base->getPaths($this->name, true);
-    //if ($this->getLastPaths() != $this->getPaths()) {
-    //  $this->incrementVersion();
-    //  $this->storeLastPaths();
-    //}
     $this->init();
   }
 
@@ -86,19 +82,14 @@ abstract class SflmFrontend {
   protected $stored = false;
 
   function store($source = 'direct') {
-    LogWriter::v('sflm_store', 1);
     if ($this->stored) throw new Exception("Can't store after frontend was already stored. Reset or rerun frontend");
     if (!$this->changed) {
-      LogWriter::v('sflm_store', 2);
       Sflm::output("No changes. Storing skipped");
       return;
     }
-    LogWriter::v('sflm_changed', 1);
     Sflm::output("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
-    //if (!$this->sflm->storeLib($this->name, $this->code())) throw new Exception('it should not have happened');
     if ($this->base->storeLib($this->name, $this->code())) {
-      LogWriter::v('sflm_storeLib', 1);
       $this->incrementVersion();
       $this->stored = true;
     }
