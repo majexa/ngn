@@ -5,7 +5,10 @@ class DbModelCore {
   static $forceCache = true;
 
   /**
-   * @retur DbModel
+   * @param string $table
+   * @param string|integer $value
+   * @param string $param
+   * @return bool|DbModel
    */
   static function get($table, $value, $param = 'id') {
     if ($param == 'id' and !$value) return false;

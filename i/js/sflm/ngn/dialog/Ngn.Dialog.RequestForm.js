@@ -35,10 +35,8 @@ Ngn.Dialog.RequestFormBase = new Class({
   response: null,
 
   urlResponse: function(r) {
+    this.parent(r);
     this.response = r;
-    this.toggle('ok', true);
-    this.loading(false);
-    if (r.title) this.setTitle(r.title);
     if (r.submitTitle) this.setOkText(r.submitTitle);
     if (r.jsOptions) {
       if (r.jsOptions.onOkClose)
@@ -54,7 +52,6 @@ Ngn.Dialog.RequestFormBase = new Class({
     // Даилога не будет содержать созданого объекта Формы
     this.form.init();
     this.fireEvent('formResponse');
-
     this.form.addEvent('submit', function(r) {
       this.fireEvent('formRequest');
       this.loading(true);

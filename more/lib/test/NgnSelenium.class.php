@@ -45,7 +45,7 @@ class NgnSelenium {
   }
   
   public function treeClick($title) {
-    $locator = "#mif-tree-1 span:contains($title)";
+    $locator = "#ngn-tree-1 span:contains($title)";
     $this->s->mouseMoveAt($locator, '');
     $this->s->mouseDownAt($locator, '');
   }

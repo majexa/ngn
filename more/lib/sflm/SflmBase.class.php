@@ -46,7 +46,7 @@ abstract class SflmBase {
       if ($this->isPackage($lib)) {
         if ($skipExistingPackages and in_array($lib, $this->existingPackages)) continue;
         $this->existingPackages[] = $lib;
-        if (($subLibs = $this->getPackageLibsR($lib)) === false) continue;
+        if (($subLibs = $this->getPackageLibsR($lib, $skipExistingPackages, $strict)) === false) continue;
         $r = Arr::append($r, $subLibs);
       }
       else {
@@ -71,15 +71,15 @@ abstract class SflmBase {
       $error = "File '$path' does not exists";
       Sflm::output($error);
       if ($strict) Err::_log($error, debug_backtrace());
-      return "\n/*----------[ $error ]---------*/\n";
+      return "\n/*--[$error]--*/\n";
     }
     if (strstr($path, '/scripts/')) {
       // Если файл находится в папке библиотек, значит это PHP-файл
-      return "\n/*----------|$path|".($r ? ' (with request data)' : '')."----------*/\n".Misc::getIncludedByRequest($path, $r);
+      return "\n/*--|$path|".($r ? ' (with request data)' : '')."--*/\n".Misc::getIncludedByRequest($path, $r);
     }
     else {
       // Иначе это статика
-      return "\n/*----------|$path|----------*/\n".file_get_contents($path);
+      return "\n/*--|$path|--*/\n".file_get_contents($path);
     }
   }
 

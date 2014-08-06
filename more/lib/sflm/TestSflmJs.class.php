@@ -21,16 +21,6 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::frontend('js')->addObject('Ngn.namespace.A');
   }
 
-  //function testChangeVersion() {
-  //  Sflm::frontend('js')->addObject('Ngn.sub.A');
-  //  $version1 = Sflm::frontend('js')->version();
-  //  Sflm::setFrontend('js', 'dummy');
-  //  $version2 = Sflm::frontend('js')->version();
-  //  Sflm::frontend('js')->addObject('Ngn.sub.B');
-  //  Sflm::frontend('js')->version();
-  //  $version3 = Sflm::frontend('js')->version();
-  //}
-
   function testResetFrontend() {
     Sflm::setFrontend('js', 'test/dependencies');
     $this->assertTrue(Sflm::frontendName() == 'test/dependencies');
@@ -93,4 +83,14 @@ class TestSflmJs extends ProjectTestCase {
     $this->assertFalse((bool)$newPaths, 'New paths must be empty after reset. Current: '.implode(', ', $newPaths));
   }
 
- }
+  function testExtending4levelNamespace() {
+    Sflm::frontend('js')->addObject('Ngn.sub.Ab.Cb');
+    $this->assertTrue(in_array('Ngn.sub.Ab.Bb', Sflm::frontend('js')->classes->existingObjects));
+  }
+
+  function testPreloadingInTheSameFile() {
+    set_time_limit(1);
+    Sflm::frontend('js')->addObject('Ngn.Tree');
+  }
+
+}

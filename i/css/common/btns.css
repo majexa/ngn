@@ -52,9 +52,13 @@ padding: 2px 7px 2px 5px;
 margin-right: 7px !important;
 }
 
-.btn > span, .btnFake > span {
-padding: 2px 7px 0px 7px;
+.btn > span {
+padding: 2px 7px 0 7px;
 display: block;
+}
+.btnFake > span {
+display: block;
+margin: 3px 7px 0 7px;
 }
 b.btn {
 color: #FFF !important;

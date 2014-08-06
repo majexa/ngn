@@ -139,10 +139,10 @@ class ClassCore {
     return $class::$$prop;
   }
 
-  static function getClassesByPrefix($prefix) {
+  static function getClassesByPrefix($prefix, $strict = false) {
     $classes = [];
     foreach (array_keys(Lib::getClassesListCached()) as $class) {
-      if (preg_match('/^'.$prefix.'.*/', $class)) $classes[] = $class;
+      if (preg_match('/^'.$prefix.'.'.($strict ? '+' : '*').'/', $class)) $classes[] = $class;
     }
     return $classes;
   }

@@ -2,12 +2,20 @@
 
 class DbTree implements DbTreeInterface {
 
+  /**
+   * @var string
+   */
   public $table;
+
+  /**
+   * @var array
+   */
+  protected $tree;
 
   /**
    * Ключ массива с детьми
    *
-   * @var array
+   * @var string
    */
   public $childrenKey = 'children';
 
@@ -39,9 +47,12 @@ class DbTree implements DbTreeInterface {
 
   /**
    * Возвращает корневой элемент
+   *
+   * @return bool|array
    */
   function getRoot() {
-    return DbModelCore::get($this->table, 0, 'parentId')->r;
+    $r = DbModelCore::get($this->table, 0, 'parentId');
+    return $r ? $r->r : false;
   }
 
   /**
@@ -50,9 +61,9 @@ class DbTree implements DbTreeInterface {
    * @return array
    */
   function getTree() {
-    $this->tree = $this->getRoot();
-    $this->tree[$this->childrenKey] = $this->getTreeR($this->tree['id']);
-    return $this->tree;
+    if (($tree = $this->getRoot()) === false) return [];
+    $tree[$this->childrenKey] = $this->getTreeR($tree['id']);
+    return $tree;
   }
 
   function getRootTrees() {

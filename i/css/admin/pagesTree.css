@@ -9,8 +9,8 @@ padding-left: 15px;
 .pagesTree td.col1 {
 }
 
-.p_agesTree .mif-tree-tag-open-icon {
-background-image:url("../../i/js/mif.tree/assets/images/tag_open.gif");
+.p_agesTree .ngn-tree-tag-open-icon {
+background-image:url("/i/img/tree/tag_open.gif");
 }
 
 .pagesTree a#dragBtn {

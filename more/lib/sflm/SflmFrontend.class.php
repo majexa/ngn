@@ -20,8 +20,12 @@ abstract class SflmFrontend {
     $this->name = $name;
     Misc::checkEmpty($this->name, 'Frontend name not defined');
     $this->base->version = $this->version();
-    $this->pathsCache = $this->getPathsCache() ? : $this->base->getPaths($this->name, true);
+    $this->pathsCache = $this->getPathsCache() ? : $this->getStaticPaths();
     $this->init();
+  }
+
+  protected function getStaticPaths() {
+    return $this->base->getPaths($this->name, true);
   }
 
   /**
@@ -67,6 +71,7 @@ abstract class SflmFrontend {
   }
 
   function _code() {
+    // в этой точке происходит генерация неконсистентного (с т.з. используемых классов) кода
     return $this->base->extractCode($this->getPaths());
   }
 

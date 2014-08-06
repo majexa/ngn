@@ -12,7 +12,7 @@ if (file_exists($existingObjectsFile)) {
 }
 $cacheFile = UPLOAD_PATH.'/js/cache/'.$frontend.'.js';
 if (file_exists($cacheFile)) {
-  $cacheClassesDefinition = Sflm::frontend('js')->classes->parseNgnClassesDefinition(file_get_contents($cacheFile));
+  $cacheClassesDefinition = Sflm::frontend('js')->classes->parseNgnObjectsDefinition(file_get_contents($cacheFile));
   $cacheModification = date('d.m.Y H:i:s', filemtime($cacheFile));
 } else {
   $cacheClassesDefinition = [];

@@ -338,7 +338,9 @@ Ngn.Dialog = new Class({
     if (this.closed) return;
     this.startupLoading(false);
     this.dotter.stop();
-    if (!this.options.jsonRequest) this.setMessage(_response, false); else {
+    if (!this.options.jsonRequest) {
+      this.setMessage(_response, false);
+    } else {
       if (_response.title) this.setTitle(_response.title);
       this.setMessage('', false);
     }

@@ -1,0 +1,252 @@
+#treeContainer {
+height: 70px;
+min-width: /*275px*/ 150px;
+max-width: 500px;
+width: 100%;
+position: relative;
+padding-left: 0px;
+}
+.treeShade.loader {
+background: #FFFFFF url(/i/img/black/loader2.gif) no-repeat top right;
+opacity: 0.5;
+}
+#treeContainer.loader {
+background: url(/i/img/black/loader2.gif) no-repeat top right;
+}
+#treeMenu {
+padding: 2px 0px 1px 7px;
+border-bottom: 1px solid #CCCCCC;
+background: #FFFFFF;
+}
+
+/*==GLOBAL==*/
+.ngn-tree-wrapper {
+width: 100%;
+height: 100%;
+margin: 0;
+overflow-y: auto;
+overflow-x: hidden;
+font-family: sans-serif;
+font-size: 11px;
+line-height: 18px; /******Tree node height*****/
+white-space: nowrap;
+cursor: default;
+border-bottom: 1px solid #CCC;
+}
+.ngn-tree-bg {
+width: 100%;
+height: 100%;
+position: absolute;
+overflow: hidden;
+}
+.ngn-tree-bg-container {
+width: 100%;
+display: none;
+}
+.ngn-tree-bg-node {
+width: 100%;
+height: 18px;
+}
+.ngn-tree-bg-selected {
+background-color: #dcd7ab;
+}
+.ngn-tree-wrapper:focus {
+outline: 0;
+}
+.ngn-tree-wrapper span {
+padding-bottom: 2px;
+padding-top: 2px;
+cursor: inherit;
+}
+.ngn-tree-children {
+padding-left: 18px;
+width: 18px;
+}
+.ngn-tree-node {
+width: 18px;
+background: url('/i/img/tree/line.gif') repeat-y 8px 0px;
+}
+.ngn-tree-node-last {
+background: url('/i/img/tree/line.gif') no-repeat 8px 0px;
+}
+.ngn-tree-name {
+cursor: default;
+overflow: hidden;
+margin-left: 4px;
+}
+.ngn-tree-name a {
+color: red;
+}
+.ngn-tree-name a:hover {
+color: blue;
+}
+.ngn-tree-node-wrapper {
+background: url('/i/img/tree/horizontal-line.gif') no-repeat 9px center;
+}
+
+/*==GADJETS==*/
+.ngn-tree-gadjet {
+background-image: url('/i/img/tree/gadjets.gif');
+padding-right: 16px;
+z-index: 1;
+overflow: hidden;
+background-repeat: no-repeat;
+cursor: default;
+}
+.ngn-tree-gadjet-none {
+background: none;
+}
+.ngn-tree-gadjet-minus {
+background-position: 0 50%;
+}
+.ngn-tree-gadjet-plus {
+background-position: -18px 50%;
+}
+.ngn-tree-gadjet-hover .ngn-tree-gadjet-minus {
+background-position: -54px 50%;
+}
+
+.ngn-tree-gadjet-hover .ngn-tree-gadjet-plus {
+background-position: -72px 50%;
+}
+/*.ngn-tree-gadjet-hover {
+background-image: url('/i/img/tree/gadjets-hover.gif');
+}*/
+
+/*==ICONS==*/
+.ngn-tree-icon {
+padding-right: 18px;
+background-position: 0 50%;
+background-repeat: no-repeat;
+cursor: inherit;
+}
+.ngn-tree-open-icon {
+background-image: url('/i/img/tree/openicon.gif')
+}
+.ngn-tree-close-icon {
+background-image: url('/i/img/tree/closeicon.gif')
+}
+.ngn-tree-loader-open-icon, .ngn-tree-loader-close-icon {
+background-image: url('/i/img/tree/mootree_loader.gif');
+}
+.ngn-tree-book-icon {
+background-image: url('/i/img/tree/book_icon.gif');
+}
+.ngn-tree-file-icon {
+background-image: url('/i/img/tree/file.gif');
+}
+.ngn-tree-bin-open-icon {
+background-image: url('/i/img/tree/bin_open_icon.gif');
+}
+.ngn-tree-bin-close-icon {
+background-image: url('/i/img/tree/bin_close_icon.gif');
+}
+.ngn-tree-tag-open-icon {
+background-image: url('/i/img/tree/tag_open.gif');
+}
+.ngn-tree-tag-close-icon {
+background-image: url('/i/img/tree/tag_close.gif');
+}
+.ngn-tree-folder-close-icon {
+background-image: url('/i/img/tree/folder_close.png')
+}
+.ngn-tree-folder-open-icon {
+background-image: url('/i/img/tree/folder_open.png')
+}
+.ngn-tree-page-icon {
+background-image: url('/i/img/tree/page.png')
+}
+
+/*==SELECTION==*/
+.ngn-tree-node-selected .ngn-tree-name {
+background-color: #0052BD;
+color: #fff;
+}
+.ngn-tree-hover-node .ngn-tree-name {
+text-decoration: underline
+}
+
+/*==DnD==*/
+.ngn-tree-pointer {
+height: 1px;
+overflow: hidden;
+position: absolute;
+background-image: url('/i/img/tree/1.gif');
+background-repeat: repeat-x;
+background-color: #292fef;
+}
+.ngn-tree-ghost {
+background-color: #fff;
+border: solid 2px #e8e8f7;
+padding-left: 2px;
+z-index: 400;
+}
+.ngn-tree-ghost span {
+padding-top: 2px;
+padding-bottom: 2px;
+}
+.ngn-tree-ghost .ngn-tree-node-wrapper {
+background: none;
+}
+
+.ngn-tree-ghost span.ngn-tree-text {
+padding-top: 1px;
+padding-bottom: 1px;
+}
+.ngn-tree-ghost-icon {
+padding-left: 16px;
+background-color: #fff;
+background-repeat: no-repeat;
+background-image: url('/i/img/tree/dropzone.gif');
+}
+.ngn-tree-ghost-after {
+background-position: -64px 2px;
+}
+.ngn-tree-ghost-before {
+background-position: -48px 2px;
+}
+.ngn-tree-ghost-between {
+background-position: -16px 2px;
+}
+.ngn-tree-ghost-inside {
+background-position: -0px 2px;
+}
+.ngn-tree-ghost-notAllowed {
+background-position: -32px 2px;
+}
+.ngn-tree-drag-current {
+background-color: #cfcfd8;
+}
+.ngn-tree-replace {
+background-color: #99c8fb;
+}
+
+/*==CHECKBOX==*/
+.ngn-tree-checkbox {
+padding-left: 18px;
+}
+.ngn-tree-node-checked, .ngn-tree-node-checked .ngn-tree-checkbox {
+background: url('/i/img/tree/checked.gif') center 2px no-repeat;
+}
+.ngn-tree-node-unchecked, .ngn-tree-node-unchecked .ngn-tree-checkbox {
+background: url('/i/img/tree/unchecked.gif') center 2px no-repeat;
+}
+.ngn-tree-node-checked-selected {
+background: url('/i/img/tree/checked_selected.gif') center 2px no-repeat;
+}
+.ngn-tree-node-unchecked-selected {
+background: url('/i/img/tree/unchecked_selected.gif') center 2px no-repeat;
+}
+
+/*==RENAME==*/
+.ngn-tree-rename {
+display: inline;
+line-height: 18px;
+height: 18px;
+cursor: default;
+overflow: hidden;
+font-family: sans-serif;
+font-size: 11px;
+padding: 1px 0;
+border: solid 1px black;
+}

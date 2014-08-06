@@ -1,16 +1,20 @@
 <?php
 
-class MifTree {
-  
+/**
+ * Structure generator for client-side Ngn.Tree class
+ */
+class NgnTree {
+
   protected $childrenKey = 'childNodes';
-  protected $allowedDataParams = ['id'/*, 'title'*/];
+  protected $allowedDataParams = ['id' /*, 'title'*/];
   protected $data;
-  
+
   function node(array $data = []) {
+    if (empty($data['title'])) $data['title'] = '{empty}';
     $node = [
       'property' => [
-        'id' => $data['id'], // необходимо для StateStorage'а
-        'name' => $data['title'] //. " ({$data['id']})",
+        'id'   => $data['id'],
+        'name' => $data['title']
       ]
     ];
     $this->setNodeType($node, $data);
@@ -23,59 +27,57 @@ class MifTree {
     }
     return $node;
   }
-  
+
   protected function setNodeType(array &$node, array $data) {
     $node['type'] = !empty($data[$this->childrenKey]) ? 'folder' : 'page';
   }
-  
+
   protected function setNodeCls(array &$node, array $data) {
   }
-  
+
   function setData(array $data) {
     $this->data = $data;
     return $this;
   }
-  
-  function getTree($forest = true) {
-    $root = $this->node([
-      'id' => 0,
+
+  protected function root() {
+    return $this->node([
+      'id'    => 0,
       'title' => 'root'
     ]);
-    $this->setChildren($root, $this->data);
-    return $forest ? $root['children'] : $root;
+  }
+
+  function getTree($forest = true) {
+    $root = $this->root();
+    if (!empty($this->data)) $this->setChildren($root, $this->data);
+    return $forest ? [$root] : $root;
   }
 
   /**
-   * @param   array   Массив, в который будут записаны данные для узла в JSON
-   * @param   array   Массив с исходными данными узлов
+   * @param array $node Массив, в который будут записаны данные для узла в client-формате
+   * @param array $nodesData Массив с исходными данными узлов
    */
   function setChildren(array &$node, array $nodesData) {
     $n = 0;
     foreach ($nodesData as $v) {
-      if (empty($v['title'])) $v['title'] = '{empty}';
       $children[$n] = $this->node($v);
-      if (!empty($v[$this->childrenKey])) {
-        $this->setChildren($children[$n], $v[$this->childrenKey]);
-      }
+      if (!empty($v[$this->childrenKey])) $this->setChildren($children[$n], $v[$this->childrenKey]);
       $n++;
     }
     $node['children'] = isset($children) ? $children : [];
   }
-  
+
   private function addChildren(array &$node, array &$data) {
     $node['children'][] = $this->node($data['title']);
   }
-  
-  //////////////////// Database Functions //////////////////////
 
   /**
-   * @static
-   * @param DbTreeInterface tree
-   * @param integer
-   * @param integer
-   * @param integer
-   * @param string inside/before/after
-   * @param null $whereParams
+   * @param DbTreeInterface $tree
+   * @param $table
+   * @param integer $id
+   * @param integer $toId
+   * @param string $where
+   * @param array $whereParams
    */
   static function move(DbTreeInterface $tree, $table, $id, $toId, $where = 'after', array $whereParams = null) {
     if ($where == 'inside') {
@@ -87,11 +89,13 @@ class MifTree {
         ORDER BY oid DESC
         LIMIT 1");
       $oid++;
-    } elseif ($where == 'before') {
+    }
+    elseif ($where == 'before') {
       $parentId = $tree->getParentId($toId);
       $oid = db()->selectCell("SELECT oid FROM $table WHERE id=?d", $toId);
       $oid--;
-    } else {
+    }
+    else {
       $parentId = $tree->getParentId($id);
       $oid = db()->selectCell("SELECT oid FROM $table WHERE id=?d", $toId);
       $oid++;
@@ -102,7 +106,5 @@ class MifTree {
     foreach ($whereParams as $k => $v) $cond->addF($k, $v);
     DbShift::sort($table, $cond);
   }
-
-
 
 }
