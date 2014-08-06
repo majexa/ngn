@@ -8,21 +8,21 @@ class AdminRouter extends Router {
   /**
    * Текущий модуль администрирования
    *
-   * @var strgin
+   * @var string
    */
   protected $module;
 
   /**
    * Текущий каталог модуля администрирования
    *
-   * @var strgin
+   * @var string
    */
   protected $moduleSubfolder;
 
   protected $allowedAdminModules;
 
   protected function getFrontendName() {
-    return 'admin';
+    return 'default';
   }
 
   function _getController() {

@@ -292,7 +292,6 @@ class Auth {
   }
 
   static function getAll() {
-
     return ($r = self::setAuth()) ? $r->r : false;
   }
 

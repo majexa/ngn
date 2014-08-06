@@ -28,11 +28,7 @@ class SflmFrontendJs extends SflmFrontend {
 
   function addObject($name, $source = 'direct', $strict = false) {
     if ($this->stored) throw new Exception("Can't add after frontend was stored. Reset or rerun frontend");
-    $this->classes->addObject($name, $source, function($source) use ($name, $strict) {
-      $s = "Class '$name' from '$source' not found";
-      if ($strict) throw new Exception($s);
-      $this->extraCode = "\n/*----------|$s|----------*/\n";
-    });
+    $this->classes->addObject($name, $source, null, $strict);
   }
 
   /**
@@ -41,6 +37,13 @@ class SflmFrontendJs extends SflmFrontend {
    */
   function exists($str) {
     return Arr::strExists(Sflm::frontend('js')->getPaths(), $str);
+  }
+
+  protected function getStaticPaths() {
+    return $this->base->getPaths('core', true);
+    //$staticPaths = parent::getStaticPaths();
+    //foreach ($staticPaths as $path) $this->classes->processPath($path);
+    //return $staticPaths;
   }
 
 }

@@ -1,49 +1,35 @@
 Ngn.TreeEdit = new Class({
 
   Implements: [Events, Options],
-  
+
   options: {
     id: 'te',
     enableStorage: true,
     onTreeLoad: null,
-    folderOpenIcon: 'mif-tree-folder-open-icon',  // default css class open icon
-    folderCloseIcon: 'mif-tree-folder-close-icon', // default css class close icon
-    pageIcon: 'mif-tree-page-icon',  // default css class open icon
+    folderOpenIcon: 'ngn-tree-folder-open-icon',  // default css class open icon
+    folderCloseIcon: 'ngn-tree-folder-close-icon', // default css class close icon
+    pageIcon: 'ngn-tree-page-icon',  // default css class open icon
     mifTreeOptions: {},
     activeIfSelected: ['rename', 'delete']
     // buttons: element container with buttons
   },
-  
-  /**
-   * @param mixed
-   *          This argument can be an Element, an array of Elements, or a
-   *          selector
-   * @param mixed
-   *          -"-
-   */
+
   initialize: function(container, options) {
     this.container = $(container) || container;
     this.containerInitHtml = this.container.get('html');
     this.setOptions(options);
-    this.eButtons = this.options.buttons ?
-      $(this.options.buttons) || this.options.buttons :
-      false;
+    this.eButtons = this.options.buttons ? $(this.options.buttons) || this.options.buttons : false;
     this.initUrl();
-    this.
-      addEvent('createComplete', this.fireEvent.pass('update', this)).
-      addEvent('moveComplete', this.fireEvent.pass('update', this)).
-      addEvent('renameComplete', this.fireEvent.pass('update', this)).
-      addEvent('deleteComplete', this.fireEvent.pass('update', this));
-    
+    this.addEvent('createComplete', this.fireEvent.pass('update', this)).addEvent('moveComplete', this.fireEvent.pass('update', this)).addEvent('renameComplete', this.fireEvent.pass('update', this)).addEvent('deleteComplete', this.fireEvent.pass('update', this));
     this.addEvent('dataLoad', function() {
-      (function () {
+      (function() {
         var s = this.container.getSize();
         this.eTreeShade = new Element('div', {
           'class': 'treeShade',
           styles: {
             'z-index': 1000,
-            'width': s.x+'px',
-            'height': s.y+'px',
+            'width': s.x + 'px',
+            'height': s.y + 'px',
             'position': 'absolute',
             'top': '0px',
             'left': '0px',
@@ -54,7 +40,7 @@ Ngn.TreeEdit = new Class({
       }.bind(this)).delay(10);
     }.bind(this));
   },
-  
+
   loading: function(flag) {
     if (!this.eTreeShade) {
       flag ? this.container.addClass('loader') : this.container.removeClass('loader');
@@ -70,19 +56,19 @@ Ngn.TreeEdit = new Class({
       this.eTreeShade.removeClass('loader');
     }
   },
-  
-  getMifTreeOptions: function() {
+
+  getTreeOptions: function() {
     return {
       id: this.options.id || 'engine',
       container: this.container, // tree container
       forest: true,
       initialize: function(disableDragging) {
-        //new Mif.Tree.KeyNav(this);
-        new Mif.Tree.Drag(this);
+        //new Ngn.Tree.KeyNav(this);
+        new Ngn.Tree.Drag(this);
       },
       types: {// node types
         folder: {
-          openIcon: this.options.folderOpenIcon, 
+          openIcon: this.options.folderOpenIcon,
           closeIcon: this.options.folderCloseIcon
         },
         page: {
@@ -93,21 +79,17 @@ Ngn.TreeEdit = new Class({
       height: 18 // node height
     };
   },
-  
-  init: function() {
-    //this.defaults.openIcon = this.options.folderOpenIcon;
-    //this.defaults.closeIcon = this.options.folderCloseIcon;
 
-    this.tree = new Mif.Tree($merge(this.getMifTreeOptions(), this.options.mifTreeOptions));
-    
-    this.tree.wrapper.addEvent('click', function(e){
-      if (e.target == this.tree.wrapper)
-        this.tree.unselect();
+  init: function() {
+    // this.defaults.openIcon = this.options.folderOpenIcon;
+    // this.defaults.closeIcon = this.options.folderCloseIcon;
+    this.tree = new Ngn.Tree($merge(this.getTreeOptions(), this.options.mifTreeOptions));
+    this.tree.wrapper.addEvent('click', function(e) {
+      if (e.target == this.tree.wrapper) this.tree.unselect();
     }.bind(this));
-    
     this.tree.addEvent('move', function(from, to, where) {
       this.loading(true);
-      new Request({
+      new Ngn.Request({
         url: this.url + '?a=ajax_move',
         onSuccess: function() {
           this.loading(false);
@@ -115,16 +97,15 @@ Ngn.TreeEdit = new Class({
           this.fireEvent('moveComplete');
         }.bind(this)
       }).GET({
-        id: from.data.id,
-        toId: to.data.id,
-        where: where
-      });
+          id: from.data.id,
+          toId: to.data.id,
+          where: where
+        });
     }.bind(this));
-    
-    this.tree.addEvent('rename', function(node, newName, oldName){
+    this.tree.addEvent('rename', function(node, newName, oldName) {
       if (newName == oldName) return;
       this.loading(true);
-      new Request({
+      new Ngn.Request({
         url: this.url + '?a=ajax_rename',
         onSuccess: function() {
           this.loading(false);
@@ -132,15 +113,14 @@ Ngn.TreeEdit = new Class({
           this.fireEvent('renameComplete', node);
         }.bind(this)
       }).GET({
-        id: node.data.id,
-        title: newName
-      });
+          id: node.data.id,
+          title: newName
+        });
     }.bind(this));
-    
-    this.tree.addEvent('remove', function(node, newName, oldName){
+    this.tree.addEvent('remove', function(node, newName, oldName) {
       if (!node.data) return;
       this.loading(true);
-      new Request({
+      new Ngn.Request({
         url: this.url + '?a=ajax_delete',
         onComplete: function(r) {
           this.loading(false);
@@ -148,27 +128,22 @@ Ngn.TreeEdit = new Class({
           this.fireEvent('deleteComplete', node);
         }.bind(this)
       }).GET({
-        id: node.data.id
-      });
+          id: node.data.id
+        });
     }.bind(this));
-    
     this.tree.addEvent('add', function(node, current, where) {
       this.select(node);
     });
     this.bindButtons();
     this.toggleButtons();
     //this.initCollapseButtons();
-
-    // storage
-    if (this.options.enableStorage)
-      this.stateStorage = new Ngn.TreeStateStorage(this.tree);
-    
+    if (this.options.enableStorage) this.stateStorage = new Ngn.TreeStateStorage(this.tree);
     this.initLoadEvents();
     this.loadFromStorage() || this.load();
     return this;
   },
-  
-  getMifDragOptions: function() {
+
+  getTreeDragOptions: function() {
     return {};
   },
 
@@ -176,13 +151,13 @@ Ngn.TreeEdit = new Class({
     if (!confirm('Вы уверены?')) return false;
     this.tree.selected.remove();
   },
-  
+
   add: function() {
     var title = prompt('Введите название');
     if (!title) return;
     this.create(title);
   },
-  
+
   create: function(title, action, data) {
     if (!$defined(action)) action = 'create';
     if (!$defined(data)) data = {};
@@ -205,43 +180,44 @@ Ngn.TreeEdit = new Class({
         this.fireEvent('createComplete');
       }.bind(this)
     }).GET($merge({
-      title: title,
-      parentId: where == 'inside' ? current.data.id : 0
-    }, data));
+        title: title,
+        parentId: where == 'inside' ? current.data.id : 0
+      }, data));
   },
-  
+
   storeTreeData: function(data) {
     if (!this.options.enableStorage) return;
     Ngn.localStorage.json.set(this.options.id + 'tree', data);
   },
-  
+
   restoreState: function(data) {
     if (this.stateStorage) this.stateStorage.restore();
   },
-  
+
   getStoredTreeData: function() {
     if (!this.options.enableStorage) return false;
     return Ngn.localStorage.json.get(this.options.id + 'tree');
   },
-  
+
   removeStoredTreeData: function() {
-    if (!this.options.enableStorage) return;
-    return localStorage.removeItem(this.options.id + 'tree');
+    if (!this.options.enableStorage) return false;
+    return Ngn.localStorage.removeItem(this.options.id + 'tree');
   },
-  
+
   // выполняется в самом начале один раз
   initLoadEvents: function() {
     this.addEvent('dataLoad', function() {
       this.restoreState();
     });
-    this.tree.addEvent('load', function(data){
+    this.tree.addEvent('load', function(data) {
       this.fireEvent('dataLoad', data);
       this.storeTreeData(data);
       this.loading(false);
     }.bind(this));
   },
-  
+
   loadFromStorage: function() {
+    return false; // temporary disabled
     var data = this.getStoredTreeData();
     if (data) {
       this.tree.load({ json: data });
@@ -250,21 +226,21 @@ Ngn.TreeEdit = new Class({
     }
     return false;
   },
-  
+
   load: function() {
     this.loading(true);
     this.tree.load({
       url: this.url + '?a=json_getTree'
     });
   },
-  
+
   reload: function() {
     this.loading(true);
     this.tree.reload({
       url: this.url + '?a=json_getTree'
     });
   },
-  
+
   toggleAll: function(state) {
     if (this.eBtnToggle) {
       if (state) {
@@ -280,24 +256,24 @@ Ngn.TreeEdit = new Class({
     }
     this._toggleAll(state);
   },
-  
+
   _toggleAll: function(state) {
     this.toggleState = state;
-    this.tree.root.recursive(function(){
+    this.tree.root.recursive(function() {
       this.toggle(state);
     });
   },
-  
+
   openFirstRoot: function() {
     var ch = this.tree.root.getChildren();
     if (!ch[0]) return;
     ch[0].toggle(true);
   },
-  
+
   buttonEls: {},
   buttons: {},
   activeIfNodeSelected: [],
-  
+
   createButton: function(name, eBtn, func) {
     if (!eBtn) return;
     this.buttons[name] = new Ngn.Btn(eBtn, func);
@@ -306,37 +282,33 @@ Ngn.TreeEdit = new Class({
   bindButtons: function() {
     if (!this.eButtons) return false;
     this.createButton('add', this.eButtons.getElement('a[class~=add]'), this.add.bind(this));
-    
     this.createButton('rename', this.eButtons.getElement('a[class~=rename]'), function() {
       if (!this.tree.selected.parentNode) return; // значит это дерево, а не нод
       if (this.tree.selected) this.tree.selected.rename();
     }.bind(this));
-    
     this.createButton('delete', this.eButtons.getElement('a[class~=delete]'), function() {
       if (this.tree.selected) this.remove();
     }.bind(this));
-    
     this.createButton('toggle', this.eButtons.getElement('a[class~=toggle]'), function() {
       this.toggleAll(!this.toggleState);
     }.bind(this));
-    
     return true;
   },
-  
+
   toggleButton: function(name, flag) {
     if (!$defined(this.buttons[name])) return;
     this.buttons[name].toggleDisabled(flag);
   },
-  
+
   toggleButtons: function() {
     for (var name in this.buttons) this.toggleButton(name, false);
     this.tree.addEvent('selectChange', function(node) {
       // Включаем, если существует выбранный нод
-      for (var i=0; i<this.options.activeIfSelected.length; i++)
+      for (var i = 0; i < this.options.activeIfSelected.length; i++)
         this.toggleButton(this.options.activeIfSelected[i], this.tree.selected ? true : false);
     }.bind(this));
   },
-  
+
   switchButtons: function(flag) {
     for (var i in this.buttons) this.buttons[i].toggleDisabled(flag);
   },
@@ -345,9 +317,9 @@ Ngn.TreeEdit = new Class({
    * @todo Переместить в Dropdowner
    */
   rebuildButtons: function() {
-    if (this.buttonsWidth > this.eButtons.getSizeWithoutPadding().x-this.buttonWidth) {
+    if (this.buttonsWidth > this.eButtons.getSizeWithoutPadding().x - this.buttonWidth) {
       var btns = this.eButtons.getElements('.iconBtn:not(.hidden,.down)');
-      btns[btns.length-1].addClass('hidden');
+      btns[btns.length - 1].addClass('hidden');
       Elements.from('<a href="#" class="iconBtn down"><i></i></a>')[0].inject(this.eButtons.getElement('.clear'), 'before');
       this.initButtonsWidth();
     }
@@ -367,17 +339,17 @@ Ngn.TreeEdit = new Class({
   initButtonsWidth: function() {
     this.buttonsWidth = 0;
     var btns = this.eButtons.getElements('.iconBtn:not(.hidden)');
-    for (var i=0; i<btns.length; i++) this.buttonsWidth += btns[i].getSizeWithMargin().x;
+    for (var i = 0; i < btns.length; i++) this.buttonsWidth += btns[i].getSizeWithMargin().x;
   },
 
   initUrl: function() {
     if (!this.options.actionUrl) throw new Ngn.EmptyError('this.options.actionUrl');
     this.url = this.options.actionUrl;
   },
-  
+
   getContextMenu: function() {
     return false;
   }
-  
+
 });
 

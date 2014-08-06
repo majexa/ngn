@@ -26,6 +26,12 @@ text-decoration: none;
 cursor: pointer;
 border-bottom: 1px dotted;
 }
+.pseudoLink > span {
+border-bottom: 1px dotted #009;
+}
+.pseudoLink:hover > span {
+border-bottom: 1px dotted #000;
+}
 .iconsSet .pseudoLink {
 border-bottom: none;
 }
@@ -53,10 +59,10 @@ color: #AFAFAF;
 color: #555555;
 }
 .dgray, .dgray a {
-color: #666666 !important;
+color: #666 !important;
 }
-.dgray a:hover, a.dgray:hover {
-color: #000000 !important;
+.dgray a:hover:not(.nonActive), a.dgray:hover:not(.nonActive) {
+color: #000 !important;
 }
 input {
 box-sizing: border-box;

@@ -1,17 +1,7 @@
 <?php
 
-/**
- * Page Actions
- * Контроллер вывода страницы.
- * Что делает:
- * 1. init() - вызывается до любых действий, осуществляемых в контроллере
- * 2. action() - осуществляет действия в зависимости от значения $this->req->r['action'] или параметров,
- *    заробранных Req'ом
- * 3. defaultAction() - вызывается если $this->isDefaultLayout = true и подготавливает данные вывода шаблона
- *
- */
 abstract class CtrlCommon {
-use Options;
+  use Options, PartialJobCtrl;
 
   /**
    * Массив с данными для шаблона
@@ -76,7 +66,10 @@ use Options;
    * Экшены с этими префиксами будут отключать вывод главного шаблона
    */
   public $noLayoutPrefixes = [
-    'ajax', 'json', 'rss', 'xml'
+    'ajax',
+    'json',
+    'rss',
+    'xml'
   ];
 
   /**
@@ -131,27 +124,7 @@ use Options;
    */
   protected $html2ajaxActions = [];
 
-  public $tplTrace = [];
-
-  /**
-   * @var Router
-   */
-  public $router;
-
-  /**
-   * @var Req
-   */
-  public $req;
-
-  /**
-   * @var TT
-   */
-  public $tt;
-
-  /**
-   * @var TtPath
-   */
-  public $path;
+  public $tplTrace = [], $router, $req, $tt, $path;
 
   function __construct(Router $router, array $options = []) {
     $this->router = $router;
@@ -175,10 +148,10 @@ use Options;
   }
 
   function __call($method, array $param = []) {
-    foreach ($this->subControllers as $oSubPa) {
-      if (is_callable([$oSubPa, $method])) {
-        if ($oSubPa->disable) return;
-        return call_user_func_array([$oSubPa, $method], $param);
+    foreach ($this->subControllers as $subCtrl) {
+      if (is_callable([$subCtrl, $method])) {
+        if ($subCtrl->disable) return;
+        return call_user_func_array([$subCtrl, $method], $param);
       }
     }
     if (method_exists($this, $method)) {
@@ -189,14 +162,9 @@ use Options;
     }
   }
 
-  private function callDirect($method, array $param = []) {
-    call_user_func_array([$this, $method], $param);
-  }
-
   function beforeAction() {
     if ($this->error404) return;
     $this->initParams();
-    $this->setTheme();
     $this->setAuthUserId();
     $this->paramActionN = $this->getParamActionN();
     $this->addSubControllers();
@@ -218,14 +186,6 @@ use Options;
 
   public $actionResult = null;
 
-  /**
-   * Конструктор
-   *
-   * @param mixed   Все данные текущей страницы
-   * @param array   Параметры запроса
-   * @param string  Шаблон вывода по умолчанию
-   * @param string  Действие
-   */
   function dispatch() {
     if ($this->error404) return $this;
     $this->beforeAction();
@@ -239,9 +199,6 @@ use Options;
     return $this;
   }
 
-  protected function setTheme() {
-  }
-
   protected function beforeInit() {
   }
 
@@ -251,10 +208,9 @@ use Options;
   protected $extendTplNames = [];
 
   /**
-   * Определяем имя файла, который будет добавлять дополнительные
-   * данные в $this->d
+   * Определяем имя файла, который будет добавлять дополнительные данные в $this->d
    *
-   * @param   string  Имя файла
+   * @param string $name Имя файла
    */
   protected function setExtendTplName($name) {
     $this->extendTplNames[] = $name;
@@ -287,11 +243,7 @@ use Options;
         if (is_string($this->json)) return $this->json;
         if ($this->actionDisabled) $this->json['actionDisabled'] = true;
         if (Sflm::frontendName()) {
-          if (($deltaUrl = Sflm::frontend('js')->getDeltaUrl())) {
-            //die2(222);
-            LogWriter::str('delta', $deltaUrl);
-            $this->json['sflJsDeltaUrl'] = $deltaUrl;
-          }
+          if (($deltaUrl = Sflm::frontend('js')->getDeltaUrl())) $this->json['sflJsDeltaUrl'] = $deltaUrl;
           if (($deltaUrl = Sflm::frontend('css')->getDeltaUrl())) $this->json['sflCssDeltaUrl'] = $deltaUrl;
         }
         return json_encode($this->json);
@@ -311,11 +263,6 @@ use Options;
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
-    /*
-    if (preg_match_all('/<script>(.*)<\/script>/s', $html, $m)) {
-      foreach ($m[1] as $code) Sflm::frontend('js')->classes->processCode($code, 'inline');
-    }
-    */
     $this->d['processTime'] = getProcessTime();
     return $html;
   }
@@ -413,7 +360,7 @@ use Options;
       // Экшн из $this->req->r'а имеет приемственность, поэтому, если он определём,
       // переопределяем полюбому
       if ( /*! $this->action and */
-        isset($this->req->r['action'])
+      isset($this->req->r['action'])
       ) {
         if (empty($this->req->r['action'])) throw new EmptyException("\$this->req->r['action']");
         $this->setAction($this->req->r['action']);
@@ -441,7 +388,7 @@ use Options;
   }
 
   /**
-   * Должна определять $this->paramActionN
+   * Возвращает номер request-параметра, значение которого используется в качестве имени экшена
    */
   protected function getParamActionN() {
     return 1;
@@ -460,26 +407,6 @@ use Options;
 
   protected function afterAction() {
   }
-
-  /*
-  protected function formAction() {
-    $actionMethod = 'action_'.$this->action;
-    if (method_exists($this, $actionMethod)) {
-      if (($oF = $this->$actionMethod()) === null or !is_a($oF, 'Form')) return false;
-      $this->d['form'] = $oF->html();
-      if (Misc::hasPrefix('ajax_', $this->action)) $this->ajaxFormAction($oF, $updated);
-      else if ($updated) $this->redirect();
-      return true;
-    }
-    if (!Misc::hasPrefix('ajax_', $this->action)) return false;
-    $actionMethod = 'action_'.Misc::removePrefix('ajax_', $this->action);
-    if (!method_exists($this, $actionMethod)) return false;
-    $this->action = Misc::removePrefix('ajax_', $this->action);
-    if (($oF = $this->$actionMethod()) === null or !is_a($oF, 'Form')) return false;
-    $this->ajaxFormAction($oF);
-    return true;
-  }
-  */
 
   protected function ajaxFormAction(Form $form) {
     $form->disableSubmit = true;
@@ -511,7 +438,6 @@ use Options;
     if (!$this->action) throw new Exception('$this->action not defined');
     $this->checkActionParams($this->action);
     $actionMethod = 'action_'.$this->action;
-    //die2(get_class($this).'::'.$actionMethod);
     $action = $this->getActionObject($this->action);
     if ($action !== false) {
       $this->isAction = true;
@@ -531,33 +457,6 @@ use Options;
       return false;
     }
   }
-
-  /*
-  protected function action_() {
-    if ($this->error404) return;
-    if (!$this->action) throw new Exception('$this->action not defined');
-    $this->checkActionParams($this->action);
-    $actionMethod = 'action_'.$this->action;
-    if (method_exists($this, $actionMethod)) {
-      $this->isAction = true;
-      if ($this->isHtml2ajaxAction) {
-        $this->actionHtml2ajax($actionMethod);
-      } elseif ($this->isJson) {
-        $oF = $this->actionJson($actionMethod);
-        if (is_object($oF) and is_a($oF, 'Form'))
-          $this->jsonFormAction($oF);
-      } else {
-        $oF = $this->$actionMethod();
-        if ($this->isAjax and is_object($oF) and is_a($oF, 'Form'))
-          $this->ajaxFormAction($oF);
-      }
-    } else {
-      $this->hasOutput = true;
-      $this->isJson = false;
-      $this->actionNotFound($this->actionMethod);
-    }
-  }
-  */
 
   protected function actionJson($oAction, $actionMethod) {
     ini_set('html_errors', false);
@@ -590,35 +489,20 @@ use Options;
     return $r;
   }
 
-  /*
-  protected function actionHtml2ajax($actionMethod) {
-    $this->$actionMethod();
-    if (!($ajaxTpl = Arr::getSubValue($this->html2ajaxActions, 'action', $this->action, 'ajaxTpl')))
-      throw new Exception(
-        'ajaxTpl not defined in array $this->html2ajaxActions for action '.
-        $this->action.': '.getPrr($this->html2ajaxActions));
-    print $this->tt->getTpl($ajaxTpl, $this->d);
-  }
-  */
-
   protected function getActionMethod() {
     return 'action_'.$this->action;
   }
 
   protected function actionNotFound($actionMethod) {
-    throw new Error404('Method <b>'.get_class($this).'::'.$actionMethod.'</b> not found.');
+    throw new NoMethodException(get_class($this).'::'.$actionMethod);
   }
 
-  public $actionReqParams;
-
-  public $actionPathParams;
+  public $actionReqParams, $actionPathParams;
 
   /**
-   * Enter description here...
-   *
-   * @param unknown_type $action
-   * @param unknown_type $name
-   * @param unknown_type text/num/array/array2
+   * @param string $action
+   * @param string $name
+   * @param string $type text/num/array/array2
    */
   function addActionReqParam($action, $name, $type = 'text') {
     $this->actionReqParams[$action][] = [
@@ -662,12 +546,8 @@ use Options;
 
   // --------------------------------------------------------------------
 
-
   function action_default() {
   }
-
-  //  function actionNotExists() {    Err::warning("Method '".get_class($this)."->action_{$this->action}' not exists");  }
-
 
   /**
    * @manual
@@ -734,63 +614,6 @@ use Options;
     return $methods;
   }
 
-  ///////////// Actions ////////////
-
-  /*
-
-  function action_json_userSearch() {
-    if (! $mask = $this->req->r['mask'] or ! $name = $this->req->r['name'])
-      return;
-    $this->json['html'] = $this->tt->getTpl('common/searchResults',
-      array(
-        'name' => $name,
-        'items' => UsersCore::searchUser($mask)
-      ));
-  }
-
-  function action_json_pageSearch() {
-    if (! $mask = $this->req->r['mask'])
-      return;
-    $this->json['html'] = $this->tt->getTpl('common/searchResults',
-      array(
-        'name' => 'pageId',
-        'items' => Pages::searchPage($mask)
-      ));
-  }
-
-  function action_json_userAutocomplete() {
-    $mask = $this->req->rq('mask');
-    if ($mask[0] == '_') {
-      $this->json = array(
-        ALL_USERS_ID => 'Все пользователи',
-        REGISTERED_USERS_ID => 'Зарегистированые пользователи'
-      );
-      return;
-    }
-    $this->json = db()->selectCol("
-      SELECT id AS ARRAY_KEY, login FROM users WHERE
-      login LIKE ? ORDER BY id LIMIT 10",
-      $mask.'%');
-  }
-
-  function action_json_pageItemsAutocomplete() {
-    $this->json = DbModelPages::searchPage($this->req->r['mask'], "pages.controller='items'");
-  }
-
-  function action_json_pageAlbumsAutocomplete() {
-    $this->json = DbModelPages::searchPage($this->req->r['mask'], "pages.controller='albums'");
-  }
-
-  function action_json_pageAutocomplete() {
-    $this->json = DbModelPages::searchPage($this->req->r['mask']);
-  }
-
-  function action_json_folderAutocomplete() {
-    $this->json = DbModelPages::searchFolder($this->req->r['mask']);
-  }
-
-  */
-
   /**
    * Очищает экшн от layout-префиксов
    *
@@ -810,55 +633,8 @@ use Options;
     Err::warning($msg);
   }
 
-  protected function getPjLastStepKey(PartialJob $oPJ) {
-    return $oPJ->getId().'LastStep';
-  }
-
-  protected function getPjLastStep(PartialJob $oPJ) {
-    return Settings::get($this->getPjLastStepKey($oPJ));
-  }
-
-  protected function actionJsonPJ(PartialJob $oPJ) {
-    $settingsKey = $this->getPjLastStepKey($oPJ);
-    $step = $this->req->rq('step');
-    $this->json['step'] = $step;
-    if (!$step and ($_step = Settings::get($settingsKey))) {
-      // Если 0-й шаг, начинаем с последнего сохраненного шага
-      $step = $_step + 1;
-    }
-    $this->json = $oPJ->stepData($step);
-    try {
-      $oPJ->makeStep($step);
-    } catch (Exception $e) {
-      if ($e->getCode() == 1040) {
-        // Шаг больше максимально возможного.
-        // Значит по какой-то причине предыдущий шаг не был успешно завершен
-        // Завершаем
-        $oPJ->complete();
-        return;
-      }
-      // 'continueErrorCodes' - коды ошибок, для которых включена ф-я "продолжить"
-      // Если эти коды существуют
-      // Проверяем выброшеное исключение на наличие в них
-      elseif (!empty($this->req->r['continueErrorCodes']) and
-        in_array($e->getCode(), $this->req->r['continueErrorCodes'])
-      ) {
-        // И, если оно там есть, переходим к следующему шагу 
-        Settings::set($settingsKey, $step);
-      }
-      // И выбрасываем ошибку, она нам ещё понадобиться в формировании ответного json-массива
-      throw $e;
-    }
-    Settings::set($settingsKey, $step);
-  }
-
-  protected function cleanupPJStep(PartialJob $oPJ) {
-    Settings::delete($this->getPjLastStepKey($oPJ));
-  }
-
   function error404($title = 'Страница не найдена', $text = '') {
     header('HTTP/1.0 404 Not Found');
-    throw new Error404($title);
     if (!$this->hasOutput) {
       if ($this->isJson) $this->json['error'] = $title;
       else print "<h1>$title</h1>$text";
@@ -871,7 +647,8 @@ use Options;
     // вызывать не надо
     $this->afterActionDisabled = true;
     $this->error404 = [
-      'backtrace' => getBacktrace(false), $title
+      'backtrace' => getBacktrace(false),
+      $title
     ];
     $this->d['tpl'] = 'errors/404';
     $this->d['text'] = $text;

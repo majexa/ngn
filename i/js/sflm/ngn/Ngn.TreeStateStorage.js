@@ -7,7 +7,7 @@ Ngn.TreeStateStorage = new Class({
       return node.property.id;
     },
     retrieve: function(value){
-      return Mif.id(value);
+      return Ngn.Tree.id(value);
     }
   },
 

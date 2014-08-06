@@ -1,8 +1,8 @@
 <?php
 
 return [
-  'i/css/common/autocompleter.css',
   'cp',
+  'i/css/common/autocompleter.css',
   'i/css/admin/panel.css',
   'i/css/admin/ddo.css',
   'i/css/admin/ddFilters.css',

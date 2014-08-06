@@ -101,6 +101,10 @@ class Sflm {
     }
   }
 
+  static function getCode($file) {
+    return preg_replace('!/\*.*?\*/!s', '', file_get_contents($file));
+  }
+
 }
 
 Sflm::$strictMode = IS_DEBUG;

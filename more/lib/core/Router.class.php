@@ -1,9 +1,5 @@
 <?php
 
-
-define('DISP_TYPE_TPL_BY_PATH', 1);
-define('DISP_TYPE_DB_TREE_BY_PATH', 2);
-
 abstract class Router {
 use Options;
 
@@ -37,18 +33,18 @@ use Options;
 
   protected function init() {
     $this->headers();
-    if (($frontend = $this->getFrontendName())) Sflm::setFrontendName($frontend, true);
     if ($this->isDb) {
       $this->session();
       $this->auth();
     }
+    if (($frontend = $this->getFrontendName())) Sflm::setFrontendName($frontend, true);
   }
 
-  function dispatch() {
+  final function dispatch() {
     $this->controller = $this->getController();
     if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
     if (!is_object($this->controller)) throw new Exception('Controller not initialized');
-    // В этом месте, после диспатчинга контроллера, может произойти его подмена
+    // В этом месте, после диспатчинга контроллера, может произойти его подмена,
     // т.е. контроллер $this->controller заменит себя другим контроллером или, другими словами, передаст управление
     if (get_class($this->controller) == 'Ctrl404') {
       $this->controller->dispatch();

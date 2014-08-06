@@ -5,9 +5,9 @@ Ngn.TreeEdit.Tags = new Class({
     id: 'tags',
     enableStorage: false,
     actionUrl: '/admin/tags',
-    folderOpenIcon: 'mif-tree-tag-open-icon',
-    folderCloseIcon: 'mif-tree-tag-close-icon',
-    pageIcon: 'mif-tree-tag-close-icon'
+    folderOpenIcon: 'ngn-tree-tag-open-icon',
+    folderCloseIcon: 'ngn-tree-tag-close-icon',
+    pageIcon: 'ngn-tree-tag-close-icon'
   },
   
   initUrl: function() {

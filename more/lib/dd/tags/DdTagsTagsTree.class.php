@@ -194,7 +194,7 @@ class DdTagsTagsTree extends DdTagsTagsBase {
    */
   function move($id, $toId, $where = 'after') {
     $oldParentTagIds = $this->getParentIds2($id, false);
-    MifTree::move($this, $this->group->table, $id, $toId, $where, [
+    NgnTree::move($this, $this->group->table, $id, $toId, $where, [
       'strName'   => $this->group->strName,
       'groupName' => $this->group->name
     ]);

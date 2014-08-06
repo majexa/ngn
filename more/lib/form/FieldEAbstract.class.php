@@ -81,7 +81,7 @@ use Options;
   protected $staticType;
 
   /**
-   * @var Имя поля с вырезанными скобками
+   * @var string Имя поля с вырезанными скобками
    */
   protected $baseName;
 

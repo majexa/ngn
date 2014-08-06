@@ -7,7 +7,7 @@
   <?= Sflm::frontend('js')->getTags() ?>
 </head>
 <body>
-<div id="layout" class="pageName_<?= Misc::name2id($d['page']['name'])?><?= $d['settings']['defaultAction'] == 'blocks' ? ' blocksLayout' : '' ?>">
+<div class="layout pageName_<?= Misc::name2id($d['page']['name'])?><?= $d['settings']['defaultAction'] == 'blocks' ? ' blocksLayout' : '' ?>">
   <div class="container showgrid">
     <? $this->tpl($d['tpl'], $d) ?>
   </div>
