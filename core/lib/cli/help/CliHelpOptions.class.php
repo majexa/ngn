@@ -22,24 +22,33 @@ abstract class CliHelpOptions extends CliHelp {
   }
 
   protected function _getParameters(ReflectionMethod $method, $class) {
-    $options = [];
-    $options = array_merge($options, $class::$requiredOptions);
-    foreach ($options as &$v) $v = $this->option($v);
+    $options = $class::$requiredOptions;
+    foreach ($options as &$v) $v = $this->option($method, $v);
     return array_merge($options, $this->getMethodOptionsWithMeta($method));
   }
 
   protected function getMethodOptionsWithMeta(ReflectionMethod $method) {
     if (!($options = ClassCore::getDocComment($method->getDocComment(), 'options'))) return [];
     $r = [];
-    foreach (array_map('trim', explode(',', $options)) as $name) $r[] = $this->option($name);
+    foreach (array_map('trim', explode(',', $options)) as $opt) {
+      $r[] = $this->option($method, $opt);
+    }
     return $r;
   }
 
-  private function option($name) {
+  private function option(ReflectionMethod $method, $name) {
+    if ($name[0] == '@') {
+      $name = ltrim($name, '@');
+      $helpMethod = 'helpOpt_'.$name;
+      $class = $method->class;
+      $variants = $class::$helpMethod();
+    } else {
+      $variants = false;
+    }
     return [
       'name'     => $name,
       'optional' => false,
-      'variants' => false,
+      'variants' => $variants,
       'descr'    => false
     ];
   }

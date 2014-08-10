@@ -5,8 +5,8 @@ class CliHelpResultClass {
   public $class, $name;
 
   /**
-   * @param string Class
-   * @param string Command name
+   * @param string $class Class
+   * @param string $name Command name
    */
   function __construct($class, $name) {
     $this->class = $class;

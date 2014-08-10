@@ -182,10 +182,16 @@ class ClassCore {
     return clone $obj;
   }
 
+  /**
+   * @param string $str
+   * @param string $_tag
+   * @return bool|string
+   * @throws Exception
+   */
   static function getDocComment($str, $_tag) {
     if ($_tag == 'title') {
-      $str = preg_replace('/^\s*\*\s*\n/m', '', $str);
-      if (!preg_match_all('/^\s*\*\s+(?!@)([^\n]*)$/m', $str, $m)) return false;
+      $str = preg_replace('/^\s*\*\s*\n/m', '', $str); // убираем символы коммента
+      if (!preg_match_all('/^\s*\*\s+(?!@)([^\n]*)$/m', $str, $m)) return false; // если пустой
       $r = implode(' ', $m[1]);
       if (($r = trim($r))) return $r;
       return false;
@@ -196,11 +202,10 @@ class ClassCore {
       if (!empty($m[1])) return trim($m[1]);
       return false;
     } elseif ($_tag == 'param') {
-      if (!preg_match_all("/\\*\\s".$tag."\\s+([^\n]+)\n/sm", $str, $m)) return false;
-      $r = $m[1];
-      foreach ($r as &$v) {
-        if (preg_match('/(\\S+)\\s+(.+)/', $v, $m)) $v = [$m[1], $m[2]];
-      }
+      //                            @param    type          name              title
+      if (!preg_match_all("/^ *\\*\\s".$tag." +[a-zA-z|]* *\\$([a-zA-z]+) *([^\n]*)$/sm", $str, $m)) return false;
+      $r = [];
+      foreach ($m[1] as $n => $v) $r[] = [$v, $m[2][$n]];
       return $r;
     } else {
       throw new Exception("Tag '$_tag' npt realized'");
@@ -213,10 +218,6 @@ class ClassCore {
       if (in_array($trait, (new ReflectionClass($cls))->getTraitNames())) return true;
     }
     return false;
-  }
-
-  static function hasInterface($class, $interace) {
-    return in_array($interace, (new ReflectionClass($class))->getInterfaceNames());
   }
 
 }

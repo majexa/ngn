@@ -157,7 +157,7 @@ TEXT
     foreach ($methods as $method) {
       if ($method['method'][0] == '_') continue;
       $nameCmd = $name ? $name.' ' : '';
-      $rOptions = $this->renderOptions($method['options']);
+      $rOptions = $this->renderMethodOptions($method['options']);
       $rOptions = $rOptions ? ' '.$rOptions : '';
       if (!empty($method['title']) and getOS() == 'win') $method['title'] = Misc::transit($method['title'], false, false);
       if (CliHelp::$proMode) $help = '';
@@ -237,7 +237,7 @@ TEXT
 
   abstract protected function _run(CliArgs $args);
 
-  protected function renderOptions($options) {
+  protected function renderMethodOptions($options) {
     return implode(' ', array_map(function ($v) {
       return (!empty($v['optional']) ? '{'.O::get('CliColors')->getColoredString($v['name'], 'darkGray').'}' : $v['name']). //
       ($v['variants'] ? O::get('CliColors')->getColoredString("[{$v['variants']}]", 'green') : '');
@@ -250,14 +250,7 @@ TEXT
   abstract protected function getMethod(ReflectionMethod $method);
 
   protected function getOptions(ReflectionMethod $method, $class) {
-    $options = $this->_getParameters($method, $class);
-    foreach ($options as &$opt) {
-      if ($opt['name'][0] != '@' and $opt['descr'] != '@') continue;
-      $opt['name'] = Misc::removePrefix('@', $opt['name']);
-      $helpMethod = 'helpOpt_'.$opt['name'];
-      if (method_exists($class, $helpMethod)) $opt['variants'] = $class::$helpMethod();
-    }
-    return $options;
+    return $this->_getParameters($method, $class);
   }
 
   /**
@@ -266,7 +259,7 @@ TEXT
   protected $filterByCurrentClass = false;
 
   protected function getMethods($class) {
-    if (ClassCore::hasInterface($class, 'CliHelpMultiWrapper')) {
+    if ($class instanceof CliHelpMultiWrapper) {
       $class = $class::singleClass();
     }
     $methods = $this->_getMethods($class);
@@ -276,7 +269,6 @@ TEXT
       });
     }
     return array_map(function (ReflectionMethod $method) use ($class) {
-      ClassCore::getDocComment($method->getDocComment(), 'title');
       return [
         'options' => $this->getOptions($method, $class),
         'title'   => ClassCore::getDocComment($method->getDocComment(), 'title'),
