@@ -37,18 +37,18 @@ class UestSflmJs extends ProjectTestCase {
     $mtime1 = filemtime(Sflm::frontend('js')->cacheFile());
     (new FieldEPhone(['name' => 'dummy'], new Form([])))->typeJs();
     //$this->assertTrue(in_array('Ngn.Form.El.Phone', Sflm::resetFrontend('js')->classes->existingClasses));
-    //$this->assertTrue(in_array('i/js/sflm/ngn/form/Ngn.Form.El.Phone.js', Sflm::resetFrontend('js')->paths));
+    //$this->assertTrue(in_array('i/js/ngn/form/Ngn.Form.El.Phone.js', Sflm::resetFrontend('js')->paths));
     $v2 = Sflm::frontend('js')->version();
     $mtime2 = filemtime(Sflm::frontend('js')->cacheFile());
     $this->assertTrue($v1 == $v2, "v1:$v1 != v2:$v2");
     $this->assertTrue($mtime1 == $mtime2, "mtime1:$mtime1 != mtime2:$mtime2");
 
-    File::replace(NGN_PATH.'/i/js/sflm/ngn/Ngn.js', '// -- check --', '// -- che --');
+    File::replace(NGN_PATH.'/i/js/ngn/Ngn.js', '// -- check --', '// -- che --');
     Sflm::frontend('js')->store();
     $contains = (bool)strstr(Sflm::frontend('js')->code(), '// -- che --');
     $contains2 = (bool)strstr(file_get_contents(Sflm::frontend('js')->cacheFile()), '// -- che --');
     $v3 = Sflm::frontend('js')->version();
-    File::replace(NGN_PATH.'/i/js/sflm/ngn/Ngn.js', '// -- che --', '// -- check --');
+    File::replace(NGN_PATH.'/i/js/ngn/Ngn.js', '// -- che --', '// -- check --');
     $this->assertTrue($contains, 'Code does not contain new string');
     $this->assertTrue($contains2, 'Cached file does not contain new string');
     $this->assertTrue($v2 < $v3, "Version not changed after one of included files has changed");

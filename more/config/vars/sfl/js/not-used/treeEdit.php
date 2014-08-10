@@ -2,6 +2,6 @@
 
 return [
   'mifTree',
-  'i/js/sflm/ngn/Ngn.TreeStateStorage.js',
-  'i/js/sflm/ngn/Ngn.TreeEdit.js'
+  'i/js/ngn/Ngn.TreeStateStorage.js',
+  'i/js/ngn/Ngn.TreeEdit.js'
 ];

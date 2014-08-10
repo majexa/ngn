@@ -1,6 +1,6 @@
 <? // $d - Field Data ?>
 
-<script type="text/javascript" src="./i/js/sflm/ngn/Ngn.FieldSet.js"></script>
+<script type="text/javascript" src="./i/js/ngn/Ngn.FieldSet.js"></script>
 <script type="text/javascript">
 
 Ngn.cp.Dfp = new Class({

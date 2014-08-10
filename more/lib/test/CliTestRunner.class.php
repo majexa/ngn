@@ -13,10 +13,6 @@ class CliTestRunner extends CliHelpArgs {
         'name' => 'proj'
       ],
       [
-        'class' => 'TestRunnerCasper',
-        'name' => 'casper'
-      ],
-      [
         'class' => 'TestRunnerNgn',
         'name' => 'ngn'
       ],

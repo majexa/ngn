@@ -125,11 +125,11 @@ abstract class FieldEFieldSetAbstract extends FieldEAbstract {
 
   function _js() {
     $this->options['jsOptions']['rowElementSelector'] = '.hgrp';
-    Sflm::frontend('js')->addObject('Ngn.frm.FieldSet');
+    Sflm::frontend('js')->addClass('Ngn.Frm.FieldSet');
     return "
 var id = '{$this->form->id()}';
 Ngn.Form.forms[id].eForm.getElements('.type_{$this->type}').each(function(el){
-  new Ngn.frm.FieldSet(Ngn.Form.forms[id], el, ".Arr::jsObj($this->options['jsOptions']).");
+  new Ngn.Frm.FieldSet(Ngn.Form.forms[id], el, ".Arr::jsObj($this->options['jsOptions']).");
 });
 ";
   }

@@ -70,12 +70,20 @@ function output($str, $output = false, $forcePlain = true) {
 }
 
 function output2($str, $output = false, $forcePlain = true) {
-  if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'cyan').">").((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
-  LogWriter::str('output', $str);
+  outputColor($str, 'cyan', $output, $forcePlain);
 }
 
 function output3($str, $output = false, $forcePlain = true) {
-  if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").("LOG: <".(new CliColors)->getColoredString($str, 'yellow').">").((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
+  outputColor($str, 'yellow', $output, $forcePlain);
+}
+
+function outputColor($str, $color, $output = false, $forcePlain = true) {
+  if (LOG_OUTPUT === true or $output) {
+    print
+      ((R::get('plainText') or $forcePlain) ? "" : "<p>"). //
+      ("LOG: <".(new CliColors)->getColoredString($str, $color).">"). //
+      ((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
+  }
   LogWriter::str('output', $str);
 }
 

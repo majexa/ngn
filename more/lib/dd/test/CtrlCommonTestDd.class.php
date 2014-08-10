@@ -7,7 +7,7 @@ class CtrlCommonTestDd extends CtrlCammon {
   }
 
   function action_dialogForm() {
-    Sflm::frontend('js')->addObject('Ngn.Dialog.RequestForm');
+    Sflm::frontend('js')->addClass('Ngn.Dialog.RequestForm');
     $this->d['tpl'] = 'test/ddFormDialog';
   }
 

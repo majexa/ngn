@@ -7,7 +7,7 @@ class CtrlCommonTestUsers extends CtrlCammon {
   }
 
   function action_dialogAuth() {
-    Sflm::frontend('js')->addObject('Ngn.Dialog.Auth');
+    Sflm::frontend('js')->addClass('Ngn.Dialog.Auth');
     $this->d['tpl'] = 'test/authDialog';
   }
 

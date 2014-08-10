@@ -2,6 +2,6 @@
 
 return [
   's2/js/common/Ngn.TinySettings',
-  'i/js/sflm/ngn/Ngn.TinySettings.Simple.js',
-  'i/js/sflm/ngn/Ngn.TinyInit.js'
+  'i/js/ngn/Ngn.TinySettings.Simple.js',
+  'i/js/ngn/Ngn.TinyInit.js'
 ];

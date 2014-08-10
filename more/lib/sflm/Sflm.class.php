@@ -96,13 +96,23 @@ class Sflm {
 
   static function output($s) {
     if (self::$output) {
-      if (strstr($s, 'src: direct')) output3($s);
-      else strstr($s, 'src:') ? output2($s) : output($s);
+      if (strstr($s, 'Skipped')) ; //outputColor($s, 'darkGray');
+      elseif (strstr($s, 'src: direct')) outputColor($s, 'yellow');
+      else strstr($s, 'src:') ? outputColor($s, 'cyan') : output($s);
     }
   }
 
   static function getCode($file) {
-    return preg_replace('!/\*.*?\*/!s', '', file_get_contents($file));
+    return preg_replace('/\/\/(.*)/', '', preg_replace('!/\*.*?\*/!s', '', file_get_contents($file)));
+  }
+
+  static function getPath($absPath, $whyDoUWantToGetThis = null) {
+    foreach (Sflm::$absBasePaths as $folder => $absBasePath) {
+      if (Misc::hasPrefix($absBasePath, $absPath)) {
+        return $folder.Misc::removePrefix($absBasePath, $absPath);
+      }
+    }
+    throw new Exception('"'.$absPath.'" not found'.($whyDoUWantToGetThis ? ". Getting for: $whyDoUWantToGetThis" : ''));
   }
 
 }
@@ -113,4 +123,4 @@ Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 Sflm::$absBasePaths = [
   'i' => NGN_PATH.'/i'
 ];
-Sflm::$output = false; // set true to debug
+Sflm::$output = true; // set true to debug

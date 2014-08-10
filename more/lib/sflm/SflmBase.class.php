@@ -165,19 +165,12 @@ abstract class SflmBase {
     throw new Exception("Unexpected prefix '$prefix' in path '$path'");
   }
 
-  function getPath($absPath, $whyDoUWantToGetThis = null) {
-    foreach (Sflm::$absBasePaths as $folder => $absBasePath) {
-      if (Misc::hasPrefix($absBasePath, $absPath)) {
-        return $folder.Misc::removePrefix($absBasePath, $absPath);
-      }
-    }
-    throw new Exception('"'.$absPath.'" not found'.($whyDoUWantToGetThis ? ". Getting for: $whyDoUWantToGetThis" : ''));
-  }
-
   /**
    * Возвращает абсолютный путь до скрипта
    *
-   * @param   string  Пример: "s2/css/icons.css"
+   * @param string $path Пример: "s2/css/icons.css"
+   * @return bool|string
+   * @throws Exception
    */
   function getScriptPath($path) {
     $path = Misc::clearFirstSlash($path);

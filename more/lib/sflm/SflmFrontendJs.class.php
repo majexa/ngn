@@ -26,9 +26,9 @@ class SflmFrontendJs extends SflmFrontend {
     return $this;
   }
 
-  function addObject($name, $source = 'direct', $strict = false) {
+  function addClass($name, $source = 'direct', $strict = false) {
     if ($this->stored) throw new Exception("Can't add after frontend was stored. Reset or rerun frontend");
-    $this->classes->addObject($name, $source, null, $strict);
+    $this->classes->addClass($name, $source, $strict);
   }
 
   /**
@@ -41,9 +41,6 @@ class SflmFrontendJs extends SflmFrontend {
 
   protected function getStaticPaths() {
     return $this->base->getPaths('core', true);
-    //$staticPaths = parent::getStaticPaths();
-    //foreach ($staticPaths as $path) $this->classes->processPath($path);
-    //return $staticPaths;
   }
 
 }

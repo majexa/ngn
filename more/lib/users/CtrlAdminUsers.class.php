@@ -31,7 +31,7 @@ class CtrlAdminUsers extends CtrlAdmin {
   }
 
   function action_default() {
-    Sflm::frontend('js')->classes->addObject('Ngn.Grid', 'ctrl', function() {
+    Sflm::frontend('js')->addClass('Ngn.Grid', 'ctrl', function() {
       die2('Oh Fuck =)');
     });
     $this->d['grid'] = $this->getGrid();

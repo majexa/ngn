@@ -125,9 +125,9 @@ class Form {
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);
-    Sflm::frontend('js')->addObject('Ngn.Form');
+    Sflm::frontend('js')->addClass('Ngn.Form');
     if ($this->options['placeholders']) {
-      Sflm::frontend('js')->addObject('Ngn.PlaceholderSupport');
+      Sflm::frontend('js')->addClass('Ngn.PlaceholderSupport');
       $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);
       $this->templates['input'] = str_replace('{input}', '{required}{input}', $this->templates['input']);
       $this->templates['title'] = '';
@@ -413,7 +413,7 @@ class Form {
     Dir::make(UPLOAD_PATH.'/js/cache/form');
     $file = UPLOAD_PATH.'/js/cache/form/'.$this->id().'.js';
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
-      file_put_contents($file, "Ngn.frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
+      file_put_contents($file, "Ngn.Frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
     }
     return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : filemtime($file));
   }
@@ -865,7 +865,7 @@ class Form {
    */
   protected function jsMaxLength() {
     return "
-Ngn.frm.maxLength($('{$this->id()}'), ".FieldEInput::defaultMaxLength.");
+Ngn.Frm.maxLength($('{$this->id()}'), ".FieldEInput::defaultMaxLength.");
 ";
   }
 
