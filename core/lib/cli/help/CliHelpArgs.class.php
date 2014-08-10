@@ -8,7 +8,7 @@ abstract class CliHelpArgs extends CliHelp {
 
   protected function renderClassOptions($class) {
     $params = $this->getConstructorParams($class);
-    $options = Arr::get(array_filter($params, function(ReflectionParameter $p) {
+    $options = Arr::get(array_filter($params, function (ReflectionParameter $p) {
       return $p->isOptional();
     }), 'name');
     return ($options ? ' '.O::get('CliColors')->getColoredString(implode(' ', $options), 'darkGray') : '');
@@ -16,7 +16,7 @@ abstract class CliHelpArgs extends CliHelp {
 
   protected function renderClassRequiredOptions($class) {
     $params = $this->getConstructorParams($class);
-    $options = Arr::get(array_filter($params, function(ReflectionParameter $p) {
+    $options = Arr::get(array_filter($params, function (ReflectionParameter $p) {
       return !$p->isOptional();
     }), 'name');
     return ($options ? ' '.implode(' ', $options) : '');
@@ -25,15 +25,16 @@ abstract class CliHelpArgs extends CliHelp {
   protected function _getParameters(ReflectionMethod $method, $class) {
     $params = $method->getParameters();
     $r = [];
-    $meta = ClassCore::getDocComment($method, 'param');
+    $meta = ClassCore::getDocComment($method->getDocComment(), 'param');
     for ($i = 0; $i < count($params); $i++) {
       /* @var ReflectionParameter $param */
       $param = $params[$i];
+      $variants = (isset($meta[$i][1]) and strstr($meta[$i][1], '|')) ? $meta[$i][1] : false;
       $r[] = [
         'name'     => $param->getName(),
         'optional' => $param->isOptional(),
-        'variants' => (isset($meta[$i][1]) and strstr($meta[$i][1], '|')) ? $meta[$i][1] : false,
-        'descr'    => (isset($meta[$i][1]) and !strstr($meta[$i][1], '|')) ? $meta[$i][1] : false,
+        'variants' => $variants,
+        'descr'    => $meta[$i][1],
       ];
     }
     return $r;
@@ -50,7 +51,8 @@ abstract class CliHelpArgs extends CliHelp {
       $params = array_slice($args->params, count($_constructorParams));
       $obj = $refl->newInstanceArgs($constructorParams);
       return call_user_func_array([$obj, $args->method], $params);
-    } else {
+    }
+    else {
       if (!$this->check($args)) return false;
       return call_user_func_array([new $args->class, $args->method], $args->params);
     }
