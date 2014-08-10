@@ -4,8 +4,33 @@ class TestSflmJs extends ProjectTestCase {
 
   protected function setUp() {
     Sflm::clearCache();
-    Sflm::setFrontend('js', 'admin');
+    Sflm::setFrontend('js', 'default');
   }
+
+  function test() {
+    // die2(Sflm::frontend('js')->classes->findObjectPath('Ngn.TreeEdit.Pages.Site'));
+    // Sflm::frontend('js')->addObject('Ngn.TreeEdit.Pages.Site');
+    Sflm::frontend('js')->addClass('Ngn.Dialog.TreeEdit.Pages');
+    // Sflm::frontend('js')->addObject('Ngn.Aaa.Bbb');
+    // Sflm::frontend('js')->store();
+  }
+
+  /*
+  function testValidClassesParsing() {
+    $r = Sflm::frontend('js')->classes->parseValidClasses("
+Ngn.Aaa
+Ngn.Aaa.Aaa
+Ngn.aaa.Aaa
+Ngn.aaa.aaa.aaa.Aaa
+Ngn.Aaa.Aaa.Aaa.aaa
+'Ngn.aaa.aaa.'
+Ngn.Aaa.Aaa.aaa
+Ngn.Aaa.aaa
+Ngn.aaa
+");
+    $this->assertTrue($r[3] == 'Ngn.aaa.aaa.aaa.Aaa');
+    $this->assertTrue(count($r) === 4);
+ }
 
   function testClearCache() {
     Sflm::frontend('js')->addObject('Ngn.Form');
@@ -60,9 +85,9 @@ class TestSflmJs extends ProjectTestCase {
   }
 
   function testExistsInExistingObjects() {
-    Sflm::frontend('js')->addObject('Ngn.frm');
+    Sflm::frontend('js')->addObject('Ngn.Frm');
     Sflm::setFrontend('js');
-    $this->assertTrue(in_array('Ngn.frm', Sflm::frontend('js')->classes->existingObjects));
+    $this->assertTrue(in_array('Ngn.Frm', Sflm::frontend('js')->classes->existingObjects));
   }
 
   // Ngn.sub, Ngn.sub.A to jsExistingObjects_custom
@@ -90,7 +115,8 @@ class TestSflmJs extends ProjectTestCase {
 
   function testPreloadingInTheSameFile() {
     set_time_limit(1);
-    Sflm::frontend('js')->addObject('Ngn.Tree');
+    Sflm::frontend('js')->addObject('Ngn.Preload');
   }
+  */
 
 }

@@ -4,7 +4,7 @@ class UestCasperAdmin extends ProjectTestCase {
 
   function test() {
     print `pm localProject cc test`;
-    TestRunnerCasper::runTest(PROJECT_KEY, [
+    Casper::run(PROJECT_KEY, [
       "god",
     ]);
   }

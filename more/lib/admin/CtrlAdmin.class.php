@@ -87,7 +87,7 @@ abstract class CtrlAdmin extends CtrlCp {
     }
     if (!($this->userId = Auth::get('id')) or (!Misc::isAdmin() and !Misc::isGod())) {
       $this->actionDisabled = true;
-      Sflm::frontend('js')->addObject('Ngn.Form', 'ctrl');
+      Sflm::frontend('js')->addClass('Ngn.Form', 'ctrl');
       $this->d['mainTpl'] = 'admin/auth';
     }
     else {

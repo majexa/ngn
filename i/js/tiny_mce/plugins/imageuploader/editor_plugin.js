@@ -72,7 +72,7 @@
         var dialog = new Ngn.Dialog.Form({
           url: '/default/tinyImageProp',
           onFormInit: function() {
-            Ngn.frm.objTo(this.form.eForm, $(el).getProperties('alt'));
+            Ngn.Frm.objTo(this.form.eForm, $(el).getProperties('alt'));
           },
           onSubmit: function(data) {
             updateOrInsert(data);

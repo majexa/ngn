@@ -11,8 +11,6 @@ abstract class CliHelpArgs extends CliHelp {
     $options = Arr::get(array_filter($params, function(ReflectionParameter $p) {
       return $p->isOptional();
     }), 'name');
-
-
     return ($options ? ' '.O::get('CliColors')->getColoredString(implode(' ', $options), 'darkGray') : '');
   }
 

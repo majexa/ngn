@@ -10,8 +10,8 @@ class File {
     if (file_exists($file)) unlink($file);
   }
 
-  static function getName($filepath) {
-    return preg_replace('/([^.]+)\.\w+/', '$1', basename($filepath));
+  static function getName($file) {
+    return preg_replace('/^(.+)\.[^.]+$/', '$1', basename($file));
   }
 
   static function getUnicName($folder, $ext) {

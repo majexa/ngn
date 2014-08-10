@@ -7,5 +7,5 @@ return [
   'i/js/jd/js/History.js',
   'i/js/jd/js/History.Routing.js',
   'i/js/jd/js/ReMooz.js',
-  'i/js/sflm/ngn/Ngn.FullScreenGallery.js',
+  'i/js/ngn/Ngn.FullScreenGallery.js',
 ];

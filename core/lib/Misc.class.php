@@ -698,7 +698,9 @@ class Misc {
   }
 
   static function firstIsUpper($str) {
+    if (!strlen($str)) throw new Exception("Empty string");
     $chr = mb_substr($str, 0, 1, CHARSET);
+    if (!preg_match('/\w/', $chr)) throw new Exception("'$chr' is not a letter");
     return mb_strtoupper($chr, CHARSET) == $chr;
   }
 
