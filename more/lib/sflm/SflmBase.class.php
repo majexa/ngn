@@ -156,12 +156,14 @@ abstract class SflmBase {
     $path = $p['path'];
     foreach (Sflm::$absBasePaths as $package => $absBasePath) {
       if (preg_match('/^\/?'.$package.'\//', $path)) {
-        //if (strstr($path, 'Ngn.Request')) die2([$package, $path]);
         return "$absBasePath/".Misc::removePrefix("$package/", ltrim($path, '/'));
       }
     }
     $prefix = explode('/', $path)[0];
-    if (in_array($prefix, RouterScripts::prefixes())) return $this->getScriptPath($path);
+    if (!$prefix) throw new Exception("Prefix is empty. Path: $path");
+    if (in_array($prefix, RouterScripts::prefixes())) {
+      return $this->getScriptAbsPath(Misc::removeSuffix('.php', $path));
+    }
     throw new Exception("Unexpected prefix '$prefix' in path '$path'");
   }
 
@@ -172,7 +174,7 @@ abstract class SflmBase {
    * @return bool|string
    * @throws Exception
    */
-  function getScriptPath($path) {
+  function getScriptAbsPath($path) {
     $path = Misc::clearFirstSlash($path);
     if (preg_match('/^s2\/(.*)/', $path)) {
       $path2 = preg_replace('/^s2\/(.*)/', '$1', $path);
@@ -195,7 +197,7 @@ abstract class SflmBase {
     $p = parse_url($path);
     $path = $p['path'];
     $cachePath = $this->getCachePath($path);
-    $path = $this->getScriptPath($path);
+    $path = $this->getScriptAbsPath($path);
     if (Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$cachePath)) {
       Dir::make(UPLOAD_PATH.'/'.dirname($cachePath));
       if (!empty($p['query'])) {
