@@ -24,7 +24,8 @@ class SflmJsClassPaths extends ArrayAccesseble {
     foreach (Ngn::$basePaths as $path) {
       if (($r = Dir::getFilesR($path.'/scripts/js/'))) {
         foreach ($r as $p) {
-          $class = basename('s2'.Misc::removePrefix($path.'/scripts', Misc::removeSuffix('.php', $p)));
+          $p = 's2'.Misc::removePrefix($path.'/scripts', $p);
+          $class = basename(Misc::removeSuffix('.php', $p));
           if (!SflmJsClasses::isValidClass($class)) continue;
           if (isset($this->r[$class])) throw new Exception("Class '$class' already exists in \$objectPaths. Trying to add path '$p'");
           $this->r[$class] = $p;

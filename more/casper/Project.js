@@ -1,12 +1,13 @@
 var require = patchRequire(require);
 require('mootools');
+var Rumax = require('Rumax');
 
 module.exports = new Class({
+  Implements: Rumax,
 
   initialize: function(casper) {
     this.casper = require('casper').create({
-      verbose: true,
-      logLevel: "debug"
+      verbose: true, logLevel: "debug"
     });
     if (!this.casper.cli.options.projectDir) throw new Error('option "projectDir" is required');
     this.projectDir = this.casper.cli.options.projectDir;
