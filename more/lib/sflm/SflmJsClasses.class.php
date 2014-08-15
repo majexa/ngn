@@ -176,7 +176,7 @@ class SflmJsClasses {
     return preg_replace('/(.*)\.[A-Za-z_]+/', '$1', $class);
   }
 
-  static protected function parseValidClasses($code, $prefix = '', $suffix = '') {
+  static function parseValidClasses($code, $prefix = '', $suffix = '') {
     $classes = [];
     if (preg_match_all('/'.$prefix.'(Ngn\.[A-Za-z.]+)'.$suffix.'/', $code, $m)) {
       foreach ($m[1] as $piece) {

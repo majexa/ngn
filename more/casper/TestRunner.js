@@ -4,6 +4,7 @@ var Project = require('Project');
 module.exports = new Class({
   Extends: Project,
 
+  //logLevel: 3,
   i: 0,
   callbackPrefixes: [
     'then', 'wait'
@@ -22,9 +23,17 @@ module.exports = new Class({
       console.debug(msg + "\n" + t + "--");
       this.exit();
     });
+    this.casper.setFilter("page.confirm", function(msg) {
+      return true;
+    });
     var runner = this;
     this.casper.thenUrl = function(url, callback) {
-      this.thenOpen(runner.baseUrl + '/' + url, callback);
+      this.thenOpen(runner.baseUrl + '/' + url, function() {
+        this.evaluate(function() {
+        });
+        runner.capture();
+        callback();
+      });
     };
     this.casper.waitForPageLoaded = function(callback) {
       this.wait(100, function() {
@@ -40,7 +49,6 @@ module.exports = new Class({
         this.evaluate(function() {
         });
         runner.capture();
-        console.debug('DIALOG CALLBACK');
         callback();
       });
     };
@@ -49,8 +57,19 @@ module.exports = new Class({
         this.evaluate(function() {
         });
         runner.capture();
-        console.debug('DIALOG CLOSE CALLBACK');
         callback();
+      });
+    };
+    this.casper.checkExistence = function(selector) {
+      if (!this.exists(selector)) throw new Error('"' + selector + '" selector does not exists');
+    };
+    this.casper.checkNonExistence = function(selector) {
+      if (this.exists(selector)) throw new Error('"' + selector + '" selector has not be present');
+    };
+    this.casper.fillAuthForm = function() {
+      this.fill('form#formAuth', {
+        authLogin: 'admin',
+        authPass: '1234'
       });
     };
   },
@@ -70,40 +89,44 @@ module.exports = new Class({
 
   processCmd: function(cmd) {
     var method = cmd[0];
-    var nextMethod;
-    var casperFn = this.casper[method];
-    var params = null;
-    if (typeof casperFn === 'function') {
-      console.debug('RUNNING ' + method);
-      if (this.isCallbackMethod(method)) {
-        nextMethod = this.getNextMethod();
-        params = cmd[1] !== undefined ? [cmd[1]] : [];
-        if (casperFn.length - 1 != params.length) {
-          throw new Error('method "' + method + '" must have ' + (casperFn.length - 1) + ' params. ' + params.length + ' passed instead');
-        }
-        params.push(nextMethod);
-        casperFn = casperFn.pass(params, this.casper);
-        casperFn();
-      } else {
-        if (cmd[1] !== undefined) {
-          params = [cmd[1]];
-          if (casperFn.length != params.length) throw new Error('method "' + method + '" must have ' + casperFn.length + ' params. ' + params.length + ' passed instead');
-          casperFn = casperFn.pass(params, this.casper);
-        } else {
-          casperFn = casperFn.bind(this.casper);
-        }
-        casperFn();
-        this.getNextMethod()();
-      }
+    var nextMethod, fnBind, fn;
+    if (this[method]) {
+      fn = this[method];
+      fnBind = this;
+    } else if (this.casper[method]) {
+      fn = this.casper[method];
+      fnBind = this.casper;
     } else {
-      throw new Error('Casper method "' + method + '" is absent');
+      throw new Error('Casper or TestRunner method "' + method + '" is absent');
+    }
+    var params = null;
+    this.log('Running ' + method);
+    if (this.isCallbackMethod(method)) {
+      nextMethod = this.getNextMethod();
+      params = cmd[1] !== undefined ? [cmd[1]] : [];
+      if (fn.length - 1 != params.length) {
+        throw new Error('method "' + method + '" must have ' + (fn.length - 1) + ' params. ' + params.length + ' passed instead');
+      }
+      params.push(nextMethod);
+      fn = fn.pass(params, fnBind);
+      fn();
+    } else {
+      if (cmd[1] !== undefined) {
+        params = [cmd[1]];
+        if (fn.length != params.length) throw new Error('method "' + method + '" must have ' + fn.length + ' params. ' + params.length + ' passed instead');
+        fn = fn.pass(params, fnBind);
+      } else {
+        fn = fn.bind(fnBind);
+      }
+      fn();
+      this.getNextMethod()();
     }
   },
 
   getNextMethod: function() {
     if (!this.test[this.i + 1]) {
       return function() {
-        console.debug('THERE ARE NO MORE STEPS');
+        this.log('There are no more steps', 2);
       }.bind(this);
     }
     return this.nextCmd.bind(this);
@@ -114,7 +137,7 @@ module.exports = new Class({
   },
 
   nextCmd: function() {
-    console.debug('RUNNING NEXT CMD (' + this.test[this.i + 1][0] + ')');
+    this.log('Running next cmd (' + this.test[this.i + 1][0] + ')', 2);
     this.i++;
     this.runCmd();
   }
