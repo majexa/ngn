@@ -634,6 +634,10 @@ abstract class CtrlCommon {
   }
 
   function error404($title = 'Страница не найдена', $text = '') {
+    throw new Exception($title);
+    // я думаю, это лишний механизм
+    // вполне можно было бы обойтись выкидыванием эксепшенов,
+    // а шаблоны переопределять по существующим путям
     header('HTTP/1.0 404 Not Found');
     if (!$this->hasOutput) {
       if ($this->isJson) $this->json['error'] = $title;

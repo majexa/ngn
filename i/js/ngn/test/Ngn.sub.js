@@ -1,1 +1,1 @@
-Ngn.sub = {};
+Ngn.Sub = {};

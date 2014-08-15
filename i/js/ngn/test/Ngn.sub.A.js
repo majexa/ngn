@@ -1,2 +1,2 @@
-Ngn.sub.A = new Class({
+Ngn.Sub.A = new Class({
 });

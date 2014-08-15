@@ -163,15 +163,6 @@ Array.prototype.get = function(k, v) {
   return false;
 };
 
-/*
- Array.prototype.getIndex = function(k, v) {
- for (var i=0; i<this.length; i++) {
- if (this[i][k] == v) return i;
- }
- return false;
- };
- */
-
 Arr = {};
 Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists in an array
   var found = false, key, strict = !!strict;
@@ -183,15 +174,6 @@ Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists in a
   }
   return found;
 }
-
-/*
- Array.prototype.min = function() {
- var min = this[0];
- var len = this.length;
- for (var i = 1; i < len; i++) if (this[i] < min) min = this[i];
- return min;
- }
- */
 
 //--------------------------------------------------------------------------
 
@@ -385,27 +367,6 @@ Ngn.setToCenterBlock = function(element, eWidth) {
     'margin-left': Math.round(eWidth.getSize().x / 2 - element.getSize().x / 2)
   });
 };
-
-/*
- MooTools.lang.set('ru-RU', 'FancyUpload', {
- 'fileName': '{name}',
- 'cancel': 'Отмена',
- 'cancelTitle': 'Кликните, что бы отменить загрузку и удалить запись',
- 'validationErrors': {
- 'duplicate': 'Файл <em>{name}</em> ужа добавлен, дубликаты не допускаются.',
- 'sizeLimitMin': 'Файл <em>{name}</em> (<em>{size}</em>) слишком маленький, минимальный размер <em>{fileSizeMin}</em>.',
- 'sizeLimitMax': 'Файл <em>{name}</em> (<em>{size}</em>) слишком большой, максимальный размер <em>{fileSizeMax}</em>.',
- 'fileListMax': 'Файл <em>{name}</em> не может быть добавлен, максимальное количество файлов <em>{fileListMax}.',
- 'fileListSizeMax': 'Файл <em>{name}</em> (<em>{size}</em>) слишком большой, максимальный суммарный размер всех файлов <em>{fileListSizeMax}</em>.'
- },
- 'errors': {
- 'httpStatus': 'Сервер вернул HTTP-код #{code}',
- 'securityError': 'Ошибка безопасности ({text})',
- 'ioError': 'Произошла ошибка загрузки или сохранения ({text})'
- },
- 'linuxWarning': 'Warning: Due to a misbehaviour of Adobe Flash Player on Linux,\nthe browser will probably freeze during the upload process.\nDo you want to start the upload anyway?'
- });
- */
 
 Ngn.tpl = function(tpl, data) {
   return tpl.replace(/\{(\w+)\}/g, function(str, name) {
@@ -653,7 +614,7 @@ Ngn.fixEmptyTds = function(el) {
 };
 
 Ngn.addBtnAction = function(selector, action, parent) {
-  esBtn = (parent ? parent : document).getElements(selector);
+  var esBtn = (parent ? parent : document).getElements(selector);
   if (!esBtn) return;
   esBtn.each(function(eBtn) {
     action = action.pass(eBtn);

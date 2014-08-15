@@ -56,18 +56,15 @@ Ngn.Dialog.RequestFormBase = new Class({
       this.fireEvent('formRequest');
       this.loading(true);
     }.bind(this));
-
     this.form.addEvent('failed', function(r) {
-      this.formResponse(r);
+      this.urlResponse(r);
       this.loading(false);
     }.bind(this));
-
     this.form.addEvent('complete', function(r) {
       this.response = r;
       this.okClose();
       this.fireEvent('submitSuccess', r);
     }.bind(this));
-
     this.resizeByCols();
     if (this.options.autoSave) {
       new Ngn.Frm.Saver(this.form.eForm, {
@@ -184,7 +181,7 @@ Ngn.Dialog.RequestForm.Static = new Class({
   // }
 
   initFormResponse: function() {
-    this.formResponse(Ngn.json.process(this.options.staticResponse));
+    this.urlResponse(Ngn.json.process(this.options.staticResponse));
   }
 
 });

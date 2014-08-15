@@ -7,17 +7,8 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js', 'default');
   }
 
-  function test() {
-    // die2(Sflm::frontend('js')->classes->findObjectPath('Ngn.TreeEdit.Pages.Site'));
-    // Sflm::frontend('js')->addObject('Ngn.TreeEdit.Pages.Site');
-    Sflm::frontend('js')->addClass('Ngn.Dialog.TreeEdit.Pages');
-    // Sflm::frontend('js')->addObject('Ngn.Aaa.Bbb');
-    // Sflm::frontend('js')->store();
-  }
-
-  /*
   function testValidClassesParsing() {
-    $r = Sflm::frontend('js')->classes->parseValidClasses("
+    $r = SflmJsClasses::parseValidClasses("
 Ngn.Aaa
 Ngn.Aaa.Aaa
 Ngn.aaa.Aaa
@@ -30,11 +21,11 @@ Ngn.aaa
 ");
     $this->assertTrue($r[3] == 'Ngn.aaa.aaa.aaa.Aaa');
     $this->assertTrue(count($r) === 4);
- }
+  }
 
   function testClearCache() {
-    Sflm::frontend('js')->addObject('Ngn.Form');
-    Sflm::frontend('js')->addObject('Ngn.Form.El.Phone');
+    Sflm::frontend('js')->addClass('Ngn.Form');
+    Sflm::frontend('js')->addClass('Ngn.Form.El.Phone');
     Sflm::frontend('js')->store();
     Sflm::clearCache();
     // ни статического ни динамического кэша не существует
@@ -43,7 +34,7 @@ Ngn.aaa
   }
 
   function testParentNamespaceInitInTheSameFile() {
-    Sflm::frontend('js')->addObject('Ngn.namespace.A');
+    Sflm::frontend('js')->addClass('Ngn.namespace.A');
   }
 
   function testResetFrontend() {
@@ -53,51 +44,47 @@ Ngn.aaa
 
   function testNoAutoloadOnAddingPackage() {
     Sflm::setFrontend('js', 'test/dependencies');
-    $this->assertFalse(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.sub.A'));
+    $this->assertFalse(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.Sub.A'));
   }
 
-  function testObjectInPaths() {
-    $this->assertTrue(isset(Sflm::frontend('js')->classes->objectPaths['Ngn.sub.A']));
-    $this->assertFalse(isset(Sflm::frontend('js')->classes->objectPaths['Ngn.Outside']));
-  }
-
-  function testAutoloadOnAddingLib() {
-    Sflm::frontend('js')->addLib('test/dependencies');
-    $this->assertTrue(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.sub.A'));
-    $this->assertTrue(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.sub.B'));
-  }
+  //function testAutoloadOnAddingLib() {
+  // not supported anymore
+  //  Sflm::frontend('js')->addLib('test/dependencies');
+  //  $this->assertTrue(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.Sub.A'));
+  //  $this->assertTrue(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.Sub.B'));
+  //}
 
   function testCodeCaching_sameAfterReset() {
-    Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
-    $code = Sflm::frontend('js')->code(); //         получаем код
-    Sflm::frontend('js')->store(); //                сторим
-    Sflm::setFrontend('js'); //                    резетим
-    $code2 = Sflm::frontend('js')->code(); //        получаем код
+    Sflm::frontend('js')->addClass('Ngn.Sub.A'); // добавляем объект
+    $code = Sflm::frontend('js')->code(); //        получаем код
+    Sflm::frontend('js')->store(); //               сторим
+    Sflm::setFrontend('js'); //                     резетим
+    $code2 = Sflm::frontend('js')->code(); //       получаем код
     $this->assertTrue($code == $code2);
   }
 
   function testCodeCaching_diffAfterAdding() {
-    Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
-    $code = Sflm::frontend('js')->code(); //         получаем код
-    Sflm::frontend('js')->addObject('Ngn.sub.B'); // добавляем объект
-    $code2 = Sflm::frontend('js')->code(); //        получаем код
+    Sflm::frontend('js')->addClass('Ngn.Sub.A'); // добавляем объект
+    $code = Sflm::frontend('js')->code(); //        получаем код
+    Sflm::frontend('js')->addClass('Ngn.Sub.B'); // добавляем объект
+    $code2 = Sflm::frontend('js')->code(); //       получаем код
     $this->assertTrue($code != $code2);
   }
 
   function testExistsInExistingObjects() {
-    Sflm::frontend('js')->addObject('Ngn.Frm');
+    Sflm::frontend('js')->addClass('Ngn.Frm');
     Sflm::setFrontend('js');
-    $this->assertTrue(in_array('Ngn.Frm', Sflm::frontend('js')->classes->existingObjects));
+    $this->assertTrue(Sflm::frontend('js')->classes->frontendClasses->exists('Ngn.Frm'));
   }
 
-  // Ngn.sub, Ngn.sub.A to jsExistingObjects_custom
+  // Ngn.Sub, Ngn.Sub.A to jsExistingObjects_custom
   function testPathsCaching() {
-    Sflm::frontend('js')->addObject('Ngn.sub.A'); // добавляем объект
+    Sflm::frontend('js')->addClass('Ngn.Sub.A'); // добавляем объект
     Sflm::frontend('js')->store(); //                сторим
     Sflm::setFrontend('js'); //                    резетим. нельзя получать код больше одного раза во время одного рантайма
-    $this->assertTrue(Sflm::frontend('js')->exists('Ngn.sub.A'));
+    $this->assertTrue(Sflm::frontend('js')->exists('Ngn.Sub.A'));
     Sflm::clearCache();
-    $this->assertFalse(Sflm::frontend('js')->exists('Ngn.sub.A'));
+    $this->assertFalse(Sflm::frontend('js')->exists('Ngn.Sub.A'));
   }
 
   function testEmptyNewPathsAfterReset() {
@@ -109,14 +96,13 @@ Ngn.aaa
   }
 
   function testExtending4levelNamespace() {
-    Sflm::frontend('js')->addObject('Ngn.sub.Ab.Cb');
-    $this->assertTrue(in_array('Ngn.sub.Ab.Bb', Sflm::frontend('js')->classes->existingObjects));
+    Sflm::frontend('js')->addClass('Ngn.Sub.A.Cb');
+    $this->assertTrue(Sflm::frontend('js')->classes->frontendClasses->exists('Ngn.Sub.A.Bb'));
   }
 
   function testPreloadingInTheSameFile() {
     set_time_limit(1);
-    Sflm::frontend('js')->addObject('Ngn.Preload');
+    Sflm::frontend('js')->addClass('Ngn.Preload');
   }
-  */
 
 }

@@ -1,3 +1,3 @@
-Ngn.sub.B = new Class({
-  Extends: Ngn.sub.A
+Ngn.Sub.B = new Class({
+  Extends: Ngn.Sub.A
 });
