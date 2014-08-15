@@ -7,19 +7,6 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js', 'default');
   }
 
-  function testPathsCaching() {
-    Sflm::frontend('js')->addClass('Ngn.Sub.A'); // добавляем объект
-    Sflm::frontend('js')->store(); //               сторим
-    Sflm::setFrontend('js'); //                     резетим. нельзя получать код больше одного раза во время одного рантайма
-    die2(Sflm::frontend('js')->getPaths());
-    
-    $this->assertTrue(Sflm::frontend('js')->exists('Ngn.Sub.A'));
-    Sflm::clearCache();
-    $this->assertFalse(Sflm::frontend('js')->exists('Ngn.Sub.A'));
-  }
-
-  /*
-
   function testValidClassesParsing() {
     $r = SflmJsClasses::parseValidClasses("
 Ngn.Aaa
@@ -90,6 +77,15 @@ Ngn.aaa
     $this->assertTrue(Sflm::frontend('js')->classes->frontendClasses->exists('Ngn.Frm'));
   }
 
+  function testPathsCaching() {
+    Sflm::frontend('js')->addClass('Ngn.Sub.A'); // добавляем объект
+    Sflm::frontend('js')->store(); //               сторим
+    Sflm::setFrontend('js'); //                     резетим. нельзя получать код больше одного раза во время одного рантайма
+    $this->assertTrue(Sflm::frontend('js')->exists('Ngn.Sub.A'));
+    Sflm::clearCache();
+    $this->assertFalse(Sflm::frontend('js')->exists('Ngn.Sub.A'));
+  }
+
   function testEmptyNewPathsAfterReset() {
     (new FieldEWisiwigSimpleLinks(['name' => 'dummy']))->typeJs();
     Sflm::frontend('js')->getDeltaUrl();
@@ -107,7 +103,5 @@ Ngn.aaa
     set_time_limit(1);
     Sflm::frontend('js')->addClass('Ngn.Preload');
   }
-
-  */
 
 }
