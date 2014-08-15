@@ -94,7 +94,6 @@ class TestRunnerAbstract {
 
   protected function _run(array $classes) {
     output("running tests: ".implode(', ', $classes));
-    //return;
     foreach ($classes as $class) {
       $this->addTestSuite($class);
     }
@@ -104,9 +103,8 @@ class TestRunnerAbstract {
   protected function __run() {
     PHPUnit_TextUI_TestRunner::run($this->suite, [
       'stopOnError' => true,
-      'listeners'   => [
-
-      ]
+      //'listeners'   => [
+      //]
     ]);
   }
 

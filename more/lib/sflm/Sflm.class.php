@@ -96,7 +96,8 @@ class Sflm {
 
   static function output($s) {
     if (self::$output) {
-      if (strstr($s, 'Skipped')) ; //outputColor($s, 'darkGray');
+      if (strstr($s, 'Adding path')) outputColor($s, 'red');
+      elseif (strstr($s, 'Skipped')) ; //outputColor($s, 'darkGray');
       elseif (strstr($s, 'src: direct')) outputColor($s, 'yellow');
       else strstr($s, 'src:') ? outputColor($s, 'cyan') : output($s);
     }
@@ -123,4 +124,4 @@ Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 Sflm::$absBasePaths = [
   'i' => NGN_PATH.'/i'
 ];
-Sflm::$output = true; // set true to debug
+Sflm::$output = false; // set true to debug

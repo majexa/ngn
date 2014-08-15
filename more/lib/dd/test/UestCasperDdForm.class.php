@@ -1,6 +1,6 @@
 <?php
 
-class TestCasperDdForm extends TestDd {
+class UestCasperDdForm extends TestDd {
 
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();

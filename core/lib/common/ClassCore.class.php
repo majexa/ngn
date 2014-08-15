@@ -33,9 +33,10 @@ class ClassCore {
   /**
    * Определяет есть ли в классах-предках класса $class класс $ancestor
    *
-   * @param   string  Имя класса или объект
-   * @param   string  Имя предполагаемого класса предка
-   * @param   bool    ..
+   * @param string|object $class Имя класса или объект
+   * @param string $ancestor Имя предполагаемого класса предка
+   * @param bool $strict
+   * @return bool
    */
   static function hasAncestor($class, $ancestor, $strict = false) {
     if (!$strict and $class == $ancestor) return true;
@@ -58,9 +59,9 @@ class ClassCore {
    * Имя абстрактного класса должно иметь вид: PrefixAbstract
    * Имя неабстрактного класса потомка должно иметь вид: PrefixName
    *
-   * @param   string  Имя класса-предка
-   *                  Пример: GrabberSourceAbstract
-   * @return  array   Имена классов
+   * @param string $ancestorClass Имя класса-предка
+   * @param bool $prefix
+   * @return array
    */
   static function getDescendants($ancestorClass, $prefix = false) {
     $classes = [];
