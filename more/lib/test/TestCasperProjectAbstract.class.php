@@ -1,6 +1,6 @@
 <?php
 
-class TestCasperProjectAbstract extends ProjectTestCase {
+abstract class TestCasperProjectAbstract extends ProjectTestCase {
 
   static function setUpBeforeClass() {
     $p = PROJECT_KEY;

@@ -159,7 +159,7 @@ abstract class SflmFrontend {
       Sflm::output("New path '$path' already exists");
       return;
     }
-    outputColor('Adding path '.$path, 'red');
+    Sflm::output('Adding path '.$path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
     $this->changed = true;

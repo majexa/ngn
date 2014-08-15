@@ -32,7 +32,7 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   /**
-   * @param string $str Object/Class name or is pars; path or part of it
+   * @param string $str Class name or its part; path or part of it
    * @return bool
    */
   function exists($str) {
