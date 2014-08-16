@@ -64,7 +64,7 @@ module.exports = new Class({
       if (!this.exists(selector)) throw new Error('"' + selector + '" selector does not exists');
     };
     this.casper.checkNonExistence = function(selector) {
-      if (this.exists(selector)) throw new Error('"' + selector + '" selector has not be present');
+      if (this.exists(selector)) throw new Error('"' + selector + '" selector has not to be present');
     };
     this.casper.fillAuthForm = function() {
       this.fill('form#formAuth', {
@@ -100,7 +100,7 @@ module.exports = new Class({
       throw new Error('Casper or TestRunner method "' + method + '" is absent');
     }
     var params = null;
-    this.log('Running ' + method);
+    this.log('Running ' + method, 2);
     if (this.isCallbackMethod(method)) {
       nextMethod = this.getNextMethod();
       params = cmd[1] !== undefined ? [cmd[1]] : [];

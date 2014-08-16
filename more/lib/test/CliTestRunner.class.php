@@ -10,19 +10,28 @@ class CliTestRunner extends CliHelpArgs {
     return [
       [
         'class' => 'TestRunnerProject',
-        'name' => 'proj'
+        'name' => 'proj',
+        'title' => 'Интерфейс для запуска тестов на уровне проекта'
       ],
       [
         'class' => 'TestRunnerNgn',
-        'name' => 'ngn'
+        'name' => 'ngn',
+        'title' => 'Интерфейс для запуска тестов фреймворка'
       ],
       [
         'class' => 'TestRunnerLib',
-        'name' => 'lib'
+        'name' => 'lib',
+        'title' => 'Интерфейс для запуска тестов библиотек'
+      ],
+      [
+        'class' => 'TestRunnerPlib',
+        'name' => 'plib',
+        'title' => 'Интерфейс для запуска тестов библиотек на уровне проекта'
       ],
       [
         'class' => 'TestCliCommon',
-        'name' => 'c'
+        'name' => 'c',
+        'title' => 'Разное'
       ],
     ];
   }
