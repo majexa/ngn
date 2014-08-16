@@ -25,7 +25,7 @@ abstract class CliHelpAbstract {
 
   protected function checkConsistency() {
     foreach ($this->getClasses() as $v) {
-      if (($optionalArgs = $this->classHasOptionalConstructorArgs($v['class']))) {
+      if (($optionalArgs = $this->getConstructorOptionalParams($v['class']))) {
         foreach ($this->getMethods($v['class']) as $m) {
           if (empty($m['options'])) continue;
           $constructorArgs = Tt()->enum(Arr::get($optionalArgs, 'name'), ', ', '`"`.$v.`"`');
@@ -98,6 +98,7 @@ TEXT
       if ($this->separateParentMethods) {
         $parentClassesOutputed = [];
         foreach ($classes as $v) {
+          if (isset($v['title'])) print O::get('CliColors')->getColoredString($v['title'].':', 'purple')."\n";
           if (($parents = ClassCore::getParents($v['class']))) {
             $parentClass = $parents[0];
             if (!isset($parentClassesOutputed[$parentClass])) {
@@ -116,6 +117,7 @@ TEXT
       }
       else {
         foreach ($classes as $v) {
+          if (isset($v['title'])) print O::get('CliColors')->getColoredString($v['title'].':', 'purple')."\n";
           print $this->renderMethods($v['class']);
         }
       }
@@ -187,6 +189,13 @@ TEXT
     if (!($constructor = (new ReflectionClass($class))->getConstructor())) return [];
     return array_filter($constructor->getParameters(), function (ReflectionParameter $param) {
       return !$param->isOptional();
+    });
+  }
+
+  protected function getConstructorOptionalParams($class) {
+    if (!($constructor = (new ReflectionClass($class))->getConstructor())) return [];
+    return array_filter($constructor->getParameters(), function (ReflectionParameter $param) {
+      return $param->isOptional();
     });
   }
 

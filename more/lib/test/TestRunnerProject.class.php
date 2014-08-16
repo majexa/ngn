@@ -22,6 +22,12 @@ class TestRunnerProject extends TestRunnerAbstract {
     });
   }
 
+  function _g() {
+    return array_filter($this->getClasses(), function ($class) {
+      return !strstr(Lib::getClassPath($class), "projects/$this->projectName/");
+    });
+  }
+
   /**
    * Запускает проектные тесты, не находящиеся в папке проекта
    */
@@ -37,12 +43,6 @@ class TestRunnerProject extends TestRunnerAbstract {
       return strstr(Lib::getClassPath($class), "projects/$this->projectName/") or !empty($class::$local);
     });
     $this->_run($classes);
-  }
-
-  function _g() {
-    return array_filter($this->getClasses(), function ($class) {
-      return !strstr(Lib::getClassPath($class), "projects/$this->projectName/");
-    });
   }
 
   /**

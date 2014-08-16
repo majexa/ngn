@@ -30,7 +30,7 @@ module.exports = new Class({
       height: 500
     });
     this.log('CAPTURED', 3);
-    require('child_process').execFile('run', ['rumax/ping', id], null, function(err, stdout, stderr) {
+    require('child_process').execFile('run', ['rumax/ping', 'id=' + id], null, function(err, stdout, stderr) {
       this.log('PINGED', 3);
     }.bind(this));
   },

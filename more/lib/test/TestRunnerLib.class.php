@@ -10,19 +10,23 @@ class TestRunnerLib extends TestRunnerNgn {
   }
 
   function __construct($libPath, $filterNames = null) {
-    $r = static::replace($libPath);
-    if (Misc::hasSuffix('.php', $r)) $r = dirname($r);
-    $this->libPath = $r;
+    $libPath = static::replace($libPath);
+    if (Misc::hasSuffix('.php', $libPath)) $libPath = dirname($libPath);
+    $this->libPath = $libPath;
     parent::__construct($filterNames);
+  }
+
+  protected function getClasses() {
+    return array_filter(parent::getClasses(), function($v) {
+      return strstr(Lib::getClassPath($v), $this->libPath);
+    });
   }
 
   /**
    * Запускает все тесты указанной библиотеки
    */
   function run() {
-    $this->_run(array_filter($this->getClasses(), function($v) {
-      return strstr(Lib::getClassPath($v), $this->libPath);
-    }));
+    $this->_run($this->getClasses());
   }
 
 }
