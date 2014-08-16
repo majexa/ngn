@@ -12,9 +12,11 @@ module.exports = new Class({
 
   initialize: function(casper) {
     this.parent(casper);
-    this.test = require('system').stdin.readLine();
-    if (!this.test.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
-    this.test = JSON.decode(this.test);
+    var data = require('system').stdin.readLine();
+    if (!data.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
+    data = JSON.decode(data);
+    this.steps = data.steps;
+    if (data.extension) this.casper = Object.merge(this.casper, require(data.extension));
     this.casper.on('page.error', function(msg, trace) {
       var t = '';
       for (var i = 0; i < trace.length; i++) {
@@ -65,12 +67,6 @@ module.exports = new Class({
     };
     this.casper.checkNonExistence = function(selector) {
       if (this.exists(selector)) throw new Error('"' + selector + '" selector has not to be present');
-    };
-    this.casper.fillAuthForm = function() {
-      this.fill('form#formAuth', {
-        authLogin: 'admin',
-        authPass: '1234'
-      });
     };
   },
 
@@ -124,7 +120,7 @@ module.exports = new Class({
   },
 
   getNextMethod: function() {
-    if (!this.test[this.i + 1]) {
+    if (!this.steps[this.i + 1]) {
       return function() {
         this.log('There are no more steps', 2);
       }.bind(this);
@@ -133,11 +129,11 @@ module.exports = new Class({
   },
 
   runCmd: function() {
-    this.processCmd(this.test[this.i]);
+    this.processCmd(this.steps[this.i]);
   },
 
   nextCmd: function() {
-    this.log('Running next cmd (' + this.test[this.i + 1][0] + ')', 2);
+    this.log('Running next cmd (' + this.steps[this.i + 1][0] + ')', 2);
     this.i++;
     this.runCmd();
   }

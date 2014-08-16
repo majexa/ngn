@@ -7,8 +7,8 @@ abstract class TestCasperProjectAbstract extends ProjectTestCase {
     `pm localProject cc $p`;
   }
 
-  protected function casper($cmds) {
-    Casper::run(PROJECT_KEY, $cmds);
+  protected function casper(array $steps) {
+    Casper::run(PROJECT_KEY, $steps);
   }
 
 }
