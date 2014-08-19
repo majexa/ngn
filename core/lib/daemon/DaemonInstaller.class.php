@@ -10,7 +10,6 @@ class DaemonInstaller {
     $this->setOptions($options);
     $this->projectName = $projectName;
     $this->daemonName = $daemonName;
-    $this->c = file_get_contents('/etc/rc.local');
     $this->name = "{$this->projectName}-{$this->daemonName}";
   }
 
@@ -22,11 +21,12 @@ class DaemonInstaller {
   }
 
   protected function bin() {
-    return isset($this->options['bin']) ? $this->options['bin'] : '/usr/bin/php';
+    return isset($this->options['bin']) ? $this->options['bin'] : '/usr/bin/run';
   }
 
   protected function opts() {
-    return isset($this->options['opts']) ? $this->options['opts'] : "/home/user/ngn-env/projects/{$this->projectName}/{$this->daemonName}.php";
+    //return isset($this->options['opts']) ? $this->options['opts'] : "/home/user/ngn-env/run/run.php {$this->projectName}/{$this->daemonName}";
+    return isset($this->options['opts']) ? $this->options['opts'] : "{$this->projectName}/{$this->daemonName}";
   }
 
   function install() {
@@ -95,7 +95,7 @@ exit 0';
     print Cli::shell("sudo mv /tmp/$this->name /etc/init.d/$this->name");
     print Cli::shell("sudo chmod +x /etc/init.d/$this->name");
     print Cli::shell("sudo /etc/init.d/$this->name restart");
-    //$this->addToRc();
+    (new RcLocal)->add("$this->projectName-$this->daemonName");
     usleep(0.1 * 1000000);
   }
 
@@ -103,44 +103,7 @@ exit 0';
     $ids = str_replace("\n", ' ', `ps aux | grep test/$this->daemonName | grep -v grep | awk '{print $2}'`);
     if ($ids) sys("sudo kill $ids");
     sys("sudo rm /etc/init.d/$this->projectName-$this->daemonName");
+    (new RcLocal)->remove("$this->projectName-$this->daemonName");
   }
-
-  protected function rcLocalWrite($c) {
-    $tmpFile = "/tmp/$this->projectName-$this->daemonName";
-    file_put_contents($tmpFile, $c);
-    `sudo mv $tmpFile /etc/rc.local`;
-  }
-
-  protected function addToRc() {
-    $cmd = "su user -c 'sudo /etc/init.d/{$this->projectName}-{$this->daemonName} start'";
-    $begin = "# ngn auto-generated workers begin\nsleep 15";
-    $end = '# ngn auto-generated workers end';
-    if ($this->rcLocalIsVirgin()) {
-      $a = "\n\n$begin\n$cmd\n$end\n\n";
-      $c = preg_replace('/^(.*this opts does nothing.)(\s+)(.*)$/ms', '$1'.$a.'$3', $this->c);
-      $this->rcLocalWrite($c);
-    }
-    else {
-      if (!preg_match("/$begin(.*)$end/ms", $this->c, $m)) throw new Exception('something wrong');
-      if (strstr($m[1], $cmd)) {
-        output("Worker '{$this->projectName}-{$this->daemonName}' already in rc.local");
-      }
-      else {
-        $this->rcLocalWrite(preg_replace("/($begin)(.*)($end)/ms", '$1$2'."$cmd\n".'$3', $this->c));
-      }
-    }
-  }
-
-  protected function rcLocalIsVirgin() {
-    if (!preg_match('/^.*this opts does nothing.\s+(.*)$/ms', $this->c, $m)) return false;
-    return !self::hasNgnWorkers($m[1]);
-  }
-
-  static function hasNgnWorkers($s) {
-    return strstr($s, '# ngn auto-generated worker');
-  }
-
-  //static function cleanup($prefix == null) {
-  //}
 
 }
