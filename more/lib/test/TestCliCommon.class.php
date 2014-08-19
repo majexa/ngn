@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Разное
+ */
 class TestCliCommon {
 
   /**
@@ -23,10 +26,10 @@ class TestCliCommon {
   /**
    * Создаёт проект "test"
    */
-  function createProject() {
+  function createProject($type = 'common') {
     $server = require NGN_ENV_PATH.'/config/server.php';
     $domain = 'test.'.$server['baseDomain'];
-    print `pm localServer createProject test $domain common`;
+    print `pm localServer createProject test $domain $type`;
     print `pm localProject replaceConstant test core IS_DEBUG true`;
     print `pm localProject cc test`;
   }

@@ -45,7 +45,7 @@ class CssCore {
     return $hash.$hex;
   }
 
-  static function btnColors($baseColor, $selector = null) {
+  static function btnColors($baseColor, $selector = null, $addSelector = '') {
     if ($selector) $selector = $selector.' ';
     $lightColor = CssCore::brightness($baseColor, 0.7);
     $darkColor = CssCore::brightness($baseColor, -0.9);
@@ -55,19 +55,19 @@ class CssCore {
     $darkColorPushed = CssCore::brightness($baseColor, -0.85);
     $borderColor = CssCore::brightness($baseColor, -0.7);
     $shadowColors = implode(', ', CssCore::brightness($baseColor, -0.5, true));
-    return <<<CSS
-$selector a.btn {
+    return "
+{$selector}a.btn$addSelector {
 border-color: $borderColor;
 background: -webkit-linear-gradient(top, $lightColor, $darkColor);
 }
-$selector a.btn:hover, b.btn {
+{$selector}a.btn$addSelector:hover:not(.nonActive):not(.pushed), b.btn$addSelector {
 background: -webkit-linear-gradient(top, $lightColorOver, $darkColorOver);
 }
-$selector a.btn:active, $selector a.btn.pushed {
+{$selector}a.btn$addSelector:active, {$selector}a.btn$addSelector.pushed {
 background: -webkit-linear-gradient(top, $lightColorPushed, $darkColorPushed);
 box-shadow: inset 0 1px 2px rgba($shadowColors, 0.5);
 }
-CSS;
+";
   }
 
 }

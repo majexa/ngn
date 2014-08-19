@@ -1,5 +1,4 @@
 /*-------- common buttons -----------*/
-
 a.btn {
 box-sizing: border-box;
 color: #000 !important;
@@ -66,7 +65,6 @@ color: #FFF !important;
 a.btn, b.btn, .btnFake {
 height: 22px;
 }
-
 /*
 a.btn.loading {
 background-image: url(/i/img/btn-loader.gif) !important;
@@ -80,13 +78,11 @@ background: url(/i/img/black/loader.gif) no-repeat 0px 0px !important;
 color: #CCCCCC !important;
 }
 */
-
 .apeform input[type=submit] {
 width: 220px;
 cursor: pointer;
 vertical-align: center;
 }
-
 .btn2, .btnSubmit {
 background: #555555;
 color: #FFFFFF;
@@ -102,26 +98,6 @@ margin-top: 5px;
 border-radius: 5px;
 font-size: 15px;
 }
-
-/*
-.pbt_userInfo .iconsSet {
-margin-top: 10px;
-}
-.pbt_userInfo .iconsSet a {
-width: 100%;
-text-align: left;
-}
-*/
-
-a.btn.new {
-border-color: #72BB00;
-background: #89DF00;
-}
-a:hover.btn.new {
-border-color: #89DF00;
-background: #9DFF00;
-}
-
 .hHandler {
 border: 1px solid;
 }

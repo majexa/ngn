@@ -103,6 +103,7 @@ class TestRunnerAbstract {
   protected function __run() {
     PHPUnit_TextUI_TestRunner::run($this->suite, [
       'stopOnError' => true,
+      'printer' => new CliTestPrinter
       //'listeners'   => [
       //]
     ]);

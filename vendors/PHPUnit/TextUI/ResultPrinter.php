@@ -272,8 +272,8 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
             $defect->thrownException()
           )
         );
-        
-        $e = $defect->thrownException()->getPrevious();                
+
+        $e = $defect->thrownException()->getPrevious();
         while ($e) {
             $this->write(
                 "\nCaused by\n" .
@@ -281,8 +281,8 @@ class PHPUnit_TextUI_ResultPrinter extends PHPUnit_Util_Printer implements PHPUn
                 PHPUnit_Util_Filter::getFilteredStacktrace($e)
             );
             $e = $e->getPrevious();
-        }        
-        
+        }
+
     }
 
     /**

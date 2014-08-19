@@ -1,4 +1,4 @@
-Ngn.TreeEdit = new Class({
+  Ngn.TreeEdit = new Class({
 
   Implements: [Events, Options],
 

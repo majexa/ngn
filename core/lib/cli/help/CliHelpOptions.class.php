@@ -14,7 +14,7 @@ abstract class CliHelpOptions extends CliHelp {
     return ClassCore::getDescendants('ArrayAccessebleOptions', ucfirst($this->prefix()));
   }
 
-  protected function _getMethods($class) {
+  function _getMethods($class) {
     return array_filter(parent::_getMethods($class), function (ReflectionMethod $method) {
       if (!Misc::hasPrefix('a_', $method->getName())) return false;
       return true;
@@ -106,6 +106,5 @@ abstract class CliHelpOptions extends CliHelp {
   protected function getSingleProcessorClass($multipleProcessorClass) {
     return rtrim($multipleProcessorClass, 's');
   }
-
 
 }

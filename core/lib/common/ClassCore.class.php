@@ -183,6 +183,10 @@ class ClassCore {
     return clone $obj;
   }
 
+  static function title($class) {
+    return ClassCore::getDocComment((new ReflectionClass($class))->getDocComment(), 'title');
+  }
+
   /**
    * @param string $str
    * @param string $_tag
