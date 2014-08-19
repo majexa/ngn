@@ -27,9 +27,8 @@ class TestCliCommon {
    * Создаёт проект "test"
    */
   function createProject($type = 'common') {
-    $server = require NGN_ENV_PATH.'/config/server.php';
-    $domain = 'test.'.$server['baseDomain'];
-    print `pm localServer createProject test $domain $type`;
+    print `pm localServer deleteProject test`;
+    print `pm localServer createProject test default $type`;
     print `pm localProject replaceConstant test core IS_DEBUG true`;
     print `pm localProject cc test`;
   }
@@ -43,15 +42,5 @@ class TestCliCommon {
     $filterNames = $filterNames ? ' '.$filterNames : '';
     print `tst proj g test$filterNames`;
   }
-
-  /**
-   * Создаёт проект "test" и запускает casper-тесты
-  function casper($filterNames = null) {
-    $this->createProject();
-    $filterNames = $filterNames ? ' '.$filterNames : '';
-    print `tst proj g test$filterNames`;
-    //print `pm localProject delete test`;
-  }
-   */
 
 }

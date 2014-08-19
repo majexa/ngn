@@ -78,7 +78,7 @@ Ngn.Dialog.Auth = new Class({
     selectedTab: 1,
     id: 'auth',
     url: '/default/auth/json_auth',
-    width: 280,
+    width: 300,
     completeUrl: null,
     fromVkEnabled: false
   },
