@@ -238,7 +238,7 @@ TEXT
       print $this->renderMethods($args->class);
       return false;
     }
-    $methods = Arr::get($this->getMethods($_class), 'options', 'method');
+    $methods = Arr::get($this->getMethods($_class, false), 'options', 'method');
     if (!isset($methods[$args->method])) {
       throw new Exception("Method '{$args->method}' does not exists in class '{$args->class}'");
     }
@@ -283,11 +283,11 @@ TEXT
    */
   protected $filterByCurrentClass = false;
 
-  function getMethods($class) {
+  function getMethods($class, $onlyVisible = true) {
     if ($class instanceof CliHelpMultiWrapper) {
       $class = $class::singleClass();
     }
-    $methods = $this->_getVisibleMethods($class);
+    $methods = $onlyVisible ? $this->_getVisibleMethods($class) : $this->_getMethods($class);
     if ($this->filterByCurrentClass) {
       $methods = array_filter($methods, function(ReflectionMethod $method) use ($class) {
         return $method->class == $class;

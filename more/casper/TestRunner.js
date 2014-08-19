@@ -129,7 +129,7 @@ module.exports = new Class({
   },
 
   callMethod: function(methodName, method) {
-    console.debug('CALL ' + methodName);
+    //console.debug('CALL ' + methodName);
     method();
   },
 
