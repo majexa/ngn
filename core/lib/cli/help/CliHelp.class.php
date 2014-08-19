@@ -67,6 +67,8 @@ abstract class CliHelp extends CliHelpAbstract {
     return $this->prefix();
   }
 
-  static $proMode = false;
+  static $proMode = false, $disableDescription = false;
 
 }
+
+if (getenv('HELP_DISABLE_DESCRIPTION')) CliHelp::$disableDescription = true;

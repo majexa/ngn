@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Запуск тестов фреймворка
+ */
 class TestRunnerNgn extends TestRunnerAbstract {
 
   function _getClasses() {

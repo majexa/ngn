@@ -10,7 +10,7 @@ class File {
     if (file_exists($file)) unlink($file);
   }
 
-  static function getName($file) {
+  static function name($file) {
     return preg_replace('/^(.+)\.[^.]+$/', '$1', basename($file));
   }
 

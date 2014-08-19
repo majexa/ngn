@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Запуск тестов на уровне проекта
+ */
 class TestRunnerProject extends TestRunnerAbstract {
 
   protected $projectName;

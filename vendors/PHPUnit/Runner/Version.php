@@ -72,6 +72,7 @@ class PHPUnit_Runner_Version
      */
     public static function getVersionString()
     {
+      print getBacktrace(false); die('!!');
         return 'PHPUnit @package_version@ by Sebastian Bergmann.';
     }
 }

@@ -68,10 +68,19 @@ module.exports = new Class({
     this.casper.checkNonExistence = function(selector) {
       if (this.exists(selector)) throw new Error('"' + selector + '" selector has not to be present');
     };
+    this.casper.selectOption = function(selector, value) {
+      this.evaluate(function(selector, value) {
+        document.querySelector(selector).selectedIndex = value;
+        return true;
+      }, {
+        selector: selector,
+        value: value
+      });
+    };
   },
 
   run: function() {
-    this.runCmd();
+    this.runStep();
   },
 
   isCallbackMethod: function(name) {
@@ -83,59 +92,67 @@ module.exports = new Class({
     return false;
   },
 
-  processCmd: function(cmd) {
-    var method = cmd[0];
-    var nextMethod, fnBind, fn;
-    if (this[method]) {
-      fn = this[method];
-      fnBind = this;
-    } else if (this.casper[method]) {
-      fn = this.casper[method];
-      fnBind = this.casper;
+  processStep: function(cmd) {
+    var methodName = cmd[0];
+    var nextMethod, methodBind, method;
+    if (this[methodName]) {
+      method = this[methodName];
+      methodBind = this;
+    } else if (this.casper[methodName]) {
+      method = this.casper[methodName];
+      methodBind = this.casper;
     } else {
-      throw new Error('Casper or TestRunner method "' + method + '" is absent');
+      throw new Error('Casper or TestRunner method "' + methodName + '" is absent');
     }
     var params = null;
-    this.log('Running ' + method, 2);
-    if (this.isCallbackMethod(method)) {
-      nextMethod = this.getNextMethod();
-      params = cmd[1] !== undefined ? [cmd[1]] : [];
-      if (fn.length - 1 != params.length) {
-        throw new Error('method "' + method + '" must have ' + (fn.length - 1) + ' params. ' + params.length + ' passed instead');
+    this.log('Running ' + methodName, 2);
+    if (this.isCallbackMethod(methodName)) {
+      nextMethod = this.getNextMethod(methodName);
+      params = cmd[1] !== undefined ? cmd.slice(1, cmd.length) : [];
+      if (method.length - 1 != params.length) {
+        throw new Error('method "' + methodName + '" must have ' + (method.length - 1) + ' params. ' + params.length + ' passed instead');
       }
-      params.push(nextMethod);
-      fn = fn.pass(params, fnBind);
-      fn();
+      params.push(nextMethod); // last param is always casper callback fn
+      method = method.pass(params, methodBind);
+      this.callMethod(methodName, method);
     } else {
       if (cmd[1] !== undefined) {
-        params = [cmd[1]];
-        if (fn.length != params.length) throw new Error('method "' + method + '" must have ' + fn.length + ' params. ' + params.length + ' passed instead');
-        fn = fn.pass(params, fnBind);
+        params = cmd.slice(1, cmd.length);
+        if (method.length != params.length) throw new Error('method "' + methodName + '" must have ' + method.length + ' params. ' + params.length + ' passed instead');
+        method = method.pass(params, methodBind);
       } else {
-        fn = fn.bind(fnBind);
+        method = method.bind(methodBind);
       }
-      fn();
-      this.getNextMethod()();
+      this.callMethod(methodName, method);
+      this.getNextMethod(methodName)();
     }
   },
 
-  getNextMethod: function() {
+  callMethod: function(methodName, method) {
+    console.debug('CALL ' + methodName);
+    method();
+  },
+
+  getNextMethod: function(currentMethodName) {
     if (!this.steps[this.i + 1]) {
       return function() {
         this.log('There are no more steps', 2);
       }.bind(this);
     }
-    return this.nextCmd.bind(this);
+    return function() {
+      if (this.isCallbackMethod(currentMethodName)) this.capture();
+      this.nextStep();
+    }.bind(this);
   },
 
-  runCmd: function() {
-    this.processCmd(this.steps[this.i]);
+  runStep: function() {
+    this.processStep(this.steps[this.i]);
   },
 
-  nextCmd: function() {
+  nextStep: function() {
     this.log('Running next cmd (' + this.steps[this.i + 1][0] + ')', 2);
     this.i++;
-    this.runCmd();
+    this.runStep();
   }
 
   //beforeRun: function() {

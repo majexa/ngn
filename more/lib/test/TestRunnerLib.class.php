@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Запуск тестов библиотек
+ */
 class TestRunnerLib extends TestRunnerNgn {
 
   protected $libPath;
@@ -26,6 +29,10 @@ class TestRunnerLib extends TestRunnerNgn {
    * Запускает все тесты указанной библиотеки
    */
   function run() {
+    $this->_run($this->getClasses());
+  }
+
+  protected function run2() {
     $this->_run($this->getClasses());
   }
 

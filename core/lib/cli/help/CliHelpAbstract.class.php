@@ -13,11 +13,13 @@ abstract class CliHelpAbstract {
     else throw new Exception('Wrong type');
     $this->argv = $argv;
     $this->init();
-    if (empty($this->argv[0]) or $this->argv[0] == 'help') {
-      $this->help();
-    }
-    else {
-      $this->run();
+    if (empty($this->options['disableRun'])) {
+      if (empty($this->argv[0]) or $this->argv[0] == 'help') {
+        $this->help();
+      }
+      else {
+        $this->run();
+      }
     }
   }
 
@@ -72,12 +74,18 @@ TEXT
 
   public $argv, $oneClass = false;
 
-  protected function _getMethods($class) {
-    return array_filter((new ReflectionClass($class))->getMethods(), function (ReflectionMethod $method) use ($class) {
+  function _getMethods($class) {
+    return array_values(array_filter((new ReflectionClass($class))->getMethods(), function (ReflectionMethod $method) use ($class) {
       if ($method->isConstructor()) return false;
       if ($method->isStatic()) return false;
       if (Misc::hasPrefix('__', $method->name)) return false;
       return $method->isPublic();
+    }));
+  }
+
+  function _getVisibleMethods($class) {
+    return array_filter($this->_getMethods($class), function(ReflectionMethod $method) {
+      return $method->name[0] != '_';
     });
   }
 
@@ -89,15 +97,23 @@ TEXT
     });
   }
 
+  protected function renderClassTitle($class) {
+    if (!($title = ClassCore::title($class))) return;
+    print O::get('CliColors')->getColoredString($title.':', 'green')."\n";
+  }
+
   protected function help() {
-    if (!CliHelp::$proMode) print O::get('CliColors')->getColoredString('name', 'darkGray')." - optional param\n";
-    if (!CliHelp::$proMode) print O::get('CliColors')->getColoredString('[...]', 'green')." - param options\n";
+    if (!CliHelp::$disableDescription) {
+      if (!CliHelp::$proMode) print O::get('CliColors')->getColoredString('name', 'darkGray')." - optional param\n";
+      if (!CliHelp::$proMode) print O::get('CliColors')->getColoredString('[...]', 'green')." - param options\n";
+    }
     $classes = $this->getClasses();
     if ($classes) {
-      if (!CliHelp::$proMode) print O::get('CliColors')->getColoredString('Supported commands:', 'yellow')."\n";
+      if (!CliHelp::$proMode and !CliHelp::$disableDescription) print O::get('CliColors')->getColoredString('Supported commands:', 'yellow')."\n";
       if ($this->separateParentMethods) {
         $parentClassesOutputed = [];
         foreach ($classes as $v) {
+          $this->renderClassTitle($v['class']);
           if (isset($v['title'])) print O::get('CliColors')->getColoredString($v['title'].':', 'purple')."\n";
           if (($parents = ClassCore::getParents($v['class']))) {
             $parentClass = $parents[0];
@@ -117,6 +133,7 @@ TEXT
       }
       else {
         foreach ($classes as $v) {
+          $this->renderClassTitle($v['class']);
           if (isset($v['title'])) print O::get('CliColors')->getColoredString($v['title'].':', 'purple')."\n";
           print $this->renderMethods($v['class']);
         }
@@ -157,8 +174,7 @@ TEXT
     $name = $this->cmdName($class);
     $s = '';
     foreach ($methods as $method) {
-      if ($method['method'][0] == '_') continue;
-      $nameCmd = $name ? $name.' ' : '';
+      $nameCmd = $name ? ' '.$name : '';
       $rOptions = $this->renderMethodOptions($method['options']);
       $rOptions = $rOptions ? ' '.$rOptions : '';
       if (!empty($method['title']) and getOS() == 'win') $method['title'] = Misc::transit($method['title'], false, false);
@@ -166,7 +182,7 @@ TEXT
       else $help = ($method['title'] ? O::get('CliColors')->getColoredString(' -- '.$method['title'], 'cyan') : '');
       $s .= //
         $this->runner($runnerColor). // runner
-        " $nameCmd{$method['method']}". // method
+        $nameCmd.(count($methods) == 1 ? '' : ' '.$method['method']). // method
         $this->renderClassRequiredOptions($class).
         $this->renderClassOptions($class).
         $rOptions. // options
@@ -267,11 +283,11 @@ TEXT
    */
   protected $filterByCurrentClass = false;
 
-  protected function getMethods($class) {
+  function getMethods($class) {
     if ($class instanceof CliHelpMultiWrapper) {
       $class = $class::singleClass();
     }
-    $methods = $this->_getMethods($class);
+    $methods = $this->_getVisibleMethods($class);
     if ($this->filterByCurrentClass) {
       $methods = array_filter($methods, function(ReflectionMethod $method) use ($class) {
         return $method->class == $class;
@@ -285,6 +301,5 @@ TEXT
       ];
     }, $methods);
   }
-
 
 }

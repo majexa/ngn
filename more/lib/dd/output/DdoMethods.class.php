@@ -120,7 +120,8 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
         ],
         'h2ItemLinkIfText' => [
           'title' => 'Заголовок 2. Ссылка на запись, только если поле "text" не пустое',
-          'dddd' => '(isset($o->items[$id][`text`]) and empty($o->items[$id][`text`])) ? `<h2>`.$v.`</h2>` : `<h2><a href="`.$ddddItemLink.`">`.$v.`</a></h2>`'
+          //'dddd' => '(isset($o->items[$id][`text`]) and empty($o->items[$id][`text`])) ? `<h2>`.$v.`</h2>` : `<h2><a href="`.$ddddItemLink.`">`.$v.`</a></h2>`'
+          'dddd' => '$v'
         ],
         'h3ItemLinkIfText' => [
           'title' => 'Заголовок 3. Ссылка на запись, только если поле "text" не пустое',

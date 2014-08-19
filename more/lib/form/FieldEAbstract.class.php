@@ -212,12 +212,11 @@ use Options;
   }
 
   function typeJs() {
+    Sflm::frontend('css')->addLib("i/css/formEl/$this->type.css");
     if (!$this->useTypeJs) return '';
     Sflm::frontend('js')->addLib("formEl/$this->type", false);
     Sflm::frontend('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
-    //prr('Ngn.Form.El.'.ucfirst($this->type));
     Sflm::frontend('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
-    Sflm::frontend('css')->addLib("i/css/formEl/$this->type.css");
     if (!$this->form) return '';
     return "\n// ------- type: {$this->type} -------\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }

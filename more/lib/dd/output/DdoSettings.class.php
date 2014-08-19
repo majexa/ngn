@@ -5,6 +5,7 @@ class DdoSettings {
   protected $strName;
 
   function __construct($strName) {
+    Misc::checkString($strName);
     $this->strName = $strName;
   }
 

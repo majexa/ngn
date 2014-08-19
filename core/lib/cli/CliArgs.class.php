@@ -15,8 +15,14 @@ class CliArgs {
     }
     else {
       $this->class = $cliHelp->name2class($cliHelp->argv[0]);
-      $this->method = $cliHelp->argv[1];
-      $this->params = array_slice($cliHelp->argv, 2);
+      $methods = $cliHelp->_getVisibleMethods($this->class);
+      if (count($methods) == 1) {
+        $this->method = $methods[0]->name;
+        $this->params = array_slice($cliHelp->argv, 1);
+      } else {
+        $this->method = $cliHelp->argv[1];
+        $this->params = array_slice($cliHelp->argv, 2);
+      }
     }
     if (!preg_match('/[a-z0-9_]/i', $this->method)) throw new Exception("Error in method arg '{$this->method}'");
     Misc::checkEmpty($this->class, '$this->class');
