@@ -19,7 +19,9 @@ class Tt {
    * Выводит шаблон
    *
    * @param string $path
-   * @param string $data
+   * @param null $d
+   * @param bool $quietly
+   * @throws Exception
    */
   function tpl($path, $d = null, $quietly = false) {
     if (($tplPath = $this->exists($path)) !== false) {
@@ -68,8 +70,8 @@ class Tt {
    * Проверяет существует ли шаблон с указанным путём и если он
    * существует возвращает его путь, если нет - false.
    *
-   * @param   string Путь до шаблона
-   * @return  mixed
+   * @param string $path Путь до шаблона
+   * @return bool|string
    */
   function exists($path) {
     foreach (Ngn::$basePaths as $basePath) if (file_exists("$basePath/tpl/$path.php")) return "$basePath/tpl/$path.php";
@@ -77,6 +79,7 @@ class Tt {
   }
 
   function getUserTag($userId, $login, $tpl = '`<a href="`.Tt()->getUserPath($id).`">`.$login.`</a>`') {
+    throw new Exception('Depricated');
     if (!PageControllersCore::exists('userData')) return '<span class="user">'.$login.'</span>';
     else
       return St::dddd($tpl, [
@@ -86,31 +89,18 @@ class Tt {
   }
 
   function getUserTag2(array $user) {
+    throw new Exception('Depricated');
     return $this->getUserTag($user['id'], $user['login']);
   }
-
-  /*
-
-  function getStrControllerPath($controller, $strName, $quietly = false) {
-    static $paths;
-    if (isset($paths[$controller.$strName])) return $paths[$controller.$strName];
-    $path = db()->selectCell("SELECT path FROM pages WHERE controller=? AND strName=? ORDER BY id LIMIT 1", $controller, $strName);
-    if (!$path) {
-      if (!$quietly) Err::warning("Page with controller '$controller' not found");
-      return '';
-    }
-    $paths[$controller.$strName] = $path;
-    return $paths[$controller.$strName];
-  }
-  */
 
   /**
    * Возвращает URL с исключенными из него параметрами
    *
-   * @param string  URL
-   * @param array Параметры для исключения
+   * @param string $url URL
+   * @param array $params Параметры для исключения
+   * @return string
    */
-  function getUrlDeletedParams($url, $params) {
+  function getUrlDeletedParams($url, array $params) {
     $parts = parse_url($url);
     parse_str($parts['query'], $out);
     foreach ($out as $k => $v) if (!in_array($k, $params)) $newParams[$k] = $v;
@@ -119,19 +109,17 @@ class Tt {
 
   /**
    * Склеивает массив в строку с разделителями, помещая при этом значения
-   * массива в шаблон.
+   * массива в шаблон
    *
-   * @param   array Массив с перечислением
-   * @param   string Разделитель
-   * @param   string Шаблон
-   * @param   string Ключ необходим в том случае, если элементом массива является массив
+   * @param array $arr Массив с перечислением
+   * @param string $glue Разделитель
+   * @param string $tpl Шаблон
+   * @param null $key Ключ необходим в том случае, если элементом массива является массив
    *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
    *                  который необходимо использовать для склеивания
-   * @return  string  Склеенная по шаблону строка
+   * @return string Склеенная по шаблону строка
    */
   function enum($arr, $glue = ', ', $tpl = '$v', $key = null) {
-    //die2(func_get_args());
-    //prr(func_get_args());
     if (empty($arr) or !is_array($arr)) return '';
     foreach ($arr as $k => $v) {
       if ($key) $v = $v[$key];
