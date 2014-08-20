@@ -34,15 +34,6 @@ class TreeCommon {
     return $params;
   }
 
-  /*
-  static function flatSingleBranch(array $node) {
-    $nodes = [$node];
-    unset($nodes[0]['childNodes']);
-    if (!empty($node['childNodes'])) $nodes = Arr::append($nodes, self::flatSingleBranch($node['childNodes'][0]));
-    return $nodes;
-  }
-  */
-
   static function flatDddd(array $tree, $dddd) {
     $params = [];
     foreach ($tree as $node) {

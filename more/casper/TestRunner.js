@@ -70,8 +70,7 @@ module.exports = new Class({
     };
     this.casper.selectOption = function(selector, value) {
       this.evaluate(function(selector, value) {
-        document.querySelector(selector).selectedIndex = value;
-        return true;
+        document.querySelector(selector).value = value;
       }, {
         selector: selector,
         value: value
