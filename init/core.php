@@ -14,14 +14,14 @@ require_once CORE_PATH.'/lib/R.class.php'; // Registry Class
 require_once CORE_PATH.'/lib/LogWriter.class.php';
 require_once CORE_PATH.'/lib/Err.class.php';
 require_once CORE_PATH.'/lib/misc.func.php';
-require_once CORE_PATH.'/lib/Dir.class.php'; // Directory processing functions
 require_once CORE_PATH.'/lib/Arr.class.php'; // Array processing functions
-require_once CORE_PATH.'/lib/File.class.php'; // File processing functions
-require_once CORE_PATH.'/lib/Misc.class.php'; // Miscellaneous functions
-require_once CORE_PATH.'/lib/FileCache.class.php';
+require_once CORE_PATH.'/lib/file/Dir.class.php'; // Directory processing functions
+require_once CORE_PATH.'/lib/file/File.class.php'; // File processing functions
+require_once CORE_PATH.'/lib/file/FileCache.class.php';
 require_once CORE_PATH.'/lib/Lib.class.php'; // Librarys, classes
 require_once CORE_PATH.'/lib/O.class.php';
 require_once CORE_PATH.'/lib/Ngn.class.php';
+require_once CORE_PATH.'/lib/Misc.class.php'; // Miscellaneous functions
 
 date_default_timezone_set('Europe/Moscow');
 
