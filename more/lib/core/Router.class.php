@@ -81,7 +81,7 @@ use Options;
     else {
       Auth::setAuth();
       // нужно убрать это в контроллер
-      //if (Auth::$postAuth) redirect(Tt()->getPath(), true); // для json запроса никаких редиректов быть не должно
+      if (Auth::$postAuth) redirect(Tt()->getPath(), true); // для json запроса никаких редиректов быть не должно
     }
   }
 
