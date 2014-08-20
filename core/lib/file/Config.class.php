@@ -231,9 +231,6 @@ class Config {
 
   /**
    * Возвращает массив с данными конфигурации
-   *
-   * @param   string  Имя файла с массивом $_CONFIG и одновременно ключа в массиве $_CONFIG
-   * @return  array
    */
   static function getVar($key, $quietly = false, $merged = true) {
     if (isset(self::$vars[$key])) return self::$vars[$key];

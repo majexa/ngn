@@ -23,7 +23,8 @@ class FileVar {
     self::updateVar($file, $r);
   }
 
-  static function getVar($file) {
+  static function getVar($file, $quietly = false) {
+    if ($quietly and !file_exists($file)) return false;
     return require $file;
   }
 
