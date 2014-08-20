@@ -292,7 +292,7 @@ class Auth {
   }
 
   static function getAll() {
-    return ($r = self::setAuth()) ? $r->r : false;
+    return ($r = self::setAuth()) ? Arr::filterByKeys($r, ['id', 'login', 'email']) : false;
   }
 
 }
