@@ -21,9 +21,11 @@ else {
       <p>Пароль:</p>
       <input type="password" name="authPass">
     </div>
+    <? /*
     <ul>
       <li><a href="/default/userLostPass">Забыли пароль?</a></li>
     </ul>
+*/ ?>
     <input type="submit" value="Войти" class="btn"/>
     <? /*
     <table cellspacing="0" cellpadding="0">
