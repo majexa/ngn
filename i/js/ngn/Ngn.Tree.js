@@ -975,11 +975,9 @@ Ngn.Tree.implement({
     this.loadOptions = this.loadOptions || $lambda({});
     function success(json) {
       var childrenRoot = tree.wrapper.getElement('.ngn-tree-children-root');
-      if (childrenRoot) childrenRoot.destroy(); //set('html', '');
-      if (json.error) {
-        new Ngn.Dialog.Error({error: json.error});
-        return;
-      }
+      if (childrenRoot) childrenRoot.destroy();
+      if (json.error) throw new Error(json.error.message); //new Ngn.Dialog.Error({error: json.error});
+      if (json.tree === undefined) throw new Error('json has no tree');
       var parent = null;
       if (tree.forest) {
         tree.root = new Ngn.Tree.Node({
@@ -988,10 +986,10 @@ Ngn.Tree.implement({
         }, {});
         parent = tree.root;
       }
-      Ngn.Tree.Load.children(json, parent, tree);
+      Ngn.Tree.Load.children(json.tree, parent, tree);
       Ngn.Tree.Draw[tree.forest ? 'forestRoot' : 'root'](tree);
       tree.$getIndex();
-      if (!options.json) tree.fireEvent('load', [json]);
+      if (!options.json) tree.fireEvent('load', [json.tree]);
       return tree;
     }
     options = $extend($extend({

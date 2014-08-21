@@ -1,5 +1,8 @@
 var require = patchRequire(require);
 var Project = require('Project');
+var c = function(v) {
+  require('utils').dump(v);
+};
 
 module.exports = new Class({
   Extends: Project,
@@ -33,8 +36,8 @@ module.exports = new Class({
       this.thenOpen(runner.baseUrl + '/' + url, function() {
         this.evaluate(function() {
         });
-        runner.capture();
-        callback();
+        this.wait(10, callback);
+        //callback.delay(2000);
       });
     };
     this.casper.waitForPageLoaded = function(callback) {
@@ -50,7 +53,6 @@ module.exports = new Class({
       this.waitForSelector('.dialog .apeform', function() {
         this.evaluate(function() {
         });
-        runner.capture();
         callback();
       });
     };
@@ -58,7 +60,6 @@ module.exports = new Class({
       this.waitWhileSelector('.dialog .apeform', function() {
         this.evaluate(function() {
         });
-        runner.capture();
         callback();
       });
     };
@@ -135,16 +136,18 @@ module.exports = new Class({
   getNextMethod: function(currentMethodName) {
     if (!this.steps[this.i + 1]) {
       return function() {
+        if (this.isCallbackMethod(currentMethodName)) this.capture(currentMethodName + ' (step: ' + this.i + ')');
         this.log('There are no more steps', 2);
       }.bind(this);
     }
     return function() {
-      if (this.isCallbackMethod(currentMethodName)) this.capture();
+      if (this.isCallbackMethod(currentMethodName)) this.capture(currentMethodName + ' (step: ' + this.i + ')');
       this.nextStep();
     }.bind(this);
   },
 
   runStep: function() {
+    this.log('run step ' + this.i);
     this.processStep(this.steps[this.i]);
   },
 
