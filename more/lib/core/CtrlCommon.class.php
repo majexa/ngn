@@ -169,6 +169,7 @@ abstract class CtrlCommon {
     $this->paramActionN = $this->getParamActionN();
     $this->addSubControllers();
     $this->initAction();
+    if (Auth::$postAuth and !$this->isAjax) redirect(Tt()->getPath(), true);
     $this->setPostAction();
     $this->setActionParams();
     $this->beforeInit();
@@ -364,7 +365,6 @@ abstract class CtrlCommon {
       ) {
         if (empty($this->req->r['action'])) throw new EmptyException("\$this->req->r['action']");
         $this->setAction($this->req->r['action']);
-        //$possibleAction = $this->req->r['action'];
       }
     }
     // Определяем action, получая его из параметров строки запроса
