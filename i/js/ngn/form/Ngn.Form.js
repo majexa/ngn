@@ -56,7 +56,6 @@ Ngn.Form = new Class({
     // Если у первого элемента есть плейсхолдер, значит и у всех остальных. Инициализируем кроссбрауузерные плейсхолдеры (для IE9)
     var eFirstTextInput = this.eForm.getElement(Ngn.Frm.textSelector);
     if (eFirstTextInput && eFirstTextInput.get('placeholder')) new Ngn.PlaceholderSupport();
-
     this.eForm.getElements('input[type=text],input[type=password]').each(function(el) {
       el.addEvent('keypress', function(e) {
         if (e.key == 'enter') this.submit();
@@ -71,23 +70,6 @@ Ngn.Form = new Class({
       //opts.scrollElement = this.options.dialog.message;
     }
     this.validator = new Ngn.Form.Validator(this, opts);
-
-    /*
-    (function() {
-      this.validator.test('validate-multiUpload-required', this.validator.getFields()[1]);
-    }.bind(this)).delay(1000);
-    */
-
-    //c(this.validator.test('validate-multiUpload-required', this.validator.getFields()[0]));
-
-    /*
-     var eFirstError = this.eForm.getElement('.advice-wrapper');
-     if (eFirstError) {
-     (function() {
-     this.validator.getScrollFx().toElement(eFirstError.getParent());
-     }).delay(100, this);
-     }
-     */
   },
 
   initDynamicJs: function() {
@@ -97,9 +79,7 @@ Ngn.Form = new Class({
         onLoad: function() {
           var func = eval('Ngn.Frm.init.' + this.eForm.get('id'));
           if (func) func();
-          //(function() {
           this.fireEvent('jsComplete');
-          //}).delay(2000, this);
         }.bind(this)
       });
     }
@@ -211,7 +191,7 @@ Ngn.Form = new Class({
   initHtml5Upload: function() {
     this.uploadType = 'html5';
     this.eForm.getElements('input[type=file]').each(function(eInput) {
-      eInputValidator = new Element('input', {
+      var eInputValidator = new Element('input', {
         type: 'hidden',
         'class': eInput.hasClass('required') ? 'validate-multiUpload-required' : 'validate-multiUpload'
       }).inject(eInput, 'after');
@@ -233,10 +213,10 @@ Ngn.Form = new Class({
         }.bind(this)
       };
       if (!eInput.get('multiple')) {
-        this.upload = new Ngn.Form.Upload.Single(this.eForm, eInput, uploadOptions);
+        this.upload = new Ngn.Form.Upload.Single(this, eInput, uploadOptions);
       } else {
         uploadOptions.url += '&multiple=1';
-        this.upload = new Ngn.Form.Upload.Multi(this.eForm, eInput, uploadOptions);
+        this.upload = new Ngn.Form.Upload.Multi(this, eInput, uploadOptions);
       }
     }.bind(this));
   },
@@ -515,12 +495,13 @@ Ngn.Form.Validator = new Class({
   lastAdvices: {},
 
   makeAdvice: function(className, field, error, warn) {
+    var advice;
     var errorMsg = (warn) ? this.warningPrefix : this.errorPrefix;
     errorMsg += (this.options.useTitles) ? field.title || error : error;
     var cssClass = (warn) ? 'warning-advice' : 'validation-advice';
     var adviceWrapper = this.getAdvice(className, field);
     if (!adviceWrapper) {
-      var advice = new Element('div', {
+      advice = new Element('div', {
         html: errorMsg
       }).addClass('advice').addClass(cssClass);
       adviceWrapper = new Element('div', {
@@ -528,7 +509,7 @@ Ngn.Form.Validator = new Class({
       }).addClass('advice-wrapper').grab(advice);
       adviceWrapper.grab(new Element('div', {'class': 'corner'}), 'top').setStyle('z-index', 300);
     } else {
-      var advice = adviceWrapper.getElement('.advice');
+      advice = adviceWrapper.getElement('.advice');
       advice.set('html', errorMsg);
     }
     field.store('$moo:advice-' + className, adviceWrapper);
@@ -539,11 +520,14 @@ Ngn.Form.Validator = new Class({
   showNewAdvice: function(className, field, error) {
     var advice = this.getAdvice(className, field);
     if (!advice) {
-      var advice = this.makeAdvice(className, field, error);
+      advice = this.makeAdvice(className, field, error);
       this.insertAdvice(advice, field);
     }
     this.showAdvice(className, field);
     field.addEvent('keypress', function() {
+      this.hideAdvice(className, field);
+    }.bind(this));
+    field.addEvent('change', function() {
       this.hideAdvice(className, field);
     }.bind(this));
     field.focus();
@@ -587,6 +571,16 @@ Form.Validator.add('IsEmpty', {
       return ((element.get('value') == null) || (element.get('value').length == 0));
   }
 });
+
+Ngn.getReadableFileSizeString = function(fileSizeInBytes) {
+  var i = -1;
+  var byteUnits = [' Кб', ' Мб', ' Гб'];
+  do {
+    fileSizeInBytes = fileSizeInBytes / 1024;
+    i++;
+  } while (fileSizeInBytes > 1024);
+  return Math.max(fileSizeInBytes, 0.1).toFixed(0) + byteUnits[i];
+};
 
 Form.Validator.addAllThese([
   ['should-be-changed', {
@@ -682,28 +676,30 @@ Form.Validator.addAllThese([
   ['validate-request', {
     errorMsg: 'Дождитесь загрузки',
     test: function(element) {
-      if (element.get('value') == 'complete') return true;
-      return false;
+      return element.get('value') == 'complete' ? true : false;
     }
   }],
   ['validate-fancyUpload', {
     errorMsg: 'Файл ещё не загружен',
     test: function(element) {
-      if (element.get('value') == 'uploading') return false;
-      return true;
+      return element.get('value') == 'uploading' ? true : false;
     }
   }],
   ['validate-fancyUpload-required', {
     errorMsg: 'Файл не загружен',
     test: function(element) {
-      if (element.get('value') == 'complete') return true;
-      return false;
+      return element.get('value') == 'complete' ? true : false;
     }
   }],
   ['validate-multiUpload-required', {
     errorMsg: 'Файлы не выбраны',
     test: function(element) {
-      if (element.get('value')) return true;
+      return element.get('value') ? true : false;
+    }
+  }],
+  ['maxFileSizeExceeded', {
+    errorMsg: 'Превышен максимальный размер файла ' + Ngn.getReadableFileSizeString(Ngn.fileSizeMax),
+    test: function() {
       return false;
     }
   }]

@@ -26,6 +26,7 @@ Ngn.Request.File = new Class({
   },
 
   append: function(key, value) {
+    c([key, value]);
     if (!this.options.allowDublicates && this._formData[key]) return;
     this.formData.append(key, value);
     this._formData[key] = value;
@@ -33,12 +34,6 @@ Ngn.Request.File = new Class({
   },
 
   send: function(options) {
-    /*
-    if (!Object.getLength(this._formData)) {
-      this.fireEvent('empty');
-      return this;
-    }
-    */
     if (!this.check(options)) return this;
     this.options.isSuccess = this.options.isSuccess || this.isSuccess;
     this.running = true;

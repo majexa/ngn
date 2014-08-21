@@ -59,6 +59,9 @@ width: 200px;
 .apeform p.label {
 margin: 2px 0px 3px 0px;
 }
+.apeform .help {
+font-size: 10px;
+}
 
 /*--------- Element ---------*/
 .apeform .element {
@@ -95,10 +98,6 @@ margin-bottom: 0px;
 margin-right: 10px;
 }
 
-.apeform input[type=file] {
-float: left;
-margin-right: 10px;
-}
 .apeform .iconsSet {
 /*padding-top: 3px; сделать это более четким */
 }
@@ -364,7 +363,7 @@ position: absolute;
 left: 7px;
 padding-top: 9px;
 display: inline-block;
-max-width: 300px;
+max-width: 290px;
 }
 .advice-wrapper .corner {
 background: url(/i/img/black/corner.png) no-repeat;
@@ -411,4 +410,41 @@ text-align: center;
 .type_user input.ac {
 background: url(/i/img/icons/user.png) no-repeat 5px 5px;
 padding-left: 20px;
+}
+
+/*-------file------*/
+/*
+.apeform input[type=file] {
+float: left;
+margin-right: 10px;
+}
+*/
+.fileProgress {
+margin: 2px 0;
+height: 3px;
+border: 1px solid #CCC;
+border-radius: 3px;
+background: #FFD505;
+}
+/*
+.uploadFiles {
+clear: both;
+padding-top: 7px;
+padding-bottom: 7px;
+font-weight: bold;
+}
+*/
+.apeform .help {
+margin-top: 2px;
+clear: both;
+}
+
+.fileDroppable {
+clear: both;
+width: 100%;
+padding: 10px;
+background: url(/i/img/black/drag-bg.gif);
+background-color: #FFD515;
+border: 1px solid #CCC;
+border-radius: 10px;
 }
