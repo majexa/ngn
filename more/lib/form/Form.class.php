@@ -11,7 +11,7 @@ class Form {
     'title'       => '<p class="label"><span class="ttl">{title}</span>{required}<span>:</span></p>',
     'error'       => '<div class="advice-wrapper static-advice" style="z-index:300"><div class="corner"></div><div class="validation-advice">{error}</div></div>',
     'globalError' => '<div class="element errorRow padBottom"><div class="validation-advice">{error}</div></div>',
-    'help'        => '<div class="clear"><!-- --></div><div class="help"><small>{help}</small></div>',
+    'help'        => '<div class="clear"><!-- --></div><div class="help">{help}</div>',
     'required'    => '<b class="reqStar" title="Обязательно для заполнения" style="cursor:help">*</b>',
     'element'     => '' // используется в ф-ии html(), если флаг $this->isDdddTpl = true
   ];
