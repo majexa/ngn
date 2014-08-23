@@ -75,7 +75,7 @@ abstract class SflmFrontend {
   }
 
   function getTags() {
-    if (!$this->stored) throw new Exception('Frontend must be stored before getting tags');
+    $this->checkStored();
     return $this->base->getTags($this->name, $this->_code());
   }
 
@@ -92,7 +92,7 @@ abstract class SflmFrontend {
    * @throws Exception
    */
   function store($source = 'direct') {
-    $this->checkStored();
+    $this->checkNotStored();
     $this->storeBacktrace = getBacktrace(false);
     if (!$this->newPaths) {
       $this->stored = true;
@@ -144,11 +144,15 @@ abstract class SflmFrontend {
   }
 
   protected function checkStored() {
+    if (!$this->stored) throw new Exception('Frontend must be stored before getting tags');
+  }
+
+  protected function checkNotStored() {
     if ($this->stored) throw new Exception("Can't store after frontend was already stored. Reset or rerun frontend. Backtrace of first call:\n".$this->storeBacktrace);
   }
 
   function addLib($lib, $strict = false) {
-    $this->checkStored();
+    $this->checkNotStored();
     if (!$strict and !$this->base->exists($lib)) {
       Sflm::output("Lib '$lib' does not exists");
       return $this;
@@ -177,7 +181,7 @@ abstract class SflmFrontend {
 
   function getDeltaUrl() {
     if (!$this->newPaths) return false;
-    $this->store('SflmFrontend::getDeltaUrl');
+    $this->checkStored();
     return $this->base->getUrl($this->name.'new', $this->base->extractCode($this->newPaths), true);
   }
 
