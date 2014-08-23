@@ -71,8 +71,9 @@ Ngn.Form.Upload.Single = new Class({
   },
 
   afterInit: function() {
-    if (this.options.loadedFiles[this.eInput.get('name')])
+    if (this.options.loadedFiles[this.eInput.get('name')]) {
       this.eCaption.set('html', 'Загружен: ' + this.options.loadedFiles[this.eInput.get('name')].name);
+    }
   },
 
   send: function() {

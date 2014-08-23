@@ -3,6 +3,7 @@
 /**
  * options[currentFile] - текущий файл (путь относительно UPLOAD_PATH), находящийся в этом поле
  * options[value] - загруженный в результате поста
+ * options[postValue] - отсюда беруться данные для сохранения данных. Например: DmfaFile
  */
 class FieldEFile extends FieldEFileBase {
 
@@ -17,14 +18,7 @@ class FieldEFile extends FieldEFileBase {
     if ($this->form->fromRequest) {
       $files = isset($this->form->options['files']) ? $this->form->options['files'] : $this->form->req->files;
       $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
-      /*
-      $uploadedFileValue = null;
-      if (!empty($files)) {
-        $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
-        if (!$uploadedFileValue) die2([get_class($this), $files, $this->options['name']]);
-        empty($this->options['multiple']) ? $this->processSingle($uploadedFileValue) : $this->processMultiple($uploadedFileValue);
-      }
-      */
+      $this->options['value'] = $uploadedFileValue['name']; // нужно для клиентской валидации
     }
     else {
       $uploadedFileValue = !empty($this->options['value']) ? $this->options['value'] : null;
@@ -65,13 +59,11 @@ class FieldEFile extends FieldEFileBase {
     else {
       // 1 состояние
       $this->options['postValue'] = $uploadedFileValue;
-      // всё остальное - 2-е
     }
   }
 
   protected function processMultiple(&$uploadedFileValue) {
     if (empty($uploadedFileValue)) return;
-
     foreach ($uploadedFileValue as &$v) $this->processSingle($v);
   }
 

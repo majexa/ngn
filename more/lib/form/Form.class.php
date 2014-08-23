@@ -852,6 +852,7 @@ class Form {
   public $tinyInitialized = false;
 
   protected function jsInlineUpload() {
+    //die2($this->options[);
     $opt = empty($this->options['uploadOptions']) ? '' : Arr::jsObj($this->options['uploadOptions']);
     return "
 (function() {

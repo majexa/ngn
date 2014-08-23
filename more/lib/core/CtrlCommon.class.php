@@ -150,7 +150,7 @@ abstract class CtrlCommon {
   function __call($method, array $param = []) {
     foreach ($this->subControllers as $subCtrl) {
       if (is_callable([$subCtrl, $method])) {
-        if ($subCtrl->disable) return;
+        if ($subCtrl->disable) return false;
         return call_user_func_array([$subCtrl, $method], $param);
       }
     }
@@ -197,9 +197,13 @@ abstract class CtrlCommon {
     $this->afterAction();
     $this->extendTplData();
     $this->prepareTplPath();
+    $this->sflmStore();
+    return $this;
+  }
+
+  protected function sflmStore() {
     Sflm::frontend('js')->store('afterAction');
     Sflm::frontend('css')->store('afterAction');
-    return $this;
   }
 
   protected function beforeInit() {
@@ -676,12 +680,14 @@ abstract class CtrlCommon {
     return $form;
   }
 
+  /*
   protected function processForm(Form $form) {
     $this->d['tpl'] = 'common/form';
     if ($form->update()) return true;
     $this->d['form'] = $form->html();
     return false;
   }
+  */
 
   protected function rss(array $header, array $items) {
     header('Content-type: text/xml; charset='.CHARSET);
