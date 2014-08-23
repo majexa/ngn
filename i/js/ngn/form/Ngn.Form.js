@@ -102,7 +102,7 @@ Ngn.Form = new Class({
       if (!eFileNav) return;
       eFileNav.inject(el.getElement('.label'), 'top');
     });
-    Ngn.Lightbox.add(this.eForm.getElements('a.lightbox'));
+    Ngn.Milkbox.add(this.eForm.getElements('a.lightbox'));
   },
 
   initActive: function() {
