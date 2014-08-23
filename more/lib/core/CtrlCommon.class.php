@@ -202,6 +202,7 @@ abstract class CtrlCommon {
   }
 
   protected function sflmStore() {
+    if (!empty($this->req->options['disableSflmStore'])) return;
     Sflm::frontend('js')->store('afterAction');
     Sflm::frontend('css')->store('afterAction');
   }

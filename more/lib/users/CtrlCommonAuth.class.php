@@ -20,7 +20,10 @@ class CtrlCommonAuth extends CtrlCammon {
 
   protected function processFormTabs(array $paths, $tpl = 'common/dialogFormTabs') {
     foreach ($paths as $uri) {
-      $ctrl = (new RouterManager(['req' => new Req(['uri' => $uri])]))->router()->dispatch()->controller;
+      $ctrl = (new RouterManager(['req' => new Req([
+          'uri' => $uri,
+          'disableSflmStore' => true
+        ])]))->router()->dispatch()->controller;
       $form = [
         'title' => $ctrl->json['title'],
         'html' => $ctrl->json['form'],

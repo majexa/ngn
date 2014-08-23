@@ -81,6 +81,7 @@ Ngn.aaa
 
   function testEmptyNewPathsAfterReset() {
     (new FieldEWisiwigSimpleLinks(['name' => 'dummy']))->typeJs();
+    Sflm::frontend('js')->store();
     Sflm::frontend('js')->getDeltaUrl();
     Sflm::setFrontend('js');
     $newPaths = Sflm::frontend('js')->newPaths;
