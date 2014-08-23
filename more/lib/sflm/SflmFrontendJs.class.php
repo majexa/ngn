@@ -43,4 +43,9 @@ class SflmFrontendJs extends SflmFrontend {
     return $this->base->getPaths('core', true);
   }
 
+  function store($source = 'direct') {
+    parent::store($source);
+    $this->classes->frontendClasses->store();
+  }
+
 }

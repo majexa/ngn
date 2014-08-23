@@ -4,8 +4,9 @@
     <?
     if (!empty($d['topBtns'])) {
       foreach ($d['topBtns'] as $v) {
-        print '<a href="'.(empty($v['link']) ? '#' : $v['link']). //
-          '" rel="nofollow" class="btn btn1'.(empty($v['class']) ? '' : ' '.$v['class']).'"'. //
+        print '<a href="'.(empty($v['link']) ? '#' : $v['link']).'"'. //
+          (empty($v['data']) ? '' : Html::dataParams($v['data'])). //
+          ' rel="nofollow" class="btn btn1'.(empty($v['class']) ? '' : ' '.$v['class']).'"'. //
           (empty($v['id']) ? '' : ' id="'.$v['id'].'"').'><span>'.$v['title'].'</span></a>';
       }
     }

@@ -103,7 +103,7 @@ abstract class CtrlCommon {
 
   public $actionDisabled = false;
 
-  protected $afterActionDisabled = false;
+  //protected $afterActionDisabled = false;
 
   public $allowRequestAction = true;
 
@@ -162,7 +162,7 @@ abstract class CtrlCommon {
     }
   }
 
-  function beforeAction() {
+  protected function beforeAction() {
     if ($this->error404) return;
     $this->initParams();
     $this->setAuthUserId();
@@ -193,10 +193,12 @@ abstract class CtrlCommon {
     if (!$this->actionDisabled) {
       $this->actionResult = $this->action();
       $this->setDefaultTpl();
-      if (!$this->afterActionDisabled) $this->afterAction();
     }
+    $this->afterAction();
     $this->extendTplData();
     $this->prepareTplPath();
+    Sflm::frontend('js')->store('afterAction');
+    Sflm::frontend('css')->store('afterAction');
     return $this;
   }
 
@@ -442,8 +444,8 @@ abstract class CtrlCommon {
     if ($action !== false) {
       $this->isAction = true;
       if ($this->isJson) {
-        $oF = $this->actionJson($action, $actionMethod);
-        if (is_object($oF) and is_a($oF, 'Form')) return $this->jsonFormAction($oF);
+        $form = $this->actionJson($action, $actionMethod);
+        if (is_object($form) and $form instanceof Form) return $this->jsonFormAction($form);
       }
       else {
         return $action->$actionMethod();
@@ -635,6 +637,7 @@ abstract class CtrlCommon {
 
   function error404($title = 'Страница не найдена', $text = '') {
     throw new Exception($title);
+    /*
     // я думаю, это лишний механизм
     // вполне можно было бы обойтись выкидыванием эксепшенов,
     // а шаблоны переопределять по существующим путям
@@ -656,6 +659,7 @@ abstract class CtrlCommon {
     ];
     $this->d['tpl'] = 'errors/404';
     $this->d['text'] = $text;
+    */
   }
 
   protected function jsonFormAction(Form $form) {

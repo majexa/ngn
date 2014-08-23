@@ -24,25 +24,25 @@ class SflmJsFrontendClasses extends ArrayAccesseble {
     //}
     Sflm::output("Add frontend class '$class' (src: $source)");
     $this->r[] = $class;
-    $this->afterAdd($class);
+    //$this->afterAdd($class);
     return true;
   }
 
   function processCode($code, $source) {
-    $n = 0;
+    //$n = 0;
     foreach (SflmJsClasses::parseValidClassesDefinition($code) as $class) {
       if (in_array($class, $this->r)) continue;
       Sflm::output("Add frontend class '$class' (src: $source)");
       $this->r[] = $class;
-      $n++;
+      //$n++;
     }
-    if ($n) $this->afterAdd("code from $source");
+    //if ($n) $this->afterAdd("code from $source");
   }
 
-  protected function afterAdd($caption) {
-    $this->store();
-    if ($this->frontend->incrementVersion()) Sflm::output("Increment version on storing '$caption'");
-  }
+  //protected function afterAdd($caption) {
+    //$this->store();
+    //if ($this->frontend->incrementVersion()) Sflm::output("Increment version on storing '$caption'");
+  //}
 
   protected function init() {
     if (($r = $this->retrieve())) {
@@ -60,7 +60,7 @@ class SflmJsFrontendClasses extends ArrayAccesseble {
     return SflmCache::c()->load('jsFrontendClasses'.$this->frontend->key());
   }
 
-  protected function store() {
+  function store() {
     if (!$this->r) Sflm::output('Storing existing objects. Nothing to store. Skipped');
     SflmCache::c()->save($this->r, 'jsFrontendClasses'.$this->frontend->key());
   }

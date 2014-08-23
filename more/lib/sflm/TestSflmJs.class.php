@@ -71,19 +71,12 @@ Ngn.aaa
     $this->assertTrue($code != $code2);
   }
 
-  function testExistsInExistingObjects() {
-    Sflm::frontend('js')->addClass('Ngn.Frm');
+  function testClassExistsAfterReset() {
+    Sflm::frontend('js')->addClass('Ngn.Sub');
+    Sflm::frontend('js')->store();
     Sflm::setFrontend('js');
-    $this->assertTrue(Sflm::frontend('js')->classes->frontendClasses->exists('Ngn.Frm'));
-  }
-
-  function testPathsCaching() {
-    Sflm::frontend('js')->addClass('Ngn.Sub.A'); // добавляем объект
-    Sflm::frontend('js')->store(); //               сторим
-    Sflm::setFrontend('js'); //                     резетим. нельзя получать код больше одного раза во время одного рантайма
-    $this->assertTrue(Sflm::frontend('js')->exists('Ngn.Sub.A'));
-    Sflm::clearCache();
-    $this->assertFalse(Sflm::frontend('js')->exists('Ngn.Sub.A'));
+    $this->assertTrue(Sflm::frontend('js')->classes->frontendClasses->exists('Ngn.Sub'));
+    $this->assertTrue(Arr::strExists(Sflm::frontend('js')->getPaths(), 'Ngn.Sub.js'));
   }
 
   function testEmptyNewPathsAfterReset() {

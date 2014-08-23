@@ -46,6 +46,10 @@ use Options;
     if (!is_object($this->controller)) throw new Exception('Controller not initialized');
     // В этом месте, после диспатчинга контроллера, может произойти его подмена,
     // т.е. контроллер $this->controller заменит себя другим контроллером или, другими словами, передаст управление
+
+    $this->controller->dispatch();
+    return $this;
+
     if (get_class($this->controller) == 'Ctrl404') {
       $this->controller->dispatch();
     } else {
