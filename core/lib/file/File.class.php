@@ -35,6 +35,7 @@ class File {
   }
 
   static function getMime($file) {
+    File::checkExists($file);
     $r = getOS() == 'win' ? finfo_open(FILEINFO_MIME) : //finfo_open(FILEINFO_MIME, '/usr/share/file/magic');
       finfo_open(FILEINFO_MIME);
     $info = finfo_file($r, $file);
