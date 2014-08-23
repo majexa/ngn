@@ -33,8 +33,7 @@ class RouterScripts extends RouterCommon {
       // Для JavaScript'ов и CSS:
       // - включить PLAIN TEXT режим
       // - выключить нотисы
-      $staticFilesMode = (isset($this->req->params[1]) and
-        ($this->req->params[1] == 'js' or $this->req->params[1] == 'css')) ? true : false;
+      $staticFilesMode = (isset($this->req->params[1]) and ($this->req->params[1] == 'js' or $this->req->params[1] == 'css')) ? true : false;
       if ($staticFilesMode) R::set('plainText', true);
       $controller = new CtrlScripts($this);
       if ($staticFilesMode) Err::noticeSwitch(true);

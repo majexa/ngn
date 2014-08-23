@@ -174,13 +174,8 @@ Ngn.Form = new Class({
     this.uploadOptions = opt;
     if ('FormData' in window) this.initHtml5Upload();
     if (this.uploadType == 'default') {
-      if (Browser.Plugins.Flash.version && opt && opt.url) {
-        this.uploadType = 'fancy';
-        this.initFancyUpload();
-      } else if (this.options.dialog) {
-        this.uploadType = 'iframe';
-        this.initIframeRequest();
-      }
+      this.uploadType = 'iframe';
+      this.initIframeRequest();
     }
   },
 
@@ -191,9 +186,10 @@ Ngn.Form = new Class({
   initHtml5Upload: function() {
     this.uploadType = 'html5';
     this.eForm.getElements('input[type=file]').each(function(eInput) {
+      var cls = eInput.get('multiple') ? 'multiUpload' : 'upload';
       var eInputValidator = new Element('input', {
         type: 'hidden',
-        'class': eInput.hasClass('required') ? 'validate-multiUpload-required' : 'validate-multiUpload'
+        'class': eInput.hasClass('required') ? 'validate-' + cls + '-required' : 'validate-' + cls
       }).inject(eInput, 'after');
       if (eInput.get('data-file')) eInputValidator.set('value', 1);
       var name = eInput.get('name');
@@ -279,71 +275,12 @@ Ngn.Form = new Class({
     });
   },
 
-  fuOptions: null,
-
-  initFancyUpload: function() {
-    this.fuOptions = $merge({
-      chooseBtnTitle: 'Выбрать',
-      hideHelp: false
-    }, this.uploadOptions);
-    this._initFancyUpload(this.eForm);
-  },
-
-  /**
-   * options: {
-   *   url: 'http://asdasd'
-   *   loadedFiles: [ ... ]   // $_FILES format
-   * }
-   */
-  _initFancyUpload: function(eContainer) {
-    var name, eDiv, eBtn, eList, eInputComplete, opts, options;
-    eContainer.getElements('input[type=file]').each(function(eInput) {
-      // Не обрабатываем файлы внутри fieldSet'а
-      if (eInput.getParent('.fieldSet')) return;
-      if (this.fuOptions.hideHelp)
-        eInput.getParent().getElement('.help').setStyle('display', 'none');
-      // Заменяем стандартный input элементами интерфейса FancyUpload
-      name = eInput.get('name');
-      eDiv = new Element('div', {'class': 'fu-item'});
-      eList = new Element('ul', {'class': 'fu-list'}).inject(eDiv);
-      eBtn = Ngn.btn1(this.fuOptions.chooseBtnTitle, 'btn2');
-      eBtn.inject(eDiv, 'top');
-      eDiv.inject(eInput, 'after');
-      eInputComplete = Elements.from('<input type="hidden" class="' + (eInput.hasClass('required') ? 'validate-fancyUpload-required' : 'validate-fancyUpload') + '">')[0].inject(eDiv);
-      // Если файл уже загружен (режим редактирования)
-      if (eInput.get('data-file')) {
-        eInputComplete.set('value', 'complete');
-      }
-      var eFileNav = eInput.getParent('.element').getElement('.fileNav');
-      options = $merge(this.fuOptions, {
-        onOpening: function() {
-          if (eFileNav) eFileNav.setStyle('display', 'none');
-        },
-        onFileStart: function() {
-          eInputComplete.set('value', 'uploading');
-        },
-        onComplete: function(data) {
-          eInputComplete.set('value', 'complete');
-          this.validator.validateField(eInputComplete, true);
-        }.bind(this)
-      });
-      eInput.dispose();
-      opts = $merge({}, options);
-      opts.url = opts.url.replace('{fn}', name); // Заменяем строку {fn} на имя поля
-      opts.loadedFiles = [];
-      if (options.loadedFiles && options.loadedFiles[name])
-        opts.loadedFiles[0] = options.loadedFiles[name];
-      new Ngn.UploadAttach(eList, eBtn, opts);
-    }.bind(this));
-  },
-
   initIframeRequest: function() {
     this.iframeRequest = new Ngn.IframeFormRequest.JSON(this.eForm);
     return this.iframeRequest;
   },
 
   addElements: function(eRow) {
-    if (this.uploadType == 'fancy') this._initFancyUpload(eRow);
     eRow.getElements('.element').each(function(el) {
       Ngn.Form.ElInit.factory(this, Ngn.Form.getElType(el));
     }.bind(this));
@@ -565,10 +502,13 @@ Ngn.Form.Validator = new Class({
 Form.Validator.add('IsEmpty', {
   errorMsg: false,
   test: function(element) {
-    if (element.type == 'select-one' || element.type == 'select')
-      return !(element.selectedIndex >= 0 && element.options[element.selectedIndex].value != ''); else if (element.type == 'file')
-      return element.get('data-file') == null; else
+    if (element.type == 'select-one' || element.type == 'select') {
+      return !(element.selectedIndex >= 0 && element.options[element.selectedIndex].value != '');
+    } else if (element.type == 'file') {
+      return element.get('data-file') == null;
+    } else {
       return ((element.get('value') == null) || (element.get('value').length == 0));
+    }
   }
 });
 
@@ -679,16 +619,10 @@ Form.Validator.addAllThese([
       return element.get('value') == 'complete' ? true : false;
     }
   }],
-  ['validate-fancyUpload', {
-    errorMsg: 'Файл ещё не загружен',
+  ['validate-upload-required', {
+    errorMsg: 'Файл не выбран',
     test: function(element) {
-      return element.get('value') == 'uploading' ? true : false;
-    }
-  }],
-  ['validate-fancyUpload-required', {
-    errorMsg: 'Файл не загружен',
-    test: function(element) {
-      return element.get('value') == 'complete' ? true : false;
+      return element.get('value') ? true : false;
     }
   }],
   ['validate-multiUpload-required', {
