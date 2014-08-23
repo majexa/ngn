@@ -105,7 +105,6 @@ class Ddo {
   protected function initTpls() {
     foreach (['ddddByType' /*, 'ssssByType', 'tplPathByType'*/] as $type) {
       $r = Config::getVar("ddo/$type.default");
-      // if (($r2 = Config::getVar("ddo/$type.default.{$this->layoutName}", true)) !== false) $r = array_merge($r, $r2);
       if (($r2 = Config::getVar("ddo/$type", true)) !== false) $r = array_merge($r, $r2);
       if ($this->list and ($r2 = Config::getVar("ddo/$type.list", true)) !== false) {
         $r = array_merge($r, $r2);
