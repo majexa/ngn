@@ -27,8 +27,8 @@ module.exports = new Class({
     this.casper.capture('/home/user/ngn-env/rumax/web/captures/' + id + '.png', {
       top: 0,
       left: 0,
-      width: 750,
-      height: 450
+      width: 950,
+      height: 500
     });
     this.log('CAPTURED', 3);
     require('child_process').execFile('run', ['rumax/ping', 'id=' + id], null, function(err, stdout, stderr) {

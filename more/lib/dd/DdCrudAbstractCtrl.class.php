@@ -38,11 +38,15 @@ use ObjectProcessorCtrl;
   }
 
   protected function ddo() {
+    return $this->objectProcess(new Ddo($this->getStrName(), $this->getDdLayout()), 'ddo');
+  }
+
+  protected function ddoEdit() {
     return $this->objectProcess(new DdoAdmin($this->getStrName(), $this->getDdLayout()), 'ddo');
   }
 
   protected function getGrid() {
-    return Ddo::getGrid($this->items()->getItems(), $this->ddo());
+    return Ddo::getGrid($this->items()->getItems(), $this->ddoEdit());
   }
 
   protected $im;

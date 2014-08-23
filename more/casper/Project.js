@@ -12,6 +12,10 @@ module.exports = new Class({
     if (!this.casper.cli.options.projectDir) throw new Error('option "projectDir" is required');
     this.projectDir = this.casper.cli.options.projectDir;
     if (!require('fs').exists(this.projectDir)) throw new Error('folder "' + this.projectDir + '" does not exists');
+    this.casper.options.viewportSize = {
+      width: 1200,
+      height: 500
+    };
     this.casper.options.pageSettings = {
       //loadPlugins: false,
       //loadImages: false
