@@ -71,12 +71,11 @@ abstract class SflmFrontend {
   }
 
   function _code() {
-    // в этой точке происходит генерация неконсистентного (с т.з. используемых классов) кода
     return $this->base->extractCode($this->getPaths());
   }
 
   function getTags() {
-    $this->store('SflmFrontend::getTags');
+    if (!$this->stored) throw new Exception('Frontend must be stored before getting tags');
     return $this->base->getTags($this->name, $this->_code());
   }
 
@@ -86,10 +85,18 @@ abstract class SflmFrontend {
 
   protected $stored = false;
 
+  /**
+   * Сохраняет все новые пути фронтенда в кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего
+   *
+   * @param string $source
+   * @throws Exception
+   */
   function store($source = 'direct') {
-    if ($this->stored) throw new Exception("Can't store after frontend was already stored. Reset or rerun frontend");
-    if (!$this->changed) {
-      Sflm::output("No changes. Storing skipped");
+    $this->checkStored();
+    $this->storeBacktrace = getBacktrace(false);
+    if (!$this->newPaths) {
+      $this->stored = true;
+      Sflm::output("No new paths. Storing skipped");
       return;
     }
     Sflm::output("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
@@ -99,6 +106,8 @@ abstract class SflmFrontend {
       $this->stored = true;
     }
   }
+
+  protected $storeBacktrace;
 
   function storePaths() {
     SflmCache::c()->save($this->getPaths(), $this->pathsCacheKey());
@@ -134,10 +143,12 @@ abstract class SflmFrontend {
     if ($strict) throw new Exception("Global lib '$lib' does not exists");
   }
 
-  protected $changed = false;
+  protected function checkStored() {
+    if ($this->stored) throw new Exception("Can't store after frontend was already stored. Reset or rerun frontend. Backtrace of first call:\n".$this->storeBacktrace);
+  }
 
   function addLib($lib, $strict = false) {
-    if ($this->stored) throw new Exception("Can't add after frontend was stored. Reset or rerun frontend");
+    $this->checkStored();
     if (!$strict and !$this->base->exists($lib)) {
       Sflm::output("Lib '$lib' does not exists");
       return $this;
@@ -162,7 +173,6 @@ abstract class SflmFrontend {
     Sflm::output('Adding path '.$path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
-    $this->changed = true;
   }
 
   function getDeltaUrl() {
