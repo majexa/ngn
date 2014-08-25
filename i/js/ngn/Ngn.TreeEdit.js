@@ -4,7 +4,7 @@
 
   options: {
     id: 'te',
-    enableStorage: true,
+    enableStorage: false,
     onTreeLoad: null,
     folderOpenIcon: 'ngn-tree-folder-open-icon',  // default css class open icon
     folderCloseIcon: 'ngn-tree-folder-close-icon', // default css class close icon
