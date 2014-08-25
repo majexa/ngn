@@ -21,7 +21,7 @@ class FieldEDdTagsTreeMultiselect extends FieldEText {
   }
 
   static function getTplData(DdTagsTagsTree $tags, $fieldName, $value, $parentId = null, $forceNodesLimit = false) {
-    $tree = $tags->getTree($parentId);
+    $tree = $tags->_getTree($parentId);
     if (!$forceNodesLimit and $tags->getNodesTotalCount() > 200) {
       foreach ($tree as &$v) {
         if (!empty($v['childNodes'])) {

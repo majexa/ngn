@@ -32,11 +32,11 @@ class SubPaTagsTree extends SubPa {
   }
   
   function action_json_move() {
-    $this->ctrl->json = O::get('NgnTree')->setData($this->getTags()->getTree())->getTree();
+    $this->ctrl->json = (new ClientTree($this->getTags()))->getTree();
   }
   
   function action_json_getTree() {
-    $this->ctrl->json = O::get('NgnTree')->setData($this->getTags()->getTree())->getTree();
+    $this->ctrl->json = (new ClientTree($this->getTags()))->getTree();
   }
 
 }

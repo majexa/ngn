@@ -1,25 +1,56 @@
 <?php
 
-class DdTagsTagsTree extends DdTagsTagsBase {
+class DdTagsTagsTree extends DdTagsTagsBase implements TreeInterface {
+
+  function getTree() {
+    return db()->select("
+    SELECT
+      id,
+      parentId,
+      title,
+      name,
+      groupName,
+      cnt,
+      id       AS ARRAY_KEY,
+      parentId AS PARENT_KEY
+    FROM {$this->group->table}".$this->getSelectCond()->all());
+  }
+
+  function childrenKey() {
+    return 'childNodes';
+  }
+
+  function getRoot() {
+    throw new Exception('not implemented. change TreeInterface');
+  }
 
   protected $curParentIds, $parentIds;
 
+  function _getTree($parentId = null) {
+    $tree = $this->_getTree();
+    if ($parentId !== null) {
+      if (($node = $this->findNode($parentId, $tree))) return $node['childNodes'];
+    }
+    return $tree;
+  }
+
   /**
    * Возвращает ID-шники родительских тэгов из указанных тэгов
+   * Пример:
+   * $this->getParentIds([3, 5])
+   * вернёт:
+   * [
+   *   [
+   *     51, 34, 3
+   *   ],
+   *   [
+   *     43, 12, 6
+   *   ]
+   * ]
    *
-   * @param   array   ID-шники детей
-   * @return  array   Родительские ID-шники, группированые по ID-шникам детей
-   *                  Пример:
-   *                  $this->getParentIds([3, 5])
-   *                  вернёт:
-   *                  [
-   *                    [
-   *                      51, 34, 3
-   *                    ],
-   *                    [
-   *                      43, 12, 6
-   *                    ]
-   *                  ]
+   * @param array $ids ID-шники детей
+   * @return array
+   * @throws Exception
    */
   function getParentIds(array $ids) {
     if (!$ids) return [];
@@ -41,8 +72,10 @@ class DdTagsTagsTree extends DdTagsTagsBase {
    * Производит поиск узла с указанным ID в дереве
    * Сохраняет в массив $this->parentIds все родительские ID и ID самого узла
    *
-   * @param   array     Массив с деревом
-   * @param   integer   ID искомого узла
+   * @param array $nodes Массив с деревом
+   * @param integer $id ID искомого узла
+   * @return mixed
+   * @throws NotFoundException
    */
   private function setParentIds(array $nodes, $id) {
     Misc::checkNumeric($id);
@@ -73,30 +106,8 @@ class DdTagsTagsTree extends DdTagsTagsBase {
     return db()->selectCell("SELECT COUNT(*) FROM {$this->group->table}".$this->getSelectCond()->all());
   }
 
-  function getTree($parentId = null) {
-    $tree = $this->_getTree();
-    if ($parentId !== null) {
-      if (($node = $this->findNode($parentId, $tree))) return $node['childNodes'];
-    }
-    return $tree;
-  }
-
-  protected function _getTree() {
-    return db()->select("
-    SELECT
-      id,
-      parentId,
-      title,
-      name,
-      groupName,
-      cnt,
-      id       AS ARRAY_KEY,
-      parentId AS PARENT_KEY
-    FROM {$this->group->table}".$this->getSelectCond()->all());
-  }
-
   /**
-   * @param miexed Один или несколько идентификаторов
+   * @param integer|array $parentId Один или несколько идентификаторов
    * @return array
    */
   function getTags($parentId) {
@@ -188,13 +199,13 @@ class DdTagsTagsTree extends DdTagsTagsBase {
   }
 
   /**
-   * @param integer Кого
-   * @param integer Куда
-   * @param integer После кого
+   * @param integer $id Кого
+   * @param integer $toId Куда
+   * @param string $where После кого
    */
   function move($id, $toId, $where = 'after') {
     $oldParentTagIds = $this->getParentIds2($id, false);
-    NgnTree::move($this, $this->group->table, $id, $toId, $where, [
+    ClientTree::move($this, $this->group->table, $id, $toId, $where, [
       'strName'   => $this->group->strName,
       'groupName' => $this->group->name
     ]);

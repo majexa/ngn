@@ -1,6 +1,6 @@
 <?php
 
-class DbTree implements DbTreeInterface {
+class DbTree implements TreeInterface {
 
   /**
    * @var string
@@ -13,13 +13,6 @@ class DbTree implements DbTreeInterface {
   protected $tree;
 
   /**
-   * Ключ массива с детьми
-   *
-   * @var string
-   */
-  public $childrenKey = 'children';
-
-  /**
    * @var DbCond
    */
   public $cond;
@@ -27,6 +20,10 @@ class DbTree implements DbTreeInterface {
   function __construct($table) {
     $this->table = $table;
     $this->cond = new DbCond();
+  }
+
+  function childrenKey() {
+    return 'children';
   }
 
   function getParentId($id) {
@@ -40,7 +37,7 @@ class DbTree implements DbTreeInterface {
   protected function getTreeR($id) {
     if (!($children = $this->getChildren($id))) return [];
     foreach ($children as $k => $v) {
-      $children[$k][$this->childrenKey] = $this->getTreeR($v['id']);
+      $children[$k][$this->childrenKey()] = $this->getTreeR($v['id']);
     }
     return $children;
   }
@@ -62,7 +59,7 @@ class DbTree implements DbTreeInterface {
    */
   function getTree() {
     if (($tree = $this->getRoot()) === false) return [];
-    $tree[$this->childrenKey] = $this->getTreeR($tree['id']);
+    $tree[$this->childrenKey()] = $this->getTreeR($tree['id']);
     return $tree;
   }
 
@@ -71,7 +68,7 @@ class DbTree implements DbTreeInterface {
     $trees = [];
     foreach ($this->getChildren(0) as $node) {
       $trees[$n] = $node;
-      $trees[$n][$this->childrenKey] = $this->getTreeR($node['id']);
+      $trees[$n][$this->childrenKey()] = $this->getTreeR($node['id']);
       $n++;
     }
     return $trees;
