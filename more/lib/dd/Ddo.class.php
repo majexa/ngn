@@ -262,7 +262,7 @@ class Ddo {
   public $groupElementsColsN = false;
   public $groupElements = true;
 
-  public $ddddItemsBegin = '`<div class="items ddItems str_`.$strName.`">`';
+  public $ddddItemsBegin = '`<div class="items ddItems tile str_`.$strName.`">`';
   public $tplPathItem = 'dd/elements/default';
   public $ddddItemsEnd = '`</div><!-- Ddo elements end "`.$strName.`" -->`';
   public $premoder = false;

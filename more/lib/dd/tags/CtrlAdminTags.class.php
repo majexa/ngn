@@ -169,7 +169,7 @@ class CtrlAdminTags extends CtrlAdmin {
   }
 
   function action_json_getTree() {
-    $this->json = (new NgnTree)->setData($this->tags->getTree())->getTree();
+    $this->json = (new ClientTree)->setData($this->tags->getTree())->getTree();
   }
 
 }

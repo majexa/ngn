@@ -3,13 +3,56 @@
 /**
  * Structure generator for client-side Ngn.Tree class
  */
-class NgnTree {
+class ClientTree {
 
-  protected $childrenKey = 'childNodes';
+  /**
+   * @var TreeInterface
+   */
+  protected $initTree;
+
+  /**
+   * @var array
+   */
+  protected $tree = [];
+
   protected $allowedDataParams = ['id' /*, 'title'*/];
-  protected $data;
 
-  function node(array $data = []) {
+  function __construct(TreeInterface $tree) {
+    $this->initTree = $tree;
+    $initNodes = [$this->initTree->getTree()];
+    foreach ($initNodes as $initNode) {
+      $node = $this->node($initNode);
+      $this->setChildren($node, $initNode);
+      $this->tree[] = $node;
+    }
+  }
+
+  protected function setChildren(&$node, $initNode) {
+    if (empty($initNode[$this->initTree->childrenKey()])) {
+      $node['children'] = [];
+      return;
+    }
+    foreach ($initNode[$this->initTree->childrenKey()] as $initChildNode) {
+      $childNode = $this->node($initChildNode);
+      $this->setChildren($childNode, $initChildNode);
+      $node['children'][] = $childNode;
+    }
+  }
+
+  function getTree() {
+    return $this->tree;
+  }
+
+  protected function replaceNodes(array &$nodes) {
+    foreach ($nodes as &$node) {
+      $node = $this->node($node);
+      if (!empty($node[$this->initTree->childrenKey()])) {
+        $this->replaceNodes($node[$this->initTree->childrenKey()]);
+      }
+    }
+  }
+
+  protected function node(array $data = []) {
     if (empty($data['title'])) $data['title'] = '{empty}';
     $node = [
       'property' => [
@@ -17,69 +60,30 @@ class NgnTree {
         'name' => $data['title']
       ]
     ];
+    //$children = $data[$this->_tree->childrenKey()];
     $this->setNodeType($node, $data);
     $this->setNodeCls($node, $data);
-    if ($data) {
-      foreach ($data as $k => $v) {
-        if (!in_array($k, $this->allowedDataParams)) continue;
-        $node['data'][$k] = $v;
-      }
-    }
+    $node['data'] = Arr::filterByKeys($data, $this->allowedDataParams);
+    //$node['children'] =
     return $node;
   }
 
   protected function setNodeType(array &$node, array $data) {
-    $node['type'] = !empty($data[$this->childrenKey]) ? 'folder' : 'page';
+    $node['type'] = !empty($data[$this->initTree->childrenKey()]) ? 'folder' : 'page';
   }
 
   protected function setNodeCls(array &$node, array $data) {
   }
 
-  function setData(array $data) {
-    $this->data = $data;
-    return $this;
-  }
-
-  protected function root() {
-    return $this->node([
-      'id'    => 0,
-      'title' => 'root'
-    ]);
-  }
-
-  function getTree($forest = true) {
-    $root = $this->root();
-    if (!empty($this->data)) $this->setChildren($root, $this->data);
-    return $forest ? [$root] : $root;
-  }
-
   /**
-   * @param array $node Массив, в который будут записаны данные для узла в client-формате
-   * @param array $nodesData Массив с исходными данными узлов
-   */
-  function setChildren(array &$node, array $nodesData) {
-    $n = 0;
-    foreach ($nodesData as $v) {
-      $children[$n] = $this->node($v);
-      if (!empty($v[$this->childrenKey])) $this->setChildren($children[$n], $v[$this->childrenKey]);
-      $n++;
-    }
-    $node['children'] = isset($children) ? $children : [];
-  }
-
-  private function addChildren(array &$node, array &$data) {
-    $node['children'][] = $this->node($data['title']);
-  }
-
-  /**
-   * @param DbTreeInterface $tree
+   * @param TreeInterface $tree
    * @param $table
    * @param integer $id
    * @param integer $toId
    * @param string $where
    * @param array $whereParams
    */
-  static function move(DbTreeInterface $tree, $table, $id, $toId, $where = 'after', array $whereParams = null) {
+  static function move(TreeInterface $tree, $table, $id, $toId, $where = 'after', array $whereParams = null) {
     if ($where == 'inside') {
       $parentId = $toId;
       // Получаем последний OID

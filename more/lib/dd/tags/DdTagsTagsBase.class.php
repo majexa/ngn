@@ -1,6 +1,6 @@
 <?php
 
-abstract class DdTagsTagsBase implements DbTreeInterface {
+abstract class DdTagsTagsBase {
 
   /**
    * @var DdTagsGroup
