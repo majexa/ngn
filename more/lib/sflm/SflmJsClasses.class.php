@@ -66,7 +66,7 @@ class SflmJsClasses {
    */
   function addClass($class, $source, $strict = true) {
     if (!SflmJsClasses::isValidClass($class)) {
-      throw new Exception("Class '$class' is not valid");
+      throw new Exception("Class '$class' is not valid. src: $source");
     }
     if (!isset($this->classPaths[$class])) {
       $err = "Class '$class' path does not exists. src: $source";

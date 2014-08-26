@@ -147,7 +147,6 @@ module.exports = new Class({
   },
 
   runStep: function() {
-    this.log('run step ' + this.i);
     this.processStep(this.steps[this.i]);
   },
 

@@ -1,4 +1,6 @@
-Ngn.toObj('Ngn.DdTags.Dialog');
+//Ngn.toObj('Ngn.DdTags.Dialog');
+Ngn.DdTags = {};
+Ngn.DdTags.Dialog = {};
 
 Ngn.DdTags.dialog = function(row) {
   var opt = {

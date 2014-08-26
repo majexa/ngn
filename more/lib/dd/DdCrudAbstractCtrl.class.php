@@ -60,6 +60,10 @@ use ObjectProcessorCtrl;
   protected function _getIm() {
     return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName()), $this->getStrName()), 'form'));
   }
+  
+  protected function id() {
+    return $this->id();
+  }
 
   function action_json_new() {
     $im = $this->getIm();
@@ -71,7 +75,7 @@ use ObjectProcessorCtrl;
 
   function action_json_edit() {
     $im = $this->getIm();
-    if ($im->requestUpdate($this->req['id'])) return true;
+    if ($im->requestUpdate($this->id())) return true;
     $this->jsonFormAction($im->form);
     return false;
   }
@@ -82,23 +86,23 @@ use ObjectProcessorCtrl;
   }
 
   function action_ajax_delete() {
-    $this->getIm()->delete($this->req['id']);
+    $this->getIm()->delete($this->id());
   }
 
   function action_ajax_activate() {
-    $this->items()->activate($this->req['id']);
+    $this->items()->activate($this->id());
   }
 
   function action_ajax_deactivate() {
-    $this->items()->deactivate($this->req['id']);
+    $this->items()->deactivate($this->id());
   }
 
   function action_ajax_changeState() {
-    $this->getIm()->updateField($this->req['id'], $this->req['field'], (bool)$this->req['state']);
+    $this->getIm()->updateField($this->id(), $this->req['field'], (bool)$this->req['state']);
   }
 
   function action_ajax_updateField() {
-    $this->getIm()->updateField($this->req['id'], $this->req['field'], $this->req['value']);
+    $this->getIm()->updateField($this->id(), $this->req['field'], $this->req['value']);
   }
 
   function action_ajax_reorder() {
@@ -115,7 +119,7 @@ use ObjectProcessorCtrl;
   }
 
   function deleteFile() {
-    $this->getIm()->deleteFile($this->req['id'], $this->req->rq('fieldName'));
+    $this->getIm()->deleteFile($this->id(), $this->req->rq('fieldName'));
   }
 
 }

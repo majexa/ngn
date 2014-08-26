@@ -1,4 +1,4 @@
-  Ngn.TreeEdit = new Class({
+Ngn.TreeEdit = new Class({
 
   Implements: [Events, Options],
 
@@ -9,7 +9,7 @@
     folderOpenIcon: 'ngn-tree-folder-open-icon',  // default css class open icon
     folderCloseIcon: 'ngn-tree-folder-close-icon', // default css class close icon
     pageIcon: 'ngn-tree-page-icon',  // default css class open icon
-    mifTreeOptions: {},
+    ngnTreeOptions: {},
     activeIfSelected: ['rename', 'delete']
     // buttons: element container with buttons
   },
@@ -83,7 +83,7 @@
   init: function() {
     // this.defaults.openIcon = this.options.folderOpenIcon;
     // this.defaults.closeIcon = this.options.folderCloseIcon;
-    this.tree = new Ngn.Tree($merge(this.getTreeOptions(), this.options.mifTreeOptions));
+    this.tree = new Ngn.Tree($merge(this.getTreeOptions(), this.options.ngnTreeOptions));
     this.tree.wrapper.addEvent('click', function(e) {
       if (e.target == this.tree.wrapper) this.tree.unselect();
     }.bind(this));
