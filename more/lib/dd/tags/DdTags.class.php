@@ -103,7 +103,7 @@ class DdTags {
    * @return  DdTagsTagsBase
    */
   static function getByGroupId($groupId) {
-    $group = DdTagsGroup::getBc2yId($groupId);
+    $group = DdTagsGroup::getById($groupId);
     return $group->tree ? new DdTagsTagsTree($group) : new DdTagsTagsFlat($group);
   }
 
