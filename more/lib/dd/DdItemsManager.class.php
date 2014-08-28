@@ -88,7 +88,7 @@ class DdItemsManager extends DbItemsManager {
   }
 
   protected function beforeDelete() {
-    if (($paths = Hook::paths('dd/beforeDelete')) !== false) foreach ($paths as $path) include $path;
+    foreach (Hook::paths('dd/beforeDelete') as $path) include $path;
     Dir::remove(UPLOAD_PATH.'/dd/'.$this->strName.'/'.$this->id);
   }
 
@@ -110,7 +110,7 @@ class DdItemsManager extends DbItemsManager {
 
   protected function replaceData() {
     parent::replaceData();
-    if (($paths = Hook::paths('dd/itemsManagerReplaceData')) !== false) foreach ($paths as $path) include $path;
+    foreach (Hook::paths('dd/itemsManagerReplaceData') as $path) include $path;
   }
 
 }

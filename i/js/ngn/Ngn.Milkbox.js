@@ -1105,9 +1105,9 @@ Ngn.MilkboxGallery = new Class({
       default:
         return;
     }
-    if (this.items.length == 0) {
-      throw new Error('Warning: gallery ' + this.name + ' is empty');
-    }
+    //if (this.items.length == 0) {
+    //  throw new Error('Warning: gallery ' + this.name + ' is empty');
+    //}
   },
 
   // turns everything into an object

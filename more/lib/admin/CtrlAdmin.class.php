@@ -59,7 +59,7 @@ abstract class CtrlAdmin extends CtrlCp {
     $this->setModuleTitle($this->d['adminModuleTitle']);
     $this->d['msg'] = Auth::get('msg');
     $this->d['god'] = $this->god = $this->req->params[0] == 'god' ? true : false;
-    if (($paths = Hook::paths('admin/moduleInit/'.$this->getName())) !== false) foreach ($paths as $path) include $path;
+    foreach (Hook::paths('admin/moduleInit/'.$this->getName()) as $path) include $path;
     Sflm::frontend('js')->addLib('cp');
   }
 
@@ -173,7 +173,7 @@ abstract class CtrlAdmin extends CtrlCp {
 
   protected function extendTplData() {
     parent::extendTplData();
-    if (($paths = Hook::paths('admin/common'))) foreach ($paths as $path) include $path;
+    foreach (Hook::paths('admin/common') as $path) include $path;
     $this->extendMainContentCssClass('am_'.$this->d['adminModule']);
   }
 

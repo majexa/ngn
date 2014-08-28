@@ -3311,7 +3311,3 @@ class HTML_Formatter {
     return $this->format_html($node);
   }
 }
-
-//END gan_formatter.php
-
-?>

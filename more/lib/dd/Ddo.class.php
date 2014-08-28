@@ -8,7 +8,7 @@ class Ddo {
   /**
    * Массив всех полей, присутствующих в этих записях
    *
-   * @var a
+   * @var
    */
   public $fields;
 
@@ -48,6 +48,10 @@ class Ddo {
     $this->layoutName = $layoutName;
     $this->settings = $this->getSettings();
     $this->titledSettings = $this->settings->getDataLayout('titled', $layoutName);
+    $this->afterConstruct();
+  }
+
+  protected function afterConstruct() {
   }
 
   protected function getSettings() {
@@ -69,9 +73,13 @@ class Ddo {
     $this->debug = $debug;
   }
 
+  protected function ddoFields() {
+    return O::gett('DdoFields', $this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
+  }
+
   function initFields() {
     if (isset($this->fields)) return $this;
-    $fields = O::gett('DdoFields', $this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
+    $fields = $this->ddoFields();
     $fields->isItemsList = $this->list;
     $this->fields = $fields->getFields();
     return $this;
@@ -262,7 +270,7 @@ class Ddo {
   public $groupElementsColsN = false;
   public $groupElements = true;
 
-  public $ddddItemsBegin = '`<div class="items ddItems tile str_`.$strName.`">`';
+  public $ddddItemsBegin = '`<div class="items ddItems str_`.$strName.`">`';
   public $tplPathItem = 'dd/elements/default';
   public $ddddItemsEnd = '`</div><!-- Ddo elements end "`.$strName.`" -->`';
   public $premoder = false;
@@ -453,7 +461,7 @@ class Ddo {
         $r['data'][$f['name']] = '';
       }
     }
-    if (($paths = Hook::paths('dd/gridRowPrepare')) !== false) foreach ($paths as $path) include $path;
+    foreach (Hook::paths('dd/gridRowPrepare') as $path) include $path;
     return $r;
   }
 

@@ -2924,7 +2924,9 @@ var attributeGetters = local.attributeGetters = {
 
 	'tabindex': function(){
 		var attributeNode = this.getAttributeNode('tabindex');
-		return (attributeNode && attributeNode.specified) ? attributeNode.nodeValue : null;
+//    return (attributeNode && attributeNode.specified) ? attributeNode.nodeValue : null;
+    // masted:
+    return (attributeNode && attributeNode.specified) ? attributeNode.node : null;
 	},
 
 	'type': function(){
@@ -2933,7 +2935,9 @@ var attributeGetters = local.attributeGetters = {
 
 	'maxlength': function(){
 		var attributeNode = this.getAttributeNode('maxLength');
-		return (attributeNode && attributeNode.specified) ? attributeNode.nodeValue : null;
+//    return (attributeNode && attributeNode.specified) ? attributeNode.nodeValue : null;
+    // masted:
+    return (attributeNode && attributeNode.specified) ? attributeNode.node : null;
 	}
 
 };

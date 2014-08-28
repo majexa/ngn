@@ -13,8 +13,8 @@ module.exports = new Class({
     'then', 'wait'
   ],
 
-  initialize: function(casper) {
-    this.parent(casper);
+  initialize: function() {
+    this.parent();
     var data = require('system').stdin.readLine();
     if (!data.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
     data = JSON.decode(data);
@@ -63,12 +63,6 @@ module.exports = new Class({
         callback();
       });
     };
-    this.casper.checkExistence = function(selector) {
-      if (!this.exists(selector)) throw new Error('"' + selector + '" selector does not exists');
-    };
-    this.casper.checkNonExistence = function(selector) {
-      if (this.exists(selector)) throw new Error('"' + selector + '" selector has not to be present');
-    };
     this.casper.selectOption = function(selector, value) {
       this.evaluate(function(selector, value) {
         document.querySelector(selector).value = value;
@@ -76,6 +70,16 @@ module.exports = new Class({
         selector: selector,
         value: value
       });
+    };
+    this.casper.checkExistence = function(selector) {
+      if (!this.exists(selector)) throw new Error('"' + selector + '" selector does not exists');
+    };
+    this.casper.checkNonExistence = function(selector) {
+      if (this.exists(selector)) throw new Error('"' + selector + '" selector has not to be present');
+    };
+    this.casper.checkText = function(selector, textToCompare) {
+      var text = this.fetchText(selector);
+      if (text != textToCompare) throw new Error('text and textToCompare are not identical: "' + text + '/' + textToCompare);
     };
   },
 
@@ -155,9 +159,5 @@ module.exports = new Class({
     this.i++;
     this.runStep();
   }
-
-  //beforeRun: function() {
-  //this.casper.thenOpen(this.baseUrl);
-  //}
 
 });

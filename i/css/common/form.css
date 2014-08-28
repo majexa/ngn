@@ -317,7 +317,11 @@ color: #000000;
 float: right;
 }
 .fileNav .thumb {
-margin-right: 0px;
+margin-right: 0;
+}
+.fileNav .thumb img {
+max-width: 50px;
+max-height: 50px;
 }
 
 textarea {

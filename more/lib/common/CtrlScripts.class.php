@@ -1,17 +1,12 @@
 <?php
 
-class CtrlScripts extends CtrlCommon {
+class CtrlScripts extends CtrlBase {
 
   protected function setAuthUserId() {
   }
 
   protected function init() {
     $this->hasOutput = false;
-    if (!isset($this->req->params[1])) {
-      // Если путь к скрипту не указан
-      $this->printList();
-      return;
-    }
     // Получаем путь из исходного "s/path/to/script" в обрезаный "path/to/script"
     $path = preg_replace('/[^\/]*\/(.*)/', '$1', O::get('Req')->path);
     if (strstr($path, 'js/')) {

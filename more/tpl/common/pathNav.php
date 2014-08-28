@@ -1,4 +1,4 @@
-<div id="pathNav">
+<div class="pathNav">
   <? if ($d['contentButtons']) { ?>
     <div class="btns">
       <div class="smIcons bordered last"><?= $d['editPageBlock'] ?></div>

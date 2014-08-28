@@ -20,7 +20,7 @@ class DdForm extends Form {
   protected function setElementsDataDefault() {
     $r = parent::setElementsDataDefault();
     if ($r) {
-      if (($paths = Hook::paths('dd/formInit'))) foreach ($paths as $path) require $path;
+      foreach (Hook::paths('dd/formInit') as $path) require $path;
     }
     return $r;
   }

@@ -42,7 +42,7 @@ class DdItems extends Items {
     $this->extendItemsUsers($items);
     $this->formatItemsText($items);
     $this->extendItemsNumberRange($items);
-    if (($paths = Hook::paths('dd/extendItems')) !== false) foreach ($paths as $path) include $path;
+    foreach (Hook::paths('dd/extendItems') as $path) include $path;
     foreach ($items as &$item) $item = Arr::unserialize($item);
     $this->extendItems($items);
     return $items;

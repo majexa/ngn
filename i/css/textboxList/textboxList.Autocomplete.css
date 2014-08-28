@@ -1,10 +1,3 @@
-/* 
-	This stylesheet belongs to TextboxList - Copyright Guillermo Rauch <http://devthought.com> 2009
-	TextboxList is not priceless for commercial use. See <http://devthought.com/projects/mootools/textboxlist/>
-	Purchase to remove copyright
-*/
-
-
 .textboxlist-autocomplete {
 position: absolute;
 z-index: 100
@@ -58,9 +51,3 @@ background-color: #FFEFBF;
 background: #eef0c4;
 font-weight: bold;
 }
-
-/*  TextboxList.Autocomplete Style guidelines 
-	Try to keep .textboxlist-autocomplete {} as it is now
-	If you apply custom styles to placeholder, also apply them to results, like it is now.
-	.textboxlist-autocomplete-result {} needs a background for IE.
-*/

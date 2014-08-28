@@ -1,6 +1,6 @@
 <?php
 
 return [
-  'i/js/textboxList/textboxList.css',
-  'i/js/textboxList/textboxList.Autocomplete.css'
+  'i/css/textboxList/textboxList.css',
+  'i/css/textboxList/textboxList.Autocomplete.css'
 ];

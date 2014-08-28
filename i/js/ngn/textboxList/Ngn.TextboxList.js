@@ -1,12 +1,8 @@
-/**
- * @requiresAfter TextboxList.Autocomplete, TextboxList.Autocomplete.Binary, GrowingInput
- */
-
 var $chk = function(obj) {
   return !!(obj || obj === 0);
 };
 
-var TextboxList = new Class({
+Ngn.TextboxList = new Class({
 
   Implements: [Options, Events],
 
@@ -134,11 +130,12 @@ var TextboxList = new Class({
       if ($chk(this.options.max) && this.list.getChildren('.' + this.options.prefix + '-bit-box').length + 1 > this.options.max) return false;
       if (this.options.unique && this.index.contains(this.uniqueValue(value))) return false;
     }
-    return new TextboxListBit[klass.capitalize()](value, this, Object.merge(this.options.bitsOptions[klass], options));
+    return new Ngn.TextboxListBit[klass.capitalize()](value, this, Object.merge(this.options.bitsOptions[klass], options));
   },
 
   enablePlugin: function(name, options) {
-    this.plugins[name] = new TextboxList[name.camelCase().capitalize()](this, options);
+    Ngn.TextboxList.Autocomplete; // need to autoload
+    this.plugins[name] = new Ngn.TextboxList[name.camelCase().capitalize()](this, options);
   },
 
   focusLast: function() {
@@ -253,7 +250,7 @@ var TextboxList = new Class({
 
 });
 
-var TextboxListBit = new Class({
+Ngn.TextboxListBit = new Class({
 
   Implements: Options,
 
@@ -342,9 +339,9 @@ var TextboxListBit = new Class({
 
 });
 
-TextboxListBit.Editable = new Class({
+Ngn.TextboxListBit.Editable = new Class({
 
-  Extends: TextboxListBit,
+  Extends: Ngn.TextboxListBit,
 
   options: {
     tabIndex: null,
@@ -465,9 +462,9 @@ TextboxListBit.Editable = new Class({
 
 });
 
-TextboxListBit.Box = new Class({
+Ngn.TextboxListBit.Box = new Class({
 
-  Extends: TextboxListBit,
+  Extends: Ngn.TextboxListBit,
 
   options: {
     deleteButton: true
