@@ -1,12 +1,9 @@
-/**
- * @requires TextboxList
- */
 Ngn.Form.El.DdTags = new Class({
   Extends: Ngn.Form.El.Dd,
 
   init: function() {
     var eInput = this.eRow.getElement('input');
-    var tl = new TextboxList(eInput, {
+    var tl = new Ngn.TextboxList(eInput, {
       unique: true,
       plugins: {
         autocomplete: {

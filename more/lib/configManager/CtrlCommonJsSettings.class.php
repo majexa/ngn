@@ -1,6 +1,9 @@
 <?php
 
-class CtrlCommonJsSettings extends CtrlCommon {
+class CtrlCommonJsSettings extends CtrlBase {
+
+  protected function sflmStore() {
+  }
 
   function action_ajax_default() {
     header('Content-type: application/javascript; charset='.CHARSET);

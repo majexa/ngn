@@ -1,21 +1,4 @@
-/*
----
-description: TextboxList
-
-authors:
-  - Guillermo Rauch
-
-requires:
-  core/1.3: '*'
-
-provides:
-  - textboxlist.autocomplete
-...
-*/
-
-(function(){
-
-TextboxList.Autocomplete = new Class({
+Ngn.TextboxList.Autocomplete = new Class({
   Implements: Options,
 
   options: {
@@ -150,7 +133,7 @@ TextboxList.Autocomplete = new Class({
       }.bind(this), true);
     }
     this.prefix = this.textboxlist.options.prefix+'-autocomplete';
-    this.method = TextboxList.Autocomplete.Methods[this.options.method];
+    this.method = Ngn.TextboxList.Autocomplete.Methods[this.options.method];
     this.container = new Element('div.'+this.prefix).inject(this.textboxlist.container);
     if ((width = this.textboxlist.container.getStyle('width').toInt()) > 0) {
       //this.container.setStyle('width', width);
@@ -299,7 +282,7 @@ TextboxList.Autocomplete = new Class({
 
 });
 
-TextboxList.Autocomplete.Methods = {
+Ngn.TextboxList.Autocomplete.Methods = {
 
   standard: {
     filter: function(values, search, insensitive, max) {
@@ -322,5 +305,3 @@ TextboxList.Autocomplete.Methods = {
   }
 
 };
-
-})();

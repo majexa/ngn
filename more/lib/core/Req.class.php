@@ -91,7 +91,6 @@ class Req extends ArrayAccesseble {
     }
     $new = [];
     $this->g = $_GET;
-    //$this->s = $_SESSION;
     if (!empty($uriData['query'])) {
       parse_str($uriData['query'], $d);
       $this->g = $d;

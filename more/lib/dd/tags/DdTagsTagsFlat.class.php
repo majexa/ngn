@@ -33,7 +33,7 @@ class DdTagsTagsFlat extends DdTagsTagsBase {
   }
 
   function getTags() {
-    return db()->query("SELECT *, id AS ARRAY_KEY, 0 AS cnt FROM {$this->group->table}".$this->getSelectCond()->all());
+    return db()->query("SELECT *, id AS ARRAY_KEY FROM {$this->group->table}".$this->getSelectCond()->all());
   }
 
 }

@@ -5,7 +5,7 @@ var Rumax = require('Rumax');
 module.exports = new Class({
   Implements: Rumax,
 
-  initialize: function(casper) {
+  initialize: function() {
     this.casper = require('casper').create({
       //verbose: true, logLevel: "debug"
     });

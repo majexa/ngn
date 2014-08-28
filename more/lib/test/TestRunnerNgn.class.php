@@ -18,4 +18,12 @@ class TestRunnerNgn extends TestRunnerAbstract {
     $this->_run($this->getClasses());
   }
 
+  static function tempImageFixture() {
+    $file = TEMP_PATH.'/'.time();
+    copy(MORE_PATH.'/lib/test/fixture/image.jpg', $file);
+    return [
+      'tmp_name' => $file
+    ];
+  }
+
 }

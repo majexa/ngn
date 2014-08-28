@@ -85,9 +85,11 @@ class TestRunnerAbstract {
     $classes = array_map(function ($v) {
       return $v['class'];
     }, ClassCore::getDescendants('NgnTestCase', 'Test'));
-    $classes = array_filter($classes, function($class) {
-      return $class::enable();
-    });
+    if (!$this->filterClasses) {
+      $classes = array_filter($classes, function($class) {
+        return $class::enable();
+      });
+    }
     if ($filter) $classes = array_filter($classes, $filter);
     return $classes;
   }
