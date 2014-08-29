@@ -28,12 +28,12 @@ use Options;
 
   protected $defaultValue;
 
-  public $isPostValue = false;
-
   public $useTypeJs = false;
 
   protected function defineOptions() {
     return [
+      //'inputValue' => false, // исходное значение поля. необходимо, если используется метод
+                               // formatValue()
       'required' => false
     ];
   }
@@ -60,16 +60,16 @@ use Options;
     $this->initDefaultValue();
   }
 
+  /**
+   * Используется в том случае, если в контроле необходимо использовать отличное
+   * от исходного значение
+   */
   protected function formatValue() {
     return false;
   }
 
   protected function &getArrayRef() {
     return $this->options;
-  }
-
-  protected function preparePostValue() {
-    return null;
   }
 
   protected function prepareValue() {
@@ -120,7 +120,7 @@ use Options;
   }
 
   /**
-   * Возвращает текущее значение поля
+   * Возвращает текущее значение поля для сохранения
    */
   function value() {
     if (!empty($this->options['noValue'])) return null;
