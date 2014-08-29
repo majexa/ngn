@@ -131,9 +131,7 @@ $cords = array(
 ?>
 
 /*-------------------iconsSet-----------------*/
-
-.iconsSet a,
-a.iconsSet {
+.iconsSet a, a.iconsSet {
 display: block;
 float: left;
 margin: 0px 15px 5px 0px;
