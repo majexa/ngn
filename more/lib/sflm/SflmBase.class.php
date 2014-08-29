@@ -152,8 +152,7 @@ abstract class SflmBase {
 
   function getAbsPath($path) {
     if ($this->isPackage($path)) throw new Exception("It ($path) can not be package");
-    $p = parse_url($path);
-    $path = $p['path'];
+    $path = parse_url($path)['path'];
     foreach (Sflm::$absBasePaths as $package => $absBasePath) {
       if (preg_match('/^\/?'.$package.'\//', $path)) {
         return "$absBasePath/".Misc::removePrefix("$package/", ltrim($path, '/'));

@@ -1,6 +1,6 @@
 <!-- Начало заголовочного блока -->
 <div class="pageTitle">
-  <div class="iconsSet topBtns">
+  <div class="topBtns">
     <?
     if (!empty($d['topBtns'])) {
       foreach ($d['topBtns'] as $v) {
