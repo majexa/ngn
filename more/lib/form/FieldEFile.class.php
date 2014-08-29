@@ -7,6 +7,27 @@
  */
 class FieldEFile extends FieldEFileBase {
 
+  /**
+   * Значение для отображения в контроле
+   */
+  protected function htmlValue() {
+    //if ($this->postValue()) {
+
+    //}
+    if (empty($this->options['value'])) return false;
+    die2($this->options['value']);
+    $file = UPLOAD_PATH.'/'.$this->options['value'];
+    if (!file_exists($file)) return false;
+    return '/'.UPLOAD_DIR.'/'.$this->options['value'].'?'.filemtime(UPLOAD_PATH.'/'.$this->options['value']);
+  }
+
+  /**
+   * Значение загруженного файла
+   */
+  function postValue() {
+    return empty($this->options['postValue']) ? null : $this->options['postValue'];
+  }
+
   function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'currentFileTitle' => 'Текущий файл'
@@ -19,11 +40,13 @@ class FieldEFile extends FieldEFileBase {
       $files = isset($this->form->options['files']) ? $this->form->options['files'] : $this->form->req->files;
       $uploadedFileValue = BracketName::getValue($files, $this->options['name']);
       $this->options['value'] = $uploadedFileValue['name']; // нужно для клиентской валидации
+      die2(1);
     }
     else {
       $uploadedFileValue = !empty($this->options['value']) ? $this->options['value'] : null;
+      //die2($this->options['value']);
     }
-    if ($uploadedFileValue !== null /* and empty($uploadedFileValue['error'])*/) {
+    if ($uploadedFileValue !== null) {
       empty($this->options['multiple']) ? $this->process2Single($uploadedFileValue) : $this->process2Multiple($uploadedFileValue);
     }
   }
@@ -84,16 +107,15 @@ class FieldEFile extends FieldEFileBase {
     }
   }
 
-  protected function getCurrentValue() {
-    if (empty($this->options['value'])) return false;
-    $file = UPLOAD_PATH.'/'.$this->options['value'];
-    if (!file_exists($file)) return false;
-    return '/'.UPLOAD_DIR.'/'.$this->options['value'].'?'.filemtime(UPLOAD_PATH.'/'.$this->options['value']);
-  }
-
   protected function htmlNav() {
-    if (!($v = $this->getCurrentValue())) return '';
-    return '<div class="iconsSet fileNav">'.'<a href="'.$v.'" class="'.$this->options['currentFileClass'].'" target="_blank"><i></i> '.$this->options['currentFileTitle'].'</a>'.((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ? '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="delete confirm" title="Удалить"><i></i></a>' : '').'</div>';
+    if (!($v = $this->htmlValue())) return '';
+    return '<div class="iconsSet fileNav">'. //
+    '<a href="'.$v.'" class="'.$this->options['currentFileClass'].'" target="_blank">'. //
+    '<i></i> '.$this->options['currentFileTitle'].'</a>'. //
+    ((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ? //
+      '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name']. //
+      '" class="delete confirm" title="Удалить"><i></i></a>' : //
+      '').'</div>';
   }
 
   function _html() {
@@ -104,10 +126,6 @@ class FieldEFile extends FieldEFileBase {
     ];
     if (!empty($this->options['multiple'])) $params['multiple'] = null;
     return $this->htmlNav().'<input type="file" '.Tt()->tagParams($params).$this->getClassAtr().' />';
-  }
-
-  function value() {
-    return empty($this->options['postValue']) ? $this->options['value'] : $this->options['postValue'];
   }
 
 }

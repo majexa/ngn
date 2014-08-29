@@ -18,7 +18,7 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
   }
 
   protected function formatValue() {
-    if (empty($this->options['value'])) return null;
+    if (empty($this->options['value'])) return false;
     try {
       return $this->tags->getParentIds2($this->options['value']);
     } catch (NotFoundException $e) {

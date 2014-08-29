@@ -98,7 +98,7 @@ Ngn.Form = new Class({
 
   initImagePreview: function() {
     this.eForm.getElements('.elImagePreview').each(function(el) {
-      eFileNav = el.getElement('.fileNav');
+      var eFileNav = el.getElement('.fileNav');
       if (!eFileNav) return;
       eFileNav.inject(el.getElement('.label'), 'top');
     });
@@ -134,7 +134,7 @@ Ngn.Form = new Class({
     if (this.options.ajaxSubmit) {
       Ngn.Frm.disable(this.eForm, flag);
     } else {
-      eSubmit = this.eForm.getElement('input[type=submit]');
+      var eSubmit = this.eForm.getElement('input[type=submit]');
       if (eSubmit) {
         eSubmit.addClass('disabled');
         eSubmit.set('disabled', flag);
