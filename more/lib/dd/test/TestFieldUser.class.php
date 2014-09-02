@@ -1,6 +1,6 @@
 <?php
 
-class TestFieldUser extends TestFieldAbstract {
+class TestFieldUser extends TestFieldDd {
 
   function createData() {
     return ['sample' => 1];

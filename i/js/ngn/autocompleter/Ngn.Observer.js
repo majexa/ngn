@@ -1,4 +1,4 @@
-Observer = new Class({
+Ngn.Observer = new Class({
   Implements: [Options, Events],
 
   options: {

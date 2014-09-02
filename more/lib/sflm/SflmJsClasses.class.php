@@ -130,13 +130,16 @@ class SflmJsClasses {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
       $this->addClass($class, ($name ? : $path ? : '').' preload');
     }
+    foreach (SflmJsClasses::parseRequired($code, 'before') as $class) {
+      $this->addClass($class, "$path requiredBefore");
+    }
     Sflm::output('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
     if ($path) $this->frontend->_addPath($path); // -------------- добавили путь
     Sflm::output("Processing valid-class patterns in '$source'");
     foreach (SflmJsClasses::parseValidClassesUsage($code) as $class) {
       $this->addClass($class, "$source valid-class pattern");
     }
-    foreach (SflmJsClasses::parseRequiredAfterClasses($code) as $class) {
+    foreach (SflmJsClasses::parseRequired($code, 'after') as $class) {
       $this->addClass($class, "$path requiredAfter");
     }
   }
@@ -212,7 +215,10 @@ class SflmJsClasses {
   }
 
   static function parseValidPreloadClasses($code) {
-    return SflmJsClasses::parseValidClasses($code, '[A-Za-z]:\s+');
+    //return array_merge(
+     return  SflmJsClasses::parseValidClasses($code, '[A-Za-z]:\s+');
+      //SflmJsClasses::parseValidClasses($code, '[A-Za-z]:\s+new ')
+    //);
   }
 
   static function parseRequired($code, $k = '') {
@@ -221,10 +227,6 @@ class SflmJsClasses {
       foreach ($m[1] as $v) $r = array_merge($r, array_map('trim', explode(',', $v)));
     }
     return $r;
-  }
-
-  static function parseRequiredAfterClasses($code) {
-    return SflmJsClasses::parseRequired($code, 'after');
   }
 
   static function captionPrefix($source, $name = null) {

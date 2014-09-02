@@ -62,9 +62,7 @@ use ObjectProcessorCtrl;
     return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName()), $this->getStrName()), 'form'));
   }
   
-  protected function id() {
-    return $this->id();
-  }
+  abstract protected function id();
 
   function action_json_new() {
     $im = $this->getIm();

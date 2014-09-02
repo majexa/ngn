@@ -58,7 +58,7 @@ class Sflm {
    * @param bool $quietly
    * @throws Exception
    */
-  static function setFrontendName($name, $quietly = false) {
+  static function setFrontendName($name = 'default', $quietly = false) {
     if (self::$frontendName) {
       if ($quietly === false) {
         throw new Exception('Frontend name already set. Use reset. Backtrace of first set call: '."\n".O::get('CliColors')->getColoredString(self::$setFrontendBacktrace, 'darkGray'));
@@ -103,8 +103,20 @@ class Sflm {
     }
   }
 
+  static function stripComments_($c) {
+    return preg_replace('/\/\/(?! @)(.*)\n?/', '', preg_replace('!/\*(.*)\*/!s', '', $c));
+  }
+  static function stripComments($c) {
+    return preg_replace('/\/\/(.*)\n?/', '', preg_replace('!/\*(.*)\*/!s', '', $c));
+  }
+
+  static function getCode_($file) {
+    return self::stripComments(file_get_contents($file));
+  }
+
+
   static function getCode($file) {
-    return preg_replace('/\/\/(.*)/', '', preg_replace('!/\*.*?\*/!s', '', file_get_contents($file)));
+    return preg_replace('/\/\/(?! @)(.*)/', '', preg_replace('!/\*.*?\*/!s', '', file_get_contents($file)));
   }
 
   static function getPath($absPath, $whyDoUWantToGetThis = null) {

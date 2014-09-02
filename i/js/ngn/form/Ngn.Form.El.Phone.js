@@ -1,13 +1,10 @@
-/**
- * @requires Meio.Mask
- */
 Ngn.Form.ElInit.Phone = new Class({
   Extends: Ngn.Form.ElInit,
 
   init: function() {
-    Meio.Mask.createMasks('Fixed', {
+    Ngn.Frm.Mask.createMasks('Fixed', {
       'Phone-ru': {mask: '+7 999 999 99 99'}
-    })
+    });
     this.parent();
   }
 

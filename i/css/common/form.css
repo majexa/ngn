@@ -61,6 +61,14 @@ margin: 2px 0px 3px 0px;
 }
 .apeform .help {
 font-size: 10px;
+margin-top: 2px;
+/*height: 14px;*/
+/*clear: both;*/
+}
+
+.apeform .type_file .help {
+width: 200px;
+float: left;
 }
 
 /*--------- Element ---------*/
@@ -438,10 +446,6 @@ padding-bottom: 7px;
 font-weight: bold;
 }
 */
-.apeform .help {
-margin-top: 2px;
-clear: both;
-}
 
 .fileDroppable {
 clear: both;

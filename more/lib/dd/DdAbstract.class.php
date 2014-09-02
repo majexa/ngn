@@ -2,7 +2,7 @@
 
 abstract class DdAbstract {
 
-  protected $strname;
+  protected $strName;
 
   function __construct($strName) {
     Misc::checkEmpty($strName);

@@ -72,14 +72,20 @@ module.exports = new Class({
       });
     };
     this.casper.checkExistence = function(selector) {
-      if (!this.exists(selector)) throw new Error('"' + selector + '" selector does not exists');
-    };
-    this.casper.checkNonExistence = function(selector) {
-      if (this.exists(selector)) throw new Error('"' + selector + '" selector has not to be present');
+      return [
+        this.exists(selector),
+        '"' + selector + '" selector does not exists'
+      ];
     };
     this.casper.checkText = function(selector, textToCompare) {
       var text = this.fetchText(selector);
-      if (text != textToCompare) throw new Error('text and textToCompare are not identical: "' + text + '/' + textToCompare);
+      return [
+        text == textToCompare,
+        'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare
+      ];
+    };
+    this.casper.printText = function(selector) {
+      console.debug(this.fetchText(selector));
     };
   },
 
@@ -98,18 +104,29 @@ module.exports = new Class({
 
   processStep: function(cmd) {
     var methodName = cmd[0];
-    var nextMethod, methodBind, method;
+    var negativeCheck = false;
+    if (methodName.substr(0, 1) == '!') {
+      methodName = methodName.substr(1, methodName.length);
+      negativeCheck = true;
+    }
+    var nextMethod, methodBind, method, methodType;
     if (this[methodName]) {
       method = this[methodName];
       methodBind = this;
+      methodType = 'TestRunner';
     } else if (this.casper[methodName]) {
       method = this.casper[methodName];
       methodBind = this.casper;
+      methodType = 'Casper';
+    } else if (this.casper.page[methodName]) {
+      method = this.casper.page[methodName];
+      methodBind = this.casper;
+      methodType = 'Page';
     } else {
       throw new Error('Casper or TestRunner method "' + methodName + '" is absent');
     }
     var params = null;
-    this.log('Running ' + methodName, 2);
+    this.log('Running ' + methodType + '::' + methodName, 2);
     if (this.isCallbackMethod(methodName)) {
       nextMethod = this.getNextMethod(methodName);
       params = cmd[1] !== undefined ? cmd.slice(1, cmd.length) : [];
@@ -127,13 +144,18 @@ module.exports = new Class({
       } else {
         method = method.bind(methodBind);
       }
-      this.callMethod(methodName, method);
+      this.callMethod(methodName, method, negativeCheck);
       this.getNextMethod(methodName)();
     }
   },
 
-  callMethod: function(methodName, method) {
-    //console.debug('CALL ' + methodName);
+  callMethod: function(methodName, method, negativeCheck) {
+    if (methodName.substr(0, 5) == 'check') {
+      var r = method();
+      if (r[0] !== !negativeCheck) throw new Error(r[1]);
+      this.log((negativeCheck ? '!' : '') + methodName + ' success');
+      return;
+    }
     method();
   },
 

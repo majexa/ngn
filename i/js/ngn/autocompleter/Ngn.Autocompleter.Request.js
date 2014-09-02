@@ -1,17 +1,5 @@
-/**
- * Autocompleter.Request
- *
- * http://digitarald.de/project/autocompleter/
- *
- * @version    1.1.2
- *
- * @license    MIT-style license
- * @author    Harald Kirschner <mail [at] digitarald.de>
- * @copyright  Author
- */
-
-Autocompleter.Request = new Class({
-  Extends: Autocompleter,
+Ngn.Autocompleter.Request = new Class({
+  Extends: Ngn.Autocompleter,
 
   options: {/*
    indicator: null,
@@ -50,8 +38,8 @@ Autocompleter.Request = new Class({
 
 });
 
-Autocompleter.Request.JSON = new Class({
-  Extends: Autocompleter.Request,
+Ngn.Autocompleter.Request.JSON = new Class({
+  Extends: Ngn.Autocompleter.Request,
 
   initialize: function(el, url, options) {
     this.parent(el, options);
@@ -68,8 +56,8 @@ Autocompleter.Request.JSON = new Class({
 
 });
 
-Autocompleter.Request.HTML = new Class({
-  Extends: Autocompleter.Request,
+Ngn.Autocompleter.Request.HTML = new Class({
+  Extends: Ngn.Autocompleter.Request,
 
   initialize: function(el, url, options) {
     this.parent(el, options);
@@ -99,8 +87,8 @@ Autocompleter.Request.HTML = new Class({
 
 /* compatibility */
 
-Autocompleter.Ajax = {
-  Base: Autocompleter.Request,
-  Json: Autocompleter.Request.JSON,
-  Xhtml: Autocompleter.Request.HTML
+Ngn.Autocompleter.Ajax = {
+  Base: Ngn.Autocompleter.Request,
+  Json: Ngn.Autocompleter.Request.JSON,
+  Xhtml: Ngn.Autocompleter.Request.HTML
 };

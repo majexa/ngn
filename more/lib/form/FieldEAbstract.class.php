@@ -11,6 +11,11 @@
  *
  * $this->options['filterEmpties'] если метод isEmpty возвращает true значение элемента не учитывается в
  * данных возвращаеммых формой
+ *
+ *
+ * inputValue - нужен для передачи в пост
+ * value - нужен для внутреннего использования в контроле. формат контрола
+ *
  */
 abstract class FieldEAbstract extends ArrayAccesseble {
 use Options;
@@ -38,8 +43,8 @@ use Options;
     ];
   }
 
-  protected function allowedFormClass() {
-    return false;
+  protected function &getArrayRef() {
+    return $this->options;
   }
 
   function __construct(array $options = [], Form $form = null) {
@@ -54,7 +59,7 @@ use Options;
     if (method_exists($this, 'beforeInit')) $this->beforeInit();
     $this->init();
     if (isset($this->form) and !$this->form->valueFormated and ($value = $this->formatValue())) {
-      $this->options['inputValue'] = $this->options['value'];
+      $this->options['postValue'] = $this->options['value'];
       $this->options['value'] = $value;
     }
     $this->initDefaultValue();
@@ -68,9 +73,24 @@ use Options;
     return false;
   }
 
-  protected function &getArrayRef() {
-    return $this->options;
+  /**
+   * Возвращает текущее значение поля для сохранения
+   */
+  function value() {
+    if (!empty($this->options['noValue'])) return null;
+    return $this->postValue();
   }
+
+  protected function postValue() {
+    if (isset($this->options['postValue'])) return $this->options['postValue'];
+    return isset($this->options['value']) ? $this->options['value'] : null;
+  }
+
+  function titledValue() {
+    return $this->value();
+  }
+
+  // --
 
   protected function prepareValue() {
     if (!empty($this->options['noValue'])) return;
@@ -113,27 +133,14 @@ use Options;
     $this->addRequiredCssClass();
   }
 
+  protected function allowedFormClass() {
+    return false;
+  }
+
   protected function addRequiredCssClass() {
     if (!empty($this->options['required'])) {
       $this->cssClasses[] = 'required';
     }
-  }
-
-  /**
-   * Возвращает текущее значение поля для сохранения
-   */
-  function value() {
-    if (!empty($this->options['noValue'])) return null;
-    return $this->postValue();
-  }
-
-  function postValue() {
-    if (isset($this->options['inputValue'])) return $this->options['inputValue'];
-    return isset($this->options['value']) ? $this->options['value'] : null;
-  }
-
-  function titledValue() {
-    return $this->value();
   }
 
   function isEmpty() {

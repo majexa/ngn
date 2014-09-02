@@ -1,6 +1,6 @@
 <?php
 
-class TestFieldNumberRange extends TestFieldAbstract {
+class TestFieldNumberRange extends TestFieldDd {
 
   function createData() {
     return [

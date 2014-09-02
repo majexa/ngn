@@ -1,6 +1,6 @@
 <?php
 
-abstract class TestFieldDdTagsAbstract extends TestFieldAbstract {
+abstract class TestFieldDdTagsAbstract extends TestFieldDd {
 
   protected $v1 = 'one', $v2 = 'two', $v3 = 'three', $itemId;
 
