@@ -169,7 +169,7 @@ abstract class CtrlBase {
     $this->paramActionN = $this->getParamActionN();
     $this->addSubControllers();
     $this->initAction();
-    if (Auth::$postAuth and !$this->isAjax) redirect($_SERVER['REQUEST_URI'], true);
+    if (Auth::$postAuth and !$this->isAjax) redirect(Tt()->getPath(), true);
     $this->setPostAction();
     $this->setActionParams();
     $this->beforeInit();

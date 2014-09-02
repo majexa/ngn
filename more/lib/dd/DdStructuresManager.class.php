@@ -104,8 +104,7 @@ class DdStructuresManager extends DbItemsManager {
       dateUpdate DATETIME NULL,
       ip VARCHAR(15) NULL,
       userId INT(11) NULL,
-      userGroupId INT(11) NULL,
-      clicks INT(11) NOT NULL DEFAULT '0'
+      userGroupId INT(11) NULL
     ) ENGINE=InnoDB");
     db()->query("ALTER TABLE $table DEFAULT CHARACTER SET ".db()->charset." COLLATE ".db()->collate);
     db()->query("ALTER TABLE $table ADD UNIQUE (id)");

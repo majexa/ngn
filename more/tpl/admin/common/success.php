@@ -1,2 +1,2 @@
 Операция прошла успешно.
-<a href="<?= $this->getPath(2) ?>">Вернуться</a>
+<a href="jabascript:history.back()">Вернуться</a>

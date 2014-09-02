@@ -59,13 +59,6 @@ class DdoFields {
         'type'         => 'commentsCount',
         'extraVirtual' => true
       ],
-      'clicks'        => [
-        'name'         => 'clicks',
-        'oid'          => 300,
-        'title'        => 'Количество просмотров',
-        'type'         => 'clicks',
-        'extraVirtual' => true
-      ],
       'authorId'      => [
         'name'         => 'authorId',
         'oid'          => 400,

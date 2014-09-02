@@ -153,21 +153,21 @@ abstract class DataManagerAbstract extends Options2 {
    * и изменяет значения записи. Последнее делает только в случае если параметр $_data пределен.
    *
    * 1) Получает данные, поступившие для апдейта записи либо
-   *    из текщих значений самой записи.
+   *    из текщих значений самой записи
    * 2) Преобразует необходимые значения в вид, необходимый для класса формы
    * 3) Выполняет создание полей формы для каждого из значений записи. Каждое поле
    *    соответственно возвращает преобразованное значение. Преобразования значений
    *    происходит в соответствующих обработчиках формы (функции формата f_fieldName в
-   *    класса формы).
-   * 4) Выполняет функцию апдейта записи.
+   *    класса формы)
+   * 4) Выполняет функцию апдейта записи
    *
-   * @param   integer ID аписи
-   * @param   array   Массив с данными для апдейта
-   * @return  bool
+   * @param $id
+   * @return bool
+   * @throws Exception
    */
   function requestUpdate($id) {
     if (!is_numeric($id)) throw new Exception('$id not numeric: '.$id);
-    $this->defaultData = $this->getItem($id);
+    $this->defaultData = Misc::checkEmpty($this->getItem($id), "item ID=$id does not exists");
     $this->fieldTypeAction('source2formFormat', $this->defaultData);
     $this->source2formFormat();
     $this->form->fromRequest = true;
@@ -182,7 +182,8 @@ abstract class DataManagerAbstract extends Options2 {
 
   /**
    * Возвращает данные в формате формы
-   * @param integer ID записи
+   *
+   * @param $id
    * @return array
    */
   function formData($id) {
@@ -211,11 +212,11 @@ abstract class DataManagerAbstract extends Options2 {
 
   /**
    * @param array $data
-   * @param bool  Данные используют формат POST запроса
+   * @param bool $valueFormatted Данные используют формат POST запроса
    */
-  protected function setFormElementsData(array $data, $valueFormated = false) {
+  protected function setFormElementsData(array $data, $valueFormatted = false) {
     $this->beforeFormElementsInit();
-    $this->form->valueFormated = $valueFormated;
+    $this->form->valueFormated = $valueFormatted;
     $this->form->setElementsData($data);
   }
 

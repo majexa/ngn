@@ -30,9 +30,10 @@ class BracketName {
    * Возвращает значение элемента массива по его значению, записанному в плоской форме
    * (форме строки "v['asd']['dfgh']")
    *
-   * @param   array   Массив с данными для извлечения
-   * @param   string  Строка элемента массива вида "v['asd']['dfgh']"
-   * @return  mixed
+   * @param array $data Массив с данными для извлечения
+   * @param string $bracketName Строка элемента массива вида "v['asd']['dfgh']"
+   * @param null $noResultMode Что возвращать в случае отсутствия элемента
+   * @return string|null|false
    */
   static function getValue(array $data, $bracketName, $noResultMode = self::modeNull) {
     if (($keys = self::getKeys($bracketName)) !== false) {

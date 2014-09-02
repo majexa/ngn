@@ -52,6 +52,19 @@ class CtrlAdminDdItems extends CtrlAdmin {
     return $this->req->param(2);
   }
 
+  protected function id() {
+    return $this->req->param(4);
+  }
+
+  function action_edit() {
+    if ($this->getIm()->requestUpdate($this->id())) {
+      $this->d['tpl'] = 'common/success';
+      return;
+    }
+    $this->d['form'] = $this->getIm()->form->html();
+    $this->d['tpl'] = 'common/form';
+  }
+
   function action_default() {
     $this->d['settings'] = $this->structure['settings'];
     $this->req->param(2); // required

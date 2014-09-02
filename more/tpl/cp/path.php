@@ -10,7 +10,6 @@ $d['filter1'] = [
 ];
 
 ?>
-  <? if ($d['path']) { ?>
     <div class="pagePath">
       <? if (isset($d['filter'])) { ?>
       <div class="itemsFilter">
@@ -30,11 +29,10 @@ $d['filter1'] = [
       </script>
       <? } ?>
       <div class="cont">
+
+        <? if ($d['path']) { ?>
         <?= $this->enumDddd($d['path'], '`<a href="`.$link.`" class="`.$name.`">`.$title.`</a>`', ' → ') ?>
+        <? } ?>
       </div>
       <div class="clear"><!-- --></div>
     </div>
-  <? } else { ?>
-    <div class="pagePathDummy"></div>
-  <? } ?>
-  

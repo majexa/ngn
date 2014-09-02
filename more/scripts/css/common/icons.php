@@ -137,7 +137,7 @@ float: left;
 margin: 0px 15px 5px 0px;
 white-space: nowrap;
 cursor: pointer;
-
+vertical-align: bottom;
 -webkit-touch-callout: none;
 -webkit-user-select: none;
 -khtml-user-select: none;
@@ -145,8 +145,6 @@ cursor: pointer;
 -ms-user-select: none;
 user-select: none;
 }
-
-
 .iconsSet label {
 display: block;
 float: left;
@@ -187,9 +185,10 @@ height: 18px;
 margin: 0px 5px 2px 0px;
 }
 
-.iconBtnCaption {
+a.iconBtnCaption {
 float: left;
-margin-top: 4px;
+display: block;
+margin-top: 2px;
 font-size: 11px;
 }
 .iconBtnCaptionLinks {
@@ -197,8 +196,9 @@ color: #009F07;
 font-style: italic;
 }
 
-.dummyIconBtn {
-width: 20px;
+.iconBtnDummy {
+float: left;
+vertical-align: bottom;
 height: 20px;
 }
 
@@ -219,15 +219,6 @@ height: 20px;
 
 .info  a {
 color: #389E38;
-}
-
-.priviliges .user i {
-display: block;
-float: left;
-width: 11px;
-height: 13px;
-margin-right: 3px;
-background: url(../../i/img/icons/pack1.png) no-repeat -276px -4px;
 }
 
 /*----------------------------------------*/

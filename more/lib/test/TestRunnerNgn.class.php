@@ -22,6 +22,7 @@ class TestRunnerNgn extends TestRunnerAbstract {
     $file = TEMP_PATH.'/'.time();
     copy(MORE_PATH.'/lib/test/fixture/image.jpg', $file);
     return [
+      'name' => 'test',
       'tmp_name' => $file
     ];
   }

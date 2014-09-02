@@ -1,36 +1,20 @@
 <?php
 
-abstract class TestFieldAbstract extends TestDd {
+abstract class TestFieldDd extends TestFieldDdBase {
 
   /**
    * @var DdItemsManager
    */
   static $im;
 
-  /**
-   * @var DdFieldsManager
-   */
-  static $fm;
-
-  static $fieldId;
-
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    self::$fm = O::gett('DdFieldsManager', 'a');
-    $fieldType = lcfirst(Misc::removePrefix('TestField', get_called_class()));
-    self::$fieldId = self::$fm->create(static::fieldData($fieldType));
     self::$im = DdCore::imDefault('a');
   }
 
-  static protected function fieldData($fieldType) {
-    return [
-      'name'  => 'sample',
-      'title' => 'sample',
-      'type'  => $fieldType
-    ];
-  }
-
   abstract function createData();
+
+  protected $itemId;
 
   function createItem($request = false) {
     if ($request) {

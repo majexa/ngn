@@ -1,6 +1,6 @@
 <?php
 
-class TestFieldFile extends TestFieldAbstract {
+class TestFieldFile extends TestFieldDd {
 
   static function enable() {
     return false;
@@ -11,11 +11,11 @@ class TestFieldFile extends TestFieldAbstract {
   }
 
   function runTests($request = false) {
+    output("request: $request");
     $item = static::$im->items->getItem($this->itemId);
     $this->assertTrue($item['sample'] == '/u/dd/a/1/sample.jpg');
+    $this->updateItem(['sample' => TestRunnerNgn::tempImageFixture()], $request);
     print static::$im->form->html();
-    //$this->assertTrue((bool)strstr(static::$im->form->html(), 'name="sample" value="'.$this->v1.'"'));
-    //prr($item);
   }
 
 }

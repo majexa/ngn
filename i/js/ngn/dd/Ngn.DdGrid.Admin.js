@@ -1,4 +1,4 @@
-// @requires Ngn.DdFilterPath
+// @requiresBefore Ngn.DdFilterPath
 Ngn.DdGrid.Admin = new Class({
   Extends: Ngn.DdGrid,
   options: {
@@ -7,7 +7,7 @@ Ngn.DdGrid.Admin = new Class({
     toolActions: {
       edit: function(row) {
         new Ngn.Dialog.RequestForm({
-          url: Ngn.getPath(4) + '?a=json_edit&itemId=' + row.id,
+          url: Ngn.getPath(3) + '/json_edit/' + row.id,
           reduceHeight: true,
           title: false,
           onOkClose: function() {
@@ -18,7 +18,7 @@ Ngn.DdGrid.Admin = new Class({
     },
     toolLinks: {
       edit: function(row) {
-        return Ngn.getPath(4) + '?a=edit&itemId=' + row.id;
+        return Ngn.getPath(3) + '/edit/' + row.id;
       }
     }
   }

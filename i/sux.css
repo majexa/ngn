@@ -1,0 +1,6 @@
+.apeform {
+width: 450px;
+}
+.apeform input[type=file] {
+width: 210px;
+}

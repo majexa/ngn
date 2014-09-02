@@ -1,16 +1,4 @@
-/**
- * Autocompleter
- *
- * http://digitarald.de/project/autocompleter/
- *
- * @version    1.1.2
- *
- * @license    MIT-style license
- * @author    Harald Kirschner <mail [at] digitarald.de>
- * @copyright  Author
- */
-
-var Autocompleter = new Class({
+Ngn.Ngn.Autocompleter = new Class({
 
   Implements: [Options, Events],
 
@@ -61,7 +49,7 @@ var Autocompleter = new Class({
     this.element = $(element);
     this.setOptions(options);
     this.build();
-    this.observer = new Observer(this.element, this.prefetch.bind(this), $merge({
+    this.observer = new Ngn.Observer(this.element, this.prefetch.bind(this), $merge({
       'delay': this.options.delay
     }, this.options.observerOptions));
     this.queryValue = null;
@@ -79,9 +67,6 @@ var Autocompleter = new Class({
    * Override this function to modify the html generation.
    */
   build: function() {
-    //return;
-
-
     if ($(this.options.customChoices)) {
       this.choices = this.options.customChoices;
     } else {
@@ -436,4 +421,4 @@ Element.implement({
 
 /* compatibility */
 
-Autocompleter.Base = Autocompleter;
+Ngn.Autocompleter.Base = Ngn.Autocompleter;

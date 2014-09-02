@@ -22,7 +22,7 @@ class AdminRouter extends Router {
   protected $allowedAdminModules;
 
   protected function getFrontendName() {
-    return 'default';
+    return 'admin';
   }
 
   function _getController() {

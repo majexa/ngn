@@ -11,7 +11,7 @@ class Form {
     'title'       => '<p class="label"><span class="ttl">{title}</span>{required}<span>:</span></p>',
     'error'       => '<div class="advice-wrapper static-advice" style="z-index:300"><div class="corner"></div><div class="validation-advice">{error}</div></div>',
     'globalError' => '<div class="element errorRow padBottom"><div class="validation-advice">{error}</div></div>',
-    'help'        => '<div class="clear"><!-- --></div><div class="help">{help}</div>',
+    'help'        => '<div class="help">{help}</div><div class="clear"></div>',
     'required'    => '<b class="reqStar" title="Обязательно для заполнения" style="cursor:help">*</b>',
     'element'     => '' // используется в ф-ии html(), если флаг $this->isDdddTpl = true
   ];
@@ -162,6 +162,9 @@ class Form {
     return $this->els[$name];
   }
 
+  /**
+   * @return FieldEAbstract[]
+   */
   function getElements() {
     $this->setElementsDataDefault();
     return $this->els;
@@ -706,17 +709,17 @@ class Form {
     else {
       $fields = $this->fields->getFieldsF();
     }
-    foreach ($fields as $n => $v) {
-      if (!is_array($v)) throw new Exception("Field #$n is not array");
-      if ($this->fields->isFileType($v['name'])) {
-        $value = BracketName::getValue($this->defaultData, $v['name'], BracketName::modeString);
+    foreach ($fields as $n => $opt) {
+      if (!is_array($opt)) throw new Exception("Field #$n is not array");
+      if ($this->fields->isFileType($opt['name'])) {
+        $value = BracketName::getValue($this->defaultData, $opt['name'], BracketName::modeString);
       }
       else {
-        $value = BracketName::getValue($this->elementsData, $v['name'], BracketName::modeNull);
+        $value = BracketName::getValue($this->elementsData, $opt['name'], BracketName::modeNull);
       }
-      if (!empty($v['default'])) $v['value'] = $v['default'];
-      if ($value !== null) $v['value'] = $value;
-      BracketName::setValue($this->elementsData, $v['name'], $this->createElement($v)->value());
+      if (!empty($opt['default'])) $opt['value'] = $opt['default'];
+      if ($value !== null) $opt['value'] = $value;
+      BracketName::setValue($this->elementsData, $opt['name'], $this->createElement($opt)->value());
     }
     if (!$this->disableSubmit) {
       $this->createElement([

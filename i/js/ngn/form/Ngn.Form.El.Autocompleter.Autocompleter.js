@@ -1,9 +1,6 @@
-/**
- * @requires ac
- */
-Ngn.Autocompleter = new Class({
+Ngn.Form.El.Autocompleter.Autocompleter = new Class({
   Extends: Autocompleter.Request.JSON,
-  
+
   options: {
     caption: 'Нажмите клавишу "вниз" для выбора вариантов',
     postVar: 'mask',
@@ -25,8 +22,8 @@ Ngn.Autocompleter = new Class({
     onComplete: function(){
       this.eSpan2.removeClass('loader');
     }
-  },  
-  
+  },
+
   initialize: function(eInput, options) {
     this.selectedValue = '';
     var type = eInput.getParent('.element').get('class').replace(/.*type_(\w+).*/, '$1');
@@ -42,10 +39,10 @@ Ngn.Autocompleter = new Class({
     this.eSpan.addClass('tooltip');
     this.element.inject(new Element('a', {'class': 'ac'}), 'after');
   },
-  
+
   prefetch: function() {
     if (this.element.value && this.element.value == this.selectedValue) return;
     this.parent();
   }
-  
+
 });

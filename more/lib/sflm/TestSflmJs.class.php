@@ -7,6 +7,18 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js', 'default');
   }
 
+  function testStripComments() {
+    $after = Sflm::stripComments("a
+/* ... */
+// ...
+// @req
+b");
+    $this->assertTrue($after == "a
+
+// @req
+b");
+  }
+
   function testValidClassesParsing() {
     $r = SflmJsClasses::parseValidClasses("
 Ngn.Aaa

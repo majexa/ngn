@@ -2,7 +2,7 @@
 
 return [
   'common',
-  'ac',
+  //'ac',
   'lightbox',
   'i/js/ngn/Ngn.HidebleBar.js',
   //'ddForm',

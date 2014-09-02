@@ -121,8 +121,8 @@ Ngn.Items = new Class({
   addBtnsActions: function(actions) {
     for (var i in this.esItems) {
       var eItem = this.esItems[i];
-      for (var i=0; i<actions.length; i++) {
-        this._addBtnAction(eItem, actions[i][0], actions[i][1]);
+      for (var j=0; j<actions.length; j++) {
+        this._addBtnAction(eItem, actions[j][0], actions[j][1]);
       }
     }
   },

@@ -17,10 +17,16 @@ class TestCliCommon {
    * Отображает все, существующие в среде тесты
    */
   function lst() {
-    print O::get('CliColors')->getColoredString('tst c proj:', 'yellow')."\n";
-    foreach ((new TestRunnerProject('dummy'))->_g() as $class) print ClassCore::classToName('Test', $class)."\n";
-    print O::get('CliColors')->getColoredString('tst ngn run:', 'yellow')."\n";
-    foreach ((new TestRunnerNgn)->_getClasses() as $class) print ClassCore::classToName('Test', $class)."\n";
+    $columns = [[],[]];
+    $columns[0][] = 'tst proj g {name}:';
+    foreach ((new TestRunnerProject('dummy'))->_g() as $class) {
+      $columns[0][] = ClassCore::classToName('Test', $class);
+    }
+    $columns[1][] ='tst ngn run:';
+    foreach ((new TestRunnerNgn)->_getClasses() as $class) {
+      $columns[1][] = ClassCore::classToName('Test', $class);
+    }
+    print Cli::columns($columns);
   }
 
   /**
