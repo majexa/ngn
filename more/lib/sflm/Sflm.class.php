@@ -103,20 +103,15 @@ class Sflm {
     }
   }
 
-  static function stripComments_($c) {
-    return preg_replace('/\/\/(?! @)(.*)\n?/', '', preg_replace('!/\*(.*)\*/!s', '', $c));
+  static function stripCommentsExceptMeta($c) {
+    return preg_replace('/\/\/(?! @).*/', '', preg_replace('!/\*.*?\*/!s', '', $c));
   }
   static function stripComments($c) {
-    return preg_replace('/\/\/(.*)\n?/', '', preg_replace('!/\*(.*)\*/!s', '', $c));
+    return preg_replace('/\/\/.*/', '', $c);
   }
-
-  static function getCode_($file) {
-    return self::stripComments(file_get_contents($file));
-  }
-
 
   static function getCode($file) {
-    return preg_replace('/\/\/(?! @)(.*)/', '', preg_replace('!/\*.*?\*/!s', '', file_get_contents($file)));
+    return self::stripCommentsExceptMeta(file_get_contents($file));
   }
 
   static function getPath($absPath, $whyDoUWantToGetThis = null) {

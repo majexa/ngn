@@ -136,7 +136,7 @@ class SflmJsClasses {
     Sflm::output('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
     if ($path) $this->frontend->_addPath($path); // -------------- добавили путь
     Sflm::output("Processing valid-class patterns in '$source'");
-    foreach (SflmJsClasses::parseValidClassesUsage($code) as $class) {
+    foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
       $this->addClass($class, "$source valid-class pattern");
     }
     foreach (SflmJsClasses::parseRequired($code, 'after') as $class) {
