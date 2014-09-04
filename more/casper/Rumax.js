@@ -22,7 +22,6 @@ module.exports = new Class({
   },
 
   capture: function(caption) {
-    console.debug('capture on ' + caption);
     var id = parseInt(Math.random() * 100000000);
     this.casper.capture('/home/user/ngn-env/rumax/web/captures/' + id + '.png', {
       top: 0,
@@ -30,7 +29,7 @@ module.exports = new Class({
       width: 950,
       height: 500
     });
-    this.log('CAPTURED', 3);
+    this.log('CAPTURED ON ' + caption, 3);
     require('child_process').execFile('run', ['rumax/ping', 'id=' + id], null, function(err, stdout, stderr) {
       this.log('PINGED', 3);
     }.bind(this));
