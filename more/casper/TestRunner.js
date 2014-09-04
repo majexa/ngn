@@ -28,6 +28,9 @@ module.exports = new Class({
       console.debug(msg + "\n" + t + "--");
       this.exit();
     });
+    this.casper.on('remote.message', function(message) {
+      //this.echo('CLIENT: ' + message);
+    });
     this.casper.setFilter("page.confirm", function(msg) {
       return true;
     });
@@ -73,15 +76,17 @@ module.exports = new Class({
     };
     this.casper.checkExistence = function(selector) {
       return [
-        this.exists(selector),
-        '"' + selector + '" selector does not exists'
+        this.exists(selector), //
+        '"' + selector + '" selector does not exists', //
+        '"' + selector + '" selector exists'
       ];
     };
     this.casper.checkText = function(selector, textToCompare) {
       var text = this.fetchText(selector);
       return [
-        text == textToCompare,
-        'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare
+        text == textToCompare, //
+        'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare,
+        'text and textToCompare are identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare
       ];
     };
     this.casper.printText = function(selector) {
@@ -152,7 +157,9 @@ module.exports = new Class({
   callMethod: function(methodName, method, negativeCheck) {
     if (methodName.substr(0, 5) == 'check') {
       var r = method();
-      if (r[0] !== !negativeCheck) throw new Error(r[1]);
+      if (r[0] !== !negativeCheck) {
+        throw new Error(r[negativeCheck ? 2 : 1]);
+      }
       this.log((negativeCheck ? '!' : '') + methodName + ' success');
       return;
     }

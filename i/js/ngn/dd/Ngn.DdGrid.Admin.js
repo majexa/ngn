@@ -1,13 +1,14 @@
-// @requiresBefore Ngn.DdFilterPath
 Ngn.DdGrid.Admin = new Class({
   Extends: Ngn.DdGrid,
   options: {
     basePath: Ngn.getPath(3),
-    filterPath: new Ngn.DdFilterPath(3),
+    //filterPath: new Ngn.DdFilterPath(4),
+    listAction: 'editContent',
+    idParam: 'itemId',
     toolActions: {
       edit: function(row) {
         new Ngn.Dialog.RequestForm({
-          url: Ngn.getPath(3) + '/json_edit/' + row.id,
+          url: Ngn.getPath(4) + '?a=json_edit&itemId=' + row.id,
           reduceHeight: true,
           title: false,
           onOkClose: function() {
@@ -18,9 +19,13 @@ Ngn.DdGrid.Admin = new Class({
     },
     toolLinks: {
       edit: function(row) {
-        return Ngn.getPath(3) + '/edit/' + row.id;
+        return Ngn.getPath(4) + '?a=edit&itemId=' + row.id;
       }
     }
+  },
+  initPagination: function(data, fromAjax) {
+    this.parent(data, fromAjax);
+    this.ePagination.inject(document.getElement('.pagePath'), 'top').addClass('pNumsTop');
   }
 });
 
@@ -30,13 +35,6 @@ Ngn.DdGrid.Admin = new Class({
  * @returns Ngn.DdGrid.Admin
  */
 Ngn.DdGrid.Admin.factory = function(strName, options) {
-  options = options || {};
-  options.resizeble = true;
-  options.id = 'dd' + strName;
-  var clsP = eval('Ngn.DdGrid.Admin.' + ucfirst(strName));
-  if (Ngn.projectKey && clsP) {
-    var cls = eval('Ngn.DdGrid.Admin.' + ucfirst(strName) + '.' + ucfirst(Ngn.projectKey));
-    if (cls) return new cls(options);
-  }
-  return clsP ? new clsP(options) : new Ngn.DdGrid.Admin(options);
+  var cls = eval('Ngn.DdGrid.Admin.' + ucfirst(strName));
+  return cls ? new cls(options) : new Ngn.DdGrid.Admin(options);
 };

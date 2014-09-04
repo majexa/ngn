@@ -1,7 +1,7 @@
 <?php
 
 class FieldEImagePreview extends FieldEImage {
-
+/*
   function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'currentFileClass' => 'image lightbox',
@@ -29,5 +29,5 @@ class FieldEImagePreview extends FieldEImage {
 </div>
 ';
   }
-
+*/
 }

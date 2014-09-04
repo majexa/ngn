@@ -26,7 +26,7 @@ module.exports = new Class({
     var id = parseInt(Math.random() * 100000000);
     this.casper.capture('/home/user/ngn-env/rumax/web/captures/' + id + '.png', {
       top: 0,
-      left: 0,
+      left: -100,
       width: 950,
       height: 500
     });

@@ -14,10 +14,17 @@ Ngn.Form = new Class({
   els: {},
 
   initialize: function(eForm, options) {
+    /*
+    eForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      console.debug('123');
+      return false;
+    }, false);
+    return;
+    */
     this.eForm = eForm;
     if (this.eForm.get('data-init')) throw new Error('This form already initialized');
     this.eForm.set('data-init', true);
-    this.initOptions = options;
     if ((options && !options.forceOcclude) && this.occlude(this.eForm.get('id'), this.eForm)) return this.occluded;
     Ngn.Form.forms[this.eForm.get('id')] = this;
     this.id = this.eForm.get('id');
@@ -65,6 +72,7 @@ Ngn.Form = new Class({
 
   initValidation: function() {
     var opts = {};
+    opts.evaluateOnSubmit = false;
     if (this.options.dialog) {
       opts.scrollToErrorsOnSubmit = false;
       //opts.scrollElement = this.options.dialog.message;
@@ -159,6 +167,7 @@ Ngn.Form = new Class({
   },
 
   initSubmit: function() {
+
     this.eForm.addEvent('submit', function(e) {
       e.preventDefault();
       this.submit();
@@ -188,9 +197,11 @@ Ngn.Form = new Class({
     this.eForm.getElements('input[type=file]').each(function(eInput) {
       var cls = eInput.get('multiple') ? 'multiUpload' : 'upload';
       var eInputValidator = new Element('input', {
-        type: 'hidden',
-        'class': eInput.hasClass('required') ? 'validate-' + cls + '-required' : 'validate-' + cls
+        type: 'hidden'
+        //name: eInput.get('name') + '_helper',
       }).inject(eInput, 'after');
+      var fileSaved = eInput.getParent('.element').getElement('.fileSaved');
+      if (!fileSaved) eInputValidator.addClass(eInput.hasClass('required') ? 'validate-' + cls + '-required' : 'validate-' + cls);
       if (eInput.get('data-file')) eInputValidator.set('value', 1);
       var name = eInput.get('name');
       var uploadOptions = {
@@ -442,14 +453,15 @@ Ngn.Form.Validator = new Class({
         html: errorMsg
       }).addClass('advice').addClass(cssClass);
       adviceWrapper = new Element('div', {
+        styles: { display: 'none' },
         id: 'advice-' + className.split(':')[0] + '-' + this.getFieldId(field)
       }).addClass('advice-wrapper').grab(advice);
       adviceWrapper.grab(new Element('div', {'class': 'corner'}), 'top').setStyle('z-index', 300);
+      field.store('$moo:advice-' + className, adviceWrapper);
     } else {
       advice = adviceWrapper.getElement('.advice');
       advice.set('html', errorMsg);
     }
-    field.store('$moo:advice-' + className, adviceWrapper);
     this.lastAdvices[field.get('name')] = className;
     return adviceWrapper;
   },
@@ -475,14 +487,6 @@ Ngn.Form.Validator = new Class({
     this.hideAdvice(this.lastAdvices[field.get('name')], field);
   },
 
-  getAdvice: function(className, field) {
-    return field.retrieve('$moo:advice-' + className);
-  },
-
-  getPropName: function(className) {
-    return 'advice-' + className;
-  },
-
   insertAdvice: function(advice, field) {
     advice.inject(field.getParent('.field-wrapper'), 'after');
   },
@@ -495,7 +499,6 @@ Ngn.Form.Validator = new Class({
     var par = this.options.scrollElement || document.id(this).getParent();
     return new Fx.Scroll(par, this.options.scrollFxOptions);
   }
-
 
 });
 
@@ -608,9 +611,7 @@ Form.Validator.addAllThese([
   ['required-wisiwig', {
     errorMsg: 'поле обязательно для заполнения',
     test: function(element) {
-      if (!Ngn.clearParagraphs(tinyMCE.get(element.get('id')).getContent()))
-        return false;
-      return true;
+      return !!Ngn.clearParagraphs(tinyMCE.get(element.get('id')).getContent());
     }
   }],
   ['validate-request', {

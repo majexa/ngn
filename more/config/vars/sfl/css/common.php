@@ -7,7 +7,6 @@ return [
   'i/css/common/dialog.css',
   'i/css/cp/pNums.css',
   'i/css/common/form.css',
-  'i/css/common/fancy.css',
   'i/css/mooRainbow/small.css',
   'i/css/common/tips.css',
   'i/css/common/resizableTextarea.css',
