@@ -6,42 +6,6 @@ Lib::addPearAutoloader('PHP');
 Lib::addPearAutoloader('File');
 Lib::addPearAutoloader('Text');
 
-class SimpleTestListener implements PHPUnit_Framework_TestListener {
-
-  function addError(PHPUnit_Framework_Test $test, Exception $e, $time) {
-    printf("Error while running test '%s'.\n", $test->getName());
-  }
-
-  function addFailure(PHPUnit_Framework_Test $test, PHPUnit_Framework_AssertionFailedError $e, $time) {
-    printf("Test '%s' failed.\n", $test->getName());
-  }
-
-  function addIncompleteTest(PHPUnit_Framework_Test $test, Exception $e, $time) {
-    printf("Test '%s' is incomplete.\n", $test->getName());
-  }
-
-  function addSkippedTest(PHPUnit_Framework_Test $test, Exception $e, $time) {
-    printf("Test '%s' has been skipped.\n", $test->getName());
-  }
-
-  function startTest(PHPUnit_Framework_Test $test) {
-    printf("Test '%s' started.\n", $test->getName());
-  }
-
-  function endTest(PHPUnit_Framework_Test $test, $time) {
-    printf("Test '%s' ended.\n", $test->getName());
-  }
-
-  function startTestSuite(PHPUnit_Framework_TestSuite $suite) {
-    printf("TestSuite '%s' started.\n", $suite->getName());
-  }
-
-  function endTestSuite(PHPUnit_Framework_TestSuite $suite) {
-    printf("TestSuite '%s' ended.\n", $suite->getName());
-  }
-
-}
-
 class TestRunnerAbstract {
 
   protected $filterClasses = [], $filterPrefix;
