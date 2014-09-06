@@ -43,7 +43,7 @@ Ngn.Grid = new Class({
 
   initMenu: function() {
     var grid = this, action;
-    this.eMenu = Elements.from('<div class="itemsTableMenu dgray iconsSet"></div>')[0].inject(this.eParent);
+    this.eMenu = Elements.from('<div class="itemsTableMenu dgray"><div class="clear"></div></div>')[0].inject(this.eParent);
     if (!this.options.menu) return;
     for (var i = 0; i < this.options.menu.length; i++) {
       (function() {
@@ -69,7 +69,7 @@ Ngn.Grid = new Class({
         }
         var cls = v.cls;
         v.cls = 'btn ' + v.cls;
-        grid.btns[cls] = new Ngn.Btn(Ngn.btn(v).inject(this.eMenu), action, v.options || {});
+        grid.btns[cls] = new Ngn.Btn(Ngn.btn(v).inject(this.eMenu, 'top'), action, v.options || {});
       }.bind(this))();
     }
   },
