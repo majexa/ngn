@@ -21,18 +21,31 @@ module.exports = new Class({
     }.bind(this));
   },
 
-  capture: function(caption) {
-    var id = parseInt(Math.random() * 100000000);
+  makeCapture: function(caption) {
+    var id = new Date().getTime() + '-' + parseInt(Math.random() * 100000000);
     this.casper.capture('/home/user/ngn-env/rumax/web/captures/' + id + '.png', {
       top: 0,
-      left: -100,
+      left: 0,
       width: 950,
       height: 500
     });
     this.log('CAPTURED ON ' + caption, 3);
-    require('child_process').execFile('run', ['rumax/ping', 'id=' + id], null, function(err, stdout, stderr) {
+    return id;
+  },
+
+  /**
+   * @param {string} runner - Path to running program
+   * @param {string} options - Look at NgnCl::strParamsToArray for options format
+   */
+  afterCaptureCmd: function(runner, options) {
+    require('child_process').execFile('run', [runner, options], null, function(err, stdout, stderr) {
       this.log('PINGED', 3);
     }.bind(this));
+  },
+
+  capture: function(caption) {
+    var id = this.makeCapture(caption);
+    this.afterCaptureCmd('rumax/ping', 'id=' + id);
   },
 
   wrapCallback: function(callback, arg1) {

@@ -53,7 +53,10 @@ class Dir {
   /**
    * Рекурсивно удаляет директорию
    *
-   * @param   string    Путь до папки
+   * @param string $dirname
+   * @param bool $removeItself
+   * @return bool
+   * @throws Exception
    */
   static function remove($dirname, $removeItself = true) {
     // Sanity check
@@ -233,12 +236,15 @@ class Dir {
   }
 
   static function getFiles($dirPath, $quietly = false) {
+    /*
+     * @depriceted:
     if (IS_MEMCACHED === true) {
       if (($files = DirMem::get(str_replace('/', '_', $dirPath)))) return $files;
       $files = self::getFiles_noCache($dirPath, $quietly);
       DirMem::set(str_replace('/', '_', $dirPath), $files, 60);
       return $files;
     }
+    */
     return self::getFiles_noCache($dirPath, $quietly);
   }
 

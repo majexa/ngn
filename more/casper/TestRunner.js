@@ -6,6 +6,7 @@ var c = function(v) {
 
 module.exports = new Class({
   Extends: Project,
+  Implements: Options,
 
   //logLevel: 3,
   i: 0,
@@ -13,13 +14,17 @@ module.exports = new Class({
     'then', 'wait'
   ],
 
-  initialize: function() {
+  options: {
+    captureFolder: null
+  },
+
+  initialize: function(options) {
     this.parent();
-    var data = require('system').stdin.readLine();
-    if (!data.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
-    data = JSON.decode(data);
-    this.steps = data.steps;
-    if (data.extension) this.casper = Object.merge(this.casper, require(data.extension));
+    var stdinOptions = require('system').stdin.readLine();
+    if (!stdinOptions.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
+    stdinOptions = JSON.decode(stdinOptions);
+    this.setOptions(Object.merge(stdinOptions, options));
+    if (this.options.extension) this.casper = Object.merge(this.casper, require(this.options.extension));
     this.casper.on('page.error', function(msg, trace) {
       var t = '';
       for (var i = 0; i < trace.length; i++) {
@@ -31,7 +36,7 @@ module.exports = new Class({
     this.casper.on('remote.message', function(message) {
       //this.echo('CLIENT: ' + message);
     });
-    this.casper.setFilter("page.confirm", function(msg) {
+    this.casper.setFilter('page.confirm', function(msg) {
       return true;
     });
     var runner = this;
@@ -167,24 +172,33 @@ module.exports = new Class({
   },
 
   getNextMethod: function(currentMethodName) {
-    if (!this.steps[this.i + 1]) {
+    if (!this.options.steps[this.i + 1]) {
       return function() {
-        if (this.isCallbackMethod(currentMethodName)) this.capture(currentMethodName + ' (step: ' + this.i + ')');
+        if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName + ' (step: ' + this.i + ')');
         this.log('There are no more steps', 2);
       }.bind(this);
     }
     return function() {
-      if (this.isCallbackMethod(currentMethodName)) this.capture(currentMethodName + ' (step: ' + this.i + ')');
+      if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName + ' (step: ' + this.i + ')');
       this.nextStep();
     }.bind(this);
   },
 
+  _capture: function(caption) {
+    if (this.options.captureFolder) {
+      var id = this.makeCapture(caption);
+      this.afterCaptureCmd('rumax/save', 'id=' + id + '+folder=' + this.options.captureFolder);
+      return;
+    }
+    this.capture(caption);
+  },
+
   runStep: function() {
-    this.processStep(this.steps[this.i]);
+    this.processStep(this.options.steps[this.i]);
   },
 
   nextStep: function() {
-    this.log('Running next cmd (' + this.steps[this.i + 1][0] + ')', 2);
+    this.log('Running next cmd (' + this.options.steps[this.i + 1][0] + ')', 2);
     this.i++;
     this.runStep();
   }
