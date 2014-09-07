@@ -15,7 +15,7 @@ class FileCache {
   function __construct(array $options) {
     if (!defined('DATA_PATH')) throw new Exception('DATA_PATH not defined');
     $this->options = $options;
-    if (!file_exists(static::folder($options))) Dir::make(static::folder($options));
+    if (!file_exists(static::folder($options))) Dir::make(static::folder());
   }
 
   // --
@@ -31,7 +31,7 @@ class FileCache {
     ]));
   }
 
-  static function folder(array $options) {
+  static function folder() {
     return DATA_PATH.'/cache';
   }
 
@@ -60,7 +60,8 @@ class FileCache {
    * @param   string  Zend_Cache-тэг
    */
   static function clean() {
-    self::c()->clean();
+    //self::c()->clean();
+    Dir::clear(self::folder());
   }
 
 }
