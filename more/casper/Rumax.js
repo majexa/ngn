@@ -21,8 +21,8 @@ module.exports = new Class({
     }.bind(this));
   },
 
-  makeCapture: function(caption) {
-    var id = new Date().getTime() + '-' + parseInt(Math.random() * 100000000);
+  makeCapture: function(caption, id) {
+    if (!id) id = new Date().getTime() + '-' + parseInt(Math.random() * 100000000);
     this.casper.capture('/home/user/ngn-env/rumax/web/captures/' + id + '.png', {
       top: 0,
       left: 0,
@@ -43,8 +43,8 @@ module.exports = new Class({
     }.bind(this));
   },
 
-  capture: function(caption) {
-    var id = this.makeCapture(caption);
+  capture: function(caption, id) {
+    id = this.makeCapture(caption, id);
     this.afterCaptureCmd('rumax/ping', 'id=' + id);
   },
 

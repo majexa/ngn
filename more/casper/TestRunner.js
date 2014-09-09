@@ -90,12 +90,20 @@ module.exports = new Class({
       var text = this.fetchText(selector);
       return [
         text == textToCompare, //
-        'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare,
-        'text and textToCompare are identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare
+        'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare, 'text and textToCompare are identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare
       ];
     };
     this.casper.printText = function(selector) {
       console.debug(this.fetchText(selector));
+    };
+    this.casper.printProperty = function(selector, property) {
+      var value = this.evaluate(function(selector, property) {
+        return document.querySelector(selector)[property];
+      }, {
+        selector: selector,
+        property: property
+      });
+      console.log(selector + ' [' + property + '] = "' + value + '"');
     };
   },
 
@@ -174,23 +182,23 @@ module.exports = new Class({
   getNextMethod: function(currentMethodName) {
     if (!this.options.steps[this.i + 1]) {
       return function() {
-        if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName + ' (step: ' + this.i + ')');
+        if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
         this.log('There are no more steps', 2);
       }.bind(this);
     }
     return function() {
-      if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName + ' (step: ' + this.i + ')');
+      if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
       this.nextStep();
     }.bind(this);
   },
 
   _capture: function(caption) {
     if (this.options.captureFolder) {
-      var id = this.makeCapture(caption);
+      var id = this.makeCapture(caption, this.i + 1);
       this.afterCaptureCmd('rumax/save', 'id=' + id + '+folder=' + this.options.captureFolder);
       return;
     }
-    this.capture(caption);
+    this.capture(caption, this.i + 1);
   },
 
   runStep: function() {

@@ -19,10 +19,13 @@ class TestRunnerNgn extends TestRunnerAbstract {
   }
 
   static function tempImageFixture() {
+    $a = [1, 2, 3, 4, 5];
     $file = TEMP_PATH.'/'.time();
-    copy(MORE_PATH.'/lib/test/fixture/image.jpg', $file);
+    $n = $a[array_rand($a)];
+    LogWriter::str('n', $n);
+    copy(MORE_PATH.'/lib/test/fixture/'.$n.'.jpg', $file);
     return [
-      'name' => 'test',
+      'name'     => 'test',
       'tmp_name' => $file
     ];
   }
