@@ -1,9 +1,10 @@
 var require = patchRequire(require);
 require('mootools');
 var LogLevel = require('LogLevel');
+var PhpCmd = require('PhpCmd');
 
 module.exports = new Class({
-  Implements: LogLevel,
+  Implements: [LogLevel, PhpCmd],
 
   logLevel: 1,
 
@@ -29,7 +30,7 @@ module.exports = new Class({
       width: 950,
       height: 500
     });
-    this.log('CAPTURED ON ' + caption, 3);
+    this.log('captured on ' + caption, 3);
     return id;
   },
 
@@ -38,8 +39,9 @@ module.exports = new Class({
    * @param {string} options - Look at NgnCl::strParamsToArray for options format
    */
   afterCaptureCmd: function(runner, options) {
-    require('child_process').execFile('run', [runner, options], null, function(err, stdout, stderr) {
-      this.log('PINGED', 3);
+    this.execFile(runner, options, function(stdout) {
+      this.log('capture result:\n' + stdout, 3);
+      //this.log('captured by ' + runner, 3);
     }.bind(this));
   },
 
