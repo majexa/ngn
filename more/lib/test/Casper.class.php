@@ -16,6 +16,7 @@ class Casper {
     if (strstr($options, "'")) throw new Exception('Data can not contains single quotes');
     $casperFolder = NGN_PATH.'/more/casper';
     $cmd = "echo '$options' | casperjs $casperFolder/test.js --projectDir=$projectDir";
+    prr($cmd);
     $process = proc_open($cmd, [['pipe', 'r'], ['pipe', 'w'], ['pipe', 'w']], $pipes, realpath('./'), []);
     $buffer = '';
     if (is_resource($process)) {

@@ -8,7 +8,7 @@ module.exports = new Class({
   Extends: Project,
   Implements: Options,
 
-  //logLevel: 3,
+  logLevel: 3,
   i: 0,
   callbackPrefixes: [
     'then', 'wait'
@@ -44,8 +44,7 @@ module.exports = new Class({
       this.thenOpen(runner.baseUrl + '/' + url, function() {
         this.evaluate(function() {
         });
-        this.wait(10, callback);
-        //callback.delay(2000);
+        this.wait(100, callback);
       });
     };
     this.casper.waitForPageLoaded = function(callback) {
@@ -56,6 +55,10 @@ module.exports = new Class({
           });
         }, callback);
       });
+    };
+    this.casper.closeDialog = function(callback) {
+      this.click('.md-closer');
+      this.waitForDialogClose(callback);
     };
     this.casper.waitForDialog = function(callback) {
       this.waitForSelector('.dialog .apeform', function() {
@@ -120,12 +123,19 @@ module.exports = new Class({
     return false;
   },
 
-  processStep: function(cmd) {
-    var methodName = cmd[0];
+  disableCapturing: false,
+
+  processStep: function(step) {
+    var methodName = step[0];
     var negativeCheck = false;
     if (methodName.substr(0, 1) == '!') {
       methodName = methodName.substr(1, methodName.length);
       negativeCheck = true;
+    }
+    this.disableCapturing = methodName.substr(0, 1) == '@';
+    //this.log('===' + this.disableCapturing);
+    if (methodName.substr(0, 1) == '@') {
+      methodName = methodName.substr(1, methodName.length);
     }
     var nextMethod, methodBind, method, methodType;
     if (this[methodName]) {
@@ -144,10 +154,9 @@ module.exports = new Class({
       throw new Error('Casper or TestRunner method "' + methodName + '" is absent');
     }
     var params = null;
-    this.log('Running ' + methodType + '::' + methodName, 2);
     if (this.isCallbackMethod(methodName)) {
       nextMethod = this.getNextMethod(methodName);
-      params = cmd[1] !== undefined ? cmd.slice(1, cmd.length) : [];
+      params = step[1] !== undefined ? step.slice(1, step.length) : [];
       if (method.length - 1 != params.length) {
         throw new Error('method "' + methodName + '" must have ' + (method.length - 1) + ' params. ' + params.length + ' passed instead');
       }
@@ -155,8 +164,8 @@ module.exports = new Class({
       method = method.pass(params, methodBind);
       this.callMethod(methodName, method);
     } else {
-      if (cmd[1] !== undefined) {
-        params = cmd.slice(1, cmd.length);
+      if (step[1] !== undefined) {
+        params = step.slice(1, step.length);
         if (method.length != params.length) throw new Error('method "' + methodName + '" must have ' + method.length + ' params. ' + params.length + ' passed instead');
         method = method.pass(params, methodBind);
       } else {
@@ -183,7 +192,10 @@ module.exports = new Class({
     if (!this.options.steps[this.i + 1]) {
       return function() {
         if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
-        this.log('There are no more steps', 2);
+        this.casper.wait(1000, function() {
+          this.log('There are no more steps', 2);
+        });
+
       }.bind(this);
     }
     return function() {
@@ -193,9 +205,11 @@ module.exports = new Class({
   },
 
   _capture: function(caption) {
+    if (this.disableCapturing) return;
+    //this.log('+++' + caption + '---' + this.disableCapturing);
     if (this.options.captureFolder) {
-      var id = this.makeCapture(caption, this.i + 1);
-      this.afterCaptureCmd('rumax/save', 'id=' + id + '+folder=' + this.options.captureFolder);
+      var id = this.makeCapture(caption);
+      this.afterCaptureCmd('rumax/save', 'id=' + id + '+folder=' + this.options.captureFolder + '+n=' + (this.i + 1));
       return;
     }
     this.capture(caption, this.i + 1);
@@ -206,7 +220,10 @@ module.exports = new Class({
   },
 
   nextStep: function() {
-    this.log('Running next cmd (' + this.options.steps[this.i + 1][0] + ')', 2);
+    var step = this.options.steps[this.i + 1];
+    var params = '';
+    if (step.length > 1) params = ' (' + step.slice(1, step.length).join(', ') + ')';
+    this.log(step[0] + params, 2);
     this.i++;
     this.runStep();
   }
