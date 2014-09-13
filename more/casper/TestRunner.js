@@ -132,10 +132,14 @@ module.exports = new Class({
       methodName = methodName.substr(1, methodName.length);
       negativeCheck = true;
     }
-    this.disableCapturing = methodName.substr(0, 1) == '@';
+    //this.disableCapturing = methodName.substr(0, 1) == '@';
     //this.log('===' + this.disableCapturing);
-    if (methodName.substr(0, 1) == '@') {
+    var capture;
+    if (methodName.substr(0, 1) == '~') {
+      capture = true;
       methodName = methodName.substr(1, methodName.length);
+    } else {
+      capture = false;
     }
     var nextMethod, methodBind, method, methodType;
     if (this[methodName]) {
@@ -172,6 +176,7 @@ module.exports = new Class({
         method = method.bind(methodBind);
       }
       this.callMethod(methodName, method, negativeCheck);
+      if (capture) this._capture(methodName);
       this.getNextMethod(methodName)();
     }
   },
@@ -191,15 +196,14 @@ module.exports = new Class({
   getNextMethod: function(currentMethodName) {
     if (!this.options.steps[this.i + 1]) {
       return function() {
-        if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
+        //if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
         this.casper.wait(1000, function() {
           this.log('There are no more steps', 2);
         });
-
       }.bind(this);
     }
     return function() {
-      if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
+      //if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
       this.nextStep();
     }.bind(this);
   },
