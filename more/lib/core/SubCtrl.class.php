@@ -1,6 +1,6 @@
 <?php
 
-abstract class SubPa {
+abstract class SubCtrl {
   
   /**
    * @var CtrlCommon

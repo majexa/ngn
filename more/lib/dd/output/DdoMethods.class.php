@@ -114,6 +114,10 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
           'title' => 'H2',
           'dddd' => '`<h2>`.$v.`</h2>`'
         ],
+        'h2ItemLink' => [
+          'title' => 'Ссылка на запись',
+          'dddd' => '`<h2><a href="`.$ddddItemLink.`">`.$v.`</a></h2>`'
+        ],
         'itemLinkIfText' => [
           'title' => 'Ссылка на запись, только если поле "text" не пустое',
           'dddd' => '(isset($o->items[$id][`text`]) and empty($o->items[$id][`text`])) ? `` : `<a href="`.$ddddItemLink.`">`.$v.`</a>`'
@@ -153,7 +157,7 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
           'title' => 'Показывать вместо отсутствующего изображения заглушку "нет фото". Ссылку, если есть поле text не пустое',
           'dddd' => '!$v ? `<a`.(empty($o->items[$id][`text`]) ? `` : ` href="`.Tt()->getPath(0).`/`.$ddddItemLink.`"`).` class="thumb"><img src="/i/img/no-images.gif" /></a>` : `<a `.(empty($o->items[$id][`text`]) ? `` : ` href="`.Tt()->getPath(0).`/`.$ddddItemLink.`"`).` class="thumb"><img src="`.Misc::getFilePrefexedPath($v, `sm_`).`" /></a>`',
         ],
-      	'middleImageUrl' => [
+        'middleImageUrl' => [
           'title' => 'Средняя картинка + ссылка на URL',
           'dddd' => '$v ? `<a href="`.$o->items[$id][`url`].`" class="thumb"><img src="`.Misc::getFilePrefexedPath($v, `md_`).`" /></a>` : ``',
         ],

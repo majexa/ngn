@@ -143,8 +143,8 @@ abstract class CtrlBase {
 
   public $subControllers = [];
 
-  protected function addSubController(SubPa $oSubPa) {
-    $this->subControllers[$oSubPa->getName()] = $oSubPa;
+  protected function addSubController(SubCtrl $subCtrl) {
+    $this->subControllers[$subCtrl->getName()] = $subCtrl;
   }
 
   function __call($method, array $param = []) {

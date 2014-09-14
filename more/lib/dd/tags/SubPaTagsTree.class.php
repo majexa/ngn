@@ -1,6 +1,6 @@
 <?php
 
-class SubPaTagsTree extends SubPa {
+class SubCtrlTagsTree extends SubCtrl {
 
   /**
    * @return DdTagsTagsTree
