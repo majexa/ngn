@@ -2,7 +2,7 @@
 
 abstract class DdFieldTypeSelectTagsStructure extends DdFieldType {
 
-  static protected function fields() {
+  protected function fields() {
     return [
       [
         'type'  => 'ddStructure',

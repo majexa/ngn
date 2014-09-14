@@ -22,11 +22,7 @@ class DdTagsGroup {
   function __construct($strName, $name) {
     Misc::checkEmpty($strName, '$strName');
     Misc::checkEmpty($name, '$name');
-    // try {
     $this->p = self::getData($strName, $name);
-    // } catch (Exception $e) {
-    // throw new Exception("tag group $strName::$name does not exists");
-    // }
     if (empty($this->p['fieldType'])) throw new Exception('Field for tag "'.$name.'" of "'.$strName.'" structure does not exists');
     $this->p['tagsGetterStrName'] = empty($this->p['masterStrName']) ? $this->p['strName'] : $this->p['masterStrName'];
     $this->p['tree'] = DdTags::isTree($this->p['fieldType']);
@@ -72,11 +68,10 @@ class DdTagsGroup {
   // ================================= STATIC ================================
 
   /**
-   * Returns Tags Group data
-   *
-   * @param   string  Structure data
-   * @param   string  Tags Group name
-   * @return  array
+   * @param $strName
+   * @param string $name Tags Group name
+   * @param bool $strict
+   * @return array
    */
   static function getData($strName, $name, $strict = true) {
     $r = db()->selectRow(<<<SQL

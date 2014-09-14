@@ -2,7 +2,7 @@
 
 class DdFieldTypeDdCity extends DdFieldType {
 
-  static protected function _get() {
+  protected function _get() {
     return [
       'dbType'   => 'VARCHAR',
       'dbLength' => 255,

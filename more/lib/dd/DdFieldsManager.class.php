@@ -38,7 +38,7 @@ class DdFieldsManager extends DbItemsManager {
 
   protected function beforeFormElementsInit() {
     if (!empty($this->defaultData)) {
-      $type = DdFieldCore::getTypeData($this->defaultData['type']);
+      $type = DdFieldCore::getType($this->defaultData['type']);
       if (!empty($type['disableTypeChange'])) unset($this->form->fields->fields['type']);
       if (!empty($type['fields'])) {
         foreach ($type['fields'] as &$v) $v['name'] = "settings[{$v['name']}]";
@@ -60,7 +60,7 @@ class DdFieldsManager extends DbItemsManager {
     parent::replaceData();
     if (!empty($this->data['type'])) {
       // Заменяем значения из формы, дозволеными статическими значениями из типа поля
-      $this->data = array_merge($this->data, Arr::filterByKeys(DdFieldCore::getTypeData($this->data['type']), [
+      $this->data = array_merge($this->data, Arr::filterByKeys(DdFieldCore::getType($this->data['type'])->r, [
         'notList',
         'system'
       ]));
@@ -71,7 +71,7 @@ class DdFieldsManager extends DbItemsManager {
 
   protected function dbCreateField() {
     if (!empty($this->data['virtual'])) return;
-    $type = DdFieldCore::getTypeData($this->data['type']);
+    $type = DdFieldCore::getType($this->data['type'])->r;
     if (!isset($type['dbLength'])) $type['dbLength'] = null;
     $this->_dbCreateField($type);
   }
@@ -163,8 +163,8 @@ class DdFieldsManager extends DbItemsManager {
   protected $currentType, $newType, $defaultDbValue;
 
   protected function initUpdateDbValues() {
-    $this->currentType = DdFieldCore::getTypeData($this->beforeUpdateData['type']);
-    $this->newType = DdFieldCore::getTypeData($this->data['type']);
+    $this->currentType = DdFieldCore::getType($this->beforeUpdateData['type'])->r;
+    $this->newType = DdFieldCore::getType($this->data['type'])->r;
     $this->defaultDbValue = empty($this->data['default']) ? null : $this->data['default'];
   }
 

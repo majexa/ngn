@@ -9,7 +9,7 @@ abstract class TestFieldDd extends TestFieldDdBase {
 
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    self::$im = DdCore::imDefault('a');
+    self::$im = DdCore::imDefault(static::$strName);
   }
 
   abstract function createData();

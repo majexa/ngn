@@ -5,6 +5,9 @@ class FieldCore {
   const FIELD_ELEMENT_CLASS_PREFIX = 'FieldE';
 
   /**
+   * @param $type
+   * @param array $options
+   * @param Form $form
    * @return FieldEAbstract
    */
   static function get($type, array $options = [], Form $form = null) {

@@ -5,7 +5,7 @@ class FieldEDdFieldType extends FieldESelect {
   protected function init() {
     $this->options['options'] = Arr::get(DdFieldCore::getTypes(), 'title', 'KEY');
     foreach (array_keys($this->options['options']) as $type) {
-      if (!empty(DdFieldCore::getTypeData($type)['disableTypeChange'])) unset($this->options['options'][$type]);
+      if (!empty(DdFieldCore::getType($type)['disableTypeChange'])) unset($this->options['options'][$type]);
     }
     parent::init();
   }
@@ -14,7 +14,7 @@ class FieldEDdFieldType extends FieldESelect {
     $s = '<table cellpadding="0" cellspacing="0" class="itemsTable">';
     $checked = empty($this->options['value']) ? Arr::firstKey($this->options['options']) : $this->options['value'];
     foreach ($this->options['options'] as $k => $v) {
-      $type = DdFieldCore::getTypeData($k);
+      $type = DdFieldCore::getType($k)->r;
       $type['disable'] = [];
       if (!empty($type['virtual'])) $type['disable'][] = 'required';
       if (!empty($type['system'])) {

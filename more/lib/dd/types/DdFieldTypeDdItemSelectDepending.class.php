@@ -2,7 +2,7 @@
 
 class DdFieldTypeDdItemSelectDepending extends DdFieldTypeDdItemSelect {
 
-  static protected function _get() {
+  protected function _get() {
     $r = parent::_get();
     $r['title'] = 'Выбор dd-записи (зависимый)';
     $r['fields']['parent'] =         [

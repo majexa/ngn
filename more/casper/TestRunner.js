@@ -24,6 +24,7 @@ module.exports = new Class({
     if (!stdinOptions.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
     stdinOptions = JSON.decode(stdinOptions);
     this.setOptions(Object.merge(stdinOptions, options));
+    this.stepsPreparse();
     if (this.options.extension) this.casper = Object.merge(this.casper, require(this.options.extension));
     this.casper.on('page.error', function(msg, trace) {
       var t = '';
@@ -132,28 +133,16 @@ module.exports = new Class({
       methodName = methodName.substr(1, methodName.length);
       negativeCheck = true;
     }
-    //this.disableCapturing = methodName.substr(0, 1) == '@';
-    //this.log('===' + this.disableCapturing);
-    var capture;
-    if (methodName.substr(0, 1) == '~') {
-      capture = true;
-      methodName = methodName.substr(1, methodName.length);
-    } else {
-      capture = false;
-    }
     var nextMethod, methodBind, method, methodType;
     if (this[methodName]) {
       method = this[methodName];
       methodBind = this;
-      methodType = 'TestRunner';
     } else if (this.casper[methodName]) {
       method = this.casper[methodName];
       methodBind = this.casper;
-      methodType = 'Casper';
     } else if (this.casper.page[methodName]) {
       method = this.casper.page[methodName];
       methodBind = this.casper;
-      methodType = 'Page';
     } else {
       throw new Error('Casper or TestRunner method "' + methodName + '" is absent');
     }
@@ -176,8 +165,8 @@ module.exports = new Class({
         method = method.bind(methodBind);
       }
       this.callMethod(methodName, method, negativeCheck);
-      if (capture) this._capture(methodName);
-      this.getNextMethod(methodName)();
+      // --- if (capture) this._capture(methodName);
+      this.getNextMethod()();
     }
   },
 
@@ -193,24 +182,21 @@ module.exports = new Class({
     method();
   },
 
-  getNextMethod: function(currentMethodName) {
+  getNextMethod: function() {
     if (!this.options.steps[this.i + 1]) {
       return function() {
-        //if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
         this.casper.wait(1000, function() {
           this.log('There are no more steps', 2);
         });
       }.bind(this);
     }
     return function() {
-      //if (this.isCallbackMethod(currentMethodName)) this._capture(currentMethodName);
       this.nextStep();
     }.bind(this);
   },
 
   _capture: function(caption) {
     if (this.disableCapturing) return;
-    //this.log('+++' + caption + '---' + this.disableCapturing);
     if (this.options.captureFolder) {
       var id = this.makeCapture(caption);
       this.afterCaptureCmd('rumax/save', 'id=' + id + '+folder=' + this.options.captureFolder + '+n=' + (this.i + 1));
@@ -230,6 +216,22 @@ module.exports = new Class({
     this.log(step[0] + params, 2);
     this.i++;
     this.runStep();
+  },
+
+  stepsPreparse: function() {
+    var steps = [];
+    for (var i = 0; i < this.options.steps.length; i++) {
+      var step = this.options.steps[i];
+      if (step[0].substr(0, 1) == '~') {
+        step[0] = step[0].substr(1, step[0].length);
+        steps.push(step);
+        steps.push(['wait', 1500]);
+        steps.push(['_capture']);
+      } else {
+        steps.push(step);
+      }
+    }
+    this.options.steps = steps;
   }
 
 });

@@ -6,7 +6,7 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
 
   function createTags() {
     parent::createTags();
-    $this->tagId4 = DdTags::get('a', 'sample')->create([
+    $this->tagId4 = DdTags::get('a', static::$tagFieldName)->create([
       'title' => $this->v4,
       'parentId' => $this->tagId1
     ]);
@@ -14,17 +14,17 @@ class TestFieldDdTagsTreeMultiselect extends TestFieldDdTagsTreeAbstract {
 
   function runTests($request = false) {
     $this->a($this->tagId3, $this->v2);
-    //$this->updateItem(['sample' => [$this->tagId2, $this->tagId4]], $request);
+    //$this->updateItem([static::$tagFieldName => [$this->tagId2, $this->tagId4]], $request);
     //$this->a($this->tagId4, $this->v4);
   }
 
   function createData() {
-    return ['sample' => [$this->tagId2, $this->tagId3]];
+    return [static::$tagFieldName => [$this->tagId2, $this->tagId3]];
   }
 
   function a($tagId2, $v) {
     $item = static::$im->items->getItemF($this->itemId);
-    $values = array_values($item['sample']);
+    $values = array_values($item[static::$tagFieldName]);
     $this->assertTrue($values[0][1]['tagId'] == $this->tagId2, "{$values[0][1]['tagId']} != $this->tagId2");
     $this->assertTrue($values[1][1]['tagId'] == $tagId2, "{$values[1][1]['tagId']} != $tagId2");
     $this->fillForm();

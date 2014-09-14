@@ -36,15 +36,20 @@ class DdFieldCore {
 
   static protected $types = [];
 
-  static function getTypeData($type, $strict = true) {
+  /**
+   * @param $type
+   * @param bool $strict
+   * @return DdFieldType|bool
+   * @throws EmptyException
+   */
+  static function getType($type, $strict = true) {
     $class = 'DdFieldType'.ucfirst($type);
-    /* @var $class DdFieldType */
-    if (!class_exists($class)/* or !is_subclass_of($class, 'DdFieldType')*/) {
+    if (!class_exists($class)) {
       if ($strict) throw new EmptyException("Class '$class' does not exists");
       else
         return false;
     }
-    return $class::get();
+    return new $class();
   }
 
   static function typeExists($type) {
@@ -61,7 +66,7 @@ class DdFieldCore {
     foreach ($classes as $class) {
       /* @var $class DdFieldType */
       if ((new ReflectionClass($class))->isAbstract()) continue;
-      $types[ClassCore::classToName('DdFieldType', $class)] = $class::get();
+      $types[ClassCore::classToName('DdFieldType', $class)] = (new $class());
     }
     return Arr::sortByOrderKey($types, 'order');
   }

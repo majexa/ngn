@@ -4,20 +4,20 @@ class TestFieldDdTagsTreeSelect extends TestFieldDdTagsTreeAbstract {
 
   function a($tagId2, $v) {
     $item = static::$im->items->getItemF($this->itemId);
-    $this->assertTrue($item['sample']['id'] == $this->tagId1, $item['sample']['id'].' != '.$this->tagId1);
-    $this->assertTrue($item['sample']['childNodes'][0]['id'] == $tagId2, $item['sample']['childNodes'][0]['id'].' != '.$tagId2);
+    $this->assertTrue($item[static::$tagFieldName]['id'] == $this->tagId1, $item[static::$tagFieldName]['id'].' != '.$this->tagId1);
+    $this->assertTrue($item[static::$tagFieldName]['childNodes'][0]['id'] == $tagId2, $item[static::$tagFieldName]['childNodes'][0]['id'].' != '.$tagId2);
     $this->fillForm();
     $this->formTest(static::$im->form->html(), $tagId2, $v);
     $this->ddoTest($item, $tagId2, $v);
   }
 
   function createData() {
-    return ['sample' => $this->tagId2];
+    return [static::$tagFieldName => $this->tagId2];
   }
 
   function runTests($request = false) {
     $this->a($this->tagId2, $this->v2);
-    $this->updateItem(['sample' => $this->tagId3], $request);
+    $this->updateItem([static::$tagFieldName => $this->tagId3], $request);
     $this->a($this->tagId3, $this->v3);
   }
 

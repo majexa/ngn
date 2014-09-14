@@ -2,12 +2,16 @@
 
 class DdFieldTypeDatetime extends DdFieldType {
 
-  static protected function _get() {
+  protected function _get() {
     return [
       'dbType' => 'DATETIME',
       'title'  => 'Дата, время',
       'order'  => 90
     ];
+  }
+
+  function sampleData() {
+    return explode('.', date('d.m.Y.H.i'));
   }
 
 }

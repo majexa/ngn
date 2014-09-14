@@ -2,7 +2,7 @@
 
 class DdFieldTypeImagePreview extends DdFieldType {
 
-  static protected function _get() {
+  protected function _get() {
     return [
       'dbType'   => 'VARCHAR',
       'dbLength' => 255,
@@ -10,5 +10,10 @@ class DdFieldTypeImagePreview extends DdFieldType {
       'order'    => 50
     ];
   }
+
+  function sampleData() {
+    return TestRunnerNgn::tempImageFixture();
+  }
+
 
 }
