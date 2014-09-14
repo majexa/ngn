@@ -3,14 +3,14 @@
 class TestFieldDdCity extends TestFieldDdTagsAbstract {
 
   function createData() {
-    return ['sample' => 822];
+    return [static::$tagFieldName => 822];
   }
 
   function runTests($request = false) {
     $item = static::$im->items->getItem($this->itemId);
-    $this->assertTrue($item['sample']['childNodes'][0]['childNodes'][0]['childNodes'][0]['title'] == 'Нижний Новгород');
+    $this->assertTrue($item[static::$tagFieldName]['childNodes'][0]['childNodes'][0]['childNodes'][0]['title'] == 'Нижний Новгород');
     $this->a(['Приволжский ФО', 'Нижегородская область', 'Нижний Новгород']);
-    $this->updateItem(['sample' => 779], $request);
+    $this->updateItem([static::$tagFieldName => 779], $request);
     $this->a(['Центральный', 'Московская область', 'Москва']);
   }
 

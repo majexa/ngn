@@ -2,7 +2,7 @@
 
 class DdFieldTypeFloatBlock extends DdFieldType {
 
-  static protected function _get() {
+  protected function _get() {
     return [
       'title'        => 'Блок для обтекания',
       'order'        => 160,

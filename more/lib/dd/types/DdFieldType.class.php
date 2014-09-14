@@ -1,9 +1,13 @@
 <?php
 
-abstract class DdFieldType {
+abstract class DdFieldType extends ArrayAccesseble {
 
-  static function get() {
-    $data = static::_get();
+  function __construct() {
+    $this->r = $this->get();
+  }
+
+  protected function get() {
+    $data = $this->_get();
     Arr::checkEmpty($data, ['title', 'order']);
     if (!empty($data['virtual'])) $data = array_merge($data, [
       'dbType'   => 'INT',
@@ -13,14 +17,18 @@ abstract class DdFieldType {
     if (!preg_match('/(.*TEXT|DATE|TIME|DATETIME)/', $data['dbType'])) Arr::checkEmpty($data, 'dbLength');
     $data['type'] = ClassCore::classToName('DdFieldType', get_called_class());
     if (empty($data['dbLength'])) $data['dbLength'] = null;
-    if (($fields = static::fields())) $data['fields'] = $fields;
+    if (($fields = $this->fields())) $data['fields'] = $fields;
     return $data;
   }
 
-  abstract static protected function _get();
+  abstract protected function _get();
 
-  static protected function fields() {
+  protected function fields() {
     return false;
+  }
+
+  function sampleData() {
+    return null;
   }
 
 }

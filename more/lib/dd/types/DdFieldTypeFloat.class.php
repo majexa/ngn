@@ -2,7 +2,7 @@
 
 class DdFieldTypeFloat extends DdFieldType {
 
-  static protected function _get() {
+  protected function _get() {
     return [
       'dbType'   => 'float',
       'dbLength' => 11,

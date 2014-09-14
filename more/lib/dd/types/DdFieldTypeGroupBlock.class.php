@@ -2,7 +2,7 @@
 
 class DdFieldTypeGroupBlock extends DdFieldType {
 
-  static protected function _get() {
+  protected function _get() {
     return [
       'title'        => 'Блок для группировки',
       'order'        => 160,

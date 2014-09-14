@@ -10,18 +10,18 @@ class TestFieldDdItemSelect extends TestFieldDdItemSelectAbstract {
   }
 
   function createData() {
-    return ['sample' => $this->itemId1];
+    return [static::$tagFieldName => $this->itemId1];
   }
 
   function runTests($request = false) {
     $this->a($this->itemId1, $this->v1);
-    $this->updateItem(['sample' => $this->itemId2], $request);
+    $this->updateItem([static::$tagFieldName => $this->itemId2], $request);
     $this->a($this->itemId2, $this->v2);
   }
 
   function a($tagId, $v) {
     $item = static::$im->items->getItemF($this->itemId);
-    $this->assertTrue($item['sample']['title'] == $v);
+    $this->assertTrue($item[static::$tagFieldName]['title'] == $v);
     $this->fillForm();
     $this->assertTrue((bool)strstr(static::$im->form->html(), '<option value="'.$tagId.'" selected>'.$v.'</option>'));
     $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), ">$v</div>"));

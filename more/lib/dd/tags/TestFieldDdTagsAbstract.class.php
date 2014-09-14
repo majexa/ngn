@@ -3,6 +3,7 @@
 abstract class TestFieldDdTagsAbstract extends TestFieldDd {
 
   protected $v1 = 'one', $v2 = 'two', $v3 = 'three', $itemId;
+  static $tagFieldName = 'sample';
 
   function createTags() {
   }
@@ -11,8 +12,8 @@ abstract class TestFieldDdTagsAbstract extends TestFieldDd {
     $this->createTags();
     $this->createItem();
     $this->runTests();
-    $this->updateItem(['sample' => '']);
-    self::$im = DdCore::imDefault('a');
+    $this->updateItem([static::$tagFieldName => '']);
+    self::$im = DdCore::imDefault(static::$strName);
     $this->createItem(true);
     $this->runTests();
   }

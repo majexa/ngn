@@ -7,6 +7,8 @@ abstract class TestDd extends ProjectTestCase {
    */
   static $sm;
 
+  static $strName = 'a';
+
   static function setUpBeforeClass() {
     $_FILES = [
       'image' => [
@@ -14,17 +16,17 @@ abstract class TestDd extends ProjectTestCase {
       ]
     ];
     self::$sm = new DdStructuresManager;
-    self::$sm->deleteByName('a');
+    self::$sm->deleteByName(static::$strName);
     self::$sm->create([
-      'title' => 'a',
-      'name' => 'a'
+      'title' => static::$strName,
+      'name' => static::$strName
     ]);
     Sflm::reset();
     Sflm::setFrontendName('default');
   }
 
   static function tearDownAfterClass() {
-    //self::$sm->deleteByName('a');
+    //self::$sm->deleteByName(static::$strName);
   }
 
 }

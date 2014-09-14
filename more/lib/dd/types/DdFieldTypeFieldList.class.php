@@ -2,7 +2,7 @@
 
 class DdFieldTypeFieldList extends DdFieldType {
 
-  static protected function _get() {
+  protected function _get() {
     return [
       'dbType' => 'TEXT',
       'title'  => 'Набор текстовых полей',

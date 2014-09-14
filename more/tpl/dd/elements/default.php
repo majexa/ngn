@@ -31,8 +31,8 @@ for ($n = 0; $n < count($fields); $n++) {
     //print St::dddd($ddo->hgrpBeginDddd, $f);
     print $ddo->hgrpBeginDddd($f['type'], $f['name'], $f['evenNum']);
   }
-  $typeData = DdFieldCore::getTypeData($f['type'], false);
-  if (empty($typeData['noElementTag'])) {
+  $type = DdFieldCore::getType($f['type'], false);
+  if (empty($type['noElementTag'])) {
     $el = $d[$f['name']]; // $el содержит текущее значение элемента записи
     print St::dddd($ddo->elBeginDddd, $f);
     print $ddo->el($el, $f['name'], $d['id']);
