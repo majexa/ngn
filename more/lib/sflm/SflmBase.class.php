@@ -210,12 +210,12 @@ abstract class SflmBase {
       }
       file_put_contents(UPLOAD_PATH.'/'.$cachePath, Misc::getIncludedByRequest($path, $q));
     }
-    return UPLOAD_DIR.'/'.$cachePath;
+    return '/'.UPLOAD_DIR.'/'.$cachePath;
   }
 
   protected function getCachePath($path) {
     $path2 = str_replace('s2/', '', $path);
-    return $this->type.'/cache/'.basename($path2).(strstr($path2, '.') ? '' : $this->type);
+    return $this->type.'/cache/'.basename($path2).(strstr($path2, '.') ? '' : '.'.$this->type);
   }
 
   function clearPathCache($path) {
@@ -229,10 +229,6 @@ abstract class SflmBase {
   public $packagesCache = [];
 
   protected $existingPackages = [];
-
-  //protected function processPathOnAdd($path) {
-  //}195
-
 
   function isPackage($path) {
     return !(strstr($path, '.') or strstr($path, $this->type.'/'));
