@@ -14,7 +14,7 @@ abstract class SubCtrl {
   }
   
   function getName() {
-    return lcfirst(Misc::removePrefix('SubPa', get_called_class()));
+    return lcfirst(Misc::removePrefix('SubCtrl', get_called_class()));
   }
   
   function init() {}
