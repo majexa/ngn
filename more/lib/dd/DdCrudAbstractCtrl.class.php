@@ -35,7 +35,6 @@ use ObjectProcessorCtrl;
 
   protected function getDdLayout() {
     return 'siteItems';
-    return Misc::isAdmin() ? 'adminItems' : 'siteItems';
   }
 
   protected function ddo() {
