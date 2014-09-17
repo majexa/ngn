@@ -95,10 +95,11 @@ Ngn.DdTags.Dialog.Flat = new Class({
     }
   },
 
-  initialize: function(options) {
-    this.options.gridOpts.basePath = '/admin/tags/' + options.data.groupId;
-    this.options.url = this.options.gridOpts.basePath + '/json_list'
+  setOptions: function(options) {
     this.parent(options);
+    this.options.gridOpts.basePath = this.options.basePath + '/' + options.data.groupId;
+    //this.options.gridOpts.url = this.options.basePath + '/json_list'
+    //this.options.gridOpts.listAjaxAction = 'json_list';
   }
 
 });
