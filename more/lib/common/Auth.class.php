@@ -230,7 +230,9 @@ class Auth {
   /**
    * Производит авторизацию по данным из поста
    *
-   * @return bool
+   * @param null $login
+   * @param null $pass
+   * @return bool|DbModelUsers
    */
   static function loginByRequest($login = null, $pass = null) {
     if (!$login and isset($_REQUEST[self::$loginFieldName])) $login = $_REQUEST[self::$loginFieldName];
@@ -292,7 +294,8 @@ class Auth {
   }
 
   static function getAll() {
-    return ($r = self::setAuth()) ? Arr::filterByKeys($r, ['id', 'login', 'email']) : false;
+    (($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
+    die2('-');
   }
 
 }

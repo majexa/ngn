@@ -13,9 +13,11 @@ class Err {
   /**
    * Выводит сообщение об ошибке, если включен режим отладки
    *
-   * @param   string Текст ошибки (опционально)
-   * @param   bool Прекращать ли выполнение скрипта
-   * @param   bool Отправляет сообщение об ошибке на e-mail администратора
+   * @param $errno
+   * @param string $errstr Текст ошибки
+   * @param $errfile
+   * @param $errline
+   * @param array $trace
    */
   static protected function output($errno, $errstr, $errfile, $errline, array $trace = []) {
     self::$last = [
@@ -29,8 +31,6 @@ class Err {
     if (!defined('IS_DEBUG') or IS_DEBUG === false) return;
     $plainText = R::get('plainText');
     print $plainText ? "\n" : '<p class="error">';
-    //print "Error ($errno): ";
-    //print "Error: ";
     if (!$plainText) $errstr = str_replace("\n", "<br />", $errstr);
     else $errstr = strip_tags($errstr);
     print $errstr ? $errstr.($plainText ? "\n---------------\n" : '<hr />') : '';
@@ -40,7 +40,7 @@ class Err {
         'line' => $errline
       ]
     ], $trace), !$plainText);
-    print($plainText ? "\n" : '</p>');
+    print $plainText ? "\n" : '</p>';
   }
 
   static function outputException(Exception $e) {
@@ -59,7 +59,7 @@ class Err {
   /**
    * Критическая ошибка. Приостановить выполнение всей программы
    *
-   * @param   string Текст ошибки
+   * @param string $text Текст ошибки
    */
   static function error($text) {
     self::_error(0, $text, 'DUMMY', 123);
@@ -73,7 +73,7 @@ class Err {
   /**
    * Выводит сообщение об ошибке, но не влияет на ход выполнения программы
    *
-   * @param   string Текст ошибки
+   * @param string $text Текст ошибки
    */
   static function warning($text) {
     self::_warning(0, $text, 'DUMMY', 123);
@@ -119,49 +119,14 @@ class Err {
     }
     if ($errno === E_NOTICE) {
       if (self::$showNotices) {
-        //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
         self::output($errno, $errstr, $errfile, $errline);
         self::_log($errstr, debug_backtrace());
       }
     }
     else {
-      //throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
       self::output($errno, $errstr, $errfile, $errline);
       self::_log($errstr, debug_backtrace());
     }
-    /*
-    switch ($errno) {
-      case E_WARNING:
-        self::_warning(
-          $errno,
-          "<b>%% Warning</b>: <i>$errstr</i> in <b>$errfile</b>: $errline %%",
-          $errfile, $errline
-        );
-        break;
-      case E_ERROR:
-        self::_error(
-          $errno,
-          "<b>%% Fatal error</b>: <i>$errstr</i> in <b>$errfile</b>: $errline %%",
-          $errfile, $errline
-        );
-        break;
-      case E_NOTICE:
-        if (self::$showNotices) {
-          self::_warning(
-            $errno,
-            "%% <b>Notice {$errno}</b>: <i>$errstr</i> in <b>$errfile</b>: $errline %%",
-            $errfile, $errline
-          );
-        }
-        break;
-      default:
-        self::_warning(
-          $errno,
-          "%% <b>Other {$errno}</b>: <i>$errstr</i> in <b>$errfile</b>: $errline %%",
-          $errfile, $errline
-        );
-    }
-    */
   }
 
   static function sql($message, $info, $die = false) {
@@ -179,7 +144,7 @@ class Err {
   /**
    * Переключает режим отображения нотисов
    *
-   * @param   bool Включить/выключить
+   * @param bool $flag Включить/выключить
    */
   static function noticeSwitch($flag) {
     self::$showNoticesLast = self::$showNotices;
