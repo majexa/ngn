@@ -144,9 +144,10 @@ Ngn.Items.toolActions = {
     switchers: {
       active: {
         /**
-         * @param Ngn.Items
-         * @param items data row
-         * @return {Object}
+         *
+         * @param items Ngn.Items
+         * @param row
+         * @returns {{classOn: string, classOff: string, linkOn: string, linkOff: string, onComplete: onComplete}}
          */
         getOptions: function(items, row) {
           return {
@@ -189,15 +190,21 @@ Ngn.Items.toolActions = {
       var eTd = row.el.getChildren('td')[n];
       if (!eTd) throw new Ngn.EmptyError('eTd');
       eTd.set('html', '');
+      eTd.store('eText', new Element('div', {
+        html: data[n - 1]
+      }).inject(eTd));
       eTd.store('eInput', new Element('input', {
         value: data[n - 1],
         styles: {
           display: 'none',
           'border': '0px',
-          'width': '100%'
+          width: '100px'
         }
       }).inject(eTd));
-      var f = function() {
+      var saving = false;
+      var save = function(from) {
+        if (saving) return;
+        saving = true;
         var r = {};
         r[items.options.idParam] = row.id;
         r[row.tools[cls].paramName] = eTd.retrieve('eInput').get('value');
@@ -206,24 +213,27 @@ Ngn.Items.toolActions = {
           new Ngn.Request.JSON({
             url: items.options.basePath + '?a=' + row.tools[cls].action,
             onComplete: function() {
+              saving = false;
               items.reload();
             }
           }).post(r);
+        } else {
+          (function() {
+            saving = false;
+          }).delay(100);
         }
-        Ngn.Items.toolActions.inlineTextEdit.switchInput(eTd);
+        Ngn.Items.toolActions.inlineTextEdit.switchInput(eTd, from);
       };
-      eTd.retrieve('eInput').addEvent('blur', f).addEvent('keypress', function(e) {
+      eTd.retrieve('eInput').addEvent('blur', save.pass('blur'));
+      eTd.retrieve('eInput').addEvent('keypress', function(e) {
         if (e.key != 'enter') return;
         e.preventDefault();
-        f();
+        save('enter');
       });
-      eTd.store('eText', new Element('div', {
-        html: data[n - 1]
-      }).inject(eTd));
       eTd.store('edit', false);
       items.createToolBtn(cls, row, Ngn.Items.toolActions.inlineTextEdit.switchInput.pass(eTd));
     },
-    switchInput: function(eTd) {
+    switchInput: function(eTd, from) {
       if (eTd.retrieve('edit')) {
         eTd.retrieve('eInput').setStyle('display', 'none');
         eTd.retrieve('eText').setStyle('display', 'block');

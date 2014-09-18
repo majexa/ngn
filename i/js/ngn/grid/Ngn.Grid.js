@@ -255,7 +255,7 @@ Ngn.Grid = new Class({
   },
 
   createToolBtn: function(cls, row, action) {
-    var action = action || this.options.toolActions[cls] || false;
+    action = action || this.options.toolActions[cls] || false;
     var el = new Element('a', {
       'href': this.options.toolLinks[cls] ? this.options.toolLinks[cls](row) : '#',
       'class': 'iconBtn ' + cls,

@@ -46,6 +46,22 @@ padding-left: 5px;
 .itemsTable .iconBtn {
 margin-bottom: 0px;
 }
+.itemsTable .loader {
+background-image: none;
+}
+.itemsTable .loading .loader {
+background-image: url(/i/img/black/loader.gif);
+}
+.itemsTable .dragBox {
+height: 16px;
+/*float: none;*/
+margin-right: 7px;
+margin-top: 1px;
+}
+.itemsTable .move .dragBox {
+border-color: #555555;
+}
+
 /*======== pagination =========*/
 .itemsTableMenu .pNums {
 position: absolute;
