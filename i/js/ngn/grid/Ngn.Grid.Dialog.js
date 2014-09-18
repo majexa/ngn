@@ -5,6 +5,7 @@ Ngn.Grid.Dialog = new Class({
     footer: false,
     jsonRequest: true,
     gridClass: Ngn.Grid,
+    reduceHeight: true,
     gridOpts: {}
   },
 

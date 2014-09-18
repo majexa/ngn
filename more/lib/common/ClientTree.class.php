@@ -60,11 +60,9 @@ class ClientTree {
         'name' => $data['title']
       ]
     ];
-    //$children = $data[$this->_tree->childrenKey()];
     $node['data'] = Arr::filterByKeys($data, $this->allowedDataParams);
     $this->setNodeType($node, $data);
     $this->setNodeCls($node, $data);
-    //$node['children'] =
     return $node;
   }
 

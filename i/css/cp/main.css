@@ -365,23 +365,7 @@ margin-bottom: 0px;
 .itemsTable .n_title h2 {
 min-width: 250px;
 } 
-.itemsTable .dragBox {
-height: 16px;
-/*float: none;*/
-margin-right: 7px;
-margin-top: 1px;
-}
 
-.itemsTable .loader {
-background-image: none;
-}
-.itemsTable .loading .loader {
-background-image: url(/i/img/black/loader.gif);
-}
-
-.itemsTable .move .dragBox {
-border-color: #555555;
-}
 
 
 .fldLarge {
