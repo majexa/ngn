@@ -19,7 +19,7 @@ class TestUiFieldFile extends TestDd {
   }
 
   function test() {
-    DdCore::imDefault('a')->create(['sample' => TestRunnerNgn::tempImageFixture()]);
+    DdCore::imDefault('a')->create(['sample' => TestCore::tempImageFixture()]);
     Casper::run(PROJECT_KEY, [
       'auth',
 
@@ -27,7 +27,7 @@ class TestUiFieldFile extends TestDd {
       ['thenUrl', 'god/ddItems/a/edit/1'],
       ['checkExistence', '.fileSaved'],
       ['wait', 1000],
-      ['fill', 'form', ['sample' => TestRunnerNgn::tempImageFixture()['tmp_name'], 'invalid' => 1], true],
+      ['fill', 'form', ['sample' => TestCore::tempImageFixture()['tmp_name'], 'invalid' => 1], true],
       ['wait', 1000],
 
       // ссылка на загруженный файл есть, при серверной инвалидации
@@ -40,7 +40,7 @@ class TestUiFieldFile extends TestDd {
       // ссылки на загруженный файл нет, при успешном сабмите на стороне сервера
       ['thenUrl', 'god/ddItems/a/edit/1'],
       ['fill', 'form', [
-        'sample' => TestRunnerNgn::tempImageFixture()['tmp_name'],
+        'sample' => TestCore::tempImageFixture()['tmp_name'],
         'invalid' => 'valid'
       ], true],
       ['wait', 1000],

@@ -133,7 +133,7 @@ module.exports = new Class({
       methodName = methodName.substr(1, methodName.length);
       negativeCheck = true;
     }
-    var nextMethod, methodBind, method, methodType;
+    var nextMethod, methodBind, method;
     if (this[methodName]) {
       method = this[methodName];
       methodBind = this;
@@ -150,22 +150,20 @@ module.exports = new Class({
     if (this.isCallbackMethod(methodName)) {
       nextMethod = this.getNextMethod(methodName);
       params = step[1] !== undefined ? step.slice(1, step.length) : [];
-      if (method.length - 1 != params.length) {
-        throw new Error('method "' + methodName + '" must have ' + (method.length - 1) + ' params. ' + params.length + ' passed instead');
-      }
+      //if (method.length - 1 != params.length) throw new Error('method "' + methodName + '" must have ' + (method.length - 1) + ' params. ' + params.length + ' passed instead');
       params.push(nextMethod); // last param is always casper callback fn
       method = method.pass(params, methodBind);
       this.callMethod(methodName, method);
     } else {
       if (step[1] !== undefined) {
         params = step.slice(1, step.length);
-        if (method.length != params.length) throw new Error('method "' + methodName + '" must have ' + method.length + ' params. ' + params.length + ' passed instead');
+        //if (method.length != params.length) throw new Error('method "' + methodName + '" must have ' + method.length + ' params. ' + params.length + ' passed instead');
+        //require('utils').dump([methodName, params]);
         method = method.pass(params, methodBind);
       } else {
         method = method.bind(methodBind);
       }
       this.callMethod(methodName, method, negativeCheck);
-      // --- if (capture) this._capture(methodName);
       this.getNextMethod()();
     }
   },
@@ -199,7 +197,11 @@ module.exports = new Class({
     if (this.disableCapturing) return;
     if (this.options.captureFolder) {
       var id = this.makeCapture(caption);
-      this.afterCaptureCmd('rumax/save', 'id=' + id + '+folder=' + this.options.captureFolder + '+n=' + (this.i + 1));
+      this.afterCaptureCmd('rumax/save', 'id=' + id + //
+        '+folder=' + this.options.captureFolder + //
+        '+n=' + (this.i + 1) + //
+        '+caption=' + caption.replace(new RegExp(' ', 'g'), '_') //
+      );
       return;
     }
     this.capture(caption, this.i + 1);
@@ -213,7 +215,7 @@ module.exports = new Class({
     var step = this.options.steps[this.i + 1];
     var params = '';
     if (step.length > 1) params = ' (' + step.slice(1, step.length).join(', ') + ')';
-    this.log(step[0] + params, 2);
+    this.log('running> ' + step[0] + params, 2);
     this.i++;
     this.runStep();
   },
@@ -225,8 +227,8 @@ module.exports = new Class({
       if (step[0].substr(0, 1) == '~') {
         step[0] = step[0].substr(1, step[0].length);
         steps.push(step);
-        steps.push(['wait', 1500]);
-        steps.push(['_capture']);
+        steps.push(['wait', 1000]);
+        steps.push(['_capture', 'after ' + step[0]]);
       } else {
         steps.push(step);
       }

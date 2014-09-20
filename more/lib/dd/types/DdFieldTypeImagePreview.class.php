@@ -12,7 +12,7 @@ class DdFieldTypeImagePreview extends DdFieldType {
   }
 
   function sampleData() {
-    return TestRunnerNgn::tempImageFixture();
+    return TestCore::tempImageFixture();
   }
 
 

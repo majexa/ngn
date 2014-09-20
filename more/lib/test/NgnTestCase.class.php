@@ -9,7 +9,7 @@ abstract class NgnTestCase extends PHPUnit_Framework_TestCase {
 
   protected function cmd($cmd) {
     $r = `$cmd`;
-    if (($error = CliTestRunner::detectError($r))) throw new Exception("$error in text:\n$r");
+    if (($error = TestCore::detectError($r))) throw new Exception("$error in text:\n$r");
   }
 
   static function enable() {

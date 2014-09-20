@@ -73,6 +73,7 @@ class Req extends ArrayAccesseble {
     if (!isset($this->options['uri'])) $this->options['uri'] = $_SERVER['REQUEST_URI'];
     // Берём путь из REQUEST_URI
     $uriData = parse_url($this->options['uri']);
+    if (empty($uriData['path'])) throw new Exception(var_export($uriData, true));
     $path = $uriData['path'];
     if ($path[0] == '/') $path = substr($path, 1, strlen($path)); // Убираем первый слэш
     if ($path[strlen($path) - 1] == '/') {
@@ -129,8 +130,7 @@ class Req extends ArrayAccesseble {
   /**
    * Разбирает строку пути к странице со слэшами на параметры
    *
-   * @param   string  Строка в формате "12/74324/56432"
-   * @return  array   Разобранные из строки параметры
+   * @return array|bool
    */
   private function setPathParams() {
     if ($this->params) return $this->params;

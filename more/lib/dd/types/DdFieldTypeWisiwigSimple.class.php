@@ -11,7 +11,7 @@ class DdFieldTypeWisiwigSimple extends DdFieldType {
   }
 
   function sampleData() {
-    return TestRunnerNgn::largeTextFixture();
+    return TestCore::largeTextFixture();
   }
 
 }

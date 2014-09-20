@@ -56,7 +56,12 @@ Ngn.Request.JSON = new Class({
 
   success: function(text) {
     Ngn.requestLoaded = true;
-    this.response.json = Ngn.json.decode(text, this.options.secure);
+    try {
+      this.response.json = Ngn.json.decode(text, this.options.secure);
+    } catch (e) {
+      throw new Error('non-json result by url ' + this.options.url + '. result:\n' + text);
+    }
+
     if (this.response.json === null) {
       this.onSuccess({});
       return;
