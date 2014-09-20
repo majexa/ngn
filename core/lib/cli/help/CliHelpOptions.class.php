@@ -92,7 +92,10 @@ abstract class CliHelpOptions extends CliHelp {
   protected function getMethodOptionsWithParams(CliArgs $args, $offset) {
     $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
-      foreach ($options as $i => $opt) $r[$opt['name']] = $args->params[$i + $offset];
+      foreach ($options as $i => $opt) {
+        $r[$opt['name']] = $args->params[$i + $offset];
+        //if ($opt['name'] == 'params') $r[$opt['name']] = Cli::strParamsToArray($r[$opt['name']]);
+      }
     }
     return $r;
   }

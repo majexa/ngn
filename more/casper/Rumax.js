@@ -41,7 +41,6 @@ module.exports = new Class({
   afterCaptureCmd: function(runner, options) {
     this.execFile(runner, options, function(stdout) {
       this.log('capture result:\n' + stdout, 3);
-      //this.log('captured by ' + runner, 3);
     }.bind(this));
   },
 

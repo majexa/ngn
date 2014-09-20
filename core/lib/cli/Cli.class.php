@@ -86,4 +86,29 @@ class Cli {
     return $r;
   }
 
+  static function strParamsToArray($s) {
+    $options = [];
+    if (strstr($s, '=')) {
+      $argv = str_replace('+', '&', $s);
+      parse_str($argv, $options);
+    }
+    return $options;
+  }
+
+  static function arrayToStrParams(array $a) {
+    $r = [];
+    foreach ($a as $k => $v) {
+      $r[] = $k.'='.$v;
+    }
+    return implode('+', $r);
+  }
+
+  static function parseArgv(array $argv, array &$options) {
+    foreach ($argv as $arg) {
+      if (substr($arg, 0, 2) == '--' and isset($options[substr($arg, 2)])) {
+        $options[substr($arg, 2)] = true;
+      }
+    }
+  }
+
 }

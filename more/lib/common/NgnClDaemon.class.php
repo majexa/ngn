@@ -16,7 +16,7 @@ abstract class NgnClDaemon extends Options2 {
   function __construct(array $argv, array $options = []) {
     parent::__construct($options);
     $this->argv = $argv;
-    NgnCl::parseArgv($this->argv, $this->options);
+    Cli::parseArgv($this->argv, $this->options);
     if ($this->options['write-initd'])
       $this->options['no-daemon'] = true;
     $this->help();
