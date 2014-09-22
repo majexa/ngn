@@ -8,7 +8,7 @@ module.exports = new Class({
   Extends: Project,
   Implements: Options,
 
-  logLevel: 3,
+  logLevel: 1,
   i: 0,
   callbackPrefixes: [
     'then', 'wait'
