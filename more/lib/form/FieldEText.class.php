@@ -12,4 +12,5 @@ class FieldEText extends FieldEInput {
     parent::prepareValue();
     if (!isset($this->options['value'])) $this->options['value'] = '';
   }
+
 }

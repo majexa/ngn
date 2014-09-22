@@ -24,9 +24,9 @@ class SflmJsClasses {
    */
   protected $strict = true;
 
-  function __construct(SflmFrontendJs $frontend) {
+  function __construct(SflmFrontendJs $frontend, SflmJsClassPaths $classPaths = null) {
     $this->frontend = $frontend;
-    $this->classPaths = new SflmJsClassPaths($this);
+    $this->classPaths = $classPaths ? : new SflmJsClassPaths($this);
     $this->frontendClasses = new SflmJsFrontendClasses($this->frontend);
   }
 
@@ -134,11 +134,8 @@ class SflmJsClasses {
       $this->addClass($class, "$path requiredBefore");
     }
     Sflm::output('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
-    if ($path) $this->frontend->_addPath($path); // -------------- добавили путь
+    if ($path) $this->frontend->_addPath($path); // -------------- добавили путь (!)
     Sflm::output("Processing valid-class patterns in '$source'");
-
-    //if ($source == 'stop') die2(SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)));
-
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
       $this->addClass($class, "$source valid-class pattern");
     }
@@ -219,8 +216,8 @@ class SflmJsClasses {
 
   static function parseValidPreloadClasses($code) {
     //return array_merge(
-     return  SflmJsClasses::parseValidClasses($code, '[A-Za-z]:\s+');
-      //SflmJsClasses::parseValidClasses($code, '[A-Za-z]:\s+new ')
+    return SflmJsClasses::parseValidClasses($code, '[A-Za-z]:\s+');
+    //SflmJsClasses::parseValidClasses($code, '[A-Za-z]:\s+new ')
     //);
   }
 

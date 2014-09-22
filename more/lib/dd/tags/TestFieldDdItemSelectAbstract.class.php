@@ -20,7 +20,7 @@ abstract class TestFieldDdItemSelectAbstract extends TestFieldDdTagsAbstract {
       'title' => 'b',
       'name' => 'b'
     ]);
-    $fm = O::gett('DdFieldsManager', 'b');
+    $fm = O::di('DdFieldsManager', 'b');
     $fm->create([
       'name'  => 'title',
       'title' => 'title',

@@ -12,7 +12,7 @@ use Options;
   
   function router() {
     if (isset($this->req->params[0]) and in_array($this->req->params[0], RouterScripts::prefixes())) {
-      return O::gett('RouterScripts', (['req' => $this->req]));
+      return O::di('RouterScripts', (['req' => $this->req]));
     }
     elseif (isset($this->req->params[0]) and ($this->req->params[0] == 'admin' or $this->req->params[0] == 'god')) {
       return new AdminRouter(['req' => $this->req]);
@@ -23,7 +23,7 @@ use Options;
   }
 
   protected function getDefaultRouter() {
-    return O::gett('DefaultRouter', ['req' => $this->req]);
+    return O::di('DefaultRouter', ['req' => $this->req]);
   }
 
 }

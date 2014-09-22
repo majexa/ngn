@@ -27,8 +27,8 @@ class DdFieldsManager extends DbItemsManager {
     Misc::checkEmpty($strName);
     $this->str = DbModelCore::get('dd_structures', $strName, 'name');
     $this->strName = $strName;
-    $items = O::gett('DdFieldItems', $strName);
-    parent::__construct($items, new DdFieldsForm(O::gett('DdFieldsFields', $this->strName), $this->strName, ['filterable' => !empty($this->str['filterStrName'])]), $options);
+    $items = O::di('DdFieldItems', $strName);
+    parent::__construct($items, new DdFieldsForm(O::di('DdFieldsFields', $this->strName), $this->strName, ['filterable' => !empty($this->str['filterStrName'])]), $options);
     if ($this->str['filterStrName']) {
       $this->filterFm = new DdFieldsManagerFilter($this->str['filterStrName'], [
         'strict' => false

@@ -48,7 +48,7 @@ class DdCore {
     }
     else {
       $items = new DdItemsPage($page['id']);
-      $form = new DdFormPage(!empty($fields) ? $fields : O::gett('DdFields', $page['strName'], $fieldsOptions), $page['id']);
+      $form = new DdFormPage(!empty($fields) ? $fields : O::di('DdFields', $page['strName'], $fieldsOptions), $page['id']);
     }
     if (($paths = Hook::paths('dd/initItemsManager', $page['module'])) !== false) foreach ($paths as $path) include $path;
     $im = new DdItemsManagerPage($items, $form, $options);

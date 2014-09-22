@@ -5,7 +5,7 @@ class TestDdAllFields extends TestDd {
   function testCreate() {
     SiteConfig::updateVar("fieldE/configSelect1", [1, 2, 3]);
     /* @var $fm DdFieldsManager */
-    $fm = O::gett('DdFieldsManager', 'a');
+    $fm = O::di('DdFieldsManager', 'a');
     foreach (DdFieldCore::getTypes() as $type => $v) {
       if (in_array($type, [
         'ddItemSelectDepending',

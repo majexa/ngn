@@ -15,23 +15,12 @@ class O {
     //return $class.(isset($argsForStoreId) ? '_'.implode(',', $argsForStoreId) : '');
   }
 
-  static function create($class) {
-    if (!$filepath = Lib::getPath($class)) throw new Exception("Class '$class' not found");
-    require_once $filepath;
-    $args = func_get_args();
-    // Необходимо реализовать сохранение в storage тех обектов, чьи
-    // параметры можно засеарелизовать в строку не более 255 символов
-    for ($i = 1; $i < count($args); $i++) $argsStr[] = '$args['.$i.']';
-    if (isset($argsStr)) $argsStr = implode(', ', $argsStr);
-    eval("\$o = new $class($argsStr);");
-    return $o;
-  }
-
   /**
    * Возвращает объект
    *
-   * @param   string Путь до класса без расширения. Пример: "dd/DdItemsPage"
-   * @return  mixed
+   * @param string $path Путь до класса без расширения. Пример: "dd/DdItemsPage"
+   * @return object
+   * @throws Exception
    */
   static function get($path) {
     $classExists = false;
@@ -63,7 +52,13 @@ class O {
     return self::getStoreId($class, func_get_args());
   }
 
-  static function gett($class) {
+  /**
+   * Используется для получения экземпляров класса через Dependency Injection
+   *
+   * @param $class
+   * @return mixed
+   */
+  static function di($class) {
     $args = func_get_args();
     if (isset(self::$injections[$class])) {
       foreach (self::$injections[$class] as $v) {

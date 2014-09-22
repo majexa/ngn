@@ -94,15 +94,6 @@ class Sflm {
     return self::frontend($type, $name);
   }
 
-  static function output($s) {
-    if (self::$output) {
-      if (strstr($s, 'Adding path')) outputColor($s, 'red');
-      elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');
-      elseif (strstr($s, 'src: direct')) outputColor($s, 'yellow');
-      else strstr($s, 'src:') ? outputColor($s, 'cyan') : output($s);
-    }
-  }
-
   static function stripCommentsExceptMeta($c) {
     return preg_replace('/\/\/(?! @).*/', '', preg_replace('!/\*.*?\*/!s', '', $c));
   }
@@ -121,6 +112,16 @@ class Sflm {
       }
     }
     throw new Exception('"'.$absPath.'" not found'.($whyDoUWantToGetThis ? ". Getting for: $whyDoUWantToGetThis" : ''));
+  }
+
+  static function output($s) {
+    //if (!strstr($s, 'PageModule')) return;
+    if (self::$output) {
+      if (strstr($s, 'Adding path')) outputColor($s, 'red');
+      elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');
+      elseif (strstr($s, 'src: direct')) outputColor($s, 'yellow');
+      else strstr($s, 'src:') ? outputColor($s, 'cyan') : output($s);
+    }
   }
 
 }

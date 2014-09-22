@@ -37,10 +37,11 @@ class CtrlAdminDdField extends CtrlAdmin {
     $this->d['strData'] = $this->strData;
     $this->d['filterableStr'] = DbModelCore::get('dd_structures', $this->strData['name'], 'filterStrName');
     $this->strName = $this->strData['name'];
-    $this->im = O::gett('DdFieldsManager', $this->strName);
+    $this->im = O::di('DdFieldsManager', $this->strName);
   }
 
   function action_default() {
+    //Sflm::frontend('js')
     $this->im->items->cond->addF('strName', $this->strName);
     $this->d['items'] = $this->im->items->getItems();
     $this->setPageTitle('Редактирование полей структуры «'.$this->d['strData']['title'].'»');

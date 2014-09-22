@@ -4,13 +4,13 @@ class TestUiFieldFile extends TestDd {
 
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
-    O::gett('DdFieldsManager', 'a')->create([
+    O::di('DdFieldsManager', 'a')->create([
       'title' => 'sample',
       'name' => 'sample',
       'type' => 'file',
       'required' => true
     ]);
-    O::gett('DdFieldsManager', 'a')->create([
+    O::di('DdFieldsManager', 'a')->create([
       'name' => 'invalid',
       'type' => 'invalid',
     ]);
