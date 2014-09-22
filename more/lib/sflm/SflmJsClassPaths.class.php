@@ -9,13 +9,17 @@ class SflmJsClassPaths extends ArrayAccesseble {
     $this->init();
   }
 
-  protected function init() {
-    $this->r = [];
+  protected function files() {
     $files = [];
     foreach (Sflm::$absBasePaths as $path) {
-      $files = Arr::append($files, Dir::getFilesR($path.'/js', '[A-Z]*.js'));
+      $files = array_merge($files, Dir::getFilesR($path.'/js', '[A-Z]*.js'));
     }
-    foreach ($files as $file) {
+    return $files;
+  }
+
+  protected function init() {
+    $this->r = [];
+    foreach ($this->files() as $file) {
       $path = Sflm::getPath($file, 'adding to init classes paths');
       foreach (SflmJsClasses::parseValidClassesDefinition(Sflm::getCode($file)) as $class) {
         $this->r[$class] = $path;
@@ -34,5 +38,5 @@ class SflmJsClassPaths extends ArrayAccesseble {
     }
     SflmCache::c()->save($this->r, 'jsClassPaths');
   }
-  
+
 }

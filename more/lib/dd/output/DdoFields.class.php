@@ -77,11 +77,13 @@ class DdoFields {
   }
 
   /**
-   * @param   DdoSettings  Объект настроек лейаута
-   * @param   string  Имя лейаута
+   * @param DdoSettings $ddoSettings Настройки лейаута
+   * @param string $layoutName Имя лейаута
+   * @param string $strName
+   * @param array $options
    */
   function __construct(DdoSettings $ddoSettings, $layoutName, $strName, array $options = []) {
-    if (!$layoutName) throw new Exception('$layoutName not defined');
+    Misc::checkEmpty($layoutName);
     $this->setOptions($options);
     $allowedFields = $ddoSettings->getAllowedFields($layoutName);
     if (!empty($this->options['getAll']) or $allowedFields) {

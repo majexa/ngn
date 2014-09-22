@@ -2,10 +2,13 @@
 
 class FieldEPrice extends FieldEFloat {
 
+  protected function defineOptions() {
+    return ['maxlength' => 11];
+  }
+
   protected function prepareValue() {
     parent::prepareValue();
-    $this->options['title'] = $this->options['title'];
-      //.' <span class="gray">(руб.)</span>';
+    //.' <span class="gray">(руб.)</span>';
     if (!empty($this->options['value'])) $this->options['value'] = Misc::price($this->options['value']);
   }
 
@@ -13,5 +16,5 @@ class FieldEPrice extends FieldEFloat {
     parent::init();
     if ($this->helpEmpty) $this->options['help'] .= 'рублей';
   }
-  
+
 }

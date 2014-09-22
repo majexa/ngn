@@ -633,7 +633,7 @@ class Arr {
 
   static function strExists(array $array, $str) {
     return (bool)array_filter($array, function ($v) use ($str) {
-      return strstr($v, $str);
+      return (bool)strstr($v, $str);
     });
   }
 

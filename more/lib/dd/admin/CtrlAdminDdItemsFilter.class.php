@@ -16,7 +16,7 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
    */
   protected function getLongJob() {
     $this->initFilterByParams();
-    return O::gett('DdXls', $this->items()->strName, $this->items());
+    return O::di('DdXls', $this->items()->strName, $this->items());
   }
 
   protected function init() {
@@ -30,7 +30,7 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
   }
 
   function action_HARD_VIGRUZKA() {
-    $longJob = O::gett('DdXls', $this->items()->strName, $this->items());
+    $longJob = O::di('DdXls', $this->items()->strName, $this->items());
     $longJob->cycle();
     $this->redirect($longJob->result());
   }

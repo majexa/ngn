@@ -74,7 +74,7 @@ class Ddo {
   }
 
   protected function ddoFields() {
-    return O::gett('DdoFields', $this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
+    return O::di('DdoFields', $this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
   }
 
   function initFields() {
@@ -161,7 +161,7 @@ class Ddo {
       $r = ($this->debug ? 'funcByName:'.$data['name'].'=' : ''). // debug
         $func($data);
       //} catch (Exception $e) {
-//        throw new Exception('funcByName name="'.$data['name'].'" error: '.$e->getMessage());
+//    throw new Exception('funcByName name="'.$data['name'].'" error: '.$e->getMessage());
       //    }
       return $r;
     }
@@ -227,10 +227,11 @@ class Ddo {
   /**
    * Возвращает HTML элемента DD-записи
    *
-   * @param   array Значение элемента записи
-   * @param   array Имя поля
-   * @param   array   ID записи
-   * @return  string  HTML
+   * @param mixed $value Значение элемента записи
+   * @param string $fieldName Имя поля
+   * @param integer $itemId
+   * @return string
+   * @throws Exception
    */
   function el($value, $fieldName, $itemId) {
     $this->check();
@@ -290,7 +291,7 @@ class Ddo {
 
   public $textItemSeparator = "--\n";
 
-  protected $excelWriters = [];
+  protected $excelWriter = [];
 
   /**
    * @param $file
@@ -298,8 +299,7 @@ class Ddo {
    */
   protected function getExcelWriter($file) {
     if (isset($this->excelWriter[$file])) return $this->excelWriter[$file];
-    $this->excelWriter[$file] = new ExcelWriter($file);
-    return $this->excelWriter[$file];
+    return $this->excelWriter[$file] = new ExcelWriter($file);
   }
 
   function els() {

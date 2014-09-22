@@ -3,7 +3,7 @@
 class TestDdFieldDelete extends TestDd {
 
   function test() {
-    $fm = O::gett('DdFieldsManager', 'a');
+    $fm = O::di('DdFieldsManager', 'a');
     $fieldId = $fm->create([
       'type' => 'ddTags',
       'name' => 'bbb'
