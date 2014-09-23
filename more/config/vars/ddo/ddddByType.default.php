@@ -11,7 +11,7 @@ return [
   'urls' => '`<ul>`.urls($v, "\n").`</ul>`',
   'file' => '$v ? `<a href="`.$v.`" />Скачать (`.File::format2($fSize).`)</a>` : ``',
   'fieldList' => 'Tt()->enum($v, `, `, `($k+1).") $v"`)',
-  'imagePreview' => '$v ? `<div class="thumbCont"><a href="`.$v.`" class="thumb" target="_blank"><img src="`.Misc::getFilePrefexedPath($v, `sm_`).`" /></a></div>` : `<div class="thumbCont"></div>`',
+  'imagePreview' => '$v ? `<div class="thumbCont"><a href="`.$v.`" class="thumb" target="_blank"><div class="thumbHover"></div><img src="`.Misc::getFilePrefexedPath($v, `sm_`).`" /></a></div>` : `<div class="thumbCont"></div>`',
   'ddUserImage' => '%imagePreview',
   'ddTags' => 'Tt()->enumDddd($v, `$title`)',
   'ddTagsSelect' => '$v ? $v[`title`] : ``',
