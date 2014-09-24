@@ -48,7 +48,8 @@ class FieldEFile extends FieldEFileBase {
    * Сохраненное текущее значение
    */
   protected function dataValue() {
-    if (!$this->form->fromRequest) throw new Exception('"dataValue" is not supported for non-request usage');
+    if (!$this->form->fromRequest) return '';
+    //if (!$this->form->fromRequest) throw new Exception('"dataValue" is not supported for non-request usage');
     return $this->options['value'];
   }
 
@@ -140,7 +141,7 @@ class FieldEFile extends FieldEFileBase {
         '');
       $r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\"><i></i>сохранён ($size)</a>$deleteHtml";
     }
-    if (($v = $this->postValue())) {
+    if (($v = $this->postValue()) and file_exists($v['tmp_name'])) {
       $r .= '<div class="clear"></div>';
       $r .= "<a class=\"file fileUploaded iconBtnCaption\"><i></i>загружен (".File::format2(filesize($v['tmp_name'])).")</a>";
       $r .= '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name']. //
@@ -149,13 +150,6 @@ class FieldEFile extends FieldEFileBase {
     }
     $r .= '</div>';
     return $r;
-
-
-    if (($v = $this->htmlValue()) === null) return '';
-    return '<div class="iconsSet fileNav">'. //
-    '<a href="'.$v.'" class="'.$this->options['currentFileClass'].'" target="_blank">'. //
-    '<i></i> '.$this->options['currentFileTitle'].'</a>' //
-    .'</div>';
   }
 
   //protected function prepareInputValue() {
