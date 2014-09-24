@@ -10,8 +10,8 @@ width: <?= $d['page']['settings']['mozaicW']+15 ?>px;
 }
 <? } elseif ($d['page']['settings']['smW']) { ?>
 .ddItems.str_<?= $d['page']['strName'] ?> .thumb img {
-max-width: <?= $d['page']['settings']['smW'] ?>px;
-max-height: <?= $d['page']['settings']['smH'] ?>px;
+width: <?= $d['page']['settings']['smW'] ?>px;
+height: <?= $d['page']['settings']['smH'] ?>px;
 }
 .ddItems.str_<?= $d['page']['strName'] ?> .thumb.halfSize img {
 max-width: <?= round($d['page']['settings']['smW']/2) ?>px;

@@ -124,8 +124,8 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
         ],
         'h2ItemLinkIfText' => [
           'title' => 'Заголовок 2. Ссылка на запись, только если поле "text" не пустое',
-          //'dddd' => '(isset($o->items[$id][`text`]) and empty($o->items[$id][`text`])) ? `<h2>`.$v.`</h2>` : `<h2><a href="`.$ddddItemLink.`">`.$v.`</a></h2>`'
-          'dddd' => '$v'
+          'dddd' => '(isset($o->items[$id][`text`]) and empty($o->items[$id][`text`])) ? `<h2>`.$v.`</h2>` : `<h2><a href="`.$ddddItemLink.`">`.$v.`</a></h2>`'
+          // 'dddd' => '$v'
         ],
         'h3ItemLinkIfText' => [
           'title' => 'Заголовок 3. Ссылка на запись, только если поле "text" не пустое',
@@ -135,7 +135,7 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
       'imagePreview' => [
         'directImageLink' => [
           'title' => 'Прямая ссылка на изображение',
-          'dddd' => '$v ? `<a href="`.Misc::getFilePrefexedPath($v, `md_`).`" class="thumb"><img src="`.Misc::getFilePrefexedPath($v, `sm_`).`" /></a>` : ``',
+          'dddd' => '$v ? `<a href="`.$v.`" class="thumb"><img src="`.Misc::getFilePrefexedPath($v, `sm_`).`" /></a>` : ``',
         ],
         'mdImageLink' => [
           'title' => 'Изображение md',

@@ -11,6 +11,7 @@ class DdoSettings {
 
   function getLayouts() {
     $staticLayouts = Arr::append(Config::getVar('ddo/staticLayouts'), Config::getVar('ddo/layouts'));
+    $layouts = [];
     foreach ($staticLayouts as $v) $layouts[$v[0]]['title'] = $v[1];
     return $layouts;
   }
