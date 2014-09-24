@@ -294,7 +294,7 @@ class Auth {
   }
 
   static function getAll() {
-    (($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
+    retuirn (($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
     die2('-');
   }
 
