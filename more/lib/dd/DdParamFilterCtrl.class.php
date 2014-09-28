@@ -175,6 +175,8 @@ trait DdParamFilterCtrl {
     }
   }
 
+  public $tagFilters = [];
+
   protected function setFilterTags($tagValue, $tagField, $byId = true) {
     /*
     // Парсим параметры тэгов
@@ -252,6 +254,8 @@ trait DdParamFilterCtrl {
       }
     }
     */
+    // die2(3);
+    $this->tagFilters[$tagField] = $tagValue;
     if (!$tagValue) {
       $this->paramFilterItems()->addF('id', 0);
       return;

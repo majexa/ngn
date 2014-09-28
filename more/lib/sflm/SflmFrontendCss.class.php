@@ -10,6 +10,18 @@ class SflmFrontendCss extends SflmFrontend {
     $this->_addPath($path);
   }
 
+  function _code() {
+    return preg_replace('/@import (.*)/', '', parent::_code());
+  }
+
+  function _addPath($path) {
+    $file = $this->base->getAbsPath($path);
+    if (file_exists($file) and preg_match_all('/@import (.*)/', file_get_contents($file), $m)) {
+      foreach ($m[1] as $v) parent::_addPath(trim($v, '"\'; '));
+    }
+    parent::_addPath($path);
+  }
+
   function addStaticPath($_path) {
     foreach (Sflm::$absBasePaths as $k => $path) {
       if (file_exists("$path/{$this->base->type}/$_path.{$this->base->type}")) {

@@ -82,6 +82,10 @@ class Ddo {
     $fields = $this->ddoFields();
     $fields->isItemsList = $this->list;
     $this->fields = $fields->getFields();
+    foreach ($this->fields as $v) {
+      Sflm::frontend('css')->addLib("i/css/ddo/{$v['type']}.css");
+      Sflm::frontend('js')->addClass('Ngn.DdoType'.ucfirst($v['type']));
+    }
     return $this;
   }
 
@@ -271,7 +275,7 @@ class Ddo {
   public $groupElementsColsN = false;
   public $groupElements = true;
 
-  public $ddddItemsBegin = '`<div class="items ddItems str_`.$strName.`">`';
+  public $ddddItemsBegin = '`<div class="items ddItems str_`.$strName.` ddoLayout_`.$layoutName.`">`';
   public $tplPathItem = 'dd/elements/default';
   public $ddddItemsEnd = '`</div><!-- Ddo elements end "`.$strName.`" -->`';
   public $premoder = false;
@@ -281,7 +285,10 @@ class Ddo {
 
   function itemsBegin() {
     if ($this->text) return '';
-    return St::dddd($this->ddddItemsBegin, ['strName' => $this->strName]);
+    return St::dddd($this->ddddItemsBegin, [
+      'strName' => $this->strName,
+      'layoutName' => $this->layoutName
+    ]);
   }
 
   function itemsEnd() {

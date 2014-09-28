@@ -6,24 +6,19 @@ class TestFieldFile extends TestFieldDd {
     return true;
   }
 
-  static function setUpBeforeClass() {
-    parent::setUpBeforeClass();
-    O::di('DdFieldsManager', static::$strName)->create([
-      'name'  => 'sample2',
-      'title' => 'sample2',
-      'type'  => 'file'
-    ]);
-  }
+  //static function setUpBeforeClass() {
+  //  parent::setUpBeforeClass();
+  //}
 
   function createData() {
-    return [
+    $r = [
       'sample' => TestCore::tempImageFixture(),
       'sample2' => TestCore::tempImageFixture()
     ];
+    return $r;
   }
 
   function runTests($request = false) {
-    output("request: $request");
     $item = static::$im->items->getItem($this->itemId);
     $this->assertTrue($item['sample'] == '/u/dd/a/1/sample.jpg');
     $this->assertTrue($item['sample2'] == '/u/dd/a/1/sample2.jpg');

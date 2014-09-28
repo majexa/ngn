@@ -10,7 +10,7 @@ Ngn.Form.El.DdTags = new Class({
           onlyFromValues: true,
           queryRemote: true,
           remote: {
-            url: '/c/ddTagsAc?strName=' + this.strName + '&fieldName=' + eInput.get('name')
+            url: '/default/ddTagsAc?strName=' + this.strName + '&fieldName=' + eInput.get('name')
           }
         }
       }

@@ -27,7 +27,7 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   function addClass($name, $source = 'direct', $strict = false) {
-    if ($this->stored) throw new Exception("Can't add after frontend was stored. Reset or rerun frontend");
+    $this->checkNotStored();
     $this->classes->addClass($name, $source, $strict);
   }
 
@@ -46,6 +46,18 @@ class SflmFrontendJs extends SflmFrontend {
   function store($source = 'direct') {
     parent::store($source);
     $this->classes->frontendClasses->store();
+  }
+
+  function processCode($code, $source) {
+    $this->checkNotStored();
+    $this->classes->processCode($code, $source);
+  }
+
+  function processHtml($html, $source) {
+    $this->checkNotStored();
+    if (!preg_match_all('!<script>(.*)</script>!s', $html, $m)) return;
+    foreach ($m[1] as $code) $this->processCode($code, $source);
+    return $html;
   }
 
 }

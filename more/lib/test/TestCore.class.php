@@ -14,7 +14,7 @@ class TestCore {
 
   static function tempImageFixture() {
     $a = [1, 2, 3, 4, 5];
-    $file = TEMP_PATH.'/'.time();
+    $file = TEMP_PATH.'/'.time().'-'.rand(1000, 9999);
     $n = $a[array_rand($a)];
     LogWriter::str('n', $n);
     copy(MORE_PATH.'/lib/test/fixture/'.$n.'.jpg', $file);

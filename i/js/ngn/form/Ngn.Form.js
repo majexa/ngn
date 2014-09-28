@@ -188,8 +188,12 @@ Ngn.Form = new Class({
     }
   },
 
+  uploads: [],
+
   submitHtml5: function() {
-    this.upload.send(this.multiUpload);
+    this.uploads.each(function(upload) {
+      upload.send(false);
+    }.bind(this));
   },
 
   initHtml5Upload: function() {
@@ -216,16 +220,31 @@ Ngn.Form = new Class({
           }
         },
         onComplete: function() {
-          this.submitAjax();
+          if (this.hasUploadsInProgress()) return;
+          this.submitAjax(); //          (!) "COMPLETE" EVENT
         }.bind(this)
       };
       if (!eInput.get('multiple')) {
-        this.upload = new Ngn.Form.Upload.Single(this, eInput, uploadOptions);
+        this.addUpload(new Ngn.Form.Upload.Single(this, eInput, uploadOptions));
       } else {
         uploadOptions.url += '&multiple=1';
-        this.upload = new Ngn.Form.Upload.Multi(this, eInput, uploadOptions);
+        this.addUpload(new Ngn.Form.Upload.Multi(this, eInput, uploadOptions));
       }
     }.bind(this));
+  },
+
+  /**
+   * @property upload Ngn.Form.Upload
+   */
+  addUpload: function(upload) {
+    this.uploads.push(upload);
+  },
+
+  hasUploadsInProgress: function() {
+    for (var i =0; i<this.uploads.length; i++) {
+      if (this.uploads[i].inProgress) return true;
+    }
+    return false;
   },
 
   hasFilesFields: function() {

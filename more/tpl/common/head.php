@@ -2,6 +2,5 @@
 <html lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <?= Sflm::frontend('js')->getTags() ?>
-  <?= Sflm::frontend('css')->getTags() ?>
+  {sflm}
 </head>

@@ -22,7 +22,6 @@ Ngn.Dialog.RequestFormBase = new Class({
     }
     this.parent(options);
     this.toggle('ok', false);
-    //this.initFormResponse();
     this.iframeUpload = true;
     window.addEvent('keypress', function(e) {
       if (e.key != 'enter' || e.target.get('tag') == 'textarea') return;
@@ -83,7 +82,7 @@ Ngn.Dialog.RequestFormBase = new Class({
   resizeByCols: function() {
     var cols = this.form.eForm.getElements('.type_col');
     if (!cols.length) return;
-    var maxY = 0;
+    //var maxY = 0;
     var ys = [];
     var x = 0;
     for (var i = 0; i < cols.length; i++) {
