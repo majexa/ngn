@@ -25,7 +25,19 @@ class DmfaFile extends Dmfa {
   }
   
   protected function getExt(FieldEFile $el) {
-    return File::getExtension($el['postValue']['tmp_name']);
+    try {
+      $r = File::getExtension($el['postValue']['tmp_name']);
+    } catch (NoFileException $e) {
+      if ($el->options['name'] == 'sample2') {
+        // тут всё не ок
+        pr($el['postValue']['tmp_name'].': '.file_exists($el['postValue']['tmp_name']));
+        //die2();
+      }
+
+      //die('-');
+      throw new NoFileException('File "'.$el['postValue']['tmp_name'].'" for field "'.$el['name'].'" does not exists');
+    }
+    return $r;
   }
 
   function elAfterCreateUpdate(FieldEFile $el) {
@@ -35,6 +47,7 @@ class DmfaFile extends Dmfa {
     $attachPath = $this->getAttachePath();
     Dir::make($attachPath);
     $filename = $this->getAttacheFilenameByEl($el).'.'.$this->getExt($el);
+    //pr('remove '.$el['name'].'> '.$el['postValue']['tmp_name']);
     rename($el['postValue']['tmp_name'], $attachPath.'/'.$filename);
     $this->dm->_updateField($this->dm->id, $el['name'], $attachFolder.'/'.$filename);
     return $attachPath.'/'.$filename;

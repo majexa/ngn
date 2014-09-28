@@ -5,7 +5,6 @@
     ($d['adminModuleTitle'] ? $d['adminModuleTitle'] : ''). 
     ($d['pageTitle'] ? ' / '.strip_tags($d['pageTitle']) : '').' — '.SITE_TITLE ?></title>
   <? $this->tpl('admin/headers', $d) ?>
-  <?//= PageModuleCore::sf('admin', $d['page']['module']) ?>
   <script type="text/javascript">
   window.addEvent('domready', function() {
     document.getElements('.apeform form').each(function(eForm) {

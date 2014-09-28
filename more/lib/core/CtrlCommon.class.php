@@ -2,6 +2,7 @@
 
 abstract class CtrlCommon extends CtrlBase {
 
+  /*
   function dispatch() {
     parent::dispatch();
     $this->sflmStore();
@@ -13,5 +14,6 @@ abstract class CtrlCommon extends CtrlBase {
     Sflm::frontend('js')->store('afterAction');
     Sflm::frontend('css')->store('afterAction');
   }
+  */
 
 }

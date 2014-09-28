@@ -104,12 +104,27 @@ use Options;
   protected function afterOutput() {
   }
 
+  protected function sflmStore() {
+    if (!empty($this->req->options['disableSflmStore'])) return;
+    Sflm::frontend('js')->store('afterAction');
+    Sflm::frontend('css')->store('afterAction');
+  }
+
+  protected function sflmInject() {
+    $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+    $this->html = str_replace('{sflm}', $tags, $this->html);
+  }
+
+  protected $html;
+
   function getOutput() {
     if (!$this->controller) throw new Exception('Controller not defined');
     Err::noticeSwitch(false);
-    $html = $this->controller->getOutput();
+    $this->html = $this->controller->getOutput();
     $this->afterOutput();
-    return $html;
+    //$this->sflmStore();
+    //$this->sflmInject();
+    return $this->html;
   }
 
 }

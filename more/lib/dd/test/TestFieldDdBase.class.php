@@ -9,6 +9,12 @@ class TestFieldDdBase extends TestDd {
         Misc::removePrefix('TestField', //
           get_called_class())));
     O::di('DdFieldsManager', static::$strName)->create(static::fieldData($fieldType));
+    O::di('DdFieldsManager', static::$strName)->create([
+      'name'  => 'sample2',
+      'title' => 'sample2',
+      'type'  => 'file'
+    ]);
+
   }
 
   static protected function fieldData($fieldType) {

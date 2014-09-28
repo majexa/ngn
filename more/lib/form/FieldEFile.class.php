@@ -35,12 +35,16 @@ class FieldEFile extends FieldEFileBase {
    */
   protected function valueToProcess() {
     if (!$this->form->fromRequest) {
+      //if ($this->options['name'] == 'sample2') {
+      //  die2(file_exists($this->options['value']['tmp_name']));
+      //}
+
       return $this->options['value'];
     };
     $files = isset($this->form->options['files']) ? $this->form->options['files'] : $this->form->req->files;
-    if (!$files) return null;
     $value = BracketName::getValue($files, $this->options['name']);
     if (!empty($value['error'])) return null;
+    //prr($files);
     return $value;
   }
 
@@ -106,6 +110,10 @@ class FieldEFile extends FieldEFileBase {
     }
     else {
       $this->options['postValue'] = $uploadedFileValue;
+      if ($this->options['name'] == 'sample2') {
+        // тут всё ок
+        //output2($this->options['postValue']['tmp_name'].': '.file_exists($this->options['postValue']['tmp_name']));
+      }
     }
   }
 
@@ -144,8 +152,8 @@ class FieldEFile extends FieldEFileBase {
     if (($v = $this->postValue()) and file_exists($v['tmp_name'])) {
       $r .= '<div class="clear"></div>';
       $r .= "<a class=\"file fileUploaded iconBtnCaption\"><i></i>загружен (".File::format2(filesize($v['tmp_name'])).")</a>";
-      $r .= '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name']. //
-        '" class="iconBtn delete confirm" title="Удалить загруженный файл"><i></i></a>';
+      //$r .= '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name']. //
+      //'" class="iconBtn delete confirm" title="Удалить загруженный файл"><i></i></a>';
 
     }
     $r .= '</div>';

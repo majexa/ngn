@@ -200,6 +200,12 @@ abstract class CtrlBase {
     return $this;
   }
 
+  protected function sflmStore() {
+    if (!empty($this->req->options['disableSflmStore'])) return;
+    Sflm::frontend('js')->store('afterAction');
+    Sflm::frontend('css')->store('afterAction');
+  }
+
   protected function beforeInit() {
   }
 
@@ -237,6 +243,7 @@ abstract class CtrlBase {
    */
   function getOutput() {
     if ($this->isJson) {
+      $this->sflmStore();
       // JSON OUTPUT HERE
       if (!empty($this->req->r['ifr'])) return '<textarea id="json">'.json_encode($this->json).'</textarea>';
       else {
@@ -258,12 +265,19 @@ abstract class CtrlBase {
       }
     }
     if (!$this->hasOutput) return '';
+
     header("Content-type: text/html; charset=".CHARSET);
     if (isset($this->output)) return $this->output;
     if (empty($this->d['tpl'])) {
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
+    Sflm::frontend('js')->processHtml($html, 'CtrlBase::getOutput()');
+
+    $this->sflmStore();
+    $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+    $html = str_replace('{sflm}', $tags, $html);
+
     $this->d['processTime'] = getProcessTime();
     return $html;
   }

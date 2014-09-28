@@ -115,7 +115,7 @@ class Sflm {
   }
 
   static function output($s) {
-    //if (!strstr($s, 'PageModule')) return;
+    //if (!strstr($s, 'CtrlAdmin')) return;
     if (self::$output) {
       if (strstr($s, 'Adding path')) outputColor($s, 'red');
       elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');
@@ -132,4 +132,4 @@ Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 Sflm::$absBasePaths = [
   'i' => NGN_PATH.'/i'
 ];
-Sflm::$output = false; // set true to debug
+Sflm::$output = true; // set true to debug

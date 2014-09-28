@@ -219,8 +219,6 @@ use Options;
   }
 
   function typeJs() {
-    //die2($this->type);
-    //$strict = $this->type
     Sflm::frontend('css')->addLib("i/css/formEl/$this->type.css");
     if (!$this->useTypeJs) return '';
     Sflm::frontend('js')->addLib("formEl/$this->type", false);

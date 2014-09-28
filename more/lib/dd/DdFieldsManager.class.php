@@ -41,7 +41,9 @@ class DdFieldsManager extends DbItemsManager {
       $type = DdFieldCore::getType($this->defaultData['type']);
       if (!empty($type['disableTypeChange'])) unset($this->form->fields->fields['type']);
       if (!empty($type['fields'])) {
-        foreach ($type['fields'] as &$v) $v['name'] = "settings[{$v['name']}]";
+        foreach ($type->r['fields'] as &$v) {
+          $v['name'] = "settings[{$v['name']}]";
+        }
         $this->form->fields->fields = array_merge($this->form->fields->fields, Arr::assoc($type['fields'], 'name'));
       }
     }

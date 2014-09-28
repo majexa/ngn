@@ -227,6 +227,12 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
            ]))->html()'
         ]
       ],
+      'sound' => [
+        'onlyPlayer' => [
+          'title' => 'только плеер',
+          'dddd' => '`<audio src="`.$v.`" preload="none"></audio>`'
+        ]
+      ],
       'ddTags' => [
         'iconed' => [
           'title' => 'с иконками',

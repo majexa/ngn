@@ -217,6 +217,11 @@ abstract class DataManagerAbstract extends Options2 {
   protected function setFormElementsData(array $data, $valueFormatted = false) {
     $this->beforeFormElementsInit();
     $this->form->valueFormated = $valueFormatted;
+    if (get_class($this->form) == 'DdForm'){
+      //die2(array_keys($this->form->fields->fields));
+      //$this->form->debugElements();
+      //die2('-');
+    }
     $this->form->setElementsData($data);
   }
 
@@ -424,7 +429,7 @@ abstract class DataManagerAbstract extends Options2 {
   protected function elementTypeAction($method) {
     $this->fieldTypeAction($method, $this->data);
     $method = 'el'.ucfirst($method);
-    foreach ($this->form->getElements() as $el) {
+    foreach ($this->form->getElements() as $k => $el) {
       $this->elementTypeActionProcessed[] = $el['name'];
       if (($o = $this->getDmfa($this->form->fields->getType($el['name']))) === false) continue;
       if (!method_exists($o, $method)) continue;
