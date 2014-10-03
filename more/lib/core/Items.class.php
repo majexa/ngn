@@ -42,12 +42,6 @@ class Items extends DbItems {
       WHERE
         {$this->table}.id=?d
         ", $id);
-    /*
-        pages.title AS pageTitle,
-        pages.name AS pageName,
-        pages.path AS pagePath
-      LEFT JOIN pages ON {$this->table}.pageId=pages.id
-    * */
     if ($this->strict and !$r) throw new Exception("Item table={$this->table} with id={$id} does not exists");
     if (empty($r)) return false;
     else {
@@ -149,13 +143,6 @@ class Items extends DbItems {
       {$this->selectCond}
     FROM {$this->table}
     ".$this->cond->all();
-    //LogWriter::v('getItems', $q);
-    /*
-      pages.strName,
-      pages.title AS pageTitle,
-      pages.name AS pageName,
-      pages.path AS pagePath
-    */
     return db()->query($q);
   }
 

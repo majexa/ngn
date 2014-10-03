@@ -6,7 +6,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
     $form = new UserRegPhoneForm(['req' => $this->req, 'defaultsFromReq' => true]);
     $this->json['title'] = 'Регистрация';
     if ($form->update()) {
-      $this->json['nextFormUrl'] = '/c/userReg/json_form?'.http_build_query($form->getData());
+      $this->json['nextFormUrl'] = '/default/userReg/json_form?'.http_build_query($form->getData());
       return;
     }
     return $this->jsonFormAction($form);

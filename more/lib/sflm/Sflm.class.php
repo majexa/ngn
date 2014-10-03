@@ -115,7 +115,6 @@ class Sflm {
   }
 
   static function output($s) {
-    //if (!strstr($s, 'CtrlAdmin')) return;
     if (self::$output) {
       if (strstr($s, 'Adding path')) outputColor($s, 'red');
       elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');

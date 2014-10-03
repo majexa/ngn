@@ -14,7 +14,6 @@ return [
   'allowEmailEdit' => true,
   'allowPhoneEdit' => true,
   'allowNameEdit' => true,
-  'allowMysiteThemeEdit' => false,
   'pageIds' => [],
   'redirectToFirstPage' => false,
   'extraData' => false,

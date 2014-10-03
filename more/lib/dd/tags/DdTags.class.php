@@ -78,6 +78,8 @@ class DdTags {
   // ------------- instance getters -----------
 
   /**
+   * @param $strName
+   * @param $groupName
    * @return DdTagsItems
    */
   static function items($strName, $groupName) {
@@ -89,9 +91,9 @@ class DdTags {
   }
 
   /**
-   * @param   string   Structure string name
-   * @param   string   Tags group name
-   * @return  DdTagsTagsBase
+   * @param string $strName Structure string name
+   * @param string $groupName Tags group name
+   * @return DdTagsTagsFlat|DdTagsTagsTree
    */
   static function get($strName, $groupName) {
     $group = new DdTagsGroup($strName, $groupName);
@@ -99,8 +101,8 @@ class DdTags {
   }
 
   /**
-   * @param   integer   Tags group ID
-   * @return  DdTagsTagsBase
+   * @param integer $groupId Tags group ID
+   * @return DdTagsTagsFlat|DdTagsTagsTree
    */
   static function getByGroupId($groupId) {
     $group = DdTagsGroup::getById($groupId);
