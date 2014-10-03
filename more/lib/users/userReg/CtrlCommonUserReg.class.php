@@ -22,12 +22,12 @@ class CtrlCommonUserReg extends CtrlCammon {
   }
 
   protected function getForm() {
-    $form =  new UsersRegForm([
+    $form = new UsersRegForm([
       'submitTitle'     => 'Зарегистрироваться',
       'defaultsFromReq' => true,
       'role'            => isset($this->req->r['role']) ? $this->req->r['role'] : null
     ]);
-    $form->action = '/c/userReg/json_form';
+    $form->action = '/default/userReg/json_form';
     return $form;
   }
 
@@ -85,13 +85,6 @@ class CtrlCommonUserReg extends CtrlCammon {
     $this->d['tpl'] = 'users/regWelcome';
   }
 
-  function action_activation() {
-    if (!$this->page['settings']['activation']) return;
-    $this->d['tpl'] = 'users/activation';
-    $this->d['success'] = UsersActivation::activate($this->req->r['code']);
-    $this->redirect($this->tt->getPath().'/welcome');
-  }
-
   // ----------------------------------------------------
 
   protected function initSubmenu() {
@@ -130,13 +123,6 @@ class CtrlCommonUserReg extends CtrlCammon {
           'title' => 'Изменить домен',
           'link'  => $this->tt->getPath(1).'/editName',
           'name'  => 'editName'
-        ];
-      }
-      if ($this->conf['allowMysiteThemeEdit']) {
-        $items[] = [
-          'title' => 'Оформление Моего сайта',
-          'link'  => $this->tt->getPath(1).'/editMysiteTheme',
-          'name'  => 'editMysite'
         ];
       }
     }
@@ -207,6 +193,7 @@ class CtrlCommonUserReg extends CtrlCammon {
     $this->setPageTitle("Изменение e-mail'а");
   }
 
+  /*
   function action_editMysiteTheme() {
     if (!Config::getVarVar('mysite', 'enable')) throw new Exception('Mysite is disabled');
     if (empty($this->conf['allowMysiteThemeEdit'])) throw new Exception('MysiteTheme change not allowed');
@@ -215,6 +202,7 @@ class CtrlCommonUserReg extends CtrlCammon {
     $this->initSubmenu();
     $this->processMysiteThemeForm();
   }
+  */
 
   protected function processFieldEditForm($fieldName, $fieldTitle, $fieldType = 'text') {
     $form = new Form(new Fields([
@@ -223,7 +211,8 @@ class CtrlCommonUserReg extends CtrlCammon {
         'title'    => 'Ваш пароль',
         'type'     => 'password',
         'required' => true
-      ], [
+      ],
+      [
         'name'     => $fieldName,
         'title'    => $fieldTitle,
         'type'     => $fieldType,
@@ -259,7 +248,8 @@ class CtrlCommonUserReg extends CtrlCammon {
         'title'    => 'Текущий пароль',
         'type'     => 'password',
         'required' => true
-      ], [
+      ],
+      [
         'name'     => 'newPass',
         'title'    => 'Новый пароль',
         'type'     => 'password',

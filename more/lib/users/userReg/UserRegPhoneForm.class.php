@@ -45,7 +45,7 @@ var eBtn = form.eForm.getElement('.name_send .btn');
 Ngn.Frm.phoneConfirm = function(method) {
   btn.toggleDisabled(false);
   new Ngn.Request.JSON({
-    url: '/c/userRegPhone/json_send' + ucfirst(method),
+    url: '/default/userRegPhone/json_send' + ucfirst(method),
     onComplete: function(r) {
       btn.toggleDisabled(true);
       if (r.validError) {

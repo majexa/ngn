@@ -13,11 +13,11 @@ class DdTagsItems {
   }
 
   /**
-   * Создает запись тэга
-   *
-   * @param   integer ID записи
-   * @param   array Названия тегов
-   * @return  mixed   Вызывать ошибку в случае попытки создания тэг-записей с древовидным типом
+   * @param integer $itemId ID записи
+   * @param array $titles Названия тегов
+   * @param bool $strict Вызывать ошибку в случае попытки создания тэг-записей с древовидным типом
+   * @throws NotFoundException
+   * @throws Exception
    */
   function create($itemId, array $titles, $strict = false) {
     if ($this->group->tree) throw new Exception("Tag Items of 'Tree' type can not be created by titles");
@@ -128,13 +128,18 @@ SQL
     $this->updateCounts(array_unique($allTagTds));
   }
 
+  function updateAllCounts() {
+    if (self::$disableUpdateCount) return false;
+    //db()->select("SELECT id FROM ");
+  }
+
   function updateCount($tagId) {
     if (self::$disableUpdateCount) return false;
     Misc::checkEmpty($tagId);
     $cnt = db()->selectCell("
     SELECT COUNT(*) FROM
     (
-      SELECT * FROM tagItems
+      SELECT tagItems.* FROM tagItems
       WHERE strName=? AND tagId=?d AND active=1
       GROUP BY itemId
     ) AS t

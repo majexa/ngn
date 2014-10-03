@@ -1,4 +1,4 @@
-Ngn.Ngn.Autocompleter = new Class({
+Ngn.Autocompleter = new Class({
 
   Implements: [Options, Events],
 

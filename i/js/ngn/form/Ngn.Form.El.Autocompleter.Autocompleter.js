@@ -1,5 +1,5 @@
 Ngn.Form.El.Autocompleter.Autocompleter = new Class({
-  Extends: Autocompleter.Request.JSON,
+  Extends: Ngn.Autocompleter.Request.JSON,
 
   options: {
     caption: 'Нажмите клавишу "вниз" для выбора вариантов',

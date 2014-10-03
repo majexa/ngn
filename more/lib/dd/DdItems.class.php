@@ -527,4 +527,14 @@ class DdItems extends Items {
     DbShift::items($ids, $this->table);
   }
 
+  function activate($id) {
+    db()->query("UPDATE tagItems SET active=1 WHERE strName=? AND itemId=?", $this->strName, $id);
+    parent::activate($id);
+  }
+
+  function deactivate($id) {
+    db()->query("UPDATE tagItems SET active=0 WHERE strName=? AND itemId=?", $this->strName, $id);
+    parent::deactivate($id);
+  }
+
 }
