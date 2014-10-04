@@ -77,7 +77,7 @@ Ngn.Dialog.Auth = new Class({
     //dialogClass: 'dialog fieldFullWidth',
     selectedTab: 0,
     id: 'auth',
-    url: '/default/auth/json_auth',
+    url: '/' + Ngn.sflmFrontend + '/auth/json_auth',
     width: 300,
     completeUrl: null,
     fromVkEnabled: false

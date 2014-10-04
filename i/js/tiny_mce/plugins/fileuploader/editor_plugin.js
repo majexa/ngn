@@ -19,7 +19,7 @@
           );
         };
         new Ngn.Dialog.RequestForm({
-          url: '/default/tinyFileUploader' +
+          url: '/' + Ngn.sflmFrontend + '/tinyFileUploader' +
             '?tinyAttachId=' + ed.settings.attachId,
           onSubmitSuccess: function(r) {
             insertFile(r.url, r.title, r.filesize);

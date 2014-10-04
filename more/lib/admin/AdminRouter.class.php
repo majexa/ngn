@@ -46,13 +46,14 @@ class AdminRouter extends Router {
     if ($this->req->params[0] == 'god' and Auth::get('id') and !Misc::isGod()) {
       throw new Exception("God mode not allowed:\n"."Possible reasons:\n"."* Current user is not god\n"."* Current IP is not presents in developers IPs list\n");
     }
-    //if (!AdminModule::isAllowed($this->module)) throw new Exception("Admin module '{$this->module}' not allowed");
-    $class = ClassCore::nameToClass('CtrlAdmin', $this->module);
-    if (Lib::exists($class)) {
-      return new $class($this);
-    }
-    else {
-      throw new NotLoggableError("Module '{$this->module}' not found. class '$class'");
+    $adminClass = ClassCore::nameToClass('CtrlAdmin', $this->module);
+    $commonClass = ClassCore::nameToClass('CtrlCommon', $this->module);
+    if (class_exists($adminClass)) {
+      return new $adminClass($this);
+    } elseif (class_exists($commonClass)) {
+      return new $commonClass($this);
+    } else {
+      throw new NotLoggableError("Module '{$this->module}' not found. class '$adminClass'");
     }
   }
 

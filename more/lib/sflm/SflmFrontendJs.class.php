@@ -28,7 +28,7 @@ class SflmFrontendJs extends SflmFrontend {
 
   function addClass($name, $source = 'direct', $strict = false) {
     $this->checkNotStored();
-    $this->classes->addClass($name, $source, $strict);
+    return $this->classes->addClass($name, $source, $strict);
   }
 
   /**

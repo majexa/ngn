@@ -1,1 +1,1 @@
-<? pr("\$d['tpl'] not defined") ?>
+DEFAULT TPL

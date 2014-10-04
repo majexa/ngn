@@ -78,21 +78,6 @@ class Tt {
     return false;
   }
 
-  function getUserTag($userId, $login, $tpl = '`<a href="`.Tt()->getUserPath($id).`">`.$login.`</a>`') {
-    throw new Exception('Depricated');
-    if (!PageControllersCore::exists('userData')) return '<span class="user">'.$login.'</span>';
-    else
-      return St::dddd($tpl, [
-        'id'    => $userId,
-        'login' => $login
-      ]);
-  }
-
-  function getUserTag2(array $user) {
-    throw new Exception('Depricated');
-    return $this->getUserTag($user['id'], $user['login']);
-  }
-
   /**
    * Возвращает URL с исключенными из него параметрами
    *

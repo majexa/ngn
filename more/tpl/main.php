@@ -1,3 +1,6 @@
-<? //Sflm::frontend('js')->addObject('Ngn.Atlas');
-Sflm::getTags(); ?>
-<? print $d['tpl'];
+<head>
+  {sflm}
+</head>
+<body>
+  <? $this->tpl($d['tpl'], $d) ?>
+</body>

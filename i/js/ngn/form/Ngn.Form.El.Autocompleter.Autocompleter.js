@@ -6,20 +6,20 @@ Ngn.Form.El.Autocompleter.Autocompleter = new Class({
     postVar: 'mask',
     minLength: 1,
     //onFocus: function(el) {
-      //el.set('value', '');
+    //el.set('value', '');
     //},
     //onBlur: function(el) {
-      //el.set('value', this.selectedValue);
+    //el.set('value', this.selectedValue);
     //},
     onSelection: function(el, d) {
       this.selectedValue = this.element.value;
       var eInputValue = el.getParent('.element').getElement('input.val');
       eInputValue.set('value', d.inputKey);
     },
-    onRequest: function(){
+    onRequest: function() {
       this.eSpan2.addClass('loader');
     },
-    onComplete: function(){
+    onComplete: function() {
       this.eSpan2.removeClass('loader');
     }
   },
@@ -27,7 +27,7 @@ Ngn.Form.El.Autocompleter.Autocompleter = new Class({
   initialize: function(eInput, options) {
     this.selectedValue = '';
     var type = eInput.getParent('.element').get('class').replace(/.*type_(\w+).*/, '$1');
-    var controller = '/c/ac' + ucfirst(type);
+    var controller = '/' + Ngn.sflmFrontend + '/ac' + ucfirst(type);
     this.parent(eInput, controller, options);
     this.eSpan = new Element('span', {'class': 'ac'});
     this.eSpan2 = new Element('span', {'class': 'ac2'});

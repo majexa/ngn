@@ -1,5 +1,5 @@
 <script>
   new Ngn.Dialog.RequestForm({
-    url: '/default/testDd/json_dialogForm'
+    url: '/' + Ngn.sflmFrontend + '/testDd/json_dialogForm'
   });
 </script>

@@ -27,7 +27,7 @@ class CtrlCommonUserReg extends CtrlCammon {
       'defaultsFromReq' => true,
       'role'            => isset($this->req->r['role']) ? $this->req->r['role'] : null
     ]);
-    $form->action = '/default/userReg/json_form';
+    $form->action = '/' + Sflm::frontendName(true) + '/userReg/json_form';
     return $form;
   }
 
