@@ -52,9 +52,7 @@ Ngn.Grid = new Class({
         if (keys.length && in_array('$constructor', keys)) {
           // класс Ngn.GridBtnAction.*
           action = new v.action(grid);
-          //action.action.bind(action);
           action.id = v.cls;
-          // action.action();
         } else {
           if (typeof(v.action) == 'function') {
             // ф-я function(grid) {}
@@ -211,10 +209,6 @@ Ngn.Grid = new Class({
 
   currentPage: 1,
 
-  replaceLinkAjaxToNormal: function(link) {
-    return;
-  },
-
   replaceLink: function(link, ajax) {
     if (ajax) {
       return link.replace(new RegExp('/' + this.options.listAjaxAction + '/', 'g'), this.options.listAction ? '/' + this.options.listAction + '/' : '/');
@@ -255,7 +249,9 @@ Ngn.Grid = new Class({
   },
 
   createToolBtn: function(cls, row, action) {
+    //c(this.options.toolActions);
     action = action || this.options.toolActions[cls] || false;
+    this.options.toolActions['edit'](row, this);
     var el = new Element('a', {
       'href': this.options.toolLinks[cls] ? this.options.toolLinks[cls](row) : '#',
       'class': 'iconBtn ' + cls,

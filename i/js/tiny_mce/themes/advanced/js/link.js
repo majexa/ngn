@@ -20,7 +20,7 @@ Ngn.Dialog.Tiny.Link = new Class({
     id: 'tinyLink',
     width: 250,
     top: 20,
-    url: '/default/tinyLink'
+    url: '/' + Ngn.sflmFrontend + '/tinyLink'
   },
 
   formInit: function() {

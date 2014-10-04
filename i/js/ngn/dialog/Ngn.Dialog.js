@@ -142,8 +142,8 @@ Ngn.Dialog = new Class({
       if (this.options.titleClose != false) {
         this.btnClose = Ngn.opacityBtn(new Element('span', {
           'id': this.options.id + '_closer',
-          'class': this.options.titleCloseClass,
-          'title': this.options.titleCloseTitle
+          'class': this.options.titleCloseClass
+          //'title': this.options.titleCloseTitle
         }).inject(this.titlebar).addEvent('click', this.close.bind(this)));
       }
     }

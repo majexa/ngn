@@ -144,7 +144,7 @@ abstract class SflmFrontend {
   }
 
   protected function checkStored() {
-    if (!$this->stored) throw new Exception('Frontend must be stored [SflmFrontend::store()] before getting tags');
+    if (!$this->stored) throw new Exception('Frontend must be stored [SflmFrontend::store()] before getting tags. Inject your sflm-tags by {sflm} string');
   }
 
   protected function checkNotStored() {

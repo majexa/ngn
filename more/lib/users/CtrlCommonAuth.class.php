@@ -11,23 +11,25 @@ class CtrlCommonAuth extends CtrlCammon {
   }
 
   function action_json_auth() {
-    $urls = ['/default/auth/json_form'];
+    $urls = ['/'.Sflm::frontendName(true).'/auth/json_form'];
     if (Config::getVarVar('userReg', 'enable')) {
-      $urls[] = Config::getVarVar('userReg', 'phoneConfirm') ? '/default/userRegPhone/json_form' : '/default/userReg/json_form';
+      $urls[] = Config::getVarVar('userReg', 'phoneConfirm') ? ('/'.Sflm::frontendName(true).'/userRegPhone/json_form') : ('/' + Sflm::frontendName(true).'/userReg/json_form');
     }
     $this->processFormTabs($urls);
   }
 
   protected function processFormTabs(array $paths, $tpl = 'common/dialogFormTabs') {
     foreach ($paths as $uri) {
-      $ctrl = (new RouterManager(['req' => new Req([
-          'uri' => $uri,
-          'disableSflmStore' => true
-        ])]))->router()->dispatch()->controller;
+      $ctrl = (new RouterManager([
+        'req' => new Req([
+            'uri'              => $uri,
+            'disableSflmStore' => true
+          ])
+      ]))->router()->dispatch()->controller;
       $form = [
         'title' => $ctrl->json['title'],
-        'html' => $ctrl->json['form'],
-        'id' => Html::getParam($ctrl->json['form'], 'id')
+        'html'  => $ctrl->json['form'],
+        'id'    => Html::getParam($ctrl->json['form'], 'id')
       ];
       if ($ctrl->actionResult) $form['submitTitle'] = $ctrl->actionResult->options['submitTitle'];
       $d['forms'][] = $form;
@@ -38,7 +40,7 @@ class CtrlCommonAuth extends CtrlCammon {
   function action_json_form() {
     LogWriter::str('aaa', 1);
     $form = new AuthForm;
-    $form->action = '/default/auth/json_form';
+    $form->action = '/' + Sflm::frontendName(true) + '/auth/json_form';
     $this->json['title'] = 'Авторизация ';
     LogWriter::str('aaa', 2);
     if ($form->isSubmittedAndValid()) {
@@ -55,7 +57,7 @@ class CtrlCommonAuth extends CtrlCammon {
     LogWriter::str('aaa', 6);
     return $this->jsonFormAction($form);
   }
-  
+
   function action_ajax_top() {
     $this->ajaxOutput = $this->tt->getTpl('top', ['path' => $this->req->rq('path')]);
   }
@@ -64,5 +66,5 @@ class CtrlCommonAuth extends CtrlCammon {
     Auth::save(DbModelCore::get('users', $this->req->param(3), 'actCode'));
     $this->redirect($this->req['url']);
   }
-  
+
 }

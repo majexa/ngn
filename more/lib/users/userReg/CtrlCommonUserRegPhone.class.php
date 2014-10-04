@@ -6,14 +6,14 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
     $form = new UserRegPhoneForm(['req' => $this->req, 'defaultsFromReq' => true]);
     $this->json['title'] = 'Регистрация';
     if ($form->update()) {
-      $this->json['nextFormUrl'] = '/default/userReg/json_form?'.http_build_query($form->getData());
+      $this->json['nextFormUrl'] = '/' + Sflm::frontendName(true) + '/userReg/json_form?'.http_build_query($form->getData());
       return;
     }
     return $this->jsonFormAction($form);
   }
 
   static function expireTime() {
-    return 60*60;
+    return 60 * 60;
   }
 
   protected function sendCode($method) {
@@ -26,7 +26,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       $this->json['validError'] = 'Пользователь с таким телефоном уже существует';
       return;
     }
-    $r = db()->selectRow('SELECT * FROM userPhoneConfirm WHERE dateCreate > ? AND phone=?', dbCurTime(time()-self::expireTime()), $phone);
+    $r = db()->selectRow('SELECT * FROM userPhoneConfirm WHERE dateCreate > ? AND phone=?', dbCurTime(time() - self::expireTime()), $phone);
     $maxAttemps = 15;
     if ($r) {
       if ($r['attempts'] >= $maxAttemps) {
@@ -35,14 +35,15 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       }
       $code = $r['code'];
       $attempts = $r['attempts'] + 1;
-    } else {
+    }
+    else {
       $code = Misc::randNum();
       $attempts = 1;
     }
     $d = [
-      'phone' => $phone,
-      'code'  => $code,
-      'attempts' => $attempts,
+      'phone'      => $phone,
+      'code'       => $code,
+      'attempts'   => $attempts,
       'dateCreate' => dbCurTime()
     ];
     if ($r) $d['id'] = $r['id'];
@@ -50,9 +51,10 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
     if ($method == 'phone') {
       (new Asterisk)->addOutgoingCall($phone, $id, [
         'actionName' => 'userRegPhone',
-        'code' => $code
+        'code'       => $code
       ]);
-    } else {
+    }
+    else {
       (new SmsSender)->send($phone, "Код: $code");
     }
   }

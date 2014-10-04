@@ -1,5 +1,3 @@
-Ngn.DdoTypeSound = {};
-
 // @requiresBefore i/js/jwplayer/jwplayer.js
 
 jwplayer.key = "Mly7dc8S4bwy8h+wBjk4qOlr2ZgjAkDgqpHC9A==";

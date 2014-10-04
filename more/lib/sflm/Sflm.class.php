@@ -73,7 +73,8 @@ class Sflm {
     return Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
   }
 
-  static function frontendName() {
+  static function frontendName($strict = false) {
+    if ($strict and !self::$frontendName) throw new Exception('Frontend name not defined');
     return self::$frontendName ? : false;
   }
 
