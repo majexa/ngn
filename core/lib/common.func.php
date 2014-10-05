@@ -41,7 +41,6 @@ function pr($var, $html = true, $trace = true) {
 }
 
 function prr($var, $html = true) {
-  die2(2);
   pr($var, $html, false);
 }
 

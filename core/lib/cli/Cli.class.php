@@ -77,7 +77,7 @@ class Cli {
       if ($rowIsEmpty($n)) break;
       for ($i = 0; $i < count($columns); $i++) {
         $s = str_pad(isset($columns[$i][$n]) ? $columns[$i][$n] : '', $width[$i] + 5);
-        if ($highlightFirstRow and $n == 0) $s = O::get('CliColors')->getColoredString($s, 'yellow');
+        if ($highlightFirstRow and $n == 0) $s = O::get('CliColors')->getColoredString($s, 'brown');
         $r .= $s;
       }
       $r .= "\n";
