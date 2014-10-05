@@ -90,10 +90,10 @@ new Ngn.Grid({
     <td class="tools loader">
       <div class="dragBox"></div>
       <? if ($v['editable']) { ?>
-      <a class="iconBtn delete" title="<?= LANG_DELETE ?>"
+      <a class="iconBtn delete" title="<?= Lang::get('delete') ?>"
          href="<?= $this->getPath() ?>?a=delete&id=<?= $v['id'] ?>"
         ><i></i></a>
-      <a class="iconBtn edit" title="<?= LANG_EDIT ?>"
+      <a class="iconBtn edit" title="<?= Lang::get('edit') ?>"
          href="<?= $this->getPath() ?>?a=edit&id=<?= $v['id'] ?>"><i></i></a>
       <?
     }
@@ -129,5 +129,5 @@ new Ngn.Grid({
 }
 else {
   ?>
-<p><?= LANG_NO_FIELDS ?>. <a href="<?= $this->getPath() ?>?a=new"><?= LANG_CREATE ?>?</a></p>
+<p><?= Lang::get('noFields') ?>. <a href="<?= $this->getPath() ?>?a=new"><?= Lang::get('create') ?>?</a></p>
 <? }*/ ?>

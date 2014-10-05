@@ -2,9 +2,9 @@
 <script>
 function swtchPass() {
   if (swtch('passBlock')) {
-    $('swtchPassLink').innerHTML = '<?= LANG_DO_NOT_CHANGE_PASS ?>';
+    $('swtchPassLink').innerHTML = '<?= Lang::get('doNotChangePass') ?>';
   } else {
-    $('swtchPassLink').innerHTML = '<?= LANG_CHANGE_PASS ?>';
+    $('swtchPassLink').innerHTML = '<?= Lang::get('changePass') ?>';
     $('pass').value = '';
   }
 }
@@ -19,23 +19,23 @@ function swtchPass() {
       <div class="info"><i></i>Данные изменены успешно</div>
     <? } ?>
     <? if ($d['action'] != 'new') { ?>
-    <p><a href="#" onclick="swtchPass(); return false;" id="swtchPassLink"><?= LANG_CHANGE_PASS ?></a></p>
+    <p><a href="#" onclick="swtchPass(); return false;" id="swtchPassLink"><?= Lang::get('changePass') ?></a></p>
     <div style="display:none;" id="passBlock">
       <p>
-        <b><?= LANG_PASSWORD ?>:</b> (пароль отображается в открытом виде!)<br />
+        <b><?= Lang::get('password') ?>:</b> (пароль отображается в открытом виде!)<br />
         <input type="text" name="pass" id="pass" />
       </p>
     </div>
     <? } ?>
-    <p><b><?= LANG_LOGIN ?>:</b><br />
+    <p><b><?= Lang::get('login') ?>:</b><br />
       <input type="text" name="login" value="<?= $u['login']?>" /></p>
     <? if ($d['action'] == 'new') { ?>
-      <p><b><?= LANG_PASSWORD ?>:</b><br />
+      <p><b><?= Lang::get('password') ?>:</b><br />
       <input type="text" name="pass" id="pass" /></p>
     <? } ?>
-    <p><b><?= LANG_EMAIL ?>:</b><br />
+    <p><b><?= Lang::get('email') ?>:</b><br />
     <input type="text" name="email" value="<?= $u['email']?>" style="width:200px" /></p>
-    <input type="submit" value="<?= LANG_SAVE ?>" style="width:150px;height:30px;" />
+    <input type="submit" value="<?= Lang::get('save') ?>" style="width:150px;height:30px;" />
   </div>
   <div class="col">
     <? if ($d['action'] == 'edit') { ?>

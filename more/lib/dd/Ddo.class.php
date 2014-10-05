@@ -455,7 +455,7 @@ class Ddo {
       'type' => 'switcher',
       'on'   => $item['active']
     ];
-    if (!empty($opt['canMove'])) $r['tools']['move'] = LANG_MOVE;
+    if (!empty($opt['canMove'])) $r['tools']['move'] = Lang::get('move');
     if (Config::getVarVar('dd', 'allowEditSystemDates', true)) $r['tools']['editDate'] = 'Редактировать системные даты';
     foreach ($ddo->fields as $f) {
       if (array_key_exists($f['name'], $item)) {

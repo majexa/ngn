@@ -1,6 +1,5 @@
 <?php
 
-Lang::load('admin');
 set_time_limit(70);
 
 class AdminRouter extends Router {
@@ -30,7 +29,9 @@ class AdminRouter extends Router {
       redirect('admin');
       return;
     }
-    if (/*Auth::get('id') and */isset($this->req->params[1])) {
+    if ( /*Auth::get('id') and */
+    isset($this->req->params[1])
+    ) {
       $this->module = $this->req->params[1];
       $this->moduleSubfolder = '/'.$this->module;
     }
@@ -50,18 +51,20 @@ class AdminRouter extends Router {
     $commonClass = ClassCore::nameToClass('CtrlCommon', $this->module);
     if (class_exists($adminClass)) {
       return new $adminClass($this);
-    } elseif (class_exists($commonClass)) {
+    }
+    elseif (class_exists($commonClass)) {
       return new $commonClass($this);
-    } else {
+    }
+    else {
       throw new NotLoggableError("Module '{$this->module}' not found. class '$adminClass'");
     }
   }
 
   protected function auth() {
     Auth::$errorsText = [
-      Auth::ERROR_AUTH_NO_LOGIN        => LANG_AUTH_NO_LOGIN,
-      Auth::ERROR_AUTH_USER_NOT_ACTIVE => LANG_AUTH_USER_NOT_ACTIVE,
-      Auth::ERROR_AUTH_WRONG_PASS      => LANG_AUTH_WRONG_PASS
+      Auth::ERROR_AUTH_NO_LOGIN        => Lang::get('auth.noLogin'),
+      Auth::ERROR_AUTH_USER_NOT_ACTIVE => Lang::get('auth.userNotActive'),
+      Auth::ERROR_AUTH_WRONG_PASS      => Lang::get('auth.wrongPass')
     ];
     parent::auth();
   }

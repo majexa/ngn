@@ -14,9 +14,9 @@
 <? foreach ($d['msgs'] as $k => $v) { ?>
   <tr class="<?= $v['viewed'] ? '' : 'notViewed' ?>">
     <td>
-      <a class="iconBtn delete" title="<?= LANG_DELETE ?>"
+      <a class="iconBtn delete" title="<?= Lang::get('delete') ?>"
         href="<?= $this->getPath() ?>?a=delete&id=<?= $v['id'] ?>"
-        onclick="if (confirm('<?= LANG_ARE_YOU_SURE ?>')) window.location = this.href; return false;"><i></i></a>
+        onclick="if (confirm('<?= Lang::get('areYouSure') ?>')) window.location = this.href; return false;"><i></i></a>
     </td>
     <td>
       <?= $v['text']?>
@@ -29,5 +29,5 @@
 <? } ?>
 </table>
 <? } else { ?>
-  <p><?= LANG_YOU_HAVE_NO_MESSAGES ?></p>
+  <p><?= Lang::get('youHaveNoMessages') ?></p>
 <? } ?>

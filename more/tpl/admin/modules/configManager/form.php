@@ -43,5 +43,5 @@
   </li>
 <? } ?>
 </ul>
-<input type="submit" value="<?= LANG_SAVE ?>" />
+<input type="submit" value="<?= Lang::get('save') ?>" />
 </form>

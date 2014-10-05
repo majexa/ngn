@@ -8,7 +8,6 @@ class CtrlCp extends CtrlCommon {
   
   protected function beforeInit() {
     $this->initMainTpl();
-    Lang::load('admin');
     $this->d['name'] = 'cp';
     $this->d['mainContentCssClass'] = 'mainContent';
   }

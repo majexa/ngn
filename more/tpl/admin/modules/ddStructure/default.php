@@ -87,9 +87,9 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
         <? if ($v['pages']) { ?>
           <? foreach ($v['pages'] as $p) { ?>
             <div>
-              <a href="<?= $this->getPath(1).'/pages/'.$p['pageId'].'/editContent' ?>" class="smIcons bordered edit" title="<?= LANG_EDIT ?>"><i></i></a>
-              <a href="<?= $this->getPath(1).'/pages/'.$p['pageId'].'/editPage' ?>" class="smIcons bordered settings" title="<?= LANG_SETTING ?>"><i></i></a>
-              <a href="/<?= $p['path'] ?>" target="_blank" class="smIcons bordered link" title="<?= LANG_SHOW ?>"><i></i></a>
+              <a href="<?= $this->getPath(1).'/pages/'.$p['pageId'].'/editContent' ?>" class="smIcons bordered edit" title="<?= Lang::get('edit') ?>"><i></i></a>
+              <a href="<?= $this->getPath(1).'/pages/'.$p['pageId'].'/editPage' ?>" class="smIcons bordered settings" title="<?= Lang::get('setting') ?>"><i></i></a>
+              <a href="/<?= $p['path'] ?>" target="_blank" class="smIcons bordered link" title="<?= Lang::get('show') ?>"><i></i></a>
               <?php /* Сделать тут выпадающую подсказку на которой был бы написан путь */ ?>
               <small class="tooltip" title="<?= $this->enumDddd($p['pathData'], '$title', ' / ') ?>"><?= $p['title'] ?></small>
               <div class="clear"><!-- --></div>

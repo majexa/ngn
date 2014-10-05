@@ -113,7 +113,7 @@ abstract class CtrlAdmin extends CtrlCp {
     }
     $this->d['adminModuleTitle'] = AdminModule::getProperty($this->getName(), 'title');
     $this->d['adminModule'] = $this->getName();
-    if (!$this->d['adminModuleTitle']) $this->d['adminModuleTitle'] = LANG_HOME;
+    if (!$this->d['adminModuleTitle']) $this->d['adminModuleTitle'] = Lang::get('home');
   }
 
   protected function initTopLinks() {
@@ -132,13 +132,13 @@ abstract class CtrlAdmin extends CtrlCp {
     $links[] = [
       'link'   => $this->tt->getPathRoot(),
       'class'  => 'site',
-      'title'  => LANG_SITE,
+      'title'  => Lang::get('site'),
       'target' => '_blank'
     ];
     $links[] = [
       'link'  => $this->tt->getPath().'?logout=1',
       'class' => 'logout',
-      'title' => LANG_EXIT
+      'title' => Lang::get('exit')
     ];
     $this->setTopLinks($links);
   }

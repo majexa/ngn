@@ -5,7 +5,7 @@
     Сообщение пользователю <a href="<?= $this->getUserPath($d['toUser']['id'])?>"><?= $d['toUser']['login'] ?></a>:<br />
     <input type="hidden" name="user" value="<?= $d['toUser']['id'] ?>" />
   <? } else { ?>
-    <p><?= Lang::get('sendTo') ?>: <small class="gray">(<?= Lang::get('findUser') ?>)</small></p>
+    <p><?= sendTo ?>: <small class="gray">(<?= findUser ?>)</small></p>
     <p><? $this->tpl('common/autocompleter', ['name' => 'user']) ?></p>
   Текст сообщения:<br>
   <? } ?>
