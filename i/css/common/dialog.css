@@ -231,7 +231,7 @@ display: block;
 text-align: center;
 padding-right: 25px;
 padding-bottom: 4px;
-border-bottom: 1px #ccc dashed;
+border-bottom: 1px solid #EFEFEF;
 }
 .dialog-tabs .md-title-text {
 border-bottom: 0px;

@@ -2,6 +2,19 @@
 
 <?= Config::getVarVar('adminExtras', 'homeHtml', true) ?>
 
+<?/*
+<script>
+
+  new Ngn.Dialog.RequestForm({
+    title: 'Тип поля',
+    url: '/god/ddField/shop?a=json_selectType',
+    width: 610,
+    height: 400
+  });
+
+</script>
+*/?>
+
 <hr/>
 
 <div class="col">

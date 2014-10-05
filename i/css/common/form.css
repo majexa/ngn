@@ -308,10 +308,15 @@ padding-right: 15px;
 white-space: nowrap;
 display: inline-block;
 }
+.apeform .checkbox label,
+.apeform .radio label,
+.apeform .treeCheckbox label {
+border-bottom: 1px dotted transparent;
+}
 .apeform .checkbox:hover label,
 .apeform .radio:hover label,
 .apeform .treeCheckbox:hover label {
-border-bottom: 1px dotted #000;
+border-color: #000;
 cursor: pointer;
 }
 
