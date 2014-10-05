@@ -1,9 +1,9 @@
 <script>
 function swtchPass() {
   if (swtch('passBlock')) {
-    $('swtchPassLink').innerHTML = '<?= LANG_DO_NOT_CHANGE_PASS ?>';
+    $('swtchPassLink').innerHTML = '<?= Lang::get('doNotChangePass') ?>';
   } else {
-    $('swtchPassLink').innerHTML = '<?= LANG_CHANGE_PASS ?>';
+    $('swtchPassLink').innerHTML = '<?= Lang::get('changePass') ?>';
     $('pass').set('value', '');
   }
 }
@@ -35,26 +35,26 @@ font-size: 17px;
       <div class="info"><i></i>Данные изменены успешно</div>
     <? } ?>
     <? if ($d['action'] != 'new') { ?>
-    <p><a href="#" onclick="swtchPass(); return false;" id="swtchPassLink"><?= LANG_CHANGE_PASS ?></a></p>
+    <p><a href="#" onclick="swtchPass(); return false;" id="swtchPassLink"><?= Lang::get('changePass') ?></a></p>
     <div style="display:none;" id="passBlock">
       <p>
-        <b><?= LANG_PASSWORD ?>:</b><br />
+        <b><?= Lang::get('password') ?>:</b><br />
         <input type="text" name="pass" id="pass" />
       </p>
     </div>
     <? } ?>
-    <p><b><?= LANG_LOGIN ?>:</b><br />
+    <p><b><?= Lang::get('login') ?>:</b><br />
       <input type="text" name="login" id="login" value="<?= $u['login']?>" /></p>
     <? if ($d['action'] == 'new') { ?>
       <p>
-        <b><?= LANG_PASSWORD ?>:</b> (пароль отображается в открытом виде!)<br />
+        <b><?= Lang::get('password') ?>:</b> (пароль отображается в открытом виде!)<br />
         <input type="text" name="pass" id="pass" />
         <input type="button" value="Сгенерировать пароль" id="genPass" />
       </p>
     <? } ?>
-    <p><b><?= LANG_EMAIL ?>:</b><br />
+    <p><b><?= Lang::get('email') ?>:</b><br />
     <input type="text" name="email" value="<?= $u['email']?>" style="width:200px" /></p>
-    <input type="submit" value="<?= $d['action'] == 'new' ? LANG_CREATE : LANG_SAVE ?>" style="width:150px;height:30px;" />
+    <input type="submit" value="<?= $d['action'] == 'new' ? Lang::get('create') : Lang::get('save') ?>" style="width:150px;height:30px;" />
   </div>
   <div class="col">
     <? if ($d['action'] == 'edit') { ?>

@@ -14,7 +14,7 @@
   <p><b>Имя структуры<span class="required">*</span>:</b></p>
   <input name="name" type="text" value="<?= $d['name'] ?>" class="required" style="width:300px;" maxlength="255" />
   <p style="margin-top:5px"><small>Только латинские символы</small></p>
-  <p style="margin-top:15px"><input type="submit" value="<?= $d['action'] == 'edit' ? LANG_SAVE : LANG_CREATE ?>" style="width: 150px; height: 40px;"></p>
+  <p style="margin-top:15px"><input type="submit" value="<?= $d['action'] == 'edit' ? Lang::get('save') : Lang::get('create') ?>" style="width: 150px; height: 40px;"></p>
   </div>
   <div class="col">
   <p>
@@ -50,7 +50,7 @@
   </p>
 </div>
 <div class="col">
-  <p><b><?= LANG_DESCRIPTION ?>:</b></p>
+  <p><b><?= Lang::get('description') ?>:</b></p>
   <textarea name="descr" style="width:300px; height:150px;"><?= $d['descr'] ?></textarea>
 </div>
 

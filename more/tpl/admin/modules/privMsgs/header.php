@@ -1,7 +1,7 @@
 <div class="navSub iconsSet">
-  <a href="<?= $this->getPath(2) ?>" class="list"><i></i><?= LANG_MESSAGES ?></a>
+  <a href="<?= $this->getPath(2) ?>" class="list"><i></i><?= Lang::get('messages') ?></a>
   <a href="<?= $this->getPath(2) ?>?a=clear" class="delete"
-    onclick="if (confirm('<?= LANG_DELETE_MSGS_CONFIRM ?>')) window.location = this.href; return false;"><i></i><?= LANG_DELETE_ALL ?></a>
+    onclick="if (confirm('<?= Lang::get('deleteMsgsConfirm') ?>')) window.location = this.href; return false;"><i></i><?= Lang::get('deleteAll') ?></a>
   <a href="<?= $this->getPath(2) ?>/sendPage" class="privMsgs"><i></i>Написать</a>
   <div class="clear"><!-- --></div>
 </div>
