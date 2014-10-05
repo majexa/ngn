@@ -25,6 +25,12 @@ class TestRunnerLib extends TestRunnerNgn {
     });
   }
 
+  function help() {
+    return array_values(array_map(function($class) {
+      return ClassCore::classToName('Test', $class);
+    },$this->getClasses()));
+  }
+
   /**
    * Запускает все тесты указанной библиотеки
    */

@@ -84,9 +84,10 @@ TEXT
   }
 
   function _getVisibleMethods($class) {
-    return array_filter($this->_getMethods($class), function(ReflectionMethod $method) {
+    return array_values(array_filter($this->_getMethods($class), function(ReflectionMethod $method) {
+      if ($method->name == 'help') return false;
       return $method->name[0] != '_';
-    });
+    }));
   }
 
   protected $separateParentMethods = false;

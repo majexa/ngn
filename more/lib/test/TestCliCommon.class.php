@@ -17,7 +17,13 @@ class TestCliCommon {
    * Отображает все, существующие в среде тесты
    */
   function lst() {
-    $columns = [[],[]];
+
+    $this->getTestLibs();
+
+
+    //return;
+
+    $columns = [[],[],[],[]];
     $columns[0][] = 'tst proj g {name}:';
     foreach ((new TestRunnerProject('dummy'))->_g() as $class) {
       $columns[0][] = ClassCore::classToName('Test', $class);
@@ -26,7 +32,61 @@ class TestCliCommon {
     foreach ((new TestRunnerNgn)->_getClasses() as $class) {
       $columns[1][] = ClassCore::classToName('Test', $class);
     }
-    print Cli::columns($columns);
+    /*
+    $n = 2;
+    foreach ($this->getTestLibs() as $name) {
+      $columns[$n][] = "tst lib $name";
+      foreach ((new TestRunnerLib(NGN_ENV_PATH.'/'.$name))->_getClasses() as $class) {
+        $columns[1][] = ClassCore::classToName('Test', $class);
+      }
+      $n++;
+    }
+
+    foreach ($this->getTestPlibs() as $name) {
+      $columns[$n][] = "tst plib $name";
+      foreach ((new TestRunnerLib(NGN_ENV_PATH.'/'.$name))->_getClasses() as $class) {
+        $columns[1][] = ClassCore::classToName('Test', $class);
+      }
+      $n++;
+    }
+
+    //$columns[3][] ='tst lib projectName $name';
+    //$this->getTestLibs()
+    //$this->getTestPlibs()
+    //new TestRunnerLib();
+    */
+
+    print Cli::columns($columns, true);
+  }
+
+  /**
+   * Возвращает имена корневых библиотек имеющих тесты
+   */
+  protected function _getTestLibs() {
+    $r = [];
+    foreach (glob(NGN_ENV_PATH.'/*') as $f) {
+      $name = basename($f);
+      if ($name == 'run') continue;
+      if (Dir::getFilesR("$f/lib", 'Test*')) {
+        $r[] = $name;
+      }
+    }
+    return $r;
+  }
+
+  protected function getTestLibs() {
+    return array_filter($this->_getTestLibs(), function($name) {
+      return !file_exists(NGN_ENV_PATH."/$name/projectLib");
+    });
+  }
+
+  /**
+   * Возвращает имена корневых библиотек имеющих тесты
+   */
+  protected function getTestPlibs() {
+    return array_filter($this->_getTestLibs(), function($name) {
+      return file_exists(NGN_ENV_PATH."/$name/projectLib");
+    });
   }
 
   /**

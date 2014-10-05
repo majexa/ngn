@@ -47,12 +47,26 @@ abstract class CliHelpArgs extends CliHelp {
   protected function _run(CliArgs $args) {
     $refl = (new ReflectionClass($args->class));
     if (($constructor = $refl->getConstructor()) and ($_constructorParams = $constructor->getParameters())) {
-      $constructorParams = array_slice($args->params, 0, count($_constructorParams));
-      $params = array_slice($args->params, count($_constructorParams));
-      $obj = $refl->newInstanceArgs($constructorParams);
-      return call_user_func_array([$obj, $args->method], $params);
+      // есть параметры в конструкторе
+      $requiredParametersCount = $constructor->getNumberOfRequiredParameters();
+      $hasOptionalParams = (bool)(count($_constructorParams) - $requiredParametersCount);
+      if ($hasOptionalParams and isset($args->params[$requiredParametersCount]) and $args->params[$requiredParametersCount] == 'help') {
+        // help
+        $constructorParams = array_slice($args->params, 0, $requiredParametersCount);
+        $obj = $refl->newInstanceArgs($constructorParams);
+        foreach ($obj->help() as $cmd) {
+          print $this->runner().' '.$this->class2name($args->class).' '.implode(' ', $constructorParams).' '.$cmd."\n";
+        }
+      } else {
+        // action
+        $constructorParams = array_slice($args->params, 0, count($_constructorParams));
+        $params = array_slice($args->params, count($_constructorParams));
+        $obj = $refl->newInstanceArgs($constructorParams);
+        return call_user_func_array([$obj, $args->method], $params);
+      }
     }
     else {
+      // нет
       if (!$this->check($args)) return false;
       return call_user_func_array([new $args->class, $args->method], $args->params);
     }

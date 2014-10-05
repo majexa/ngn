@@ -31,7 +31,7 @@ module.exports = new Class({
       for (var i = 0; i < trace.length; i++) {
         t += trace[i].file + ':' + trace[i].line + "\n";
       }
-      console.debug(msg + "\n" + t + "--");
+      console.debug(msg + "\n" + t);
       this.exit();
     });
     this.casper.on('remote.message', function(message) {

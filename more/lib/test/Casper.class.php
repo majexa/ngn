@@ -24,7 +24,8 @@ class Casper {
         print $s;
       }
       if (preg_match('/[A-Z][a-z]+Error: .*/s', $buffer, $m)) {
-        throw new Exception($m[0]);
+        die2(trim($m[0]));
+        throw new Exception(trim($m[0]));
       }
     }
   }
