@@ -1,13 +1,13 @@
 <?php
 
 return [
-  'core' => [
-    'title' => 'Core',
-    'static' => true, 
+  'core'     => [
+    'title'  => 'Core',
+    'static' => true,
     'fields' => [
-      'DO_NOT_LOG' => [
-        'title' => 'Не вести логи', 
-        'type' => 'bool'
+      'DO_NOT_LOG'   => [
+        'title' => 'Не вести логи',
+        'type'  => 'bool'
       ],
       /*
       'LOG_OUTPUT' => array(
@@ -15,29 +15,29 @@ return [
         'type' => 'bool',
         'default' => false
       ),
-      */ 
-      'IS_DEBUG' => [
-        'title' => 'Отладка', 
-        'type' => 'bool',
+      */
+      'IS_DEBUG'     => [
+        'title'   => 'Отладка',
+        'type'    => 'bool',
         'default' => false
-      ], 
-      'DATA_CACHE' => [
-        'title' => 'Кеш данных', 
-        'type' => 'bool',
+      ],
+      'DATA_CACHE'   => [
+        'title'   => 'Кеш данных',
+        'type'    => 'bool',
         'default' => false
       ],
       'CACHE_METHOD' => [
-        'title' => 'Метод кэширования', 
-        'type' => 'select',
+        'title'   => 'Метод кэширования',
+        'type'    => 'select',
         'default' => 'File',
         'options' => [
-          'File' => 'Файлы',
+          'File'      => 'Файлы',
           'Memcached' => 'Memcached'
         ]
       ],
-      'PROJECT_KEY' => [
-        'title' => 'Ключ проекта',
-        'required' => true 
+      'PROJECT_KEY'  => [
+        'title'    => 'Ключ проекта',
+        'required' => true
       ]
       /*
       'IS_MEMCACHED' => array(
@@ -48,36 +48,41 @@ return [
       */
     ]
   ],
-  'more' => [
-    'title' => 'More',
-    'static' => true, 
+  'more'     => [
+    'title'  => 'More',
+    'static' => true,
     'fields' => [
-      'SITE_DOMAIN' => [
+      'SITE_DOMAIN'              => [
         'title' => 'Домен',
       ],
-      'DEBUG_STATIC_FILES' => [
-        'title' => 'Отладка статических файлов (кеш выключен)', 
-        'type' => 'bool',
+      'LANG'                     => [
+        'title'   => 'Язык',
+        'type'    => 'select',
+        'options' => ['ru', 'en']
+      ],
+      'DEBUG_STATIC_FILES'       => [
+        'title' => 'Отладка статических файлов (кеш выключен)',
+        'type'  => 'bool',
       ],
       'FORCE_STATIC_FILES_CACHE' => [
         'title' => 'Выключить кэширование статических файлов',
-        'type' => 'bool',
+        'type'  => 'bool',
       ],
-      'TEMPLATE_DEBUG' => [
-        'title' => 'Отладка шаблонов', 
-        'type' => 'bool',
+      'TEMPLATE_DEBUG'           => [
+        'title' => 'Отладка шаблонов',
+        'type'  => 'bool',
       ],
-      'JSON_DEBUG' => [
-        'title' => 'Отладка JSON', 
-        'type' => 'bool',
+      'JSON_DEBUG'               => [
+        'title' => 'Отладка JSON',
+        'type'  => 'bool',
       ],
-      'SESSION_EXPIRES' => [
+      'SESSION_EXPIRES'          => [
         'title' => 'Время жизни сессии',
-        'type' => 'expires',
+        'type'  => 'expires',
       ],
-      'ALLOW_GOD_MODE' => [
-        'title' => 'Позволить режим Бога', 
-        'type' => 'bool',
+      'ALLOW_GOD_MODE'           => [
+        'title' => 'Позволить режим Бога',
+        'type'  => 'bool',
       ],
       /**
        * Номер первого параметра в строке запроса (начиная с нуля)
@@ -85,62 +90,62 @@ return [
        * http://site.com/folder/subfolder/, то номер первого параметра
        * должен быть 2
        */
-      'FIRST_URL_PARAM_N' => [
+      'FIRST_URL_PARAM_N'        => [
         'title' => 'Номер первого параметра в строке запроса',
-        'type' => 'num',
+        'type'  => 'num',
       ],
     ]
   ],
-  'site' => [
-    'title' => 'Сайт', 
-    'static' => true, 
+  'site'     => [
+    'title'  => 'Сайт',
+    'static' => true,
     'fields' => [
-      'SITE_TITLE' => [
-        'title' => 'Название проекта',
-        'default' => 'Rename project!',
+      'SITE_TITLE'      => [
+        'title'    => 'Название проекта',
+        'default'  => 'Rename project!',
         'required' => true
       ],
-      'ALLOW_SEND' => [
+      'ALLOW_SEND'      => [
         'title' => "Разрешена отправка email'a",
-        'type' => 'bool',
+        'type'  => 'bool',
       ],
-      'JS_REDIRECT' => [
-        'title' => 'Java-script редирект вместо HTTP-редиректа',
-        'type' => 'bool',
+      'JS_REDIRECT'     => [
+        'title'    => 'Java-script редирект вместо HTTP-редиректа',
+        'type'     => 'bool',
         'required' => true
       ],
-      'LAST_DB_PATCH' => [
-        'title' => '№ последнего примененного патча БД', 
-        'type' => 'num'
-      ], 
+      'LAST_DB_PATCH'   => [
+        'title' => '№ последнего примененного патча БД',
+        'type'  => 'num'
+      ],
       'LAST_FILE_PATCH' => [
-        'title' => '№ последнего примененного патча файлов', 
-        'type' => 'num'
-      ], 
-    ]////////////////// ================ //////////////////
-  ], 
+        'title' => '№ последнего примененного патча файлов',
+        'type'  => 'num'
+      ],
+    ]
+    ////////////////// ================ //////////////////
+  ],
   'database' => [
-    'title' => 'База данных', 
-    'static' => true, 
+    'title'  => 'База данных',
+    'static' => true,
     'fields' => [
-      'DB_HOST' => [
+      'DB_HOST'    => [
         'title' => 'Хост'
-      ], 
-      'DB_NAME' => [
+      ],
+      'DB_NAME'    => [
         'title' => 'Имя базы'
-      ], 
-      'DB_USER' => [
+      ],
+      'DB_USER'    => [
         'title' => 'Пользователь'
-      ], 
-      'DB_PASS' => [
+      ],
+      'DB_PASS'    => [
         'title' => 'Пароль',
-        'type' => 'password'
+        'type'  => 'password'
       ],
       'DB_LOGGING' => [
         'title' => 'Логировать SQL-запросы',
-        'type' => 'bool'
-      ], 
+        'type'  => 'bool'
+      ],
     ]
   ],
-  ]
-;
+];

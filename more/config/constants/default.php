@@ -1,7 +1,7 @@
 <?php
 
 setConstant('DEBUG_STATIC_FILES', false);
-//setConstant('FORCE_STATIC_FILES_CACHE', false);
+setConstant('FORCE_STATIC_FILES_CACHE', false);
 setConstant('TEMPLATE_DEBUG', false);
 setConstant('JSON_DEBUG', false);
 setConstant('SESSION_EXPIRES', 2592000);

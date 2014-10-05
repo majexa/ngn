@@ -16,23 +16,7 @@ $enable = [
 ];
 
 return [
-  'lang-admin-en'          => [
-    'type' => 'hash'
-  ],
-  // Стандартные 
-  'lang'                   => [
-    'title'  => 'Языки',
-    'fields' => [
-      'admin' => [
-        'title'   => 'Язык панели управления',
-        'type'    => 'select',
-        'options' => [
-          'ru' => 'Русский',
-          'en' => 'Английский'
-        ]
-      ]
-    ]
-  ],
+  // Стандартные
   'adminExtras'            => [
     'title'  => 'Админ: дополнения',
     'fields' => [
