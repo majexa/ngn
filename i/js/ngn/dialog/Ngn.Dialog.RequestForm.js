@@ -136,6 +136,7 @@ Ngn.Dialog.RequestForm = new Class({
   options: {
     autoSave: false,
     formEvents: false
+    //cacheRequest: false
   },
 
   _submit: function() {

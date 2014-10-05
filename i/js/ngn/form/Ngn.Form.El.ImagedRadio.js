@@ -1,13 +1,23 @@
 Ngn.Form.El.ImagedRadio = new Class({
   Extends: Ngn.Form.El,
 
+  options: {
+    maxLableLength: 10,
+    generateImagesCss: true
+  },
+
   init: function() {
+    //if (this.options.generateImagesCss)
+      generateImagesCss(this);
     var elements = this.eRow.getElements('.radio');
     if (!elements.length) return;
     var items = [], n = 0, selectedN = false;
     elements.each(function(eWrapper) {
       var eLabel = eWrapper.getElement('label');
-      eLabel.set('html', eLabel.get('html').substr(0, 10));
+      if (eLabel.get('html').length > this.options.maxLableLength) {
+        eWrapper.set('title', eLabel.get('html'));
+        eLabel.set('html', eLabel.get('html').substr(0, this.options.maxLableLength));
+      }
       var eInput = eWrapper.getElement('input');
       items[n] = [ eWrapper, eInput ];
       eWrapper.store('n', n);

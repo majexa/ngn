@@ -4,10 +4,16 @@ display: none;
 .type_imagedRadio .radio {
 border: 1px solid #EFEFEF;
 border-radius: 4px;
-padding: 2px 4px;
+padding: 4px 4px;
 margin-right: 5px;
 margin-bottom: 5px;
 text-align: center;
+}
+.type_imagedRadio label {
+display: inline-block;
+}
+.type_imagedRadio .marker {
+background: no-repeat center center;
 }
 .type_imagedRadio .radio:hover {
 background-color: #FFF4BF;

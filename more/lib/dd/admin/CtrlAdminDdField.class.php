@@ -41,7 +41,6 @@ class CtrlAdminDdField extends CtrlAdmin {
   }
 
   function action_default() {
-    //Sflm::frontend('js')
     $this->im->items->cond->addF('strName', $this->strName);
     $this->d['items'] = $this->im->items->getItems();
     $this->setPageTitle('Редактирование полей структуры «'.$this->d['strData']['title'].'»');
@@ -132,6 +131,10 @@ class CtrlAdminDdField extends CtrlAdmin {
   function action_deleteAll() {
     $this->im->deleteFields();
     $this->redirect();
+  }
+
+  function action_json_selectType() {
+    return $this->jsonFormAction(new FormDdFieldType);
   }
 
 }
