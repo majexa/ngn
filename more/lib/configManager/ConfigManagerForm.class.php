@@ -5,18 +5,22 @@ class ConfigManagerForm extends Form {
   protected $configType, $configName, $configValues, $configStruct, $configFields, $configDefaultData, $alert, $noRootKeys = false;
 
   /**
-   * @param string  Тип конфигурации (vars/constants)
-   * @param string  Имя конфигурационной группы (admins/database/emails/...)
+   * @param string $type Тип конфигурации (vars/constants)
+   * @param string $name Имя конфигурационной группы (admins/database/emails/...)
    */
   function __construct($type, $name) {
     $type = str_replace('vvv', 'vars', $type);
     $this->configType = $type;
     $this->configName = $name;
-    if ($this->configType == 'vars') $this->configValues = Config::getVar($this->configName, true);
-    else
-      $this->configValues = SiteConfig::getConstants($this->configName, true);
-    if (!$this->configValues) $this->configValues = [];
     $this->initStruct();
+    if ($this->configType == 'vars') $this->configValues = Config::getVar($this->configName, true);
+    else {
+      //die2();
+      foreach (array_keys($this->configStruct['fields']) as $constantName) {
+        $this->configValues[$constantName] = constant($constantName);
+      }
+    }
+    if (!$this->configValues) $this->configValues = [];
     if (count($this->configStruct['fields']) == 1 and Arr::first($this->configStruct['fields'])['type'] == 'fieldList') {
       $this->noRootKeys = Arr::firstKey($this->configStruct['fields']);
       $this->configValues[$this->configName] = $this->configValues;
@@ -27,12 +31,10 @@ class ConfigManagerForm extends Form {
         $this->addVisibilityCondition($cond['headerName'], $cond['condFieldName'], $cond['cond']);
       }
     }
-    //foreach ($this->configStruct['fields'] as $k => $f) $this->isDisabled($k);
     parent::__construct(new Fields(Fields::keyAsName($this->configStruct['fields'])));
   }
 
   static function cmd($code) {
-    //$fieldName
     $p = WEBROOT_PATH;
     return `php $p/cmd.php "$code"`;
   }
@@ -41,12 +43,7 @@ class ConfigManagerForm extends Form {
     if ($this->configType == 'vars') return false;
     $curValue = $this->configValues[$fieldName];
     SiteConfig::replaceConstant($this->configName, $fieldName, 'changed');
-    //$disabled = self::cmd("print($fieldName)") == $curValue;
     SiteConfig::replaceConstant($this->configName, $fieldName, $curValue);
-    //return $disabled;
-    //$curValue
-    //die($fieldName);
-    //$this->update();
   }
 
   protected function init() {
