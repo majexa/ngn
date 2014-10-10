@@ -272,7 +272,13 @@ abstract class CtrlBase {
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
-    Sflm::frontend('js')->processHtml($html, 'CtrlBase::getOutput()');
+    try {
+      Sflm::frontend('js')->processHtml($html, 'page html post-process');
+    } catch (SflmNotExists $e) {
+      print $e->getMessage()."<br>---<pre>".htmlspecialchars($html)."</pre>";
+      die2();
+    }
+
 
     $this->sflmStore();
     $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
@@ -415,7 +421,7 @@ abstract class CtrlBase {
   }
 
   protected function setDefaultTpl() {
-    if (empty($this->d['tpl'])) $this->d['tpl'] = 'default';
+    if (empty($this->d['tpl'])) $this->d['tpl'] = $this->getName().'/'.$this->action;
     if (empty($this->d['mainTpl'])) $this->d['mainTpl'] = 'main';
   }
 
@@ -704,6 +710,11 @@ abstract class CtrlBase {
         'header' => $header,
         'items'  => $items
       ]);
+  }
+
+  static function debug($d) {
+    unset($d['controller']);
+    die2($d);
   }
 
 }

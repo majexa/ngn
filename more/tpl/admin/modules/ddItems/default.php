@@ -21,6 +21,6 @@
       toolActions: Ngn.Grid.toolActions,
       isSorting: <?= Arr::jsValue(!empty($d['settings']['enableManualOrder'])) ?>
     };
-    Ngn.DdGrid.Admin.grid = new Ngn.DdGrid.Admin.factory(Ngn.getParam(2), opt).reload();
+    Ngn.DdGrid.Admin.grid = new Ngn.DdGrid.Admin.factory('<?= $d['structure']['name'] ?>', opt).reload();
   })();
 </script>

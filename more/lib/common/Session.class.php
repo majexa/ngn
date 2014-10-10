@@ -81,12 +81,12 @@ class Session {
   }
 
   static function init() {
+    ini_set('session.gc_maxlifetime', self::$expires);
+    ini_set('session.cookie_lifetime', self::$expires);
     if (!session_id()) session_start();
     return;
     if (self::$started) return;
     //ini_set('session.cookie_domain', SITE_DOMAIN);
-    ini_set('session.gc_maxlifetime', self::$expires);
-    ini_set('session.cookie_lifetime', self::$expires);
 
     /**
      * Если будем определять INI-переменную 'session.cookie_domain', то для доменов

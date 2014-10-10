@@ -69,6 +69,7 @@ class DdFields extends Fields {
   function addField(array $v, $after = false) {
     $v['strName'] = $this->strName;
     $v['dd'] = true;
+    if (!empty($v['settings'])) $v['settings'] = unserialize($v['settings']);
     if (isset($v['active'])) $v['active'] = 1;
     foreach (['system', 'defaultDisallow', 'virtual'] as $k) if (!isset($v[$k])) $v[$k] = 0;
     $this->initFields[$v['name']] = $v;

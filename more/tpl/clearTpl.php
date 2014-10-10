@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
   <meta content="NGN" name="generator"/>
   <title><?= $d['pageHeadTitle'] ?></title>
-  <?= Sflm::frontend('js')->getTags() ?>
+  {sflm}
 </head>
 <body>
 <div class="layout pageName_<?= Misc::name2id($d['page']['name'])?><?= $d['settings']['defaultAction'] == 'blocks' ? ' blocksLayout' : '' ?>">
