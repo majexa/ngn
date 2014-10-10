@@ -125,10 +125,10 @@ class DbModelCore {
   const modeObject = 2;
 
   /**
-   * @param string  Query after FROM keyword
-   * @param array   args
-   * @param integer Mode
-   * ...
+   * @param string $table
+   * @param DbCond $cond
+   * @param int $mode
+   * @return array|null|void
    */
   static function collection($table, DbCond $cond = null, $mode = self::modeArray) {
     $args = func_get_args();

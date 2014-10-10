@@ -36,7 +36,8 @@ class CtrlAdminDdItems extends CtrlAdmin {
   protected $structure;
 
   protected function init() {
-    $this->structure = (new DdStructureItems)->getItemByField('name', $this->getStrName());
+    $this->d['structure'] = $this->structure = (new DdStructureItems)->getItemByField('name', $this->getStrName());
+    Misc::checkEmpty($this->structure, 'structure '.$this->getStrName().' does not exists');
     Sflm::frontend('js')->addClass('Ngn.DdGrid.Admin');
   }
 
@@ -53,7 +54,7 @@ class CtrlAdminDdItems extends CtrlAdmin {
   }
 
   protected function id() {
-    return $this->req->param(4);
+    return $this->req['id'] ?: $this->req->param(4);
   }
 
   function action_edit() {

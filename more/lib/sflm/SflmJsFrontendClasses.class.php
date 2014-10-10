@@ -22,7 +22,7 @@ class SflmJsFrontendClasses extends ArrayAccesseble {
     //  Sflm::output("Skipped adding frontend class '$class' (src: $source). EXISTS");
     //  return false;
     //}
-    Sflm::output("Add frontend class '$class' (src: $source)");
+    Sflm::output("Add frontend class '$class'. src: $source");
     $this->r[] = $class;
     //$this->afterAdd($class);
     return true;
@@ -32,7 +32,7 @@ class SflmJsFrontendClasses extends ArrayAccesseble {
     //$n = 0;
     foreach (SflmJsClasses::parseValidClassesDefinition($code) as $class) {
       if (in_array($class, $this->r)) continue;
-      Sflm::output("Add frontend class '$class' (src: $source)");
+      Sflm::output("Add frontend class '$class'. src: $source");
       $this->r[] = $class;
       //$n++;
     }

@@ -12,6 +12,8 @@
     });
   });
   </script>
+  <?/*
   <script src="http://localhost:888/sux.js"></script>
   <link rel="stylesheet" type="text/css" href="http://localhost:888/sux.css" media="screen, projection" />
+  */?>
 </head>

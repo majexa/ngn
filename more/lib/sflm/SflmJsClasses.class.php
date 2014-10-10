@@ -1,5 +1,7 @@
 <?php
 
+class SflmNotExists extends Exception {}
+
 class SflmJsClasses {
 
   /**
@@ -74,7 +76,7 @@ class SflmJsClasses {
         Sflm::output($err);
         return false;
       }
-      throw new Exception($err);
+      throw new SflmNotExists($err);
     }
     if ($this->frontendClasses->exists($class)) {
       Sflm::output("Class '$class' exists. Skipped. src: $source");

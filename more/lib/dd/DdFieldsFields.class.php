@@ -36,18 +36,14 @@ class DdFieldsFields extends Fields {
         'title' => 'Максимальная длина',
         'help'  => 'Оставьте пустым, если максимальная длина не нужна'
       ],
-      [
-        'type' => 'col'
-      ],
+      ['type' => 'col'],
       [
         'name'     => 'type',
         'title'    => 'Тип',
         'type'     => 'ddFieldType',
         'required' => true
       ],
-      [
-        'type' => 'col'
-      ],
+      ['type' => 'col'],
       [
         'name'  => 'required',
         'title' => 'обязательно для заполнения',
