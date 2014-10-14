@@ -5,10 +5,8 @@ class DbModelCore {
   static $forceCache = true;
 
   /**
-   * @param string $table
-   * @param string|integer $value
-   * @param string $param
-   * @return bool|DbModel
+   * @api
+   * Возвращает db-модель
    */
   static function get($table, $value, $param = 'id') {
     if ($param == 'id' and !$value) return false;
@@ -17,16 +15,28 @@ class DbModelCore {
     return empty($o->r) ? false : $o;
   }
 
+  /**
+   * @api
+   * Возвращает db-модель. Если не существует выбрасывает исключение
+   */
   static function take($table, $value, $param = 'id') {
     if (($r = self::get($table, $value, $param)) === false) throw new Exception('No such model');
     return $r;
   }
 
+  /**
+   * @api
+   * Возвращает класс db-модели
+   */
   static function getClass($table) {
     $class = 'DbModel'.ucfirst($table);
     return class_exists($class) ? $class : 'DbModel';
   }
 
+  /**
+   * @api
+   * Создаёт запись с данными `$data` в таблице `$table`. Если `$filterByFields=true`, данные фильтруются по именам полей
+   */
   static function create($table, array $data, $filterByFields = false) {
     $class = self::getClass($table);
     if ($class == 'DbModel') {
@@ -49,6 +59,10 @@ class DbModelCore {
     }
   }
 
+  /**
+   * @api
+   * Изменяет на строчку с `ID=$id` в таблице `$table` на основе данных `$data`. Если $filterByFields=true, данные фильтруются по именам полей
+   */
   static function update($table, $id, array $data, $filterByFields = false) {
     $class = self::getClass($table);
     if ($class == 'DbModel') {
@@ -63,6 +77,10 @@ class DbModelCore {
 
   static $replaceCreate;
 
+  /**
+   * @api
+   * Если строка с `ID=$id` существует, выполняет `DbModelCore::update()`, иначе `DbModelCore::create()`
+   */
   static function replace($table, $id, array $data, $filterByFields = false) {
     if (self::get($table, $id)) {
       self::update($table, $id, $data, $filterByFields);
@@ -79,6 +97,10 @@ class DbModelCore {
     return $id;
   }
 
+  /**
+   * @api
+   * Удаляет строку
+   */
   static function delete($table, $id) {
     db()->query("DELETE FROM $table WHERE id=?", $id);
     self::cc($table, $id);
@@ -125,10 +147,8 @@ class DbModelCore {
   const modeObject = 2;
 
   /**
-   * @param string $table
-   * @param DbCond $cond
-   * @param int $mode
-   * @return array|null|void
+   * @api
+   * Возвращает набор db-моделей
    */
   static function collection($table, DbCond $cond = null, $mode = self::modeArray) {
     $args = func_get_args();
@@ -146,6 +166,10 @@ class DbModelCore {
     }
   }
 
+  /**
+   * @api
+   * Возвращает количество записей в таблице
+   */
   static function count($table, DbCond $cond = null) {
     $cond = $cond ? $cond->all() : '';
     $key = sha1($table.$cond);

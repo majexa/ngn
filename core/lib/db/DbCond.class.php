@@ -1,6 +1,6 @@
 <?php
 
-db();
+//db();
 
 class DbCond {
 
@@ -87,33 +87,34 @@ class DbCond {
   }
 
   /**
-   * @param   string  filterCond/itemFilterCond
-   * @param   array   array(
+   * @param array $filter [
    *                    'key' => 'asd',
    *                    'value' => 123,
    *                    'table' => 'tt',
    *                    'func' => ...
-   *                  )
+   *                  ]
+   * @return $this
    */
   function addFilter(array $filter) {
     $this->_addFilter('filter', $filter);
     return $this;
   }
 
+  /**
+   * @api
+   * Добавляет фильтр по одному значению
+   *
+   * @param $key
+   * @param $value
+   * @param null $func
+   * @return $this
+   */
   function addF($key, $value, $func = null) {
     if (is_string($value) and strstr($value, ',')) $value = explode(',', $value);
     return $this->addFilter([
       'key'   => $key,
       'value' => $value,
       'func'  => $func
-    ]);
-  }
-
-  function addNotInFilter($key, $value) {
-    return $this->addFilter([
-      'key'   => $key,
-      'value' => $value,
-      'not'   => true
     ]);
   }
 
@@ -161,13 +162,15 @@ class DbCond {
   const strictBoth = 1, strictFrom = 2, strictTo = 3;
 
   /**
-   * Добавляет фильтр по заданому диапозону значений
+   * @api
+   * Добавляет фильтр по диапазону
    *
-   * @param   string  Имя поля таблицы
-   * @param   string /bool   Значение начала диапозона. Если false, не учитывается
-   * @param   string /bool   Значение конца диапозона. Если false, не учитывается
-   * @param   array
-   * @param   bool    Строгое (>) или нестрогое (>=) неравенство
+   * @param string $key
+   * @param string|bool $from Значение начала диапозона. Если false, не учитывается
+   * @param string|bool $to Значение конца диапозона. Если false, не учитывается
+   * @param array $params
+   * @param bool $strict Строгое (>) или нестрогое (>=) неравенство
+   * @return $this
    */
   function addRangeFilter($key, $from, $to = false, array $params = null, $strict = false) {
     $tablePrefix = $this->tablePrefix;
@@ -190,26 +193,78 @@ class DbCond {
 
   public $likeCond = '';
 
+  /**
+   * @api
+   * Добавляет фильтр поиска по маске
+   *
+   * @param $key
+   * @param $text
+   * @return $this
+   */
   function addLikeFilter($key, $text) {
     $this->likeCond = " AND $key LIKE '".mysql_real_escape_string($text)."'";
     return $this;
   }
 
+  /**
+   * @api
+   * Добавляет фильтр по значению NULL
+   *
+   * @param $key
+   * @param bool $isNull
+   */
   function addNullFilter($key, $isNull = false) {
     $this->filters['null'][$key] = $isNull;
     $this->setNullCond();
   }
 
+  /**
+   * @api
+   * Добавляет фильтр "больше чем ..."
+   *
+   * @param $key
+   * @param $from
+   * @param null $func
+   * @param bool $strict
+   */
   function addFromFilter($key, $from, $func = null, $strict = false) {
     $this->addRangeFilter($key, $from, false, $func, $strict);
   }
 
+  /**
+   * @api
+   * Добавляет фильтр "меньше чем ..."
+   *
+   * @param $key
+   * @param $to
+   * @param null $func
+   * @param bool $strict
+   */
   function addToFilter($key, $to, $func = null, $strict = false) {
     $this->addRangeFilter($key, false, $to, $func, $strict);
   }
 
+
   /**
+   * @api
+   * Добавляет фильтр "не входит в ..."
+   *
+   * @param $key
+   * @param $value
+   * @return $this
+   */
+  function addNotInFilter($key, $value) {
+    return $this->addFilter([
+      'key'   => $key,
+      'value' => $value,
+      'not'   => true
+    ]);
+  }
+
+  /**
+   * @api
    * Добавляет фильтр по выражению
+   *
    * @param $key string Имя поля таблицы
    * @param $expr string Экспрешн ( >= LALALA )
    */

@@ -153,7 +153,6 @@ class Db extends DbSimple_Mysql {
 
   function insert($table, array $data, $mode = 0) {
     $word = $mode == self::modeReplace ? 'REPLACE' : 'INSERT';
-    LogWriter::v('sux', [$word.(self::modeInsertIgnore == $mode ? ' IGNORE' : '')." INTO $table SET ?a", $data]);
     return $this->query($word.(self::modeInsertIgnore == $mode ? ' IGNORE' : '')." INTO $table SET ?a", $data);
   }
 

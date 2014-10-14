@@ -174,23 +174,53 @@ class Req extends ArrayAccesseble {
     return Tt()->getUrlDeletedParams($url, $params);
   }
 
+  /**
+   * @api
+   * Возвращает значение параметра $n и проверяет его на `empty()`
+   *
+   * @param $n
+   * @return mixed
+   */
+  function param($n) {
+    return Misc::checkEmpty($this->params[$n], "params[$n]");
+  }
+
+  /**
+   * @api
+   * Возвращает значение `$_REQUEST[$name]` и проверяет его на `isset()`
+   *
+   * @param $name
+   * @return mixed
+   * @throws Exception
+   */
   function rq($name) {
     if (!isset($this->r[$name])) throw new Exception("\$_REQUEST[$name] not defined");
     return $this->r[$name];
   }
 
+  /**
+   * @api
+   * Возвращает значение `$_REQUEST[$name]` и проверяет его на `empty()`
+   *
+   * @param $name
+   * @return mixed
+   * @throws Exception
+   */
   function reqNotEmpty($name) {
     if (empty($this->r[$name])) throw new Exception("\$_REQUEST[$name] can not be empty. URI: ".$_SERVER['REQUEST_URI'].'. r: '.getPrr($this->r));
     return $this->r[$name];
   }
 
+  /**
+   * @api
+   * Возвращает значение `$_REQUEST[$name]` или пустую строку, если не прошла проверка на `empty()`
+   *
+   * @param $name
+   * @return string
+   */
   function reqAnyway($name) {
     if (empty($this->r[$name])) return '';
     return $this->r[$name];
-  }
-
-  function param($n) {
-    return Misc::checkEmpty($this->params[$n], "params[$n]");
   }
 
   function path($offset = 0, $limit = 0) {

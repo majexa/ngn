@@ -11,15 +11,33 @@ abstract class DataManagerAbstract extends Options2 {
   use CallOnce;
 
   /**
+   * @api
+   * Возвращает одну запись по ID
+   *
    * @param $id
    * @return array
    */
   abstract function getItem($id);
 
+  /**
+   * Cоздавёт одну запись и возвращать её уникальный ID
+   *
+   * @return mixed
+   */
   abstract protected function _create();
 
+  /**
+   * Изменяет текущую запись
+   *
+   * @return mixed
+   */
   abstract protected function _update();
 
+  /**
+   * Удаляет текущую запись
+   *
+   * @return mixed
+   */
   abstract protected function _delete();
 
   /**
@@ -103,10 +121,10 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   /**
-   * Используется в вызове из контроллера
-   * Обрабатывает пользовательские данные, преобразовывая их с помощью класса формы
+   * @api
+   * Создает новую запись
    *
-   * @param  array  Данные по умолчанию
+   * @param  array  Данные для _Формы_ по умолчанию
    * @return bool|integer
    */
   function requestCreate(array $default = []) {
@@ -149,17 +167,17 @@ abstract class DataManagerAbstract extends Options2 {
   public $defaultData;
 
   /**
-   * Производит обработку действия с формы перед созданием, создаёт форму, обрабатывает значения полученные в результате её создания
-   * и изменяет значения записи. Последнее делает только в случае если параметр $_data пределен.
-   *
-   * 1) Получает данные, поступившие для апдейта записи либо
-   *    из текщих значений самой записи
-   * 2) Преобразует необходимые значения в вид, необходимый для класса формы
-   * 3) Выполняет создание полей формы для каждого из значений записи. Каждое поле
-   *    соответственно возвращает преобразованное значение. Преобразования значений
-   *    происходит в соответствующих обработчиках формы (функции формата f_fieldName в
-   *    класса формы)
-   * 4) Выполняет функцию апдейта записи
+   * @api
+   * - Получает значения для _Формы_ из записи: `DataManagerAbstract::getItem($id)`;<br>
+   * - Преобразует значения в формат, необходимый для _Формы_;<br>
+   * - Инициализирует _Форму_ и _Элементамы полей_ с преобразованными данными;<br>
+   * - Получает данные из _Формы_;<br>
+   * - Преобразует их в формат источника;<br>
+   * - Вызывает специфичные типам полей экшены;<br>
+   * - Добавляет системные значения;<br>
+   * - Если произошел сабмит _Формы_
+   * - Выполняет апдейт записи;<br>
+   * - Вызывает специфичные типам полей пост-экшены.
    *
    * @param $id
    * @return bool
@@ -181,7 +199,8 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   /**
-   * Возвращает данные в формате формы
+   * @api
+   * Возвращает данные записи в формате _Формы_
    *
    * @param $id
    * @return array
@@ -195,6 +214,12 @@ abstract class DataManagerAbstract extends Options2 {
   protected function beforeFormElementsInit() {
   }
 
+  /**
+   * @api
+   * Вызывается после инициализации _Элементов полей_, но до рендеринга _Формы_.
+   * Таким образом этот метод можно использовать для переопределения опций _Элементов полей_
+   * прямо из _Менеджера данных_.
+   */
   protected function afterFormElementsInit() {
   }
 
@@ -217,11 +242,6 @@ abstract class DataManagerAbstract extends Options2 {
   protected function setFormElementsData(array $data, $valueFormatted = false) {
     $this->beforeFormElementsInit();
     $this->form->valueFormated = $valueFormatted;
-    if (get_class($this->form) == 'DdForm'){
-      //die2(array_keys($this->form->fields->fields));
-      //$this->form->debugElements();
-      //die2('-');
-    }
     $this->form->setElementsData($data);
   }
 
@@ -345,6 +365,10 @@ abstract class DataManagerAbstract extends Options2 {
     $this->update($id, $data);
   }
 
+  /**
+   * @api
+   * Действия перед апдейтов (используйте $this->data)
+   */
   protected function beforeUpdate() {
   }
 

@@ -143,6 +143,12 @@ class Form {
     return $this->defaultData;
   }
 
+  /**
+   * @api
+   * Определяет был ли сабмит этой формы
+   *
+   * @return bool
+   */
   function isSubmitted() {
     if (!$this->fromRequest) return true;
     return $this->req['formId'] and $this->req['formId'] == $this->id();
@@ -177,6 +183,12 @@ class Form {
     $this->hasErrors = true;
   }
 
+  /**
+   * @api
+   * Проверяет был ли сабмит этой формы и прошла ли валидация введёных в неё данных
+   *
+   * @return bool
+   */
   function isSubmittedAndValid() {
     $this->setElementsDataDefault();
     if (!$this->isSubmitted() or !$this->validate()) return false;
@@ -322,6 +334,7 @@ class Form {
   protected $jsInlineDynamic = '';
 
   /**
+   * @api
    * Возвращает HTML формы
    *
    * @return string
@@ -448,6 +461,13 @@ class Form {
     }
   }
 
+  /**
+   * @api
+   * Произваодит валидацию введёных в форму данных
+   *
+   * @return bool
+   * @throws Exception
+   */
   final function validate() {
     if (!$this->isSubmitted()) return false; // throw new Exception('Validation mast be used only with submitting');
     $this->lastError = false;
@@ -591,7 +611,10 @@ class Form {
   protected $_id;
 
   /**
-   * @return string Уникальный идентификатор формы
+   * @api
+   * Возвращает уникальный идентификатор формы
+   *
+   * @return string
    */
   function id() {
     $this->callOnce('initId');

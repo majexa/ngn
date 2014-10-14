@@ -4,7 +4,9 @@ class DdStructuresManager extends DbItemsManager {
 
   protected function afterFormElementsInit() {
     // убираем из списка текущую редактируемую структуру
-    if (($el = $this->form->getElement('filterStrName')) !== false) unset($el->options['options'][$this->defaultData['name']]);
+    if (($el = $this->form->getElement('filterStrName')) !== false) {
+      unset($el->options['options'][$this->defaultData['name']]);
+    }
   }
 
   function __construct() {
@@ -22,6 +24,11 @@ class DdStructuresManager extends DbItemsManager {
         'title'    => 'Имя',
         'type'     => 'ddStructureName',
         'required' => true
+      ],
+      [
+        'name'  => 'descr',
+        'title' => 'Описание',
+        'type'  => 'textarea',
       ]
     ];
     if (Config::getVarVar('dd', 'enableFilters')) {
@@ -56,14 +63,6 @@ class DdStructuresManager extends DbItemsManager {
         'title' => 'разрешить индексацию структуры',
         'type'  => 'bool',
         'help'  => 'Такие структуры, как, например, "Баннеры" не нуждаются в индексации, т.к. поиск по ним не нужен'
-      ],
-      [
-        'type' => 'col'
-      ],
-      [
-        'name'  => 'descr',
-        'title' => 'Описание',
-        'type'  => 'textarea',
       ]
     ]);
     parent::__construct(new DdStructureItems, new Form($fields));
@@ -115,8 +114,8 @@ class DdStructuresManager extends DbItemsManager {
   /**
    * Создает поля по умолчанию необходимые для данного типа структуры
    *
-   * @param   string  Имя структуры
-   * @param   string  Тип структуры
+   * @param string $strName Имя структуры
+   * @param string $type Тип структуры
    */
   protected function createDefaultFields($strName, $type) {
     $o = new DdFieldsManager($strName);

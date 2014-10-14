@@ -9,7 +9,7 @@ class FieldEName extends FieldEText {
   }
   
   protected function validate2() {
-    if (!Misc::validName($this->options['value'])) $this->error = 'Неправильный формат';
+    if (!Misc::validName($this->options['value'])) $this->error('Неправильный формат');
   }
 
 }

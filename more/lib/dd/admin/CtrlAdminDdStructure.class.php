@@ -3,7 +3,6 @@
 class CtrlAdminDdStructure extends CtrlAdmin {
 
   static $properties = [
-    'title' => 'Структуры',
     'onMenu' => true,
     'order' => 30
   ];
@@ -46,3 +45,5 @@ class CtrlAdminDdStructure extends CtrlAdmin {
   }
   
 }
+
+CtrlAdminDdStructure::$properties['title'] = Lang::get('adminModuleDdStructure');
