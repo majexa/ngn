@@ -1,9 +1,10 @@
 <?php
 
+CtrlAdminLogs::$properties['title'] = Lang::get('adminModuleLogs');
+
 class CtrlAdminLogs extends CtrlAdmin {
 
   static $properties = [
-    'title' => 'Логи',
     'order' => 310,
     'onMenu' => true
   ];

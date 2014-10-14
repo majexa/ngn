@@ -213,13 +213,47 @@ class DbSimple_Generic_Database extends DbSimple_Generic_LastError {
   }
 
   /**
-   * mixed select(string $query [, $arg1] [,$arg2] ...)
-   * Execute query and return the result.
+   * Выполняет запрос и возвращает результат в виде массива
+   *
+   * @api select(string $query [, $arg1] [, $arg2] ...)
    */
   function select($query) {
     $args = func_get_args();
     $total = false;
     return $this->_query($args, $total);
+  }
+
+  /**
+   * Алиас для select(). Может быть использована для INSERT или UPDATE запросов
+   *
+   * @api query(string $query [, $arg1] [, $arg2] ...)
+   */
+  function query() {
+    $args = func_get_args();
+    $total = false;
+    return $this->_query($args, $total);
+  }
+
+
+  /**
+   * Возвращает первую строчку из результата запроса.
+   * При ошибках вернёт null и установит последнюю ошибку.
+   * Если запрос вернул пустой результат, метод возвращает пустой массив.
+   * Это удобно при отладке, потому что PHP не выбрасывает NOTICE на выражении
+   * `$row['abc']`, если `$row === null` или `$row === false`.
+   * Но если $row - путой массив NOTICE выбросится.
+   *
+   * @api selectRow(string $query [, $arg1] [,$arg2] ...)
+   *
+   */
+  function selectRow() {
+    $args = func_get_args();
+    $total = false;
+    $rows = $this->_query($args, $total);
+    if (!is_array($rows)) return $rows;
+    if (!count($rows)) return [];
+    reset($rows);
+    return current($rows);
   }
 
   /**
@@ -236,26 +270,9 @@ class DbSimple_Generic_Database extends DbSimple_Generic_LastError {
   }
 
   /**
-   * hash selectRow(string $query [, $arg1] [,$arg2] ...)
-   * Return the first row of query result.
-   * On errors return null and set last error.
-   * If no one row found, return array()! It is useful while debugging,
-   * because PHP DOES NOT generates notice on $row['abc'] if $row === null
-   * or $row === false (but, if $row is empty array, notice is generated).
-   */
-  function selectRow() {
-    $args = func_get_args();
-    $total = false;
-    $rows = $this->_query($args, $total);
-    if (!is_array($rows)) return $rows;
-    if (!count($rows)) return [];
-    reset($rows);
-    return current($rows);
-  }
-
-  /**
-   * array selectCol(string $query [, $arg1] [,$arg2] ...)
-   * Return the first column of query result as array.
+   * Возвращает первую колонку из результата запроса
+   *
+   * @api selectCol(string $query [, $arg1] [,$arg2] ...)
    */
   function selectCol() {
     $args = func_get_args();
@@ -267,9 +284,9 @@ class DbSimple_Generic_Database extends DbSimple_Generic_LastError {
   }
 
   /**
-   * scalar selectCell(string $query [, $arg1] [,$arg2] ...)
-   * Return the first cell of the first column of query result.
-   * If no one row selected, return null.
+   * Возвращает первую ячейку первой колонки результата запроса. Если не выбрано ниодной строки, возвращает null.
+   *
+   * @api selectCell(string $query [, $arg1] [, $arg2] ...)
    */
   function selectCell() {
     $args = func_get_args();
@@ -282,16 +299,6 @@ class DbSimple_Generic_Database extends DbSimple_Generic_LastError {
     if (!is_array($row)) return $row;
     reset($row);
     return current($row);
-  }
-
-  /**
-   * mixed query(string $query [, $arg1] [,$arg2] ...)
-   * Alias for select(). May be used for INSERT or UPDATE queries.
-   */
-  function query() {
-    $args = func_get_args();
-    $total = false;
-    return $this->_query($args, $total);
   }
 
   /**

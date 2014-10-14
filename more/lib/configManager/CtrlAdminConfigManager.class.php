@@ -3,8 +3,7 @@
 class CtrlAdminConfigManager extends CtrlAdmin {
 
   static $properties = [
-    'title'  => 'Конфигурация',
-    'descr'  => 'Управление конфигурационными файлами',
+    //'descr'  => 'Управление конфигурационными файлами',
     'onMenu' => true,
     'order'  => 80
   ];
@@ -54,3 +53,5 @@ class CtrlAdminConfigManager extends CtrlAdmin {
   }
 
 }
+
+CtrlAdminConfigManager::$properties['title'] = Lang::get('adminModuleConfigManager');

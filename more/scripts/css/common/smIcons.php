@@ -64,6 +64,10 @@ foreach ($cords as $class => $c) {
 .smIcons.inline {
 margin-right: 0px;
 }
+.smIcons.inline i {
+vertical-align: middle;
+margin-right: 0px;
+}
 .smIcons.inline i, a.smIcons.inline {
 display: inline-block;
 float: none;

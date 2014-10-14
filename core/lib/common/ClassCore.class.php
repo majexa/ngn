@@ -193,11 +193,12 @@ class ClassCore {
    * @return bool|string
    * @throws Exception
    */
-  static function getDocComment($str, $_tag) {
+  static function getDocComment($str, $_tag = 'title') {
     if ($_tag == 'title') {
       $str = preg_replace('/^\s*\*\s*\n/m', '', $str); // убираем символы коммента
       if (!preg_match_all('/^\s*\*\s+(?!@)([^\n]*)$/m', $str, $m)) return false; // если пустой
       $r = implode(' ', $m[1]);
+      $r = Misc::removeSuffix('*/', $r);
       if (($r = trim($r))) return $r;
       return false;
     }

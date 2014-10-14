@@ -3,7 +3,6 @@
 class CtrlAdminUsers extends CtrlAdmin {
 
   static $properties = [
-    'title'  => 'Пользователи',
     'onMenu' => true
   ];
 
@@ -103,3 +102,5 @@ class CtrlAdminUsers extends CtrlAdmin {
   }
 
 }
+
+CtrlAdminUsers::$properties['title'] = Lang::get('adminModuleUsers');

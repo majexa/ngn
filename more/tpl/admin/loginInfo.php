@@ -2,7 +2,7 @@
   <?= Lang::get('loggedAs') ?>
   <b>
   <? if (AdminModule::isAllowed('profile')) { ?>
-    <a href="<?= $this->getPath(1).'/profile' ?>" class="smIcons edit"><i></i><?= Auth::get('login') ?></a>
+    <a href="<?= $this->getPath(1).'/profile' ?>" class="smIcons inline edit"><i></i><?= Auth::get('login') ?></a>
   <? } else { ?>
     <?= Auth::get('login') ?>
   <? } ?>

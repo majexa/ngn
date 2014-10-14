@@ -11,13 +11,14 @@ return [
   'adminModulePages' => 'Site Sections',
   'adminModulePrivmsgs' => 'Messages',
   'adminModuleProfile' => 'Profile',
-  'adminModuleConfigmanager' => 'Config',
-  'adminModuleDdfield' => 'Fields',
-  'adminModuleDdstructure' => 'Structures',
+  'adminModuleConfigManager' => 'Config',
+  'adminModuleDdField' => 'Fields',
+  'adminModuleDdStructure' => 'Structures',
   'adminModulePrivileges' => 'Privileges',
   'adminModuleSettings' => 'Settings',
   'adminModuleTags' => 'Tags',
   'adminModuleUsers' => 'Users',
+  'adminModuleLogs' => 'Logs',
 
   // Site Modules Properties
   'moduleAuthoritems' => 'Author Items',

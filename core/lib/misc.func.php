@@ -1,10 +1,8 @@
 <?php
 
 function q($q, $print = false, $execute = true) {
-  if ($print)
-    pr($q);
-  if ($execute)
-    return db()->select($q);
+  if ($print) pr($q);
+  if ($execute) return db()->select($q);
 }
 
 function request($k) {
@@ -16,10 +14,9 @@ function params($n = false) {
 }
 
 function ob_get($func, $params) {
-  foreach ($params as &$param)
-    $param = Arr::formatValue($param);
+  foreach ($params as &$param) $param = Arr::formatValue($param);
   ob_start();
-  eval("$func(" . implode(', ', $params) . ");");
+  eval("$func(".implode(', ', $params).");");
   $c = ob_get_contents();
   ob_end_clean();
   return $c;
@@ -48,7 +45,8 @@ function Tt() {
   return O::get('Tt');
 }
 
-function none() {}
+function none() {
+}
 
 function quoting(&$v) {
   $v = "'".mysql_real_escape_string($v)."'";
