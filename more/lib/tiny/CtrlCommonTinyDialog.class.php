@@ -4,7 +4,7 @@ abstract class CtrlCommonTinyDialog extends CtrlCommon {
 
   protected $useParentPlugin = false;
 
-  protected function setDefaultTpl() {
+  protected function initDefaultTpl() {
     $this->d['mainTpl'] = 'tiny/popup/main';
   }
   

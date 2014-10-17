@@ -170,7 +170,7 @@ abstract class CtrlBase {
     $this->addSubControllers();
     $this->initAction();
     if (Auth::$postAuth and !$this->isAjax) redirect(Tt()->getPath(), true);
-    $this->setPostAction();
+    $this->initPostAction();
     $this->setActionParams();
     $this->beforeInit();
     $this->init();
@@ -192,7 +192,7 @@ abstract class CtrlBase {
     $this->beforeAction();
     if (!$this->actionDisabled) {
       $this->actionResult = $this->action();
-      $this->setDefaultTpl();
+      $this->initDefaultTpl();
     }
     $this->afterAction();
     $this->extendTplData();
@@ -415,13 +415,17 @@ abstract class CtrlBase {
   }
 
   // Экшн для формы шаблона
-  protected function setPostAction() {
+  protected function initPostAction() {
     if ($this->action == 'edit' or $this->action == 'update') $this->d['postAction'] = 'update';
     elseif ($this->action == 'new' or $this->action == 'create') $this->d['postAction'] = 'create';
   }
 
-  protected function setDefaultTpl() {
-    if (empty($this->d['tpl'])) $this->d['tpl'] = $this->getName().'/'.$this->action;
+  protected function getDefaultTpl() {
+    return 'default';
+  }
+
+  protected function initDefaultTpl() {
+    if (empty($this->d['tpl'])) $this->d['tpl'] = $this->getDefaultTpl();
     if (empty($this->d['mainTpl'])) $this->d['mainTpl'] = 'main';
   }
 

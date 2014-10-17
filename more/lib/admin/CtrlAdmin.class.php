@@ -96,9 +96,11 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function initPrivMsgs() {
-    if (!AdminModule::isAllowed('privMsgs')) return;
-    $this->pribMsgs = new PrivMsgs($this->userId);
-    $this->d['newMsgsCount'] = $this->pribMsgs->getNewMsgsCount();
+    /*
+      if (!AdminModule::isAllowed('privMsgs')) return;
+      $this->pribMsgs = new PrivMsgs($this->userId);
+      $this->d['newMsgsCount'] = $this->pribMsgs->getNewMsgsCount();
+    */
   }
 
   protected function afterInit() {

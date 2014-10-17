@@ -18,6 +18,7 @@ return [
   'adminModuleSettings' => 'Настройки',
   'adminModuleTags' => 'Тэги',
   'adminModuleUsers' => 'Пользователи',
+  'adminModuleLogs' => 'Логи',
 
   // Свойства модулей сайта
   'moduleAuthoritems' => 'Авторские записи',
