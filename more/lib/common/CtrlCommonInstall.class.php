@@ -9,7 +9,7 @@ class CtrlCommonInstall extends CtrlCommon {
 		if (defined('DB_INSTALLED')) throw new Exception('Database already installed');
 	}
 	
-  function setDefaultTpl() {
+  function initDefaultTpl() {
     $this->d['mainTpl'] = '_installer/main';
   }
 
