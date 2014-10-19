@@ -3,7 +3,7 @@
 class FieldEUser extends FieldEAutocompleter {
 
   protected function defineOptions() {
-    return ['help' => 'Для поиска начните вводить email пользователя'];
+    return ['help' => 'Для поиска начните вводить '.Config::getVarVar('userReg', 'titleName').' пользователя'];
   }
 
   protected function validate2() {

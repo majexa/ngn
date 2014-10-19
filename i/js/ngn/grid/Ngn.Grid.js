@@ -38,6 +38,7 @@ Ngn.Grid = new Class({
     } else {
       Elements.from('<th></th>')[0].inject(this.eHeadTr);
     }
+    c(this.options.data);
     if (this.options.data) this.initInterface(this.options.data);
   },
 
@@ -183,7 +184,9 @@ Ngn.Grid = new Class({
         }
         if (this.options.formatters[name]) value = this.options.formatters[name]();
         prop.html = this.replaceHtmlValue(value);
-        new Element('td', prop).addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
+        new Element('td', prop).
+          addClass('n_' + name).
+          addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
         n++;
       }
       row.tools = $merge(row.tools || {}, this.options.tools);

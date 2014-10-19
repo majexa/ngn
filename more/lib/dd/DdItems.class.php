@@ -280,7 +280,7 @@ class DdItems extends Items {
   /**
    * Добавляет данные для тэгов в массив записи
    *
-   * @param   array Массив записи
+   * @param $item
    */
   protected function extendItemTags(&$item) {
     $this->setFieldTagTypes();
@@ -310,8 +310,6 @@ class DdItems extends Items {
         }
       }
     }
-    //$memAfter = memory_get_usage() - $memBefore;
-    //output($item['id'].':  '.Misc::formatPrice($memAfter).'. Total:  '.Misc::formatPrice(memory_get_usage()));
   }
 
   protected function extendItemTagIds(&$item) {
