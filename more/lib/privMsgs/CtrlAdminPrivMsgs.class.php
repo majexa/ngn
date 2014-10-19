@@ -4,7 +4,7 @@ class CtrlAdminPrivMsgs extends CtrlAdmin {
 
   static $properties = [
     'title' => 'Сообщения',
-    'onMenu' => true,
+    'onMenu' => false,
     'order' => 20
   ];
   

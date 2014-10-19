@@ -184,7 +184,7 @@ function getOS() {
 
 function redirect($path, $forceHttp = false) {
   LogWriter::v('redirect', $path);
-  if (!strstr($path, 'http://')) $path = '/'.ltrim($path, '/');
+  if (!strstr($path, 'http://') and !strstr($path, 'https://')) $path = '/'.ltrim($path, '/');
   (getConstant('JS_REDIRECT') and !$forceHttp) ? jsRedirect($path) : header('Location: '.$path);
   print "\n"; // если после хедера нет никакого вывода, редирект не осуществляется
 }

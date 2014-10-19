@@ -166,9 +166,7 @@ class UsersCore {
   }
 
   static function getDefaultStaticField() {
-    foreach (self::$staticTitleNames as $v) {
-      if (Config::getVarVar('userReg', $v.'Enable')) return $v;
-    }
+    return Config::getVarVar('userReg', 'titleName');
   }
 
   static function getDefaultTable() {

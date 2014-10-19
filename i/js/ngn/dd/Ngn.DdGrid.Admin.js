@@ -1,10 +1,14 @@
+// @requiresBefore Ngn.DdFilterPath
+
 Ngn.DdGrid.Admin = new Class({
   Extends: Ngn.DdGrid,
   options: {
+    resizeble: true,
+    id: 'dqwdwqd',
     basePath: Ngn.getPath(3),
-    //filterPath: new Ngn.DdFilterPath(4),
+    filterPath: new Ngn.DdFilterPath(4),
     listAction: 'editContent',
-    idParam: 'itemId',
+    //idParam: 'itemId',
     toolActions: {
       edit: function(row) {
         new Ngn.Dialog.RequestForm({
