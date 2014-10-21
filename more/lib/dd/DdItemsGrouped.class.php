@@ -1,16 +1,17 @@
 <?php
 
-class DdItemsGrouped extends DdItems {
+class DdItemsGrouped {
 
+  public $items;
   protected $groupedFieldName;
 
   function __construct($strName, $groupedFieldName, Db $db = null) {
     $this->groupedFieldName = $groupedFieldName;
-    parent::__construct($strName, $db);
+    $this->items = new DdItems($strName, $db);
   }
 
   function getItems() {
-    $items = parent::getItems();
+    $items = $this->items->getItems_nocache();
     $r = [];
     foreach ($items as $item) {
       $gItem = $item[$this->groupedFieldName];
