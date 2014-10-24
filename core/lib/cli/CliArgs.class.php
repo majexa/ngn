@@ -7,7 +7,7 @@ class CliArgs {
 
   public $class, $method, $params;
 
-  function __construct(CliHelpAbstract $cliHelp) {
+  function __construct(CliAccessAbstract $cliHelp) {
     if ($cliHelp->oneClass) {
       $this->class = $cliHelp->oneClass;
       $this->method = $cliHelp->argv[0];

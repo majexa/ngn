@@ -11,7 +11,7 @@
       "position": 0
     },
     {
-      "class": "\\DbModCliHelpOptionselCore",
+      "class": "\\DbModCliAccessOptionselCore",
       "method": "get",
       "position": 0,
       "mask": "DbModel%s"

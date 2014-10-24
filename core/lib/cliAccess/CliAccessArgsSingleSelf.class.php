@@ -1,6 +1,6 @@
 <?php
 
-class CliHelpArgsSingleSelf extends CliHelpArgsSingle {
+class CliAccessArgsSingleSelf extends CliAccessArgsSingle {
 
   protected $filterByCurrentClass = true;
 

@@ -1,6 +1,6 @@
 <?php
 
-interface CliHelpMultiWrapper {
+interface CliAccessMultiWrapper {
 
   static function singleClass();
 

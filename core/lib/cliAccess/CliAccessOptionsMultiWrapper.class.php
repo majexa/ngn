@@ -1,6 +1,6 @@
 <?php
 
-abstract class CliHelpOptionsMultiWrapper extends ArrayAccessebleOptions {
+abstract class CliAccessOptionsMultiWrapper extends ArrayAccessebleOptions {
 
   /**
    * @return array

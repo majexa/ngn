@@ -1,6 +1,6 @@
 <?php
 
-abstract class CliHelpAbstract {
+abstract class CliAccessAbstract {
   use Options;
 
   protected $initArgv;
@@ -33,7 +33,7 @@ abstract class CliHelpAbstract {
           $constructorArgs = Tt()->enum(Arr::get($optionalArgs, 'name'), ', ', '`"`.$v.`"`');
           $methodArgs = Tt()->enum(Arr::get($m['options'], 'name'), ', ', '`"`.$v.`"`');
           throw new Exception(<<<TEXT
-CliHelp system does not supports both usage of constructor optional arguments & method arguments.
+CliAccess system does not supports both usage of constructor optional arguments & method arguments.
 * Remove arguments $methodArgs from "{$m['method']}" method of "{$v['class']}" class OR
 * Remove optional arguments $constructorArgs from class "{$v['class']}" constructor
 TEXT
@@ -104,13 +104,13 @@ TEXT
   }
 
   protected function help() {
-    if (!CliHelp::$disableDescription) {
-      if (!CliHelp::$proMode) print O::get('CliColors')->getColoredString('name', 'darkGray')." - optional param\n";
-      if (!CliHelp::$proMode) print O::get('CliColors')->getColoredString('[...]', 'green')." - param options\n";
+    if (!CliAccess::$disableDescription) {
+      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('name', 'darkGray')." - optional param\n";
+      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('[...]', 'green')." - param options\n";
     }
     $classes = $this->getClasses();
     if ($classes) {
-      if (!CliHelp::$proMode and !CliHelp::$disableDescription) print O::get('CliColors')->getColoredString('Supported commands:', 'yellow')."\n";
+      if (!CliAccess::$proMode and !CliAccess::$disableDescription) print O::get('CliColors')->getColoredString('Supported commands:', 'yellow')."\n";
       if ($this->separateParentMethods) {
         $parentClassesOutputed = [];
         foreach ($classes as $v) {
@@ -152,7 +152,7 @@ TEXT
   }
 
   protected function isMultiWrapper($class) {
-    return is_subclass_of($class, 'CliHelpOptionsMultiWrapper');
+    return is_subclass_of($class, 'CliAccessOptionsMultiWrapper');
   }
 
   protected function renderMethods($class) {
@@ -179,7 +179,7 @@ TEXT
       $rOptions = $this->renderMethodOptions($method['options']);
       $rOptions = $rOptions ? ' '.$rOptions : '';
       if (!empty($method['title']) and getOS() == 'win') $method['title'] = Misc::transit($method['title'], false, false);
-      if (CliHelp::$proMode) $help = '';
+      if (CliAccess::$proMode) $help = '';
       else $help = ($method['title'] ? O::get('CliColors')->getColoredString(' -- '.$method['title'], 'cyan') : '');
       $s .= //
         $this->runner($runnerColor). // runner
@@ -285,7 +285,7 @@ TEXT
   protected $filterByCurrentClass = false;
 
   function getMethods($class, $onlyVisible = true) {
-    if ($class instanceof CliHelpMultiWrapper) {
+    if ($class instanceof CliAccessMultiWrapper) {
       $class = $class::singleClass();
     }
     $methods = $onlyVisible ? $this->_getVisibleMethods($class) : $this->_getMethods($class);

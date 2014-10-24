@@ -1,6 +1,6 @@
 <?php
 
-class CliHelpArgsSingleSub extends CliHelpArgsSingle {
+class CliAccessArgsSingleSub extends CliAccessArgsSingle {
 
   protected $_runner, $name, $cmdNameSuffix = '';
 
