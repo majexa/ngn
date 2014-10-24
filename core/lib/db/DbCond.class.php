@@ -318,7 +318,7 @@ class DbCond {
   }
 
   function setOrder($order = 'id DESC') {
-    if (!$order) return;
+    if (!$order) return $this;
     $this->orderKey = preg_replace('/(.*) (DESC|ASC)/', '$1', $order);
     $this->orderAsc = !strstr($order, 'DESC');
     $this->orderCond = "ORDER BY ".(strstr($order, '(') ? '' : $this->tablePrefix).$order;
@@ -349,7 +349,7 @@ class DbCond {
   }
 
   function addJoin($foreiginTable, $id, $foreiginId = 'id') {
-    if (isset($this->joins[$foreiginTable])) return;
+    if (isset($this->joins[$foreiginTable])) return $this;
     $this->joins[$foreiginTable] = [$foreiginId, $id];
     return $this;
   }
