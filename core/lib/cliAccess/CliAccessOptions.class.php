@@ -1,6 +1,6 @@
 <?php
 
-abstract class CliHelpOptions extends CliHelp {
+abstract class CliAccessOptions extends CliAccess {
 
   protected function renderClassOptions($class) {
     return '';
@@ -59,7 +59,7 @@ abstract class CliHelpOptions extends CliHelp {
 
   protected function _run(CliArgs $args) {
     $args->method = 'a_'.$args->method;
-    if (is_subclass_of($args->class, 'CliHelpOptionsMultiWrapper')) {
+    if (is_subclass_of($args->class, 'CliAccessOptionsMultiWrapper')) {
       $this->runMultiWrapper($args);
     }
     else {
@@ -83,7 +83,7 @@ abstract class CliHelpOptions extends CliHelp {
       $realArgs, //
       count($realClass::$requiredOptions) //
     ));
-    /* @var CliHelpOptionsMultiWrapper $multiWrapper */
+    /* @var CliAccessOptionsMultiWrapper $multiWrapper */
     $class = $args->class;
     $multiWrapper = (new $class($options));
     $multiWrapper->action($realArgs->method);

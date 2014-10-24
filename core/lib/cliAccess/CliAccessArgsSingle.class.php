@@ -1,6 +1,6 @@
 <?php
 
-class CliHelpArgsSingle extends CliHelpArgs {
+class CliAccessArgsSingle extends CliAccessArgs {
 
   /**
    * @param $argv

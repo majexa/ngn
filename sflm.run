@@ -1,0 +1,3 @@
+#!/bin/sh
+# ngn
+php ~/ngn-env/run/run.php site $1 "new CliAccessArgsSingle('$*', new SflmCli)"

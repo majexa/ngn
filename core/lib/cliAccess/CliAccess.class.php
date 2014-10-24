@@ -1,7 +1,7 @@
 <?php
 
 // name -
-abstract class CliHelp extends CliHelpAbstract {
+abstract class CliAccess extends CliAccessAbstract {
 
   /**
    * Используется для формирования имени класса при генерации списка классов
@@ -43,7 +43,7 @@ abstract class CliHelp extends CliHelpAbstract {
 
   protected function run() {
     $args = $this->getArgs();
-    if (($r = $this->_run($args)) and $r instanceof CliHelpResultClass) {
+    if (($r = $this->_run($args)) and $r instanceof CliAccessResultClass) {
       if ($this->classHasOptionalConstructorArgs($r->class)) throw new Exception('Sub-action class can not has optional constructor arguments');
       $argsSub = clone $args;
       if ((new ReflectionClass($r->class))->isAbstract()) throw new Exception('Can not be abstract');
@@ -52,7 +52,7 @@ abstract class CliHelp extends CliHelpAbstract {
       $argsSub->method = isset($args->params[1]) ? $args->params[1] : false;
       $argsSub->params = array_merge($argsSub->params, //
         array_slice($args->params, count($this->getConstructorParams($r->class)) + 1));
-      new CliHelpArgsSingleSub($argsSub, $this->_runner(), $r->name);
+      new CliAccessArgsSingleSub($argsSub, $this->_runner(), $r->name);
     }
   }
 
@@ -71,4 +71,4 @@ abstract class CliHelp extends CliHelpAbstract {
 
 }
 
-if (getenv('HELP_DISABLE_DESCRIPTION')) CliHelp::$disableDescription = true;
+if (getenv('HELP_DISABLE_DESCRIPTION')) CliAccess::$disableDescription = true;

@@ -1,6 +1,6 @@
 <?php
 
-abstract class CliHelpArgs extends CliHelp {
+abstract class CliAccessArgs extends CliAccess {
 
   protected function init() {
     $this->checkConsistency();
