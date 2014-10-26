@@ -44,7 +44,7 @@ abstract class CliAccessArgs extends CliAccess {
     return $method->getName();
   }
 
-  protected function _run(CliArgs $args) {
+  protected function _run(CliAccessArgsArgs $args) {
     $refl = (new ReflectionClass($args->class));
     if (($constructor = $refl->getConstructor()) and ($_constructorParams = $constructor->getParameters())) {
       // есть параметры в конструкторе

@@ -3,15 +3,21 @@
 /**
  * Аргументы, необсходимые для запуска комманды
  */
-class CliArgs {
+class CliAccessArgsArgs {
 
   public $class, $method, $params;
 
   function __construct(CliAccessAbstract $cliHelp) {
     if ($cliHelp->oneClass) {
       $this->class = $cliHelp->oneClass;
-      $this->method = $cliHelp->argv[0];
-      $this->params = array_slice($cliHelp->argv, 1);
+      $methods = (new ReflectionClass($this->class))->getMethods();
+      if (count($methods) == 1) {
+        $this->method = $methods[0]->name;
+        $this->params = $cliHelp->argv;
+      } else {
+        $this->method = $cliHelp->argv[0];
+        $this->params = array_slice($cliHelp->argv, 1);
+      }
     }
     else {
       $this->class = $cliHelp->name2class($cliHelp->argv[0]);

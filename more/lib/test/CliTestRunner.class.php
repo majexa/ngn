@@ -35,7 +35,7 @@ class CliTestRunner extends CliAccessArgs {
     return 'tst';
   }
 
-  protected function _run(CliArgs $args) {
+  protected function _run(CliAccessArgsArgs $args) {
     if (isset($args->params[2]) and $args->params[2] == 'debug') TestCore::$debug = true;
     parent::_run($args);
   }
