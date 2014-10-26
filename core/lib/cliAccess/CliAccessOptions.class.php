@@ -73,7 +73,7 @@ abstract class CliAccessOptions extends CliAccess {
     }
   }
 
-  protected function runMultiWrapper(CliAccessArgs $args) {
+  protected function runMultiWrapper(CliAccessArgsArgs $args) {
     $realClass = method_exists($args->class, $args->method) ? $args->class : $this->getSingleProcessorClass($args->class);
     $requiredOptions = [];
     foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
@@ -89,7 +89,7 @@ abstract class CliAccessOptions extends CliAccess {
     $multiWrapper->action($realArgs->method);
   }
 
-  protected function getMethodOptionsWithParams(CliAccessArgs $args, $offset) {
+  protected function getMethodOptionsWithParams(CliAccessArgsArgs $args, $offset) {
     $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
       foreach ($options as $i => $opt) {
