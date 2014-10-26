@@ -23,7 +23,8 @@ abstract class CliAccessAbstract {
     }
   }
 
-  protected function init() {}
+  protected function init() {
+  }
 
   protected function checkConsistency() {
     foreach ($this->getClasses() as $v) {
@@ -84,7 +85,7 @@ TEXT
   }
 
   function _getVisibleMethods($class) {
-    return array_values(array_filter($this->_getMethods($class), function(ReflectionMethod $method) {
+    return array_values(array_filter($this->_getMethods($class), function (ReflectionMethod $method) {
       if ($method->name == 'help') return false;
       return $method->name[0] != '_';
     }));
@@ -174,6 +175,7 @@ TEXT
   protected function _renderMethods($class, array $methods, $runnerColor = 'brown') {
     $name = $this->cmdName($class);
     $s = '';
+
     foreach ($methods as $method) {
       $nameCmd = $name ? ' '.$name : '';
       $rOptions = $this->renderMethodOptions($method['options']);
@@ -184,9 +186,7 @@ TEXT
       $s .= //
         $this->runner($runnerColor). // runner
         $nameCmd.(count($methods) == 1 ? '' : ' '.$method['method']). // method
-        $this->renderClassRequiredOptions($class).
-        $this->renderClassOptions($class).
-        $rOptions. // options
+        $this->renderClassRequiredOptions($class).$this->renderClassOptions($class).$rOptions. // options
         $help."\n"; //
     }
     if ($name and $this->isMultiWrapper($class)) {
@@ -231,7 +231,7 @@ TEXT
     });
   }
 
-  protected function check(CliArgs $args) {
+  protected function check(CliAccessArgsArgs $args) {
     if ($this->isMultiWrapper($args->class)) return true; // $_class = Misc::removeSuffix('s', $args->class);
     else $_class = $args->class;
     if (empty($args->method)) {
@@ -261,7 +261,7 @@ TEXT
     return true;
   }
 
-  abstract protected function _run(CliArgs $args);
+  abstract protected function _run(CliAccessArgsArgs $args);
 
   protected function renderMethodOptions($options) {
     return implode(' ', array_map(function ($v) {
@@ -290,7 +290,7 @@ TEXT
     }
     $methods = $onlyVisible ? $this->_getVisibleMethods($class) : $this->_getMethods($class);
     if ($this->filterByCurrentClass) {
-      $methods = array_filter($methods, function(ReflectionMethod $method) use ($class) {
+      $methods = array_filter($methods, function (ReflectionMethod $method) use ($class) {
         return $method->class == $class;
       });
     }

@@ -56,11 +56,8 @@ abstract class CliAccess extends CliAccessAbstract {
     }
   }
 
-  /**
-   * @return CliArgs
-   */
   protected function getArgs() {
-    return new CliArgs($this);
+    return new CliAccessArgsArgs($this);
   }
 
   protected function _runner() {

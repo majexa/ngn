@@ -5,11 +5,11 @@ class CliAccessArgsSingleSub extends CliAccessArgsSingle {
   protected $_runner, $name, $cmdNameSuffix = '';
 
   /**
-   * @param CliArgs $args
-   * @param string
-   * @param string
+   * @param CliAccessArgsArgs $args
+   * @param object|string $_runner
+   * @param $name
    */
-  function __construct(CliArgs $args, $_runner, $name) {
+  function __construct(CliAccessArgsArgs $args, $_runner, $name) {
     $this->_runner = $_runner;
     $this->name = $name;
     if (($constructorParams = $this->getConstructorParamsImposed($args->class, $args->params))) {
