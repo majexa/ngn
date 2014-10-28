@@ -5,16 +5,16 @@ abstract class CliAccessAbstract {
 
   protected $initArgv;
 
-  function __construct($argv, array $options = []) {
+  function __construct($argParams, array $options = []) {
     $this->setOptions($options);
-    $this->initArgv = $argv;
-    if (is_string($argv)) $argv = explode(' ', $argv);
-    elseif (is_array($argv)) $argv = array_slice($argv, 1);
+    $this->initArgv = $argParams;
+    if (is_string($argParams)) $argParams = explode(' ', $argParams);
+    elseif (is_array($argParams)) $argParams = array_slice($argParams, 1);
     else throw new Exception('Wrong type');
-    $this->argv = $argv;
+    $this->argParams = $argParams;
     $this->init();
     if (empty($this->options['disableRun'])) {
-      if (empty($this->argv[0]) or $this->argv[0] == 'help') {
+      if (empty($this->argParams[0]) or $this->argParams[0] == 'help') {
         $this->help();
       }
       else {
@@ -73,7 +73,7 @@ TEXT
 
   abstract protected function _getParameters(ReflectionMethod $method, $class);
 
-  public $argv, $oneClass = false;
+  public $argParams, $oneClass = false;
 
   function _getMethods($class) {
     return array_values(array_filter((new ReflectionClass($class))->getMethods(), function (ReflectionMethod $method) use ($class) {
@@ -175,7 +175,6 @@ TEXT
   protected function _renderMethods($class, array $methods, $runnerColor = 'brown') {
     $name = $this->cmdName($class);
     $s = '';
-
     foreach ($methods as $method) {
       $nameCmd = $name ? ' '.$name : '';
       $rOptions = $this->renderMethodOptions($method['options']);

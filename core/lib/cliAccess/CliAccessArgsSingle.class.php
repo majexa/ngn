@@ -3,12 +3,12 @@
 class CliAccessArgsSingle extends CliAccessArgs {
 
   /**
-   * @param $argv
+   * @param $argParams
    * @param string|object $class Class or object
    */
-  function __construct($argv, $class) {
+  function __construct($argParams, $class) {
     $this->oneClass = is_object($class) ? get_class($class) : $class;
-    parent::__construct($argv);
+    parent::__construct($argParams);
   }
 
   function prefix() {

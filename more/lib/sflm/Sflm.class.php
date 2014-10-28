@@ -124,6 +124,9 @@ class Sflm {
     }
   }
 
+  static $debugPaths = [];
+  static $debugUrl;
+
 }
 
 Sflm::$strictMode = IS_DEBUG;

@@ -2,20 +2,23 @@
 
 class CliAccessArgsSingleSub extends CliAccessArgsSingle {
 
-  protected $_runner, $name, $cmdNameSuffix = '';
+  protected $_runner, $cmdPrefix, $cmdNameSuffix = '';
 
   /**
    * @param CliAccessArgsArgs $args
-   * @param object|string $_runner
-   * @param $name
+   * @param object|string $_runner Название программы
+   * @param string $cmdPrefix Имя класса
    */
-  function __construct(CliAccessArgsArgs $args, $_runner, $name) {
+  function __construct(CliAccessArgsArgs $args, $_runner, $cmdPrefix) {
     $this->_runner = $_runner;
-    $this->name = $name;
+    $this->cmdPrefix = $cmdPrefix;
+    /*
     if (($constructorParams = $this->getConstructorParamsImposed($args->class, $args->params))) {
       $this->cmdNameSuffix = ' '.implode(' ', $constructorParams);
     }
-    parent::__construct(array_merge([null, $args->method], $args->params), $args->class);
+    */
+    //die2(;
+    parent::__construct(array_merge([null], $args->params), $args->class);
   }
 
   protected function renderClassRequiredOptions($class) {
@@ -30,8 +33,8 @@ class CliAccessArgsSingleSub extends CliAccessArgsSingle {
     return $this->_runner;
   }
 
-  protected function name($class) {
-    return $this->name;
+  protected function className($class) {
+    return $this->cmdPrefix;
   }
 
 }

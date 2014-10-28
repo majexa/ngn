@@ -26,7 +26,6 @@ Ngn.Request.File = new Class({
   },
 
   append: function(key, value) {
-    c([key, value]);
     if (!this.options.allowDublicates && this._formData[key]) return;
     this.formData.append(key, value);
     this._formData[key] = value;
