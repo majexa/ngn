@@ -210,21 +210,27 @@ padding-bottom: 0px;
 .fieldSet .element input[type=text] {
 width: 150px;
 }
-.fieldSet .bbtns a {
+.fieldSet .bottomBtns a {
 float: none !important;
 display: inline-block;
 margin: 10px 10px 5px 5px;
 }
 .fieldSet a.bordered {
-position: absolute;
+/*position: absolute;
 bottom: 0px;
 right: 0px;
+*/
 }
+/*
 .fieldSet .hgrp {
 clear: both;
 float: left;
 position: relative;
 padding-right: 25px;
+}
+*/
+.fieldSet .rowElement {
+position: relative;
 }
 .fieldSet .rowNumber {
 display: inline-block;

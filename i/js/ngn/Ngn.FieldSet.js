@@ -72,8 +72,8 @@ Ngn.FieldSet = new Class({
     this.eContainer = this.getContainer();
     this.eAddRow = this.eContainer.getElement(this.options.addRowBtnSelector);
     if (!this.eAddRow) {
-      var eBbtns = new Element('div', {'class': 'bbtns'}).inject(this.eContainer, 'bottom');
-      this.eAddRow = Ngn.btn1(this.options.addTitle, 'add dgray').inject(eBbtns);
+      var eBottomBtns = new Element('div', {'class': 'bottomBtns'}).inject(this.eContainer, 'bottom');
+      this.eAddRow = Ngn.btn1(this.options.addTitle, 'btn add dgray').inject(eBbtns);
       Elements.from('<div class="heightFix"></div>')[0].inject(this.eContainer, 'bottom');
     }
     this.buttons.push(new Ngn.Btn(this.eAddRow, function(btn) {
@@ -106,6 +106,9 @@ Ngn.FieldSet = new Class({
     }
     // Переносим стили элементов в стили контейнеров элементов, а у элементов их удаляем
     this.esRows = this.eContainer.getElements(this.options.rowElementSelector);
+    for (var i = 0; i < this.esRows.length; i++) {
+      new Element('div', {'class': 'rowBtns smIcons'}).inject(this.esRows[i]); // контейнер для кнопок
+    }
     this.eSampleRow = this.esRows[0].clone();
     this.eSampleRow.getElements(this.options.cleanOnCloneSelector).dispose();
     this.createCleanupButton(this.esRows[0]);
@@ -114,6 +117,7 @@ Ngn.FieldSet = new Class({
       if (this.options.addRowNumber) this.addRowNumber(this.esRows[i]);
       this.moveStyles(this.esRows[i]);
     }
+    return;
     if (this.esRows.length > 0) {
       for (var i = 1; i < this.esRows.length; i++) {
         this.removeTrash(this.esRows[i]);
@@ -163,9 +167,11 @@ Ngn.FieldSet = new Class({
   createRowButton: function(eRow, btn, action, options) {
     var els = eRow.getElements(this.options.elementContainerSelector);
     var fieldSet = this;
+    var eRowBtns = eRow.getElement('.rowBtns');
     this.buttons.push(new Ngn.Btn(// Вставляем кнопку после последнего элемента формы в этой строке
       //Ngn.addTips(Ngn.btn(btn)).inject(els[els.length - 1], 'after'), function() {
-      Ngn.btn(btn).inject(els[els.length - 1], 'after'), function() {
+      //Ngn.btn(btn).inject(els[els.length - 1], 'after'), function() {
+      Ngn.btn(btn).inject(eRowBtns), function() {
         fieldSet.fireEvent(btn.cls);
         action.bind(this)();
       }, options || {}));
@@ -203,7 +209,6 @@ Ngn.FieldSet = new Class({
     var nextRowN = this.getNextN(eLastRow);
     var eLabel;
     var lastRowElements = eLastRow.getElements(Ngn.Frm.selector);
-    c(lastRowElements);
     eNewRow.getElements('.element').each(function(eElement, i) {
       //c(eElement.get('class').replace('-' + curN + '-', '-' + nextN + '-'));
       //c('(.*)-' + lastRowN + '-(.*)');

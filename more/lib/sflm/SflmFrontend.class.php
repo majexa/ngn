@@ -20,7 +20,7 @@ abstract class SflmFrontend {
     $this->name = $name;
     Misc::checkEmpty($this->name, 'Frontend name not defined');
     $this->base->version = $this->version();
-    $this->pathsCache = $this->getPathsCache() ? : $this->getStaticPaths();
+    $this->pathsCache = $this->getPathsCache() ?: $this->getStaticPaths();
     $this->init();
   }
 
@@ -44,7 +44,7 @@ abstract class SflmFrontend {
   }
 
   protected function getLastPaths() {
-    return SflmCache::c()->load('sflmLastPaths'.$this->cacheSuffix()) ? : [];
+    return SflmCache::c()->load('sflmLastPaths'.$this->cacheSuffix()) ?: [];
   }
 
   protected function storeLastPaths() {
@@ -57,7 +57,7 @@ abstract class SflmFrontend {
    * @return array
    */
   function getPathsCache() {
-    return SflmCache::c()->load($this->pathsCacheKey()) ? : [];
+    return SflmCache::c()->load($this->pathsCacheKey()) ?: [];
   }
 
   protected function init() {
@@ -76,7 +76,13 @@ abstract class SflmFrontend {
 
   function getTags() {
     $this->checkStored();
-    return $this->base->getTags($this->name, $this->_code());
+    $html = $this->base->getTags($this->name, $this->_code());
+    if (isset(Sflm::$debugPaths[$this->base->type])) {
+      foreach (Sflm::$debugPaths[$this->base->type] as $path) {
+        $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
+      }
+    }
+    return $html;
   }
 
   function getTag() {
@@ -174,6 +180,10 @@ abstract class SflmFrontend {
       Sflm::output("New path '$path' already exists");
       return;
     }
+    if (in_array($path, Sflm::$debugPaths)) {
+      Sflm::output('Skipping path '.$path);
+      return;
+    }
     Sflm::output('Adding path '.$path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
@@ -190,7 +200,7 @@ abstract class SflmFrontend {
   }
 
   function version() {
-    return ProjectState::get($this->versionCacheKey(), true) ? : 0;
+    return ProjectState::get($this->versionCacheKey(), true) ?: 0;
   }
 
   protected $incremented = false;

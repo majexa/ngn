@@ -9,7 +9,7 @@ abstract class CliAccess extends CliAccessAbstract {
    * @param $class
    * @return string
    */
-  protected function name($class) {
+  protected function className($class) {
     if (($prefix = $this->prefix())) {
       return lcfirst(Misc::removePrefix(ucfirst($this->prefix()), $class));
     }
@@ -26,7 +26,7 @@ abstract class CliAccess extends CliAccessAbstract {
       $this->classes = [
         [
           'class' => $this->oneClass,
-          'name'  => $this->name($this->oneClass)
+          'name'  => $this->className($this->oneClass)
         ]
       ];
     }
@@ -34,7 +34,7 @@ abstract class CliAccess extends CliAccessAbstract {
       $this->classes = array_filter(array_map(function ($class) {
         return [
           'class' => $class,
-          'name'  => $this->name($class)
+          'name'  => $this->className($class)
         ];
       }, ClassCore::getClassesByPrefix(ucfirst($this->prefix()))));
     }
@@ -44,16 +44,20 @@ abstract class CliAccess extends CliAccessAbstract {
   protected function run() {
     $args = $this->getArgs();
     if (($r = $this->_run($args)) and $r instanceof CliAccessResultClass) {
-      if ($this->classHasOptionalConstructorArgs($r->class)) throw new Exception('Sub-action class can not has optional constructor arguments');
-      $argsSub = clone $args;
-      if ((new ReflectionClass($r->class))->isAbstract()) throw new Exception('Can not be abstract');
-      $argsSub->class = $r->class;
-      $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));
-      $argsSub->method = isset($args->params[1]) ? $args->params[1] : false;
-      $argsSub->params = array_merge($argsSub->params, //
-        array_slice($args->params, count($this->getConstructorParams($r->class)) + 1));
-      new CliAccessArgsSingleSub($argsSub, $this->_runner(), $r->name);
+      $this->runSub($args, $r);
     }
+  }
+
+  protected function runSub(CliAccessArgsArgs $args, CliAccessResultClass $r) {
+    if ($this->classHasOptionalConstructorArgs($r->class)) throw new Exception('Sub-action class ('.$r->class.') can not has optional constructor arguments');
+    $argsSub = clone $args;
+    if ((new ReflectionClass($r->class))->isAbstract()) throw new Exception('Can not be abstract');
+    $argsSub->class = $r->class;
+    $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));
+    $argsSub->method = isset($args->params[1]) ? $args->params[1] : false;
+    $argsSub->params = array_merge($argsSub->params, //
+      array_slice($args->params, count($this->getConstructorParams($r->class)) + 1));
+    new CliAccessArgsSingleSub($argsSub, $this->_runner(), $r->name.' '.$args->params[0]);
   }
 
   protected function getArgs() {
