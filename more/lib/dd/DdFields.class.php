@@ -9,6 +9,7 @@ class DdFields extends Fields {
 
   protected function defineOptions() {
     return [
+      'forceShow'     => [],
       'getHidden'     => false,
       'getSystem'     => false,
       'getDisallowed' => false,
@@ -53,14 +54,29 @@ class DdFields extends Fields {
       'system'          => true,
       'defaultDisallow' => false
     ]);
+    $this->addField([
+      'title'           => 'Автор',
+      'name'            => 'userId',
+      'type'            => 'user',
+      'system'          => true,
+      'defaultDisallow' => false
+    ]);
   }
 
   function getFieldsF() {
-    $fields = $this->getFields();
-    if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0, true);
-    if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0, true);
-    if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, true, true);
-    foreach ($fields as &$v) $v = Arr::filterEmptyStrings($v);
+    $fields = [];
+    foreach ($this->getFields() as $f) {
+      if (!in_array($f['name'], $this->options['forceShow'])) {
+        if ($f['system'] and !$this->options['getSystem']) continue;
+        if ($f['defaultDisallow'] and !$this->options['getDisallowed']) continue;
+        if ($f['virtual'] and !$this->options['getVirtual']) continue;
+      }
+      $fields[$f['name']] = $f;
+    }
+    //if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0, true);
+    //if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0, true);
+    //if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, true, true);
+    //foreach ($fields as &$v) $v = Arr::filterEmptyStrings($v);
     return $fields;
   }
 

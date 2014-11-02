@@ -120,7 +120,7 @@ class Lib {
    * Возвращает абсолютный путь к файлу или false, если файл не найден
    *
    * @param   string $class Имя класса
-   * @return  string
+   * @return  string|false
    */
   static function getClassPath($class) {
     self::$currentGetClass = $class;

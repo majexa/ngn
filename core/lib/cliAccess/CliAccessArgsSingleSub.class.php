@@ -12,13 +12,37 @@ class CliAccessArgsSingleSub extends CliAccessArgsSingle {
   function __construct(CliAccessArgsArgs $args, $_runner, $cmdPrefix) {
     $this->_runner = $_runner;
     $this->cmdPrefix = $cmdPrefix;
-    /*
-    if (($constructorParams = $this->getConstructorParamsImposed($args->class, $args->params))) {
-      $this->cmdNameSuffix = ' '.implode(' ', $constructorParams);
-    }
-    */
-    //die2(;
     parent::__construct(array_merge([null], $args->params), $args->class);
+  }
+
+  protected function isHelp() {
+    $methods = $this->getPublicMethods();
+    if (count($methods) == 1) {
+      $requiredParams = array_filter($methods[0]->getParameters(), function (ReflectionParameter $param) {
+        return !$param->isOptional();
+      });
+      if (count($requiredParams) > 0 and count($this->argParams) <= 1) {
+        return true;
+      }
+    }
+    return (count($this->argParams) <= count($this->getConstructorParams($this->oneClass)));
+  }
+
+  protected function getArgsOneClass() {
+    $methods = (new ReflectionClass($this->oneClass))->getMethods();
+    $constructorParams = $this->getConstructorParams($this->oneClass);
+    if (count($methods) == 1) {
+      $method = $methods[0]->name;
+      $params = array_slice($this->argParams, 1, count($this->argParams));
+    }
+    else {
+      $method = $this->argParams[1];
+      $params = array_merge( //
+        array_slice($this->argParams, 0, count($constructorParams)), //
+        array_slice($this->argParams, 2, count($this->argParams)) //
+      );
+    }
+    return new CliAccessArgsArgs($this->oneClass, $method, $params);
   }
 
   protected function renderClassRequiredOptions($class) {

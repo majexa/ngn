@@ -95,6 +95,7 @@ abstract class SflmFrontend {
    * Сохраняет все новые пути фронтенда в кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего
    *
    * @param string $source
+   * @return $this
    * @throws Exception
    */
   function store($source = 'direct') {
