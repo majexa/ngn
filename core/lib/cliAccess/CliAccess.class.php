@@ -53,15 +53,44 @@ abstract class CliAccess extends CliAccessAbstract {
     $argsSub = clone $args;
     if ((new ReflectionClass($r->class))->isAbstract()) throw new Exception('Can not be abstract');
     $argsSub->class = $r->class;
-    $argsSub->params = array_slice($args->params, 0, count($this->getConstructorParams($r->class)));
-    $argsSub->method = isset($args->params[1]) ? $args->params[1] : false;
-    $argsSub->params = array_merge($argsSub->params, //
-      array_slice($args->params, count($this->getConstructorParams($r->class)) + 1));
     new CliAccessArgsSingleSub($argsSub, $this->_runner(), $r->name.' '.$args->params[0]);
   }
 
+  /**
+   * @return ReflectionMethod[]
+   */
+  protected function getPublicMethods() {
+    return (new ReflectionClass($this->oneClass))->getMethods();
+  }
+
+  protected function getArgsOneClass() {
+    $methods = $this->getPublicMethods();
+    if (count($methods) == 1) {
+      $method = $methods[0]->name;
+      $params = $this->argParams;
+    } else {
+      $method = $this->argParams[0];
+      $params = array_slice($this->argParams, 1);
+    }
+    return new CliAccessArgsArgs($this->oneClass, $method, $params);
+  }
+
   protected function getArgs() {
-    return new CliAccessArgsArgs($this);
+    if ($this->oneClass) {
+      return $this->getArgsOneClass();
+    }
+    else {
+      $class = $this->name2class($this->argParams[0]);
+      $methods = $this->_getVisibleMethods($class);
+      if (count($methods) == 1) {
+        $method = $methods[0]->name;
+        $params = array_slice($this->argParams, 1);
+      } else {
+        $method = $this->argParams[1];
+        $params = array_slice($this->argParams, 2);
+      }
+      return new CliAccessArgsArgs($class, $method, $params);
+    }
   }
 
   protected function _runner() {

@@ -14,13 +14,12 @@ abstract class CliAccessAbstract {
     $this->argParams = $argParams;
     $this->init();
     if (empty($this->options['disableRun'])) {
-      if (empty($this->argParams[0]) or $this->argParams[0] == 'help') {
-        $this->help();
-      }
-      else {
-        $this->run();
-      }
+      $this->isHelp() ? $this->help() : $this->run();
     }
+  }
+
+  protected function isHelp() {
+    return empty($this->argParams[0]) or $this->argParams[0] == 'help';
   }
 
   protected function init() {
@@ -245,16 +244,14 @@ TEXT
     foreach ($this->getConstructorParams($args->class) as $n => $param) {
       if ($param->isOptional()) continue;
       if (!isset($args->params[$n])) {
-        output("Param #".($n + 1)." '".$param->getName()."' is required");
-        return false;
+        throw new Exception("Param #".($n + 1)." '".$param->getName()."' is required");
       }
     }
     // check method required params
     foreach ($methods[$args->method] as $n => $param) {
       if ($param['optional']) continue;
       if (!isset($args->params[$n])) {
-        output("Param #".($n + 1)." '{$param['name']}' is required");
-        return false;
+        throw new Exception("Param #".($n + 1)." '{$param['name']}' is required");
       }
     }
     return true;

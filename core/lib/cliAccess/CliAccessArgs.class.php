@@ -68,7 +68,9 @@ abstract class CliAccessArgs extends CliAccess {
     else {
       // нет
       if (!$this->check($args)) return false;
-      return call_user_func_array([new $args->class, $args->method], $args->params);
+      $r = call_user_func_array([new $args->class, $args->method], $args->params);
+      if ($r instanceof CliAccessResultClass) $r->name = $args->method;
+      return $r;
     }
   }
 

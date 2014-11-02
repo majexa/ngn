@@ -109,7 +109,7 @@ abstract class SflmBase {
   }
 
   function cacheFile($package) {
-    return UPLOAD_PATH.'/'.$this->filePath($package);
+    return Sflm::$uploadPath.'/'.$this->filePath($package);
   }
 
   function storeLib($package, $code = null) {
@@ -117,17 +117,17 @@ abstract class SflmBase {
     if (!$code) $code = $this->getPackageCode($package);
     Misc::checkEmpty($code, "No code in package [$this->type::$package]");
     if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
-    Dir::make(UPLOAD_PATH.'/'.$this->type.'/cache');
+    Dir::make(Sflm::$uploadPath.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
     return true;
   }
 
   function getCode($package) {
-    if (Sflm::$debug or Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$this->type.'/cache/'.$package.'.css')) {
+    if (Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$uploadPath.'/'.$this->type.'/cache/'.$package.'.css')) {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package);
     }
-    return file_get_contents(UPLOAD_PATH.'/'.$this->type.'/cache/'.$package.'.'.$this->type);
+    return file_get_contents(Sflm::$uploadPath.'/'.$this->type.'/cache/'.$package.'.'.$this->type);
   }
 
   function exists($lib) {
@@ -197,8 +197,8 @@ abstract class SflmBase {
     $path = $p['path'];
     $cachePath = $this->getCachePath($path);
     $path = $this->getScriptAbsPath($path);
-    if (Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$cachePath)) {
-      Dir::make(UPLOAD_PATH.'/'.dirname($cachePath));
+    if (Sflm::$forceCache or !file_exists(Sflm::$uploadPath.'/'.$cachePath)) {
+      Dir::make(Sflm::$uploadPath.'/'.dirname($cachePath));
       if (!empty($p['query'])) {
         parse_str($p['query'], $q);
         if (!empty($q)) {
@@ -208,7 +208,7 @@ abstract class SflmBase {
       else {
         $q = [];
       }
-      file_put_contents(UPLOAD_PATH.'/'.$cachePath, Misc::getIncludedByRequest($path, $q));
+      file_put_contents(Sflm::$uploadPath.'/'.$cachePath, Misc::getIncludedByRequest($path, $q));
     }
     return '/'.UPLOAD_DIR.'/'.$cachePath;
   }
@@ -219,7 +219,7 @@ abstract class SflmBase {
   }
 
   function clearPathCache($path) {
-    File::delete(UPLOAD_PATH.'/'.$this->getCachePath($path));
+    File::delete(Sflm::$uploadPath.'/'.$this->getCachePath($path));
   }
 
   function getPackagePath($package) {
@@ -259,7 +259,7 @@ abstract class SflmBase {
   }
 
   function getUrl($package, $code = null, $force = false) {
-    if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(UPLOAD_PATH.'/'.$this->filePath($package))) {
+    if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$uploadPath.'/'.$this->filePath($package))) {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package, $code);
     }

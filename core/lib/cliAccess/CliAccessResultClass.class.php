@@ -8,9 +8,8 @@ class CliAccessResultClass {
    * @param string $class Class
    * @param string $name Command name
    */
-  function __construct($class, $name) {
+  function __construct($class) {
     $this->class = $class;
-    $this->name = $name;
   }
 
 }

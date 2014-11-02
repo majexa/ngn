@@ -42,7 +42,10 @@ class CtrlAdminDdItems extends CtrlAdmin {
   }
 
   protected function _getIm() {
-    return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName(), ['getDisallowed' => true]), $this->getStrName()), 'form'));
+    return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName(), [
+      'forceShow'     => ['userId'],
+      'getDisallowed' => true
+    ]), $this->getStrName()), 'form'));
   }
 
   protected function getParamActionN() {
