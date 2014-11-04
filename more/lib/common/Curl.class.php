@@ -196,4 +196,10 @@ class Curl {
         )+%xs', $string);
   }
 
+  function getCode($url) {
+    $this->setopt(CURLOPT_URL, $url);
+    $this->exec();
+    return curl_getinfo($this->fSocket, CURLINFO_HTTP_CODE);
+  }
+
 }
