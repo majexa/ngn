@@ -120,7 +120,9 @@ class Html {
   }
 
   static function getParam($html, $attr) {
-    preg_match('/<[^>]*'.$attr.'="([^>^"]*)"[^>]*>/um', $html, $m);
+    if (!preg_match('/<[^>]*'.$attr.'="([^>^"]*)"[^>]*>/um', $html, $m))
+      throw new Exception("attr $attr not found");
+
     return $m[1];
   }
 

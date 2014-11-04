@@ -13,7 +13,9 @@ class CtrlCommonAuth extends CtrlCammon {
   function action_json_auth() {
     $urls = ['/'.Sflm::frontendName(true).'/auth/json_form'];
     if (Config::getVarVar('userReg', 'enable')) {
-      $urls[] = Config::getVarVar('userReg', 'phoneConfirm') ? ('/'.Sflm::frontendName(true).'/userRegPhone/json_form') : ('/' + Sflm::frontendName(true).'/userReg/json_form');
+      $urls[] = Config::getVarVar('userReg', 'phoneConfirm') ? //
+        ('/'.Sflm::frontendName(true).'/userRegPhone/json_form') : //
+        ('/'.Sflm::frontendName(true).'/userReg/json_form');
     }
     $this->processFormTabs($urls);
   }
@@ -22,10 +24,11 @@ class CtrlCommonAuth extends CtrlCammon {
     foreach ($paths as $uri) {
       $ctrl = (new RouterManager([
         'req' => new Req([
-            'uri'              => $uri,
-            'disableSflmStore' => true
-          ])
+          'uri'              => $uri,
+          'disableSflmStore' => true
+        ])
       ]))->router()->dispatch()->controller;
+      if (empty($ctrl->json['form']))
       $form = [
         'title' => $ctrl->json['title'],
         'html'  => $ctrl->json['form'],
