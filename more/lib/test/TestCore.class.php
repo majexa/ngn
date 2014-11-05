@@ -4,6 +4,10 @@ class TestCore {
 
   static $debug = false;
 
+  static function projectUrl() {
+    die2(NGN_ENV_PATH);
+  }
+
   static function detectError($text) {
     if (strstr($text, 'Uncaught exception')) return '"Uncaught exception" in test result';
     elseif (strstr($text, 'failed')) return '"failed" in test result';

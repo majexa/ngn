@@ -12,6 +12,10 @@ class UsersRegForm extends UsersForm {
     ]);
   }
 
+  function id() {
+    return 'formUserReg';
+  }
+
   protected function _getFields() {
     $fields = parent::_getFields();
     if (Config::getVarVar('userReg', 'phoneConfirm')) {
