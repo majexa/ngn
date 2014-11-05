@@ -28,11 +28,10 @@ class CtrlCommonAuth extends CtrlCammon {
           'disableSflmStore' => true
         ])
       ]))->router()->dispatch()->controller;
-      if (empty($ctrl->json['form']))
       $form = [
+        'id'    => Html::getParam($ctrl->json['form'], 'id'),
         'title' => $ctrl->json['title'],
-        'html'  => $ctrl->json['form'],
-        'id'    => Html::getParam($ctrl->json['form'], 'id')
+        'html'  => $ctrl->json['form']
       ];
       if ($ctrl->actionResult) $form['submitTitle'] = $ctrl->actionResult->options['submitTitle'];
       $d['forms'][] = $form;
@@ -41,7 +40,6 @@ class CtrlCommonAuth extends CtrlCammon {
   }
 
   function action_json_form() {
-    LogWriter::str('aaa', 1);
     $form = new AuthForm;
     $form->action = '/' + Sflm::frontendName(true) + '/auth/json_form';
     $this->json['title'] = 'Авторизация ';

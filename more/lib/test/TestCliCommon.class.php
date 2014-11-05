@@ -17,12 +17,7 @@ class TestCliCommon {
    * Отображает все, существующие в среде тесты
    */
   function lst() {
-
     $this->getTestLibs();
-
-
-    //return;
-
     $columns = [[],[],[],[]];
     $columns[0][] = 'tst proj g {name}:';
     foreach ((new TestRunnerProject('dummy'))->_g() as $class) {
