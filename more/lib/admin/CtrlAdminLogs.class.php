@@ -1,7 +1,5 @@
 <?php
 
-CtrlAdminLogs::$properties['title'] = Lang::get('adminModuleLogs');
-
 class CtrlAdminLogs extends CtrlAdmin {
 
   static $properties = [
@@ -38,3 +36,5 @@ class CtrlAdminLogs extends CtrlAdmin {
   }
   
 }
+
+CtrlAdminLogs::$properties['title'] = Lang::get('adminModuleLogs');
