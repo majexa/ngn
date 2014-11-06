@@ -181,7 +181,7 @@ abstract class SflmFrontend {
       Sflm::output("New path '$path' already exists");
       return;
     }
-    if (Arr::strExists(Sflm::$debugPaths, $path)) {
+    if (Arr::strExists(Sflm::$debugPaths[$this->base->type], $path)) {
       Sflm::output('Skipping path '.$path);
       return;
     }
