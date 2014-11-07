@@ -10,6 +10,9 @@ Ngn.Request = new Class({
   },
 
   send: function(options) {
+    if (this.options.cache) {
+      this.options.url;
+    }
     Ngn.requestLoaded = false;
     this.parent(options);
   }
