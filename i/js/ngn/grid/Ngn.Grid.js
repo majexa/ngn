@@ -38,7 +38,6 @@ Ngn.Grid = new Class({
     } else {
       Elements.from('<th></th>')[0].inject(this.eHeadTr);
     }
-    c(this.options.data);
     if (this.options.data) this.initInterface(this.options.data);
   },
 

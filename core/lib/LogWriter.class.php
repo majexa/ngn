@@ -27,7 +27,7 @@ class LogWriter {
    */
   static function html($name, $html, array $trace = [], array $params = [], $force = false) {
     $s = '('.__FILE__.':'.__LINE__.")\n";
-    if (isset($_SERVER['REQUEST_URI'])) {
+    if (!getConstant('CLI') and isset($_SERVER['REQUEST_URI'])) {
       $s .= 'url: '.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$_SERVER['REQUEST_URI'].', referer: '.(!empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
       if ($params) $s .= ', ';
     }
@@ -49,10 +49,10 @@ class LogWriter {
   /**
    * Записывает строку в лог-файл. Лог-файл не поддерживается LogReader'ом
    *
-   * @param   string  Имя лога
-   * @param   string  Строка, которую нужно записать в лог-файл
-   * @param   string  Путь к папке с логами
-   * @param   string  Записывать лог в любом случае независимо от флага DO_NOT_LOG
+   * @param string $name Имя лога
+   * @param string $str Строка, которую нужно записать в лог-файл
+   * @param string|null $logsPath Путь к папке с логами
+   * @param bool $force Записывать лог в любом случае независимо от флага DO_NOT_LOG
    */
   static function str($name, $str, $logsPath = null, $force = false) {
     if (!$force and getConstant('DO_NOT_LOG')) return;
