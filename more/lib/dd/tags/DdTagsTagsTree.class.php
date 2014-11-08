@@ -27,7 +27,7 @@ class DdTagsTagsTree extends DdTagsTagsBase implements TreeInterface {
   protected $curParentIds, $parentIds;
 
   function _getTree($parentId = null) {
-    $tree = $this->_getTree();
+    $tree = $this->getTree();
     if ($parentId !== null) {
       if (($node = $this->findNode($parentId, $tree))) return $node['childNodes'];
     }

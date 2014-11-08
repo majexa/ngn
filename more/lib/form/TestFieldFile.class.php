@@ -6,10 +6,6 @@ class TestFieldFile extends TestFieldDd {
     return true;
   }
 
-  //static function setUpBeforeClass() {
-  //  parent::setUpBeforeClass();
-  //}
-
   function createData() {
     $r = [
       'sample' => TestCore::tempImageFixture(),

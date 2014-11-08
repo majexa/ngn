@@ -11,7 +11,6 @@ class FieldEFile extends FieldEFileBase {
    * Значение для отображения в контроле
    */
   protected function htmlValue() {
-    // $this->
     return null;
     /*
     if (empty($this->options['value'])) return false;
@@ -24,6 +23,7 @@ class FieldEFile extends FieldEFileBase {
 
   function defineOptions() {
     return array_merge(parent::defineOptions(), [
+      'value'            => null,
       'filterEmpties'    => true,
       'currentFileTitle' => 'Текущий файл',
       'postValue'        => null
@@ -35,16 +35,12 @@ class FieldEFile extends FieldEFileBase {
    */
   protected function valueToProcess() {
     if (!$this->form->fromRequest) {
-      //if ($this->options['name'] == 'sample2') {
-      //  die2(file_exists($this->options['value']['tmp_name']));
-      //}
-
+      //die2($this->options);
       return $this->options['value'];
     };
     $files = isset($this->form->options['files']) ? $this->form->options['files'] : $this->form->req->files;
     $value = BracketName::getValue($files, $this->options['name']);
     if (!empty($value['error'])) return null;
-    //prr($files);
     return $value;
   }
 
@@ -53,7 +49,6 @@ class FieldEFile extends FieldEFileBase {
    */
   protected function dataValue() {
     if (!$this->form->fromRequest) return '';
-    //if (!$this->form->fromRequest) throw new Exception('"dataValue" is not supported for non-request usage');
     return $this->options['value'];
   }
 
@@ -64,14 +59,6 @@ class FieldEFile extends FieldEFileBase {
   protected function postValue() {
     return $this->options['postValue'];
   }
-
-  /*
-  Определенное вручную значение поля (минуя Request)
-  protected function directValue() {
-    if ($this->form->fromRequest) return false;
-    return $this->options['value'];
-  }
-   */
 
   protected function init() {
     parent::init();

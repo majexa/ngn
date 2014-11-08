@@ -17,4 +17,7 @@ class FieldEFileBase extends FieldEInput {
     ];
   }
 
+  protected function prepareValue() {
+  }
+
 }

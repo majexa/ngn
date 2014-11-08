@@ -59,23 +59,15 @@ class Dir {
    * @throws Exception
    */
   static function remove($dirname, $removeItself = true) {
-    // Sanity check
     if (!file_exists($dirname)) return false;
-    // Simple delete for a file or link
     if (is_file($dirname) or is_link($dirname)) {
       return unlink($dirname);
     }
-    // Loop through the folder
     if (!$dir = dir($dirname)) throw new Exception("Check permissions for $dirname", true);
     while (false !== $entry = $dir->read()) {
-      // Skip pointers
-      if ($entry == '.' or $entry == '..') {
-        continue;
-      }
-      // Recurse
+      if ($entry == '.' or $entry == '..') continue;
       self::remove("$dirname/$entry");
     }
-    // Clean up
     $dir->close();
     if ($removeItself) rmdir($dirname);
   }
