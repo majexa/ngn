@@ -732,6 +732,7 @@ class Form {
     else {
       $fields = $this->fields->getFieldsF();
     }
+    //die2($this->elementsData);
     foreach ($fields as $n => $opt) {
       if (!is_array($opt)) throw new Exception("Field #$n is not array");
       if ($this->fields->isFileType($opt['name'])) {
@@ -785,7 +786,7 @@ class Form {
   /**
    * Выводит только указанные для инициализации поля
    *
-   * @param   bool Флаг
+   * @param bool $flag
    */
   function outputOnlyFields($flag = true) {
     $this->disableFormTag = $flag;

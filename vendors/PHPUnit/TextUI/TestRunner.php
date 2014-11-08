@@ -110,7 +110,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
 
         if ($test instanceof PHPUnit_Framework_Test) {
             $aTestRunner = new PHPUnit_TextUI_TestRunner;
-
             return $aTestRunner->doRun(
               $test,
               $arguments
@@ -316,6 +315,8 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
               $arguments['timeoutForLargeTests']
             );
         }
+
+//      die2(get_class($suite));
 
         $suite->run(
           $result,
