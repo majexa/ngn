@@ -35,7 +35,7 @@ class DbModelCore {
 
   /**
    * @api
-   * Создаёт запись с данными `$data` в таблице `$table`. Если `$filterByFields=true`, данные фильтруются по именам полей
+   * Создаёт запись с данными `$data` в таблице `$table` и возвращает ID записи. Если `$filterByFields=true`, данные фильтруются по именам полей
    */
   static function create($table, array $data, $filterByFields = false) {
     $class = self::getClass($table);
@@ -57,6 +57,14 @@ class DbModelCore {
       if (method_exists($class, 'afterCreateUpdate')) $class::afterCreateUpdate($id);
       return $id;
     }
+  }
+
+  /**
+   * @api
+   * То же самое, что и `create`, только возвращает созданную модель, а не ID
+   */
+  static function createAndGet($table, array $data, $filterByFields = false) {
+    return self::get($table, self::create($table, $data, $filterByFields));
   }
 
   /**
