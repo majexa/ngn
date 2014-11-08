@@ -125,9 +125,9 @@ class Form {
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);
-    Sflm::frontend('js')->addClass('Ngn.Form');
+    if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.Form');
     if ($this->options['placeholders']) {
-      Sflm::frontend('js')->addClass('Ngn.PlaceholderSupport');
+      if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.PlaceholderSupport');
       $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);
       $this->templates['input'] = str_replace('{input}', '{required}{input}', $this->templates['input']);
       $this->templates['title'] = '';
@@ -411,7 +411,7 @@ class Form {
     foreach (get_class_methods($this) as $method) {
       if ($method != 'js' and substr($method, 0, 2) == 'js') {
         if (($c = $this->$method()) != '') {
-          Sflm::frontend('js')->processCode($c, get_class($this).'::'.$method);
+          if (Sflm::frontendName()) Sflm::frontend('js')->processCode($c, get_class($this).'::'.$method);
           if (Misc::hasPrefix('jsInline', $method)) $this->jsInline .= "\n// -- $method -- \n".$c;
           else $this->js .= "\n// -- $method -- \n".$c;
         }
