@@ -6,7 +6,7 @@ class DdForm extends Form {
 
   function __construct($fields, $strName, array $options = []) {
     $this->strName = $strName;
-    Sflm::frontend('js')->addClass('Ngn.DdForm');
+    if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.DdForm');
     parent::__construct($fields, $options);
   }
 
