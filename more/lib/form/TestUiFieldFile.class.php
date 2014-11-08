@@ -2,6 +2,10 @@
 
 class TestUiFieldFile extends TestDd {
 
+  static function enable() {
+    return false;
+  }
+
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
     O::di('DdFieldsManager', 'a')->create([

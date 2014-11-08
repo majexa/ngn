@@ -98,6 +98,7 @@ class Sflm {
   static function stripCommentsExceptMeta($c) {
     return preg_replace('/\/\/(?! @).*/', '', preg_replace('!/\*.*?\*/!s', '', $c));
   }
+
   static function stripComments($c) {
     return preg_replace('/\/\/.*/', '', $c);
   }

@@ -1,6 +1,6 @@
 <?php
 
-class TestFieldDdBase extends TestDd {
+abstract class TestFieldDdBase extends TestDd {
 
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
