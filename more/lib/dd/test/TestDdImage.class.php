@@ -2,8 +2,11 @@
 
 class TestDdImage extends TestDd {
 
+  static function enable() {
+    return false;
+  }
+
   function test() {
-    copy(TestRunnerAbstract::$folder.'/fixture/image.jpg', TEMP_PATH.'/image.jpg');
     $this->assertFalse(file_exists(UPLOAD_PATH."/dd/a"));
     (new DdFieldsManager('a'))->create([
       'title' => 'image',
@@ -17,11 +20,8 @@ class TestDdImage extends TestDd {
     $this->assertTrue(file_exists(UPLOAD_PATH."/dd/a/$id/sm_image.jpg"));
     $filesize = filesize(UPLOAD_PATH."/dd/a/$id/image.jpg");
     $smFilesize = filesize(UPLOAD_PATH."/dd/a/$id/sm_image.jpg");
-    copy(TestRunnerAbstract::$folder.'/fixture/image2.jpg', TEMP_PATH.'/image.jpg');
     $_FILES = [
-      'image' => [
-        'tmp_name'  => TEMP_PATH.'/image.jpg'
-      ]
+      'image' => TestCore::tempImageFixture()
     ];
     $im->requestUpdate($id);
     $this->assertTrue(filesize(UPLOAD_PATH."/dd/a/$id/image.jpg") != $filesize);
@@ -29,9 +29,7 @@ class TestDdImage extends TestDd {
     unlink(UPLOAD_PATH."/dd/a/$id/image.jpg");
     copy(TestRunnerAbstract::$folder.'/fixture/image2.jpg', TEMP_PATH.'/image.jpg');
     $_FILES = [
-      'image' => [
-        'tmp_name'  => TEMP_PATH.'/image.jpg'
-      ]
+      'image' => TestCore::tempImageFixture()
     ];
     $im->requestUpdate($id);
     $this->assertFalse(empty($im->items->getItem($id)['image']));

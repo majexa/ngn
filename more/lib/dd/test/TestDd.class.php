@@ -11,9 +11,7 @@ abstract class TestDd extends ProjectTestCase {
 
   static function setUpBeforeClass() {
     $_FILES = [
-      'image' => [
-        'tmp_name'  => TEMP_PATH.'/image.jpg'
-      ]
+      'image' => TestCore::tempImageFixture()
     ];
     self::$sm = new DdStructuresManager;
     self::$sm->deleteByName(static::$strName);
