@@ -20,3 +20,5 @@ if (!is_file(WEBROOT_PATH.'/index.php')) die2('Dir "'.WEBROOT_PATH.'" or "index.
 
 R::set('processTimeStart', getMicrotime());
 if (isset($_REQUEST['plain'])) R::set('plainText', true);
+
+Lib::enableCache();

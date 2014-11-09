@@ -15,3 +15,4 @@ require_once NGN_PATH.'/init/cli.php';
 
 setConstant('SITE_LIB_PATH', SITE_PATH.'/lib');
 Lib::addFolder(NGN_ENV_PATH.'/run/lib');
+Lib::enableCache();

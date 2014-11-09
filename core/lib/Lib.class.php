@@ -12,7 +12,7 @@ function pearAutoload($class) {
  */
 class Lib {
 
-  static $isCache = false;
+  static protected $cacheEnabled = false;
 
   static $cl = [];
 
@@ -124,7 +124,8 @@ class Lib {
    */
   static function getClassPath($class) {
     self::$currentGetClass = $class;
-    $classesList = self::$isCache ? self::getClassesListCached() : self::getClassesList();
+    //$classesList = self::$cacheEnabled ? self::getClassesListCached() : self::getClassesList();
+    $classesList = self::getClassesListCached();
     if (isset($classesList[$class])) return $classesList[$class]['path'];
     return false;
   }
@@ -234,19 +235,25 @@ class Lib {
   static protected $cachePrefix;
 
   /**
-   * Caching the list of added classes
+   * Включает кэширование библиотек. До вызова этой функции нельзя использовать
+   * неподгруженные (require/include) классы.
    *
-   * @param $string
+   * @param string $key Уникальный ключ кэширования
+   * @throws Exception
    */
-  static function cache($string) {
-    self::$cachePrefix = Misc::shortHash($string);
-    self::$isCache = true;
+  static function enableCache($key = null) {
+    //die2('!');
+    if (self::$cacheEnabled) throw new Exception('Lib cache already enabled');
+    if ($key) self::$cachePrefix = Misc::shortHash($key);
+    self::$cacheEnabled = true;
   }
 
   static function getClassesListCached() {
+    if (!self::$cacheEnabled) throw new Exception('Please enable cache [Lib::enableCache()] before use class autoload');
     if (self::$list !== false) return self::$list;
     $options = [];
     if (isset(self::$cachePrefix)) $options['file_name_prefix'] = self::$cachePrefix;
+    //print_r($options);
     $cache = FileCache::c($options);
     if (!(self::$list = $cache->load('classesList'))) {
       self::initClassesList();

@@ -26,6 +26,8 @@ class FileCache {
     $key = serialize($options);
     if (isset(static::$cache[$key])) return static::$cache[$key];
     $options['automatic_serialization'] = true;
+    //debug_print_backtrace();
+    //die(static::folder($options)."\n--\n");
     return static::$cache[$key] = Zend_Cache::factory('Core', 'File', $options, array_merge($options, [
       'cache_dir' => static::folder($options)
     ]));
