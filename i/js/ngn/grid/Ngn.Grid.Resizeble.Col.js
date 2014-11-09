@@ -2,6 +2,7 @@ Ngn.Grid.Resizeble.Col = new Class({
 
   initialize: function(resizeble, colN, eHandler) {
     this.resizeble = resizeble;
+    if (!this.resizeble.grid.options.id) throw new Error('cat use resizeble on grid without id option');
     this.colN = colN;
     this.drag = new Drag(new Element('div'), {
       handle: eHandler,

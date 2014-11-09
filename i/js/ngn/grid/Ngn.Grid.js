@@ -29,6 +29,7 @@ Ngn.Grid = new Class({
   init: function() {
     if (!this.options.eParent) throw new Ngn.EmptyError('this.options.eParent');
     if (this.options.basePath == '/') this.options.basePath = '';
+    if (this.options.basePath) this.options.id = this.options.basePath.hashCode();
     this.eParent = $(this.options.eParent);
     this.initMenu();
     this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable' + (this.options.resizeble ? ' resizeble' : '') + '"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
@@ -39,6 +40,7 @@ Ngn.Grid = new Class({
       Elements.from('<th></th>')[0].inject(this.eHeadTr);
     }
     if (this.options.data) this.initInterface(this.options.data);
+    c(this.options);
   },
 
   initMenu: function() {
