@@ -2,18 +2,17 @@
 
 class SflmCli {
 
-  protected $frontend;
-
-  //function __construct($frontend) {
-  //    $this->frontend = $frontend;
-  //    Sflm::setFrontendName($this->frontend);
-  //}
-
-  function paths() {
-    die2(Sflm::frontend('js')->getPaths());
+  /**
+   * Отображает пути фронтенда
+   */
+  function paths($frontend, $type) {
+    Sflm::setFrontendName($frontend);
+    print implode("\n", Sflm::frontend($type)->getPaths())."\n";
   }
 
-  function a() {
+  function version($frontend, $type) {
+    Sflm::setFrontendName($frontend);
+    print Sflm::frontend($type)->version()."\n";
   }
 
 }
