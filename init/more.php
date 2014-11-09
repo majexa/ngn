@@ -34,7 +34,7 @@ if (file_exists(SITE_PATH.'/config/constants/more.php')) {
   require SITE_PATH.'/config/constants/more.php';
 }
 require MORE_PATH.'/config/constants/default.php';
-require MORE_PATH.'/config.php'; // what is it? name it
+require MORE_PATH.'/config.php'; // @todo: what is it? name it
 // ---------------------------------------------------
 require_once MORE_PATH.'/lib/sflm/SflmBase.class.php';
 require_once MORE_PATH.'/lib/sflm/SflmJs.class.php';
@@ -55,9 +55,6 @@ if (!defined('DATA_PATH')) define('DATA_PATH', SITE_PATH.'/'.DATA_DIR);
 // Очитка кэша. Нельзя помещать в web-init, потому что web-init включается уже после
 // включения кэширования библиотек
 if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) FileCache::clean();
-
-// Переключаем загрузку классов на кэширующий метод
-Lib::$isCache = true;
 
 Err::noticeSwitch(true);
 
