@@ -124,7 +124,6 @@ class Lib {
    */
   static function getClassPath($class) {
     self::$currentGetClass = $class;
-    //$classesList = self::$cacheEnabled ? self::getClassesListCached() : self::getClassesList();
     $classesList = self::getClassesListCached();
     if (isset($classesList[$class])) return $classesList[$class]['path'];
     return false;
@@ -242,7 +241,6 @@ class Lib {
    * @throws Exception
    */
   static function enableCache($key = null) {
-    //die2('!');
     if (self::$cacheEnabled) throw new Exception('Lib cache already enabled');
     if ($key) self::$cachePrefix = Misc::shortHash($key);
     self::$cacheEnabled = true;
@@ -253,7 +251,6 @@ class Lib {
     if (self::$list !== false) return self::$list;
     $options = [];
     if (isset(self::$cachePrefix)) $options['file_name_prefix'] = self::$cachePrefix;
-    //print_r($options);
     $cache = FileCache::c($options);
     if (!(self::$list = $cache->load('classesList'))) {
       self::initClassesList();
