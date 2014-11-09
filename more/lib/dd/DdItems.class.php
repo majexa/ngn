@@ -66,21 +66,21 @@ class DdItems extends Items {
 
   function getItems_cache() {
     $items = [];
-    $ids = $this->getItemIds();
+    $ids = $this->ids();
     foreach ($ids as $id) $items[$id] = $this->getItem_cache($id);
     return $items;
   }
 
   function getItems_nocache() {
     $items = [];
-    $ids = $this->getItemIds();
+    $ids = $this->ids();
     foreach ($ids as $id) $items[$id] = $this->getItem($id);
     return $items;
   }
 
   function getItemsF_cache() {
     $items = [];
-    $ids = $this->getItemIds();
+    $ids = $this->ids();
     foreach ($ids as $id) $items[$id] = $this->getItemF_cache($id);
     return $items;
   }

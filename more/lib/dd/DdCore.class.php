@@ -144,7 +144,7 @@ class DdCore {
     $items = new DdItems($strName);
     $items->cond = $cond;
     $dumper = new DbDumper(null, ['noHeaders' => true]);
-    $ids = $items->getItemIds();
+    $ids = $items->ids();
     $dumper->cond->addF('id', $ids);
     $r = $dumper->getDump(self::table($strName));
     $dumper = new DbDumper(null, ['noHeaders' => true]);

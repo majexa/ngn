@@ -117,7 +117,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
     return $items;
   }
 
-  function getItemIds() {
+  function ids() {
     $this->prepareItemsConds();
     return $this->db->ids($this->table, $this->cond);
   }
