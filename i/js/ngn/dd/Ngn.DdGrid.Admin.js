@@ -4,7 +4,6 @@ Ngn.DdGrid.Admin = new Class({
   Extends: Ngn.DdGrid,
   options: {
     resizeble: true,
-    id: 'dqwdwqd',
     basePath: Ngn.getPath(3),
     filterPath: new Ngn.DdFilterPath(4),
     listAction: 'editContent',

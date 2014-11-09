@@ -14,7 +14,7 @@ Ngn.Grid.Resizeble = new Class({
     this.grid = grid;
     if (this.debug) this.addDubugCells();
     this.initWrappers();
-    this.initHanderls();
+    this.initHandlers();
   },
 
   getTrParsents: function() {
@@ -56,7 +56,7 @@ Ngn.Grid.Resizeble = new Class({
     }.bind(this));
   },
 
-  initHanderls: function() {
+  initHandlers: function() {
     this.cols = this.getTrParsents()[0].getChildren()[0].getChildren('th');
     this.cols.each(function(eTh, n) {
       if (n < this.firstResizebleColN + 1) return;

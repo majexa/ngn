@@ -129,7 +129,7 @@ class DdCore {
    */
   static function imSystem($strName) {
     $class = self::imClass($strName);
-    return new $class(new DdItems($strName), new DdForm(new DdFields($strName, ['getDisallowed' => true]), $strName));
+    return new $class(new DdItems($strName), new DdForm(new DdFields($strName, ['getHidden' => true]), $strName));
   }
 
   /**
