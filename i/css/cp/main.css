@@ -27,7 +27,7 @@ padding: 0px;
 h1 {
 margin-top: 0px;
 margin-bottom: 10px;
-font-size: 22px;
+font-size: 16px;
 font-family: Georgia;
 font-weight: normal;
 }
@@ -148,7 +148,7 @@ margin: 10px 0px 10px 0px;
 }
 
 .logo {
-min-width: 150px;
+min-width: 200px;
 margin: 5px 15px 5px 10px;
 float: left;
 }
