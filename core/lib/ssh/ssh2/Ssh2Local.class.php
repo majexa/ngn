@@ -3,8 +3,8 @@
 class Ssh2Local implements Ssh2ShellInterface {
 
   function exec($cmd) {
-    if (is_array($cmd)) $cmd = implode('; ', $cmd);
-    return Cli::shell($cmd);
+    if (is_array($cmd)) $cmd = implode(' && ', $cmd);
+    return `$cmd`;
   }
 
   // here it's alias

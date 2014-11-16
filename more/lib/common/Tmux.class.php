@@ -1,10 +1,14 @@
 <?php
 
 /**
- * tmux — это менеджер терминалов, к которому удобно подключаться и отключаться, не теряя при этом процессы и историю.
- * Класс Tmux помогает запускать несколько комманд в одном окне, не разбираясь формате команд tmux'а.
+ * tmux — это менеджер терминалов, к которому удобно подключаться и отключаться, не теряя
+ * при этом процессы и историю.
+ *
+ * Класс Tmux помогает запускать несколько комманд в одном окне, не разбираясь в формате
+ * команд tmux'а.
+ *
  * Extample:
- * (new Tmux(['php cmd.php 123']))->run()
+ * (new Tmux)->run('php cmd.php 123')
  *
  * https://gist.github.com/henrik/1967800
  * http://ricochen.wordpress.com/2011/11/14/tmux-techniques-by-example/
@@ -15,7 +19,6 @@ class Tmux {
 
   function __construct($sessionName = 'asd') {
     $this->sessionName = $sessionName;
-    // useful `tmux attach || tmux new; tmux list-session 2>&1 | grep -q "^$this->sessionName:" || tmux new-session -s $this->sessionName -d -n task1; tmux select-window -t $this->sessionName:task1; tmux send-keys "htop" C-m`;
   }
 
   protected $notSplitPanes = [];
@@ -28,7 +31,6 @@ class Tmux {
   function run($cmd, $n = 9) {
     $this->kill();
     $this->cmd("-2 new-session -d -s $this->sessionName");
-    //tmux list-session 2>&1 | grep -q "^$this->sessionName:" ||
     $this->cmd("new-window -t $this->sessionName:1 -n '$this->sessionName'");
     $rows = $cols = ceil(sqrt($n));
     for ($i = 0; $i < $cols - 1; $i++) {
@@ -52,7 +54,7 @@ class Tmux {
       if (($_cmd = $this->prepareCmd($cmd, $i)) === false) continue;
       $this->cmd("select-pane -t $i");
       $this->cmd("send-keys \"$_cmd\" C-m");
-      //sleep(2);
+      usleep(300);
     }
     $this->cmd("select-window -t $this->sessionName:1");
     $this->cmd("-2 attach-session -t $this->sessionName");

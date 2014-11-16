@@ -82,9 +82,11 @@ class Ddo {
     $fields = $this->ddoFields();
     $fields->isItemsList = $this->list;
     $this->fields = $fields->getFields();
-    foreach ($this->fields as $v) {
-      Sflm::frontend('css')->addLib("i/css/ddo/{$v['type']}.css");
-      Sflm::frontend('js')->addClass('Ngn.DdoType'.ucfirst($v['type']));
+    if (Sflm::frontendName()) {
+      foreach ($this->fields as $v) {
+        Sflm::frontend('css')->addLib("i/css/ddo/{$v['type']}.css");
+        Sflm::frontend('js')->addClass('Ngn.DdoType'.ucfirst($v['type']));
+      }
     }
     return $this;
   }

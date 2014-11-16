@@ -1074,6 +1074,7 @@ application/x-httpd-php-source  phps
   static function copy($from, $to) {
     copy($from, $to);
     output('Copy "'.$from.'" ---> "'.$to.'"');
+    return $to;
   }
 
   static function copyToFolder($file, $folder) {

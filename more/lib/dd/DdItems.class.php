@@ -91,36 +91,8 @@ class DdItems extends Items {
     $cache->remove('fi'.$id);
   }
 
-  // --------------------- Варианты кэширования -------------------------
-
-  /*
-
-  function getItems_cache2() {
-    $cache = FileCache::c();
-    if (!($items = $cache->load('ddItems'.$this->strName))) {
-      $items = $this->getItems_nocache();
-      $cache->save($items, 'ddItems'.$this->strName);
-    }
-    return $items;
-  }
-  
-  function getItems_cache3() {
-    $ids = $this->getItemIds();
-    $items = array();
-    foreach ($ids as $id) {
-      if (($item = Mem::get('ddItem'.$id)) === false) {
-        $item = $this->getItemF($id);
-        Mem::set('ddItem'.$id, $item);
-      }
-      $items[$id] = $item;
-    }
-    return $items;
-  }
-  */
-
-  // -----------------------------------------------------------------------
-
   function getFirstItem() {
+    $this->cond->setLimit(1);
     foreach ($this->getItems() as $v) return $v;
     return false;
   }
@@ -130,7 +102,6 @@ class DdItems extends Items {
     if (($item = parent::getItem($id)) == false) return false;
     $this->extendItemTags($item);
     $this->extendItemNumberRange($item);
-    //$this->extendItemUsers($item);
     $this->extendItemFilePaths($item);
     return $item;
   }
@@ -171,8 +142,9 @@ class DdItems extends Items {
   /**
    * Получает отформатированые данные
    *
-   * @param   integer   ID записи
-   * @return  array     Массив записи
+   * @param integer $id ID записи
+   * @return array Массив записи
+   * @throws Exception
    */
   function getItemF($id) {
     if (!($item = $this->getItem($id))) return false;
@@ -208,59 +180,9 @@ class DdItems extends Items {
     return $newId;
   }
 
-  // ********************************************
-  // -------------- Data Extenders --------------
-  // ********************************************
-
   private function extendItemsTags(&$items) {
     foreach ($items as &$item) {
       $this->extendItemTags($item);
-    }
-    return;
-
-    $itemIds = array_keys($items);
-    if (!($fields = $this->fields()->getTagFields())) return;
-    foreach (db()->query("
-    SELECT
-      tagItems.itemId,
-      tagItems.groupName,
-      tagItems.collection,
-      tags.id,
-      tags.title,
-      tags.name,
-      tags.cnt
-    FROM tagItems
-    LEFT JOIN tags ON tagItems.tagId=tags.id
-    WHERE
-      tagItems.strName=? AND
-      tagItems.groupName IN (?a) AND
-      tagItems.itemId IN (?a)", $this->strName, array_keys($fields), $itemIds) as $v) {
-      $tags[$v['itemId']][$v['groupName']][] = $v;
-    }
-    foreach ($fields as $fieldName => $field) {
-      foreach ($itemIds as $itemId) {
-        // $items[$itemId][$fieldName] = null; continue; // debug
-        if (FieldCore::hasAncestor($field['type'], 'ddTagsSelect')) {
-          $items[$itemId][$fieldName] = isset($tags[$itemId][$fieldName]) ? $tags[$itemId][$fieldName][0] : [];
-        }
-        elseif (FieldCore::hasAncestor($field['type'], 'ddTagsTreeMultiselect')) {
-          $items[$itemId][$fieldName] = DdTags::items($this->strName, $fieldName)->getItems($itemId);
-          continue;
-          // Формируем массив с разбитием на коллекции тэговых записей
-          if (isset($tags[$itemId][$fieldName])) {
-            $items[$itemId][$fieldName] = [];
-            foreach ($tags[$itemId][$fieldName] as $tag) {
-              $items[$itemId][$fieldName][$tag['collection']][] = $tag;
-            }
-          }
-          else {
-            $items[$itemId][$fieldName] = [];
-          }
-        }
-        else {
-          $items[$itemId][$fieldName] = DdTags::items($this->strName, $fieldName)->getItems($itemId);
-        }
-      }
     }
   }
 
@@ -309,23 +231,6 @@ class DdItems extends Items {
           $item[$fieldName] = $r ? $r[0] : null;
         }
       }
-    }
-  }
-
-  protected function extendItemTagIds(&$item) {
-    $this->extendItemTags($item);
-    return;
-    $this->setFieldTagTypes();
-    foreach (array_keys($item) as $fieldName) {
-      if (!isset($this->fieldTagTypes[$fieldName])) continue;
-      $fieldType = $this->fieldTagTypes[$fieldName];
-      if (DdTags::isTree($fieldType)) {
-        $r = DdTags::items($this->strName, $fieldName)->getLastTreeNodes($item['id']);
-      }
-      else {
-        $r = DdTags::items($this->strName, $fieldName)->getItems($item['id']);
-      }
-      $item[$fieldName] = $r ? (DdTags::isMulti($fieldType) ? $r : $r[0]) : null;
     }
   }
 
