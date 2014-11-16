@@ -25,5 +25,3 @@ if (isset($_SERVER['REMOTE_ADDR']) and $_SERVER['REMOTE_ADDR'] == '127.0.0.1' an
 
 ini_set('magic_quotes_gpc', 0);
 
-define('REGISTERED_USERS_ID', -1);
-define('ALL_USERS_ID', -2);

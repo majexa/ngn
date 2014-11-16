@@ -7,38 +7,30 @@ class DaemonInstaller {
   public $name;
 
   function __construct($projectName, $daemonName, array $options = []) {
-    $this->setOptions($options);
     $this->projectName = $projectName;
     $this->daemonName = $daemonName;
     $this->name = "{$this->projectName}-{$this->daemonName}";
+    $this->setOptions($options);
   }
 
-  /**
-   * @return mixed Количесво воркеров демона
-   */
-  protected function workersCount() {
-    return 1;
-  }
-
-  protected function bin() {
-    return isset($this->options['bin']) ? $this->options['bin'] : '/usr/bin/run';
-  }
-
-  protected function opts() {
-    //return isset($this->options['opts']) ? $this->options['opts'] : "/home/user/ngn-env/run/run.php {$this->projectName}/{$this->daemonName}";
-    return isset($this->options['opts']) ? $this->options['opts'] : "{$this->projectName}/{$this->daemonName}";
+  protected function defineOptions() {
+    return [
+      'bin' => '/usr/bin/run',
+      'opts' => "{$this->projectName}/{$this->daemonName}",
+      'workers' => 1
+    ];
   }
 
   function install() {
     $for = '';
-    for ($i = 1; $i <= $this->workersCount(); $i++) $for .= " $i";
+    for ($i = 1; $i <= $this->options['workers']; $i++) $for .= " $i";
     $c = '#! /bin/sh
 
 # ngn auto-generated worker
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-DAEMON='.$this->bin().'
-DAEMON_OPTS="'.$this->opts().'"
+DAEMON='.$this->options['bin'].'
+DAEMON_OPTS="'.$this->options['opts'].'"
 NAME='.$this->name.'
 QUIET="--quiet"
 

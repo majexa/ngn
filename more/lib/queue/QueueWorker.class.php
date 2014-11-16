@@ -29,8 +29,6 @@ class QueueWorker extends QueueBase {
   }
 
   protected function _processData($body) {
-    //$id = time().'-'.rand(100, 10000);
-    //if ($this->isDebug()) file_put_contents(DATA_PATH.'/queue/'.$id, $body);
     if (empty($body)) throw new Exception('Body is empty');
     if ($this->isDebug()) LogWriter::v('processBody', $body);
     $data = json_decode($body, true);
@@ -72,10 +70,13 @@ class QueueWorker extends QueueBase {
         new $class($data['data']);
       }
       else {
-        (new $class)->{$data['method']}($data['data']);
+        if (isset($data['data'])) {
+          (new $class)->{$data['method']}($data['data']);
+        } else {
+          (new $class)->{$data['method']}();
+        }
       }
     }
-    //unlink(DATA_PATH.'/queue/'.$id);
   }
 
   protected function isDebug() {

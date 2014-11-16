@@ -10,7 +10,7 @@ define('NGN_PATH', dirname(__DIR__));
 // web init
 define('IS_DEBUG', true);
 
-require_once NGN_PATH.'/init/core.php';
+require_once NGN_PATH.'/init/more.php';
 require_once NGN_PATH.'/init/cli.php';
 
 setConstant('SITE_LIB_PATH', SITE_PATH.'/lib');

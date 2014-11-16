@@ -126,10 +126,13 @@ class UsersCore {
 
   static function getSystemUsers() {
     return [
-      ALL_USERS_ID        => 'Все пользователи',
-      REGISTERED_USERS_ID => 'Зарегистированые пользователи'
+      self::allUsersId        => 'Все пользователи',
+      self::registeredUserId => 'Зарегистированые пользователи'
     ];
   }
+
+  const registeredUserId = -1;
+  const allUsersId = -2;
 
   const extraStrName = 'users';
 

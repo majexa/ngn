@@ -1,5 +1,6 @@
 <?php
 
+// @todo очищать ddi кеш после добавления поля
 class DdiCache extends FileCache {
 
   function __construct(array $options) {

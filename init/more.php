@@ -29,27 +29,16 @@ if ($ver < 5) die("Minimal PHP version for NGN is 5.0.4. Your version is ".phpve
 if (!ini_get('short_open_tag')) die("Change the value of php.ini short_open_tag = On");
 
 // ------------------ more constants -----------------
+if (!defined('SITE_PATH')) die('Error: SITE_PATH not defined'."\n".getBacktrace(false));
 if (file_exists(SITE_PATH.'/config/constants/more.php')) {
   // опциональное определение констант, что определяются в следующем require
   require SITE_PATH.'/config/constants/more.php';
 }
 require MORE_PATH.'/config/constants/default.php';
 require MORE_PATH.'/config.php'; // @todo: what is it? name it
-// ---------------------------------------------------
-require_once MORE_PATH.'/lib/sflm/SflmBase.class.php';
-require_once MORE_PATH.'/lib/sflm/SflmJs.class.php';
-require_once MORE_PATH.'/lib/sflm/SflmCss.class.php';
-require_once MORE_PATH.'/lib/sflm/SflmCache.class.php';
-require_once MORE_PATH.'/lib/sflm/Sflm.class.php';
-// ---------------------------------------------------
 
-Sflm::$absBasePaths['m'] = WEBROOT_PATH.'/m';
-
-if (!defined('SITE_PATH')) die('Error: SITE_PATH not defined'."\n".getBacktrace(false));
 if (!is_writable(SITE_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.SITE_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
 
-// Включаем кэширование списка классов
-// Кэшировать нужно с помощью FileCache. Значит нужно его подключить
 if (!defined('DATA_PATH')) define('DATA_PATH', SITE_PATH.'/'.DATA_DIR);
 
 // Очитка кэша. Нельзя помещать в web-init, потому что web-init включается уже после
@@ -57,17 +46,6 @@ if (!defined('DATA_PATH')) define('DATA_PATH', SITE_PATH.'/'.DATA_DIR);
 if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) FileCache::clean();
 
 Err::noticeSwitch(true);
-
-if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) {
-  require_once CORE_PATH.'/lib/Memc.class.php';
-  require_once CORE_PATH.'/lib/Mem.class.php';
-  require_once MORE_PATH.'/lib/core/UrlCache.class.php';
-  FileCache::clean();
-  Mem::clean();
-  UrlCache::clearCache();
-  Sflm::clearCache();
-  die('cc');
-}
 
 require MORE_PATH.'/lib/common/date.func.php';
 require MORE_PATH.'/lib/common/tpl.func.php';
