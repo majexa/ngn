@@ -9,7 +9,7 @@ class CronJobUserRegPhoneCleanup extends CronJobAbstract {
   }
 
   function _run() {
-    db()->query("DELETE FROM userPhoneConfirm WHERE dateCreate < ?", dbCurTime(time()-CtrlCommonUserRegPhone::expireTime()));
+    db()->query("DELETE FROM userPhoneConfirm WHERE dateCreate < ?", Date::db(time()-CtrlCommonUserRegPhone::expireTime()));
   }
 
 }

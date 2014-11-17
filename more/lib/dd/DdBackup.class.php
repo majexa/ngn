@@ -60,7 +60,7 @@ class DdBackup {
       $item
     )) return;
     
-    $item['dateBackup'] = dbCurTime();
+    $item['dateBackup'] = Date::db();
     
     // Удаляем более старые записи
     foreach (db()->select("

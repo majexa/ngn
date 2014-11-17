@@ -5,27 +5,27 @@ class SiteConfig {
   static $varsFolder;
 
   static function updateConstant($name, $k, $v, $formatValue = true) {
-    Config::updateConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k, $v, $formatValue);
+    Config::updateConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k, $v, $formatValue);
   }
 
   static function updateConstants($name, $constants, $formatValue = true) {
-    Config::updateConstants(SITE_PATH.'/config/constants/'.$name.'.php', $constants, $formatValue);
+    Config::updateConstants(PROJECT_PATH.'/config/constants/'.$name.'.php', $constants, $formatValue);
   }
 
   static function addConstant($name, $k, $v) {
-    Config::addConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k, $v);
+    Config::addConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k, $v);
   }
 
   static function addConstants($name, $constants) {
-    foreach ($constants as $k => $v) Config::addConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k, $v);
+    foreach ($constants as $k => $v) Config::addConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k, $v);
   }
 
   static function deleteConstant($name, $k) {
-    Config::deleteConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k);
+    Config::deleteConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k);
   }
 
   static function replaceConstant($name, $k, $v) {
-    Config::replaceConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k, $v);
+    Config::replaceConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k, $v);
   }
 
   static function replaceConstants($name, $constants) {
@@ -33,15 +33,15 @@ class SiteConfig {
       if (is_numeric($v)) $v = (int)$v;
       if (getConstant($k) !== $v) $new[$k] = $v;
     }
-    if (isset($new)) Config::replaceConstants(SITE_PATH.'/config/constants/'.$name.'.php', $new);
+    if (isset($new)) Config::replaceConstants(PROJECT_PATH.'/config/constants/'.$name.'.php', $new);
   }
 
   static function createConstants($name, $constants) {
-    Config::createConstants(SITE_PATH.'/config/constants/'.$name.'.php', $constants);
+    Config::createConstants(PROJECT_PATH.'/config/constants/'.$name.'.php', $constants);
   }
 
   static function cleanupConstants($name) {
-    Config::cleanupConstants(SITE_PATH.'/config/constants/'.$name.'.php');
+    Config::cleanupConstants(PROJECT_PATH.'/config/constants/'.$name.'.php');
   }
 
   static function getConstants($name, $quietly = false) {
@@ -55,11 +55,11 @@ class SiteConfig {
   }
 
   static function getConstant($name, $k, $quitely = false) {
-    return Config::getConstant(SITE_PATH.'/config/constants/'.$name.'.php', $k, $quitely);
+    return Config::getConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k, $quitely);
   }
 
   static function getAllConstants() {
-    return Config::getAllConstants(SITE_PATH.'/config/constants');
+    return Config::getAllConstants(PROJECT_PATH.'/config/constants');
   }
 
   static function updateVar($k, $v, $ignoreExistence = false) {
@@ -107,7 +107,7 @@ class SiteConfig {
   }
 
   static function getNames($type) {
-    return Config::_getVars(SITE_PATH.'/config/'.$type, false);
+    return Config::_getVars(PROJECT_PATH.'/config/'.$type, false);
   }
 
   static function getTitles($type) {
@@ -127,7 +127,7 @@ class SiteConfig {
   static function getStruct($type) {
     $struct = Config::getStruct(CORE_PATH, $type);
     $struct += Config::getStruct(MORE_PATH, $type);
-    $struct += Config::getStruct(SITE_PATH, $type);
+    $struct += Config::getStruct(PROJECT_PATH, $type);
     return $struct;
   }
 
@@ -158,4 +158,4 @@ class SiteConfig {
 
 }
 
-SiteConfig::$varsFolder = SITE_PATH.'/config/vars';
+SiteConfig::$varsFolder = PROJECT_PATH.'/config/vars';

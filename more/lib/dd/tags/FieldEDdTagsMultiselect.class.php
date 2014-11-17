@@ -15,7 +15,7 @@ class FieldEDdTagsMultiselect extends FieldEMultiselect {
     if (is_array($value)) {
       $r = [];
       foreach ($value as $v) $r[] = $this->options['options'][$v];
-      return Tt()->enum($r);
+      return St::enum($r);
     }
     else {
       return isset($this->options['options'][$value]) ? $this->options['options'][$value] : '';

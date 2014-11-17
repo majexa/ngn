@@ -63,7 +63,7 @@ class UploadTemp extends Options2 {
       'fileName'   => $fileName,
       'name'       => $file['name'],
       'multiple'   => $this->options['multiple'],
-      'dateCreate' => dbCurTime()
+      'dateCreate' => Date::db()
     ]);
   }
 
@@ -101,7 +101,7 @@ class UploadTemp extends Options2 {
     $timeToKeepFiles = 60 * 60;
     foreach (Dir::getFilesR(TEMP_PATH.'/upload') as $file) if (filemtime($file) < time() - $timeToKeepFiles) File::delete($file);
     Dir::removeEmpties(TEMP_PATH.'/upload');
-    db()->query('DELETE FROM uploadTemp WHERE dateCreate < ?', dbCurTime(time() - $timeToKeepFiles));
+    db()->query('DELETE FROM uploadTemp WHERE dateCreate < ?', Date::db(time() - $timeToKeepFiles));
     foreach (db()->select('SELECT * FROM uploadTemp') as $v) if (!file_exists(TEMP_PATH.'/upload/'.$v['tempId'].'/'.$v['fileName'])) db()->query('DELETE FROM uploadTemp WHERE tempId=? AND fileName=?', $v['tempId'], $v['fileName']);
   }
 

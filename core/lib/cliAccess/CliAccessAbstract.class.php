@@ -30,8 +30,8 @@ abstract class CliAccessAbstract {
       if (($optionalArgs = $this->getConstructorOptionalParams($v['class']))) {
         foreach ($this->getMethods($v['class']) as $m) {
           if (empty($m['options'])) continue;
-          $constructorArgs = Tt()->enum(Arr::get($optionalArgs, 'name'), ', ', '`"`.$v.`"`');
-          $methodArgs = Tt()->enum(Arr::get($m['options'], 'name'), ', ', '`"`.$v.`"`');
+          $constructorArgs = St::enum(Arr::get($optionalArgs, 'name'), ', ', '`"`.$v.`"`');
+          $methodArgs = St::enum(Arr::get($m['options'], 'name'), ', ', '`"`.$v.`"`');
           throw new Exception(<<<TEXT
 CliAccess system does not supports both usage of constructor optional arguments & method arguments.
 * Remove arguments $methodArgs from "{$m['method']}" method of "{$v['class']}" class OR

@@ -10,7 +10,7 @@
     <td nowrap><small><?= datetimeStr($v['time']) ?></small></td>
     <td>
       <?= $v['body'] ?>
-      <?= ol(explode("\n", trim($v['trace']))) ?>
+      <?= Tpl::ol(explode("\n", trim($v['trace']))) ?>
       <?= $v['url'] ? '<br><b>URL:</b> '.$v['url'] : '' ?>
       <?= $v['referer'] ? '<br><b>Referer:</b> '.$v['url'] : '' ?>
       <?= $v['post'] ? '<pre>'.$v['post'].'</pre>' : '' ?>

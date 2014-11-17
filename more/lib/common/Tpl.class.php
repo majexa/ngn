@@ -1,70 +1,54 @@
 <?php
 
 class Tpl {
-  
-  static $master;
 
-  static function getSettingsFields($path) {
-    preg_match(
-      '/@tplSettings:(.*)\*\/\?>(.*)/U',
-      str_replace("\n", '', file_get_contents(Tt()->exists($path))),
-      $m
-    );
-    return eval('return '.$m[1].';');
-  }
-  
-  static function saveSettings($path, $settings) {
-    Settings::set('tplSettings.'.self::clearSlashes($path), $settings);
-  }
-  
-  static function getSettings($path) {
-    return Settings::get('tplSettings.'.self::clearSlashes($path));
-  }
-  
-  static function clearSlashes($path) {
-    return str_replace('/', '~', $path);
-  }
-  
-  static function returnSlashes($path) {
-    return str_replace('~', '/', $path);    
-  }
-  
-  static function getList($masterFolder, $parentPath = null) {
-    $list = [];
-    $tplFolder = $masterFolder.'/'.$parentPath;
-    if (!($dir = dir($tplFolder))) return $list;
-    while (false !== $entry = $dir->read()) {
-      if ($entry[0] == '.') continue;
-      if (is_dir($tplFolder.'/'.$entry)) {
-        $list = Arr::append($list, self::getList(
-          $masterFolder,
-          $parentPath ? ($parentPath.'/'.$entry) : $entry
-        ));
-      } elseif (preg_match('/(.*).php/', $entry, $m)) {
-        $list[] = ($parentPath ? $parentPath.'/' : '').$m[1];
-      }
-    }
-    return $list;
-  }
-  
-  static function getListNGN() {
-    return self::getList(NGN_PATH.'/tpl');
+  /**
+   * Приводит текст вида "http://site1.com, http://site2.com, ..." в
+   * список тэгов:
+   * <a href="http://site1.com" target="_blank">http://site1.com</a>,
+   * <a href="http://site2.com" target="_blank">http://site2.com</a>,
+   * <a href="..." target="_blank">...</a>
+   *
+   * @param string $t Ссылки через запятую
+   * @param string $delimiter Разделитель
+   * @param string $tpl Шаблон ссылки
+   * @return mixed|string
+   */
+  static function urls($t, $delimiter = ',', $tpl = '<li><a href="$1" target="_blank">$1</a></li>') {
+    if (trim($t) == '') return '';
+    return preg_replace('/([^'.$delimiter.']*)'.$delimiter.'/u', $tpl.$delimiter, $t.$delimiter);
   }
 
-  static function getListMaster() {
-    return self::getList(MASTER_PATH.'/tpl');
+  /**
+   * Превращает URL  имя хоста, отбрасывая часть с путём и протоколом
+   *
+   * @param $url
+   * @return mixed
+   */
+  static function clearUrl($url) {
+    $url = preg_replace('/^https?:\/\/(.*)$/', '$1', $url);
+    if (preg_match('/^([^\/]*)\/*$/', $url)) return preg_replace('/^([^\/]*)\/*$/', '$1', $url);
+    return $url;
   }
-  
-  static function getListSite() {
-    return self::getList(SITE_PATH.'/tpl');
+
+  /**
+   * Возвращает URL с исключенными из него GET-параметрами
+   *
+   * @param string $url URL
+   * @param array $params Параметры для исключения
+   * @return string
+   */
+  static function removeUrlGetParams($url, array $params) {
+    $parts = parse_url($url);
+    parse_str($parts['query'], $out);
+    foreach ($out as $k => $v) if (!in_array($k, $params)) $newParams[$k] = $v;
+    return isset($newParams) ? $parts['path'].'?'.implode('&', $newParams) : $parts['path'];
   }
-  
-  static function setMaster($master) {
-    self::$master = $master;
+
+  static function ol($items) {
+    $s = '<ol>';
+    foreach ($items as $item) $s .= '<li>'.$item.'</li>';
+    return $s.'</ol>';
   }
-  
-  static function setSlave($master) {
-    self::$master = $master;
-  }
-  
+
 }

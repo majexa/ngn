@@ -18,7 +18,7 @@ class ObjectCacherGen {
       $objectClass = $this->getObjectClass($class);
       foreach ((new ReflectionClass($objectClass))->getMethods() as $v) {
         print '.';
-        $params = Tt()->enum(Arr::get((new ReflectionMethod($objectClass, $v->name))->getParameters(), 'name'), ', ', '`$`.$v');
+        $params = St::enum(Arr::get((new ReflectionMethod($objectClass, $v->name))->getParameters(), 'name'), ', ', '`$`.$v');
         $s .= " * @method void {$v->name}($params)\n";
       }
       $s .= " */\n";

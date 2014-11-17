@@ -77,7 +77,7 @@ class DbModel extends ArrayAccesseble {
 
   static function addDefaultUpdateData(array &$data) {
     if (!static::$hasDefaultDateFields) return;
-    if (empty($data['dateUpdate'])) $data['dateUpdate'] = dbCurTime();
+    if (empty($data['dateUpdate'])) $data['dateUpdate'] = Date::db();
   }
 
   static function update($table, $id, array $data, $filterByFields = false) {
@@ -90,8 +90,8 @@ class DbModel extends ArrayAccesseble {
 
   static function addDefaultCreateData(array &$data) {
     if (!static::$hasDefaultDateFields) return;
-    if (empty($data['dateCreate'])) $data['dateCreate'] = dbCurTime();
-    if (empty($data['dateUpdate'])) $data['dateUpdate'] = dbCurTime();
+    if (empty($data['dateCreate'])) $data['dateCreate'] = Date::db();
+    if (empty($data['dateUpdate'])) $data['dateUpdate'] = Date::db();
   }
 
   static function create($table, array $data, $filterByFields = false) {

@@ -72,7 +72,7 @@ class DdItemsManager extends DbItemsManager {
       $data[$name] = $v;
     }
     if (!empty($data)) $this->items->update($this->id, $data);
-    else $this->items->updateField($this->id, 'dateUpdate', dbCurTime());
+    else $this->items->updateField($this->id, 'dateUpdate', Date::db());
   }
 
   protected function addCreateData() {

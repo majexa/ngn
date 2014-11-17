@@ -93,7 +93,7 @@ class FieldEFile extends FieldEFileBase {
     if (!empty($this->allowedMimes) and !in_array($mime, $this->allowedMimes)) {
       // Если для этого поля определены MIME и MIME загруженного 
       // файла на присутствует в этом списке
-      $this->error = "Неправильный формат файла ($mime). Допускаемые: ".Tt()->enum($this->allowedMimes);
+      $this->error = "Неправильный формат файла ($mime). Допускаемые: ".St::enum($this->allowedMimes);
     }
     else {
       $this->options['postValue'] = $uploadedFileValue;

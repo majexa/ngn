@@ -134,7 +134,7 @@ class Html {
   }
 
   static function toParams(array $params) {
-    return Tt()->enum($params, '', ' $k="$v"');
+    return St::enum($params, '', ' $k="$v"');
   }
 
   /**
@@ -145,7 +145,7 @@ class Html {
    * @param array  (tagId, class, noSelectTag, defaultCaption)
    */
   static function select($name, $options, $default = null, array $opts = []) {
-    $dataTags = isset($opts['data']) ? ' '.Tt()->enum($opts['data'], '', '`data-`.$k.`="`.$v.`"`') : '';
+    $dataTags = isset($opts['data']) ? ' '.St::enum($opts['data'], '', '`data-`.$k.`="`.$v.`"`') : '';
     if (empty($opts['noSelectTag'])) {
       $html = "\n<select name=\"$name\"".$dataTags.
         (!empty($opts['tagId']) ? ' id="'.$opts['tagId'].'"' : "").
@@ -248,11 +248,11 @@ class Html {
 
   static function params(array $params, array $inheritParams = null) {
     if ($inheritParams) throw new Exception('not yet realized');
-    return ' '.Tt()->enum($params, ' ', '$k.`="`.$v.`"`');
+    return ' '.St::enum($params, ' ', '$k.`="`.$v.`"`');
   }
 
   static function dataParams(array $data) {
-    return ' '.Tt()->enum($data, ' ', '`data-`.$k.`="`.$v.`"`');
+    return ' '.St::enum($data, ' ', '`data-`.$k.`="`.$v.`"`');
   }
 
 }

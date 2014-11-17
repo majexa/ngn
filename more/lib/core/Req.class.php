@@ -170,10 +170,6 @@ class Req extends ArrayAccesseble {
     return 'http://'.SITE_DOMAIN;
   }
 
-  function getUrlDeletedParams($url, $params) {
-    return Tt()->getUrlDeletedParams($url, $params);
-  }
-
   /**
    * @api
    * Возвращает значение параметра $n и проверяет его на `empty()`

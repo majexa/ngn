@@ -3,49 +3,37 @@
 // NGN core
 require_once NGN_PATH.'/init/core.php';
 
-// NGN more ----------
+// NGN more
 define('MORE_PATH', NGN_PATH . '/more');
+
+// Новый базовый путь в папке more
 Ngn::addBasePath(MORE_PATH, 1);
 
-// Определение этой константы должно проходить в "project/site/config/constants/core"
-if (!PROJECT_KEY) die('Constant PROJECT_KEY is empty');
-
 // Для удачной инициализации NGN необходимо, что бы были определены следующие константы:
-if (!is_dir(NGN_PATH)) die('Dir "'.NGN_PATH.'" not exists');
+if (!is_dir(NGN_PATH)) die('Dir "'.NGN_PATH.'" not exists'."\n".getBacktrace(false));
 
-/*
-if (!function_exists('imagecreate')) die('Extension "gd" is not loaded');
-if (!function_exists('mb_strstr')) die('Extension "mbstring" is not loaded');
-if (!function_exists('mysql_connect')) die('Extension "mysql" is not loaded');
-if (!function_exists('finfo_file')) die('Extension "fileinfo" is not loaded');
-*/
-
-// Проверка версии PHP
-list($ver) = explode('.', phpversion());
-
-if ($ver < 5) die("Minimal PHP version for NGN is 5.0.4. Your version is ".phpversion());
-
-// Проверка установки short_open_tag = On в php.ini
-if (!ini_get('short_open_tag')) die("Change the value of php.ini short_open_tag = On");
-
-// ------------------ more constants -----------------
-if (!defined('SITE_PATH')) die('Error: SITE_PATH not defined'."\n".getBacktrace(false));
-if (file_exists(SITE_PATH.'/config/constants/more.php')) {
+if (!defined('PROJECT_PATH')) die('Error: PROJECT_PATH not defined'."\n".getBacktrace(false));
+if (file_exists(PROJECT_PATH.'/config/constants/more.php')) {
   // опциональное определение констант, что определяются в следующем require
-  require SITE_PATH.'/config/constants/more.php';
+  require PROJECT_PATH.'/config/constants/more.php';
 }
-require MORE_PATH.'/config/constants/default.php';
-require MORE_PATH.'/config.php'; // @todo: what is it? name it
 
-if (!is_writable(SITE_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.SITE_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
+if (!is_writable(PROJECT_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.PROJECT_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
 
-if (!defined('DATA_PATH')) define('DATA_PATH', SITE_PATH.'/'.DATA_DIR);
+if (!defined('DATA_PATH')) define('DATA_PATH', PROJECT_PATH.'/'.DATA_DIR);
+if ((!defined('SITE_DOMAIN') or !constant('SITE_DOMAIN')) and !empty($_SERVER['HTTP_HOST'])) define('SITE_DOMAIN', $_SERVER['HTTP_HOST']);
+
+define('SITE_WWW', 'http://'.SITE_DOMAIN);
+
+if (!defined('LOGS_PATH')) {
+  // Абсолютный путь к каталогу с логами
+  define('LOGS_PATH', PROJECT_PATH.'/'.LOGS_DIR);
+}
+
+define('UPLOAD_PATH', WEBROOT_PATH.'/'.UPLOAD_DIR);
 
 // Очитка кэша. Нельзя помещать в web-init, потому что web-init включается уже после
 // включения кэширования библиотек
 if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) FileCache::clean();
 
 Err::noticeSwitch(true);
-
-require MORE_PATH.'/lib/common/date.func.php';
-require MORE_PATH.'/lib/common/tpl.func.php';
