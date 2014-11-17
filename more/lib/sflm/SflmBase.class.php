@@ -163,7 +163,7 @@ abstract class SflmBase {
     if (in_array($prefix, RouterScripts::prefixes())) {
       return $this->getScriptAbsPath(Misc::removeSuffix('.php', $path));
     }
-    throw new Exception("Unexpected prefix '$prefix' in path '$path'");
+    throw new Exception("Unexpected prefix '$prefix' in path '$path'. Use Sflm::\$absBasePaths[prefix] = '/path/to/files' to register it.");
   }
 
   /**

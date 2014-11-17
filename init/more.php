@@ -21,6 +21,7 @@ if (file_exists(PROJECT_PATH.'/config/constants/more.php')) {
 if (!is_writable(PROJECT_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.PROJECT_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
 
 if (!defined('DATA_PATH')) define('DATA_PATH', PROJECT_PATH.'/'.DATA_DIR);
+if (!defined('TEMP_PATH')) define('TEMP_PATH', PROJECT_PATH.'/temp');
 if ((!defined('SITE_DOMAIN') or !constant('SITE_DOMAIN')) and !empty($_SERVER['HTTP_HOST'])) define('SITE_DOMAIN', $_SERVER['HTTP_HOST']);
 
 define('SITE_WWW', 'http://'.SITE_DOMAIN);
@@ -32,8 +33,15 @@ if (!defined('LOGS_PATH')) {
 
 define('UPLOAD_PATH', WEBROOT_PATH.'/'.UPLOAD_DIR);
 
-// Очитка кэша. Нельзя помещать в web-init, потому что web-init включается уже после
-// включения кэширования библиотек
-if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) FileCache::clean();
+// sflm init
 
+require_once MORE_PATH.'/lib/sflm/SflmBase.class.php';
+require_once MORE_PATH.'/lib/sflm/SflmJs.class.php';
+require_once MORE_PATH.'/lib/sflm/SflmCss.class.php';
+require_once MORE_PATH.'/lib/sflm/SflmCache.class.php';
+require_once MORE_PATH.'/lib/sflm/Sflm.class.php';
+
+Sflm::$absBasePaths['m'] = WEBROOT_PATH.'/m';
+
+// @todo why not used standard php method
 Err::noticeSwitch(true);
