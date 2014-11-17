@@ -1,6 +1,6 @@
 <?php
 
-class Ssh2 extends Ssh2Base implements ShellInterface {
+class Ssh2 extends Ssh2Base implements Ssh2ShellInterface {
 
   function exec($cmd) {
     if (is_array($cmd)) {
