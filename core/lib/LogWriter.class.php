@@ -34,7 +34,7 @@ class LogWriter {
     $r = [];
     foreach ($params as $k => $v) $r[] = "$k: $v";
     $s .= implode(', ', $r);
-    // if ($params) $s .= Tt()->enum($params, ', ', '$k.`: `.$v');
+    // if ($params) $s .= St::enum($params, ', ', '$k.`: `.$v');
     $s .= "\n";
     $s .= "<body>".$html."</body>";
     $html = false;

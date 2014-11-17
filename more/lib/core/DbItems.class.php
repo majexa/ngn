@@ -63,8 +63,8 @@ class DbItems implements UpdatableItems, ArrayAccess {
   }
 
   function ___create(array $data) {
-    if (empty($data['dateCreate'])) $data['dateCreate'] = dbCurTime();
-    $data['dateUpdate'] = dbCurTime();
+    if (empty($data['dateCreate'])) $data['dateCreate'] = Date::db();
+    $data['dateUpdate'] = Date::db();
     if ($this->filterDataByColNames) $data = Arr::filterByKeys($data, db()->cols($this->table));
     return $this->db->query("INSERT INTO {$this->table} SET ?a", Arr::serialize($data));
   }
@@ -80,7 +80,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
   public $filterDataByColNames = false;
 
   function update($id, array $data) {
-    $data['dateUpdate'] = dbCurTime();
+    $data['dateUpdate'] = Date::db();
     if ($this->filterDataByColNames) $data = Arr::filterByKeys($data, db()->cols($this->table));
     $this->db->query("UPDATE {$this->table} SET ?a WHERE id=?d", Arr::serialize($data), $id);
   }

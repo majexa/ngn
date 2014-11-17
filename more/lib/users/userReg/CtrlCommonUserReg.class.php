@@ -126,7 +126,7 @@ class CtrlCommonUserReg extends CtrlCammon {
         ];
       }
     }
-    $this->d['submenu'] = getLinks($items, $this->action);
+    $this->d['submenu'] = Tpl::getLinks($items, $this->action);
     foreach ($this->d['submenu'] as $v) {
       if ($v['name'] == $this->action) {
         $this->setPageTitle($v['title'], true);

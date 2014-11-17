@@ -75,12 +75,12 @@ use Options;
   protected function auth() {
     if (isset($this->req->g['logout'])) {
       Auth::logout();
-      $url = 'http://'.SITE_DOMAIN.Tt()->getUrlDeletedParams($_SERVER['REQUEST_URI'], ['logout']);
+      $url = 'http://'.SITE_DOMAIN.St::removeUrlGetParams($_SERVER['REQUEST_URI'], ['logout']);
       jsRedirect($url);
     }
     elseif (isset($this->req->g['clear'])) {
       Auth::clear();
-      //header('Location: '.Tt()->getUrlDeletedParams($_SERVER['REQUEST_URI'], array('clear')));
+      //header('Location: '.St::removeUrlGetParams($_SERVER['REQUEST_URI'], array('clear')));
     }
     else {
       Auth::setAuth();

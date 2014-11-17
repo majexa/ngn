@@ -7,12 +7,12 @@ class Date {
    * Условно-произвольный формат даты чувствителен к следующему ряду символов,
    * указанных через пробел и сам пробел: d m y h i s . : , | - \ /
    *
-   * @param   string  Время-дата в условно-произвольном формате
-   * @param   string  Условно-произвольный формат
-   * @param   string  Формат принятый в ф-ии date()
-   * @return  string  Время-дата в формате $outFormat
+   * @param string $date Время-дата в условно-произвольном формате
+   * @param string $outFormat Условно-произвольный формат
+   * @param string $inFormat Формат принятый в ф-ии date()
+   * @return string Время-дата в формате $outFormat
    */
-  function _date_reformat($date, $outFormat, $inFormat) {
+  function _reformat($date, $outFormat, $inFormat) {
     $inFormat = strtolower($inFormat);
     $regexp = '';
     $n = 1;
@@ -48,71 +48,70 @@ class Date {
     return $outFormat;
   }
 
-  function date_reformat($date, $outFormat, $inFormat = ['d.m.Y H:i:s', 'd.m.Y H:i', 'd.m.Y']) {
+  static function reformat($date, $outFormat, $inFormat = ['d.m.Y H:i:s', 'd.m.Y H:i', 'd.m.Y']) {
     if (is_array($inFormat)) {
       foreach ($inFormat as $format) {
-        if (($r = _date_reformat($date, $outFormat, $format)) !== false) return $r;
+        if (($r = self::_reformat($date, $outFormat, $format)) !== false) return $r;
       }
       throw new Exception("Date '$date' not supported by formats: ".implode(', ', $inFormat));
     }
     else {
-      return _date_reformat($date, $outFormat, $inFormat);
+      return self::_reformat($date, $outFormat, $inFormat);
     }
   }
 
-
-  function date_reformat_db($date, $outFormat) {
-    return date_reformat($date, $outFormat, [
-      'Y-m-d H:i:s', 'Y-m-d'
-    ]);
+  /**
+   * Возвращает время в формате базы данных MySQL
+   *
+   * @param int $time
+   * @return bool|string|void
+   */
+  static function db($time = 0) {
+    return date('Y-m-d H:i:s', $time ? $time : time());
   }
 
   /**
-   * Возвращает строку формата: DD Month YYY
-   *
-   * @param   string    TIMESTAMP
-   * @param   bool      Переводить в нижний регистр
-   * @param   string    Тип месяца:
+   * @param string $tStamp TIMESTAMP
+   * @param bool $lowercase Переводить в нижний регистр
+   * @param string $monthsType Тип месяца:
    *                    'months' (месяц с прописной буквы в именительном падеже) /
    *                    'months2' (месяц с прописной буквы в родительном падеже)
-   * @return  string
+   * @return string
+   * @throws Exception
    */
-  static function str($tStamp, $lowercase = true, $monthsType = 'months') {
+  static function str($tStamp, $lowercase = true, $monthsType = 'months2') {
     static $months;
-    if (!$months) $months = Config::getVar('ruMonths2');
+    if (!$months) $months = Config::getVar(LANG.ucfirst($monthsType));
     return date('j', $tStamp).' '.($lowercase ? mb_strtolower($months[date('n', $tStamp)], CHARSET) : $months[date('n', $tStamp)]).' '.date('Y', $tStamp);
   }
 
-  function dateStrSql($dateSql) {
-    preg_match('/(\d+)-(\d+)-(\d+)/', $dateSql, $m);
-    static $months;
-    if (!isset($months)) $months = Config::getVar('ruMonths2');
-    return $m[3].' '.mb_strtolower($months[(int)$m[2]], CHARSET).' '.$m[1];
-  }
-
-  function datetimeStrSql($dateSql) {
+  function datetimeStrSql($dateSql, $monthsType = 'months2') {
     preg_match('/(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/', $dateSql, $m);
     static $months;
-    if (!$months) $months = Config::getVar('ruMonths2');
+    if (!$months) $months = Config::getVar(LANG.ucfirst($monthsType));
     return $m[3].' '.mb_strtolower($months[(int)$m[2]], CHARSET).' '.$m[1].' в '.$m[4].':'.$m[5];
   }
 
   function datetimeStr($tStamp, $lowercase = true, $monthsType = 'months') {
     if ($tStamp == 0) return 'не определено';
-    return dateStr($tStamp, $lowercase, $monthsType).' — '.date('H:i:s', $tStamp);
+    return self::str($tStamp, $lowercase, $monthsType).' — '.date('H:i:s', $tStamp);
   }
 
-  /*
-
-  Варианты входных форматов:
-  'd.m.Y H:i:s'
-  'd.m.Y H:i'
-  'd.m.Y'
-  'd ru-month Y'
-  'd ru-month2 Y'
-
-  */
-  function dateParse($str, $inFormat, $outFormat) {
+  /**
+   * Варианты входных форматов:
+   *   'd.m.Y H:i:s'
+   *   'd.m.Y H:i'
+   *   'd.m.Y'
+   *   'd ru-month Y'
+   *   'd ru-month2 Y'
+   *
+   * @param $str
+   * @param $inFormat
+   * @param $outFormat
+   * @return string
+   * @throws Exception
+   */
+  static function dateParse($str, $inFormat, $outFormat) {
     if ($inFormat == 'd.m H:i') {
       $str = preg_replace('/(\d+\.\d+)( \d+:\d+)/', '$1.'.date('Y').'$2', $str);
       $inFormat = 'd.m.Y H:i';
@@ -137,35 +136,17 @@ class Date {
         //$monthConfigKey1 = preg_replace('/.*([a-z]{2}-month).*/', '$1s', $inFormat);
         //foreach (array_flip(Config::getVar($monthConfigKey1)) as $monthTitle => $n)
         //  $str = str_replace($monthTitle, $n, $str);
-
         $inFormat = preg_replace('/[a-z]{2}-month/', 'n', $inFormat);
       }
     }
-
-    /*
-    if (!$oDate = DateTime::createFromFormat($inFormat, $str)) {
-      $errors = date_get_last_errors();
-      foreach ($errors['errors'] as $err)
-        throw new Exception("$err Format: $inFormat, String: «".htmlspecialchars($str)."»");
-    }
-    if ($outFormat == 'timestamp') return $oDate->getTimestamp();
-    return $oDate->format($outFormat);
-    */
-
-    //die2("$str, $outFormat, $inFormat");
-
-    return _date_reformat($str, $outFormat, $inFormat);
-  }
-
-  function dbCurTime($time = 0) {
-    return date('Y-m-d H:i:s', $time ? $time : time());
+    return self::_reformat($str, $outFormat, $inFormat);
   }
 
   /**
-   * @param string Дата в формате DD.MM.YYYY
-   * @return string
+   * @param string $date Дата в формате DD.MM.YYYY
+   * @return bool|string|void
    */
-  function ageFromBirthDate($date) {
+  static function ageFromBirthDate($date) {
     list($d, $m, $y) = explode('.', $date);
     $d = (int)$d;
     $m = (int)$m;
@@ -177,11 +158,6 @@ class Date {
       $y++;
     }
     return date('Y') - $y;
-  }
-
-  function makeTime($s, $dayOffset = 0) {
-    list($h, $m) = explode(':', $s);
-    return mktime($h, $m, 0, date('m'), date('j') + $dayOffset);
   }
 
 }

@@ -26,7 +26,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       $this->json['validError'] = 'Пользователь с таким телефоном уже существует';
       return;
     }
-    $r = db()->selectRow('SELECT * FROM userPhoneConfirm WHERE dateCreate > ? AND phone=?', dbCurTime(time() - self::expireTime()), $phone);
+    $r = db()->selectRow('SELECT * FROM userPhoneConfirm WHERE dateCreate > ? AND phone=?', Date::db(time() - self::expireTime()), $phone);
     $maxAttemps = 15;
     if ($r) {
       if ($r['attempts'] >= $maxAttemps) {
@@ -44,7 +44,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       'phone'      => $phone,
       'code'       => $code,
       'attempts'   => $attempts,
-      'dateCreate' => dbCurTime()
+      'dateCreate' => Date::db()
     ];
     if ($r) $d['id'] = $r['id'];
     $id = db()->create('userPhoneConfirm', $d, true);

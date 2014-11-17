@@ -202,7 +202,7 @@ abstract class SflmBase {
       if (!empty($p['query'])) {
         parse_str($p['query'], $q);
         if (!empty($q)) {
-          $cachePath = Misc::getFilePrefexedPath($cachePath, Tt()->enum($q, '-', '$k.`,`.$v').'.');
+          $cachePath = Misc::getFilePrefexedPath($cachePath, St::enum($q, '-', '$k.`,`.$v').'.');
         }
       }
       else {

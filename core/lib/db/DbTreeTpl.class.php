@@ -93,5 +93,20 @@ class DbTreeTpl {
     if ($tpl == 'node' or $tpl == 'leaf') $this->prepareNode($node);
     return St::dddd($this->$_tpl, $node);
   }
+
+  static function simple($tree, $tplNode, $tplLeaf = '', $tplNodesBegin = '', $tplNodesEnd = '', $extData = null) {
+    if (!$tree) return '';
+    $o = new self;
+    $o->setNodes($tree);
+    if ($extData) $o->setExtData($extData);
+    if (!$tplLeaf) $o->setTpl($tplNode);
+    else {
+      $o->setNodeTpl($tplNode);
+      $o->setLeafTpl($tplLeaf);
+      $o->setNodesBeginTpl($tplNodesBegin);
+      $o->setNodesEndTpl($tplNodesEnd);
+    }
+    return $o->html();
+  }
   
 }

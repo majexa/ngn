@@ -72,7 +72,7 @@ class DdTagsHtml {
 
   static function lastInBranches(array $nodes, $dddd) {
     foreach ($nodes as $v) {
-      Tt()->enum(TreeCommon::lastInBranch($v), '', $dddd);
+      St::enum(TreeCommon::lastInBranch($v), '', $dddd);
     }
   }
 

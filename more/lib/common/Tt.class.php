@@ -12,7 +12,7 @@ class Tt {
   protected $req;
 
   function __construct(Req $req = null) {
-    $this->req = $req ? : O::get('Req');
+    $this->req = $req ?: O::get('Req');
   }
 
   /**
@@ -78,44 +78,6 @@ class Tt {
     return false;
   }
 
-  /**
-   * Возвращает URL с исключенными из него параметрами
-   *
-   * @param string $url URL
-   * @param array $params Параметры для исключения
-   * @return string
-   */
-  function getUrlDeletedParams($url, array $params) {
-    $parts = parse_url($url);
-    parse_str($parts['query'], $out);
-    foreach ($out as $k => $v) if (!in_array($k, $params)) $newParams[$k] = $v;
-    return isset($newParams) ? $parts['path'].'?'.implode('&', $newParams) : $parts['path'];
-  }
-
-  /**
-   * Склеивает массив в строку с разделителями, помещая при этом значения
-   * массива в шаблон
-   *
-   * @param array $arr Массив с перечислением
-   * @param string $glue Разделитель
-   * @param string $tpl Шаблон
-   * @param null $key Ключ необходим в том случае, если элементом массива является массив
-   *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
-   *                  который необходимо использовать для склеивания
-   * @return string Склеенная по шаблону строка
-   */
-  function enum($arr, $glue = ', ', $tpl = '$v', $key = null) {
-    if (empty($arr) or !is_array($arr)) return '';
-    foreach ($arr as $k => $v) {
-      if ($key) $v = $v[$key];
-      $results[] = St::dddd($tpl, [
-        'k' => $k,
-        'v' => $v
-      ]);
-    }
-    return implode($glue, $results);
-  }
-
   function enumPrefix(array $arr, $glue = ', ', $tpl = '$v', $prefix = '', $postfix = '', $key = null) {
     if (empty($arr) or !is_array($arr)) return '';
     return $prefix.$this->enum($arr, $glue, $tpl, $key).$postfix;
@@ -124,21 +86,6 @@ class Tt {
   function enumInlineStyles($arr) {
     if (empty($arr)) return '';
     return $this->enumPrefix($arr, '; ', '$k.`: `.$v', ' style="', '"');
-  }
-
-  /**
-   * Тоже самое, что и Tt()->enum(), только с измененныым порядком параметров
-   *
-   * @param   array Массив с перечислением
-   * @param   string Ключ необходим в том случае, если элементом массива является массив
-   *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
-   *                  который необходимо использовать для склеивания
-   * @param   string Разделитель
-   * @param   string Шаблон
-   * @return  strgin  Склеенная по шаблону строка
-   */
-  function enumK($arr, $key, $glue = ', ', $tpl = '$v') {
-    return Tt()->enum($arr, $glue, $tpl, $key);
   }
 
   function enumDddd($arr, $tpl, $glue = ', ') {
@@ -151,33 +98,6 @@ class Tt {
     if (!is_array($arr)) return '';
     foreach ($arr as $v) $results[] = St::ssss($tpl, $v);
     return isset($results) ? implode($glue, $results) : '';
-  }
-
-  function enumSsss2(array $arr, $tpl = '$v', $glue = ', ') {
-    foreach ($arr as $k => $v) $results[] = St::ssss($tpl, [
-      'k' => $k,
-      'v' => $v
-    ]);
-    return isset($results) ? implode($glue, $results) : '';
-  }
-
-  function getDbTree($tree, $tplNode, $tplLeaf = '', $tplNodesBegin = '', $tplNodesEnd = '', $extData = null) {
-    if (!$tree) return false;
-    $o = new DbTreeTpl();
-    $o->setNodes($tree);
-    if ($extData) $o->setExtData($extData);
-    if (!$tplLeaf) $o->setTpl($tplNode);
-    else {
-      $o->setNodeTpl($tplNode);
-      $o->setLeafTpl($tplLeaf);
-      $o->setNodesBeginTpl($tplNodesBegin);
-      $o->setNodesEndTpl($tplNodesEnd);
-    }
-    return $o->html();
-  }
-
-  function hasBlocks($action) {
-    return !in_array($action, ['new', 'edit', 'complete']);
   }
 
   function tagParams(array $params) {

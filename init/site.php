@@ -1,8 +1,8 @@
 <?php
 
 require_once NGN_PATH.'/init/core.php';
-if (file_exists(SITE_PATH.'/config/constants/site.php')) require SITE_PATH.'/config/constants/site.php';
-if (file_exists(SITE_PATH.'/config/constants/database.php')) require SITE_PATH.'/config/constants/database.php';
-if (!defined('SITE_PATH') or !is_dir(SITE_PATH)) die2('Dir SITE_PATH not defined or "'.SITE_PATH.'"');
-setConstant('SITE_LIB_PATH', SITE_PATH.'/lib');
-Ngn::addBasePath(SITE_PATH, 5);
+if (file_exists(PROJECT_PATH.'/config/constants/site.php')) require PROJECT_PATH.'/config/constants/site.php';
+if (file_exists(PROJECT_PATH.'/config/constants/database.php')) require PROJECT_PATH.'/config/constants/database.php';
+if (!defined('PROJECT_PATH') or !is_dir(PROJECT_PATH)) die2('Dir PROJECT_PATH not defined or "'.PROJECT_PATH.'"');
+setConstant('SITE_LIB_PATH', PROJECT_PATH.'/lib');
+Ngn::addBasePath(PROJECT_PATH, 5);

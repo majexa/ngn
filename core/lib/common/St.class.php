@@ -11,7 +11,7 @@ class St {
    * $__data = array('name' => '123'), то в коде будет доступна
    * переменная $name = '123'
    *
-   * @param   string  PHP-код. Вместо одинарных кавычек (') используются
+   * @param string $__text PHP-код. Вместо одинарных кавычек (') используются
    *                  одинарные наклонные (`)
    *                  Пример кода:
    *                  $_text = 'just` . someFunc(`fallow`) . `your heart';
@@ -21,9 +21,10 @@ class St {
    *                  вывести текст с переменной, ставить кавычки вообще не нужно
    *                  Пример кода:
    *                  $_text = 'just $fallow your heart';
-   * @param   array   Массив, элементы которого будут доступны, как переменные в
+   * @param array $__data Массив, элементы которого будут доступны, как переменные в
    *                  вашем PHP-коде
-   * @return  midex   Результат обработки eval()
+   * @return mixed Результат обработки eval()
+   * @throws Exception
    */
   static function dddd($__text, array $__data) {
     Err::noticeSwitch(false);
@@ -32,7 +33,6 @@ class St {
     if (is_array($__data)) extract($__data);
     $__text = str_replace('\\"', '"', $__text);
     $__text = str_replace('`', '\'', $__text);
-    //$__text = str_replace('’', '\\`', $__text);
     $code = 'return '.$__text.';';
     ob_start();
     $r = eval($code);
@@ -61,13 +61,13 @@ class St {
   }
 
   /**
-   * Работает с шаблонами вида "adqwdqw {varName} asdawdqw"
+   * Работает с шаблонами формата "abc {varKey} bca"
    *
-   * @param   string  Исходный текст
-   * @param   array   Массив с данными для замены
-   * @param   bool    Заменять только строки {name}, соответствующие элементы которых
-   *                  существуют в массиве $data
-   * @return  string  Замененный текст
+   * @param string $text Исходный текст
+   * @param array $data Массив с данными для замены
+   * @param bool $onlyExistsInData Заменять только строки {name}, соответствующие
+   *                               элементы которых существуют в массиве $data
+   * @return string Замененный текст
    */
   static function tttt($text, array $data, $onlyExistsInData = true) {
     if (preg_match_all('/\{(\w+)\}/', $text, $m)) {
@@ -85,6 +85,52 @@ class St {
 
   static function hasTttt($text) {
     return preg_match('/\{(\w+)\}/', $text);
+  }
+
+  /**
+   * Склеивает массив в строку с разделителями, помещая при этом значения
+   * массива в шаблон
+   *
+   * @param array $arr Массив с перечислением
+   * @param string $glue Разделитель
+   * @param string $tpl Шаблон
+   * @param null $key Ключ необходим в том случае, если элементом массива является массив
+   *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
+   *                  который необходимо использовать для склеивания
+   * @return string Склеенная по шаблону строка
+   */
+  static function enum($arr, $glue = ', ', $tpl = '$v', $key = null) {
+    if (empty($arr) or !is_array($arr)) return '';
+    $results = [];
+    foreach ($arr as $k => $v) {
+      if ($key) $v = $v[$key];
+      $results[] = St::dddd($tpl, [
+        'k' => $k,
+        'v' => $v
+      ]);
+    }
+    return implode($glue, $results);
+  }
+
+  /**
+   * Тоже самое, что и St::enum(), только с измененныым порядком параметров
+   *
+   * @param   array $arr Массив с перечислением
+   * @param   string $key Ключ необходим в том случае, если элементом массива является массив
+   *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
+   *                  который необходимо использовать для склеивания
+   * @param   string $glue Разделитель
+   * @param   string $tpl Шаблон
+   * @return  string  Склеенная по шаблону строка
+   */
+  static function enumK($arr, $key, $glue = ', ', $tpl = '$v') {
+    return St::enum($arr, $glue, $tpl, $key);
+  }
+
+  function enumSsss($arr, $tpl, $glue = ', ') {
+    if (!is_array($arr)) return '';
+    foreach ($arr as $v) $results[] = St::ssss($tpl, $v);
+    return isset($results) ? implode($glue, $results) : '';
   }
 
 }

@@ -334,7 +334,7 @@ class Db extends DbSimple_Mysql {
 
   function getAndCond($params) {
     if (!count($params)) return '1';
-    return Tt()->enum($params, ' AND ', "\\\"\$k=`\$v`\\\""); // Шаблон преобразовывается в "$k='$v'"
+    return St::enum($params, ' AND ', "\\\"\$k=`\$v`\\\""); // Шаблон преобразовывается в "$k='$v'"
   }
 
   function unpack($query) {
