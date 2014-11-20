@@ -81,14 +81,14 @@ class Date {
    */
   static function str($tStamp, $lowercase = true, $monthsType = 'months2') {
     static $months;
-    if (!$months) $months = Config::getVar(LANG.ucfirst($monthsType));
+    if (!$months) $months = Config::getVar('ru'.ucfirst($monthsType));
     return date('j', $tStamp).' '.($lowercase ? mb_strtolower($months[date('n', $tStamp)], CHARSET) : $months[date('n', $tStamp)]).' '.date('Y', $tStamp);
   }
 
   function datetimeStrSql($dateSql, $monthsType = 'months2') {
     preg_match('/(\d+)-(\d+)-(\d+) (\d+):(\d+):(\d+)/', $dateSql, $m);
     static $months;
-    if (!$months) $months = Config::getVar(LANG.ucfirst($monthsType));
+    if (!$months) $months = Config::getVar('ru'.ucfirst($monthsType));
     return $m[3].' '.mb_strtolower($months[(int)$m[2]], CHARSET).' '.$m[1].' в '.$m[4].':'.$m[5];
   }
 

@@ -7,6 +7,21 @@ class CtrlCommonErrors extends CtrlCommon {
   }
 
   function action_default() {
+    $this->hasOutput = false;
+    print '<html><head><meta http-equiv="refresh" content="10"></head>';
+    $rows = [];
+    foreach ($this->errors()->get() as $v) {
+      $rows[] = [
+        $v['name'],
+        date('d.m.Y H:i:s', $v['time'])."<br>{$v['body']}<pre>{$v['trace']}</pre>"
+      ];
+    }
+    print '<body>';
+    Tt()->tpl('common/table', $rows);
+    print '</body></html>';
+  }
+
+  function action_rss() {
     $items = [];
     foreach ($this->errors()->get() as $v) {
       $v['body'] = preg_replace('/\s+/u', ' ', $v['body']);
@@ -19,12 +34,9 @@ class CtrlCommonErrors extends CtrlCommon {
         'link'        => isset($v['url']) ? 'http://'.SITE_DOMAIN.$v['url'] : 'none',
       ];
     }
-    $items = Arr::sortByOrderKey($items, 'time', SORT_DESC);
-    //foreach ($items as $n => &$v) $v['title'] = ($n + 1).') '.$v['title'];
     $this->rss([
       'title' => SITE_TITLE.': ошибки',
     ], $items);
   }
-
 
 }

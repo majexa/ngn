@@ -2,8 +2,7 @@
 
 abstract class Ssh2Connection {
 
-  public $host, $port;
-  protected $connection;
+  public $host, $port, $connection;
 
   function __construct($host, $port) {
     $this->host = $host;
@@ -17,12 +16,13 @@ abstract class Ssh2Connection {
   protected function connect() {
     if ($this->attempt > 3) {
       throw new Exception("Reached max attempts ($this->attempt)");
-      return;
     }
     output("Connecting ssh $this->host:$this->port");
     $this->attempt++;
     try {
       $this->connection = ssh2_connect($this->host, $this->port);
+
+      //die2($this->connection);
     } catch (Exception $e) {
       if (strstr($e->getMessage(), 'Error starting up SSH connection(-1): Unable to exchange encryption keys')) {
         output($e->getMessage());
