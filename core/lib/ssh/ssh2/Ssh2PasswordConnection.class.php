@@ -11,11 +11,11 @@ class Ssh2PasswordConnection extends Ssh2Connection {
   }
 
   protected function auth() {
-    try {
+    //try {
       $r = ssh2_auth_password($this->connection, $this->username, $this->password);
-    } catch (Exception $e) {
-      throw new Exception($e->getMessage()." ($this->connection, $this->host, $this->username, $this->password)");
-    }
+    //} catch (Exception $e) {
+    //  throw new Exception($e->getMessage()." ($this->connection, $this->host, $this->username, $this->password)");
+    //}
     if (!$r) throw new Exception('=(');
     output("Auth successfully");
   }

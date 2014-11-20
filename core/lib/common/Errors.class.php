@@ -3,7 +3,7 @@
 class Errors {
 
   function get() {
-    return Arr::append(LogReader::get('warnings'), LogReader::get('errors'));
+    return array_merge(LogReader::get('warnings'), LogReader::get('errors'));
   }
 
   /**

@@ -20,30 +20,48 @@ class LogReader {
   /**
    * Парсит лог-файл и возвращает массив
    *
-   * @param   string  Имя лог-файла
-   * @return  array
+   * @param string $file Имя лог-файла
+   * @return Generator
    */
   static function _get($file) {
-    if (!file_exists($file)) return [];
-    $r = [];
-    foreach (explode('=====+=====', file_get_contents($file)) as $v) {
-      if (!preg_match('/(\d+.\d+.\d+ \d+.\d+.\d+): \((.*)\)\n(.*)\n<body>(.*)<\/body>\n<trace>(.*)<\/trace>/ms', $v, $m)) continue;
-      $i['time'] = strtotime($m[1]);
-      $i['body'] = str_replace("\\'", '', $m[4]);
-      $i['file'] = $file;
-      $i['trace'] = $m[5];
-      if ($m[3]) {
-        $params = explode(', ', $m[3]);
-        foreach ($params as $param) {
-          $p = explode(': ', $param);
-          $i[$p[0]] = $p[1];
+    $a = function($file) {
+      $handle = fopen($file, 'r');
+      if ($handle) {
+        $c = '';
+        while (($buffer = fgets($handle, 4096)) !== false) {
+          $c .= $buffer;
+          if (strstr($c, '=====+=====')) {
+            $p = explode('=====+=====', $c)[0];
+            $c = '';
+            yield $p;
+          }
         }
+        fclose($handle);
       }
-      if (preg_match('/<post>(.*)<\/post>/ms', $v, $m)) $i['post'] = $m[1];
-      $r[] = $i;
-    }
-    return empty($r) ? [] : Arr::sortByOrderKey($r, 'time', SORT_DESC);
+    };
+    $b = function() use ($file, $a) {
+      foreach ($a($file) as $p) {
+        if (!preg_match('/(\d+.\d+.\d+ \d+.\d+.\d+): \((.*)\)\n(.*)\n<body>(.*)<\/body>\n<trace>(.*)<\/trace>/ms', $p, $m)) continue;
+        $v = [];
+        $v['time'] = strtotime($m[1]);
+        $v['body'] = str_replace("\\'", '', $m[4]);
+        $v['file'] = $file;
+        $v['trace'] = $m[5];
+        if ($m[3]) {
+          $params = explode(', ', $m[3]);
+          foreach ($params as $param) {
+            $r = explode(': ', $param);
+            $v[$r[0]] = $r[1];
+          }
+        }
+        if (preg_match('/<post>(.*)<\/post>/ms', $p, $m)) $v['post'] = $m[1];
+        yield $v;
+      }
+    };
+    return $b();
   }
+
+  /**/
 
   static function logs() {
     $logs = [];

@@ -124,7 +124,7 @@ class Lib {
    */
   static function getClassPath($class) {
     self::$currentGetClass = $class;
-    $classesList = self::getClassesListCached();
+    $classesList = self::getClassesListCached($class);
     if (isset($classesList[$class])) return $classesList[$class]['path'];
     return false;
   }
@@ -246,8 +246,8 @@ class Lib {
     self::$cacheEnabled = true;
   }
 
-  static function getClassesListCached() {
-    if (!self::$cacheEnabled) throw new Exception('Please enable cache [Lib::enableCache()] before use class autoload');
+  static function getClassesListCached($forClass = null) {
+    if (!self::$cacheEnabled) throw new Exception('Please enable cache [Lib::enableCache()] before use class '.($forClass ? '"'.$forClass.'" ' : '').'autoload');
     if (self::$list !== false) return self::$list;
     $options = [];
     if (isset(self::$cachePrefix)) $options['file_name_prefix'] = self::$cachePrefix;
