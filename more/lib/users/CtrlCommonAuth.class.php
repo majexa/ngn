@@ -43,19 +43,14 @@ class CtrlCommonAuth extends CtrlCammon {
     $form = new AuthForm;
     $form->action = '/' + Sflm::frontendName(true) + '/auth/json_form';
     $this->json['title'] = 'Авторизация ';
-    LogWriter::str('aaa', 2);
     if ($form->isSubmittedAndValid()) {
       $this->json['success'] = true;
-      LogWriter::str('aaa', 3);
       return;
     }
-    LogWriter::str('aaa', 4);
     $this->json['req'] = $form->req->r;
     $this->json['req2'] = $_REQUEST;
     $this->json['valid'] = ($form->validate() ? 'true' : $form->lastError);
-    LogWriter::str('aaa', 5);
     if ($form->req['formId']) $this->json['idssss'] = $form->req['formId'].' - '.$form->id();
-    LogWriter::str('aaa', 6);
     return $this->jsonFormAction($form);
   }
 
