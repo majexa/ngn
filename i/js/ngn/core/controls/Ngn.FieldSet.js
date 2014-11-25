@@ -73,7 +73,7 @@ Ngn.FieldSet = new Class({
     this.eAddRow = this.eContainer.getElement(this.options.addRowBtnSelector);
     if (!this.eAddRow) {
       var eBottomBtns = new Element('div', {'class': 'bottomBtns'}).inject(this.eContainer, 'bottom');
-      this.eAddRow = Ngn.btn1(this.options.addTitle, 'btn add dgray').inject(eBbtns);
+      this.eAddRow = Ngn.btn1(this.options.addTitle, 'btn add dgray').inject(eBottomBtns);
       Elements.from('<div class="heightFix"></div>')[0].inject(this.eContainer, 'bottom');
     }
     this.buttons.push(new Ngn.Btn(this.eAddRow, function(btn) {

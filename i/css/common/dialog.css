@@ -50,6 +50,9 @@ margin-right: 10px;
 margin-right: 0;
 }
 
+.image-button i {
+margin-top: -1px;
+}
 /* advanced button 
 .image-button a {
 display: block;
