@@ -7,7 +7,7 @@ Ngn.DdGrid.Admin = new Class({
     basePath: Ngn.getPath(3),
     filterPath: new Ngn.DdFilterPath(4),
     listAction: 'editContent',
-    //idParam: 'itemId',
+    // idParam: 'itemId',
     toolActions: {
       edit: function(row) {
         new Ngn.Dialog.RequestForm({
@@ -25,11 +25,11 @@ Ngn.DdGrid.Admin = new Class({
         return Ngn.getPath(4) + '?a=edit&itemId=' + row.id;
       }
     }
-  },
-  initPagination: function(data, fromAjax) {
-    this.parent(data, fromAjax);
-    this.ePagination.inject(document.getElement('.pagePath'), 'top').addClass('pNumsTop');
   }
+  //initPagination: function(data, fromAjax) {
+  //  this.parent(data, fromAjax);
+  //  this.ePagination.inject(document.getElement('.pagePath'), 'top').addClass('pNumsTop');
+  //}
 });
 
 /**

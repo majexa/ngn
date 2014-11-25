@@ -1,3 +1,4 @@
+
 Ngn.Grid = new Class({
   Extends: Ngn.Items.Table,
 
@@ -40,7 +41,6 @@ Ngn.Grid = new Class({
       Elements.from('<th></th>')[0].inject(this.eHeadTr);
     }
     if (this.options.data) this.initInterface(this.options.data);
-    c(this.options);
   },
 
   initMenu: function() {
