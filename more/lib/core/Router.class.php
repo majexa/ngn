@@ -20,7 +20,7 @@ use Options;
    */
   public $req;
 
-  function __construct(array $options) {
+  function __construct(array $options = []) {
     $this->setOptions($options);
     $this->req = isset($this->options['req']) ? $this->options['req'] : O::get('Req');
     if (isset($this->options['isDb'])) $this->isDb = $this->options['isDb'];

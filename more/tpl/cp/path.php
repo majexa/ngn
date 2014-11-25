@@ -1,15 +1,4 @@
-<?
-
-$d['filter1'] = [
-  'name' => 'cityLive',
-  'title' => 'Город проживания',
-  'param' => 't',
-  'options' => [
-    'asdasd'
-  ]
-];
-
-?>
+<?/*
     <div class="pagePath">
       <? if (isset($d['filter'])) { ?>
       <div class="itemsFilter">
@@ -36,3 +25,4 @@ $d['filter1'] = [
       </div>
       <div class="clear"><!-- --></div>
     </div>
+*/?>

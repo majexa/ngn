@@ -52,7 +52,7 @@ Ngn.Grid.Resizeble.Col = new Class({
 
   getElements: function(offset) {
     var els = [];
-    var offset = offset || 0;
+    offset = offset || 0;
     this.resizeble.getRows().each(function(eTr) {
       eTr.getChildren('td,th').each(function(el, n) {
         if (n == this.colN - offset) {
