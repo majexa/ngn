@@ -1,4 +1,4 @@
-body,div,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,th,td {margin:0;padding:0;}
+/*body,div,ul,ol,li,h1,h2,h3,h4,h5,h6,form,fieldset,input,textarea,p,th,td {margin:0;padding:0;}*/
 
 a {
 color: #004eb8;
@@ -99,38 +99,6 @@ width: 500px;
 height: 100px;
 }
 
-
-
-.am_stm .element {
-font-size: 11px;
-float: left;
-width: 110px;
-}
-.am_stm .hgrp_mainSettings .element {
-width: 233px;
-}
-.am_stm .type_headerToggle .element p.label {
-margin-bottom: 5px;
-}
-.am_stm .element input[type=text] {
-width: 50px;
-}
-.am_stm .type_fieldSet .type_header .element {
-width: 200px;
-}
-.am_stm .type_fieldSet .element input[type=text] {
-width: 100%;
-}
-.am_stm .element select {
-width: 100%;
-}
-
-/*--------------------------------------------------------------------*/
-
-body, td, th, input, textarea, select, button {
-font-family: Verdana, Tahoma, Geneva, Arial, Sans-serif;
-font-size: 12px;
-}
 select {
 font-size: 11px;
 }
@@ -877,11 +845,6 @@ a:hover.btn {
 text-decoration: underline;
 color: #555;
 }
-a.btn span {
-display: block;
-padding: 4px 7px 0px 7px;
-}
-
 
 .am_stm.a_default ul {
 margin: 0px;

@@ -97,7 +97,7 @@ class SflmJsClasses {
     $code = Sflm::getCode($this->frontend->base->getAbsPath($this->classPaths[$class]));
     // Проверяем всех предков, подключены ли они
     foreach ($namespaceParents as $parent) {
-      // Если неймспейс не найден в файле объекта и его нет в существующих объекта, пытаемся добавить
+      // Если неймспейс не найден в файле объекта и его нет в существующих объектах, то пытаемся добавить
       if (!$this->namespaceInitExists($code, $parent) and !$this->frontendClasses->exists($parent)) {
         $this->addClass($parent, "[$source] ($class parent namespace)");
       }
@@ -118,6 +118,7 @@ class SflmJsClasses {
    * @throws Exception
    */
   function processPath($path, $source = null, $name = null) {
+    if (Misc::hasSuffix('', $path))
     if (in_array($path, $this->frontend->pathsCache)) {
       Sflm::output("Path '$path' in cache. Skipped");
       return;

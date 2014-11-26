@@ -15,8 +15,8 @@ class DaemonInstaller {
 
   protected function defineOptions() {
     return [
-      'bin' => '/usr/bin/run',
-      'opts' => "{$this->projectName}/{$this->daemonName}",
+      'bin' => '/usr/bin/php',
+      'opts' => "/home/user/ngn-env/run/run.php {$this->projectName}/{$this->daemonName}",
       'workers' => 1
     ];
   }
@@ -38,7 +38,7 @@ for N in'.$for.'
 do
   DESC="'.$this->projectName.' '.$this->daemonName.' daemon ${N}"
   PIDFILE="/var/run/${NAME}-${N}.pid"
-  START_OPTS="--start ${QUIET} --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS}"
+  START_OPTS="--start ${QUIET} --chuid user:user --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS}"
   STOP_OPTS="--stop --pidfile ${PIDFILE}"
   test -x $DAEMON || exit 0
   set -e
