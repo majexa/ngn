@@ -12,7 +12,7 @@
 <tr>
   <td><h2><?= $n ?>.</h2></td>
   <td>
-    <a href="<?= $this->getPath(2).'?a=restore&id='.$v['id'] ?>" class="btn" data-time="<?= datetimeStr($v['time']) ?>"><span>Восстановить из резервной копии от <?= datetimeStr($v['time']) ?></span></a>
+    <a href="<?= $this->getPath(2).'?a=restore&id='.$v['id'] ?>" class="btn" data-time="<?= Date::datetimeStr($v['time']) ?>"><span>Восстановить из резервной копии от <?= datetimeStr($v['time']) ?></span></a>
   </td>
   <td>
     <div class="smIcons"><a href="<?= $this->getPath(2).'?a=delete&id='.$v['id'] ?>" class="delete gray confirm"><i></i>Удалить</a></div>

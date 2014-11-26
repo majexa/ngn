@@ -7,7 +7,7 @@
 <tbody>
 <? foreach ($d['items'] as $k => $v) { ?>
   <tr>
-    <td nowrap><small><?= datetimeStr($v['time']) ?></small></td>
+    <td nowrap><small><?= Date::datetimeStr($v['time']) ?></small></td>
     <td>
       <?= $v['body'] ?>
       <?= Tpl::ol(explode("\n", trim($v['trace']))) ?>
