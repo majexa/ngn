@@ -49,9 +49,12 @@ margin-right: 10px;
 .image-button.cancel {
 margin-right: 0;
 }
-
 .image-button i {
 margin-top: -1px;
+}
+.image-button .btn span {
+display: block;
+padding: 4px 7px 0 7px;
 }
 /* advanced button 
 .image-button a {
