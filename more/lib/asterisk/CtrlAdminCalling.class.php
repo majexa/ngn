@@ -19,8 +19,8 @@ class CtrlAdminCalling extends CtrlAdmin {
     foreach (glob('/usr/share/asterisk/agi-bin/startCalling/'.PROJECT_KEY.'/*') as $file) {
       $r = require $file;
       $r['phone'] = Misc::parsePhone($r['phone']);
-      $r['retryTime'] = datetimeStr($r['startCallingTime'] + $r['retryTime']);
-      $r['startCallingTime'] = datetimeStr($r['startCallingTime']);
+      $r['retryTime'] = Date::datetimeStr($r['startCallingTime'] + $r['retryTime']);
+      $r['startCallingTime'] = Date::datetimeStr($r['startCallingTime']);
       $this->d['table'][] = $r;
     }
     $this->d['tpl'] = 'common/tableTable';

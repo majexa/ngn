@@ -201,7 +201,7 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
       'datetime' => [
         'datetime' => [
           'title' => 'Дата и время',
-          'dddd' => 'datetimeStr($o->items[$id][$name.`_tStamp`])'
+          'dddd' => 'Date::datetimeStr($o->items[$id][$name.`_tStamp`])'
         ],
         'time' => [
           'title' => 'Время',
