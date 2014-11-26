@@ -209,7 +209,7 @@ href="`.$ddddItemLink.`#msgs"><i></i> комментарии (`.$v.`)
         ],
         'date' => [
           'title' => 'Дата',
-          'dddd' => 'dateStr($o->items[$id][$name.`_tStamp`])'
+          'dddd' => 'Date::dateStr($o->items[$id][$name.`_tStamp`])'
         ],
       ],
       'ddTagsSelect' => [

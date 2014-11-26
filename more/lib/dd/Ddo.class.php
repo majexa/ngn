@@ -139,12 +139,12 @@ class Ddo {
   protected function initOutputMethodsTpls() {
     $outputMethod = $this->settings->getOutputMethod();
     if (!isset($outputMethod[$this->layoutName])) return;
+    $methods = DdoMethods::getInstance();
     foreach ($outputMethod[$this->layoutName] as $fieldName => $method) {
       if (empty($this->fields[$fieldName])) {
         // Если output-метдо существует, но поле не должно выводиться
         continue;
       }
-      $methods = DdoMethods::getInstance();
       $fieldType = $this->fields[$fieldName]['type'];
       if (isset($methods->field[$fieldType][$method]['dddd'])) {
         $this->ddddByName[$fieldName] = $methods->field[$fieldType][$method]['dddd'];
