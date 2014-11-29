@@ -5,6 +5,11 @@ return [
     'title'  => 'Core',
     'static' => true,
     'fields' => [
+      'IS_DEBUG'     => [
+        'title'   => 'Отладка',
+        'type'    => 'bool',
+        'default' => false
+      ],
       'DO_NOT_LOG'   => [
         'title' => 'Не вести логи',
         'type'  => 'bool'
@@ -16,11 +21,6 @@ return [
         'default' => false
       ),
       */
-      'IS_DEBUG'     => [
-        'title'   => 'Отладка',
-        'type'    => 'bool',
-        'default' => false
-      ],
       'DATA_CACHE'   => [
         'title'   => 'Кеш данных',
         'type'    => 'bool',
@@ -37,6 +37,7 @@ return [
       ],
       'PROJECT_KEY'  => [
         'title'    => 'Ключ проекта',
+        'disabled' => true,
         'required' => true
       ]
       /*

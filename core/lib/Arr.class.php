@@ -438,12 +438,12 @@ class Arr {
     else return $v;
   }
 
-  static function checkEmpty(array $arr, $keys, $quitely = false) {
+  static function checkEmpty(array $arr, $keys, $quietly = false) {
     $keys = (array)$keys;
     foreach ($keys as $k) {
       if (empty($arr[$k])) {
         LogWriter::v('CHECK_EMPTY', [$k, $arr]);
-        if ($quitely) return false;
+        if ($quietly) return false;
         else throw new Exception("Key '$k' has empty value in array: ".getPrr($arr));
       }
     }

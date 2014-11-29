@@ -185,13 +185,21 @@ class Config {
 
   const noConst = 311111;
 
-  static function getConstant($file, $k, $quitely = false) {
+  /**
+   * @param $file
+   * @param $k
+   * @param bool $quietly
+   * @return bool|string
+   * @throws Exception
+   * @throws NoFileException
+   */
+  static function getConstant($file, $k, $quietly = false) {
     if (!file_exists($file)) {
-      if ($quitely) return false;
+      if ($quietly) return false;
       else throw new NoFileException($file);
     }
     if (($r = self::__getConstant(file_get_contents($file), $k)) !== self::noConst) return $r;
-    if ($quitely) return false;
+    if ($quietly) return false;
     else throw new Exception("There is no constant '$k' in file '$file'");
   }
 
@@ -200,9 +208,9 @@ class Config {
     return (self::__getConstant(file_get_contents($file), $k) != self::noConst);
   }
 
-  static function _getConstant($c, $k, $quitely = false) {
+  static function _getConstant($c, $k, $quietly = false) {
     if (($r = self::__getConstant($c, $k)) != self::noConst) return $r;
-    if ($quitely) return false;
+    if ($quietly) return false;
     else throw new Exception("There is no constant '$k'");
   }
 

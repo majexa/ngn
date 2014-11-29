@@ -13,7 +13,9 @@ class CtrlCommonErrors extends CtrlCommon {
     foreach ($this->errors()->get() as $v) {
       $rows[] = [
         $v['name'],
-        date('d.m.Y H:i:s', $v['time'])."<br>{$v['body']}<pre>{$v['trace']}</pre>"
+        date('d.m.Y H:i:s', $v['time']). //
+        (isset($v['entryCmd']) ? '<br><b>cmd:</b> <code>'.$v['entryCmd'].'</code>' : ''). //
+        "<br>{$v['body']}<pre>{$v['trace']}</pre>"
       ];
     }
     print '<body>';

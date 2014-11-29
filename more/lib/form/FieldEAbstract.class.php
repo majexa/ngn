@@ -179,7 +179,7 @@ use Options;
   }
 
   protected function validate1() {
-    if (!empty($this->options['required']) and empty($this->options['value'])) {
+    if (!empty($this->options['required']) and empty($this->options['value']) and empty($this->options['disabled'])) {
       $this->error = "Поле «{$this->options['title']}» обязательно для заполнения";
     }
   }

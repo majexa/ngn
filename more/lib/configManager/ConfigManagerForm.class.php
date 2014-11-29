@@ -15,7 +15,6 @@ class ConfigManagerForm extends Form {
     $this->initStruct();
     if ($this->configType == 'vars') $this->configValues = Config::getVar($this->configName, true);
     else {
-      //die2();
       foreach (array_keys($this->configStruct['fields']) as $constantName) {
         $this->configValues[$constantName] = constant($constantName);
       }

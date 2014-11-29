@@ -1049,15 +1049,16 @@ application/x-httpd-php-source  phps
   const SIZE_MB = 1048576;
   const SIZE_GB = 1073741824;
 
-  static function format($dsize) {
-    if (strlen($dsize) <= 9 && strlen($dsize) >= 7) {
-      return number_format($dsize / self::SIZE_MB, 1).' Мб';
+  static function format($size) {
+    if (!$size) return '0';
+    if (strlen($size) <= 9 && strlen($size) >= 7) {
+      return number_format($size / self::SIZE_MB, 1).' Мб';
     }
-    elseif (strlen($dsize) >= 10) {
-      return number_format($dsize / self::SIZE_GB, 1).' Гб';
+    elseif (strlen($size) >= 10) {
+      return number_format($size / self::SIZE_GB, 1).' Гб';
     }
     else {
-      return number_format($dsize / self::SIZE_KB, 1).' Кб';
+      return number_format($size / self::SIZE_KB, 1).' Кб';
     }
   }
 

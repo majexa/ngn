@@ -54,8 +54,8 @@ class SiteConfig {
     return $r;
   }
 
-  static function getConstant($name, $k, $quitely = false) {
-    return Config::getConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k, $quitely);
+  static function getConstant($name, $k, $quietly = false) {
+    return Config::getConstant(PROJECT_PATH.'/config/constants/'.$name.'.php', $k, $quietly);
   }
 
   static function getAllConstants() {

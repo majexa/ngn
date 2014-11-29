@@ -61,7 +61,7 @@ trait TtPath {
    * @param   integer   ID пользователя
    * @return  string    Путь до страницы пользователя
    */
-  function getUserPath($userId, $quitely = false) {
+  function getUserPath($userId, $quietly = false) {
     return '{depricated}';
   }
 
