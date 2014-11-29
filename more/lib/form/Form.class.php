@@ -586,6 +586,7 @@ class Form {
     $r = [];
     foreach ($this->getElements() as $name => $el) {
       if ($el['noValue']) continue;
+      if ($el['disabled']) continue;
       // Если в элементе или форме есть флаг 'filterEmpties' и значение элемента пусто
       if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties'])) and $el->isEmpty()) continue;
       $value = $el->value();

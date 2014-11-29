@@ -138,7 +138,8 @@ padding: 6px 15px 16px 15px;
 
 .pageTitle {
 height: 65px;
-width: 300px;
+min-width: 150px;
+max-width: 400px;
 border-left: 1px solid #FFEB8F;
 border-right: 1px solid #FFEB8F;
 background: #FFF9DF;

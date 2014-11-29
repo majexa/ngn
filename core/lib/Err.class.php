@@ -97,10 +97,16 @@ class Err {
     }
   }
 
+  static function setEntryCmd($cmd) {
+    self::$errorExtra['entryCmd'] = $cmd;
+  }
+
+  static $errorExtra = [];
+
   static function log(Exception $e) {
-    LogWriter::html('errors', $e->getMessage(), getFullTrace($e), [
+    LogWriter::html('errors', $e->getMessage(), getFullTrace($e), array_merge([
       'exceptionClass' => get_class($e)
-    ], true);
+    ], self::$errorExtra), true);
   }
 
   static function logWarning(Exception $e) {
