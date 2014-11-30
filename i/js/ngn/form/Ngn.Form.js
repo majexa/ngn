@@ -14,14 +14,6 @@ Ngn.Form = new Class({
   els: {},
 
   initialize: function(eForm, options) {
-    /*
-    eForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      console.debug('123');
-      return false;
-    }, false);
-    return;
-    */
     this.eForm = eForm;
     if (this.eForm.get('data-init')) throw new Error('This form already initialized');
     this.eForm.set('data-init', true);
@@ -75,7 +67,7 @@ Ngn.Form = new Class({
     opts.evaluateOnSubmit = false;
     if (this.options.dialog) {
       opts.scrollToErrorsOnSubmit = false;
-      //opts.scrollElement = this.options.dialog.message;
+      // opts.scrollElement = this.options.dialog.message;
     }
     this.validator = new Ngn.Form.Validator(this, opts);
   },
