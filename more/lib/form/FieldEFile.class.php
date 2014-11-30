@@ -7,26 +7,14 @@
  */
 class FieldEFile extends FieldEFileBase {
 
-  /**
-   * Значение для отображения в контроле
-   */
-  protected function htmlValue() {
-    return null;
-    /*
-    if (empty($this->options['value'])) return false;
-    die2($this->options['value']);
-    $file = UPLOAD_PATH.'/'.$this->options['value'];
-    if (!file_exists($file)) return false;
-    return '/'.UPLOAD_DIR.'/'.$this->options['value'].'?'.filemtime(UPLOAD_PATH.'/'.$this->options['value']);
-    */
-  }
-
   function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'value'            => null,
       'filterEmpties'    => true,
       'currentFileTitle' => 'Текущий файл',
-      'postValue'        => null
+      'postValue'        => null,
+      'multiple'         => null,
+      'allowedMimes'     => null
     ]);
   }
 
@@ -34,10 +22,7 @@ class FieldEFile extends FieldEFileBase {
    * Загруженное, но не сохраненное значение
    */
   protected function valueToProcess() {
-    if (!$this->form->fromRequest) {
-      //die2($this->options);
-      return $this->options['value'];
-    };
+    if (!$this->form->fromRequest) return $this->options['value'];
     $files = isset($this->form->options['files']) ? $this->form->options['files'] : $this->form->req->files;
     $value = BracketName::getValue($files, $this->options['name']);
     if (!empty($value['error'])) return null;
@@ -60,10 +45,17 @@ class FieldEFile extends FieldEFileBase {
     return $this->options['postValue'];
   }
 
+  /**
+   * Значение для отображения в контроле
+   */
+  protected function htmlValue() {
+    return null;
+  }
+
   protected function init() {
     parent::init();
     if (($v = $this->valueToProcess()) !== null) {
-      empty($this->options['multiple']) ? $this->processSingle($v) : $this->processMultiple($v);
+      !$this->options['multiple'] ? $this->processSingle($v) : $this->processMultiple($v);
     }
   }
 
@@ -97,10 +89,6 @@ class FieldEFile extends FieldEFileBase {
     }
     else {
       $this->options['postValue'] = $uploadedFileValue;
-      if ($this->options['name'] == 'sample2') {
-        // тут всё ок
-        //output2($this->options['postValue']['tmp_name'].': '.file_exists($this->options['postValue']['tmp_name']));
-      }
     }
   }
 
@@ -112,7 +100,7 @@ class FieldEFile extends FieldEFileBase {
   protected function processMultiple(array &$uploadedFileValue) {
     foreach ($uploadedFileValue as $k => $v) {
       $mime = $this->check($v);
-      if (!empty($this->allowedMimes) and !in_array($mime, $this->allowedMimes)) {
+      if ($this->options['allowedMimes'] and !in_array($mime, $this->options['allowedMimes'])) {
         unset($uploadedFileValue[$k]);
       }
     }
@@ -136,21 +124,22 @@ class FieldEFile extends FieldEFileBase {
         '');
       $r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\"><i></i>сохранён ($size)</a>$deleteHtml";
     }
-    if (($v = $this->postValue()) and file_exists($v['tmp_name'])) {
+    if ($v = $this->postValue()) {
       $r .= '<div class="clear"></div>';
-      $r .= "<a class=\"file fileUploaded iconBtnCaption\"><i></i>загружен (".File::format2(filesize($v['tmp_name'])).")</a>";
-      //$r .= '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name']. //
-      //'" class="iconBtn delete confirm" title="Удалить загруженный файл"><i></i></a>';
-
+      if ($this->options['multiple']) {
+        foreach ($v as $file) $r .= $this->htmlUploadedLink($file);
+      } else {
+        $r .= $this->htmlUploadedLink($v);
+      }
     }
     $r .= '</div>';
     return $r;
   }
 
-  //protected function prepareInputValue() {
-  //  if (($value = $this->postValue()) === null) return '';
-  //  return $value['tmp_name'];
-  //}
+  protected function htmlUploadedLink(array $file) {
+    if (!file_exists($file['tmp_name'])) return '';
+    return "<a class=\"file fileUploaded iconBtnCaption\"><i></i>загружен (".File::format2(filesize($file['tmp_name'])).")</a>";
+  }
 
   function isEmpty() {
     return !$this->postValue();
@@ -159,11 +148,11 @@ class FieldEFile extends FieldEFileBase {
   function _html() {
     $value = $this->prepareInputValue($this->postValue());
     $params = [
-      'name'      => $this->options['name'],
+      'name'      => $this->options['name'].($this->options['multiple'] ? '[]' : ''),
       'value'     => '',
       'data-file' => (bool)$value,
     ];
-    if (!empty($this->options['multiple'])) $params['multiple'] = null;
+    if ($this->options['multiple']) $params['multiple'] = null; // null for empty tag param
     return $this->htmlNav().'<input type="file"'.Tt()->tagParams($params).$this->getClassAtr().' />';
   }
 
