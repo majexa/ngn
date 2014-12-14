@@ -213,7 +213,7 @@ Ngn.Form = new Class({
         },
         onComplete: function() {
           if (this.hasUploadsInProgress()) return;
-          this.submitAjax(); //          (!) "COMPLETE" EVENT
+          //this.submitAjax();
         }.bind(this)
       };
       if (!eInput.get('multiple')) {

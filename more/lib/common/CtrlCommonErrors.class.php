@@ -15,6 +15,7 @@ class CtrlCommonErrors extends CtrlCommon {
         $v['name'],
         date('d.m.Y H:i:s', $v['time']). //
         (isset($v['entryCmd']) ? '<br><b>cmd:</b> <code>'.$v['entryCmd'].'</code>' : ''). //
+        (!empty($v['url']) ? '<br><b>URL:</b> '.$v['url'].'<br>' : '').
         "<br>{$v['body']}<pre>{$v['trace']}</pre>"
       ];
     }

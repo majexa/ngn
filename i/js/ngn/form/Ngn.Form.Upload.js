@@ -46,7 +46,7 @@ Ngn.Form.Upload = new Class({
       onComplete: function(r) {
         this.inProgress = false;
         this.eProgress.setStyle('width', '100%');
-        this.fireEvent('complete'); //       (!) FIRING "COMPLETE" EVENT
+        this.fireEvent('complete');
       }.bind(this)
     });
   },
@@ -102,7 +102,7 @@ Ngn.Form.Upload.Multi = new Class({
   send: function() {
     var n = 0;
     this.inputFiles.getFiles().each(function(file) {
-      this.uploadReq.append(this.name + '[' + n + ']', file);
+      this.uploadReq.append(this.name, file);
       n++;
     }.bind(this));
     this.uploadReq.send();
