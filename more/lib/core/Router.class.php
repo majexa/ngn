@@ -43,10 +43,9 @@ use Options;
   final function dispatch() {
     $this->controller = $this->getController();
     if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
-    if (!is_object($this->controller)) throw new Exception('Controller not initialized');
+    if (!is_object($this->controller)) throw new Error404('Controller not initialized');
     // В этом месте, после диспатчинга контроллера, может произойти его подмена,
     // т.е. контроллер $this->controller заменит себя другим контроллером или, другими словами, передаст управление
-
     $this->controller->dispatch();
     return $this;
 

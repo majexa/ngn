@@ -125,7 +125,10 @@ class Form {
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);
-    if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.Form');
+    if (Sflm::frontendName()) {
+      Sflm::frontend('js')->addClass('Ngn.Form');
+      Sflm::frontend('js')->addPath('i/js/ngn/form/init.js');
+    }
     if ($this->options['placeholders']) {
       if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.PlaceholderSupport');
       $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);

@@ -176,9 +176,11 @@ class Req extends ArrayAccesseble {
    *
    * @param $n
    * @return mixed
+   * @throws NotLoggableError
    */
   function param($n) {
-    return Misc::checkEmpty($this->params[$n], "params[$n]");
+    if (empty($this->params[$n])) throw new NotLoggableError("params[$n] is empty");
+    return $this->params[$n];
   }
 
   /**
@@ -190,7 +192,7 @@ class Req extends ArrayAccesseble {
    * @throws Exception
    */
   function rq($name) {
-    if (!isset($this->r[$name])) throw new Exception("\$_REQUEST[$name] not defined");
+    if (!isset($this->r[$name])) throw new NotLoggableError("\$_REQUEST[$name] not defined");
     return $this->r[$name];
   }
 
