@@ -3,9 +3,9 @@
 class FieldEUrls extends FieldETextarea {
 
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'help' => 'Вводите каждую новую ссылку с новой строки'
-    ];
+    ]);
   }
   
   protected function validate2() {

@@ -3,7 +3,7 @@
 class FieldEEmails extends FieldETextarea {
 
   protected function defineOptions() {
-    return ['help' => 'Через запятую'];
+    return array_merge(parent::defineOptions(), ['help' => 'Через запятую']);
   }
 
   protected function prepareValue() {

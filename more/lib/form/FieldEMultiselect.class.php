@@ -5,10 +5,10 @@ class FieldEMultiselect extends FieldESelect {
   static protected $dd = false;
 
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'minNum' => 0,
       'maxNum' => 0
-    ];
+    ]);
   }
 
   protected function init() {

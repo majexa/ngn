@@ -3,12 +3,12 @@
 class FieldEFullName extends FieldEText {
 
   protected function defineOptions() {
-    return ['cssClass' => 'validate-fullName'];
+    return array_merge(parent::defineOptions(), ['cssClass' => 'validate-fullName']);
   }
 
   protected function vlidate2() {
     //if (!preg_match('/^\S+\s+\S+\s+\S+$/', $this->options['value']))
-      //$this->error = "Неправильный формат имени";
+    //$this->error = "Неправильный формат имени";
   }
 
   protected function prepareValue() {
