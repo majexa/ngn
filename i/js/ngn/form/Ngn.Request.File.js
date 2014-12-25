@@ -5,10 +5,7 @@ Ngn.Request.File = new Class({
   Extends: Ngn.Request.JSON,
 
   options: {
-    emulation: false,
-    urlEncoded: false,
-    allowDublicates: false,
-    formData: null
+    emulation: false, urlEncoded: false, allowDublicates: false, formData: null
   },
 
   initialize: function(options) {
@@ -18,15 +15,33 @@ Ngn.Request.File = new Class({
     this.headers = this.options.headers;
     if (this.options.formData) for (var i in this.options.formData) this.append(i, this.options.formData[i]);
   },
-  
+
   clear: function() {
     this.formData = new FormData();
     this._formData = {};
     return this;
   },
 
+  bracketCount: {},
+
   append: function(key, value) {
-    if (!this.options.allowDublicates && this._formData[key]) return;
+    var hasStr = function(haystack, needle) {
+      var pos = haystack.indexOf(needle);
+      if (pos == -1) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+    var baseKey;
+    var multi = hasStr(key, '[]');
+    if (!multi && !this.options.allowDublicates && this._formData[key]) return;
+    if (multi) {
+      baseKey = key.replace('[]', '');
+      if (!this.bracketCount[baseKey]) this.bracketCount[baseKey] = 0;
+      key = baseKey + '[' + this.bracketCount[baseKey] + ']';
+      this.bracketCount[baseKey]++;
+    }
     this.formData.append(key, value);
     this._formData[key] = value;
     return this.formData;
@@ -34,6 +49,7 @@ Ngn.Request.File = new Class({
 
   send: function(options) {
     if (!this.check(options)) return this;
+    c(['_formData', this._formData]);
     this.options.isSuccess = this.options.isSuccess || this.isSuccess;
     this.running = true;
     var xhr = this.xhr;
@@ -47,7 +63,7 @@ Ngn.Request.File = new Class({
     Object.each(this.headers, function(value, key) {
       try {
         xhr.setRequestHeader(key, value);
-      } catch (e){
+      } catch (e) {
         this.fireEvent('exception', [key, value]);
       }
     }, this);

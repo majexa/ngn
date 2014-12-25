@@ -2,12 +2,11 @@
 
 class FieldEWisiwig extends FieldETextarea {
 
-  public $useTypeJs = true;
-
   protected $staticType;
 
   function defineOptions() {
     return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
       'rowClass' => 'elWisiwig',
       'jsOptions' => [
         'tinySettings' => [

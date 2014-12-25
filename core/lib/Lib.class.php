@@ -226,6 +226,11 @@ class Lib {
 
   static $list = false;
 
+  /**
+   * Возвращает список всех существующих классов в формате [name => pathToFile]
+   *
+   * @return array
+   */
   static function getClassesList() {
     self::initClassesList();
     return self::$list;

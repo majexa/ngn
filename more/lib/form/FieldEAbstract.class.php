@@ -33,12 +33,11 @@ use Options;
 
   protected $defaultValue;
 
-  public $useTypeJs = false;
-
   protected function defineOptions() {
     return [
       //'inputValue' => false, // исходное значение поля. необходимо, если используется метод
                                // formatValue()
+      'useTypeJs' => false,
       'required' => false
     ];
   }
@@ -103,7 +102,7 @@ use Options;
   /**
    * @var string Имя поля с вырезанными скобками
    */
-  protected $baseName;
+  public $baseName;
 
   protected function init() {
     if (empty($this->options['id'])) {
@@ -234,7 +233,8 @@ use Options;
 
   function typeJs() {
     Sflm::frontend('css')->addLib("i/css/formEl/$this->type.css");
-    if (!$this->useTypeJs) return '';
+  if (!isset($this->options['useTypeJs'])) die2(get_class($this));
+    if (!$this->options['useTypeJs']) return '';
     Sflm::frontend('js')->addLib("formEl/$this->type", false);
     Sflm::frontend('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
     Sflm::frontend('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");

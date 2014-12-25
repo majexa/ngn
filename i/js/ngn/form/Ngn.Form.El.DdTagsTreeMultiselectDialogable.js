@@ -24,13 +24,15 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
   },
 
   updateTitles: function(values) {
+    //c(values);
     if (!values.length) {
       this.eSelect.set('html', this.options.selectText);
       return;
     }
     var titles = [];
+    //c(this.name);
     for (var i = 0; i < values.length; i++) {
-      titles.push(this.eParent.getElement('#' + this.name + '_' + values[i]).getNext().get('text'));
+      titles.push(this.eParent.getElement('#' + Ngn.name2id(this.name) + '_' + values[i]).getNext().get('text'));
     }
     this.eSelect.set('html', Ngn.cut(titles.join(', '), 50));
   },
@@ -52,12 +54,12 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
   },
 
   options: {
-    selectText: ''
+    selectText: 'выбрать'
   },
 
   init: function() {
     this.parent();
-    this.name = Ngn.Frm.getPureName(this.eRow.getElement('input').get('name'));
+    //this.name = Ngn.Frm.getPureName(this.eRow.getElement('input').get('name'));
     this.eTree = this.eRow.getElement('.field-wrapper div');
     this.eFieldWrapper = this.eRow.getElement('.field-wrapper');
     this.eHiddens = new Element('div.hiddens').inject(this.eFieldWrapper);

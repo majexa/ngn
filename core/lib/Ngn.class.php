@@ -22,7 +22,9 @@ class Ngn {
 
   /**
    * @param $path
-   * @param int $priority
+   * @param int $priority Чем больше число, тем выше приоритет.
+   *                      Используйте приоритет от 1 до 4 для подключения библиотек.
+   *                      Для папки проекта "site" в Ngn используется приоритет 5.
    */
   static function addBasePath($path, $priority = 0) {
     if (file_exists("$path/lib")) Lib::addFolder("$path/lib");

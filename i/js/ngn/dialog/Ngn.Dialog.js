@@ -51,6 +51,7 @@ Ngn.Dialog = new Class({
     baseZIndex: 300,
     savePosition: false,
     vResize: false,
+    fixed: false,
     //maxHeight: null,
     onComplete: $empty(),
     onClose: $empty(),
@@ -114,7 +115,7 @@ Ngn.Dialog = new Class({
       //'opacity': (this.options.useFx ? 0 : 1),
       'styles': dialog_styles
     }).inject(this.parentElement);
-
+    if (this.options.fixed) this.dialog.setStyle('position', 'fixed');
     this.fx = this.options.useFx ? new Fx.Tween(this.dialog, $merge({
       duration: 300
     }, this.options.fxOptions)) : null;

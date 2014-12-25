@@ -30,7 +30,7 @@ Ngn.Form.Upload = new Class({
   init: function() {
     //this.eCaption = new Element('div.uploadFiles').inject(this.eInput, 'after');
     this.eProgress = new Element('div.fileProgress').setStyle('display', 'none').inject(this.eCaption, 'after');
-    this.uploadReq = new Ngn.Request.File({
+    this.requestFile = new Ngn.Request.File({
       url: this.options.url,
       onRequest: function() {
         this.inProgress = true;
@@ -41,12 +41,12 @@ Ngn.Form.Upload = new Class({
         var loaded = event.loaded, total = event.total;
         var proc = parseInt(loaded / total * 100, 10).limit(0, 100);
         this.eProgress.setStyle('width', proc + '%');
-        if (proc == 100) this.eCaption.set('html', 'Загрузка завершена. Происходит добавление');
+        if (proc == 100) this.eCaption.set('html', 'Загрузка завершена');
       }.bind(this),
       onComplete: function(r) {
         this.inProgress = false;
         this.eProgress.setStyle('width', '100%');
-        this.fireEvent('complete');
+        this.fireEvent('complete', {result: r});
       }.bind(this)
     });
   },
@@ -85,8 +85,8 @@ Ngn.Form.Upload.Single = new Class({
       this.fireEvent('complete');
       return;
     }
-    this.uploadReq.append(this.eInput.get('name'), this.file);
-    this.uploadReq.send();
+    this.requestFile.append(this.eInput.get('name'), this.file);
+    this.requestFile.send();
   }
 
 });
@@ -102,10 +102,10 @@ Ngn.Form.Upload.Multi = new Class({
   send: function() {
     var n = 0;
     this.inputFiles.getFiles().each(function(file) {
-      this.uploadReq.append(this.name, file);
+      this.requestFile.append(this.name, file);
       n++;
     }.bind(this));
-    this.uploadReq.send();
+    this.requestFile.send();
   }
 
 });

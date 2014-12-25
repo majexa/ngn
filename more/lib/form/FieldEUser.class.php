@@ -3,7 +3,7 @@
 class FieldEUser extends FieldEAutocompleter {
 
   protected function defineOptions() {
-    return ['help' => 'Для поиска начните вводить '.Config::getVarVar('userReg', 'titleName').' пользователя'];
+    return array_merge(parent::defineOptions(), ['help' => 'Для поиска начните вводить '.Config::getVarVar('userReg', 'titleName').' пользователя']);
   }
 
   protected function validate2() {
@@ -11,7 +11,7 @@ class FieldEUser extends FieldEAutocompleter {
       $this->error = "Пользователя с ID={$this->options['value']} не существует";
     }
   }
-  
+
   function _html() {
     if (empty($this->options['value'])) $title = null;
     elseif ($this->options['value'] instanceof DbModelUsers) {

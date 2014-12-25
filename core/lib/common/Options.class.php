@@ -9,7 +9,9 @@ trait Options {
   protected $optionsDefined;
 
   function setOptions(array $options) {
-    if (!$this->optionsDefined) $this->options = array_merge($this->options, $this->defineOptions());
+    if (!$this->optionsDefined) {
+      $this->options = array_merge($this->options, $this->defineOptions());
+    }
     $this->optionsDefined = true;
     $this->options = array_merge($this->options, $options);
     foreach (static::$requiredOptions as $k)

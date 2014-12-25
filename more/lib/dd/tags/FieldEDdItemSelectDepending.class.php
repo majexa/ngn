@@ -2,7 +2,13 @@
 
 class FieldEDdItemSelectDepending extends FieldEAbstract {
 
-  public $useTypeJs = true, $parentOptions;
+  public $parentOptions;
+
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
+    ]);
+  }
 
   static $ddTags = true, $ddTagItems = true;
 

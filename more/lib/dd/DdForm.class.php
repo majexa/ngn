@@ -10,13 +10,6 @@ class DdForm extends Form {
     parent::__construct($fields, $options);
   }
 
-  protected function dataParams() {
-    return [
-      'class' => 'DdForm',
-      'strName' => $this->strName
-    ];
-  }
-
   protected function setElementsDataDefault() {
     $r = parent::setElementsDataDefault();
     if ($r) {
@@ -27,6 +20,15 @@ class DdForm extends Form {
 
   protected function jsInitTagValues() {
     return "Ngn.toObj('Ngn.Form.El.DdTags.values.{$this->id()}', {});";
+  }
+
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'dataParams' => [
+        'class'   => 'DdForm',
+        'strName' => $this->strName
+      ]
+    ]);
   }
 
 }

@@ -18,6 +18,17 @@ class FieldEFile extends FieldEFileBase {
     ]);
   }
 
+  protected function init() {
+    parent::init();
+    if (($v = $this->valueToProcess()) !== null) {
+      !$this->options['multiple'] ? $this->processSingle($v) : $this->processMultiple($v);
+    }
+  }
+
+  protected function allowedTagParams() {
+    return array_merge(parent::allowedTagParams(), ['accept']);
+  }
+
   /**
    * Загруженное, но не сохраненное значение
    */
@@ -50,13 +61,6 @@ class FieldEFile extends FieldEFileBase {
    */
   protected function htmlValue() {
     return null;
-  }
-
-  protected function init() {
-    parent::init();
-    if (($v = $this->valueToProcess()) !== null) {
-      !$this->options['multiple'] ? $this->processSingle($v) : $this->processMultiple($v);
-    }
   }
 
   protected function _processSingle(&$uploadedFileValue) {
@@ -128,7 +132,8 @@ class FieldEFile extends FieldEFileBase {
       $r .= '<div class="clear"></div>';
       if ($this->options['multiple']) {
         foreach ($v as $file) $r .= $this->htmlUploadedLink($file);
-      } else {
+      }
+      else {
         $r .= $this->htmlUploadedLink($v);
       }
     }
@@ -152,6 +157,7 @@ class FieldEFile extends FieldEFileBase {
       'value'     => '',
       'data-file' => (bool)$value,
     ];
+    if ($this->options['allowedMimes']) $params['accept'] = implode(',', $this->options['allowedMimes']);
     if ($this->options['multiple']) $params['multiple'] = null; // null for empty tag param
     return $this->htmlNav().'<input type="file"'.Tt()->tagParams($params).$this->getClassAtr().' />';
   }

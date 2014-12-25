@@ -4,7 +4,11 @@ class FieldEColor extends FieldEText {
 
   static $title = 'Цвет';
 
-  public $useTypeJs = true;
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
+    ]);
+  }
 
   function _html() {
     return Tt()->getTpl('common/colorPicker',

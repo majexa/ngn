@@ -5,7 +5,7 @@
   Ngn.Milkbox = new Class({
     Implements: [Options, Events],
 
-    options: {//set all the options here
+    options: { //set all the options here
       overlayOpacity: 0.7,
       marginTop: 10,
       initialWidth: 250,
