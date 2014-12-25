@@ -3,7 +3,7 @@
 class FieldEUrl extends FieldEText {
 
   protected function defineOptions() {
-    return ['cssClass' => 'validate-url'];
+    return array_merge(parent::defineOptions(), ['cssClass' => 'validate-url']);
   }
 
   function value() {

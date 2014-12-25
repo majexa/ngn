@@ -3,10 +3,10 @@
 class FieldEFieldList extends FieldEFieldSetAbstract {
 
   protected function defineOptions() {
-    return [
-      'deleteTitle' => 'Удалить поле',
+    return array_merge(parent::defineOptions(), [
+      'deleteTitle'  => 'Удалить поле',
       'cleanupTitle' => 'Очистить поле'
-    ];
+    ]);
   }
 
   protected function init() {

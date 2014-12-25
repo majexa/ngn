@@ -233,7 +233,7 @@ use Options;
 
   function typeJs() {
     Sflm::frontend('css')->addLib("i/css/formEl/$this->type.css");
-  if (!isset($this->options['useTypeJs'])) die2(get_class($this));
+    if (!isset($this->options['useTypeJs'])) throw new Exception(get_class($this).'::defineOptions does not extends parent');
     if (!$this->options['useTypeJs']) return '';
     Sflm::frontend('js')->addLib("formEl/$this->type", false);
     Sflm::frontend('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");

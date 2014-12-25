@@ -3,7 +3,7 @@
 class FieldEPrice extends FieldEFloat {
 
   protected function defineOptions() {
-    return ['maxlength' => 11];
+    return array_merge(parent::defineOptions(), ['maxlength' => 11]);
   }
 
   protected function prepareValue() {
