@@ -4,12 +4,14 @@ Ngn.Dialog.DdTagsTreeMultiselectDialog = new Class({
   options: {
     id: 'metro',
     dialogClass: 'treeMultiselectDialog',
-    title: '',
+    title: 'Выбо категории',
+    width: 400,
     textInfo: '',
     height: 400,
     noPadding: false,
     cancel: false,
-    bindBuildMessageFunction: true
+    bindBuildMessageFunction: true,
+    fixed: true
   },
 
   /**

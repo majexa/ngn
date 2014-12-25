@@ -5,7 +5,7 @@ class FieldEText extends FieldEInput {
   public $inputType = 'text';
 
   protected function defineOptions() {
-    return ['maxlength' => 255];
+    return array_merge(parent::defineOptions(), ['maxlength' => 255]);
   }
 
   protected function prepareValue() {

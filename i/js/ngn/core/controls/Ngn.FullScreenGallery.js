@@ -23,7 +23,7 @@ Ngn.FullScreenGallery = new Class( {
       }
     });
     this.gal.inject(document.body, 'bottom');
-    var imagesData = new Array();
+    var imagesData = [];
     $$('.ddItems .item').each( function(el, i) {
       var smImage = el.getElement('a.thumb img').get('src');
       var mdImage = smImage.replace('sm_', 'md_');

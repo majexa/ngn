@@ -2,6 +2,10 @@
 
 class FieldEDateRange extends FieldEText {
 
-  public $useTypeJs = true;
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
+    ]);
+  }
 
 }

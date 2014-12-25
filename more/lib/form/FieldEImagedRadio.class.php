@@ -2,7 +2,12 @@
 
 class FieldEImagedRadio extends FieldERadio {
 
-  public $useTypeJs = true;
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
+    ]);
+  }
+
   public $markerHtml = '<div class="marker"><i></i></div>';
 
 }

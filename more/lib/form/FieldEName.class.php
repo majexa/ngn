@@ -3,9 +3,9 @@
 class FieldEName extends FieldEText {
 
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'cssClass' => 'validate-name'
-    ];
+    ]);
   }
   
   protected function validate2() {

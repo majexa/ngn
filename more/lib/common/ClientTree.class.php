@@ -19,7 +19,11 @@ class ClientTree {
 
   function __construct(TreeInterface $tree) {
     $this->initTree = $tree;
-    $initNodes = [$this->initTree->getTree()];
+    $initNodes = [];
+    if ($tree = $this->initTree->getTree()) {
+      $initNodes = $tree;
+    }
+    //die2($initNodes);
     foreach ($initNodes as $initNode) {
       $node = $this->node($initNode);
       $this->setChildren($node, $initNode);
@@ -54,6 +58,7 @@ class ClientTree {
 
   protected function node(array $data = []) {
     if (empty($data['title'])) $data['title'] = '{empty}';
+    if (!isset($data['id'])) die2($data);
     $node = [
       'property' => [
         'id'   => $data['id'],

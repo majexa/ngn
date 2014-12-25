@@ -9,7 +9,11 @@ class FieldEDdTagsConsecutiveSelect extends FieldEAbstract {
    */
   protected $tags;
 
-  public $useTypeJs = true;
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
+    ]);
+  }
 
   protected function init() {
     parent::init();

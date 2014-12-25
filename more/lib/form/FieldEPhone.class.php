@@ -2,13 +2,12 @@
 
 class FieldEPhone extends FieldEText {
 
-  public $useTypeJs = true;
-
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
       'cssClass' => 'validate-phone',
       'help'     => 'Пример: +79202123933'
-    ];
+    ]);
   }
 
   protected function prepareValue() {

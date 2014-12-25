@@ -3,12 +3,14 @@
 class FieldETextarea extends FieldEText {
 
   protected $staticType = 'textarea';
-  public $useTypeJs = true;
 
-  public $options = [
-    'maxlength' => 65000
-  ];
-  
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'maxlength' => 65000,
+      'useTypeJs' => true
+    ]);
+  }
+
   function _html() {
     return '<textarea name="'.$this->options['name'].'"'.
       Tt()->tagParams($this->getTagsParams()).$this->getClassAtr().'>'.

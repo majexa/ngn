@@ -1,0 +1,13 @@
+.am_ddField .element.name_type {
+height: 300px;
+overflow-y: scroll;
+}
+.am_ddField .element.type_submit {
+padding-top: 15px;
+}
+.am_ddField .element.type_submit input {
+padding: 10px 20px;
+}
+.mainContent .apeform .element {
+padding-left: 10px;
+}

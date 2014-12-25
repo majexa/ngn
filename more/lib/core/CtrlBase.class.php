@@ -433,7 +433,7 @@ abstract class CtrlBase {
   }
 
   protected function ajaxFormAction(Form $form) {
-    $form->disableSubmit = true;
+    $form->options['disableSubmit'] = true;
     $this->ajaxOutput = $this->tt->getTpl('common/form', ['form' => $form->html()]);
   }
 
@@ -685,7 +685,7 @@ abstract class CtrlBase {
   }
 
   protected function jsonFormAction(Form $form) {
-    $form->disableSubmit = true;
+    $form->options['disableSubmit'] = true;
     $form->defaultData = $this->req->r;
     $this->json['form'] = $this->tt->getTpl('common/form', ['form' => $form->html()]);
     if (!empty($form->options['title'])) $this->json['title'] = $form->options['title'];

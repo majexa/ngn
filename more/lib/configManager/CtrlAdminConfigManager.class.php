@@ -27,6 +27,7 @@ class CtrlAdminConfigManager extends CtrlAdmin {
 
   function action_default() {
     Sflm::frontend('js')->addPath('i/js/ngn/Ngn.initConfigManager.js');
+    $this->setPageTitle($this->configType == 'vars' ? 'Переменные' : 'Константы');
     $form = ConfigManagerFormFactory::get($this->configType, $this->configName);
     if ($form->update()) {
       $this->redirect();

@@ -14,12 +14,16 @@ abstract class FieldEInput extends FieldEAbstract {
   protected function getTagsParams() {
     $opts = $this->options;
     if (isset($opts['value'])) $opts['value'] = $this->prepareInputValue($this->postValue());
-    $opt = Arr::filterByKeys($opts, ['name', 'maxlength', 'value', 'disabled', 'placeholder', 'autocomplete']);
+    $opt = Arr::filterByKeys($opts, $this->allowedTagParams());
     if (!empty($opts['data'])) foreach ($opts['data'] as $k => $v) $opt["data-$k"] = $v;
     if (!empty($this->options['multiple'])) $opts['multiple'] = null;
     htmlspecialcharsR($opt);
     return $opt;
   }
+
+    protected function allowedTagParams() {
+        return ['name', 'maxlength', 'value', 'disabled', 'placeholder', 'autocomplete'];
+    }
 
   protected function prepareInputValue($value) {
     return $value;

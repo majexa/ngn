@@ -5,16 +5,15 @@ class FieldEDdTagsTreeMultiselect extends FieldEText {
 
   static $ddTags = true, $ddTagsTree = true, $ddTagsMulti = true;
 
-  public $useTypeJs = true;
-
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
       'rootTagId' => 0
-    ];
+    ]);
   }
 
   function _html() {
-    $data = self::getTplData(new DdTagsTagsTree(new DdTagsGroup($this->strName, $this->options['name'])), $this->options['name'], $this->options['value'], $this->options['rootTagId'], !empty($this->options['value']));
+    $data = self::getTplData(new DdTagsTagsTree(new DdTagsGroup($this->strName, $this->baseName)), $this->options['name'], $this->options['value'], $this->options['rootTagId'], !empty($this->options['value']));
     return Tt()->getTpl('dd/tagsTreeMultiselect', array_merge($data, [
       'dataParams' => isset($this->options['dataParams']) ? $this->options['dataParams'] : []
     ]));

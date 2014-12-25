@@ -211,9 +211,9 @@ Ngn.Form = new Class({
             eInputValidator.set('value', '');
           }
         },
-        onComplete: function() {
+        onComplete: function(r) {
           if (this.hasUploadsInProgress()) return;
-          //this.submitAjax();
+          this.submitedAndUploaded(r);
         }.bind(this)
       };
       if (!eInput.get('multiple')) {
@@ -223,6 +223,10 @@ Ngn.Form = new Class({
         this.addUpload(new Ngn.Form.Upload.Multi(this, eInput, uploadOptions));
       }
     }.bind(this));
+  },
+
+  submitedAndUploaded: function() {
+    this.submitAjax();
   },
 
   /**
@@ -321,6 +325,7 @@ Ngn.Form = new Class({
   },
 
   _submitAjax: function() {
+    c('_submitAjax');
     new Ngn.Request.JSON({
       url: this.eForm.get('action'),
       onComplete: function(r) {
@@ -334,6 +339,7 @@ Ngn.Form = new Class({
   },
 
   _submit: function() {
+    c('_submit');
     this.eForm.submit();
   }
 
@@ -395,7 +401,7 @@ Ngn.Form.El = new Class({
     Ngn.Form.elN++;
     this.eRow = eRow;
     this.eRow.n = Ngn.Form.elN;
-    this.name = eRow.get('class').replace(/(.* )?name_(\w+)( .*)?/, '$2');
+    this.name = eRow.get('data-name');
     this.form.els[this.name] = this;
     if (Ngn.Form.elOptions[this.name]) this.options = Ngn.Form.elOptions[this.name];
     this.init();

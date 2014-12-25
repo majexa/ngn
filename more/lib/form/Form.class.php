@@ -51,13 +51,6 @@ class Form {
   public $isHeaderGroupTags = true;
 
   /**
-   * Выключить отображение тега <form>
-   *
-   * @var bool
-   */
-  public $disableFormTag = false;
-
-  /**
    * Использовать dddd-шаблоны в $this->templates
    *
    * @var bool
@@ -95,8 +88,6 @@ class Form {
    */
   public $onlyRequired = false;
 
-  public $disableSubmit = false;
-
   /**
    * @var FormSpamBlocker
    */
@@ -127,7 +118,6 @@ class Form {
     $this->setOptions($options);
     if (Sflm::frontendName()) {
       Sflm::frontend('js')->addClass('Ngn.Form');
-      Sflm::frontend('js')->addPath('i/js/ngn/form/init.js');
     }
     if ($this->options['placeholders']) {
       if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.PlaceholderSupport');
@@ -203,17 +193,13 @@ class Form {
     return '';
   }
 
-  protected function dataParams() {
-    return false;
-  }
-
   public $methodPost = true;
 
   protected function htmlFormOpen() {
-    if (!$this->disableFormTag) {
+    if (!$this->options['disableFormTag']) {
       $html = '<form action="'.($this->action ? $this->action : $this->req->options['uri']).'"';
       $html .= $this->tagParams();
-      if (($data = $this->dataParams())) $html .= Html::dataParams($data);
+      if (($data = $this->options['dataParams'])) $html .= Html::dataParams($this->options['dataParams']);
       if (!empty($this->encType)) $html .= ' enctype="'.$this->encType.'"';
       if (!empty($this->options['name'])) $html .= ' name="'.$this->options['name'].'"';
       $html .= ' id="'.$this->id().'" method="'.($this->methodPost ? 'post' : 'get').'">';
@@ -231,7 +217,10 @@ class Form {
     $input = str_replace('{value}', is_array($el['value']) ? '' : $el['value'], $input);
     $input = str_replace('{id}', $el['id'], $input);
     $input = str_replace('{rowClass}', $this->htmlGetRowClassAtr($el), $input);
-    if ($el->useTypeJs) $input = str_replace('{data}', Html::dataParams(['typejs' => true]), $input);
+    if ($el['useTypeJs']) $input = str_replace('{data}', Html::dataParams([
+      'name' => $el['name'],
+      'typejs' => true
+    ]), $input);
     else $input = str_replace('{data}', '', $input);
     return $input;
   }
@@ -279,7 +268,7 @@ class Form {
   }
 
   protected function htmlGetRowClassAtr(FieldEAbstract $el) {
-    $rowClassAtr = (empty($el['id']) ? '' : ' row_'.$el['id']).' type_'.$el->type.(empty($el->options['name']) ? '' : ' name_'.$el->options['name']);
+    $rowClassAtr = (empty($el['id']) ? '' : ' row_'.$el['id']).' type_'.$el->type.(empty($el->options['name']) ? '' : ' name_'.$el->baseName);
     if (!empty($el->error)) $rowClassAtr .= ' errorRow';
     if (!empty($el['rowClass'])) $rowClassAtr .= ' '.$el['rowClass'];
     return $rowClassAtr;
@@ -289,7 +278,7 @@ class Form {
     return ' name="'.$row['name'].'" id="'.Misc::name2id($row['name']).'i"';
   }
 
-  protected function htmlElement(FieldEAbstract $el) {
+  function htmlElement(FieldEAbstract $el) {
     if (is_a($el, 'FieldEHeaderAbstract')) {
       // Для хедеров всё совсем иначе
       return $this->htmlHeader($el);
@@ -344,7 +333,7 @@ class Form {
    */
   function html() {
     $this->setElementsDataDefault();
-    if ($this->disableSubmit) {
+    if ($this->options['disableSubmit']) {
       foreach ($this->els as $k => $el) if ($el->type == 'submit') unset($this->els[$k]);
     }
     $html = $this->htmlFormOpen();
@@ -366,7 +355,7 @@ class Form {
     $html = $html.str_replace('{input}', $elsHtml, $this->templates['form']);
     $html .= $this->htmlVisibilityConditions();
     if (isset($this->fsb)) $html .= $this->fsb->makeTags();
-    if (!$this->disableFormTag) $html .= '</form>';
+    if (!$this->options['disableFormTag']) $html .= '</form>';
     return $html.$this->js();
   }
 
@@ -396,7 +385,7 @@ class Form {
   public $disableJs = false;
 
   function js() {
-    if ($this->disableJs or $this->disableFormTag) return '';
+    if ($this->disableJs) return '';
     $this->js = $this->jsInline = '';
     $jsTypesAdded = [];
     $typeJs = '';
@@ -630,8 +619,11 @@ class Form {
 
   protected function defineOptions() {
     return [
+      'dataParams' => false,
       'placeholders' => false,
-      'submitTitle'  => 'Сохранить'
+      'submitTitle'  => 'Сохранить',
+      'disableFormTag' => false,
+      'disableSubmit' => false,
     ];
   }
 
@@ -691,7 +683,7 @@ class Form {
   public $defaultElements;
 
   protected function initDefaultElements() {
-    if ($this->disableFormTag) return;
+    if ($this->options['disableFormTag']) return;
     $this->callOnce('initDefaultHiddenFields');
     foreach ($this->hiddenFields as $v) $this->createElement($v);
     if (!empty($this->defaultElements)) {
@@ -749,7 +741,7 @@ class Form {
       if ($value !== null) $opt['value'] = $value;
       BracketName::setValue($this->elementsData, $opt['name'], $this->createElement($opt)->value());
     }
-    if (!$this->disableSubmit) {
+    if (!$this->options['disableSubmit']) {
       $this->createElement([
         'value' => $this->options['submitTitle'],
         'type'  => 'submit'
@@ -793,8 +785,8 @@ class Form {
    * @param bool $flag
    */
   function outputOnlyFields($flag = true) {
-    $this->disableFormTag = $flag;
-    $this->disableSubmit = $flag;
+    $this->options['disableFormTag'] = $flag;
+    $this->options['disableSubmit'] = $flag;
     $this->disableJs = $flag;
   }
 

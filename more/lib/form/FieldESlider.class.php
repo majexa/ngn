@@ -3,14 +3,16 @@
 class FieldESlider extends FieldEText {
 
   public $inputType = 'hidden';
-  public $useTypeJs = true;
 
-  public $options = [
-    'jsOptions' => [
-      'steps' => 20,
-      'range' => [1, 100]
-    ]
-  ];
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'useTypeJs' => true,
+      'jsOptions' => [
+        'steps' => 20,
+        'range' => [1, 100]
+      ]
+    ]);
+  }
 
   function setOptions(array $options) {
     parent::setOptions($options);

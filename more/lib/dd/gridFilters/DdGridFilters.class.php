@@ -92,8 +92,9 @@ class DdGridFilters {
       $v['dataParams']['pathFilterType'] = $v['pathFilterType'];
       $v['dataParams']['name'] = isset($v['filterName']) ? $v['filterName'] : $v['name'];
     }
-    $this->form = new DdForm($fields, $strName);
-    $this->form->disableSubmit = true;
+    $this->form = new DdForm($fields, $strName, [
+      'disableSubmit' => true
+    ]);
   }
 
 }

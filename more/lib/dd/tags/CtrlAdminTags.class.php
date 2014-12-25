@@ -37,14 +37,15 @@ class CtrlAdminTags extends CtrlAdmin {
       $this->strName = $this->tags->group->strName;
       $this->d['field'] = O::get('DdFields', $this->strName, [
         'getDisallowed' => true,
-        'getSystem' => true
+        'getSystem'     => true
       ])->getField($this->groupName);
       $this->d['structure'] = O::get('DbItems', 'dd_structures')->getItemByField('name', $this->strName);
       $this->d['path'] = [
         [
           'title' => 'Тэги',
           'link'  => $this->tt->getPath(2)
-        ], [
+        ],
+        [
           'title' => $this->d['structure']['title'].': '.$this->d['field']['title'],
           'link'  => $this->tt->getPath(4)
         ],
@@ -60,7 +61,7 @@ class CtrlAdminTags extends CtrlAdmin {
   }
 
   function action_default() {
-    $r = db()->query('
+    $r = db()->query(<<<SQL
     SELECT
       tagGroups.*,
       dd_fields.title AS title,
@@ -68,7 +69,8 @@ class CtrlAdminTags extends CtrlAdmin {
     FROM tagGroups
     LEFT JOIN dd_fields ON tagGroups.name=dd_fields.name
     LEFT JOIN dd_structures ON tagGroups.strName=dd_structures.name
-    ');
+SQL
+    );
     $items = [];
     foreach ($r as $v) {
       $items[$v['strName']]['title'] = $v['strTitle'];
@@ -81,20 +83,20 @@ class CtrlAdminTags extends CtrlAdmin {
   protected function getGrid() {
     $group = DdTagsGroup::getById($this->groupId);
     return Items::grid([
-      'head' => ['ID', 'Тэг','Кол-во записей'],
-      'body' => array_map(function($v) {
+      'head' => ['ID', 'Тэг', 'Кол-во записей'],
+      'body' => array_map(function ($v) {
         return [
-          'id' => $v['id'],
+          'id'    => $v['id'],
           'tools' => [
             'delete' => 'Удалить',
-            'edit' => [
-              'type' => 'inlineTextEdit',
-              'action' => 'ajax_rename',
+            'edit'   => [
+              'type'      => 'inlineTextEdit',
+              'action'    => 'ajax_rename',
               'paramName' => 'title',
-              'elN' => 1
+              'elN'       => 1
             ]
           ],
-          'data' => Arr::filterByKeys($v, ['id', 'title', 'cnt'])
+          'data'  => Arr::filterByKeys($v, ['id', 'title', 'cnt'])
         ];
       }, (new DdTagsTagsFlat($group))->getTags())
     ]);
@@ -139,9 +141,9 @@ class CtrlAdminTags extends CtrlAdmin {
 
   function action_json_pageSearch() {
     $this->json['html'] = $this->tt->getTpl('common/searchResults', [
-        'name'  => 'pageId',
-        'items' => Pages::searchPage($this->req->rq('mask'))
-      ]);
+      'name'  => 'pageId',
+      'items' => Pages::searchPage($this->req->rq('mask'))
+    ]);
   }
 
   function action_ajax_reorder() {
@@ -166,10 +168,6 @@ class CtrlAdminTags extends CtrlAdmin {
       'parentId' => $this->req->rq('parentId')
     ]);
     $this->json = $this->tags->getItem($id);
-  }
-
-  function action_json_getTree() {
-    $this->json = (new ClientTree)->setData($this->tags->getTree())->getTree();
   }
 
 }

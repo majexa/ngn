@@ -35,17 +35,10 @@ $d['grid'] = [
 
 if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
 
-/*
-
-  <div id="table"></div>
-  <script>
-    new Ngn.Grid({data: <?= json_encode($d['grid']) ?>});
-  </script>
-
-
-*/
-
 ?>
+
+<div id="asd"></div>
+<script></script>
 
 <? if ($d['items']) { ?>
   <table cellpadding="0" cellspacing="0" id="itemsTable" class="itemsTable valign structures">
@@ -119,5 +112,5 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
   </table>
 <? }
 else { ?>
-  <p>Пока что не создано ниодной структуры</p>
+  <div class="textBody"><p>Пока что не создано ниодной структуры</p></div>
 <? } ?>

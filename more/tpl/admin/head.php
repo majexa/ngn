@@ -12,8 +12,5 @@
     });
   });
   </script>
-  <link rel="stylesheet" type="text/css" href="http://localhost:888/module/default.css" media="screen, projection" />
-  <?/*
-  <script src="http://localhost:888/sux.js"></script>
-  */?>
+  <link rel="stylesheet" type="text/css" href="/i/css/admin/module/<?= $d['adminModule'] ?>.css" media="screen, projection" />
 </head>
