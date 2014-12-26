@@ -3,7 +3,7 @@
 class FieldEExpires extends FieldESelect {
 
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'options' => [
         60 * 60 * 24 * 1       => '1 день',
         60 * 60 * 24 * 2       => '2 дня',
@@ -14,7 +14,7 @@ class FieldEExpires extends FieldESelect {
         60 * 60 * 24 * 90      => '3 месяца',
         60 * 60 * 24 * 30 * 12 => 'год',
       ]
-    ];
+    ]);
   }
 
 }
