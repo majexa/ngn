@@ -5,7 +5,7 @@ class FieldEButton extends FieldEAbstract {
   public $inputType = 'button';
 
   protected function defineOptions() {
-    return ['noValue' => true];
+    return array_merge(parent::defineOptions(), ['noValue' => true]);
   }
 
   function _html() {

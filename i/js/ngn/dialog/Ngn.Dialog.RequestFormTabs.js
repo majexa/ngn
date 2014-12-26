@@ -7,7 +7,8 @@ Ngn.Dialog.RequestFormTabs = new Class({
     selectedTab: 0,
     draggable: true,
     openerType: 'default',
-    okDestroy: false
+    okDestroy: false,
+    dialogClass: 'dialog dialog-tabs'
   },
 
   initialize: function(opts) {
@@ -15,7 +16,6 @@ Ngn.Dialog.RequestFormTabs = new Class({
     opts.ok = this.submit.bind(this);
     this.parent(opts);
     this.toggle('ok', false);
-    this.dialog.addClass('dialog-tabs');
   },
 
   submit: function() {

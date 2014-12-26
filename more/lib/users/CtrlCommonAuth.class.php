@@ -28,6 +28,9 @@ class CtrlCommonAuth extends CtrlCammon {
           'disableSflmStore' => true
         ])
       ]))->router()->dispatch()->controller;
+      if (empty($ctrl->json['form'])) {
+        throw new Exception("no form by uri '$uri'");
+      }
       $form = [
         'id'    => Html::getParam($ctrl->json['form'], 'id'),
         'title' => $ctrl->json['title'],
@@ -41,14 +44,13 @@ class CtrlCommonAuth extends CtrlCammon {
 
   function action_json_form() {
     $form = new AuthForm;
-    $form->action = '/' + Sflm::frontendName(true) + '/auth/json_form';
-    $this->json['title'] = 'Авторизация ';
+    $form->action = '/'.Sflm::frontendName(true).'/auth/json_form';
+    $this->json['title'] = 'Авторизация';
     if ($form->isSubmittedAndValid()) {
       $this->json['success'] = true;
-      return;
+      return null;
     }
     $this->json['req'] = $form->req->r;
-    $this->json['req2'] = $_REQUEST;
     $this->json['valid'] = ($form->validate() ? 'true' : $form->lastError);
     if ($form->req['formId']) $this->json['idssss'] = $form->req['formId'].' - '.$form->id();
     return $this->jsonFormAction($form);

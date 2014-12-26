@@ -115,9 +115,10 @@ Ngn.Dialog.Auth = new Class({
       this.options.completeUrl ?
         window.location.assign(this.options.completeUrl) :
         window.location.reload(true);
-    } else {
-      if (Ngn.site.top.auth.reload) Ngn.site.top.auth.reload();
     }
+    //else {
+    //  if (Ngn.site.top.auth.reload) Ngn.site.top.auth.reload();
+    //}
   },
 
   // eval methods
