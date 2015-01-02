@@ -88,7 +88,7 @@ class Err {
   static function shutdownHandler() {
     $error = error_get_last();
     if ($error !== null) {
-      LogWriter::v('errors', $error['message'], [
+      self::_log($error['message'], [
         [
           'file' => $error['file'],
           'line' => $error['line']
@@ -115,7 +115,7 @@ class Err {
 
   static function _log($text, array $trace) {
     LogWriter::str('errors', $text);
-    LogWriter::html('errors', $text, $trace);
+    LogWriter::html('errors', $text, $trace, self::$errorExtra);
   }
 
   static function errorHandler($errno, $errstr, $errfile, $errline) {

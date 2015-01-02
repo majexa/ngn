@@ -5,11 +5,10 @@ class LogWriter {
   static $output = false;
 
   /**
-   * Записывает "var_export" в лог-файл. Лог-файл поддерживается LogReader'ом
-   *
-   * @param   string  Имя лога
-   * @param   string  Строка, которую нужно записать в лог-файл
-   * @param   array   Дополнительные параметры
+   * @param string $name Имя лога
+   * @param string $var Строка, которую нужно записать в лог-файл
+   * @param array $trace Трассировка
+   * @param array $params Дополнительные параметры
    */
   static function v($name, $var, array $trace = [], array $params = []) {
     if (getConstant('DO_NOT_LOG')) return;
@@ -21,9 +20,11 @@ class LogWriter {
   /**
    * Записывает HTML в лог-файл. Лог-файл поддерживается LogReader'ом
    *
-   * @param   string  Имя лога
-   * @param   string  Строка, которую нужно записать в лог-файл
-   * @param   array   Дополнительные параметры
+   * @param string $name Имя лога
+   * @param string $html Строка, которую нужно записать в лог-файл
+   * @param array $trace Трассировка
+   * @param array $params Дополнительные параметры
+   * @param bool $force
    */
   static function html($name, $html, array $trace = [], array $params = [], $force = false) {
     $s = '('.__FILE__.':'.__LINE__.")\n";
