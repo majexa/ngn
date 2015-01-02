@@ -19,7 +19,7 @@ abstract class CliAccessArgs extends CliAccess {
     $options = Arr::get(array_filter($params, function (ReflectionParameter $p) {
       return !$p->isOptional();
     }), 'name');
-    return ($options ? ' '.implode(' ', $options) : '');
+    return ($options ? ' '.O::get('CliColors')->getColoredString(implode(' ', $options), 'lightCyan') : '');
   }
 
   protected function _getParameters(ReflectionMethod $method, $class) {
