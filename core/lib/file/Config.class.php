@@ -68,11 +68,13 @@ class Config {
   static function replaceConstant($file, $k, $v) {
     self::deleteConstant($file, $k);
     self::addConstant($file, $k, $v);
+    opcache_reset();
   }
 
   static function _replaceConstant($c, $k, $v) {
     $c = self::_deleteConstant($c, $k);
     $c = self::_addConstant($c, $k, $v);
+    opcache_reset();
     return $c;
   }
 
@@ -83,6 +85,7 @@ class Config {
       $c .= "\n\n"."if (!defined('$k')) define('$k', ".Arr::formatValue($v).");";
     }
     file_put_contents($file, $c);
+    opcache_reset();
   }
 
   static function cleanupConstants($file) {
@@ -91,6 +94,7 @@ class Config {
     $c = '';
     foreach ($constants as $k => $v) $c .= "\n\n"."if (!defined('$k')) define('$k', ".Arr::formatValue($v).");";
     file_put_contents($file, "<?php$c");
+    opcache_reset();
   }
 
   static function deleteConstant($file, $k) {

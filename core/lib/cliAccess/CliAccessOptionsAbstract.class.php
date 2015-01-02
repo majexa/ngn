@@ -77,21 +77,29 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     $realClass = method_exists($args->class, $args->method) ? $args->class : $this->getSingleProcessorClass($args->class);
     $realArgs = clone $args;
     $realArgs->class = $realClass;
-    /*
     $requiredOptions = [];
     foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
     $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams( //
       $realArgs, //
       count($realClass::$requiredOptions) //
     ));
-    */
-    $options = [];
     /* @var CliAccessOptionsMultiWrapper $multiWrapper */
     $class = $args->class;
     $multiWrapper = (new $class($options));
     $multiWrapper->action($realArgs->method);
   }
 
+  /**
+   * Берёт класс и метод из объекта $args.
+   * Получает опции метода из док-блока.
+   * Формирует массив, гдк ключ - это опция, а значение - взято из объекта $args по порядку,
+   * начиная с указанного отступа.
+   * Возвращает этот массив.
+   *
+   * @param CliAccessArgsArgs $args
+   * @param $offset
+   * @return array
+   */
   protected function getMethodOptionsWithParams(CliAccessArgsArgs $args, $offset) {
     $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
