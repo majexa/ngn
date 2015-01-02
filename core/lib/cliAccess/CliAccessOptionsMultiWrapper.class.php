@@ -20,7 +20,7 @@ abstract class CliAccessOptionsMultiWrapper extends ArrayAccessebleOptions {
     if (method_exists($singleClass, $method)) {
       $this->beforeActions();
       foreach ($this->_records() as $v) {
-        $this->options['name'] = $v['name'];
+        $this->options = array_merge($this->options, $v);
         $this->beforeAction();
         (new $singleClass($this->options))->$method();
         $this->afterAction();

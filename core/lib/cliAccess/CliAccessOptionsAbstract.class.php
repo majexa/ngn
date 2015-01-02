@@ -78,13 +78,13 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     $realArgs = clone $args;
     $realArgs->class = $realClass;
     $requiredOptions = [];
-    foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
+    /* @var CliAccessOptionsMultiWrapper $multiWrapper */
+    $class = $args->class;
+    // foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
     $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams( //
       $realArgs, //
       count($realClass::$requiredOptions) //
     ));
-    /* @var CliAccessOptionsMultiWrapper $multiWrapper */
-    $class = $args->class;
     $multiWrapper = (new $class($options));
     $multiWrapper->action($realArgs->method);
   }
