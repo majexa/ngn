@@ -2,7 +2,6 @@
 
 class TestSflmJs extends ProjectTestCase {
 
-  /*
   protected function setUp() {
     Sflm::clearCache();
     Sflm::setFrontend('js', 'default');
@@ -98,13 +97,17 @@ Ngn.aaa
     set_time_limit(1);
     Sflm::frontend('js')->addClass('Ngn.Preload');
   }
-  */
 
   function testDebugPaths() {
+    $this->_testDebugPaths('i/js/ngn/test/');
+    $this->_testDebugPaths('Ngn.Sub');
+  }
+
+  protected function _testDebugPaths($excepting) {
     Sflm::$debugUrl = 'abc';
     Sflm::$debugPaths = [
       'js' => [
-        'i/js/ngn/test/'
+        $excepting
       ]
     ];
     Sflm::clearCache();
@@ -115,9 +118,6 @@ Ngn.aaa
 <script src="abc/i/js/ngn/test/Ngn.Sub.A.js" type="text/javascript"></script>
 <script src="abc/i/js/ngn/test/Ngn.Sub.B.js" type="text/javascript"></script>
 TAGS;
-
-    //die2((bool)strstr(Sflm::frontend('js')->getTags(), $tags));
-
     $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTags(), $tags));
   }
 
