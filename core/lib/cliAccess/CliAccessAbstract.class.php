@@ -174,9 +174,9 @@ TEXT
 
   protected function _renderMethods($class, array $methods, $runnerColor = 'brown') {
     $name = $this->cmdName($class);
+    $nameCmd = $name ? ' '.$name : '';
     $s = '';
     foreach ($methods as $method) {
-      $nameCmd = $name ? ' '.$name : '';
       $rOptions = $this->renderMethodOptions($method['options']);
       $rOptions = $rOptions ? ' '.$rOptions : '';
       if (!empty($method['title']) and getOS() == 'win') $method['title'] = Misc::transit($method['title'], false, false);
@@ -185,7 +185,8 @@ TEXT
       $s .= //
         $this->runner($runnerColor). // runner
         $nameCmd.(count($methods) == 1 ? '' : ' '.$method['method']). // method
-        $this->renderClassRequiredOptions($class).$this->renderClassOptions($class).$rOptions. // options
+        $this->renderClassRequiredOptions($class). //
+        $this->renderClassOptions($class).$rOptions. // options
         $help."\n"; //
     }
     if ($name and $this->isMultiWrapper($class)) {
