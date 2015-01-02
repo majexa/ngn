@@ -24,13 +24,11 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
   },
 
   updateTitles: function(values) {
-    //c(values);
     if (!values.length) {
       this.eSelect.set('html', this.options.selectText);
       return;
     }
     var titles = [];
-    //c(this.name);
     for (var i = 0; i < values.length; i++) {
       titles.push(this.eParent.getElement('#' + Ngn.name2id(this.name) + '_' + values[i]).getNext().get('text'));
     }
@@ -46,7 +44,7 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
         value: item
       }).inject(this.eHiddens);
     }.bind(this));
-    this.eReq.set('value', values.length != 0 ? 1 : '');
+    if (this.eReq) this.eReq.set('value', values.length != 0 ? 1 : '');
   },
 
   dialog: function() {
@@ -59,7 +57,6 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
 
   init: function() {
     this.parent();
-    //this.name = Ngn.Frm.getPureName(this.eRow.getElement('input').get('name'));
     this.eTree = this.eRow.getElement('.field-wrapper div');
     this.eFieldWrapper = this.eRow.getElement('.field-wrapper');
     this.eHiddens = new Element('div.hiddens').inject(this.eFieldWrapper);
@@ -73,11 +70,13 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
       new Event(e).stop();
       new dialog(this);
     }.bind(this));
-    this.eReq = new Element('input', {
-      type: 'hidden',
-      'class': 'required',
-      name: 'dummy'
-    }).inject(this.eFieldWrapper);
+    if (this.eTree.get('data-required')) {
+      this.eReq = new Element('input', {
+        type: 'hidden',
+        'class': 'required',
+        name: 'dummy'
+      }).inject(this.eFieldWrapper);
+    }
     this.update();
   }
 

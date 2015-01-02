@@ -105,8 +105,9 @@ TEXT
 
   protected function help() {
     if (!CliAccess::$disableDescription) {
-      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('name', 'darkGray')." - optional param\n";
-      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('[...]', 'green')." - param options\n";
+      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('name', 'lightCyan')." - param\n";
+      if (!CliAccess::$proMode) print '{'.O::get('CliColors')->getColoredString('name', 'darkGray')."} - optional param\n";
+      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('[...]', 'green')." - param variants\n";
     }
     $classes = $this->getClasses();
     if ($classes) {
@@ -261,7 +262,7 @@ TEXT
 
   protected function renderMethodOptions($options) {
     return implode(' ', array_map(function ($v) {
-      return (!empty($v['optional']) ? '{'.O::get('CliColors')->getColoredString($v['name'], 'darkGray').'}' : $v['name']). //
+      return (!empty($v['optional']) ? '{'.O::get('CliColors')->getColoredString($v['name'], 'darkGray').'}' : O::get('CliColors')->getColoredString($v['name'], 'lightCyan')). //
       ($v['variants'] ? O::get('CliColors')->getColoredString("[{$v['variants']}]", 'green') : '');
     }, $options));
   }

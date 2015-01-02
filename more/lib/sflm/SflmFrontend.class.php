@@ -77,10 +77,13 @@ abstract class SflmFrontend {
   function getTags() {
     $this->checkStored();
     $html = $this->base->getTags($this->name, $this->_code());
-    if (isset(Sflm::$debugPaths[$this->base->type])) {
-      foreach (Sflm::$debugPaths[$this->base->type] as $path) {
-        $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
-      }
+//    if (isset(Sflm::$debugPaths[$this->base->type])) {
+//      foreach (Sflm::$debugPaths[$this->base->type] as $path) {
+//        $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
+//      }
+//    }
+    foreach ($this->debugPaths as $path) {
+      $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
     }
     return $html;
   }
@@ -171,8 +174,12 @@ abstract class SflmFrontend {
 
   abstract protected function __addPath($path, $source = null);
 
+  protected $debugPaths = [];
+
   /**
-   * @param string $path Добавляет к текущему фронтенду runtime путь
+   * Добавляет к текущему фронтенду runtime путь
+   *
+   * @param string $path
    * @throws Exception
    */
   function _addPath($path) {
@@ -181,8 +188,9 @@ abstract class SflmFrontend {
       Sflm::output("New path '$path' already exists");
       return;
     }
-    if (isset(Sflm::$debugPaths[$this->base->type]) and Arr::strExists(Sflm::$debugPaths[$this->base->type], $path)) {
-      Sflm::output('Skipping path '.$path);
+    if (isset(Sflm::$debugPaths[$this->base->type]) and Arr::strExistsInvert(Sflm::$debugPaths[$this->base->type], $path)) {
+      $this->debugPaths[] = $path;
+      Sflm::output('Skipping debug path '.$path);
       return;
     }
     Sflm::output('Adding path '.$path);

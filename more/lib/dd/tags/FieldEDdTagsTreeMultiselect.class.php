@@ -7,13 +7,13 @@ class FieldEDdTagsTreeMultiselect extends FieldEText {
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
-      'useTypeJs' => true,
       'rootTagId' => 0
     ]);
   }
 
   function _html() {
     $data = self::getTplData(new DdTagsTagsTree(new DdTagsGroup($this->strName, $this->baseName)), $this->options['name'], $this->options['value'], $this->options['rootTagId'], !empty($this->options['value']));
+    if ($this->options['required']) $this->options['dataParams']['required'] = true;
     return Tt()->getTpl('dd/tagsTreeMultiselect', array_merge($data, [
       'dataParams' => isset($this->options['dataParams']) ? $this->options['dataParams'] : []
     ]));

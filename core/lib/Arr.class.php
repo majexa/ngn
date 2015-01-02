@@ -631,9 +631,14 @@ class Arr {
     $a[$k]++;
   }
 
-  static function strExists(array $array, $str) {
-    return (bool)array_filter($array, function ($v) use ($str) {
-      return (bool)strstr($v, $str);
+  static function strExists(array $haystacks, $heedle) {
+    return (bool)array_filter($haystacks, function ($haystack) use ($heedle) {
+      return (bool)strstr($haystack, $heedle);
+    });
+  }
+  static function strExistsInvert(array $heedles, $haystack) {
+    return (bool)array_filter($heedles, function ($heedle) use ($haystack) {
+      return (bool)strstr($haystack, $heedle);
     });
   }
 
