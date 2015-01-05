@@ -82,6 +82,7 @@ abstract class SflmFrontend {
 //        $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
 //      }
 //    }
+    //die2($this->debugPaths);
     foreach ($this->debugPaths as $path) {
       $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
     }

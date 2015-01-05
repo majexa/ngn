@@ -2,7 +2,7 @@
 
 class TestSflmJs extends ProjectTestCase {
 
-  protected function setUp() {
+/*  protected function setUp() {
     Sflm::clearCache();
     Sflm::setFrontend('js', 'default');
   }
@@ -97,9 +97,9 @@ Ngn.aaa
     set_time_limit(1);
     Sflm::frontend('js')->addClass('Ngn.Preload');
   }
-
+*/
   function testDebugPaths() {
-    $this->_testDebugPaths('i/js/ngn/test/');
+    //$this->_testDebugPaths('i/js/ngn/test/');
     $this->_testDebugPaths('Ngn.Sub');
   }
 

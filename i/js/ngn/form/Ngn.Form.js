@@ -22,6 +22,7 @@ Ngn.Form = new Class({
     this.id = this.eForm.get('id');
     this.setOptions(options);
     if (!this.options.disableInit) this.init();
+    c('form "' + this.id + '" initialized');
   },
 
   init: function() {
