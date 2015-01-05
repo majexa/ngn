@@ -263,33 +263,15 @@ trait DdParamFilterCtrl {
     $this->paramFilterItems()->addTagFilter($tagField, is_array($tagValue) ? $tagValue : explode(',', $tagValue), $byId);
   }
 
-  protected $curUser;
+  public $curUser = false;
 
   /**
-   * @param   integer   ID пользователя
+   * @param integer $userId ID пользователя
+   * @throws EmptyException
    */
   function setFilterUser($userId) {
     $this->curUser = Misc::checkEmpty(DbModelCore::get('users', $userId));
     $this->paramFilterItems()->addF('userId', $this->curUser['id']);
-    /*
-     * $this->d['itemsUser']
-    if (empty($this->d['itemsUser'])) {
-      $this->error404('Пользователь не найден');
-      return;
-    }
-    if ($this->page->getS('ownerMode') == 'author') {
-      $name = UsersCore::name($this->d['itemsUser']);
-      $this->setPageTitle($this->d['pageTitle'].' — '.$name);
-      $this->setPathData($this->tt->getPath(2), $name);
-    }
-    */
-    /*
-    $this->d['submenu'] = UserMenu::get(
-      $this->d['itemsUser'],
-      $this->d['page']['id'],
-      $this->action
-    );
-    */
   }
 
 }

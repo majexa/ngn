@@ -177,8 +177,10 @@ Ngn.checkboxesSelected = function(esCheckboxes) {
 
 // --------------------------Common functions------------------------------
 
+Ngn.debug = true;
+
 function c(t) {
-  if ($defined(console) && console.log) {
+  if (console && console.log && Ngn.debug) {
     console.log(t);
   }
 };

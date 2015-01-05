@@ -17,15 +17,15 @@ class DdoSettings {
   }
 
   protected function getKey($prefix, $suffix = null) {
-    return "$prefix.{$this->strName}".($suffix ? '.'.$suffix : '');
+    return "ddo/$prefix.{$this->strName}".($suffix ? '.'.$suffix : '');
   }
 
-  protected function getVar($prefix, $suffix = null) {
+  function getVar($prefix, $suffix = null) {
     return Config::getVar($this->getKey($prefix, $suffix), true);
   }
 
   function getShowAll() {
-    return $this->getVar('ddo/itemsShow');
+    return $this->getVar('itemsShow');
   }
 
   function getShow($layoutName) {
@@ -33,29 +33,28 @@ class DdoSettings {
   }
 
   function getDataAll($name) {
-    return $this->getVar("ddo/$name");
+    return $this->getVar($name);
   }
 
   function getDataLayout($name, $layout) {
-    if (($r = $this->getVar("ddo/$name")) === false) return false;
+    if (($r = $this->getVar($name)) === false) return false;
     return isset($r[$layout]) ? $r[$layout] : false;
   }
-
 
   /**
    * Возвращает все методы вывода для определенного поля
    *
-   * @param   string  Имя поля
-   * @return  array
+   * @param string $fieldName Имя поля
+   * @return array
    */
-  function getOutputMethods($fieldType) {
+  function getOutputMethods($fieldName) {
     $methods = [
       [
         'name'  => '',
         'title' => 'по умолчанию'
       ]
     ];
-    if (($_methods = DdoMethods::getInstance()->field[$fieldType])) {
+    if (($_methods = DdoMethods::getInstance()->field[$fieldName])) {
       foreach ($_methods as $name => $v) {
         $methods[] = [
           'name'  => $name,
@@ -79,7 +78,7 @@ class DdoSettings {
    * @return array
    */
   function getOutputMethod() {
-    return $this->getVar('ddo/outputMethod');
+    return $this->getVar('outputMethod');
   }
 
   function getAllowedFields($layoutName) {
@@ -88,19 +87,19 @@ class DdoSettings {
   }
 
   function getOrder($layoutName) {
-    return $this->getVar('ddo/fieldOrder', $layoutName);
+    return $this->getVar('fieldOrder', $layoutName);
   }
 
   function updateShow($values) {
-    SiteConfig::updateVar($this->getKey('ddo/itemsShow'), $values, true);
+    SiteConfig::updateVar($this->getKey('itemsShow'), $values, true);
   }
 
   function updateOutputMethod($values) {
-    SiteConfig::updateVar($this->getKey('ddo/outputMethod'), $values, true);
+    SiteConfig::updateVar($this->getKey('outputMethod'), $values, true);
   }
 
   function updateTitled($values) {
-    SiteConfig::updateVar($this->getKey('ddo/titled'), $values, true);
+    SiteConfig::updateVar($this->getKey('titled'), $values, true);
   }
 
   /**
