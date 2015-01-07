@@ -2,6 +2,10 @@
 
 class UserRegPhoneForm extends Form {
 
+  function id() {
+    return 'formReg';
+  }
+
   function __construct(array $options = []) {
     $options['submitTitle'] = 'Продолжить';
     parent::__construct([
@@ -10,25 +14,29 @@ class UserRegPhoneForm extends Form {
         'name'     => 'phone',
         'type'     => 'phone',
         'required' => true
-      ], [
+      ],
+      [
         'title'    => 'Ваш телефон',
         'name'     => 'phone',
         'type'     => 'phone',
         'required' => true
-      ], [
-        'title'    => 'Выберите способ для подтверждения телефона',
-        'name'     => 'method',
-        'type'     => 'radio',
-        'noValue'  => true,
-        'options'  => [
+      ],
+      [
+        'title'   => 'Выберите способ для подтверждения телефона',
+        'name'    => 'method',
+        'type'    => 'radio',
+        'noValue' => true,
+        'options' => [
           'sms'   => 'по sms',
           'phone' => 'по телефону'
         ]
-      ], [
+      ],
+      [
         'value' => 'Отправить код подтверждения',
         'type'  => 'button',
         'name'  => 'send'
-      ], [
+      ],
+      [
         'title'    => 'Код',
         'name'     => 'code',
         'type'     => 'num',
@@ -66,9 +74,16 @@ JS;
   }
 
   protected function initErrors() {
+    parent::initErrors();
+    $this->initCodeError();
+  }
+
+  protected function initCodeError() {
+    if (!Config::getVarVar('userReg', 'phoneConfirm')) return;
     $codeEl = $this->getElement('code');
-    $exists = db()->select('SELECT * FROM userPhoneConfirm WHERE phone=? AND code=?', $this->getElement('phone')->value(), $codeEl->value());
-    if (!$exists) $codeEl->error('Неверный код подтверждения');
+    if (IS_DEBUG and $codeEl->value() == '123') return;
+    $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $this->getElement('phone')->value(), $codeEl->value());
+    if (!$exists) $this->globalError('Неверный код подтверждения');
   }
 
 }

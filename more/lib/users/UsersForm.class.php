@@ -33,7 +33,7 @@ class UsersForm extends Form {
         'name'     => 'phone',
         'title'    => 'Телефон',
         'type'     => 'phone',
-        'disabled' => !empty($this->req->r['phone']),
+        // 'disabled' => !empty($this->req->r['phone']),
         'required' => true
       ];
     }

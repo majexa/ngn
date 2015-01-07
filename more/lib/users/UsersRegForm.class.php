@@ -27,11 +27,11 @@ class UsersRegForm extends UsersForm {
     return $fields;
   }
 
-  protected function initCodeError() {
-    if (!Config::getVarVar('userReg', 'phoneConfirm')) return;
-    $codeEl = $this->getElement('code');
-    $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $this->getElement('phone')->value(), $codeEl->value());
-    if (!$exists) $this->globalError('Неверный код подтверждения');
+  protected function _update(array $data) {
+    $data = Arr::filterByKeys($data, $this->filterFields);
+    $data['active'] = $this->options['active'];
+    $id = DbModelCore::create('users', $data);
+    Ngn::fireEvent('users.new', $id);
   }
 
   protected function initErrors() {
@@ -39,11 +39,12 @@ class UsersRegForm extends UsersForm {
     $this->initCodeError();
   }
 
-  protected function _update(array $data) {
-    $data = Arr::filterByKeys($data, $this->filterFields);
-    $data['active'] = $this->options['active'];
-    $id = DbModelCore::create('users', $data);
-    Ngn::fireEvent('users.new', $id);
+  protected function initCodeError() {
+    if (!Config::getVarVar('userReg', 'phoneConfirm')) return;
+    $code = $this->req->rq('code');
+    $phone = $this->req->rq('phone');
+    $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $phone, $code);
+    if (!$exists) $this->globalError('Неверный код подтверждения');
   }
 
 }

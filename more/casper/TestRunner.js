@@ -6,26 +6,26 @@ var c = function(v) {
 
 module.exports = new Class({
   Extends: Project,
-  Implements: Options,
 
-  logLevel: 1,
+  logLevel: 3,
   i: 0,
   callbackPrefixes: [
     'then', 'wait'
   ],
 
   options: {
-    captureFolder: null
+    captureFolder: null,
+    stepsFile: null
   },
 
-  initialize: function(options) {
+  init: function() {
+    this.initSteps();
+    this.preparseSteps();
+  },
+
+  initCasper: function() {
     this.parent();
-    var stdinOptions = require('system').stdin.readLine();
-    if (!stdinOptions.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
-    stdinOptions = JSON.decode(stdinOptions);
-    this.setOptions(Object.merge(stdinOptions, options));
-    this.stepsPreparse();
-    if (this.options.extension) this.casper = Object.merge(this.casper, require(this.options.extension));
+    // -- if (this.options.extension) this.casper = Object.merge(this.casper, require(this.options.extension));
     this.casper.on('page.error', function(msg, trace) {
       var t = '';
       for (var i = 0; i < trace.length; i++) {
@@ -197,11 +197,11 @@ module.exports = new Class({
     if (this.disableCapturing) return;
     if (this.options.captureFolder) {
       var id = this.makeCapture(caption);
-      this.afterCaptureCmd('rumax/save', 'id=' + id + //
-        '+folder=' + this.options.captureFolder + //
-        '+n=' + (this.i + 1) + //
-        '+caption=' + caption.replace(new RegExp(' ', 'g'), '_') //
-      );
+        this.afterCaptureCmd('rumax/save', 'id=' + id + //
+          '+folder=' + this.options.captureFolder + //
+          '+n=' + (this.i + 1) + //
+          '+caption=' + caption.replace(new RegExp(' ', 'g'), '_') //
+        );
       return;
     }
     this.capture(caption, this.i + 1);
@@ -215,12 +215,35 @@ module.exports = new Class({
     var step = this.options.steps[this.i + 1];
     var params = '';
     if (step.length > 1) params = ' (' + step.slice(1, step.length).join(', ') + ')';
-    this.log('running> ' + step[0] + params, 2);
+    this.log('STEP>  ' + step[0] + params, 2);
     this.i++;
     this.runStep();
   },
 
-  stepsPreparse: function() {
+  /**
+   * Получает массив с шагами из stdin'а или json-файла
+   */
+  initSteps: function() {
+    if (!this.casper.cli.options.stepsFile) {
+      this.log('init stdin steps', 3);
+      var steps = require('system').stdin.readLine();
+      if (!steps.replace(new RegExp('\\s', 'g'), '')) throw new Error('Wrong or empty json in stdin');
+      this.options.steps = JSON.decode(steps);
+    } else {
+      this.log('init steps from "' + this.casper.cli.options.stepsFile + '"', 3);
+      var data = require('fs').read(this.casper.cli.options.stepsFile, 'utf-8');
+      this.options.steps = JSON.decode(data);
+    }
+    this.log('initialized:', 3);
+    for (var i =0; i<this.options.steps.length; i++) {
+      this.log('  * ' + this.options.steps[i], 3);
+    }
+  },
+
+  /**
+   * Добавляет "wait" и "capture" шаг после шагов с префиксом "~"
+   */
+  preparseSteps: function() {
     var steps = [];
     for (var i = 0; i < this.options.steps.length; i++) {
       var step = this.options.steps[i];

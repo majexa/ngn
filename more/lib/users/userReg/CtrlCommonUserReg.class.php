@@ -27,7 +27,7 @@ class CtrlCommonUserReg extends CtrlCammon {
       'defaultsFromReq' => true,
       'role'            => isset($this->req->r['role']) ? $this->req->r['role'] : null
     ]);
-    $form->action = '/' + Sflm::frontendName(true) + '/userReg/json_form';
+    $form->action = '/'.Sflm::frontendName(true).'/userReg/json_form';
     return $form;
   }
 
@@ -41,9 +41,9 @@ class CtrlCommonUserReg extends CtrlCammon {
     $form = $this->getForm();
     $this->d['form'] = $form->html();
     if ($form->update()) {
-      //$data = $form->getData();
-      //if (empty($this->conf['activation']) and !empty($this->conf['authorizeAfterReg']))
-      //Auth::loginByRequest($data['login'], $data['pass']);
+//      $data = $form->getData();
+//      if (empty($this->conf['activation']) and !empty($this->conf['authorizeAfterReg']))
+//      Auth::loginByRequest($data['login'], $data['pass']);
       $this->redirect($this->tt->getPath(1).'/complete');
     }
   }
@@ -61,10 +61,10 @@ class CtrlCommonUserReg extends CtrlCammon {
       if (empty($this->conf['activation']) and !empty($this->conf['authorizeAfterReg'])) {
         $this->json['authorized'] = true;
         Auth::loginByRequest($this->conf['loginEnable'] ? $form->elementsData['login'] : $form->elementsData['email'], $form->elementsData['pass']);
-        return;
+        return null;
       }
       $this->json['activation'] = $this->conf['activation'];
-      return;
+      return null;
     }
     return $this->jsonFormAction($form);
   }
@@ -84,8 +84,6 @@ class CtrlCommonUserReg extends CtrlCammon {
     $this->isDefaultAction = false;
     $this->d['tpl'] = 'users/regWelcome';
   }
-
-  // ----------------------------------------------------
 
   protected function initSubmenu() {
     $items = [];
@@ -153,6 +151,7 @@ class CtrlCommonUserReg extends CtrlCammon {
     if (!$this->initUser()) return;
     $this->initSubmenu();
     $method = "process".ucfirst($name)."EditForm";
+    /* @var $form Form */
     $form = $this->$method();
     if ($form->isSubmittedAndValid()) {
       $this->d['tpl'] = 'common/successMsg';
@@ -192,17 +191,6 @@ class CtrlCommonUserReg extends CtrlCammon {
     $this->wrapProcessForm('name');
     $this->setPageTitle("Изменение e-mail'а");
   }
-
-  /*
-  function action_editMysiteTheme() {
-    if (!Config::getVarVar('mysite', 'enable')) throw new Exception('Mysite is disabled');
-    if (empty($this->conf['allowMysiteThemeEdit'])) throw new Exception('MysiteTheme change not allowed');
-    $this->d['tpl'] = 'users/regEdit';
-    if (!$this->initUser()) return;
-    $this->initSubmenu();
-    $this->processMysiteThemeForm();
-  }
-  */
 
   protected function processFieldEditForm($fieldName, $fieldTitle, $fieldType = 'text') {
     $form = new Form(new Fields([
@@ -277,42 +265,6 @@ class CtrlCommonUserReg extends CtrlCammon {
 
   protected function processNameEditForm() {
     return $this->processFieldEditForm('name', 'домен');
-  }
-
-  protected function processMysiteThemeForm() {
-    $folder = UPLOAD_PATH.'/mysite/'.$this->user['id'];
-    $file = $folder.'/bg.jpg';
-    $this->d['fields'] = $fields = [
-      [
-        'name'     => 'image',
-        'title'    => 'Картинка для шапки',
-        'type'     => 'image',
-        'required' => true,
-        'default'  => file_exists($file) ? UPLOAD_DIR.'/mysite/'.$this->user['id'].'/bg.jpg' : ''
-      ],
-    ];
-    $oF = new Form(new Fields($fields));
-    $oF->options['submitTitle'] = 'Изменить';
-    $data = $oF->setElementsData();
-    if ($oF->isSubmittedAndValid()) {
-      Dir::make($folder);
-      copy($data['image']['tmp_name'], $file);
-      unlink($data['image']['tmp_name']);
-    }
-    $this->d['form'] = $oF->html();
-  }
-
-  function action_deleteFile() {
-    if (!Config::getVarVar('mysite', 'enable')) throw new Exception('Mysite is disabled');
-    if (empty($this->conf['allowMysiteThemeEdit'])) throw new Exception('MysiteTheme change not allowed');
-    if (!$this->initUser()) return;
-    if (file_exists(UPLOAD_PATH.'/mysite/'.$this->user['id'].'/bg.jpg')) unlink(UPLOAD_PATH.'/mysite/'.$this->user['id'].'/bg.jpg');
-    $this->redirect($this->tt->getPath(1).'/editMysiteTheme');
-  }
-
-  function action_updateUserDataPageId() {
-    db()->query("UPDATE users SET userDataPageId=?d WHERE id=?d", $this->req->r['userDataPageId'], Auth::get('id'));
-    $this->redirect();
   }
 
 }

@@ -238,6 +238,7 @@ abstract class SflmBase {
     if (Sflm::$debug) {
       $t = '';
       foreach ($this->getPaths($package) as $path) {
+        $path = '/'.$path;
         if ($this->isPackage($path)) {
           $t .= $this->getTags($path);
         }
