@@ -24,7 +24,11 @@ module.exports = new Class({
 
   makeCapture: function(caption, id) {
     if (!id) id = new Date().getTime() + '-' + parseInt(Math.random() * 100000000);
-    this.casper.capture('/home/user/ngn-env/rumax/web/captures/' + id + '.png', {
+    var capturesFolder = '/home/user/ngn-env/rumax/web/captures';
+    if (this.casper.cli.options.rumaxFolder) {
+      capturesFolder = this.casper.cli.options.rumaxFolder;
+    }
+    this.casper.capture(capturesFolder + '/' + id + '.png', {
       top: 0,
       left: 0,
       width: 950,
@@ -39,6 +43,7 @@ module.exports = new Class({
    * @param {string} options - Look at NgnCl::strParamsToArray for options format
    */
   afterCaptureCmd: function(runner, options) {
+    if (this.casper.cli.options.disableAfterCaptureCmd) return;
     this.execFile(runner, options, function(stdout) {
       this.log('capture result:\n' + stdout, 3);
     }.bind(this));

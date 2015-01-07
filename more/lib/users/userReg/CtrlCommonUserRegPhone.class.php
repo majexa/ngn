@@ -6,8 +6,8 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
     $form = new UserRegPhoneForm(['req' => $this->req, 'defaultsFromReq' => true]);
     $this->json['title'] = 'Регистрация';
     if ($form->update()) {
-      $this->json['nextFormUrl'] = '/' + Sflm::frontendName(true) + '/userReg/json_form?'.http_build_query($form->getData());
-      return;
+      $this->json['nextFormUrl'] = '/'.Sflm::frontendName(true).'/userReg/json_form?'.http_build_query($form->getData());
+      return null;
     }
     return $this->jsonFormAction($form);
   }
@@ -27,12 +27,12 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       return;
     }
     $r = db()->selectRow('SELECT * FROM userPhoneConfirm WHERE dateCreate > ? AND phone=?', Date::db(time() - self::expireTime()), $phone);
-    $maxAttemps = 15;
+    $maxAttempts = 15;
     if ($r) {
-//      if ($r['attempts'] >= $maxAttemps) {
-//        $this->json['validError'] = 'Вы исчерпали лимит попыток. Попробуйте ещё раз через час';
-//        return;
-//      }
+      if ($r['attempts'] >= $maxAttempts) {
+        $this->json['validError'] = 'Вы исчерпали лимит попыток. Попробуйте ещё раз через час';
+        return;
+      }
       $code = $r['code'];
       $attempts = $r['attempts'] + 1;
     }

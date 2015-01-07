@@ -6,11 +6,11 @@ define('LOG_OUTPUT', isset($_REQUEST['ol']) ? true : false);
 require_once NGN_PATH.'/init/more.php';
 
 if (getConstant('IS_DEBUG') and isset($_REQUEST['cc'])) {
-  require_once CORE_PATH.'/lib/Memc.class.php';
-  require_once CORE_PATH.'/lib/Mem.class.php';
   require_once MORE_PATH.'/lib/core/UrlCache.class.php';
   FileCache::clean();
-  Mem::clean();
+//  require_once CORE_PATH.'/lib/Memc.class.php';
+//  require_once CORE_PATH.'/lib/Mem.class.php';
+//  Mem::clean();
   UrlCache::clearCache();
   Sflm::clearCache();
   die('cc');
