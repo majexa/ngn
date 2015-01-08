@@ -35,7 +35,7 @@ class Casper {
     if (!$projectName) $projectName = PROJECT_KEY;
     $projectDir = NGN_ENV_PATH.'/projects/'.$projectName;
     $casperFolder = NGN_PATH.'/more/casper';
-    $cmd = "casperjs $casperFolder/test.js --projectDir=$projectDir --stepsFile=$casperFolder/$test.js --disableCapture=1";
+    $cmd = "casperjs $casperFolder/test.js --projectDir=$projectDir --stepsFile=$casperFolder/test/$test.js --disableCapture=1";
     print `$cmd`;
   }
 
