@@ -21,7 +21,7 @@ class UserBaseForm extends Form {
   protected function initCodeError() {
     if (!Config::getVarVar('userReg', 'phoneConfirm')) return;
     $codeEl = $this->getElement('code');
-    if (IS_DEBUG and $codeEl->value() == '123') return;
+    if (getConstant('TESTING') and $codeEl->value() == '123') return;
     $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $this->getElement('phone')->value(), $codeEl->value());
     if (!$exists) $this->globalError('Неверный код подтверждения');
   }
