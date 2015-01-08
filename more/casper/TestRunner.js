@@ -7,7 +7,7 @@ var c = function(v) {
 module.exports = new Class({
   Extends: Project,
 
-  logLevel: 3,
+  logLevel: 1,
   i: 0,
   callbackPrefixes: [
     'then', 'wait'
@@ -91,7 +91,7 @@ module.exports = new Class({
       ];
     };
     this.casper.checkText = function(selector, textToCompare) {
-      var text = this.fetchText(selector);
+      var text = this.fetchText(selector).trim();
       return [
         text == textToCompare, //
         'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare, 'text and textToCompare are identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare
@@ -250,8 +250,8 @@ module.exports = new Class({
       if (step[0].substr(0, 1) == '~') {
         step[0] = step[0].substr(1, step[0].length);
         steps.push(step);
-        steps.push(['wait', 1000]);
-        steps.push(['_capture', 'after ' + step[0]]);
+        steps.push(['wait', 2000]);
+        if (!this.casper.cli.options.disableCapture) steps.push(['_capture', 'after ' + step[0]]);
       } else {
         steps.push(step);
       }

@@ -1,6 +1,6 @@
 <?php
 
-class UsersRegForm extends UsersForm {
+class UserRegForm extends UserForm {
 
   public $create = true;
   
@@ -23,6 +23,10 @@ class UsersRegForm extends UsersForm {
         'name' => 'code',
         'type' => 'hidden'
       ];
+      $fields[] = [
+        'name' => 'phone',
+        'type' => 'hidden'
+      ];
     }
     return $fields;
   }
@@ -31,20 +35,13 @@ class UsersRegForm extends UsersForm {
     $data = Arr::filterByKeys($data, $this->filterFields);
     $data['active'] = $this->options['active'];
     $id = DbModelCore::create('users', $data);
+    if ($this->options['onCreate']) $this->options['onCreate']($id);
     Ngn::fireEvent('users.new', $id);
   }
 
   protected function initErrors() {
     parent::initErrors();
     $this->initCodeError();
-  }
-
-  protected function initCodeError() {
-    if (!Config::getVarVar('userReg', 'phoneConfirm')) return;
-    $code = $this->req->rq('code');
-    $phone = $this->req->rq('phone');
-    $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $phone, $code);
-    if (!$exists) $this->globalError('Неверный код подтверждения');
   }
 
 }

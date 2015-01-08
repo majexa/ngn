@@ -75,7 +75,12 @@ Ngn.Form = new Class({
 
   initDynamicJs: function() {
     var js = $(this.eForm.get('id') + 'js');
+    c([
+      this.eForm.get('id') + 'js',
+      js
+    ]);
     if (js) {
+      c('form "' + this.id + '" init dynamic js');
       Asset.javascript(js.get('html'), {
         onLoad: function() {
           var func = eval('Ngn.Frm.init.' + this.eForm.get('id'));
@@ -359,6 +364,7 @@ Ngn.Form.elOptions = {};
 Ngn.Form.ElInit = new Class({
 
   initialize: function(form, type) {
+    console.trace();
     this.form = form;
     this.type = type;
     this.init();

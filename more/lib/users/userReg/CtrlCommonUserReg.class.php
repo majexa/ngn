@@ -22,7 +22,7 @@ class CtrlCommonUserReg extends CtrlCammon {
   }
 
   protected function getForm() {
-    $form = new UsersRegForm([
+    $form = new UserRegForm([
       'submitTitle'     => 'Зарегистрироваться',
       'defaultsFromReq' => true,
       'role'            => isset($this->req->r['role']) ? $this->req->r['role'] : null
@@ -55,15 +55,16 @@ class CtrlCommonUserReg extends CtrlCammon {
 
   function action_json_form() {
     $form = $this->getForm();
+    $form->options['onCreate'] = function($id) {
+      Auth::loginById($id);
+    };
     $this->json['title'] = 'Регистрация';
     if ($form->update()) {
       $this->json['success'] = true;
+      $this->json['activation'] = $this->conf['activation'];
       if (empty($this->conf['activation']) and !empty($this->conf['authorizeAfterReg'])) {
         $this->json['authorized'] = true;
-        Auth::loginByRequest($this->conf['loginEnable'] ? $form->elementsData['login'] : $form->elementsData['email'], $form->elementsData['pass']);
-        return null;
       }
-      $this->json['activation'] = $this->conf['activation'];
       return null;
     }
     return $this->jsonFormAction($form);

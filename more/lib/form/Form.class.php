@@ -130,7 +130,7 @@ class Form {
   }
 
   protected function getDefaultData() {
-    if ($this->isSubmitted() and !empty($this->options['defaultsFromReq'])) {
+    if (!empty($this->options['defaultsFromReq'])) {
       return $this->req->r;
     }
     return $this->defaultData;
@@ -355,8 +355,9 @@ class Form {
     $html = $html.str_replace('{input}', $elsHtml, $this->templates['form']);
     $html .= $this->htmlVisibilityConditions();
     if (isset($this->fsb)) $html .= $this->fsb->makeTags();
+    $html = $html.$this->js();
     if (!$this->options['disableFormTag']) $html .= '</form>';
-    return $html.$this->js();
+    return $html;
   }
 
   protected function initElementsInlineJs() {
@@ -469,8 +470,12 @@ class Form {
       /* @var $el FieldEAbstract */
       if (!$el->validate()) {
         if (empty($el->error)) throw new Exception('error is empty. $el: '.getPrr($el));
-        $this->lastError = $el->error;
-        $this->hasErrors = true;
+        if (isset($el->inputType) and $el->inputType == 'hidden') {
+          $this->globalError($el->error);
+        } else {
+          $this->lastError = $el->error;
+          $this->hasErrors = true;
+        }
       }
     }
     if (isset($this->globalError)) {

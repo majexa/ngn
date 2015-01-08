@@ -6,7 +6,7 @@ class FieldEPhone extends FieldEText {
     return array_merge(parent::defineOptions(), [
       'useTypeJs' => true,
       'cssClass' => 'validate-phone',
-      'help'     => 'Пример: +79202123933'
+      'help'     => 'Формат: +71234567890'
     ]);
   }
 

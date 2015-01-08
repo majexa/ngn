@@ -1,7 +1,6 @@
 <?php
 
-class UsersForm extends Form {
-  use FormDbUnicCheck;
+class UserForm extends UserBaseForm {
 
   protected $filterFields = ['login', 'user', 'pass', 'email', 'name', 'phone', 'extra'];
   public $strName = UsersCore::extraStrName;
@@ -28,15 +27,14 @@ class UsersForm extends Form {
         'autocomplete' => 'off'
       ];
     }
-    if (Config::getVarVar('userReg', 'phoneEnable')) {
-      $fields[] = [
-        'name'     => 'phone',
-        'title'    => 'Телефон',
-        'type'     => 'phone',
-        // 'disabled' => !empty($this->req->r['phone']),
-        'required' => true
-      ];
-    }
+//    if (Config::getVarVar('userReg', 'phoneEnable')) {
+//      $fields[] = [
+//        'name'     => 'phone',
+//        'title'    => 'Телефон',
+//        'type'     => 'phone',
+//        'required' => true
+//      ];
+//    }
     $fields[] = [
       'name'         => 'pass',
       'title'        => 'Пароль',
@@ -59,16 +57,6 @@ class UsersForm extends Form {
 
   protected function extraFieldsOptions() {
     return [];
-  }
-
-  protected function unicCheckCond() {
-    return 'users';
-  }
-
-  protected function initErrors() {
-    $this->unicCheck('email', 'Такой имейл уже зарегистрирован');
-    $this->unicCheck('login', Config::getVarVar('userReg', 'loginAsFullName') ? 'Такое Ф.И.О. уже зарегистрировано' : 'Такой логин уже зарегистрирован');
-    $this->unicCheck('phone', 'Пользователь с таким телефоном уже существует');
   }
 
   protected function init() {

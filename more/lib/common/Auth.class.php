@@ -19,13 +19,6 @@ class Auth {
 
   protected static $auth;
 
-  /**
-   * Метод авторизации cookie/session
-   *
-   * @var string
-   */
-  static $method = 'session';
-
   const ERROR_AUTH_NO_LOGIN = 1;
 
   const ERROR_AUTH_WRONG_PASS = 2;
@@ -36,13 +29,8 @@ class Auth {
 
   static $errorsText;
 
-  static function setMethod($method) {
-    self::$method = $method;
-  }
-
   static function cryptPass($pass) {
     return md5(md5(md5($pass)));
-    return $pass;
   }
 
   /**
@@ -118,13 +106,7 @@ class Auth {
   }
 
   static function save(DbModelUsers $user) {
-    $user = $user->r;
-    if (self::$method == 'cookie') {
-      self::saveCookie($user);
-    }
-    else {
-      self::saveSession($user);
-    }
+    self::saveSession($user->r);
   }
 
   static function pack($data) {
@@ -143,18 +125,6 @@ class Auth {
     return $d;
   }
 
-  static private function saveCookie($data) {
-    $data = self::pack($data);
-    str_replace('"', '\"', $data);
-    if (self::$expires) {
-      setcookie('auth', $data, time() + self::$expires, '/');
-    }
-    else {
-      setcookie('auth', $data);
-    }
-    $_COOKIE['auth'] = $data;
-  }
-
   static private function saveSession($user) {
     Session::init();
     $_SESSION['auth'] = $user;
@@ -170,39 +140,21 @@ class Auth {
     return self::login($login, db()->selectCell('SELECT pass FROM users WHERE login=?', $login));
   }
 
+  static function loginById($id) {
+    self::save(Misc::checkEmpty(DbModelCore::get('users', $id)));
+  }
+
   static function logout() {
-    if (self::$method == 'cookie') {
-      if (self::$expires) {
-        setcookie('auth', '', time() + self::$expires, '/');
-      }
-      else {
-        setcookie('auth', '');
-      }
-      $_COOKIE['auth'] = null;
-    }
-    else {
-      Session::init();
-      $_SESSION['auth'] = null;
-    }
+    Session::init();
+    $_SESSION['auth'] = null;
   }
 
   static function clear() {
-    if (self::$method == 'cookie') {
-      if (self::$expires) {
-        setcookie('auth', '', time() + self::$expires, '/');
-      }
-      else {
-        setcookie('auth', '');
-      }
-      $_COOKIE['auth'] = null;
-    }
-    else {
-      Session::init();
-      $_SESSION = null;
-      Session::delete();
-      foreach ($_COOKIE as $k => $v) {
-        setcookie($k, '', time() + self::$expires, '/', SITE_DOMAIN);
-      }
+    Session::init();
+    $_SESSION = null;
+    Session::delete();
+    foreach ($_COOKIE as $k => $v) {
+      setcookie($k, '', time() + self::$expires, '/', SITE_DOMAIN);
     }
   }
 
@@ -258,12 +210,7 @@ class Auth {
    */
   static function loginPage() {
     if (($r = self::loginByRequest()) === false) {
-      if (self::$method == 'cookie') {
-        return self::loginByCookie();
-      }
-      else {
-        return self::loginBySession();
-      }
+      return self::loginBySession();
     }
     return $r;
   }
@@ -294,7 +241,7 @@ class Auth {
   }
 
   static function getAll() {
-    retuirn (($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
+    retuirn(($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
     die2('-');
   }
 

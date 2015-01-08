@@ -1,19 +1,20 @@
 <?php
 
-trait FormDbUnicCheck {
+class FormDbUnicCheck {
 
-  abstract protected function unicCheckCond();
+  protected $cond, $form;
 
-  protected function unicCheck($name, $errorText, DbCond $cond = null, $tableField = null) {
-    if (!($el = $this->getElement($name))) return;
-    if (!$this->create and !$el->valueChanged) return;
+  function __construct(DbCond $cond, Form $form) {
+    $this->cond = $cond;
+    $this->form = $form;
+  }
+
+  function check($name, $errorText, $tableField = null) {
+    if (!($el = $this->form->getElement($name))) return;
+    // if (!$this->form->create and !$el->valueChanged) return;
     if (!$tableField) $tableField = $name;
-    if (!$cond) {
-      $cond = $this->unicCheckCond();
-      if (is_string($cond)) $cond = new DbCond($cond);
-    }
-    $cond->addF($tableField, $el->value());
-    if (db()->selectCell("SELECT * FROM {$cond->table}".$cond->all())) $el->error($errorText);
+    $this->cond->addF($tableField, $el->value());
+    if (db()->selectCell("SELECT * FROM {$this->cond->table}".$this->cond->all())) $el->error($errorText);
   }
 
 }
