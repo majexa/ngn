@@ -36,7 +36,7 @@ a.btn {
 border-color: #a9a89c;
 background: -webkit-linear-gradient(top, #f6f5e9, #d9d8c9);
 }
-a.btn:hover:not(.nonActive):not(.pushed), b.btn {
+a.btn:hover:not(.nonActive):not(.pushed):not(:active), b.btn {
 background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
 }
 a.btn:active:not(.nonActive), a.btn.pushed {

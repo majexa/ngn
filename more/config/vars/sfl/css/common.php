@@ -3,6 +3,7 @@
 return [
   'i/css/common/screen.css',
   'i/css/common.css',
+  'i/css/common/interface.css', // .nonActive for btn
   'i/css/common/btns.css',
   'i/css/common/dialog.css',
   'i/css/cp/pNums.css',

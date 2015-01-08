@@ -2901,7 +2901,7 @@ CREATE TABLE IF NOT EXISTS `userGroup` (
 CREATE TABLE IF NOT EXISTS `userPhoneConfirm` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `phone` varchar(15) NOT NULL,
-  `code` int(5) NOT NULL,
+  `code` int(4) NOT NULL,
   `attempts` int(2) NOT NULL,
   `confirmed` int(1) NOT NULL DEFAULT '0',
   `dateCreate` datetime NOT NULL,

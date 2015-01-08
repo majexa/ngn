@@ -10,13 +10,10 @@ class AuthForm extends Form {
   }
 
   function __construct(array $options = []) {
+    $loginField = UserRegCore::getLoginField();
+    $loginField['name'] = 'authLogin';
     $fields = [
-      [
-        'name'     => 'authLogin',
-        'title'    => UserRegCore::getAuthLoginTitle(),
-        'type'     => 'text',
-        'required' => true
-      ],
+      $loginField,
       [
         'name'     => 'authPass',
         'title'    => 'Пароль',
@@ -39,8 +36,7 @@ class AuthForm extends Form {
         Auth::ERROR_AUTH_NO_LOGIN,
         Auth::ERROR_AUTH_USER_NOT_ACTIVE,
         Auth::ERROR_EMPTY_LOGIN_OR_PASS
-      ])
-      ) $this->getElement('authLogin')->error(Auth::$errors[0]['text']);
+      ])) $this->getElement('authLogin')->error(Auth::$errors[0]['text']);
       else $this->getElement('authPass')->error(Auth::$errors[0]['text']);
     }
   }

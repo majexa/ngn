@@ -21,27 +21,28 @@ class UserRegPhoneForm extends UserBaseForm {
         'type'     => 'phone',
         'required' => true
       ],
+//      [
+//        'title'   => 'Выберите способ для подтверждения телефона',
+//        'name'    => 'method',
+//        'type'    => 'radio',
+//        'noValue' => true,
+//        'options' => [
+//          'sms'   => 'по sms',
+//          'phone' => 'по телефону'
+//        ]
+//      ],
       [
-        'title'   => 'Выберите способ для подтверждения телефона',
-        'name'    => 'method',
-        'type'    => 'radio',
-        'noValue' => true,
-        'options' => [
-          'sms'   => 'по sms',
-          'phone' => 'по телефону'
-        ]
-      ],
-      [
-        'value' => 'Отправить код подтверждения',
+        'value' => 'Отправить код подтверждения по SMS',
         'type'  => 'button',
         'name'  => 'send'
       ],
       [
-        'title'    => 'Код',
-        'name'     => 'code',
-        'type'     => 'num',
-        'required' => true,
-        'help'     => 'Введите сюда высланный Вам код'
+        'title'     => 'Код',
+        'name'      => 'code',
+        'type'      => 'num',
+        'maxlength' => 4,
+        'required'  => true,
+        'help'      => 'Введите сюда высланный Вам код'
       ]
     ], $options);
   }
@@ -68,13 +69,10 @@ Ngn.Frm.phoneConfirm = function(method) {
 
 var btn = new Ngn.Btn(eBtn, function(e) {
   if (!form.validator.validateField('phonei')) return;
-  Ngn.Frm.phoneConfirm(Ngn.Frm.getValueByName('method', form.eForm));
+  //Ngn.Frm.phoneConfirm(Ngn.Frm.getValueByName('method', form.eForm));
+  Ngn.Frm.phoneConfirm('sms');
 });
 JS;
-  }
-
-  protected function init() {
-    parent::init();
   }
 
   protected function initErrors() {

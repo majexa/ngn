@@ -172,7 +172,7 @@ class Form {
   protected $globalError;
 
   function globalError($message) {
-    $this->lastError = $this->globalError = 'Ошибка: '.$message;
+    $this->lastError = $this->globalError = $message;
     $this->hasErrors = true;
   }
 

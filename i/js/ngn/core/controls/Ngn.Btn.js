@@ -1,7 +1,13 @@
 // @requires Ngn.Frm
 
 /**
- * opt: cls, title, prop, caption
+ * Создаёт и возвращает html-элемент кнопки
+ *
+ * @param {Object} [opt]
+ * @param {Object} [opt.cls] CSS-класс
+ * @param {Object} [opt.title] Заголовок кнопки
+ * @param {Object} [opt.caption] Значение тега "title"
+ * @returns {HTMLElement}
  */
 Ngn.btn = function(opt) {
   if (!opt) opt = {};
@@ -93,13 +99,6 @@ Ngn.Btn = new Class({
 
   pushed: false,
 
-  /**
-   * @param Element Элемент кнопки
-   * @param function/object Функция вызывающаяся при нажатии, либо объект {action: function},
-   *                        содержащий эту ф-ю. В объекте может так же находится дополнительная информация, как-то
-   *                        id (уникальный идентификатор кнопки) и confirm (флаг - подтверждать нажатие или нет)
-   * @param options
-   */
   initialize: function(el, action, options) {
     this.setOptions(options);
     this.setAction(action);
@@ -117,7 +116,7 @@ Ngn.Btn = new Class({
     this.el.addEvent('mousedown', down);
     this.el.addEvent('tap', down);
     this.el.addEvent('mouseup', up);
-    //this.el.addEvent('mouseout', up); // WTF?
+    this.el.addEvent('mouseout', up);
     this.el.addEvent('click', function(e) {
       e.preventDefault();
       if (!this.enable) return;
