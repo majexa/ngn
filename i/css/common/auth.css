@@ -5,3 +5,10 @@ padding: 2px 3px 5px 3px;
 #auth_dialog .apeform input[type=password] {
 width: 100%;
 }
+#auth_dialog .apeform input {
+font-size: 17px;
+padding: 0 2px;
+}
+#auth_dialog .apeform .name_code input {
+width: 60px;
+}

@@ -37,7 +37,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       $attempts = $r['attempts'] + 1;
     }
     else {
-      $code = Misc::randNum();
+      $code = Misc::randNum(4);
       $attempts = 1;
     }
     $d = [
@@ -55,7 +55,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       ]);
     }
     else {
-      (new SmsSender)->send($phone, "CODE: $code");
+      (new Smsc)->send_sms($phone, "CODE: $code");
     }
   }
 

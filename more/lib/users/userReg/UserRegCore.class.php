@@ -25,6 +25,18 @@ class UserRegCore {
       ];
     }
     else {
+      if ( //
+        !Config::getVarVar('userReg', 'loginEnable') and //
+        !Config::getVarVar('userReg', 'emailEnable') and //
+        Config::getVarVar('userReg', 'phoneEnable') //
+      ) { //
+        return [
+          'name'  => 'login',
+          'title' => 'Телефон',
+          'type'  => 'phone',
+          'required' => true
+        ];
+      }
       return [
         'name'     => 'login',
         'title'    => 'Логин',
