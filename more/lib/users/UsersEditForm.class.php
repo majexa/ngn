@@ -1,6 +1,6 @@
 <?php
 
-class UsersEditForm extends UsersForm {
+class UsersEditForm extends UserForm {
 
   public $create = false;
   public $userId;

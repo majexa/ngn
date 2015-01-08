@@ -1,6 +1,6 @@
 <?php
 
-class UsersRegFormAdmin extends UsersRegForm {
+class UsersRegFormAdmin extends UserRegForm {
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [

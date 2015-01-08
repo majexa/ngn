@@ -1,14 +1,18 @@
 <?php
 
 class DdFieldsForm extends DdForm {
-use FormDbUnicCheck;
 
-  protected function unicCheckCond() {
-    return (new DbCond('dd_fields'))->addF('strName', $this->strName);
+  /**
+   * @var FormDbUnicCheck
+   */
+  protected $uc;
+
+  protected function init() {
+    $this->uc = new FormDbUnicCheck((new DbCond('dd_fields'))->addF('strName', $this->strName), $this);
   }
 
   protected function initErrors() {
-    $this->unicCheck('name', 'Поле с таким именем уже существует', $this->unicCheckCond());
+    $this->uc->check('name', 'Поле с таким именем уже существует');
   }
 
 }

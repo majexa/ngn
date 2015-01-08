@@ -1,9 +1,9 @@
 <?php
 
-class UserRegPhoneForm extends Form {
+class UserRegPhoneForm extends UserBaseForm {
 
   function id() {
-    return 'formReg';
+    return 'formUserRegPhone';
   }
 
   function __construct(array $options = []) {
@@ -73,17 +73,13 @@ var btn = new Ngn.Btn(eBtn, function(e) {
 JS;
   }
 
+  protected function init() {
+    parent::init();
+  }
+
   protected function initErrors() {
     parent::initErrors();
     $this->initCodeError();
-  }
-
-  protected function initCodeError() {
-    if (!Config::getVarVar('userReg', 'phoneConfirm')) return;
-    $codeEl = $this->getElement('code');
-    if (IS_DEBUG and $codeEl->value() == '123') return;
-    $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $this->getElement('phone')->value(), $codeEl->value());
-    if (!$exists) $this->globalError('Неверный код подтверждения');
   }
 
 }

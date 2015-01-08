@@ -9,7 +9,7 @@ print $oF1->html().'<div class="clear"><!-- --></div>';
 <h2 class="tab">Новый пользователь</h2>
 <div class="apeform">
 <?
-$oF2 = new UsersRegForm([
+$oF2 = new UserRegForm([
   'submitTitle' => 'Подписаться'
 ]);
 $oF2->action = $this->getControllerPath('userReg').'/ajax_popupReg';
