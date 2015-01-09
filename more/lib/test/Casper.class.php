@@ -25,7 +25,6 @@ class Casper {
         print $s;
       }
       if (preg_match('/[A-Z][a-z]+Error: .*/s', $buffer, $m)) {
-        die2(trim($m[0]));
         throw new Exception(trim($m[0]));
       }
     }
@@ -35,8 +34,9 @@ class Casper {
     if (!$projectName) $projectName = PROJECT_KEY;
     $projectDir = NGN_ENV_PATH.'/projects/'.$projectName;
     $casperFolder = NGN_PATH.'/more/casper';
-    $cmd = "casperjs $casperFolder/test.js --projectDir=$projectDir --stepsFile=$casperFolder/test/$test.js";
-    //$cmd = "casperjs $casperFolder/test.js --projectDir=$projectDir --stepsFile=$casperFolder/test/$test.js --disableCapture=1";
+    if (!strstr($test, '/')) $test = "$casperFolder/test/$test.json";
+    else $test = "$test.json";
+    $cmd = "casperjs $casperFolder/test.js --projectDir=$projectDir --stepsFile=$test";
     print `$cmd`;
   }
 

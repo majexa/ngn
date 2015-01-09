@@ -615,6 +615,7 @@ class Form {
    * @return string
    */
   function id() {
+    if (isset($this->options['id'])) return $this->options['id'];
     $this->callOnce('initId');
     return $this->_id;
   }
