@@ -58,7 +58,7 @@ use ObjectProcessorCtrl;
   }
 
   protected function _getIm() {
-    return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName()), $this->getStrName()), 'form'));
+    return $this->objectProcess(new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName()), $this->getStrName()), 'form')), 'im');
   }
   
   abstract protected function id();
