@@ -17,7 +17,7 @@
       <? if (Misc::isAdmin()) { ?>
         <p><a href="/admin">Admin</a></p>
       <? } ?>
-      <p class="error">У вас нет прав доступа к панеле управления сайтом</p>
+      <p class="error">У вас нет прав доступа к панели управления сайтом</p>
     <? } else { ?>
       <form action="" method="post" id="loginForm">
       <table cellspacing="0" cellpadding="2" width="100%">
