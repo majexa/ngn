@@ -7,7 +7,7 @@ var c = function(v) {
 module.exports = new Class({
   Extends: Project,
 
-  logLevel: 3,
+  logLevel: 1,
   i: 0,
   callbackPrefixes: [
     'then', 'wait'
