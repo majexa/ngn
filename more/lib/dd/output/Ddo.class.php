@@ -47,7 +47,7 @@ class Ddo {
     $this->strName = $strName;
     $this->layoutName = $layoutName;
     $this->settings = $this->getSettings();
-    $this->titledSettings = $this->settings->getDataLayout('titled', $layoutName);
+    $this->titledSettings = $this->settings->getLayoutSettings('titled', $layoutName);
     $this->afterConstruct();
   }
 

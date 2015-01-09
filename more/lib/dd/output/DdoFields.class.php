@@ -123,7 +123,6 @@ class DdoFields {
   ];
 
   protected $forceShowTypes = [
-    'ddSlaveItemsSelect'
   ];
 
   function getFields() {

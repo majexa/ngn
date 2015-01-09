@@ -9,7 +9,7 @@ module.exports = new Class({
     this.log('initializing', 3);
     this.setOptions(options);
     this.casper = require('casper').create({
-      // verbose: true, logLevel: "info" // uncomment for debug
+      //verbose: true, logLevel: "info" // uncomment for debug
     });
     if (!this.casper.cli.options.projectDir) throw new Error('option "projectDir" is required');
     this.projectDir = this.casper.cli.options.projectDir;

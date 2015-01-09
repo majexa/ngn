@@ -29,14 +29,14 @@ class DdoSettings {
   }
 
   function getShow($layoutName) {
-    return $this->getDataLayout('itemsShow', $layoutName);
+    return $this->getLayoutSettings('itemsShow', $layoutName);
   }
 
   function getDataAll($name) {
     return $this->getVar($name);
   }
 
-  function getDataLayout($name, $layout) {
+  function getLayoutSettings($name, $layout) {
     if (($r = $this->getVar($name)) === false) return false;
     return isset($r[$layout]) ? $r[$layout] : false;
   }
