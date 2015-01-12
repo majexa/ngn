@@ -239,7 +239,7 @@ use Options;
     Sflm::frontend('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
     Sflm::frontend('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
     if (!$this->form) return '';
-    return "\n// ------- type: {$this->type} -------\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
+    return "\n// -- type: {$this->type} --\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }
 
   public $errorBacktrace;
