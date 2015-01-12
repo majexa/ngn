@@ -107,6 +107,7 @@ class Auth {
 
   static function save(DbModelUsers $user) {
     self::saveSession($user->r);
+    Ngn::fireEvent('auth', $user);
   }
 
   static function pack($data) {

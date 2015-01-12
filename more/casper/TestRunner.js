@@ -7,15 +7,10 @@ var c = function(v) {
 module.exports = new Class({
   Extends: Project,
 
-  logLevel: 1,
-  i: 0,
-  callbackPrefixes: [
-    'then', 'wait'
-  ],
+  logLevel: 3, i: 0, callbackPrefixes: ['then', 'wait'],
 
   options: {
-    captureFolder: null,
-    stepsFile: null
+    captureFolder: null, stepsFile: null
   },
 
   init: function() {
@@ -79,23 +74,18 @@ module.exports = new Class({
       this.evaluate(function(selector, value) {
         document.querySelector(selector).value = value;
       }, {
-        selector: selector,
-        value: value
+        selector: selector, value: value
       });
     };
     this.casper.checkExistence = function(selector) {
-      return [
-        this.exists(selector), //
+      return [this.exists(selector), //
         '"' + selector + '" selector does not exists', //
-        '"' + selector + '" selector exists'
-      ];
+        '"' + selector + '" selector exists'];
     };
     this.casper.checkText = function(selector, textToCompare) {
       var text = this.fetchText(selector).trim();
-      return [
-        text == textToCompare, //
-        'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare, 'text and textToCompare are identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare
-      ];
+      return [text == textToCompare, //
+        'text and textToCompare are not identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare, 'text and textToCompare are identical. Selector "' + selector + '" value: ' + text + '; text to compare: ' + textToCompare];
     };
     this.casper.printText = function(selector) {
       console.debug(this.fetchText(selector));
@@ -104,8 +94,7 @@ module.exports = new Class({
       var value = this.evaluate(function(selector, property) {
         return document.querySelector(selector)[property];
       }, {
-        selector: selector,
-        property: property
+        selector: selector, property: property
       });
       console.log(selector + ' [' + property + '] = "' + value + '"');
     };
@@ -197,11 +186,11 @@ module.exports = new Class({
     if (this.disableCapturing) return;
     if (this.options.captureFolder) {
       var id = this.makeCapture(caption);
-        this.afterCaptureCmd('rumax/save', 'id=' + id + //
-          '+folder=' + this.options.captureFolder + //
-          '+n=' + (this.i + 1) + //
-          '+caption=' + caption.replace(new RegExp(' ', 'g'), '_') //
-        );
+      this.afterCaptureCmd('rumax/save', 'id=' + id + //
+        '+folder=' + this.options.captureFolder + //
+        '+n=' + (this.i + 1) + //
+        '+caption=' + caption.replace(new RegExp(' ', 'g'), '_') //
+      );
       return;
     }
     this.capture(caption, this.i + 1);
@@ -235,8 +224,28 @@ module.exports = new Class({
       this.options.steps = JSON.decode(data);
     }
     this.log('initialized:', 3);
-    for (var i =0; i<this.options.steps.length; i++) {
+    for (var i = 0; i < this.options.steps.length; i++) {
       this.log('  * ' + this.options.steps[i], 3);
+    }
+  },
+
+  replaceNgnFolder: function(step) {
+    if (step[2] && this.casper.cli.options.ngnFolder) {
+      if (typeof step[2] == 'object') {
+        for (var j in step[2]) {
+          if (step[2][j] instanceof Array) {
+            for (var k = 0; k < step[2][j].length; k++) {
+              if (step[2][j][k].indexOf('{ngnFolder}') >= 0) {
+                step[2][j][k] = step[2][j][k].replace('{ngnFolder}', this.casper.cli.options.ngnFolder);;
+              }
+            }
+          } else if (typeof step[2][j] == 'string') {
+            if (step[2][j].indexOf('{ngnFolder}') >= 0) {
+              step[2][j] = step[2][j].replace('{ngnFolder}', this.casper.cli.options.ngnFolder);
+            }
+          }
+        }
+      }
     }
   },
 
@@ -247,6 +256,7 @@ module.exports = new Class({
     var steps = [];
     for (var i = 0; i < this.options.steps.length; i++) {
       var step = this.options.steps[i];
+      this.replaceNgnFolder(step);
       if (step[0].substr(0, 1) == '~') {
         step[0] = step[0].substr(1, step[0].length);
         steps.push(step);

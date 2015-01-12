@@ -165,7 +165,6 @@ Ngn.Form = new Class({
   },
 
   initSubmit: function() {
-
     this.eForm.addEvent('submit', function(e) {
       e.preventDefault();
       this.submit();
