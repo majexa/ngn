@@ -22,7 +22,7 @@ Ngn.Form = new Class({
     this.id = this.eForm.get('id');
     this.setOptions(options);
     if (!this.options.disableInit) this.init();
-    c('form "' + this.id + '" initialized');
+    //c('form "' + this.id + '" initialized');
   },
 
   init: function() {
@@ -75,12 +75,7 @@ Ngn.Form = new Class({
 
   initDynamicJs: function() {
     var js = $(this.eForm.get('id') + 'js');
-    c([
-      this.eForm.get('id') + 'js',
-      js
-    ]);
     if (js) {
-      c('form "' + this.id + '" init dynamic js');
       Asset.javascript(js.get('html'), {
         onLoad: function() {
           var func = eval('Ngn.Frm.init.' + this.eForm.get('id'));
@@ -326,10 +321,12 @@ Ngn.Form = new Class({
   },
 
   submitAjax: function() {
+    //c('submitAjax');
     this.options.ajaxSubmit ? this._submitAjax() : this._submit();
   },
 
   _submitAjax: function() {
+    //c('_submitAjax');
     new Ngn.Request.JSON({
       url: this.eForm.get('action'),
       onComplete: function(r) {
@@ -343,14 +340,23 @@ Ngn.Form = new Class({
   },
 
   _submit: function() {
-    c('_submit');
+    //c('_submit');
     this.eForm.submit();
   }
 
 });
 
+
+Ngn.Form.factories = {};
+Ngn.Form.registerFactory = function(id, func) {
+  Ngn.Form.factories[id] = func;
+};
+
 Ngn.Form.factory = function(eForm, opts) {
   eForm = document.id(eForm, true);
+  if (Ngn.Form.factories[eForm.get('id')]) {
+    return Ngn.Form.factories[eForm.get('id')](eForm, opts);
+  }
   var name = 'Ngn.' + (eForm.get('data-class') || 'Form');
   var cls = eval(name);
   if (!cls) throw new Error('class ' + name + ' not found');
@@ -363,7 +369,6 @@ Ngn.Form.elOptions = {};
 Ngn.Form.ElInit = new Class({
 
   initialize: function(form, type) {
-    console.trace();
     this.form = form;
     this.type = type;
     this.init();

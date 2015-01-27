@@ -9,6 +9,7 @@ Ngn.Request.File = new Class({
   },
 
   initialize: function(options) {
+    this.id = Ngn.randString(20);
     this.xhr = new Browser.Request();
     this.setOptions(options);
     this.clear();
@@ -49,7 +50,7 @@ Ngn.Request.File = new Class({
 
   send: function(options) {
     if (!this.check(options)) return this;
-    c(['_formData', this._formData]);
+    Ngn.Request.inProgress.push(this.id);
     this.options.isSuccess = this.options.isSuccess || this.isSuccess;
     this.running = true;
     var xhr = this.xhr;

@@ -162,7 +162,11 @@ Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists in a
     }
   }
   return found;
-}
+};
+
+Arr.drop = function(array, value) {
+  return array.splice(array.indexOf(value), 1);
+};
 
 //--------------------------------------------------------------------------
 
@@ -822,5 +826,3 @@ String.prototype.hashCode = function() {
 };
 
 Ngn.requestLoaded = true;
-
-// -- check --

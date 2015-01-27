@@ -197,7 +197,7 @@ class Form {
 
   protected function htmlFormOpen() {
     if (!$this->options['disableFormTag']) {
-      $html = '<form action="'.($this->action ? $this->action : $this->req->options['uri']).'"';
+      $html = '<form action="'.($this->action ? $this->action : $this->req['uri']).'"';
       $html .= $this->tagParams();
       if (($data = $this->options['dataParams'])) $html .= Html::dataParams($this->options['dataParams']);
       if (!empty($this->encType)) $html .= ' enctype="'.$this->encType.'"';

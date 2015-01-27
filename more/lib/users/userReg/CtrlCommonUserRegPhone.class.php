@@ -4,6 +4,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
 
   function action_json_form() {
     $form = new UserRegPhoneForm(['req' => $this->req, 'defaultsFromReq' => true]);
+    $form->action = '/'.Sflm::frontendName(true).'/userRegPhone/json_form';
     $this->json['title'] = 'Регистрация';
     if ($form->update()) {
       $this->json['nextFormUrl'] = '/'.Sflm::frontendName(true).'/userReg/json_form?'.http_build_query($form->getData());
