@@ -5,6 +5,7 @@ Ngn.DdForm = new Class({
   
   initialize: function(eForm, options) {
     this.strName = eForm.get('data-strName');
+    if (!this.strName) throw new Error('"data-strName" is empty in form #' + eForm.get('id'));
     this.parent(eForm, options);
   }
 

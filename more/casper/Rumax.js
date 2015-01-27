@@ -34,7 +34,7 @@ module.exports = new Class({
       width: 950,
       height: 500
     });
-    this.log('captured on ' + caption, 3);
+    // this.log('captured on ' + caption, 3);
     return id;
   },
 

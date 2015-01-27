@@ -1,8 +1,15 @@
 Ngn.Request = new Class({
   Extends: Request,
 
+  id: null,
+
+  initialize: function(options) {
+    this.id = Ngn.randString(20);
+    this.parent(options);
+  },
+
   success: function(text, xml) {
-    Ngn.requestLoaded = true;
+    Arr.drop(Ngn.Request.inProgress, this.id);
     if (text.contains('Error: ')) {
       return;
     }
@@ -10,14 +17,13 @@ Ngn.Request = new Class({
   },
 
   send: function(options) {
-    if (this.options.cache) {
-      this.options.url;
-    }
-    Ngn.requestLoaded = false;
+    Ngn.Request.inProgress.push(this.id);
     this.parent(options);
   }
 
 });
+
+Ngn.Request.inProgress = [];
 
 Ngn.Request.Loading = new Class({
   Extends: Ngn.Request,
@@ -57,14 +63,18 @@ Ngn.json.process = function(json) {
 Ngn.Request.JSON = new Class({
   Extends: Request.JSON,
 
+  initialize: function(options) {
+    this.id = Ngn.randString(20);
+    this.parent(options);
+  },
+
   success: function(text) {
-    Ngn.requestLoaded = true;
+    Arr.drop(Ngn.Request.inProgress, this.id);
     try {
       this.response.json = Ngn.json.decode(text, this.options.secure);
     } catch (e) {
       throw new Error('non-json result by url ' + this.options.url + '. result:\n' + text);
     }
-
     if (this.response.json === null) {
       this.onSuccess({});
       return;
@@ -91,7 +101,7 @@ Ngn.Request.JSON = new Class({
   },
 
   send: function(options) {
-    Ngn.requestLoaded = false;
+    Ngn.Request.inProgress.push(this.id);
     this.parent(options);
   }
 

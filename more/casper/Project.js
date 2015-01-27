@@ -48,11 +48,17 @@ module.exports = new Class({
     throw new Error('abstract');
   },
 
+  ngnBasePaths: null,
+
   loadConstant: function(name, onComplete) {
-    this.log('loading constant ' + name, 3);
-    require('child_process').execFile('php', [this.projectDir + '/cmd.php', 'const', name], null, function(err, stdout, stderr) {
-      this.log('constant ' + name + ' loaded: ' + stdout, 3);
-      onComplete(stdout);
+    require('child_process').execFile('php', [this.projectDir + '/cmd.php', 'print json_encode(Ngn::$basePaths);'], null, function(err, stdout, stderr) {
+      this.ngnBasePaths = JSON.decode(stdout);
+      require('utils').dump(this.ngnBasePaths);
+      this.log('loading constant ' + name, 3);
+      require('child_process').execFile('php', [this.projectDir + '/cmd.php', 'const', name], null, function(err, stdout, stderr) {
+        this.log('constant ' + name + ' loaded: ' + stdout, 3);
+        onComplete(stdout);
+      }.bind(this));
     }.bind(this));
   }
 

@@ -68,13 +68,13 @@ class Config {
   static function replaceConstant($file, $k, $v) {
     self::deleteConstant($file, $k);
     self::addConstant($file, $k, $v);
-    opcache_reset();
+    if (function_exists('opcache_reset')) opcache_reset();
   }
 
   static function _replaceConstant($c, $k, $v) {
     $c = self::_deleteConstant($c, $k);
     $c = self::_addConstant($c, $k, $v);
-    opcache_reset();
+    if (function_exists('opcache_reset')) opcache_reset();
     return $c;
   }
 
@@ -85,7 +85,7 @@ class Config {
       $c .= "\n\n"."if (!defined('$k')) define('$k', ".Arr::formatValue($v).");";
     }
     file_put_contents($file, $c);
-    opcache_reset();
+    if (function_exists('opcache_reset')) opcache_reset();
   }
 
   static function cleanupConstants($file) {
@@ -94,7 +94,7 @@ class Config {
     $c = '';
     foreach ($constants as $k => $v) $c .= "\n\n"."if (!defined('$k')) define('$k', ".Arr::formatValue($v).");";
     file_put_contents($file, "<?php$c");
-    opcache_reset();
+    if (function_exists('opcache_reset')) opcache_reset();
   }
 
   static function deleteConstant($file, $k) {
@@ -112,8 +112,10 @@ class Config {
   /**
    * Получает список всех констант, используемых в файле
    *
-   * @param   string  Путь к файлу
-   * @return  array
+   * @param string $file Путь к файлу
+   * @param bool $quietly
+   * @return array|bool
+   * @throws Exception
    */
   static function getConstants($file, $quietly = false) {
     if (!file_exists($file)) {
