@@ -394,7 +394,7 @@ class Form {
       /* @var $el FieldEAbstract */
       if (($js = $el->jsInline()) != '') $this->jsInline .= $js;
       if (($js = $el->js())) $this->js .= $js;
-      if (($js = $el->typeJs()) and !in_array($el->type, $jsTypesAdded)) {
+      if (($js = $el->typeCssAndJs()) and !in_array($el->type, $jsTypesAdded)) {
         $jsTypesAdded[] = $el->type;
         $typeJs .= $js;
       }
@@ -659,7 +659,7 @@ class Form {
   }
 
   protected function initId() {
-    $this->_id = 'f'.md5(serialize($this->fields->getFields()));
+    $this->_id = 'f'.md5(serialize($this->fields->getFieldsF()));
   }
 
   function addField(array $v, $after = false) {
@@ -734,7 +734,6 @@ class Form {
     else {
       $fields = $this->fields->getFieldsF();
     }
-    //die2($this->elementsData);
     foreach ($fields as $n => $opt) {
       if (!is_array($opt)) throw new Exception("Field #$n is not array");
       if ($this->fields->isFileType($opt['name'])) {
@@ -881,7 +880,6 @@ class Form {
   public $tinyInitialized = false;
 
   protected function jsInlineUpload() {
-    //die2($this->options[);
     $opt = empty($this->options['uploadOptions']) ? '' : Arr::jsObj($this->options['uploadOptions']);
     return "
 (function() {

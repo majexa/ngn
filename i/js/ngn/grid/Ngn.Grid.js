@@ -69,7 +69,7 @@ Ngn.Grid = new Class({
         }
         var cls = v.cls;
         v.cls = 'btn ' + v.cls;
-        grid.btns[cls] = new Ngn.Btn(Ngn.btn(v).inject(this.eMenu, 'top'), action, v.options || {});
+        grid.btns[cls] = new Ngn.Btn(Ngn.Btn.btn(v).inject(this.eMenu, 'top'), action, v.options || {});
       }.bind(this))();
     }
   },

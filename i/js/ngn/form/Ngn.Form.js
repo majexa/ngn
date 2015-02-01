@@ -1,3 +1,13 @@
+/**
+ * @callback elementCallback
+ * @param {HTMLElement} element
+ *
+ * @callback callback
+ */
+
+/**
+ * @class
+ */
 Ngn.Form = new Class({
   Implements: [Options, Events, Class.Occlude],
 
@@ -7,12 +17,23 @@ Ngn.Form = new Class({
     focusFirst: false,
     ajaxSubmit: false,
     disableInit: false
-    //onNewElement: function(el) {}
-    //onComplete: null
   },
 
   els: {},
 
+  /**
+   * Создаёт и возвращает html-элемент кнопки
+   *
+   * @param {HTMLElement} eForm
+   * @param [options]
+   * @param [options.equalElementHeights=false]
+   * @param [options.dialog=false]
+   * @param [options.focusFirst=false]
+   * @param [options.ajaxSubmit=false]
+   * @param [options.disableInit=false]
+   * @param {elementCallback} [options.onNewElement]
+   * @param {callback} [options.onComplete]
+   */
   initialize: function(eForm, options) {
     this.eForm = eForm;
     if (this.eForm.get('data-init')) throw new Error('This form already initialized');
@@ -22,7 +43,7 @@ Ngn.Form = new Class({
     this.id = this.eForm.get('id');
     this.setOptions(options);
     if (!this.options.disableInit) this.init();
-    //c('form "' + this.id + '" initialized');
+    // c('form "' + this.id + '" initialized');
   },
 
   init: function() {
@@ -376,13 +397,16 @@ Ngn.Form.ElInit = new Class({
 
   init: function() {
     var els = this.form.eForm.getElements('.type_' + this.type);
-    if (!els.length) throw new Error('No ".type_' + this.type + '" elements was found. User FieldEAbstract::_html() instead of html()');
+    if (!els.length) throw new Error('No ".type_' + this.type + '" elements was found. Maybe use FieldEAbstract::_html() instead of html()');
     els.each(function(eRow) {
+      //c('1' + this.type);
       if (!eRow.get('data-typejs')) return;
       var clsName = 'Ngn.Form.El.' + ucfirst(this.type)
       var cls = eval(clsName);
       if (cls === undefined) throw new Error('Class "' + clsName + '" is not defined');
+      //c('2' + this.type);
       if (eRow.retrieve('initialized')) return;
+      //c('3' + this.type + ' ' + clsName);
       new cls(this.type, this.form, eRow);
       eRow.store('initialized', true);
     }.bind(this));
@@ -415,6 +439,7 @@ Ngn.Form.El = new Class({
     this.form.els[this.name] = this;
     if (Ngn.Form.elOptions[this.name]) this.options = Ngn.Form.elOptions[this.name];
     this.init();
+    c('Ngn.Form.El.' + ucfirst(this.type) + ' initialized');
   },
   fireFormElEvent: function(event, value) {
     this.form.fireEvent('el' + ucfirst(this.name) + ucfirst(event), value);

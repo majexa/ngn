@@ -73,7 +73,7 @@ Ngn.FieldSet = new Class({
     this.eAddRow = this.eContainer.getElement(this.options.addRowBtnSelector);
     if (!this.eAddRow) {
       var eBottomBtns = new Element('div', {'class': 'bottomBtns'}).inject(this.eContainer, 'bottom');
-      this.eAddRow = Ngn.btn1(this.options.addTitle, 'btn add dgray').inject(eBottomBtns);
+      this.eAddRow = Ngn.Btn.btn1(this.options.addTitle, 'btn add dgray').inject(eBottomBtns);
       Elements.from('<div class="heightFix"></div>')[0].inject(this.eContainer, 'bottom');
     }
     this.buttons.push(new Ngn.Btn(this.eAddRow, function(btn) {
@@ -169,9 +169,9 @@ Ngn.FieldSet = new Class({
     var fieldSet = this;
     var eRowBtns = eRow.getElement('.rowBtns');
     this.buttons.push(new Ngn.Btn(// Вставляем кнопку после последнего элемента формы в этой строке
-      //Ngn.addTips(Ngn.btn(btn)).inject(els[els.length - 1], 'after'), function() {
-      //Ngn.btn(btn).inject(els[els.length - 1], 'after'), function() {
-      Ngn.btn(btn).inject(eRowBtns), function() {
+      //Ngn.addTips(Ngn.Btn.btn(btn)).inject(els[els.length - 1], 'after'), function() {
+      //Ngn.Btn.btn(btn).inject(els[els.length - 1], 'after'), function() {
+      Ngn.Btn.btn(btn).inject(eRowBtns), function() {
         fieldSet.fireEvent(btn.cls);
         action.bind(this)();
       }, options || {}));

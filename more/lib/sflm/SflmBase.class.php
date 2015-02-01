@@ -23,7 +23,7 @@ abstract class SflmBase {
     if (isset($this->packagesCache[$lib])) return $this->packagesCache[$lib];
     if (($r = $this->getPackageLibsR($lib, true, $strict)) === false) return $this->packagesCache[$lib] = [];
     $this->packagesCache[$lib] = $r;
-    Sflm::output("Got package '$lib' libs recursive: ".implode(", ", $this->packagesCache[$lib]));
+    Sflm::log("Got package '$lib' libs recursive: ".implode(", ", $this->packagesCache[$lib]));
     return $this->packagesCache[$lib];
   }
 
@@ -31,7 +31,7 @@ abstract class SflmBase {
     if (($r = Config::getVar("sfl/".$this->type."/$package", true, false)) !== false) return $r;
     $errText = "Package '$package' (sfl/".$this->type."/$package) does not exists";
     if (!$strict) {
-      Sflm::output($errText);
+      Sflm::log($errText);
       return false;
     } else {
       throw new Exception($errText);
@@ -54,7 +54,7 @@ abstract class SflmBase {
           File::checkExists($this->getAbsPath($lib), "Path '$lib' in package '$package' does not exists");
         }
         $absPath = $this->getAbsPath($lib);
-        if (!file_exists($absPath)) Sflm::output("File '$absPath' does not exists");
+        if (!file_exists($absPath)) Sflm::log("File '$absPath' does not exists");
         $r[] = $lib;
       }
     }
@@ -69,7 +69,7 @@ abstract class SflmBase {
     Misc::checkEmpty($path);
     if (!is_file($path)) {
       $error = "File '$path' does not exists";
-      Sflm::output($error);
+      Sflm::log($error);
       if ($strict) Err::_log($error, debug_backtrace());
       return "\n/*--[$error]--*/\n";
     }

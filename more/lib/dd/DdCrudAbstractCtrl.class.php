@@ -66,6 +66,7 @@ use ObjectProcessorCtrl;
   function action_json_new() {
     $im = $this->getIm();
     $im->form->options['submitTitle'] = 'Создать';
+    $im->form->action = $this->req->options['uri'];
     if (($id = $im->requestCreate())) return $id;
     $this->jsonFormAction($im->form);
     return false;
@@ -73,6 +74,7 @@ use ObjectProcessorCtrl;
 
   function action_json_edit() {
     $im = $this->getIm();
+    $im->form->action = $this->req->options['uri'];
     if ($im->requestUpdate($this->id())) return true;
     $this->jsonFormAction($im->form);
     return false;
