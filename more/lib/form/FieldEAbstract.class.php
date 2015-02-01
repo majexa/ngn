@@ -97,7 +97,7 @@ use Options;
     if (!empty($this->options['value']) and is_string($this->options['value'])) $this->options['value'] = trim($this->options['value']);
   }
 
-  protected $staticType;
+  protected $staticType = null;
 
   /**
    * @var string Имя поля с вырезанными скобками
@@ -111,10 +111,11 @@ use Options;
     if ($this->isEmpty() and empty($this->options['value'])) {
       $this->options['value'] = null;
     }
+    if ($this->options['type'] == 'hidden') $this->options['noTypeCss'] = true;
     if (empty($this->options['help'])) $this->options['help'] = '';
     $this->baseName = BracketName::getPureName($this->options['name']);
     $this->prepareValue();
-    if (isset($this->staticType)) $this->type = $this->staticType;
+    if (!empty($this->staticType)) $this->type = $this->staticType;
     else
       $this->type = lcfirst(Misc::removePrefix('FieldE', get_class($this)));
     if ($this->form and $this->form->isSubmitted()) {
@@ -231,8 +232,8 @@ use Options;
     return empty($this->cssClasses) ? false : $this->cssClasses;
   }
 
-  function typeJs() {
-    Sflm::frontend('css')->addLib("i/css/formEl/$this->type.css");
+  function typeCssAndJs() {
+    if (empty($this->options['noTypeCss'])) Sflm::frontend('css')->addStaticLib("formEl/$this->type.css");
     if (!isset($this->options['useTypeJs'])) throw new Exception(get_class($this).'::defineOptions does not extends parent');
     if (!$this->options['useTypeJs']) return '';
     Sflm::frontend('js')->addLib("formEl/$this->type", false);

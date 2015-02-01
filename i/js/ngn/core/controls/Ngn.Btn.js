@@ -1,94 +1,5 @@
 // @requires Ngn.Frm
 
-/**
- * Создаёт и возвращает html-элемент кнопки
- *
- * @param {Object} [opt]
- * @param {Object} [opt.cls] CSS-класс
- * @param {Object} [opt.title] Заголовок кнопки
- * @param {Object} [opt.caption] Значение тега "title"
- * @returns {HTMLElement}
- */
-Ngn.btn = function(opt) {
-  if (!opt) opt = {};
-  if (!opt.cls) opt.cls = '';
-  if (!opt.title && !opt.cls.contains('btn')) opt.cls = 'bordered ' + opt.cls;
-  var a = new Element('a', $merge({
-    'class': (opt.cls.contains('icon') ? '' : 'smIcons ') + opt.cls,
-    html: opt.title || ''
-  }, opt.prop || {}));
-  if (opt.caption) {
-    a.set('title', opt.caption);
-    a.setTip(opt.caption);
-  }
-  new Element('i').inject(a, 'top');
-  return a;
-};
-
-/**
- * Кнопка с заголовком
- */
-Ngn.btn1 = function(title, cls, prop) {
-  return Ngn.btn({
-    title: title,
-    cls: cls,
-    prop: prop
-  });
-};
-
-/**
- * Кнопка с всплывающей подсказкой
- */
-Ngn.btn2 = function(caption, cls, prop) {
-  return Ngn.btn({
-    caption: caption,
-    cls: cls,
-    prop: prop
-  });
-};
-
-
-Ngn.btns = function(btns, small, opt) {
-  if (!opt) opt = {};
-  var defaultOpt = { bordered: true };
-  if (!opt.bordered) opt.bordered = true;
-  var eCont = new Element('div', {'class': (small ? 'smIcons' : 'iconsSet') + (opt.bordered ? ' bordered' : '') });
-  for (var i = 0; i < btns.length; i++) Ngn.btn($merge(defaultOpt, btns[i])).inject(eCont);
-  return eCont;
-};
-
-Ngn.btn1Flag = function(defaultFirstState, state1, state2) {
-  return Ngn.__btnFlag(Ngn.btn1, defaultFirstState, state1, state2);
-};
-
-Ngn.btn2Flag = function(defaultFirstState, state1, state2) {
-  return Ngn.__btnFlag(Ngn.btn2, defaultFirstState, state1, state2);
-};
-
-Ngn.__btnFlag = function(btn, defaultFirstState, state1, state2) {
-  var deflt = defaultFirstState ? state1 : state2;
-  return Ngn._btnFlag(btn(deflt.title, deflt.cls), state1, state2);
-};
-
-Ngn._btnFlag = function(eA, state1, state2) {
-  return eA.addEvent('click', function(e) {
-    e.preventDefault();
-    var flag = eA.hasClass(state1.cls);
-    var newState = flag ? state2 : state1;
-    var curState = flag ? state1 : state2;
-    if (curState.confirm !== undefined) if (!Ngn.confirm(curState.confirm)) return;
-    new Ngn.Request({
-      url: curState.url,
-      onComplete: function() {
-        eA.removeClass(curState.cls);
-        eA.addClass(newState.cls);
-        eA.set('title', newState.title);
-        Ngn.addTips(eA);
-      }
-    }).send();
-  });
-};
-
 Ngn.Btn = new Class({
   Implements: [Options],
 
@@ -178,6 +89,85 @@ Ngn.Btn = new Class({
   }
 
 });
+
+/**
+ * Создаёт и возвращает html-элемент кнопки
+ *
+ * @param opt
+ * @param opt.cls CSS-класс
+ * @param opt.title Заголовок кнопки
+ * @param opt.caption Значение тега "title"
+ * @returns {HTMLElement}
+ */
+Ngn.Btn.btn = function(opt) {
+  if (!opt) opt = {};
+  if (!opt.cls) opt.cls = '';
+  if (!opt.title && !opt.cls.contains('btn')) opt.cls = 'bordered ' + opt.cls;
+  var a = new Element('a', $merge({
+    'class': (opt.cls.contains('icon') ? '' : 'smIcons ') + opt.cls,
+    html: opt.title || ''
+  }, opt.prop || {}));
+  if (opt.caption) {
+    a.set('title', opt.caption);
+    a.setTip(opt.caption);
+  }
+  new Element('i').inject(a, 'top');
+  return a;
+};
+
+/**
+ * Кнопка с заголовком
+ */
+Ngn.Btn.btn1 = function(title, cls, prop) {
+  return Ngn.Btn.btn({
+    title: title,
+    cls: cls,
+    prop: prop
+  });
+};
+
+/**
+ * Кнопка с всплывающей подсказкой
+ */
+Ngn.Btn.btn2 = function(caption, cls, prop) {
+  return Ngn.Btn.btn({
+    caption: caption,
+    cls: cls,
+    prop: prop
+  });
+};
+
+Ngn.Btn.flag1 = function(defaultFirstState, state1, state2) {
+  return Ngn.Btn.__flag(Ngn.btn1, defaultFirstState, state1, state2);
+};
+
+Ngn.Btn.flag2 = function(defaultFirstState, state1, state2) {
+  return Ngn.Btn.__flag(Ngn.btn2, defaultFirstState, state1, state2);
+};
+
+Ngn.Btn.__flag = function(btn, defaultFirstState, state1, state2) {
+  var deflt = defaultFirstState ? state1 : state2;
+  return Ngn.Btn._flag(btn(deflt.title, deflt.cls), state1, state2);
+};
+
+Ngn.Btn._flag = function(eA, state1, state2) {
+  return eA.addEvent('click', function(e) {
+    e.preventDefault();
+    var flag = eA.hasClass(state1.cls);
+    var newState = flag ? state2 : state1;
+    var curState = flag ? state1 : state2;
+    if (curState.confirm !== undefined) if (!Ngn.confirm(curState.confirm)) return;
+    new Ngn.Request({
+      url: curState.url,
+      onComplete: function() {
+        eA.removeClass(curState.cls);
+        eA.addClass(newState.cls);
+        eA.set('title', newState.title);
+        Ngn.addTips(eA);
+      }
+    }).send();
+  });
+};
 
 Ngn.Btn.Action = new Class({
   action: function() {}

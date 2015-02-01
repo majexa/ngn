@@ -28,7 +28,7 @@ Ngn.DateRangeDialog = new Class({
     });
     //new Element('a', { class: 'gray pseudoLink', html: 'Сегодня' }).inject(this.message);
     //new Element('a', { class: 'gray pseudoLink', html: 'Последняя неделя' }).inject(this.message);
-    //Ngn.btn1('Сегодня', 'btn ok').inject(this.message).addEvent('click', function() {
+    //Ngn.Btn.btn1('Сегодня', 'btn ok').inject(this.message).addEvent('click', function() {
     //});
   },
   getValue: function() {

@@ -25,7 +25,7 @@ $link = '/?theme[location]='.$d['params'][3].'&theme[design]='.$d['params'][5].'
     useSaver: true
   });
   var eMenuSelect = $('menui');
-  Ngn.btn({
+  Ngn.Btn.btn({
     title: 'Редактировать меню',
     prop: {
       events: {

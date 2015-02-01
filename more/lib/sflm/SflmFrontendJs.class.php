@@ -21,7 +21,7 @@ class SflmFrontendJs extends SflmFrontend {
 
   function _addLib($lib) {
     if (!$this->base->exists($lib)) throw new Exception("Lib '$lib' does not exists");
-    Sflm::output("Adding lib '$lib'");
+    $this->log("Adding lib '$lib'");
     foreach ($this->base->getPaths($lib) as $path) $this->_addPath($path);
     return $this;
   }

@@ -7,7 +7,7 @@ class FieldEHidden extends FieldEText {
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'type' => 'hidden',
-      'noRowHtml' => true
+      'noRowHtml' => true,
     ]);
   }
 

@@ -107,10 +107,10 @@ abstract class SflmFrontend {
     $this->storeBacktrace = getBacktrace(false);
     if (!$this->newPaths) {
       $this->stored = true;
-      Sflm::output("No new paths. Storing skipped");
+      $this->log("No new paths. Storing skipped");
       return;
     }
-    Sflm::output("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
+    $this->log("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     if ($this->base->storeLib($this->name, $this->code())) {
       $this->incrementVersion();
@@ -146,12 +146,17 @@ abstract class SflmFrontend {
   function addStaticLib($lib, $strict = false) {
     foreach (Sflm::$absBasePaths as $k => $path) {
       if (file_exists("$path/{$this->base->type}/$lib")) {
-        Sflm::output("add global lib $path/{$this->base->type}/$lib");
+        $this->log("add global lib $path/{$this->base->type}/$lib");
         $this->addLib("$k/{$this->base->type}/$lib");
         return;
       }
     }
     if ($strict) throw new Exception("Global lib '$lib' does not exists");
+    else $this->log("Global lib '$lib' does not exists");
+  }
+
+  protected function log($s) {
+    Sflm::log($this->base->type.': '.$s);
   }
 
   protected function checkStored() {
@@ -165,10 +170,10 @@ abstract class SflmFrontend {
   function addLib($lib, $strict = false) {
     $this->checkNotStored();
     if (!$strict and !$this->base->exists($lib)) {
-      Sflm::output("Lib '$lib' does not exists");
+      $this->log("Lib '$lib' does not exists");
       return $this;
     }
-    Sflm::output("Adding lib '$lib'");
+    $this->log("Adding lib '$lib'");
     foreach ($this->base->getPaths($lib) as $path) $this->__addPath($path, "lib '$lib'");
     return $this;
   }
@@ -186,15 +191,15 @@ abstract class SflmFrontend {
   function _addPath($path) {
     if ($this->base->isPackage($path)) throw new Exception("Can not add packages");
     if (in_array($path, $this->pathsCache)) {
-      Sflm::output("New path '$path' already exists");
+      $this->log("New path '$path' already exists");
       return;
     }
     if (isset(Sflm::$debugPaths[$this->base->type]) and Arr::strExistsInvert(Sflm::$debugPaths[$this->base->type], $path)) {
       $this->debugPaths[] = $path;
-      Sflm::output('Skipping debug path '.$path);
+      $this->log('Skipping debug path '.$path);
       return;
     }
-    Sflm::output('Adding path '.$path);
+    $this->log('Adding path '.$path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
   }

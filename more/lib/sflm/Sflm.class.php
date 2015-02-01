@@ -24,7 +24,7 @@ class Sflm {
     if (!preg_match('/js|css/', $type)) throw new Exception("Unknown type '$type'");
     $name = $name ? : self::$frontendName;
     if (isset(self::$cache[$name][$type])) return self::$cache[$name][$type];
-    Sflm::output("Generate frontend [$type::$name] instance");
+    Sflm::log("Generate frontend [$type::$name] instance");
     $class = 'SflmFrontend'.ucfirst($type);
     /* @var $frontend SflmFrontend */
     $frontend = new $class(self::lib($type), $name);
@@ -89,7 +89,7 @@ class Sflm {
       if (!isset(self::$cache[self::$frontendName][$type])) {
         return self::frontend($type, $name);
       }
-      Sflm::output("Delete Frontend [$type::".self::$frontendName."] instance");
+      Sflm::log("Delete Frontend [$type::".self::$frontendName."] instance");
       unset(self::$cache[self::$frontendName][$type]);
     }
     return self::frontend($type, $name);
@@ -116,7 +116,8 @@ class Sflm {
     throw new Exception('"'.$absPath.'" not found'.($whyDoUWantToGetThis ? ". Getting for: $whyDoUWantToGetThis" : ''));
   }
 
-  static function output($s) {
+  static function log($s) {
+    LogWriter::str('sflm', $s);
     if (self::$output) {
       if (strstr($s, 'Adding path')) outputColor($s, 'red');
       elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');

@@ -9,9 +9,9 @@ class FieldEDdTagsTreeMultiselectDialogable extends FieldEDdTagsTreeMultiselect 
     ]);
   }
 
-  function typeJs() {
+  function typeCssAndJs() {
     Sflm::frontend('css')->addLib('i/css/common/treeMultiselectDialogable.css');
-    return parent::typeJs();
+    return parent::typeCssAndJs();
   }
 
 }

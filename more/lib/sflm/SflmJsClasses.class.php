@@ -71,15 +71,15 @@ class SflmJsClasses {
       throw new Exception("Class '$class' is not valid. src: $source");
     }
     if (!isset($this->classPaths[$class])) {
-      $err = "Class '$class' path does not exists. src: $source";
+      $err = "Class '$class' does not exists. src: $source";
       if (!$strict) {
-        Sflm::output($err);
+        Sflm::log($err);
         return false;
       }
       throw new SflmNotExists($err);
     }
     if ($this->frontendClasses->exists($class)) {
-      Sflm::output("Class '$class' exists. Skipped. src: $source");
+      Sflm::log("Class '$class' exists. Skipped. src: $source");
       return false;
     }
     $this->frontendClasses->add($class, $source);
@@ -120,11 +120,11 @@ class SflmJsClasses {
   function processPath($path, $source = null, $name = null) {
     if (Misc::hasSuffix('', $path))
     if (in_array($path, $this->frontend->pathsCache)) {
-      Sflm::output("Path '$path' in cache. Skipped");
+      Sflm::log("Path '$path' in cache. Skipped");
       return;
     }
     if (in_array($path, $this->processedPaths)) throw new Exception("Path '$path' already processed. src: $source | $name!");
-    Sflm::output("Processing contents of '$path'");
+    Sflm::log("Processing contents of '$path'");
     $this->processedPaths[] = $path;
     $code = Sflm::getCode($this->frontend->base->getAbsPath($path));
     $this->processCode($code, $path, $name, $path);
@@ -140,9 +140,9 @@ class SflmJsClasses {
     foreach (SflmJsClasses::parseRequired($code, 'before') as $class) {
       $this->addSomething($class, "$path requiredBefore");
     }
-    Sflm::output('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
+    Sflm::log('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
     if ($path) $this->frontend->_addPath($path); // -------------- добавили путь (!)
-    Sflm::output("Processing valid-class patterns in '$source'");
+    Sflm::log("Processing valid-class patterns in '$source'");
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
       $this->addClass($class, "$source valid-class pattern");
