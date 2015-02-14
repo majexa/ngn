@@ -15,4 +15,11 @@ class SflmCli {
     print Sflm::frontend($type)->version()."\n";
   }
 
+  function jsClasses($frontend) {
+    Sflm::setFrontendName($frontend);
+    foreach ((new SflmJsClassPaths) as $class => $path) {
+      print str_pad($class, 50).$path."\n";
+    }
+  }
+
 }

@@ -8,7 +8,10 @@ if (($itemClasses = Config::getVarVar('dd', 'useFieldNameAsItemClass', true))) {
     $extraClasses[] = $v['field'].'_'.Ddo::getFlatValue($d[$v['field']]);
   }
 }
-print '<div class="item'.($d['active'] ? '' : ' nonActive').(!empty($d['image']) ? ' isImage' : '').($extraClasses ? ' '.implode(' ', $extraClasses) : '').'" data-id="'.$d['id'].'" data-userId="'.$d['userId'].'">';
+print '<div class="item'.($d['active'] ? '' : ' nonActive'). //
+  (!empty($d['image']) ? ' isImage' : ''). //
+  ($extraClasses ? ' '.implode(' ', $extraClasses) : ''). //
+  '" data-id="'.$d['id'].'" data-userId="'.$d['userId'].'">';
 print '<div class="itemBody">';
 $fields = array_values($ddo->fields);
 

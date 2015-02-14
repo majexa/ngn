@@ -126,7 +126,8 @@ class FieldEFile extends FieldEFileBase {
         '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name']. //
         '" class="iconBtn delete confirm" title="Удалить сохраненный файл"><i></i></a>' : //
         '');
-      $r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\"><i></i>сохранён ($size)</a>$deleteHtml";
+      //$r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\"><i></i>сохранён ($size)</a>$deleteHtml";
+      $r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\" title=\"сохранён ($size)\"><i></i></a>$deleteHtml";
     }
     if ($v = $this->postValue()) {
       $r .= '<div class="clear"></div>';

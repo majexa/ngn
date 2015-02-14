@@ -178,7 +178,7 @@ class Req extends ArrayAccesseble {
    * @api
    * Возвращает значение параметра $n и проверяет его на `empty()`
    *
-   * @param $n
+   * @param integer $n Начинается с нуля http://site.com/item/123. для item $n=0.
    * @return mixed
    * @throws NotLoggableError
    */

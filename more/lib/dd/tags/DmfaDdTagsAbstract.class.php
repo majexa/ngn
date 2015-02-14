@@ -1,6 +1,6 @@
 <?php
 
-abstract class DmfaDdTagsAbstract extends Dmfa {
+abstract class DmfaDdTagsAbstract extends DmfaDd {
 
   function elBeforeDelete(FieldEAbstract $el) {
     $this->deleteTagItems($el['name']);

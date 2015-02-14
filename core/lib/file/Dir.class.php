@@ -6,7 +6,7 @@ class Dir {
     if (!strstr($path, '/') and !strstr($path, '\\')) Err::warning('Use absolute dir path. $path='.$path);
     if (!$existsPath = self::getExists($path)) throw new Exception("Can not detect existing parent path by '$path'. Not writable?");
     $extraPath = substr($path, strlen($existsPath), strlen($path));
-    $folders = explode('/', Misc::clearLastSlash($extraPath));
+    $folders = explode('/', trim($extraPath, '/'));
     foreach ($folders as $folder) {
       $existsPath .= '/'.$folder;
       if (!is_dir($existsPath)) self::makeDir($existsPath);
@@ -15,16 +15,16 @@ class Dir {
   }
 
   static private function makeDir($path) {
-    mkdir($path) or Err::error("Making '$path'");
+    if (!is_writable(dirname($path))) throw new Exception("path '$path' is not writable");
+    mkdir($path);
     chmod($path, 0777);
   }
 
   /**
    * Возвращает существующий путь к директории проходя вверх по данной директории
    *
-   * @param   string  Путь к предполагаемой существующей директории
-   * @return  mixed   false если таковой директории нет, и путь до директории,
-   *                  если она найдена
+   * @param string $_path Путь к предполагаемой существующей директории
+   * @return mixed bool false если таковой директории нет, и путь до директории, если она найдена
    */
   static function getExists($_path) {
     $path = $_path;

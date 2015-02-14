@@ -10,10 +10,15 @@ class QueueBase {
     $connection->connect();
     if (!$connection->isConnected()) throw new Exception('Can not connect');
     $this->channel = new AMQPChannel($connection);
-    $this->getExchange();
   }
 
-  protected function getExchange() {
+  function setName($name) {
+    $this->exName = $name;
+    $this->queueName = $name;
+    return $this;
+  }
+
+  function getExchange() {
     if (isset($this->exchange)) return $this->exchange;
     $this->exchange = new AMQPExchange($this->channel);
     $this->exchange->setName($this->exName);

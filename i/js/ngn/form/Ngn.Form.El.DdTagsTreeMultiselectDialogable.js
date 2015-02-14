@@ -78,6 +78,7 @@ Ngn.Form.El.DdTagsTreeMultiselectDialogable = new Class({
       }).inject(this.eFieldWrapper);
     }
     this.update();
+    this.eTree.inject(this.form.eOutsideContainer);
   }
 
 });

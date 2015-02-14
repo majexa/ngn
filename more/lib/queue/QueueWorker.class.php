@@ -8,18 +8,17 @@ class QueueWorker extends QueueBase {
     parent::__construct();
     $this->id = $id;
     Dir::make(DATA_PATH.'/queue');
-    $this->run();
   }
 
-  protected function run() {
-    set_time_limit(0);
+  function run() {
+    $this->getExchange();
     $this->output("Worker $this->id started");
     $this->getQueue()->consume(function (AMQPEnvelope $envelope) {
       $this->processData($envelope->getBody());
     }, AMQP_AUTOACK);
   }
 
-  function processData($body) {
+  protected function processData($body) {
     $this->output("Worker $this->id start processing data");
     $t = getMicrotime();
     db()->disconnect();

@@ -116,6 +116,13 @@ class Form {
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);
+    if (!empty($this->options['idByClass'])) {
+      $this->options['id'] = lcfirst(str_replace('Form', '', get_class($this)));
+    }
+    if (!empty($this->options['jsClassById'])) {
+      if (empty($this->options['id'])) throw new Exception('id not defined');
+      $this->options['dataParams']['class'] = ucfirst($this->options['id']).'Form';
+    }
     if (Sflm::frontendName()) {
       Sflm::frontend('js')->addClass('Ngn.Form');
     }
@@ -199,7 +206,7 @@ class Form {
     if (!$this->options['disableFormTag']) {
       $html = '<form action="'.($this->action ? $this->action : $this->req['uri']).'"';
       $html .= $this->tagParams();
-      if (($data = $this->options['dataParams'])) $html .= Html::dataParams($this->options['dataParams']);
+      if ($this->options['dataParams']) $html .= Html::dataParams($this->options['dataParams']);
       if (!empty($this->encType)) $html .= ' enctype="'.$this->encType.'"';
       if (!empty($this->options['name'])) $html .= ' name="'.$this->options['name'].'"';
       $html .= ' id="'.$this->id().'" method="'.($this->methodPost ? 'post' : 'get').'">';
@@ -625,7 +632,7 @@ class Form {
 
   protected function defineOptions() {
     return [
-      'dataParams' => false,
+      'dataParams' => [],
       'placeholders' => false,
       'submitTitle'  => 'Сохранить',
       'disableFormTag' => false,
