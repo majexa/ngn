@@ -155,11 +155,11 @@ Ngn.Frm.objTo = function(eContainer, obj) {
 
 Ngn.Frm.toObj = function(eContainer, except) {
   var rv = {};
-  var name;
   except = except || [];
   eContainer = $(eContainer);
   var typeMatch = 'text' + (!except.contains('hidden') ? '|hidden' : '') + (!except.contains('password') ? '|password' : '');
   var elements = eContainer.getElements(Ngn.Frm.selector);
+  c(elements);
   for (var i = 0; i < elements.length; i++) {
     var el = elements[i];
     if (!el.name) continue;

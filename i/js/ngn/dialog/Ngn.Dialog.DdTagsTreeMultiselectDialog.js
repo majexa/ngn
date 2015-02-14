@@ -4,7 +4,7 @@ Ngn.Dialog.DdTagsTreeMultiselectDialog = new Class({
   options: {
     id: 'metro',
     dialogClass: 'treeMultiselectDialog',
-    title: 'Выбо категории',
+    title: 'Выбор категории',
     width: 400,
     textInfo: '',
     height: 400,
@@ -29,7 +29,11 @@ Ngn.Dialog.DdTagsTreeMultiselectDialog = new Class({
       'class': 'textInfo',
       html: this.options.textInfo
     }).inject(this.container);
-    var eSelectAll = Elements.from('<div class="selectAll"><input type="checkbox" id="selectAll' + this.options.id + '" /> <label for="selectAll' + this.options.id + '">выбрать все</label></div>')[0]
+    var eSelectAll = Elements.from( //
+      '<div class="selectAll"><input type="checkbox" id="selectAll' + //
+      this.options.id + //
+      '" /> <label for="selectAll' + //
+      this.options.id + '">выбрать все</label></div>')[0]
     eSelectAll.inject(this.container);
     eSelectAll = eSelectAll.getElement('input');
     eSelectAll.addEvent('change', function(a) {

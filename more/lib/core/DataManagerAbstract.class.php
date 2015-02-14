@@ -54,8 +54,6 @@ abstract class DataManagerAbstract extends Options2 {
 
   public $imageSizes;
 
-  public $videoSizes;
-
   /**
    * Тип ресайза превьюшек (resize/resample)
    *

@@ -86,7 +86,7 @@ class DdTags {
     return O::get('DdTagsItems', $strName, $groupName);
   }
 
-  static function tag($group, $id, $param = null) {
+  static function tag(DdTagsGroup $group, $id, $param = null) {
     return DbModelCore::get($group->table, $id, $param);
   }
 

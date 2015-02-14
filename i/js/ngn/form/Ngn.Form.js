@@ -6,7 +6,7 @@
  */
 
 /**
- * @class
+ * @class Класс для инициализации html-форм, созданных php-классом Form или его предками
  */
 Ngn.Form = new Class({
   Implements: [Options, Events, Class.Occlude],
@@ -22,20 +22,19 @@ Ngn.Form = new Class({
   els: {},
 
   /**
-   * Создаёт и возвращает html-элемент кнопки
+   * @constructs
    *
-   * @param {HTMLElement} eForm
-   * @param [options]
-   * @param [options.equalElementHeights=false]
-   * @param [options.dialog=false]
-   * @param [options.focusFirst=false]
-   * @param [options.ajaxSubmit=false]
-   * @param [options.disableInit=false]
-   * @param {elementCallback} [options.onNewElement]
-   * @param {callback} [options.onComplete]
+   * @param {HTMLElement} eForm HTML-элемент формы
+   * @param [options.equalElementHeights=false] Уравнивать высоты элементов формы
+   * @param {boolean|Ngn.Dialog} [options.dialog=false] Диалог, из которого была создана форма
+   * @param [options.focusFirst=false] Делать фокус на первом элементе
+   * @param [options.ajaxSubmit=false] Сабмитить форму ajax-ом
+   * @param [options.disableInit=false] Не производить инициализацию в формы в конструкторе
+   * @param {callback} [options.onComplete] Событие возникает при завершении ajax-запроса при сабмите формы
    */
   initialize: function(eForm, options) {
     this.eForm = eForm;
+    this.eOutsideContainer = new Element('div', { styles: {'display': 'none'}}).inject(this.eForm, 'after');
     if (this.eForm.get('data-init')) throw new Error('This form already initialized');
     this.eForm.set('data-init', true);
     if ((options && !options.forceOcclude) && this.occlude(this.eForm.get('id'), this.eForm)) return this.occluded;
@@ -342,7 +341,6 @@ Ngn.Form = new Class({
   },
 
   submitAjax: function() {
-    //c('submitAjax');
     this.options.ajaxSubmit ? this._submitAjax() : this._submit();
   },
 
@@ -381,6 +379,7 @@ Ngn.Form.factory = function(eForm, opts) {
   var name = 'Ngn.' + (eForm.get('data-class') || 'Form');
   var cls = eval(name);
   if (!cls) throw new Error('class ' + name + ' not found');
+  c('init ' + name);
   return new cls(eForm, opts);
 };
 

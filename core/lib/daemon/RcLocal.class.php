@@ -12,7 +12,7 @@ class RcLocal {
   }
 
   protected function rcLocalWrite($c) {
-    $tmpFile = TEMP_PATH.'/'.Misc::randString();
+    $tmpFile = Dir::make(TEMP_PATH).'/'.Misc::randString();
     file_put_contents($tmpFile, $c);
     $this->c = $c;
     `sudo mv $tmpFile /etc/rc.local`;
