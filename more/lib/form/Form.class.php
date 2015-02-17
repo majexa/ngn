@@ -125,6 +125,9 @@ class Form {
     }
     if (Sflm::frontendName()) {
       Sflm::frontend('js')->addClass('Ngn.Form');
+      if (isset($this->options['dataParams']['class'])) {
+        Sflm::frontend('js')->addClass('Ngn.'.$this->options['dataParams']['class']);
+      }
     }
     if ($this->options['placeholders']) {
       if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.PlaceholderSupport');
