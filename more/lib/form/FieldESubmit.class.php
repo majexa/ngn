@@ -3,6 +3,8 @@
 class FieldESubmit extends FieldEInput {
 
   public $inputType = 'submit';
+
+  protected $cssClasses = ['btn basicBtn'];
   
   public $options = [
     'noTitle' => true,

@@ -439,8 +439,8 @@ class Misc {
     return $v;
   }
 
-  static function checkString($v) {
-    if (!is_string($v)) throw new Exception("'$v' is not string");
+  static function checkString($v, $show = false) {
+    if (!is_string($v)) throw new Exception("'$v' is not string".($show ? getPrr($v) : ''));
     return $v;
   }
 
