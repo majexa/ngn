@@ -10,10 +10,6 @@ class SflmFrontendCss extends SflmFrontend {
     $this->_addPath($path);
   }
 
-  function _code() {
-    return preg_replace('/@import (.*)/', '', parent::_code());
-  }
-
   function _addPath($path) {
     $file = $this->base->getAbsPath($path);
     if (file_exists($file) and preg_match_all('/@import (.*)/', file_get_contents($file), $m)) {
@@ -29,6 +25,20 @@ class SflmFrontendCss extends SflmFrontend {
         return;
       }
     }
+  }
+
+  protected $absFiles = [];
+
+  function addFolder($absFolder) {
+    foreach (glob("$absFolder/*.css") as $file) {
+      $this->absFiles[] = $file;
+    }
+  }
+
+  function _code() {
+    $code = preg_replace('/@import (.*)/', '', parent::_code());
+    foreach ($this->absFiles as $file) $code .= file_get_contents($file);
+    return $code;
   }
 
 }
