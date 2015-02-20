@@ -345,7 +345,6 @@ Ngn.Form = new Class({
   },
 
   _submitAjax: function() {
-    //c('_submitAjax');
     new Ngn.Request.JSON({
       url: this.eForm.get('action'),
       onComplete: function(r) {

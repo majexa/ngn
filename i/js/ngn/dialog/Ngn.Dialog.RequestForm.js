@@ -8,6 +8,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     getFormData: function() {
       return Ngn.Frm.toObj(this.form.eForm);
     },
+    onFormResponse: $empty,
     onFormRequest: $empty,
     onSubmitSuccess: $empty
   },
