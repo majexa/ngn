@@ -27,13 +27,14 @@ class Ngn {
    *                      Используйте приоритет от 1 до 4 для подключения библиотек.
    *                      Для папки проекта "site" в Ngn используется приоритет 5.
    */
-  static function addBasePath($path, $priority = 0) {
+  static function addBasePath($path, $priority = 0, $sflmPathPackage = null) {
     if (file_exists("$path/lib")) Lib::addFolder("$path/lib");
     require_once __DIR__.'/file/Config.class.php';
     Config::addBasePath("$path/config", $priority);
     self::$_basePaths[] = [$path, $priority];
     self::$_basePaths = Arr::sortByOrderKey(self::$_basePaths, 1, SORT_DESC);
     self::$basePaths = Arr::get(self::$_basePaths, 0);
+    if ($sflmPathPackage !== null) Sflm::$absBasePaths[$sflmPathPackage] = $path.'/m';
   }
 
   static function debugKey() {
