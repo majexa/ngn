@@ -23,4 +23,13 @@ class DdStructureCore {
     ]];
   }
 
+  static function create($name, array $fields) {
+    (new DdStructuresManager)->create([
+      'title' => $name,
+      'name' => $name
+    ]);
+    $fieldsManager = new DdFieldsManager($name);
+    foreach ($fields as $field) $fieldsManager->create($field);
+  }
+
 }

@@ -71,7 +71,13 @@ abstract class SflmFrontend {
   }
 
   function _code() {
-    return $this->base->extractCode($this->getPaths());
+//    $k = md5(serialize($this->getPaths()));
+//    if (($r = Mem::get($k)) !== false) {
+//      return $r;
+//    }
+    $r = $this->base->extractCode($this->getPaths());
+//    Mem::set($k, $r);
+    return $r;
   }
 
   function getTags() {

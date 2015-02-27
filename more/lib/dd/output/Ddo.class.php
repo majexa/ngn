@@ -26,7 +26,7 @@ class Ddo {
    *
    * @var bool
    */
-  protected $list;
+  public $list;
 
   public $layoutName;
 
@@ -73,13 +73,13 @@ class Ddo {
     $this->debug = $debug;
   }
 
-  protected function ddoFields() {
+  function fields() {
     return O::di('DdoFields', $this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
   }
 
-  function initFields() {
+  protected function initFields() {
     if (isset($this->fields)) return $this;
-    $fields = $this->ddoFields();
+    $fields = $this->fields();
     $fields->isItemsList = $this->list;
     $this->fields = $fields->getFields();
     if (Sflm::frontendName()) {
@@ -91,22 +91,42 @@ class Ddo {
     return $this;
   }
 
+  /**
+   * @api
+   * Задаёт dd-запись и выключает списочный режим вывода
+   *
+   * @param $item
+   * @return $this
+   */
   function setItem($item) {
     $this->list = false;
     $this->items = [$item['id'] => $item];
-    $this->init();
+    $this->_init();
     return $this;
   }
 
+  /**
+   * @api
+   * Задаёт dd-записии и включает списочный режим вывода
+   *
+   * @param $items
+   * @return $this
+   */
   function setItems($items) {
     $this->list = true;
     unset($this->items);
     $this->items = $items;
-    $this->init();
+    $this->_init();
     return $this;
   }
 
-  protected function init() {
+  function init($list = true) {
+    $this->list = $list;
+    $this->_init();
+    return $this;
+  }
+
+  protected function _init() {
     $this->initFields();
     $this->initTpls();
     $this->initOutputMethodsTpls();
@@ -130,7 +150,7 @@ class Ddo {
       }
       $this->$type = $r;
     }
-    if (($r =$this->settings->getVar('ddddByName', $this->layoutName)) !== false) $this->ddddByName = array_merge($this->ddddByName, $r);
+    if (($r = $this->settings->getVar('ddddByName', $this->layoutName)) !== false) $this->ddddByName = array_merge($this->ddddByName, $r);
   }
 
   public $ddddByName = [];
@@ -225,13 +245,15 @@ class Ddo {
   }
 
   protected function check() {
+    if (!isset($this->list)) throw new Exception('$this->fields not defined');
     if (!isset($this->fields)) throw new Exception('$this->fields not defined. Use setItem() or setItems() before');
   }
 
   // ------------- Element -------------- 
 
   /**
-   * Возвращает HTML элемента DD-записи
+   * @api
+   * Возвращает HTML элемента dd-записи
    *
    * @param mixed $value Значение элемента записи
    * @param string $fieldName Имя поля
@@ -241,16 +263,17 @@ class Ddo {
    */
   function el($value, $fieldName, $itemId) {
     $this->check();
-    if ($itemId) { // Если $itemId != null
-      $item = $this->items[$itemId];
-      if (!isset($item)) throw new Exception("No data for item ID=$itemId. Items: ".getPrr($this->items));
-    }
+    if (!isset($this->items[$itemId])) throw new Exception("No data for item ID=$itemId. Items: ".getPrr($this->items));
+    return $this->_el($value, $fieldName, $this->items[$itemId]);
+  }
+
+  function _el($value, $fieldName, array $item) {
     if (isset($item[$fieldName.'_f'])) $value = $item[$fieldName.'_f'];
     if (empty($this->fields[$fieldName])) throw new Exception("No field for field name=$fieldName. Fields:".getPrr($this->fields));
     $f = $this->fields[$fieldName];
     $tplData = [
       'pagePath'     => $this->getPagePath(),
-      'id'           => $itemId,
+      'id'           => $item['id'],
       'f'            => $f,
       'type'         => $f['type'],
       'title'        => isset($f['title']) ? $f['title'] : '',
@@ -258,6 +281,7 @@ class Ddo {
       'ddddItemLink' => $this->ddddItemLink,
       'authorId'     => $item['authorId'],
       'userGroupId'  => $item['userGroupId'],
+      'item'         => $item,
       'v'            => $value,
       'o'            => $this
     ];
@@ -280,17 +304,16 @@ class Ddo {
   public $ddddItemsBegin = '`<div class="`.$mainCssClass.` str_`.$strName.` ddoLayout_`.$layoutName.`">`';
   public $tplPathItem = 'dd/elements/default';
   public $ddddItemsEnd = '`</div><!-- Ddo elements end "`.$strName.`" -->`';
-  public $premoder = false;
-  //public $hgrpBeginDddd = '`<!-- Open fields group --><div class="hgrp hgrpt_`.$type.` hgrp_`.$name.` even_`.$evenNum.`">`';
   public $elBeginDddd = '`<div class="element f_`.$name.` t_`.$type.`">`';
   public $elEnd = '</div>';
+  public $gridMode = 'list';
 
   function itemsBegin() {
     if ($this->text) return '';
     return St::dddd($this->ddddItemsBegin, [
-      'mainCssClass' => $this->list ? 'ddItems' : 'ddItem',
-      'strName' => $this->strName,
-      'layoutName' => $this->layoutName
+      'mainCssClass' => ($this->list ? 'ddItems' : 'ddItem').' '.$this->gridMode,
+      'strName'      => $this->strName,
+      'layoutName'   => $this->layoutName
     ]);
   }
 
@@ -312,8 +335,15 @@ class Ddo {
     return $this->excelWriter[$file] = new ExcelWriter($file);
   }
 
+  /**
+   * @api
+   * Возвращает HTML с элементами всех записей. Каждая запись обрамляется HTML-кодом, генерируемым
+   * методами Ddo::itemsBegin и Ddo::itemsEnd
+   *
+   * @return string
+   * @throws Exception
+   */
   function els() {
-    Err::noticeSwitch(false);
     $this->check();
     if ($this->debug) print 'class='.get_class($this);
     if ($this->text) {
@@ -328,12 +358,19 @@ class Ddo {
     }
     $html = '<!-- Ddo elements begin "'.$this->strName.'" -->'."\n";
     $html .= $this->itemsBegin();
-    foreach ($this->items as $v) $html .= $this->elsItem($v);
+    foreach ($this->items as $v) $html .= $this->_elsItem($v);
     $html .= $this->itemsEnd();
-    Err::noticeSwitchBefore();
     return $html;
   }
 
+  /**
+   * @api
+   * Возвращает HTML-таблицу, где каждая dd-запись - это строка в таблице, а в ячейках находятся
+   * отрендереные значения этих записей
+   *
+   * @return string
+   * @throws Exception
+   */
   function table() {
     $this->check();
     $this->text = true;
@@ -350,6 +387,13 @@ class Ddo {
     return Tt()->getTpl('common/table', $rows);
   }
 
+  /**
+   * @api
+   * Созраняет отрендеренные данные в Excel-файл
+   *
+   * @return string
+   * @throws Exception
+   */
   function xls($file, $header = true) {
     Err::noticeSwitch(false);
     $this->check();
@@ -390,18 +434,38 @@ class Ddo {
     Err::noticeSwitchBefore();
   }
 
+  /**
+   * @api
+   * Рендерит каждую запись отдельно и возвращает массив с ними
+   *
+   * @return array
+   */
   function elsSeparate() {
-    Err::noticeSwitch(false);
     $html = [];
-    foreach ($this->items as $v) $html[$v['id']] = $this->elsItem($v);
-    Err::noticeSwitchBefore();
+    foreach ($this->items as $v) $html[$v['id']] = $this->_elsItem($v);
     return $html;
   }
 
-  protected function elsItem(&$item) {
-    $item['o'] = $this;
-    $v['premoder'] = $this->premoder;
-    return Tt()->getTpl($this->tplPathItem, $item);
+  /**
+   * Обрамляет элементы HTML-контейнером, начиная с указанного поля включительно
+   */
+  function groupFrom($fieldName) {
+    $this->grouppedFields[] = $fieldName;
+  }
+
+  protected $grouppedFields = [];
+
+  function isGroupped($fieldName) {
+    return in_array($fieldName, $this->grouppedFields);
+  }
+
+  function elsItem(array $item) {
+    $this->check();
+    return $this->_elsItem($item);
+  }
+
+  protected function _elsItem(array $item) {
+    return (new DdoItemElements($this, $item))->html();
   }
 
   static function getFlatValue($v) {

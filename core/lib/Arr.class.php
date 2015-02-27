@@ -588,7 +588,7 @@ class Arr {
   static function sortByOrderKey(array $arr, $key, $order = SORT_ASC) {
     if (!$arr) return [];
     foreach ($arr as $k => $v) {
-      $o[$k] = isset($v[$key]) ? $v[$key] : 0;
+      $o[$k] = isset($v[$key]) ? $v[$key] : 1000;
     }
     array_multisort($o, $order, $arr);
     return $arr;
@@ -596,9 +596,10 @@ class Arr {
 
   /**
    * Проверяет является ли $subset подмножеством $set
-   * @static
-   * @param $set
+   *
+   * @param array $set
    * @param $subset
+   * @return bool
    */
   static function isSubset(array $set, $subset) {
     foreach ($subset as $v) if (!in_array($v, $set)) return false;

@@ -2,11 +2,10 @@ Ngn.DdoItemsEdit = new Class({
   Implements: [Options],
 
   options: {
-    baseUrl: ''
+    baseUrl: window.location.pathname
   },
 
   initialize: function(options) {
-    //this.setOptions(options);
     if (Ngn.authorized) {
       document.getElements('.ddItems .item').each(function(eItem) {
         if (!Ngn.isAdmin && eItem.get('data-userId') != Ngn.authorized) return;
@@ -16,7 +15,7 @@ Ngn.DdoItemsEdit = new Class({
           new Ngn.Dialog.RequestForm({
             title: 'Редактирование вещи',
             width: 300,
-            url: this.options.baseUrl + '/?a=json_edit&id=' + id,
+            url: this.options.baseUrl + '?a=json_edit&id=' + id,
             onOkClose: function() {
               this.reloadItem(id);
             }.bind(this)

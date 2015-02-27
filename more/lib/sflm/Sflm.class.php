@@ -117,7 +117,7 @@ class Sflm {
   }
 
   static function log($s) {
-    LogWriter::str('sflm', $s);
+    if (self::$log) LogWriter::str('sflm', $s);
     if (self::$output) {
       if (strstr($s, 'Adding path')) outputColor($s, 'red');
       elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');
@@ -126,6 +126,7 @@ class Sflm {
     }
   }
 
+  static $log = false;
   static $debugPaths = [];
   static $debugUrl;
   static $uploadPath;

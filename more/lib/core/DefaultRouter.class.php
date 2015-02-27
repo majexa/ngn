@@ -16,7 +16,7 @@ class DefaultRouter extends Router {
    * CtrlDefault
    * Ctrl[param 0]
    *
-   * @return bool
+   * @return bool|Router
    */
   function _getController() {
     if (isset($this->req->params[0])) {

@@ -49,7 +49,7 @@ border-bottom: 1px solid #CCCCCC;
 background: #FFEB9E;
 }
 .nonActive {
-opacity: 0.4;
+opacity: 0.3;
 cursor: default !important;
 /*progid: DXImageTransform.Microsoft.Alpha(opacity=40);*/
 filter: progid:DXImageTransform.Microsoft.Alpha(opacity=40);

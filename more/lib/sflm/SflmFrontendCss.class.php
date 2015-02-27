@@ -37,7 +37,7 @@ class SflmFrontendCss extends SflmFrontend {
 
   function _code() {
     $code = preg_replace('/@import (.*)/', '', parent::_code());
-    foreach ($this->absFiles as $file) $code .= file_get_contents($file);
+    foreach ($this->absFiles as $file) $code .= "\n/*--|$file|--*/\n".file_get_contents($file);
     return $code;
   }
 

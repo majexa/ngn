@@ -5,7 +5,7 @@ class Mem {
   static $keyPrefix = '';
   static $initialized = false;
   static $m;
-  static $enable = false;
+  static $enable = true;
 
   /**
    * @return Memcached

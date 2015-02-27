@@ -10,6 +10,15 @@
  */
 abstract class SflmBase {
 
+  protected $absPathsCache = [];
+  protected $extractCodeCache;
+
+  function __construct() {
+    if (($r = FileCache::c()->load('sflm'.$this->type.'absPaths')) !== false) {
+      $this->absPathsCache = $r;
+    }
+  }
+
   /**
    * Возвращает массив путей для указанного пакета, за исключением подпакетов, уже находящихся в кэше.
    * Или сам путь (если указан путь), обёрнутый в массив
@@ -92,6 +101,11 @@ abstract class SflmBase {
   }
 
   function extractCode(array $paths) {
+//    $cacheKey = 'sflmExtract'.md5(serialize($paths));
+//    if (($code = FileCache::c()->load($cacheKey)) !== false) {
+//      return $code;
+//    }
+    if (isset($this->extractCodeCache)) return $this->extractCodeCache;
     $code = '';
     foreach ($paths as $path) {
       $absPath = $this->getAbsPath($path);
@@ -105,6 +119,7 @@ abstract class SflmBase {
         $code .= $this->getFileContents($absPath, $this->isStrictPath($path));
       }
     }
+//    FileCache::c()->save($code, $cacheKey);
     return $code;
   }
 
@@ -141,27 +156,32 @@ abstract class SflmBase {
 
   function where($lib) {
     if ($this->isPackage($lib)) {
-      die2("\n111");
       return (bool)Config::getVar("sfl/".$this->type."/$lib", true);
     }
     else {
-      die2("\n222");
       return file_exists($this->getAbsPath($lib));
     }
   }
 
   function getAbsPath($path) {
+//    if (isset($this->absPathsCache[$path])) return $this->absPathsCache[$path];
     if ($this->isPackage($path)) throw new Exception("It ($path) can not be package");
     $path = parse_url($path)['path'];
     foreach (Sflm::$absBasePaths as $package => $absBasePath) {
       if (preg_match('/^\/?'.$package.'\//', $path)) {
-        return "$absBasePath/".Misc::removePrefix("$package/", ltrim($path, '/'));
+        $r = "$absBasePath/".Misc::removePrefix("$package/", ltrim($path, '/'));
+//        $this->absPathsCache[$path] = $r;
+//        FileCache::c()->save($this->absPathsCache, 'sflm'.$this->type.'absPaths');
+        return $r;
       }
     }
     $prefix = explode('/', $path)[0];
     if (!$prefix) throw new Exception("Prefix is empty. Path: $path");
     if (in_array($prefix, RouterScripts::prefixes())) {
-      return $this->getScriptAbsPath(Misc::removeSuffix('.php', $path));
+      $r = $this->getScriptAbsPath(Misc::removeSuffix('.php', $path));
+//      $this->absPathsCache[$path] = $r;
+//      FileCache::c()->save($this->absPathsCache, 'sflm'.$this->type.'absPaths');
+      return $r;
     }
     throw new Exception("Unexpected prefix '$prefix' in path '$path'. Use Sflm::\$absBasePaths[prefix] = '/path/to/files' to register it.");
   }
