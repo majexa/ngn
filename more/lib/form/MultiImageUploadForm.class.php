@@ -1,6 +1,6 @@
 <?php
 
-class MultiPhotoUploadForm extends Form {
+class MultiImageUploadForm extends Form {
 
   function __construct() {
     parent::__construct([

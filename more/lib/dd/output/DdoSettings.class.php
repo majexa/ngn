@@ -36,6 +36,13 @@ class DdoSettings {
     return $this->getVar($name);
   }
 
+  /**
+   * Возвращает массив конфигурации anyNgnBasePath/config/ddo/name.strName.php
+   *
+   * @param $name
+   * @param $layout
+   * @return bool
+   */
   function getLayoutSettings($name, $layout) {
     if (($r = $this->getVar($name)) === false) return false;
     return isset($r[$layout]) ? $r[$layout] : false;
@@ -86,6 +93,12 @@ class DdoSettings {
     return array_keys($r);
   }
 
+  /**
+   * Конфиг находится тут: ddo/fieldOrder.strName.layoutName
+   *
+   * @param $layoutName
+   * @return array|bool|mixed
+   */
   function getOrder($layoutName) {
     return $this->getVar('fieldOrder', $layoutName);
   }

@@ -145,14 +145,20 @@ class DdoFields {
       }
       $_fields[$k] = $v;
     }
-    $this->order($_fields);
-    return $_fields;
+    return $this->order($_fields);
   }
 
-  private function order(&$fields) {
-    if (($order = $this->settigns->getOrder($this->layoutName)) === false) return;
-    foreach ($fields as $k => &$v) if (isset($order[$v['name']])) $fields[$k]['oid'] = $order[$v['name']];
-    $fields = Arr::sortByOrderKey($fields, 'oid');
+  private function order($fields) {
+    if (($order = $this->settigns->getOrder($this->layoutName)) === false) return $fields;
+    foreach ($fields as $k => &$v) {
+      if (isset($order[$v['name']])) {
+        $v['oid'] = $order[$v['name']];
+      } elseif ($v['oid'] == 0) {
+        // Если порядок переопределён в настройках ddo, 0 считаем не приоритетным
+        $v['oid'] = 1000;
+      }
+    }
+    return Arr::sortByOrderKey($fields, 'oid');
   }
 
   private function allowed($fieldName) {

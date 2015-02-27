@@ -42,7 +42,7 @@ use ObjectProcessorCtrl;
   }
 
   protected function ddoEdit() {
-    return $this->objectProcess(new DdoAdmin($this->getStrName(), $this->getDdLayout()), 'ddo');
+    return $this->objectProcess(new DdoAdmin($this->getStrName(), 'adminItems'), 'ddo');
   }
 
   protected function getGrid() {

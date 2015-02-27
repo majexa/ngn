@@ -279,7 +279,6 @@ abstract class CtrlBase {
       die2();
     }
 
-
     $this->sflmStore();
     $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
     $html = str_replace('{sflm}', $tags, $html);

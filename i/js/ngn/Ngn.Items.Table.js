@@ -1,9 +1,10 @@
+// Редактирование записей в таблице
 Ngn.Items.Table = new Class({
   Extends: Ngn.Items,
 
   options: {
-    eItems: 'itemsTable',
-    itemElementSelector: 'tbody tr',
+    eItems: 'itemsTable', // контейнер таблицы
+    itemElementSelector: 'tbody tr', // селектор строки
     isSorting: true,
     handle: '.dragBox',
     onMoveComplete: $empty,
@@ -88,31 +89,20 @@ Ngn.ColResizer = new Class({
 
   initialize: function(eHandler, n, grid) {
     var initW;
-    //this.eSpacer = eSpacer;
-    //c(grid.esTh);
     var eWidth = grid.esTh[n - 1];
     if (!eWidth) return;
-    //c(eWidth.getSize().x);
     new Drag(eHandler, {
       modifiers: {
         x: 'left'
       },
       snap: 0,
       onStart: function() {
-        //c(n-1);
-        //c();
         eWidth.store('initW', eWidth.getSize().x);
         grid.initThSizes();
-
-        //initW = eSpacer.getSize().x;
-        //c(initW);
       },
       onDrag: function() {
         var offset = parseInt(eHandler.getStyle('left'));
-        //var before = this.eSpacer.getSize().x;
         eWidth.setStyle('width', (eWidth.retrieve('initW') + offset) + 'px');
-        //c([eWidth.retrieve('initW'), eWidth.getStyle('width'), offset, eWidth.retrieve('initW') + offset]);
-        //c([before, offset, this.eSpacer.getSize().x]);
       }.bind(this)
     });
   }
@@ -144,7 +134,6 @@ Ngn.Items.toolActions = {
     switchers: {
       active: {
         /**
-         *
          * @param items Ngn.Items
          * @param row
          * @returns {{classOn: string, classOff: string, linkOn: string, linkOff: string, onComplete: onComplete}}
@@ -167,19 +156,6 @@ Ngn.Items.toolActions = {
       }
     }
   },
-
-  /*
-  'delete': {
-    init: function(items, cls, row) {
-      items.createToolBtn(cls, row, function() {
-        if (!Ngn.confirm()) return;
-        new Ngn.Request({
-          url: items.options.basePath + '?a=ajax_delete'
-        }).post(items.idP(row.id));
-      });
-    }
-  },
-  */
 
   inlineTextEdit: {
     init: function(items, cls, row) {

@@ -269,6 +269,13 @@ class Config {
     return $r;
   }
 
+  /**
+   * @param $k1
+   * @param $k2
+   * @param bool $quietly
+   * @return bool|array
+   * @throws Exception
+   */
   static function getVarVar($k1, $k2, $quietly = false) {
     if (!($v = self::getVar($k1, $quietly))) return false;
     if (!isset($v[$k2])) {

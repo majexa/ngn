@@ -17,7 +17,7 @@ $fields = array_values($ddo->fields);
 
 if ($ddo->groupElementsColsN) {
   for ($n = 0; $n < count(array_values($ddo->fields)); $n++) {
-    $field =& $fields[$n];
+    $field = $fields[$n];
     if (DdFieldCore::isGroup($field['type']) or !$ddo->groupElements) $group[] = $n;
   }
   $fieldsN = count($group) / $ddo->groupElementsColsN;
@@ -31,7 +31,6 @@ for ($n = 0; $n < count($fields); $n++) {
   if ($ddo->groupElementsColsN) if ($n == 0) print '<div class="col col'.$n.'">';
   if ($ddo->groupElements and $n == 0 or DdFieldCore::isGroup($f['type'])) {
     // Если это первый элемент или это элемент после Заголовка
-    //print St::dddd($ddo->hgrpBeginDddd, $f);
     print $ddo->hgrpBeginDddd($f['type'], $f['name'], $f['evenNum']);
   }
   $type = DdFieldCore::getType($f['type'], false);
