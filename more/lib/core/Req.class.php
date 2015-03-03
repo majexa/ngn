@@ -225,7 +225,8 @@ class Req extends ArrayAccesseble {
     return $this->r[$name];
   }
 
-  function path($offset = 0, $limit = 0) {
+  function path($offset = 0, $limit = null) {
+    if (!$offset and $limit === null) return '';
     return implode('/', array_slice($this->params, $offset, $limit ? : count($this->params)));
   }
 

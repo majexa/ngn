@@ -42,6 +42,13 @@ class Ddo {
 
   public $titled = false, $text = false, $even = false, $titledSettings;
 
+  /**
+   * Имена полей, элементы которых запрещено выводить пустыми
+   *
+   * @var
+   */
+  public $disallowEmpties = [];
+
   function __construct($strName, $layoutName, array $options = []) {
     $this->setOptions($options);
     $this->strName = $strName;
@@ -288,7 +295,8 @@ class Ddo {
     if (FieldCore::hasAncestor($f['type'], 'file')) {
       if (isset($item[$fieldName.'_fSize'])) $tplData['fSize'] = $item[$fieldName.'_fSize'];
     }
-    return ($this->debug ? "\n\n<!-- Field=$fieldName, Value=".(is_scalar($value) ? $value : '['.gettype($value).']').". Current DdoPage class: ".get_class($this)." -->\n\n" : '').$this->htmlEl($tplData);
+    return ($this->debug ? "\n\n<!-- Field=$fieldName, Value=".(is_scalar($value) ? $value : '['.gettype($value).']'). //
+      ". Current DdoPage class: ".get_class($this)." -->\n\n" : '').$this->htmlEl($tplData);
   }
 
   // ------------- Elements -------------- 
@@ -302,7 +310,6 @@ class Ddo {
   public $groupElements = true;
 
   public $ddddItemsBegin = '`<div class="`.$mainCssClass.` str_`.$strName.` ddoLayout_`.$layoutName.`">`';
-  public $tplPathItem = 'dd/elements/default';
   public $ddddItemsEnd = '`</div><!-- Ddo elements end "`.$strName.`" -->`';
   public $elBeginDddd = '`<div class="element f_`.$name.` t_`.$type.`">`';
   public $elEnd = '</div>';
@@ -465,7 +472,11 @@ class Ddo {
   }
 
   protected function _elsItem(array $item) {
-    return (new DdoItemElements($this, $item))->html();
+    return $this->itemElements($item)->html();
+  }
+
+  protected function itemElements(array $item) {
+    return new DdoItemElements($this, $item);
   }
 
   static function getFlatValue($v) {

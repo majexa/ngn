@@ -226,6 +226,7 @@ module.exports = new Class({
           var f = this.ngnBasePaths[i] + '/casper/test/' + file;
           if (require('fs').exists(f)) {
             file = f;
+            throw new Error('!');
             found = true;
             break;
           }

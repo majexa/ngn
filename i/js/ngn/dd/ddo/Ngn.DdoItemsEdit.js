@@ -27,7 +27,7 @@ Ngn.DdoItemsEdit = new Class({
             notAskSomeTime: true,
             onOkClose: function() {
               new Ngn.Request({
-                url: this.options.baseUrl + '/?a=ajax_delete&id=' + id,
+                url: this.options.baseUrl + '?a=ajax_delete&id=' + id,
                 onComplete: function() {
                   new Fx.Morph(eBtns, {
                     duration: 200
@@ -50,6 +50,7 @@ Ngn.DdoItemsEdit = new Class({
     }
   },
   reloadItem: function(id) {
+    window.location.reload();
   }
 
 });

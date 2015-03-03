@@ -38,7 +38,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
   function __construct($table, Db $db = null) {
     $this->table = $table;
     $this->cond = new DbCond($table);
-    $this->db = $db ? : db();
+    $this->db = $db ?: db();
   }
 
   function count() {
@@ -204,21 +204,22 @@ class DbItems implements UpdatableItems, ArrayAccess {
   // ----------------- static -------------------
 
   static function createDummyTable($name) {
-    db()->query("
-CREATE TABLE IF NOT EXISTS `$name` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `active` int(1) NOT NULL DEFAULT '1',
-  `dateCreate` datetime DEFAULT NULL,
-  `dateUpdate` datetime DEFAULT NULL,
-  `ip` varchar(15) DEFAULT NULL,
-  `userId` int(11) DEFAULT NULL,
-  UNIQUE KEY `id` (`id`)
+    db()->query(<<<SQL
+CREATE TABLE IF NOT EXISTS $name (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  active int(1) NOT NULL DEFAULT '1',
+  dateCreate datetime DEFAULT NULL,
+  dateUpdate datetime DEFAULT NULL,
+  ip varchar(15) DEFAULT NULL,
+  userId int(11) DEFAULT NULL,
+  UNIQUE KEY id (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
-");
+SQL
+    );
   }
 
-  function addF($key, $value) {
-    $this->cond->addF($key, $value);
+  function addF($key, $value, $func = null) {
+    $this->cond->addF($key, $value, $func);
     return $this;
   }
 
