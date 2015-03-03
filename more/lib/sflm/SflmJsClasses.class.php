@@ -231,7 +231,7 @@ class SflmJsClasses {
 
   static function parseRequired($code, $k = '') {
     $r = [];
-    if (preg_match_all('/@requires'.ucfirst($k).'\s+([A-Za-z.\\/, ]+)/', $code, $m)) {
+    if (preg_match_all('/@requires'.ucfirst($k).'\s+([0-9?=&A-Za-z.\\/, ]+)/', $code, $m)) {
       foreach ($m[1] as $v) $r = array_merge($r, array_map('trim', explode(',', $v)));
     }
     return $r;

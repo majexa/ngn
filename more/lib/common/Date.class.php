@@ -71,6 +71,8 @@ class Date {
   }
 
   /**
+   * Преобразует timestamp в дату с текстовым месяцем
+   *
    * @param string $tStamp TIMESTAMP
    * @param bool $lowercase Переводить в нижний регистр
    * @param string $monthsType Тип месяца:
@@ -158,6 +160,15 @@ class Date {
       $y++;
     }
     return date('Y') - $y;
+  }
+
+
+  const TIME_H = 1;
+  const TIME_HM = 2;
+
+  static function time($time, $format = Date::TIME_HM) {
+    if ($format === Date::TIME_HM) return preg_replace('/(\d+:\d+):\d+/', '$1', $time);
+    else return preg_replace('/(\d+):\d+:\d+/', '$1', $time);
   }
 
 }

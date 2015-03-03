@@ -42,9 +42,12 @@ class DdoItemElements {
       }
       $type = DdFieldCore::getType($fields[$n]['type'], false);
       if (empty($type['noElementTag'])) {
-        $el = $this->item[$fields[$n]['name']]; // $el содержит текущее значение элемента записи
+        $value = $this->item[$fields[$n]['name']];
+        if ($this->ddo->disallowEmpties and !$value and in_array($fields[$n]['name'], $this->ddo->disallowEmpties)) {
+          continue;
+        }
         $s .= St::dddd($this->ddo->elBeginDddd, $fields[$n]);
-        $s .= $this->ddo->_el($el, $fields[$n]['name'], $this->item);
+        $s .= $this->ddo->_el($value, $fields[$n]['name'], $this->item);
         $s .= $this->ddo->elEnd;
       }
       // Закрывающийся тэг группы
@@ -57,10 +60,11 @@ class DdoItemElements {
     // Закрывающийся тэг группы
     if ($this->ddo->groupElements) $s .= '</div><!-- Close fields group -->';
     if ($this->ddo->groupElementsColsN) $s .= '</div><!-- Close col -->';
-    $s .= '<div class="clear"><!-- --></div>';
-    $s .= '</div>';
-    $s .= '</div>';
+    $s .= $this->beforeItemCloseHtml;
+    $s .= '</div></div>'; // close itemBody & item
     return $s;
   }
+
+  protected $beforeItemCloseHtml = '<div class="clear"><!-- --></div>';
 
 }

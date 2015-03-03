@@ -22,4 +22,11 @@ class SflmCli {
     }
   }
 
+  static function helpOpt_frontend() {
+    return [
+      'default',
+      'admin'
+    ];
+  }
+
 }

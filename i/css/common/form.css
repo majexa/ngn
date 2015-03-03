@@ -75,7 +75,10 @@ float: left;
 }
 
 .apeform .type_price input {
-width: 100px;
+width: 100px !important;
+}
+.apeform .type_time input {
+width: 50px !important;
 }
 
 /*--------- Element ---------*/
