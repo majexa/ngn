@@ -45,7 +45,7 @@ function prr($var, $html = true) {
 }
 
 function prrc($var) {
-  print (new CliColors)->getColoredString(print_r($var, true), 'cyan')."\n--\n";
+  print CliColors::colored(print_r($var, true), 'cyan')."\n--\n";
 }
 
 function getPrr($v, $html = true) {
@@ -81,7 +81,7 @@ function outputColor($str, $color, $output = false, $forcePlain = true) {
   if (LOG_OUTPUT === true or $output) {
     print
       ((R::get('plainText') or $forcePlain) ? "" : "<p>"). //
-      ("LOG: <".(new CliColors)->getColoredString($str, $color).">"). //
+      ("LOG: <".CliColors::colored($str, $color).">"). //
       ((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
   }
   LogWriter::str('output', $str);
