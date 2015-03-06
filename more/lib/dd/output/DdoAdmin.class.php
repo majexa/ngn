@@ -28,8 +28,8 @@ class DdoAdmin extends Ddo {
     $this->ddddByType['bool'] = '`<a href="" class="iconBtn iconFlag icon_flag`.($v ? `On` : `Off`).` flag`.($v ? `On` : `Off`).` tooltip" title="`.$title.`"><i></i></a>`';
     $this->ddddByType['author'] = '`<a href="`.Tt()->getPath(1).`/users/?a=edit&id=`.$v[`id`].`">`.$authorLogin.`</a>`';
     $this->ddddByType['select'] = '`<a href="`.Tt()->getPath(4).`/v.`.$name.`.`.$v[`k`].`">`.$v[`v`].`</a>`';
-    $this->ddddByType['tagsMultiselect'] = '($v ? $title.`: ` : ``).St::enumSsss($v, `<a href="`.Tt()->getPath(4).`/t2.$groupName.$name">$title</a>`)';
-    $this->ddddByType['tagsSelect'] = '`<a href="`.Tt()->getPath(4).`/t2.`.$v[`groupName`].`.`.$v[`name`].`">`.$v[`title`].`</a>`';
+    $this->ddddByType['tagsMultiselect'] = '($v ? $title.`: ` : ``).St::enumSsss($v, `<a href="`.Tt()->getPath(4).`/t2.$groupId.$name">$title</a>`)';
+    $this->ddddByType['tagsSelect'] = '`<a href="`.Tt()->getPath(4).`/t2.`.$v[`groupId`].`.`.$v[`name`].`">`.$v[`title`].`</a>`';
     $this->ddddByType['tags'] = $this->ddddByType['tagsMultiselect'];
     unset($this->tplPathByType['tags']);
   }

@@ -32,53 +32,66 @@ trait DdParamFilterCtrl {
     for ($i = $this->paramFilterN(); $i < count($this->req->params); $i++) {
       $m = [];
       if (preg_match('/([a-z]+[0-9]?)\.(.+)/', $this->req->params[$i], $m)) {
-        if ($this->addFilterByParam($m[1], $m[2])) {
-          if ($m[1] == 'd') $this->d['filters'][$m[1]] = $m[2];
-          else $this->d['filters'][$m[1]] = explode('.', $m[2]);
+        if (strstr($m[2], '.')) {
+          list($value, $fieldName) = explode('.', $m[2]);
+        } else {
+          $value = $m[2];
+          $fieldName = null;
+        }
+        if ($this->addFilterByParam($m[1], $value, $fieldName)) {
+          if ($m[1] == 'd') $this->d['filters'][$m[1]] = $value;
+          else $this->d['filters'][$m[1]] = explode('.', $value);
         }
       }
     }
   }
 
-  protected function addFilterByParam($k, $v) {
-    $method = 'setFilter'.ucfirst($k);
-    if ($k == 'd') {
-      $this->setFilterDate($v);
+  protected function addFilterByParam($param1, $param2, $param3 = null) {
+    $method = 'setFilter'.ucfirst($param1);
+    if ($param1 == 'd') {
+      $this->setFilterDate($param2, $param3);
     }
-    elseif ($k == 't2' or $k == 't') {
+    elseif ($param1 == 't2' or $param1 == 't') {
       // Четко по тэгу "page/t2.tagGroup.tagId"
-      list($tagName, $tagValue) = is_array($v) ? $v : explode('.', $v);
-      $this->setFilterTags($tagValue, $tagName, ($k == 't2'));
+      if (is_array($param2)) {
+        list($tagName, $tagValue) = $param2;
+      } elseif ($param3) {
+        $tagName = $param2;
+        $tagValue = $param3;
+      } else {
+        throw new Exception('!');
+      }
+      $this->setFilterTags($tagValue, $tagName, ($param1 == 't2'));
     }
-    elseif ($k == 'u') {
+    elseif ($param1 == 'u') {
       // Четко по пользователю
-      $this->setFilterUser($v);
+      $this->setFilterUser($param2);
     }
-    elseif ($k == 'v') {
+    elseif ($param1 == 'v') {
       // Четко по значению поля. Пример /asd.asd/v.title.Какой-то заголовок
       //list($fieldName, $value) = explode('.', $v);
-      $fieldName = strstr($v, '.', true);
-      $value = substr(strstr($v, '.'), 1);
+      $param3 = strstr($param2, '.', true);
+      $value = substr(strstr($param2, '.'), 1);
       $value = $value == 'none' ? '' : $value;
       $value = urldecode($value);
-      if (isset(DdCore::$pathTranslation[$fieldName])) {
-        $f = DdCore::$pathTranslation[$fieldName];
+      if (isset(DdCore::$pathTranslation[$param3])) {
+        $f = DdCore::$pathTranslation[$param3];
         if (($r = $f($value))) {
           list($newK, $newV) = $f($value);
           $this->addFilterByParam($newK, $newV);
         }
       }
       else {
-        $this->paramFilterItems()->addF($fieldName, $value);
+        $this->paramFilterItems()->addF($param3, $value);
       }
     }
-    elseif ($k == 'ne') {
+    elseif ($param1 == 'ne') {
       // Not Empty
-      $this->paramFilterItems()->addNullFilter($k, false);
+      $this->paramFilterItems()->addNullFilter($param1, false);
     }
     elseif (method_exists($this, $method)) {
       // Динамический метод
-      $this->$method($v);
+      $this->$method($param2);
     }
     else {
       return false;
@@ -86,15 +99,21 @@ trait DdParamFilterCtrl {
     return true;
   }
 
+  /**
+   * Возвращает имя поля по которому производится фильтрация по дате
+   *
+   * @return string
+   */
   protected function paramFilterDateField() {
     return 'dateCreate';
   }
 
-  public $year = null, $month = null, $day = null;
+  public $year = null, $month = null, $day = null, $dateFieldName = null;
   protected $dateParam, $datePeriod, $dateType;
 
-  protected function setFilterDate($dateParam) {
-    $dateField = $this->paramFilterDateField();
+  protected function setFilterDate($dateParam, $fieldName = null) {
+    if (!$fieldName) $fieldName = $this->paramFilterDateField();
+    $this->dateFieldName = $fieldName;
     $this->dateParam = $dateParam;
     // Парсим параметры даты
     // Четко по дате
@@ -133,23 +152,23 @@ trait DdParamFilterCtrl {
 
     // Устанавливаем параметры для фильтров
     if ($this->dateType == self::$DATE_RANGE) {
-      $this->paramFilterItems()->cond->addRangeFilter($dateField, $this->datePeriod['from']['y'].'-'.$this->datePeriod['from']['m'].'-'.$this->datePeriod['from']['d'], $this->datePeriod['to']['y'].'-'.$this->datePeriod['to']['m'].'-'.$this->datePeriod['to']['d'].' 23:59:59');
+      $this->paramFilterItems()->cond->addRangeFilter($fieldName, $this->datePeriod['from']['y'].'-'.$this->datePeriod['from']['m'].'-'.$this->datePeriod['from']['d'], $this->datePeriod['to']['y'].'-'.$this->datePeriod['to']['m'].'-'.$this->datePeriod['to']['d'].' 23:59:59');
     }
     elseif ($this->dateType == self::$DATE_DMY) {
       // Заголовок типа "Литературные новости (11 августа 2009)"
       //$m = Config::getVar('ruMonths2');
       //if (!empty($this->d['pageTitle'])) $this->setPageTitle($this->d['pageTitle'].' ('.$this->day.' '.mb_strtolower($m[(int)$this->month], CHARSET).' '.$this->year.')');
-      $this->paramFilterItems()->cond->addRangeFilter($dateField, sprintf('%04d-%02d-%02d', $this->year, $this->month, $this->day), sprintf('%04d-%02d-%02d', $this->year, $this->month, $this->day + 1), null, DbCond::strictTo);
+      $this->paramFilterItems()->cond->addRangeFilter($fieldName, sprintf('%04d-%02d-%02d', $this->year, $this->month, $this->day), sprintf('%04d-%02d-%02d', $this->year, $this->month, $this->day + 1), null, DbCond::strictTo);
     }
     elseif ($this->dateType == self::$DATE_MY) {
       // Заголовок типа "Новости (Август 2009)"
       //$m = Config::getVar('ruMonths');
       //if (!empty($this->d['pageTitle'])) $this->setPageTitle($this->d['pageTitle'].' ('.$m[(int)$this->month].' '.$this->year.')');
-      $this->paramFilterItems()->addF($dateField, $this->month, 'MONTH');
-      $this->paramFilterItems()->addF($dateField, $this->year, 'YEAR');
+      $this->paramFilterItems()->addF($fieldName, $this->month, 'MONTH');
+      $this->paramFilterItems()->addF($fieldName, $this->year, 'YEAR');
     }
     elseif ($this->dateType == self::$DATE_Y) {
-      $this->paramFilterItems()->addF($dateField, $this->year, 'YEAR');
+      $this->paramFilterItems()->addF($fieldName, $this->year, 'YEAR');
     }
   }
 

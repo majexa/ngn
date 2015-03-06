@@ -2,57 +2,57 @@ Ngn.GroupToggler = new Class({
   Implements: [Options],
 
   options: {
-    groupName: 'default',
-    itemNameParam: function(eItem) {
+    groupId: 'default',
+    itemIdParam: function(eItem) {
       return eItem.get('class').replace(/.*name_(\w+).*/, '$1');
     },
     itemSelector: '.element',
     btnSelector: '.label',
-    bodySelector: '.field-wrapper'
+    bodySelector: '.field-wrapper',
+    //storage: true,
+    openForever: false,
+    displayValue: 'block'
   },
-
-  //togglers: {},
 
   initialize: function(eCont, options) {
     this.setOptions(options);
     eCont.getElements(this.options.itemSelector).each(function(eItem) {
       var eBtn = eItem.getElement(this.options.btnSelector);
+      if (!eBtn) return;
       eBtn.addClass('pseudoLink').addClass('dgray');
       var eBody = eItem.getElement(this.options.bodySelector);
-      var name = this.options.itemNameParam(eItem);
-      /*
-      this.togglers[name] = {
-        eBtn: eBtn,
-        eBtn: eBody
-      };
-      */
-      eBody.setStyle('display', this.display(name));
+      if (this.options.openForever) {
+        eBody.setStyle('display', 'none');
+      } else {
+        var id = this.options.itemIdParam(eItem);
+        eBody.setStyle('display', this.display(id));
+      }
       eBtn.addEvent('click', function(e) {
         e.preventDefault();
-        eBody.setStyle('display', this.display(name, true));
-        Ngn.storage.set(this.name(name), !this.get(name));
+        if (this.options.openForever) {
+          eBody.setStyle('display', this.options.displayValue);
+          eBtn.dispose();
+          eItem.getElements('.temp').each(function(el){
+            el.dispose();
+          })
+        } else {
+          eBody.setStyle('display', this.display(id, true));
+          Ngn.storage.set(this.id(id), !this.get(id));
+        }
       }.bind(this));
     }.bind(this));
   },
 
-  /*
-  toggle: function(name, flag) {
-    if (!this.togglers[name]) return;
-    this.togglers[name].setStyle('display', flag ? 'block' : 'none');
-    Ngn.storage.set(this.name(name), flag);
-  },
-  */
-
-  get: function(name) {
-    return Ngn.storage.get(this.name(name)) ? true : false;
+  get: function(id) {
+    return Ngn.storage.get(this.id(id)) ? true : false;
   },
 
-  display: function(name, invert) {
-    return this.get(name) ? (invert ? 'none' : 'block') : (invert ? 'block' : 'none');
+  display: function(id, invert) {
+    return this.get(id) ? (invert ? 'none' : this.options.displayValue) : (invert ? this.options.displayValue : 'none');
   },
 
-  name: function(name) {
-    return this.options.groupName + name;
+  id: function(id) {
+    return this.options.groupId + id;
   }
 
 });

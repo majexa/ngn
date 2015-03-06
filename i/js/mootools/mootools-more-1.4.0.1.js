@@ -4711,7 +4711,7 @@ Form.Validator.addAllThese([
 			return Form.Validator.getMsg('reqChkByName').substitute({label: props.label || element.get('type')});
 		},
 		test: function(element, props){
-			var grpName = props.groupName || element.get('name');
+			var grpName = props.groupId || element.get('name');
 			var oneCheckedItem = $$(document.getElementsByName(grpName)).some(function(item, index){
 				return item.checked;
 			});

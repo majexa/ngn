@@ -47,17 +47,17 @@ class DdTagsHtml {
   }
 
   static function treeArrowsLinks($v) {
-    return self::treeArrows($v['tags'], '`<a href="'.Tt()->getPath(0).$v['pagePath'].'/t2.`.$groupName.`.`.$id.`">`.$title.`</a>`');
+    return self::treeArrows($v['tags'], '`<a href="'.Tt()->getPath(0).$v['pagePath'].'/t2.`.$groupId.`.`.$id.`">`.$title.`</a>`');
   }
 
   static function treeArrows2($v) {
-    return Tt()->enumDddd($v['tags'], '`<a href="'.Tt()->getPath(0).$v['pagePath'].'/t2.`.$groupName.`.`.$id.`">`.$title.`</a>`', ' → ');
+    return Tt()->enumDddd($v['tags'], '`<a href="'.Tt()->getPath(0).$v['pagePath'].'/t2.`.$groupId.`.`.$id.`">`.$title.`</a>`', ' → ');
   }
 
   static function treeArrows3($v, $dddd = '`<li>`.$v.`</li>`') {
     $r = '';
     foreach ($v['tags'] as $tags) {
-      $html = Tt()->enumDddd([$tags], '`<a href="'.Tt()->getPath(0).$v['pagePath'].'/t2.`.$groupName.`.`.$id.`">`.$title.`</a>`', ' → ');
+      $html = Tt()->enumDddd([$tags], '`<a href="'.Tt()->getPath(0).$v['pagePath'].'/t2.`.$groupId.`.`.$id.`">`.$title.`</a>`', ' → ');
 
       $r .= St::dddd($dddd, ['v' => $html]);
     }

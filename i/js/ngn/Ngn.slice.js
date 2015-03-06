@@ -118,7 +118,7 @@ Ngn.slice.Edit = new Class({
         this.eText.set('html', html);
       }.bind(this)
     }).POST({
-      //'groupName': this.groupName,
+      //'groupId': this.groupId,
       'id': this.id,
       'pageId': this.pageId,
       'title': this.getTitle(),

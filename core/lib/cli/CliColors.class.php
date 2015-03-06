@@ -2,55 +2,44 @@
 
 class CliColors {
 
-  private $foregroundColors = [];
-  private $backgroundColors = [];
+  static $foregroundColors = [];
+  static $backgroundColors = [];
 
-  function __construct() {
-    $this->foregroundColors['black'] = '0;30';
-    $this->foregroundColors['darkGray'] = '1;30';
-    $this->foregroundColors['blue'] = '0;34';
-    $this->foregroundColors['lightBlue'] = '1;34';
-    $this->foregroundColors['green'] = '0;32';
-    $this->foregroundColors['lightGreen'] = '1;32';
-    $this->foregroundColors['cyan'] = '0;36';
-    $this->foregroundColors['lightCyan'] = '1;36';
-    $this->foregroundColors['red'] = '0;31';
-    $this->foregroundColors['lightRed'] = '1;31';
-    $this->foregroundColors['purple'] = '0;35';
-    $this->foregroundColors['lightPurple'] = '1;35';
-    $this->foregroundColors['brown'] = '0;33';
-    $this->foregroundColors['yellow'] = '1;33';
-    $this->foregroundColors['lightGray'] = '0;37';
-    $this->foregroundColors['white'] = '1;37';
-    $this->backgroundColors['black'] = '40';
-    $this->backgroundColors['red'] = '41';
-    $this->backgroundColors['green'] = '42';
-    $this->backgroundColors['yellow'] = '43';
-    $this->backgroundColors['blue'] = '44';
-    $this->backgroundColors['magenta'] = '45';
-    $this->backgroundColors['cyan'] = '46';
-    $this->backgroundColors['lightGray'] = '47';
-  }
-
-  function getColoredString($string, $foregroundColor = null, $backgroundColor = null) {
-    if (getOS() == 'win') return $string;
+  static function colored($string, $foregroundColor = null, $backgroundColor = null) {
     $colored = "";
-    if (isset($this->foregroundColors[$foregroundColor])) {
-      $colored .= "\033[".$this->foregroundColors[$foregroundColor]."m";
+    if (isset(CliColors::$foregroundColors[$foregroundColor])) {
+      $colored .= "\033[".CliColors::$foregroundColors[$foregroundColor]."m";
     }
-    if (isset($this->backgroundColors[$backgroundColor])) {
-      $colored .= "\033[".$this->backgroundColors[$backgroundColor]."m";
+    if (isset(CliColors::$backgroundColors[$backgroundColor])) {
+      $colored .= "\033[".CliColors::$backgroundColors[$backgroundColor]."m";
     }
     $colored .= $string."\033[0m";
     return $colored;
   }
 
-  function getForegroundColors() {
-    return array_keys($this->foregroundColors);
-  }
-
-  function getBackgroundColors() {
-    return array_keys($this->backgroundColors);
-  }
-  
 }
+
+CliColors::$foregroundColors['black'] = '0;30';
+CliColors::$foregroundColors['darkGray'] = '1;30';
+CliColors::$foregroundColors['blue'] = '0;34';
+CliColors::$foregroundColors['lightBlue'] = '1;34';
+CliColors::$foregroundColors['green'] = '0;32';
+CliColors::$foregroundColors['lightGreen'] = '1;32';
+CliColors::$foregroundColors['cyan'] = '0;36';
+CliColors::$foregroundColors['lightCyan'] = '1;36';
+CliColors::$foregroundColors['red'] = '0;31';
+CliColors::$foregroundColors['lightRed'] = '1;31';
+CliColors::$foregroundColors['purple'] = '0;35';
+CliColors::$foregroundColors['lightPurple'] = '1;35';
+CliColors::$foregroundColors['brown'] = '0;33';
+CliColors::$foregroundColors['yellow'] = '1;33';
+CliColors::$foregroundColors['lightGray'] = '0;37';
+CliColors::$foregroundColors['white'] = '1;37';
+CliColors::$backgroundColors['black'] = '40';
+CliColors::$backgroundColors['red'] = '41';
+CliColors::$backgroundColors['green'] = '42';
+CliColors::$backgroundColors['yellow'] = '43';
+CliColors::$backgroundColors['blue'] = '44';
+CliColors::$backgroundColors['magenta'] = '45';
+CliColors::$backgroundColors['cyan'] = '46';
+CliColors::$backgroundColors['lightGray'] = '47';

@@ -28,21 +28,19 @@ Ngn.TreeStateStorage = new Class({
   },
   
   read: function(){
-    //c(['r', this.tree.id+'toggle', Ngn.storage.json.get(this.tree.id+'toggle')]);
     return Ngn.storage.json.get(this.tree.id+'toggle') || [];
   },
   
   restore: function(data){
     // toggle restore
+    var stored, node;
     if (!data) this.restored = this.restored || this.read();
     var restored = data || this.restored;
+    c(restored);
     for (var i = 0; i < restored.length; i++) {
-      var stored = restored[i];
-      //c('stored: '+stored);
-      var node = this.options.retrieve(stored);
-      if (node) {
-        node.toggle(true);
-      }
+      stored = restored[i];
+      node = this.options.retrieve(stored);
+      if (node) node.toggle(true);
     }
     // select restore
     var selected = Ngn.storage.get(this.tree.id + 'selected');
