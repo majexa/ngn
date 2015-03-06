@@ -55,6 +55,9 @@ quotes: "" "";
 a img {
 border: none;
 }
+a {
+cursor: pointer;
+}
 /* -------------------------------------------------------------- 
    
    typography.css

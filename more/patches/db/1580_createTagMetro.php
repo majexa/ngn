@@ -4,7 +4,7 @@ q("CREATE TABLE IF NOT EXISTS `tagMetro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) NOT NULL,
   `oid` int(11) NOT NULL,
-  `groupName` varchar(50) NOT NULL,
+  `groupId` varchar(50) NOT NULL,
   `strName` varchar(50) NOT NULL,
   `title` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -14,7 +14,7 @@ q("CREATE TABLE IF NOT EXISTS `tagMetro` (
    PRIMARY KEY (`id`)
    ) ENGINE=InnoDB  DEFAULT CHARSET=utf8");
   
-q("INSERT INTO `tagMetro` (`id`, `parentId`, `oid`, `groupName`, `strName`, `title`, `name`, `cnt`, `dateCreate`, `dateUpdate`) VALUES
+q("INSERT INTO `tagMetro` (`id`, `parentId`, `oid`, `groupId`, `strName`, `title`, `name`, `cnt`, `dateCreate`, `dateUpdate`) VALUES
 (1, 271, 0, '', '', 'Сокольническая линия', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (2, 271, 0, '', '', 'Замоскворецкая линия', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (3, 271, 0, '', '', 'Арбатско-Покровская линия', '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),

@@ -3,7 +3,6 @@ Ngn.TreeEdit.Tags = new Class({
   
   options: {
     id: 'tags',
-    enableStorage: false,
     actionUrl: '/admin/tags',
     folderOpenIcon: 'ngn-tree-tag-open-icon',
     folderCloseIcon: 'ngn-tree-tag-close-icon',

@@ -10,7 +10,7 @@ q('CREATE TABLE IF NOT EXISTS `new_tags` (
   `id` int(11) NOT NULL auto_increment,
   `parentId` int(11) NOT NULL,
   `oid` int(11) NOT NULL,
-  `groupName` varchar(50) character set utf8 NOT NULL,
+  `groupId` varchar(50) character set utf8 NOT NULL,
   `strName` varchar(50) character set utf8 NOT NULL,
   `title` varchar(255) character set utf8 NOT NULL,
   `cnt` int(11) NOT NULL,
@@ -24,7 +24,7 @@ SELECT
   tags.tagId AS id,
   tags.parentId,
   tags.oid,
-  tags.type AS groupName,
+  tags.type AS groupId,
   pages.strName,
   tags.title,
   0 AS cnt
@@ -45,10 +45,10 @@ q('CREATE TABLE IF NOT EXISTS `new_tags_groups` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8');
 
-foreach (q('SELECT * FROM new_tags GROUP BY groupName') as $v) {
+foreach (q('SELECT * FROM new_tags GROUP BY groupId') as $v) {
   $a = [
     'strName' => $v['strName'],
-    'name' => $v['groupName'],
+    'name' => $v['groupId'],
     'itemsDirected' => 1,
     'unicalTagsName' => 1,
     'tree' => 0,
@@ -60,7 +60,7 @@ foreach (q('SELECT * FROM new_tags GROUP BY groupName') as $v) {
 db()->delete(['new_tags_items']);
 
 q('CREATE TABLE IF NOT EXISTS `new_tags_items` (
-  `groupName` varchar(50) character set utf8 NOT NULL,
+  `groupId` varchar(50) character set utf8 NOT NULL,
   `strName` varchar(50) character set utf8 NOT NULL,
   `tagId` int(11) NOT NULL,
   `itemId` int(11) NOT NULL
@@ -69,7 +69,7 @@ q('CREATE TABLE IF NOT EXISTS `new_tags_items` (
 q('
 INSERT INTO new_tags_items
 SELECT
-  tags_items.type AS groupName,
+  tags_items.type AS groupId,
   pages.strName,
   tags.tagId,
   tags_items.itemId

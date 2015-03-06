@@ -51,7 +51,7 @@ TEXT
   abstract function getClasses();
 
   protected function runner($color = 'brown') {
-    return O::get('CliColors')->getColoredString($this->_runner(), $color);
+    return CliColors::colored($this->_runner(), $color);
   }
 
   abstract protected function _runner();
@@ -100,23 +100,23 @@ TEXT
 
   protected function renderClassTitle($class) {
     if (!($title = ClassCore::title($class))) return;
-    print O::get('CliColors')->getColoredString($title.':', 'green')."\n";
+    print CliColors::colored($title.':', 'green')."\n";
   }
 
   protected function help() {
     if (!CliAccess::$disableDescription) {
-      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('name', 'lightCyan')." - param\n";
-      if (!CliAccess::$proMode) print '{'.O::get('CliColors')->getColoredString('name', 'darkGray')."} - optional param\n";
-      if (!CliAccess::$proMode) print O::get('CliColors')->getColoredString('[...]', 'green')." - param variants\n";
+      if (!CliAccess::$proMode) print CliColors::colored('name', 'lightCyan')." - param\n";
+      if (!CliAccess::$proMode) print '{'.CliColors::colored('name', 'darkGray')."} - optional param\n";
+      if (!CliAccess::$proMode) print CliColors::colored('[...]', 'green')." - param variants\n";
     }
     $classes = $this->getClasses();
     if ($classes) {
-      if (!CliAccess::$proMode and !CliAccess::$disableDescription) print O::get('CliColors')->getColoredString('Supported commands:', 'yellow')."\n";
+      if (!CliAccess::$proMode and !CliAccess::$disableDescription) print CliColors::colored('Supported commands:', 'yellow')."\n";
       if ($this->separateParentMethods) {
         $parentClassesOutputed = [];
         foreach ($classes as $v) {
           $this->renderClassTitle($v['class']);
-          if (isset($v['title'])) print O::get('CliColors')->getColoredString($v['title'].':', 'purple')."\n";
+          if (isset($v['title'])) print CliColors::colored($v['title'].':', 'purple')."\n";
           if (($parents = ClassCore::getParents($v['class']))) {
             $parentClass = $parents[0];
             if (!isset($parentClassesOutputed[$parentClass])) {
@@ -136,13 +136,13 @@ TEXT
       else {
         foreach ($classes as $v) {
           $this->renderClassTitle($v['class']);
-          if (isset($v['title'])) print O::get('CliColors')->getColoredString($v['title'].':', 'purple')."\n";
+          if (isset($v['title'])) print CliColors::colored($v['title'].':', 'purple')."\n";
           print $this->renderMethods($v['class']);
         }
       }
     }
     else {
-      print O::get('CliColors')->getColoredString('No supported commands', 'red')."\n";
+      print CliColors::colored('No supported commands', 'red')."\n";
     }
     $this->extraHelp();
   }
@@ -159,7 +159,7 @@ TEXT
   protected function renderMethods($class) {
     if (!($methods = $this->getMethods($class))) {
       if ($this->isMultiWrapper($class)) return $this->_renderMethods($class, []);
-      return O::get('CliColors')->getColoredString("No supported methods in class '$class'", 'red')."\n";
+      return CliColors::colored("No supported methods in class '$class'", 'red')."\n";
     }
     return $this->_renderMethods($class, $methods);
   }
@@ -181,7 +181,7 @@ TEXT
       $rOptions = $rOptions ? ' '.$rOptions : '';
       if (!empty($method['title']) and getOS() == 'win') $method['title'] = Misc::transit($method['title'], false, false);
       if (CliAccess::$proMode) $help = '';
-      else $help = ($method['title'] ? O::get('CliColors')->getColoredString(' -- '.$method['title'], 'cyan') : '');
+      else $help = ($method['title'] ? CliColors::colored(' -- '.$method['title'], 'cyan') : '');
       $s .= //
         $this->runner($runnerColor). // runner
         $nameCmd.(count($methods) == 1 ? '' : ' '.$method['method']). // method
@@ -192,7 +192,7 @@ TEXT
     if ($name and $this->isMultiWrapper($class)) {
       $s .= //
         $this->runner()." $name ". //
-        O::get('CliColors')->getColoredString("{the same options as $name}", 'cyan')."\n";
+        CliColors::colored("{the same options as $name}", 'cyan')."\n";
     }
     return $s;
   }
@@ -263,8 +263,8 @@ TEXT
 
   protected function renderMethodOptions($options) {
     return implode(' ', array_map(function ($v) {
-      return (!empty($v['optional']) ? '{'.O::get('CliColors')->getColoredString($v['name'], 'darkGray').'}' : O::get('CliColors')->getColoredString($v['name'], 'lightCyan')). //
-      ($v['variants'] ? O::get('CliColors')->getColoredString("[{$v['variants']}]", 'green') : '');
+      return (!empty($v['optional']) ? '{'.CliColors::colored($v['name'], 'darkGray').'}' : CliColors::colored($v['name'], 'lightCyan')). //
+      ($v['variants'] ? CliColors::colored("[{$v['variants']}]", 'green') : '');
     }, $options));
   }
 

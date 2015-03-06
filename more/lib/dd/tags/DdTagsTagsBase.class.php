@@ -14,7 +14,7 @@ abstract class DdTagsTagsBase {
   function create(array $data) {
     Arr::checkEmpty($data, 'title');
     $data['strName'] = $this->group->strName;
-    $data['groupName'] = $this->group->name;
+    $data['groupId'] = $this->group->name;
     return DbModelCore::create($this->group->table, $data);
   }
 
@@ -33,7 +33,7 @@ abstract class DdTagsTagsBase {
     $this->cond = DbCond::get();
     if ($this->group->allowEdit) $this->cond->setOrder('oid');
     if (!$this->group->global) {
-      $this->cond->addF('groupName', $this->group->name);
+      $this->cond->addF('groupId', $this->group->name);
       $this->cond->addF('strName', $strName);
     }
     return $this->cond;
@@ -55,8 +55,8 @@ abstract class DdTagsTagsBase {
    * Удаляет все теги текущей группы
    */
   function deleteAll() {
-    db()->query("DELETE FROM {$this->group->table} WHERE strName=? AND groupName=?", $this->group->strName, $this->group->name);
-    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=?', $this->group->strName, $this->group->name);
+    db()->query("DELETE FROM {$this->group->table} WHERE strName=? AND groupId=?", $this->group->strName, $this->group->name);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupId=?', $this->group->strName, $this->group->name);
   }
 
   abstract function import($text);
@@ -89,7 +89,7 @@ abstract class DdTagsTagsBase {
     $itemIds = (array)$itemIds;
     $cond = new DbCond('tagItems');
     $cond->addJoin($this->group->table, 'tagId');
-    $cond->addF('itemId', $itemIds)->addF('strName', $this->group->tagsGetterStrName)->addF('groupName', $this->group->name);
+    $cond->addF('itemId', $itemIds)->addF('strName', $this->group->tagsGetterStrName)->addF('groupId', $this->group->name);
     return db()->query("SELECT {$this->group->table}.*, COUNT(*) AS cnt FROM tagItems".$cond->all().' GROUP BY tagItems.tagId');
   }
 

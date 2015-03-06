@@ -4,7 +4,7 @@ Ngn.TreeEdit = new Class({
 
   options: {
     id: 'te',
-    enableStorage: false,
+    enableStorage: true,
     onTreeLoad: null,
     folderOpenIcon: 'ngn-tree-folder-open-icon',  // default css class open icon
     folderCloseIcon: 'ngn-tree-folder-close-icon', // default css class close icon
@@ -190,8 +190,12 @@ Ngn.TreeEdit = new Class({
     Ngn.localStorage.json.set(this.options.id + 'tree', data);
   },
 
-  restoreState: function(data) {
-    if (this.stateStorage) this.stateStorage.restore();
+  restoreState: function() {
+    c('1');
+    if (this.stateStorage) {
+      c('2');
+      this.stateStorage.restore();
+    }
   },
 
   getStoredTreeData: function() {

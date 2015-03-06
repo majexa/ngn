@@ -60,8 +60,8 @@ class DdTagsGroup {
 
   function delete() {
     db()->query('DELETE FROM tagGroups WHERE id=?d', $this->p['id']);
-    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=?', $this->p['strName'], $this->p['name']);
-    db()->query('DELETE FROM tags WHERE strName=? AND groupName=?', $this->p['strName'], $this->p['name']);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupId=?', $this->p['strName'], $this->p['name']);
+    db()->query('DELETE FROM tags WHERE strName=? AND groupId=?', $this->p['strName'], $this->p['name']);
     O::delete('DdTagsItems', $this->p['strName'], $this->p['name']);
   }
 
@@ -133,8 +133,8 @@ SQL
       UPDATE tagGroups
       SET name=?, itemsDirected=?d, unicalTagsName=?d, tree=?d
       WHERE strName=? AND name=?', $newName, $itemsDirected, $unicalTagsName, $tree, $strName, $name);
-    db()->query('UPDATE tags SET groupName=? WHERE groupName=? AND strName=?', $newName, $name, $strName);
-    db()->query('UPDATE tagItems SET groupName=? WHERE groupName=? AND strName=?', $newName, $name, $strName);
+    db()->query('UPDATE tags SET groupId=? WHERE groupId=? AND strName=?', $newName, $name, $strName);
+    db()->query('UPDATE tagItems SET groupId=? WHERE groupId=? AND strName=?', $newName, $name, $strName);
   }
 
   /**

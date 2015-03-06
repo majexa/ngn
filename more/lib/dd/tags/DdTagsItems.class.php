@@ -38,7 +38,7 @@ class DdTagsItems {
     foreach ($titles as $title) {
       $tag = $tags->getByTitle($title);
       if (!$tag) {
-        if ($strict) throw new NotFoundException("Tag with title '$title' not found (strName=$strName, groupName=$groupName)");
+        if ($strict) throw new NotFoundException("Tag with title '$title' not found (strName=$strName, groupId=$groupName)");
         if (!$this->group->itemsDirected) // Если ТэгЗаписи не влияют на Тэги
           continue;
         $tagId = $tags->create(['title' => $title]);
@@ -81,7 +81,7 @@ class DdTagsItems {
       // Если добавляем, то учитываем, что коллекции уже существуют. Нужно получить ID последней
       $lastCollectionId = db()->selectCell(<<<SQL
 SELECT collection FROM tagItems
-WHERE strName=? AND groupName=? AND itemId=?d
+WHERE strName=? AND groupId=? AND itemId=?d
 GROUP BY collection
 ORDER BY collection DESC
 LIMIT 1
@@ -98,7 +98,7 @@ SQL
       foreach ($tagTds as $tagId) {
         $allTagTds[] = $tagId;
         $d = [
-          'groupName'  => $this->group->name,
+          'groupId'  => $this->group->name,
           'strName'    => $this->strName,
           'tagId'      => $tagId,
           'itemId'     => $itemId,
@@ -164,11 +164,11 @@ SQL
   }
 
   public function _create($tagId, $itemId, $collection = 0) {
-    db()->query('INSERT INTO tagItems SET groupName=?, strName=?, tagId=?d, itemId=?d, collection=?d', $this->group->name, $this->strName, $tagId, $itemId, $collection);
+    db()->query('INSERT INTO tagItems SET groupId=?, strName=?, tagId=?d, itemId=?d, collection=?d', $this->group->name, $this->strName, $tagId, $itemId, $collection);
   }
 
   function _delete($itemId) {
-    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d', $this->strName, $this->group->name, $itemId);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupId=? AND itemId=?d', $this->strName, $this->group->name, $itemId);
   }
 
   /**
@@ -187,7 +187,7 @@ SQL
   }
 
   function deleteByCollection($itemId, $tagId, $collection) {
-    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND itemId=?d AND tagId=?d AND collection=?d', $this->strName, $this->group->name, $itemId, $tagId, $collection);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupId=? AND itemId=?d AND tagId=?d AND collection=?d', $this->strName, $this->group->name, $itemId, $tagId, $collection);
   }
 
   /**
@@ -198,7 +198,7 @@ SQL
   function deleteByTagId($tagId) {
     // а ещё у этого тэга есть родительские tagItems. их бы тоже надо удалить
     // get tree by $tagId
-    db()->query('DELETE FROM tagItems WHERE strName=? AND groupName=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
+    db()->query('DELETE FROM tagItems WHERE strName=? AND groupId=? AND tagId=?d', $this->strName, $this->group->name, $tagId);
     $this->updateCount($tagId);
   }
 
@@ -221,7 +221,7 @@ SQL
     $activeCond = self::$getNonActive ? '' : 'AND active=1';
     return db()->selectCol("
     SELECT itemId FROM tagItems
-    WHERE strName=? AND groupName=? AND tagId=?d $activeCond", $this->strName, $this->group->name, $tagId);
+    WHERE strName=? AND groupId=? AND tagId=?d $activeCond", $this->strName, $this->group->name, $tagId);
   }
 
   /**
@@ -263,7 +263,7 @@ SQL
     LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
       tagItems.strName=? AND
-      tagItems.groupName=? AND
+      tagItems.groupId=? AND
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
@@ -281,7 +281,7 @@ SQL
     LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
       tagItems.strName=? AND
-      tagItems.groupName=? AND
+      tagItems.groupId=? AND
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
@@ -311,7 +311,7 @@ SQL
     LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
       tagItems.strName=? AND
-      tagItems.groupName=? AND
+      tagItems.groupId=? AND
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
@@ -336,7 +336,7 @@ SQL
     LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
       tagItems.strName=? AND
-      tagItems.groupName=? AND
+      tagItems.groupId=? AND
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
@@ -378,7 +378,7 @@ SQL
   /*
   static function updateCountByItemId($strName, $itemId) {
     if (self::$disableUpdateCount) return;
-    $r = db()->query("SELECT groupName, tagId FROM tagItems WHERE strName=? AND itemId=?d GROUP BY tagId", $strName, $itemId);
+    $r = db()->query("SELECT groupId, tagId FROM tagItems WHERE strName=? AND itemId=?d GROUP BY tagId", $strName, $itemId);
     foreach ($r as $v) self::updateCount($v['tagId']);
   }
 

@@ -2,7 +2,8 @@
 
 class DmfaDate extends Dmfa {
 
-  function form2sourceFormat($v) {
+  function form2sourceFormat($v, $fieldName) {
+    if (empty($v)) return '';
     if (is_string($v)) $v = explode('.', $v);
     return sprintf("%04s-%02s-%02s", $v[2], $v[1], $v[0]);
   }
