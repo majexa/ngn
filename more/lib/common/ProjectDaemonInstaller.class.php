@@ -3,10 +3,10 @@
 class ProjectDaemonInstaller extends DaemonInstaller {
 
   protected function defineOptions() {
-    $config = FileVar::getVar("/home/user/ngn-env/project/{$this->projectName}/config/vars/{$this->daemonName}.php");
+    $config = json_decode(`run site {$this->projectName} var {$this->daemonName}`, JSON_FORCE_OBJECT);
     return [
       'bin'     => '/usr/bin/php',
-      'opts'    => "/home/user/ngn-env/project/{$this->projectName}/{$this->daemonName}.php",
+      'opts'    => "/home/user/ngn-env/projects/{$this->projectName}/{$this->daemonName}.php",
       'workers' => isset($config['workers']) ? $config['workers'] : 1
     ];
   }

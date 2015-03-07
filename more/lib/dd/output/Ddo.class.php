@@ -454,10 +454,15 @@ class Ddo {
   }
 
   /**
+   * @api
    * Обрамляет элементы HTML-контейнером, начиная с указанного поля включительно
+   *
+   * @param $fieldName
+   * @return $this
    */
   function groupFrom($fieldName) {
     $this->grouppedFields[] = $fieldName;
+    return $this;
   }
 
   protected $grouppedFields = [];

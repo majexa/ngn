@@ -442,7 +442,6 @@ class Arr {
     $keys = (array)$keys;
     foreach ($keys as $k) {
       if (empty($arr[$k])) {
-        LogWriter::v('CHECK_EMPTY', [$k, $arr]);
         if ($quietly) return false;
         else throw new Exception("Key '$k' has empty value in array: ".getPrr($arr));
       }
