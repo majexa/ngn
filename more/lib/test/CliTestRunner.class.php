@@ -2,6 +2,10 @@
 
 class CliTestRunner extends CliAccessArgs {
 
+  protected function extraHelp() {
+    print "Use % wildcard to filter by pattern in 'filterNames' param\n";
+  }
+
   function prefix() {
     return false;
   }

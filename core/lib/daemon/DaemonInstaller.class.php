@@ -34,13 +34,22 @@ DAEMON_OPTS="'.$this->options['opts'].'"
 NAME='.$this->name.'
 QUIET="--quiet"
 
+if [ ! -f $DAEMON ]; then
+   echo "NOT EXISTS: $DAEMON"
+   exit 0
+fi
+
+if [ ! -f $DAEMON_OPTS ]; then
+   echo "NOT EXISTS: $DAEMON_OPTS"
+   exit 0
+fi
+
 for N in'.$for.'
 do
   DESC="'.$this->projectName.' '.$this->daemonName.' daemon ${N}"
   PIDFILE="/var/run/${NAME}-${N}.pid"
   START_OPTS="--start ${QUIET} --chuid user:user --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS}"
   STOP_OPTS="--stop --pidfile ${PIDFILE}"
-  test -x $DAEMON || exit 0
   set -e
   case "$1" in
     start)
@@ -88,14 +97,25 @@ exit 0';
     print Cli::shell("sudo chmod +x /etc/init.d/$this->name");
     print Cli::shell("sudo /etc/init.d/$this->name restart");
     (new RcLocal)->add("$this->projectName-$this->daemonName");
-    usleep(0.1 * 1000000);
+  }
+
+  protected function getProcessIds() {
+    $pattern = str_replace('-', '/', $this->name);
+    return str_replace("\n", ' ', `ps aux | grep $pattern | grep -v grep | awk '{print $2}'`);
+  }
+
+  protected function killProcesses() {
+    if ($ids = $this->getProcessIds()) sys("sudo kill $ids");
   }
 
   function uninstall() {
-    $ids = str_replace("\n", ' ', `ps aux | grep test/$this->daemonName | grep -v grep | awk '{print $2}'`);
-    if ($ids) sys("sudo kill $ids");
     sys("sudo rm /etc/init.d/$this->projectName-$this->daemonName");
     (new RcLocal)->remove("$this->projectName-$this->daemonName");
   }
+
+  function checkInstallation() {
+    if (!$this->getProcessIds()) throw new Exception('Installation failed: "'.str_replace('-', '/', $this->name).'"');
+  }
+
 
 }

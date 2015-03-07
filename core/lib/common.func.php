@@ -66,6 +66,7 @@ function getPr($v, $html = true) {
 
 function output($str, $output = false, $forcePlain = true) {
   if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").("LOG: <$str>").((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
+  //print CliColors::colored(getBacktrace(false), 'brown');
   LogWriter::str('output', $str);
 }
 

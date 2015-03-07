@@ -21,10 +21,11 @@ class Tt {
    * @param string $path
    * @param null $d
    * @param bool $quietly
+   * @param bool|integer $forcePriority Если указана, выбирается элемент под этим номером из списка базовых путей ngn
    * @throws Exception
    */
-  function tpl($path, $d = null, $quietly = false) {
-    if (($tplPath = $this->exists($path)) !== false) {
+  function tpl($path, $d = null, $quietly = false, $forcePriority = false) {
+    if (($tplPath = $this->exists($path, $forcePriority)) !== false) {
       $clearTplPath = preg_replace('/^(.*).php$/U', '$1', $tplPath);
       $body1 = "Begin Template \"$clearTplPath\"";
       $body2 = "End Template \"$clearTplPath\"";
@@ -73,7 +74,8 @@ class Tt {
    * @param string $path Путь до шаблона
    * @return bool|string
    */
-  function exists($path) {
+  function exists($path, $numbver = false) {
+    if ($numbver !== false) return "{Ngn::$basePaths[$numbver]}/tpl/$path.php";
     foreach (Ngn::$basePaths as $basePath) if (file_exists("$basePath/tpl/$path.php")) return "$basePath/tpl/$path.php";
     return false;
   }
