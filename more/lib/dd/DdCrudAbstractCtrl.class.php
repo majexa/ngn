@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @method void processItems(DdItems $items)
- * @method void processForm(DdForm $form)
- * @method void processDdo(Ddo $ddo)
+ * @method void oProcessItems(DdItems $items)
+ * @method void oProcessForm(DdForm $form)
+ * @method void protected oProcessDdo(Ddo $ddo)
  */
 trait DdCrudAbstractCtrl {
 use ObjectProcessorCtrl;
@@ -49,6 +49,9 @@ use ObjectProcessorCtrl;
     return Ddo::getGrid($this->items()->getItems(), $this->ddoEdit());
   }
 
+  /**
+   * @var DataManagerAbstract
+   */
   protected $im;
 
 

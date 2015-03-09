@@ -37,8 +37,16 @@ class DbItems implements UpdatableItems, ArrayAccess {
 
   function __construct($table, Db $db = null) {
     $this->table = $table;
-    $this->cond = new DbCond($table);
     $this->db = $db ?: db();
+    $this->init();
+  }
+
+  protected function init() {
+    $this->cond = new DbCond($this->table);
+  }
+
+  function __clone() {
+    $this->init();
   }
 
   function count() {

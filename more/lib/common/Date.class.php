@@ -67,8 +67,10 @@ class Date {
    * @return bool|string|void
    */
   static function db($time = 0) {
-    return date('Y-m-d H:i:s', $time ? $time : time());
+    return date(self::DB_FORMAT, $time ? $time : time());
   }
+
+  const DB_FORMAT = 'Y-m-d H:i:s';
 
   /**
    * Преобразует timestamp в дату с текстовым месяцем
@@ -170,5 +172,10 @@ class Date {
     if ($format === Date::TIME_HM) return preg_replace('/(\d+:\d+):\d+/', '$1', $time);
     else return preg_replace('/(\d+):\d+:\d+/', '$1', $time);
   }
+
+  static function firstDayTimestamp() {
+
+  }
+  static function lastDayTimestamp() {}
 
 }

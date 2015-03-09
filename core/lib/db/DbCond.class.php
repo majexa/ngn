@@ -191,6 +191,14 @@ class DbCond {
     return $this;
   }
 
+  function addTodayFilter($key) {
+    $this->addRangeFilter($key, date('Y-m-d').' 00:00:00', date('Y-m-d').' 23:59:59');
+  }
+
+  function addYesterdayFilter($key) {
+    $this->addRangeFilter($key, date('Y-m-d', '-1 days').' 00:00:00', date('Y-m-d', '-1 days').' 23:59:59');
+  }
+
   public $likeCond = '';
 
   /**

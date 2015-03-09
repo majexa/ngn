@@ -122,10 +122,12 @@ class FieldEFile extends FieldEFileBase {
     $r = '<div class="iconsSet fileNav">';
     if (($v = $this->dataValue())) {
       $size = File::format2(filesize($this->dataRealValue()));
-      $deleteHtml = ((!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) ? //
-        '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name']. //
-        '" class="iconBtn delete confirm" title="Удалить сохраненный файл"><i></i></a>' : //
-        '');
+      if (!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) {
+        $deleteHtml = '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].
+        '" class="iconBtn delete confirm" title="Удалить сохраненный файл"><i></i></a>';
+      } else {
+        $deleteHtml = '';
+      }
       //$r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\"><i></i>сохранён ($size)</a>$deleteHtml";
       $r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\" title=\"сохранён ($size)\"><i></i></a>$deleteHtml";
     }
