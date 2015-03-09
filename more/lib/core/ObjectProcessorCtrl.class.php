@@ -13,7 +13,7 @@ trait ObjectProcessorCtrl {
   */
 
   protected function objectProcess($object, $suffix) {
-    $prefix = 'process'.ucfirst($suffix);
+    $prefix = 'oProcess'.ucfirst($suffix);
     foreach (get_class_methods($this) as $method) {
       if (Misc::hasPrefix($prefix, $method)) {
         $this->$method($object);

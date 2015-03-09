@@ -7,7 +7,7 @@ use DdCrudCtrl, DdParamFilterCtrl;
     return $this->items();
   }
 
-  protected function processItemsInitParamFilter() {
+  protected function oProcessItemsInitParamFilter() {
     $this->initFilterByParams();
   }
 

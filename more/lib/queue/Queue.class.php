@@ -3,7 +3,8 @@
 class Queue extends QueueBase {
 
   function add(array $data) {
-    Arr::checkEmpty($data, ['class', 'method']);
+    Arr::checkEmpty($data, ['class']);
+    if (!isset($data['method'])) $data['method'] = '__construct';
     if ($data['class'] == 'object') {
       Arr::checkEmpty($data, 'object');
       $data['object'] = serialize($data['object']);
