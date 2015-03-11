@@ -3,7 +3,7 @@
 /**
  * @method void oProcessItems(DdItems $items)
  * @method void oProcessForm(DdForm $form)
- * @method void protected oProcessDdo(Ddo $ddo)
+ * @method void oProcessDdo(Ddo $ddo)
  */
 trait DdCrudAbstractCtrl {
 use ObjectProcessorCtrl;
@@ -62,7 +62,8 @@ use ObjectProcessorCtrl;
   }
 
   protected function _getIm() {
-    return $this->objectProcess(new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName()), $this->getStrName()), 'form')), 'im');
+    $form = new DdForm(new DdFields($this->getStrName()), $this->getStrName());
+    return $this->objectProcess(new DdItemsManager($this->items(), $this->objectProcess($form, 'form')), 'im');
   }
   
   abstract protected function id();

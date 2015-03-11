@@ -18,6 +18,10 @@ class DdFieldCore {
     return FieldCore::hasAncestor($type, 'num') or FieldCore::hasAncestor($type, 'float');
   }
 
+  static function isImageType($type) {
+    return FieldCore::hasAncestor($type, 'image');
+  }
+
   static function isFileType($type) {
     return FieldCore::hasAncestor($type, 'file');
   }

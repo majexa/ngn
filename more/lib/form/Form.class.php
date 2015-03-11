@@ -730,7 +730,7 @@ class Form {
    */
   public $valueFormated = false;
 
-  protected function initElements($reset = false) {
+  protected function initElements($reset = false, array $filter = null) {
     if ($reset) {
       $this->els = [];
       $this->initDefaultElements();
@@ -744,6 +744,8 @@ class Form {
     else {
       $fields = $this->fields->getFieldsF();
     }
+    if ($filter) $fields = Arr::filterByValue($fields, 'name', $filter);
+    //pr(Arr::get($fields, 'name'));
     foreach ($fields as $n => $opt) {
       if (!is_array($opt)) throw new Exception("Field #$n is not array");
       if ($this->fields->isFileType($opt['name'])) {
@@ -771,13 +773,13 @@ class Form {
    * @param bool $reset
    * @return $this
    */
-  function setElementsData(array $defaultData = [], $reset = true) {
+  function setElementsData(array $defaultData = [], $reset = true, $filterFieldsByDefaultData = false) {
     $this->defaultData = $defaultData;
     $this->elementsData = $defaultData;
     if ($this->isSubmitted() and $this->fromRequest) {
       $this->elementsData = $this->req->p;
     }
-    $this->initElements($reset);
+    $this->initElements($reset, $filterFieldsByDefaultData ? array_keys($defaultData) : null);
     return $this;
   }
 
@@ -788,7 +790,7 @@ class Form {
    * определены ф-ей setFieldsData()
    */
   protected function setElementsDataDefault() {
-    if ($this->elementsDefaultDefined) return false;
+    if ($this->defaultData) return false;
     $this->setElementsData($this->getDefaultData());
     $this->elementsDefaultDefined = true;
     return true;
@@ -882,9 +884,10 @@ class Form {
   protected function _update(array $data) {
   }
 
-  function debugElements() {
-    $this->setElementsDataDefault();
-    foreach ($this->els as $el) prr($el->options);
+  function debugElements($name = false) {
+    //$this->setElementsDataDefault();
+    foreach ($this->els as $el) $name ? print $el->options['name'].', ' : prr($el->options);
+    if ($name) print "\n";
   }
 
   public $tinyInitialized = false;
