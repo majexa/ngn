@@ -20,13 +20,14 @@ class Tpl {
   }
 
   /**
-   * Превращает URL  имя хоста, отбрасывая часть с путём и протоколом
+   * Преобразует URL в читаемый адрес без http[s]://
    *
    * @param $url
    * @return mixed
    */
   static function clearUrl($url) {
     $url = preg_replace('/^https?:\/\/(.*)$/', '$1', $url);
+    $url = O::get('IdnaConvert')->decode($url);
     if (preg_match('/^([^\/]*)\/*$/', $url)) return preg_replace('/^([^\/]*)\/*$/', '$1', $url);
     return $url;
   }

@@ -33,6 +33,10 @@ class DdItemsManager extends DbItemsManager {
 
   function __construct(DdItems $items, Form $form, array $options = []) {
     parent::__construct($items, $form, $options);
+    $config = Config::getVar('dd/itemsManager');
+    $this->imageSizes = array_merge($this->imageSizes, //
+      Arr::filterByKeys($config, array_keys($this->imageSizes)));
+    Arr::toObjProp($config, $this);
     $this->strName = $items->strName;
   }
 

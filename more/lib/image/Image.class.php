@@ -121,8 +121,8 @@ class Image {
   /**
    * Создаём изображение
    *
-   * @param   string    Путь к файлу изображения
-   * @param   string    Тип (расширение) сформированное в резальтате проверки MIME
+   * @param string $imgPath Путь к файлу изображения
+   * @throws Exception
    */
   function createImage($imgPath) {
     $err_rep = error_reporting(0);
@@ -133,7 +133,6 @@ class Image {
     error_reporting($err_rep);
     if ($src) {
       $this->src = $src;
-      return true;
     }
     else {
       throw new Exception('Wrong Image format');
@@ -148,29 +147,20 @@ class Image {
   /**
    * Интеллектуальное изменение размеров картинки
    * Вписывает в прямоугольник с заданными шириной и высотой
-   *
-   * @param   integer   Ширина прямоугольника для вписывания
-   * @param   integer   Высота прямоугольника для вписывания
-   * @param   bool      Увеличивать ли изображение меньшее по размерам,
-   *                    чем заданные для уменьшения размеры (любое ширина или высота)
-   * @return  bool
+
+   * @param $srcPath
+   * @param integer $w Ширина прямоугольника для вписывания
+   * @param integer $h Высота прямоугольника для вписывания
+   * @return resource
+   * @throws EmptyException
+   * @throws Exception
    */
   function _resample($srcPath, $w, $h) {
     Misc::checkEmpty($w);
     Misc::checkEmpty($h);
-    if (!$this->createImage($srcPath)) return false;
+    $this->createImage($srcPath);
     $srcW = $this->data['w'];
     $srcH = $this->data['h'];
-    if ($w > $h) {
-      // по ширине
-      $destH = $h;
-      $destW = round($srcW * $h / $srcH);
-    }
-    else {
-      // по высоте
-      $destW = $w;
-      $destH = round($srcH * $w / $srcW);
-    }
     $destW = round($srcW * $h / $srcH);
     $destH = round($srcH * $w / $srcW);
     $destW = ($destW > $w ? $w : $destW);

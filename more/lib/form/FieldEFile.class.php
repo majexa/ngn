@@ -129,7 +129,7 @@ class FieldEFile extends FieldEFileBase {
         $deleteHtml = '';
       }
       //$r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\"><i></i>сохранён ($size)</a>$deleteHtml";
-      $r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\" title=\"сохранён ($size)\"><i></i></a>$deleteHtml";
+      $r .= "<a href=\"$v\" class=\"file fileSaved iconBtn\" target=\"_blank\" title=\"сохранён ($size)\"><i></i></a>$deleteHtml";
     }
     if ($v = $this->postValue()) {
       $r .= '<div class="clear"></div>';

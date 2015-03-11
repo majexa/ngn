@@ -236,20 +236,23 @@ abstract class DataManagerAbstract extends Options2 {
   /**
    * @param array $data
    * @param bool $valueFormatted Данные используют формат POST запроса
+   * @param bool $filterByData
    */
-  protected function setFormElementsData(array $data, $valueFormatted = false) {
+  protected function setFormElementsData(array $data, $valueFormatted = false, $filterByData = false) {
     $this->beforeFormElementsInit();
     $this->form->valueFormated = $valueFormatted;
-    $this->form->setElementsData($data);
+    $this->form->setElementsData($data, true, $filterByData);
   }
 
   protected function formatFormPostData() {
     $this->fieldTypeAction('post2formFormat', $this->form->req->p);
   }
 
-  function update($id, array $data, $throwFormErrors = true) {
+  function update($id, array $data, $throwFormErrors = true, $filterByData = false) {
+    // $filterByData используется для случаев, когда не нужно валидировать данные из формы
+    // т.е. данные могут прийти частично (не все, что есть в форме) и частично же обработаны
     $this->form->fromRequest = false;
-    $this->setFormElementsData($data);
+    $this->setFormElementsData($data, false, $filterByData);
     if ($this->form->hasErrors) {
       if ($throwFormErrors) throw new Exception($this->form->lastError.'. data: '.getPrr($data));
       else return false;
@@ -329,6 +332,7 @@ abstract class DataManagerAbstract extends Options2 {
     $this->beforeUpdateData = $this->getItemNonFormat($this->id);
     try {
       $this->data = $this->form->getData();
+//      die2($this->data);
       $this->fieldTypeAction('form2sourceFormat', $this->data);
       $this->form2sourceFormat();
       $this->replaceData();
@@ -536,7 +540,8 @@ abstract class DataManagerAbstract extends Options2 {
   /**
    * Создаёт превьюшки изображения
    *
-   * @param   string    Путь до картинки от корня
+   * @param string $imageRoot Путь до картинки от корня
+   * @throws Exception
    */
   function makeThumbs($imageRoot) {
     $this->makeSmallThumbs($imageRoot);
@@ -580,6 +585,7 @@ abstract class DataManagerAbstract extends Options2 {
   }
 
   function deleteFile($id, $fieldName) {
+    if ($this->form->fields[$fieldName]['required']) throw new Exception("Field '$fieldName' is required");
     $this->_updateField($id, $fieldName, '');
     $this->id = $id;
     if (($dmfa = $this->getDmfa($this->form->fields->fields[$fieldName]['type'])) !== false) {

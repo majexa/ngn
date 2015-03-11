@@ -36,6 +36,7 @@ class DdFields extends Fields {
       'title'           => 'ID',
       'name'            => 'id',
       'type'            => 'integer',
+      'disableUpdate'   => true,
       'system'          => true,
       'defaultDisallow' => true
     ]);
@@ -67,6 +68,7 @@ class DdFields extends Fields {
     $fields = [];
     foreach ($this->getFields() as $f) {
       if (!in_array($f['name'], $this->options['forceShow'])) {
+        if (!empty($f['disableUpdate'])) continue;
         if ($f['system'] and !$this->options['getSystem']) continue;
         if ($f['defaultDisallow'] and !$this->options['getDisallowed']) continue;
         if ($f['virtual'] and !$this->options['getVirtual']) continue;
