@@ -186,7 +186,7 @@ class Calendar {
   }
 
   public $ssssTable = '
-<div id="calendarHeader">
+<div id="calendarHeader" data-m="$m" data-y="$y">
 <a href="$prevMonthLink" class="prev">«</a>
 <a href="$monthLink" class="current">$header</a>
 <a href="$nextMonthLink" class="next">»</a>
@@ -221,6 +221,12 @@ $rows
   public $ddddRow = '`<tr>`.$cells.`</tr>`';
   public $ddddCell = '`<td>`.($empty ? `&nbsp;` : ($link ? `<a href="`.$link.`"`.($class ? ` class="`.$class.`"` : ``).`>`.$day.`</a>` : `<span>`.$day.`</span>`)).`</td>`';
 
+  protected $basePath;
+
+  function __construct($basePath) {
+    $this->basePath = $basePath;
+  }
+
   /**
    * Generate the HTML for a given month
    *
@@ -238,15 +244,15 @@ $rows
     $date = getdate(mktime(12, 0, 0, $month, 1, $year));
     $first = $date['wday'];
     $monthName = $this->monthNames[$month - 1];
-    $prev = $this->adjustDate($month - 1, $year);
-    $next = $this->adjustDate($month + 1, $year);
+    $prevDate = $this->adjustDate($month - 1, $year);
+    $nextDate = $this->adjustDate($month + 1, $year);
     if ($showYear == 1) {
-      $prevMonth = $this->getCalendarLink($prev[0], $prev[1]);
-      $nextMonth = $this->getCalendarLink($next[0], $next[1]);
+      $prevMonthLink = $this->getCalendarLink($prevDate[0], $prevDate[1]);
+      $nextMonthLink = $this->getCalendarLink($nextDate[0], $nextDate[1]);
     }
     else {
-      $prevMonth = '';
-      $nextMonth = '';
+      $prevMonthLink = '';
+      $nextMonthLink = '';
     }
     $header = $monthName.(($showYear > 0) ? ' '.$year : '');
     /*
@@ -306,14 +312,15 @@ $rows
     $d = [
       'm'         => $m,
       'y'         => $y,
-      'prevMonth' => $prevMonth,
-      'nextMonth' => $nextMonth,
+      'prevMonth' => $prevMonthLink,
+      'nextMonth' => $nextMonthLink,
       'header'    => $header,
       'rows'      => $rows
     ];
     for ($i = 0; $i <= 7; $i++) $d['weekday'.($i + 1)] = $this->dayNames[($this->startDay + $i) % 7];
-    $d['prevMonthLink'] = '';// $this->basePath.'/d.'.$m.';'.$y;
-    $d['nextMonthLink'] = '';//$this->basePath.'/d.'.$m.';'.$y;
+    $d['monthLink'] = $this->basePath.'/d.'.$m.';'.$y;
+    $d['nextMonthLink'] = $this->basePath.'/d.'.$prevDate[0].';'.$prevDate[1];
+    $d['nextMonthLink'] = $this->basePath.'/d.'.$nextDate[0].';'.$nextDate[1];
     return St::ssss($this->ssssTable, $d);
   }
 

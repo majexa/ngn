@@ -12,7 +12,7 @@ Ngn.Dialog.Auth.Vk = new Class({
     var eVkAuth = $('vkAuth');
     if (!eVkAuth) return;
     if (this.vkInitialized) return;
-    if (!Ngn.vkApiId) throw new  Error('VK API ID does not defined in config');
+    if (!Ngn.vkApiId) throw new Error('VK API ID does not defined in config');
     var eVkApiTransport = new Element('div', {id: 'vk_api_transport'}).inject(eVkAuth);
     var vkResultReceived = false;
     window.vkAsyncInit = function() {
@@ -33,12 +33,11 @@ Ngn.Dialog.Auth.Vk = new Class({
       this.vkInitialized = true;
     }.bind(this);
     (function() {
-      var eScript =
-        new Element('script', {
-          type: 'text/javascript',
-          src: 'http://vkontakte.ru/js/api/openapi.js',
-          async: true
-        }).inject(eVkApiTransport);
+      var eScript = new Element('script', {
+        type: 'text/javascript',
+        src: 'http://vkontakte.ru/js/api/openapi.js',
+        async: true
+      }).inject(eVkApiTransport);
     }).delay(0);
   },
 
@@ -73,8 +72,7 @@ Ngn.Dialog.Auth = new Class({
 
   options: {
     onAuthComplete: $empty,
-    reloadOnAuth: true,
-    //dialogClass: 'dialog fieldFullWidth',
+    reloadOnAuth: true, //dialogClass: 'dialog fieldFullWidth',
     selectedTab: 0,
     id: 'auth',
     url: '/' + Ngn.sflmFrontend + '/auth/json_auth',
@@ -100,7 +98,7 @@ Ngn.Dialog.Auth = new Class({
       }
     }.bind(this));
     if (Ngn.Dialog.Auth.requestActions.length)
-      for (var i=0; i<Ngn.Dialog.Auth.requestActions.length; i++)
+      for (var i = 0; i < Ngn.Dialog.Auth.requestActions.length; i++)
         Ngn.Dialog.Auth.requestActions[i].bind(this)();
   },
 
@@ -112,9 +110,7 @@ Ngn.Dialog.Auth = new Class({
         title: 'Подождите...',
         hasFaviconTimer: false
       });
-      this.options.completeUrl ?
-        window.location.assign(this.options.completeUrl) :
-        window.location.reload(true);
+      this.options.completeUrl ? window.location.assign(this.options.completeUrl) : window.location.reload(true);
     }
   },
 
