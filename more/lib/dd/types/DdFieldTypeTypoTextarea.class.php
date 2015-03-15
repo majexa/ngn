@@ -6,6 +6,7 @@ class DdFieldTypeTypoTextarea extends DdFieldType {
     return [
       'dbType' => 'TEXT',
       'title'  => 'Многострочное поле',
+      'descr'  => 'С типографированием',
       'order'  => 100
     ];
   }

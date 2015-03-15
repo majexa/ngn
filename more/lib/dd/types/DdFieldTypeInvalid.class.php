@@ -2,6 +2,8 @@
 
 class DdFieldTypeInvalid extends DdFieldType {
 
+  static $notList = true;
+
   protected function _get() {
     return [
       'dbType'   => 'INT',
