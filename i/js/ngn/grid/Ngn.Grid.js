@@ -1,4 +1,6 @@
-
+/**
+ * Компонент для вывода и редактирования табличных данных
+ */
 Ngn.Grid = new Class({
   Extends: Ngn.Items.Table,
 
