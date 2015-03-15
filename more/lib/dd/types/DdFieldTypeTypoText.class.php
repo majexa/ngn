@@ -6,7 +6,7 @@ class DdFieldTypeTypoText extends DdFieldType {
     return [
       'dbType'   => 'VARCHAR',
       'dbLength' => 255,
-      'title'    => 'Одностройчное поле',
+      'title'    => 'Одностройчное поле с типографированием',
       'order'    => 20
     ];
   }

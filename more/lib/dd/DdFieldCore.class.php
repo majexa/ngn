@@ -69,6 +69,7 @@ class DdFieldCore {
     $types = [];
     foreach ($classes as $class) {
       /* @var $class DdFieldType */
+      if (ClassCore::getStaticProperty($class, 'notList', false)) continue;
       if ((new ReflectionClass($class))->isAbstract()) continue;
       $types[ClassCore::classToName('DdFieldType', $class)] = (new $class());
     }
