@@ -362,6 +362,18 @@ class DbCond {
     return $this;
   }
 
+  function filterExists($key, $value = null) {
+    if (!isset($this->filters['filter'])) return false;
+    foreach ($this->filters['filter'] as $f) {
+      if ($value !== null) {
+        if ($f['key'] == $key and $f['value'] === $value) return true;
+      } else {
+        if ($f['key'] == $key) return true;
+      }
+    }
+    return false;
+  }
+
   static function get($table = null) {
     return new self($table);
   }
