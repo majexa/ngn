@@ -3,7 +3,7 @@
 trait DdCrudParamFilterCtrl {
 use DdCrudCtrl, DdParamFilterCtrl;
 
-  protected function paramFilterItems() {
+  protected function _paramFilterItems() {
     return $this->items();
   }
 

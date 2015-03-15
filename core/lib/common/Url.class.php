@@ -46,10 +46,8 @@ class Url {
     // ------------ Content ------------ 
     $content = substr($out, strpos($out, "\n\n") + 2, strlen($out));
     preg_match('/Content-Type:.*charset=(.*)/i', $header, $m);
-    $charset = isset($m[1]) ? $m[1] : 'windows-1251'; // @todo непонятно почему именно windows-1251
-    // нужно как-то узнать всё же кодировку, 
-    // если её в заголовках нет
-    if ($charset != self::$charset) $content = iconv($charset, self::$charset, $content);
+    $charset = isset($m[1]) ? $m[1] : false;
+    if ($charset and $charset != self::$charset) $content = iconv($charset, self::$charset, $content);
     self::$contents[$url] = $content;
   }
 

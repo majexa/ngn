@@ -33,7 +33,7 @@ abstract class DdTagsTagsBase {
     $this->cond = DbCond::get();
     if ($this->group->allowEdit) $this->cond->setOrder('oid');
     if (!$this->group->global) {
-      $this->cond->addF('groupId', $this->group->name);
+      $this->cond->addF('groupName', $this->group->name);
       $this->cond->addF('strName', $strName);
     }
     return $this->cond;

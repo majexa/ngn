@@ -39,4 +39,8 @@ class SflmJsClassPaths extends ArrayAccesseble {
     SflmCache::c()->save($this->r, 'jsClassPaths');
   }
 
+  function fullPath() {
+
+  }
+
 }

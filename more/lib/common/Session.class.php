@@ -76,17 +76,15 @@ class Session {
    * @usage execution rate 1/100
    *        (session.gc_probability/session.gc_divisor)
    */
-  static function gc($max) {
-    return db()->query("DELETE FROM sessions WHERE expires < ?", time());
+  static function gc($lifetime) {
+    return db()->query("DELETE FROM sessions WHERE expires < ?", time()-$lifetime);
   }
 
   static function init() {
+    if (self::$started) return;
+
     ini_set('session.gc_maxlifetime', self::$expires);
     ini_set('session.cookie_lifetime', self::$expires);
-    if (!session_id()) session_start();
-    return;
-    if (self::$started) return;
-    //ini_set('session.cookie_domain', SITE_DOMAIN);
 
     /**
      * Если будем определять INI-переменную 'session.cookie_domain', то для доменов

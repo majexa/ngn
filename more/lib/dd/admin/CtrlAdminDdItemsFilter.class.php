@@ -3,7 +3,7 @@
 class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
   use DdParamFilterCtrl/*, LongJobCtrl*/;
 
-  protected function paramFilterItems() {
+  protected function _paramFilterItems() {
     return $this->items();
   }
 

@@ -19,11 +19,21 @@ trait DdParamFilterCtrl {
     return 1;
   }
 
+  protected $paramFilterItems;
+
+  /**
+   * @return DdItems
+   */
+  protected function paramFilterItems() {
+    if (isset($this->paramFilterItems)) return $this->paramFilterItems;
+    return $this->paramFilterItems = $this->_paramFilterItems();
+  }
+
   /**
    * @abstract
    * @return DdItems
    */
-  abstract protected function paramFilterItems();
+  abstract protected function _paramFilterItems();
 
   /**
    * Инициализирует ф-л трейта
@@ -70,19 +80,17 @@ trait DdParamFilterCtrl {
     elseif ($param1 == 'v') {
       // Четко по значению поля. Пример /asd.asd/v.title.Какой-то заголовок
       //list($fieldName, $value) = explode('.', $v);
-      $param3 = strstr($param2, '.', true);
-      $value = substr(strstr($param2, '.'), 1);
-      $value = $value == 'none' ? '' : $value;
-      $value = urldecode($value);
+      $param3 = $param3 == 'none' ? '' : $param3;
+      $param3 = urldecode($param3);
       if (isset(DdCore::$pathTranslation[$param3])) {
         $f = DdCore::$pathTranslation[$param3];
-        if (($r = $f($value))) {
-          list($newK, $newV) = $f($value);
+        if (($r = $f($param3))) {
+          list($newK, $newV) = $f($param3);
           $this->addFilterByParam($newK, $newV);
         }
       }
       else {
-        $this->paramFilterItems()->addF($param3, $value);
+        $this->paramFilterItems()->addF($param2, $param3);
       }
     }
     elseif ($param1 == 'ne') {

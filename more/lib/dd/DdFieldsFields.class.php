@@ -73,7 +73,7 @@ class DdFieldsFields extends Fields {
         'help'  => ''
       ]
     ]);
-    if (Config::getVarVar('dd', 'enableFilters')) {
+    if (Config::getVarVar('dd/common', 'enableFilters')) {
       $this->addField([
         'name'    => 'filterable',
         'title'   => 'фильтруемое',

@@ -31,7 +31,7 @@ class DdStructuresManager extends DbItemsManager {
         'type'  => 'textarea',
       ]
     ];
-    if (Config::getVarVar('dd', 'enableFilters')) {
+    if (Config::getVarVar('dd/common', 'enableFilters')) {
       $fields[] = [
         'name'        => 'filterStrName',
         'title'       => 'Структура фильтра',

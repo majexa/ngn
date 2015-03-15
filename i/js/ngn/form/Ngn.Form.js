@@ -1,37 +1,28 @@
 /**
- * @callback elementCallback
- * @param {HTMLElement} element
+ * Класс `Ngn.Form` в паре с серверным PHP классом `Form` образует свзяку для работы с HTML-формами
  *
- * @callback callback
- */
-
-/**
- * @class Класс для инициализации html-форм, созданных php-классом Form или его предками
+ * ###Основные задачи###
+ *
+ *  - Инициализацию динамически сгенерированого на сервере JavaScript'а
+ *  - Валидацию полей
+ *  - Сабмит
+ *  - Интерфейс колонок, свёртываемых блоков, прикрепленных файлов
+ *  - Активацию/дезактивацию полей
+ *  - Инициализацию загрузчика файлов
  */
 Ngn.Form = new Class({
   Implements: [Options, Events, Class.Occlude],
 
   options: {
-    equalElementHeights: false,
-    dialog: false,
-    focusFirst: false,
-    ajaxSubmit: false,
-    disableInit: false
+    equalElementHeights: false, // [boolean] Уравнивать высоты элементов формы
+    dialog: null, // [null|Ngn.Dialog] Диалог, из которого была создана форма
+    focusFirst: false, // [boolean] Делать фокус на первом элементе
+    ajaxSubmit: false, // [boolean] Сабмитить форму ajax-ом
+    disableInit: false // [boolean] Не производить инициализацию в формы в конструкторе
   },
 
   els: {},
 
-  /**
-   * @constructs
-   *
-   * @param {HTMLElement} eForm HTML-элемент формы
-   * @param [options.equalElementHeights=false] Уравнивать высоты элементов формы
-   * @param {boolean|Ngn.Dialog} [options.dialog=false] Диалог, из которого была создана форма
-   * @param [options.focusFirst=false] Делать фокус на первом элементе
-   * @param [options.ajaxSubmit=false] Сабмитить форму ajax-ом
-   * @param [options.disableInit=false] Не производить инициализацию в формы в конструкторе
-   * @param {callback} [options.onComplete] Событие возникает при завершении ajax-запроса при сабмите формы
-   */
   initialize: function(eForm, options) {
     this.eForm = eForm;
     this.eOutsideContainer = new Element('div', { styles: {'display': 'none'}}).inject(this.eForm, 'after');
@@ -42,7 +33,6 @@ Ngn.Form = new Class({
     this.id = this.eForm.get('id');
     this.setOptions(options);
     if (!this.options.disableInit) this.init();
-    // c('form "' + this.id + '" initialized');
   },
 
   init: function() {

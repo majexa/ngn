@@ -9,7 +9,7 @@ class DdTagsTagsTree extends DdTagsTagsBase implements TreeInterface {
       parentId,
       title,
       name,
-      groupId,
+      groupName,
       cnt,
       id       AS ARRAY_KEY,
       parentId AS PARENT_KEY
