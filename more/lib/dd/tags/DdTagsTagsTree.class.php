@@ -55,7 +55,11 @@ class DdTagsTagsTree extends DdTagsTagsBase implements TreeInterface {
   function getParentIds(array $ids) {
     if (!$ids) return [];
     try {
-      foreach ($ids as $id) $this->setParentIds($tree = $this->_getTree(), $id);
+      foreach ($ids as $id) {
+        $tree = $this->_getTree();
+        if (!is_array($tree)) die2($tree);
+        $this->setParentIds($tree, $id);
+      }
     } catch (Exception $e) {
       throw new Exception($e->getMessage().'. $ids: '.getPrr($ids));
     }
