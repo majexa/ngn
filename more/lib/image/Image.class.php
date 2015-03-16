@@ -114,8 +114,7 @@ class Image {
     elseif ($this->data['mime'] == 'image/gif') $this->exp = 'gif';
     elseif ($this->data['mime'] == 'image/bmp') $this->exp = 'bmp';
     elseif ($this->data['mime'] == 'image/png' or $this->data['mime'] == 'image/x-png') $this->exp = 'png';
-    else return false;
-    return true;
+    else throw new Exception('fuck');
   }
 
   /**
@@ -125,18 +124,12 @@ class Image {
    * @throws Exception
    */
   function createImage($imgPath) {
-    $err_rep = error_reporting(0);
-    if ($this->exp == 'jpg') $src = @imageCreateFromJPEG($imgPath);
-    elseif ($this->exp == 'gif') $src = @imageCreateFromGIF($imgPath);
-    elseif ($this->exp == 'png') $src = @imageCreateFromPNG($imgPath);
-    elseif ($this->exp == 'bmp') $src = @imageCreateFromWBMP($imgPath);
-    error_reporting($err_rep);
-    if ($src) {
-      $this->src = $src;
-    }
-    else {
-      throw new Exception('Wrong Image format');
-    }
+    if ($this->exp == 'jpg') $src = imageCreateFromJPEG($imgPath);
+    elseif ($this->exp == 'gif') $src = imageCreateFromGIF($imgPath);
+    elseif ($this->exp == 'png') $src = imageCreateFromPNG($imgPath);
+    elseif ($this->exp == 'bmp') $src = imageCreateFromWBMP($imgPath);
+    else throw new Exception('Wrong Image format');
+    $this->src = $src;
   }
 
   function rotate($srcPath, $destPath, $degrees = 90) {
@@ -191,7 +184,7 @@ class Image {
    * @return  bool
    */
   protected function _resize($imgPath, $w, $h) {
-    if (!$this->createImage($imgPath)) return false;
+    $this->createImage($imgPath);
     $srcW = $this->data['w'];
     $srcH = $this->data['h'];
     // Подготавливаем изображение с обрезанными размерами
@@ -212,7 +205,6 @@ class Image {
       $destY = 0;
       $destX = -round(($destW - $w) / 2);
     }
-
     imageCopyResampled($resultImage, $this->src, $destX, $destY, 0, 0, $destW, $destH, $srcW, $srcH);
     $this->result['type'] = 'resize';
     $this->result['w'] = $destW;
@@ -250,11 +242,11 @@ class Image {
 
   function resizeAndSave($imgPath, $destPath, $w, $h, array $options = []) {
     $this->opt = $options;
-    if (!$this->setData($imgPath)) return false;
+    $this->setData($imgPath);
     if (empty($options['enlargeSmall']) and ($this->data['w'] < $w or $this->data['h'] < $h)) {
       $this->saveInital($destPath);
     }
-    if (!$resultImage = $this->_resize($imgPath, $w, $h)) return false;
+    if (!$resultImage = $this->_resize($imgPath, $w, $h)) throw new Exception('fuck');
     $this->save($resultImage, $destPath);
   }
 

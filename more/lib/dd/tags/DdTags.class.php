@@ -23,7 +23,7 @@ class DdTags {
   }
 
   static function getLink($path, array $tag, $id = false) {
-    return $path.'/t2.'.$tag['groupId'].'.'.$tag['id'];
+    return $path.'/t2.'.$tag['groupName'].'.'.$tag['id'];
   }
 
   static function title2name($title) {
@@ -34,9 +34,9 @@ class DdTags {
   static function rebuildCounts() {
     db()->select('UPDATE tags SET cnt=0');
     foreach ((db()->select('
-    SELECT strName, groupId, tagId AS id, COUNT(*) AS cnt
-    FROM tagItems GROUP BY strName, groupId, tagId')) as $v) {
-      db()->select('UPDATE tags SET cnt=?d WHERE strName=? AND groupId=? AND id=?d', $v['cnt'], $v['strName'], $v['groupId'], $v['id']);
+    SELECT strName, groupName, tagId AS id, COUNT(*) AS cnt
+    FROM tagItems GROUP BY strName, groupName, tagId')) as $v) {
+      db()->select('UPDATE tags SET cnt=?d WHERE strName=? AND groupName=? AND id=?d', $v['cnt'], $v['strName'], $v['groupName'], $v['id']);
     }
   }
 
@@ -53,23 +53,23 @@ class DdTags {
     foreach (db()->select('
     SELECT
       tags.strName,
-      tags.groupId,
+      tags.groupName,
       tags.id,
       tags.parentId
     FROM tags
     LEFT JOIN tagGroups ON
       tagGroups.strName=tags.strName AND
-      tagGroups.name=tags.groupId
+      tagGroups.name=tags.groupName
     WHERE tagGroups.tree=1') as $v) {
-      $ids[$v['strName']][$v['groupId']][] = $v['id'];
-      if ($v['parentId']) $parentIds[$v['strName']][$v['groupId']][] = $v['parentId'];
+      $ids[$v['strName']][$v['groupName']][] = $v['id'];
+      if ($v['parentId']) $parentIds[$v['strName']][$v['groupName']][] = $v['parentId'];
     }
     foreach ($parentIds as $strName => $v1) {
       foreach ($v1 as $groupName => $v2) {
         foreach ($v2 as $parentId) {
           if (!in_array($parentId, $ids[$strName][$groupName])) db()->query('
             UPDATE tags SET parentId=0
-            WHERE parentId=?d AND strName=? AND groupId=?', $parentId, $strName, $groupName);
+            WHERE parentId=?d AND strName=? AND groupName=?', $parentId, $strName, $groupName);
         }
       }
     }

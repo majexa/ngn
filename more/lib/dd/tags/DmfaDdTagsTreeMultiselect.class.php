@@ -46,6 +46,7 @@ class DmfaDdTagsTreeMultiselect extends DmfaDdTagsAbstract {
   }
 
   function afterCreate($tagIds, $k) {
+    if (!$tagIds) return;
     $tagItems = DdTags::items($this->dm->strName, $k);
     $collectionTagIds = (new DdTagsTagsTree(new DdTagsGroup($this->dm->strName, $k)))->getParentIds($tagIds);
     $tagItems->createByIdsCollection($this->dm->id, $collectionTagIds, false);

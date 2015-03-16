@@ -25,11 +25,21 @@ class UserUploadTemp {
       $id = Auth::get('id') ?: session_id();
     }
     if ($id === null) return [];
-    return array_map(function ($v) {
-      return str_replace(UPLOAD_PATH, UPLOAD_DIR, $v);
-    }, array_filter(glob(UPLOAD_PATH.'/temp/'.$id.'/*'), function ($v) {
-      return !Misc::hasPrefix('sm_', basename($v));
-    }));
+    $r = [];
+    $image = new Image;
+    foreach (glob(UPLOAD_PATH.'/temp/'.$id.'/*') as $file) {
+      if (Misc::hasPrefix('sm_', basename($file))) continue;
+      $v = str_replace(UPLOAD_PATH, UPLOAD_DIR, $file);
+      $image->resizeAndSave($file, Misc::getFilePrefexedPath($file, 'sm_'), 100, 100);
+      $r[] = $v;
+    }
+    return $r;
+    //die2($r);
+//    return array_map(function ($v) {
+//      return
+//    }, array_filter(, function ($v) {
+//      return !Misc::hasPrefix('sm_', basename($v));
+//    }));
   }
 
   static function moveSessionToAuth($userId) {
