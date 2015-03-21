@@ -23,7 +23,7 @@ class Misc {
   }
 
   static function randNum($len = 5) {
-    return self::_randString('0123456789', $len);
+    return self::_randString('123456789', $len);
   }
 
   static protected function _randString($chars, $len = 20) {
@@ -374,12 +374,14 @@ class Misc {
     return $c;
   }
 
-  static function iconvR($in, $out, $d) {
+  static function iconvR($in, $out, $d, $strict = true) {
     if (is_array($d)) {
-      foreach ($d as $k => $v) $d[$k] = self::iconvR($in, $out, $v);
+      foreach ($d as $k => $v) $d[$k] = self::iconvR($in, $out, $v, $strict);
       return $d;
     }
-    else return iconv($in, $out, $d);
+    else {
+      return $strict ? iconv($in, $out, $d) : @iconv($in, $out, $d);
+    }
   }
 
   static function plural($t) {

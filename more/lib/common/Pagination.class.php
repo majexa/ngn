@@ -4,6 +4,7 @@ class Pagination extends Options2 {
 
   public $options = [
     'n'                    => 10,
+    'db'                   => null,
     'sep'                  => ' ',
     'maxPages'             => 9,
     'dddd'                 => '`<a href="`.$link.`"><span>`.$title.`</span></a>`',
@@ -21,17 +22,23 @@ class Pagination extends Options2 {
    */
   protected $req;
 
+  /**
+   * @var Db
+   */
+  protected $db;
+
   protected function init() {
-    $this->req = $this->options['req'] ? : O::get('Req');
+    $this->req = $this->options['req'] ?: O::get('Req');
+    $this->db = $this->options['db'] ?: db();
   }
 
   function get($table, $cond = '', $selectCond = '') {
     $cond = is_object($cond) ? $cond->all() : $cond;
     if ($cond or $this->options['forceShowTableStatus']) {
-      $cnt = db()->selectCell("SELECT COUNT(*) AS count$selectCond FROM $table".$cond);
+      $cnt = $this->db->selectCell("SELECT COUNT(*) AS count$selectCond FROM $table".$cond);
     }
     else {
-      $r = db()->selectRow("SHOW TABLE STATUS LIKE '$table'");
+      $r = $this->db->selectRow("SHOW TABLE STATUS LIKE '$table'");
       $cnt = $r['Rows'];
     }
     $res = $this->data($cnt);
@@ -69,8 +76,7 @@ class Pagination extends Options2 {
       for ($i = 0; $i < $pagesN; $i++) {
         $pageNumber = $i + 1;
         $descN--;
-        if ($i <= $page - round($this->options['maxPages'] / 2) - 1 or
-          $i >= $page + round($this->options['maxPages'] / 2) - 1
+        if ($i <= $page - round($this->options['maxPages'] / 2) - 1 or $i >= $page + round($this->options['maxPages'] / 2) - 1
         ) continue;
         $qstr2 = $self.'/pg'.$this->options['type'].$pageNumber;
         $d = [
