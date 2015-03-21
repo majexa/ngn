@@ -555,7 +555,7 @@ abstract class DataManagerAbstract extends Options2 {
 
   function makeSmallThumbs($imageRoot) {
     if (!file_exists($imageRoot)) throw new Exception("File '$imageRoot' does not exists");
-    if (!isset($this->image)) $this->image = new Image();
+    if (!isset($this->image)) $this->image = new Image;
     if ($this->smResizeType == 'resample') {
       $this->image->resampleAndSave($imageRoot, Misc::getFilePrefexedPath2($imageRoot, 'sm_'), $this->imageSizes['smW'], $this->imageSizes['smH']);
     }

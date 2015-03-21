@@ -213,41 +213,30 @@ class Image {
   }
 
   function resample($imgPath, $w, $h) {
-    if (!$this->setData($imgPath)) return false;
+    $this->setData($imgPath);
     return $this->_resample($imgPath, $w, $h);
   }
 
-  protected $opt;
-
   function resampleAndSave($imgPath, $destPath, $w, $h, array $options = []) {
-    $this->opt = $options;
-    if (!$this->setData($imgPath)) return false;
+    $this->setData($imgPath);
     if (empty($options['enlargeSmall']) and ($this->data['w'] < $w and $this->data['h'] < $h)) {
       $this->saveInital($destPath);
       return;
     }
-    //die("convert -sample {$w}x{$h} $imgPath $destPath");
-    //system("convert -sample {$w}x{$h} -alpha On $imgPath $destPath");
-    //system("convert $imgPath -resize 50% $destPath");
-    //die();
-    //return;
-    if (!($resultImage = $this->_resample($imgPath, $w, $h))) return false;
-    $this->save($resultImage, $destPath);
+    $this->save($this->_resample($imgPath, $w, $h), $destPath);
   }
 
   function resize($imgPath, $w, $h) {
-    if (!$this->setData($imgPath)) return false;
+    $this->setData($imgPath);
     return $this->_resize($imgPath, $w, $h);
   }
 
   function resizeAndSave($imgPath, $destPath, $w, $h, array $options = []) {
-    $this->opt = $options;
     $this->setData($imgPath);
     if (empty($options['enlargeSmall']) and ($this->data['w'] < $w or $this->data['h'] < $h)) {
       $this->saveInital($destPath);
     }
-    if (!$resultImage = $this->_resize($imgPath, $w, $h)) throw new Exception('fuck');
-    $this->save($resultImage, $destPath);
+    $this->save($this->_resize($imgPath, $w, $h), $destPath);
   }
 
   private function setResultData($path) {
