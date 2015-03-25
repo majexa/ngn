@@ -159,7 +159,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
    *
    * @var integer
    */
-  protected $n = 20;
+  public $n = 20;
 
   /**
    * HTML код со ссылками на страницы
