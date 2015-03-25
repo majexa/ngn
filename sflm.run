@@ -2,7 +2,7 @@
 # ngn
 if [ -z $1 ]
 then
-  echo "Corrent syntax: sflm projectName"
+  php ~/ngn-env/run/run.php "new CliAccessArgsSingleProject('projectName', new SflmCli, 'sflm')"
   exit
 fi
 php ~/ngn-env/run/run.php site $1 "new CliAccessArgsSingleProject('$*', new SflmCli, 'sflm')"
