@@ -10,7 +10,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       $this->json['nextFormUrl'] = '/'.Sflm::frontendName(true).'/userReg/json_form?'.http_build_query($form->getData());
       return null;
     }
-    return $this->jsonFormAction($form);
+    return $form;
   }
 
   static function expireTime() {

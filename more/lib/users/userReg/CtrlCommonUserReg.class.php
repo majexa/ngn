@@ -67,7 +67,7 @@ class CtrlCommonUserReg extends CtrlCammon {
       }
       return null;
     }
-    return $this->jsonFormAction($form);
+    return $form;
   }
 
   /**

@@ -53,7 +53,7 @@ class CtrlCommonAuth extends CtrlCammon {
     $this->json['req'] = $form->req->r;
     $this->json['valid'] = ($form->validate() ? 'true' : $form->lastError);
     if ($form->req['formId']) $this->json['idssss'] = $form->req['formId'].' - '.$form->id();
-    return $this->jsonFormAction($form);
+    return $form;
   }
 
   function action_ajax_top() {

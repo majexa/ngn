@@ -466,7 +466,7 @@ abstract class CtrlBase {
       $this->isAction = true;
       if ($this->isJson) {
         $form = $this->actionJson($action, $actionMethod);
-        if (is_object($form) and $form instanceof Form) return $this->jsonFormAction($form);
+        if (is_object($form) and $form instanceof Form) return $this->jsonFormActionUpdate($form);
       }
       else {
         return $action->$actionMethod();
@@ -694,7 +694,7 @@ abstract class CtrlBase {
 
   protected function jsonFormActionUpdate(Form $form) {
     if ($form->update()) return true;
-    return $form;
+    return $this->jsonFormAction($form);
   }
 
   protected function processForm(Form $form) {

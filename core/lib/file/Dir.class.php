@@ -14,6 +14,11 @@ class Dir {
     return Misc::clearLastSlash($existsPath);
   }
 
+  static function store($file, $c) {
+    self::make(dirname($file));
+    file_put_contents($file, $c);
+  }
+
   static private function makeDir($path) {
     if (!is_writable(dirname($path))) throw new Exception("path '$path' is not writable");
     mkdir($path);
@@ -317,7 +322,7 @@ class Dir {
   }
 
   static function getSize($path, $lifetime = 43200) {
-    $key = str_replace(['/', '.', '-'], '_', str_replace(':', '', $path));
+    $key = str_replace(['/', '.', '-', '\\'], '_', str_replace(':', '', $path));
     if (($r = FileCache::c([
         'lifetime' => $lifetime
       ])->load($key)) === false

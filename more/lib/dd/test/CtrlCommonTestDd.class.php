@@ -12,7 +12,7 @@ class CtrlCommonTestDd extends CtrlCammon {
   }
 
   function action_json_dialogForm() {
-    $this->jsonFormAction(new DdForm(new DdFields('a'), 'a'));
+    return new DdForm(new DdFields('a'), 'a');
   }
 
 }
