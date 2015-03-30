@@ -7,12 +7,11 @@ class Ngn {
   static function addEvent($name, Closure $func) {
     self::$events[$name] = $func;
   }
-  
+
   static function fireEvent($name) {
     LogWriter::str('events', "fire event '$name'");
     $params = array_slice(func_get_args(), 1);
-    if (($func = Config::getVar('event/'.$name, true)) !== false and is_callable($func))
-      return call_user_func_array($func, $params);
+    if (($func = Config::getVar('event/'.$name, true)) !== false and is_callable($func)) return call_user_func_array($func, $params);
     elseif (isset(self::$events[$name])) {
       return call_user_func_array(self::$events[$name], $params);
     }
@@ -28,6 +27,7 @@ class Ngn {
    *                      Для папки проекта "site" в Ngn используется приоритет 5.
    */
   static function addBasePath($path, $priority = 0, $sflmPathPackage = null) {
+    //if (in_array($path, array_column(self::$_basePaths, 0))) return;
     if (file_exists("$path/lib")) Lib::addFolder("$path/lib");
     require_once __DIR__.'/file/Config.class.php';
     Config::addBasePath("$path/config", $priority);
