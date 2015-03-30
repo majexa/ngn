@@ -2,7 +2,7 @@
 
 // SMSC.RU API (smsc.ru) версия 3.3 (17.12.2014)
 
-define("SMSC_LOGIN", "masted");      // логин клиента
+define("SMSC_LOGIN", Config::getVarVar('smsc', 'masted'));      // логин клиента
 define("SMSC_PASSWORD", "08dbc75a4098fa9e3daa50258af12df6");  // пароль или MD5-хеш пароля в нижнем регистре
 define("SMSC_POST", 0);          // использовать метод POST
 define("SMSC_HTTPS", 0);        // использовать HTTPS протокол

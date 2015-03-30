@@ -24,7 +24,7 @@ class Tt {
    * @param bool|integer $forcePriority Если указана, выбирается элемент под этим номером из списка базовых путей ngn
    * @throws Exception
    */
-  function tpl($path, $d = null, $quietly = false, $forcePriority = false) {
+  function tpl($path, $d = null, $quietly = false, $forcePriority = false, $name = null) {
     if (($tplPath = $this->exists($path, $forcePriority)) !== false) {
       $clearTplPath = preg_replace('/^(.*).php$/U', '$1', $tplPath);
       $body1 = "Begin Template \"$clearTplPath\"";
@@ -55,7 +55,7 @@ class Tt {
       if (getConstant('TEMPLATE_DEBUG')) print "\n".$closeCommentBegin.$body2.$closeCommentEnd."\n";
     }
     elseif (!$quietly) {
-      throw new NotFoundException("Template '$path' not found.") ;
+      throw new NotFoundException("Template ".($name ? "by name '$name' " : '')."'$path' not found.") ;
     }
   }
 

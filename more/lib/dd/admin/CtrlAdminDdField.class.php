@@ -134,7 +134,7 @@ class CtrlAdminDdField extends CtrlAdmin {
   }
 
   function action_json_selectType() {
-    return $this->jsonFormAction(new FormDdFieldType);
+    return new FormDdFieldType;
   }
 
 }

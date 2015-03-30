@@ -16,7 +16,6 @@ module.exports = new Class({
     if (!require('fs').exists(this.projectDir)) throw new Error('folder "' + this.projectDir + '" does not exists');
     this.log('init casper', 3);
     this.initCasper();
-    this.log('init sub-module', 3);
     this.init();
     this.loadConstant('SITE_DOMAIN', function(domain) {
       if (!domain) throw new Error('domain not defined');
@@ -53,7 +52,7 @@ module.exports = new Class({
   loadConstant: function(name, onComplete) {
     require('child_process').execFile('php', [this.projectDir + '/cmd.php', 'print json_encode(Ngn::$basePaths);'], null, function(err, stdout, stderr) {
       this.ngnBasePaths = JSON.decode(stdout);
-      require('utils').dump(this.ngnBasePaths);
+      //require('utils').dump(this.ngnBasePaths);
       this.log('loading constant ' + name, 3);
       require('child_process').execFile('php', [this.projectDir + '/cmd.php', 'const', name], null, function(err, stdout, stderr) {
         this.log('constant ' + name + ' loaded: ' + stdout, 3);

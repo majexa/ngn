@@ -17,8 +17,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     options = options || {};
     options.ok = this.submit.bind(this);
     if (!$defined(options.submitUrl)) {
-      if (!$defined(options.jsonSubmit))
-        options.jsonSubmit = false;
+      if (!$defined(options.jsonSubmit)) options.jsonSubmit = false;
       options.submitUrl = options.url;
     }
     this.parent(options);
@@ -45,6 +44,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     this.setMessage(r.form, false);
     this.form = Ngn.Form.factory(this.message.getElement('form'), {
       ajaxSubmit: true,
+      ajaxSubmitUrl: this.options.submitUrl,
       disableInit: true
     });
     this.form.options.dialog = this; // Важно создавать передавать объект Диалога в объект 
@@ -78,7 +78,8 @@ Ngn.Dialog.RequestFormBase = new Class({
   },
 
   // abstract
-  initEvents: function() {},
+  initEvents: function() {
+  },
 
   resizeByCols: function() {
     var cols = this.form.eForm.getElements('.type_col');

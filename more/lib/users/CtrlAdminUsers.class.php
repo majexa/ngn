@@ -7,13 +7,11 @@ class CtrlAdminUsers extends CtrlAdmin {
   ];
 
   function action_json_new() {
-    $this->json['title'] = 'Создание пользователя';
     return $this->jsonFormActionUpdate(new UsersRegFormAdmin);
   }
 
   function action_json_edit() {
-    $this->json['title'] = 'Редактирование пользователя';
-    return $this->jsonFormActionUpdate(new UsersEditFormAdmin($this->req->rq('id')));
+    return new UsersEditFormAdmin($this->req->rq('id'));
   }
 
   function action_ajax_delete() {
