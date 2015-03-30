@@ -75,7 +75,7 @@ class O {
     return call_user_func_array(['self', 'get'], $args);
   }
 
-  static protected $injections = [];
+  static public $injections = [];
 
   static function registerInjection($classToRewrite, $classRewriter, $args = [], $strict = true) {
     self::$injections[$classToRewrite][] = [
