@@ -103,7 +103,7 @@ class DdTagsTagsTree extends DdTagsTagsBase implements TreeInterface {
   }
 
   function getByTitle($title, $parentId) {
-    return db()->selectRow('SELECT * FROM tags WHERE strName=? AND groupId=? AND title=? AND parentId=?d', $this->group->tagsGetterStrName, $this->group->name, $title, $parentId);
+    return db()->selectRow('SELECT * FROM tags WHERE strName=? AND groupName=? AND title=? AND parentId=?d', $this->group->tagsGetterStrName, $this->group->name, $title, $parentId);
   }
 
   function getNodesTotalCount() {
@@ -211,7 +211,7 @@ class DdTagsTagsTree extends DdTagsTagsBase implements TreeInterface {
     $oldParentTagIds = $this->getParentIds2($id, false);
     ClientTree::move($this, $this->group->table, $id, $toId, $where, [
       'strName'   => $this->group->strName,
-      'groupId' => $this->group->name
+      'groupName' => $this->group->name
     ]);
     $newParentTagIds = $this->getParentIds2($id, false);
     $tagIdsToDelete = array_diff($oldParentTagIds, $newParentTagIds);

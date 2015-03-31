@@ -4,7 +4,7 @@ q("CREATE TABLE IF NOT EXISTS `tagMetro` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) NOT NULL,
   `oid` int(11) NOT NULL,
-  `groupId` varchar(50) NOT NULL,
+  `groupName` varchar(50) NOT NULL,
   `strName` varchar(50) NOT NULL,
   `title` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
