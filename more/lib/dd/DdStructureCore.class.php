@@ -32,4 +32,7 @@ class DdStructureCore {
     foreach ($fields as $field) $fieldsManager->create($field);
   }
 
+  static function copy($name, $newName) {
+  }
+
 }

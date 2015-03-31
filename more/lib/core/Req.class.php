@@ -76,7 +76,7 @@ class Req extends ArrayAccesseble {
       $path = '/';
     } else {
       $uriData = parse_url($this->options['uri']);
-      if (empty($uriData['path'])) throw new Exception(var_export($uriData, true));
+      if (empty($uriData['path'])) $uriData['path'] = '/';//die2($this->options['uri']);
       $path = $uriData['path'];
     }
     if ($path[0] == '/') $path = substr($path, 1, strlen($path)); // Убираем первый слэш
