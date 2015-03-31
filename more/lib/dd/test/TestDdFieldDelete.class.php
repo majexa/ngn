@@ -10,7 +10,7 @@ class TestDdFieldDelete extends TestDd {
     ]);
     DdCore::imDefault('a')->create(['bbb' => 'asdasd']);
     $fm->delete($fieldId);
-    $r = db()->query("SELECT * FROM tags WHERE strName='a' AND groupId='bbb'");
+    $r = db()->query("SELECT * FROM tags WHERE strName='a' AND groupName='bbb'");
     $this->assertTrue(empty($r), 'delete tag field error');
   }
 

@@ -28,7 +28,7 @@ $('body').addClass('twopanels');
 window.addEvent('domready', function() {
   te = new Ngn.TreeEdit.Tags(
     'treeContainer',
-    '<?= $d['groupId'] ?>',
+    '<?= $d['groupName'] ?>',
     { buttons: 'treeMenu' }
   ).init();
   setHeight();

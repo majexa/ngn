@@ -10,7 +10,7 @@ q('CREATE TABLE IF NOT EXISTS `new_tags` (
   `id` int(11) NOT NULL auto_increment,
   `parentId` int(11) NOT NULL,
   `oid` int(11) NOT NULL,
-  `groupId` varchar(50) character set utf8 NOT NULL,
+  `groupName` varchar(50) character set utf8 NOT NULL,
   `strName` varchar(50) character set utf8 NOT NULL,
   `title` varchar(255) character set utf8 NOT NULL,
   `cnt` int(11) NOT NULL,
@@ -60,7 +60,7 @@ foreach (q('SELECT * FROM new_tags GROUP BY groupId') as $v) {
 db()->delete(['new_tags_items']);
 
 q('CREATE TABLE IF NOT EXISTS `new_tags_items` (
-  `groupId` varchar(50) character set utf8 NOT NULL,
+  `groupName` varchar(50) character set utf8 NOT NULL,
   `strName` varchar(50) character set utf8 NOT NULL,
   `tagId` int(11) NOT NULL,
   `itemId` int(11) NOT NULL
