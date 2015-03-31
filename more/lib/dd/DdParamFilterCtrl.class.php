@@ -119,7 +119,8 @@ trait DdParamFilterCtrl {
   public $year = null, $month = null, $day = null, $dateFieldName = null;
   protected $dateParam, $datePeriod, $dateType;
 
-  protected function setFilterDate($dateParam, $fieldName = null) {
+  protected function setFilterDate($dateParam, $fieldName = null, $ifNotDefined = false) {
+    if ($ifNotDefined and isset($this->dateParam)) return false;
     if (!$fieldName) $fieldName = $this->paramFilterDateField();
     $this->dateFieldName = $fieldName;
     $this->dateParam = $dateParam;
@@ -178,6 +179,7 @@ trait DdParamFilterCtrl {
     elseif ($this->dateType == self::$DATE_Y) {
       $this->paramFilterItems()->addF($fieldName, $this->year, 'YEAR');
     }
+    return true;
   }
 
   protected function paramFilterBirthDateField() {
