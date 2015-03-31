@@ -14,7 +14,7 @@ abstract class DdTagsTagsBase {
   function create(array $data) {
     Arr::checkEmpty($data, 'title');
     $data['strName'] = $this->group->strName;
-    $data['groupId'] = $this->group->name;
+    $data['groupName'] = $this->group->name;
     return DbModelCore::create($this->group->table, $data);
   }
 
