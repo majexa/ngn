@@ -23,6 +23,15 @@ class DdStructureCore {
     ]];
   }
 
+  /**
+   * @api
+   * Создаёт структуру
+   *
+   * @param string $name Имя структуры
+   * @param array $fields Массив полей структуры
+   * @throws EmptyException
+   * @throws Exception
+   */
   static function create($name, array $fields) {
     (new DdStructuresManager)->create([
       'title' => $name,
@@ -32,7 +41,20 @@ class DdStructureCore {
     foreach ($fields as $field) $fieldsManager->create($field);
   }
 
-  static function copy($name, $newName) {
+  /**
+   * @api
+   * Переименовывает структуру
+   *
+   * @param string $name Текущее имя
+   * @param string $newName Новое имя
+   * @throws EmptyException
+   * @throws Exception
+   */
+  static function rename($name, $newName) {
+    $manager = new DdStructuresManager;
+    $manager->update($manager->items->getItemByField('name', $name)['id'], [
+      'name' => $newName
+    ]);
   }
 
 }

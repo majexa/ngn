@@ -17,15 +17,28 @@ module.exports = new Class({
     this.log('init casper', 3);
     this.initCasper();
     this.init();
-    this.loadConstant('SITE_DOMAIN', function(domain) {
-      if (!domain) throw new Error('domain not defined');
-      this.baseUrl = 'http://' + domain;
-      this.casper.start();
-      this.beforeRun();
-      this.run();
-      this.casper.run();
-    }.bind(this));
+    if (this.casper.cli.options.baseUrl) {
+      this.baseUrl = 'http://' + this.casper.cli.options.baseUrl;
+      this.startActions();
+    } else {
+      this.loadConstant('SITE_DOMAIN', function(domain) {
+        if (!domain) throw new Error('domain not defined');
+        this.baseUrl = 'http://' + domain;
+        this.startActions();
+      }.bind(this));
+    }
   },
+
+  startActions: function() {
+    this.casper.start(this.baseUrl, function(page) {
+      if (page.status != 200) {
+        throw new Error('Base URL "' + this.baseUrl + '" not works. Status: ' + page.status);
+      }
+    }.bind(this));
+    this.beforeRun();
+    this.run();
+    this.casper.run();
+  }
 
   init: function() {},
 

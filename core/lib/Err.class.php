@@ -124,14 +124,16 @@ class Err {
       return;
     }
     if ($errno === E_NOTICE) {
-      if (self::$showNotices) {
+      if (self::$throwNotices) {
         self::output($errno, $errstr, $errfile, $errline);
         self::_log($errstr, debug_backtrace());
+        exit(1);
       }
     }
     else {
       self::output($errno, $errstr, $errfile, $errline);
       self::_log($errstr, debug_backtrace());
+      exit(1);
     }
   }
 
@@ -144,8 +146,8 @@ class Err {
     self::error(var_dump($info, true));
   }
 
-  static $showNoticesLast;
-  static $showNotices = false;
+  static $throwNoticesLast;
+  static $throwNotices = false;
 
   /**
    * Переключает режим отображения нотисов
@@ -153,12 +155,12 @@ class Err {
    * @param bool $flag Включить/выключить
    */
   static function noticeSwitch($flag) {
-    self::$showNoticesLast = self::$showNotices;
-    self::$showNotices = $flag;
+    self::$throwNoticesLast = self::$throwNotices;
+    self::$throwNotices = $flag;
   }
 
   static function noticeSwitchBefore() {
-    self::$showNotices = self::$showNoticesLast;
+    self::$throwNotices = self::$throwNoticesLast;
   }
 
   static function getErrorText(Exception $e) {

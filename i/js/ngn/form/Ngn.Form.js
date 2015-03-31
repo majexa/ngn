@@ -211,7 +211,7 @@ Ngn.Form = new Class({
       if (eInput.get('data-file')) eInputValidator.set('value', 1);
       var name = eInput.get('name');
       var uploadOptions = {
-        url: this.uploadOptions.url.replace('{fn}', name),
+        url: this.uploadOptions.url.replace('{fn}', name.replace(']', '').replace('[', '')),
         loadedFiles: this.uploadOptions.loadedFiles,
         fileEvents: {
           change: function() {
