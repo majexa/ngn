@@ -311,7 +311,7 @@ SQL
     LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
       tagItems.strName=? AND
-      tagItems.groupId=? AND
+      tagItems.groupName=? AND
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
@@ -336,7 +336,7 @@ SQL
     LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
     WHERE
       tagItems.strName=? AND
-      tagItems.groupId=? AND
+      tagItems.groupName=? AND
       tagItems.itemId IN (".implode(', ', $itemIds).") AND
       tagItems.active=1
       ";
