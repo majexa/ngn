@@ -195,7 +195,7 @@ class Lib {
   static function addFolder($folder) {
     if (!file_exists($folder)) throw new NoFileException($folder);
     if (self::$listIsFormed) throw new Exception("Can not add folder after classes list already formed. Check calles of undefined classes before this Lib::addFolder call. Backtrace of first call: \n".self::$firstCallBacktrace);
-    self::$libFolders[] = $folder;
+    if (!in_array($folder, self::$libFolders)) self::$libFolders[] = $folder;
   }
 
   static $listIsFormed = false;

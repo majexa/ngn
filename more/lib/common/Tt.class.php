@@ -55,7 +55,7 @@ class Tt {
       if (getConstant('TEMPLATE_DEBUG')) print "\n".$closeCommentBegin.$body2.$closeCommentEnd."\n";
     }
     elseif (!$quietly) {
-      throw new NotFoundException("Template ".($name ? "by name '$name' " : '')."'$path' not found.") ;
+      throw new NotFoundException("Template ".($name ? "by name '$name' & path '$path'" : "by path '$path'")." not found.") ;
     }
   }
 
