@@ -260,10 +260,17 @@ class Lib {
     if (!(self::$list = $cache->load('classesList'))) {
       self::initClassesList();
       $cache->save(self::$list, 'classesList');
+      $cache->save(getBacktrace(false), 'classesListSaveBacktrace');
+      $cache->save(self::$libFolders, 'classesListLibFolders');
     }
     self::$listIsFormed = true;
     self::$firstCallBacktrace = getBacktrace(false);
     return self::$list;
+  }
+
+  static function requireIfExists($file) {
+    if (!file_exists($file)) return;
+    require_once $file;
   }
 
 }
