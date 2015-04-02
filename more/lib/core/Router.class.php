@@ -40,7 +40,7 @@ use Options;
     if (($frontend = $this->getFrontendName())) Sflm::setFrontendName($frontend, true);
   }
 
-  final function dispatch() {
+  function dispatch() {
     $this->controller = $this->getController();
     if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
     if (!is_object($this->controller)) throw new Error404('Controller not initialized');

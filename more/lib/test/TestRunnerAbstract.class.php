@@ -42,7 +42,6 @@ class TestRunnerAbstract {
       };
     }
     elseif ($this->filterClasses) {
-      die2($this->filterClasses);
       $filter = function ($class) {
         return in_array($class, $this->filterClasses);
       };

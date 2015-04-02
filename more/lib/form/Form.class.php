@@ -790,7 +790,8 @@ class Form {
    * определены ф-ей setFieldsData()
    */
   protected function setElementsDataDefault() {
-    if ($this->defaultData) return false;
+    //if ($this->defaultData) return false; // было так почему-то
+    if ($this->elementsDefaultDefined) return false; // так нужно для инициализации CtrlAopDefault::action_default()
     $this->setElementsData($this->getDefaultData());
     $this->elementsDefaultDefined = true;
     return true;

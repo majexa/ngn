@@ -142,7 +142,7 @@ abstract class DataManagerAbstract extends Options2 {
     $this->form->create = true;
     $this->setFormElementsData($data);
     if (!$this->form->validate()) {
-      if ($throwFormErrors) throw new Exception(get_class($this).': '.$this->form->lastError.(IS_DEBUG ? '. data: '.getPrr($data) : ''));
+      if ($throwFormErrors) throw new AlreadyExistsException(get_class($this).': '.$this->form->lastError.(IS_DEBUG ? '. data: '.getPrr($data) : ''));
       else return false;
     }
     $r = $this->makeCreate();
