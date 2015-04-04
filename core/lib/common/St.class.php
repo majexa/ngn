@@ -94,18 +94,18 @@ class St {
    *
    * @param array $arr Массив с перечислением
    * @param string $glue Разделитель
-   * @param string $tpl Шаблон
+   * @param string $dddd Шаблон
    * @param null $key Ключ необходим в том случае, если элементом массива является массив
    *                  Ключем в этом случае будет являтся ключ того элемента этого подмассива,
    *                  который необходимо использовать для склеивания
    * @return string Склеенная по шаблону строка
    */
-  static function enum($arr, $glue = ', ', $tpl = '$v', $key = null) {
+  static function enum($arr, $glue = ', ', $dddd = '$v', $key = null) {
     if (empty($arr) or !is_array($arr)) return '';
     $results = [];
     foreach ($arr as $k => $v) {
       if ($key) $v = $v[$key];
-      $results[] = St::dddd($tpl, [
+      $results[] = St::dddd($dddd, [
         'k' => $k,
         'v' => $v
       ]);

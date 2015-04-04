@@ -19,9 +19,10 @@ use ObjectProcessorCtrl;
    */
   abstract protected function _items();
 
-  protected function getStrName() {
-    return lcfirst(Misc::removePrefix('Ctrl', get_class($this)));
-  }
+  abstract function getStrName();
+  //function getStrName() {
+  //  return lcfirst(Misc::removePrefix('Ctrl', get_class($this)));
+  //}
 
   /**
    * @return DdItems
@@ -79,7 +80,7 @@ use ObjectProcessorCtrl;
 
   function action_json_edit() {
     $im = $this->getIm();
-    $im->form->action = $this->req->options['uri'];
+    $im->form->action = $this->req->options['uri']; // TODO xss
     if ($im->requestUpdate($this->id())) return true;
     $this->jsonFormAction($im->form);
     return false;
