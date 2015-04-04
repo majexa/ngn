@@ -6,6 +6,7 @@ class CtrlCommonUploadTemp extends CtrlCommon {
 
   function action_json_default() {
     if (empty($this->req->files)) return;
+    LogWriter::v('files', $_FILES);
     (new UploadTemp([
       'formId' => $this->req->reqNotEmpty('formId'),
       'tempId' => $this->req->reqNotEmpty('tempId'),

@@ -35,7 +35,7 @@ class UserRegForm extends UserForm {
     $data = Arr::filterByKeys($data, $this->filterFields);
     $data['active'] = $this->options['active'];
     $id = DbModelCore::create('users', $data);
-    if ($this->options['onCreate']) $this->options['onCreate']($id);
+    if (!empty($this->options['onCreate'])) $this->options['onCreate']($id);
     Ngn::fireEvent('users.new', $id);
   }
 

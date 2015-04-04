@@ -325,6 +325,7 @@ class DdItems extends Items {
   private function extendItemFilePaths(&$item) {
     $types = $this->fields()->getTypes();
     foreach (array_keys($this->fields()->getFileFields()) as $name) {
+      if (is_array($item[$name])) continue;
       if (empty($item[$name]) or !file_exists(UPLOAD_PATH.'/'.$item[$name])) {
         $item[$name] = '';
         $item['sm_'.$name] = '';

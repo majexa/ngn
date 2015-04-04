@@ -158,21 +158,14 @@ trait DdParamFilterCtrl {
         $this->dateType = self::$DATE_Y;
       }
     }
-
     // Устанавливаем параметры для фильтров
     if ($this->dateType == self::$DATE_RANGE) {
       $this->paramFilterItems()->cond->addRangeFilter($fieldName, $this->datePeriod['from']['y'].'-'.$this->datePeriod['from']['m'].'-'.$this->datePeriod['from']['d'], $this->datePeriod['to']['y'].'-'.$this->datePeriod['to']['m'].'-'.$this->datePeriod['to']['d'].' 23:59:59');
     }
     elseif ($this->dateType == self::$DATE_DMY) {
-      // Заголовок типа "Литературные новости (11 августа 2009)"
-      //$m = Config::getVar('ruMonths2');
-      //if (!empty($this->d['pageTitle'])) $this->setPageTitle($this->d['pageTitle'].' ('.$this->day.' '.mb_strtolower($m[(int)$this->month], CHARSET).' '.$this->year.')');
       $this->paramFilterItems()->cond->addRangeFilter($fieldName, sprintf('%04d-%02d-%02d', $this->year, $this->month, $this->day), sprintf('%04d-%02d-%02d', $this->year, $this->month, $this->day + 1), null, DbCond::strictTo);
     }
     elseif ($this->dateType == self::$DATE_MY) {
-      // Заголовок типа "Новости (Август 2009)"
-      //$m = Config::getVar('ruMonths');
-      //if (!empty($this->d['pageTitle'])) $this->setPageTitle($this->d['pageTitle'].' ('.$m[(int)$this->month].' '.$this->year.')');
       $this->paramFilterItems()->addF($fieldName, $this->month, 'MONTH');
       $this->paramFilterItems()->addF($fieldName, $this->year, 'YEAR');
     }

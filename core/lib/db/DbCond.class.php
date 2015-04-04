@@ -119,6 +119,7 @@ class DbCond {
   }
 
   protected function _addFilter($type, array $filter) {
+    $this->filterKeys[] = $filter['key'];
     if (empty($filter['mode'])) $filter['mode'] = $this->filterMode;
     if (is_bool($filter['value'])) $filter['value'] = (int)$filter['value'];
     if (is_array($filter['value'])) {
@@ -173,6 +174,7 @@ class DbCond {
    * @return $this
    */
   function addRangeFilter($key, $from, $to = false, array $params = null, $strict = false) {
+    $this->filterKeys[] = $key;
     $tablePrefix = $this->tablePrefix;
     $func = null;
     if ($params !== null) {
@@ -190,6 +192,8 @@ class DbCond {
         (($strict == self::strictBoth or $strict == self::strictTo) ? ' < ' : ' <= ').$to) : '');
     return $this;
   }
+
+  public $filterKeys = [];
 
   function addTodayFilter($key) {
     $this->addRangeFilter($key, date('Y-m-d').' 00:00:00', date('Y-m-d').' 23:59:59');
