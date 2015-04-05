@@ -487,13 +487,8 @@ abstract class CtrlBase {
     // сохраняем последнюю (если она есть) в json-массив
     R::set('showErrors', false); // --- Отключаем показ ошибок
     try {
-      $r = $oAction->$actionMethod(); // --- Выполняем экшн
-    } catch (Exception $e) { // --- Лобим исключение, записываем его в json
-      // Формирование массива error для исключений необходимо делать здесь, потому что
-      // exceptionHandler срабатывает только, если исключение не поймано.
-      // В конструкторе Exception нельзя делать создание этого массива, т.к.
-      // эксепшены могут быть созданы вендорными классами, которые не унеаследованы от
-      // Exception
+      $r = $oAction->$actionMethod();
+    } catch (Exception $e) {
       if (getConstant('IS_DEBUG')) {
         $this->json['error'] = [
           'message' => $e->getMessage(),
