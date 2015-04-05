@@ -65,8 +65,7 @@ function getPr($v, $html = true) {
 }
 
 function output($str, $output = false, $forcePlain = true) {
-  if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").("LOG: <$str>").((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
-  //print CliColors::colored(getBacktrace(false), 'brown');
+  if (LOG_OUTPUT === true or $output) print ((R::get('plainText') or $forcePlain) ? "" : "<p>").$str.((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
   LogWriter::str('output', $str);
 }
 
@@ -82,7 +81,7 @@ function outputColor($str, $color, $output = false, $forcePlain = true) {
   if (LOG_OUTPUT === true or $output) {
     print
       ((R::get('plainText') or $forcePlain) ? "" : "<p>"). //
-      ("LOG: <".CliColors::colored($str, $color).">"). //
+      CliColors::colored($str, $color). //
       ((R::get('plainText') or $forcePlain) ? "\n" : "</p>");
   }
   LogWriter::str('output', $str);
