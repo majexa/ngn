@@ -36,6 +36,11 @@ class DbModelCore {
   /**
    * @api
    * Создаёт запись с данными `$data` в таблице `$table` и возвращает ID записи. Если `$filterByFields=true`, данные фильтруются по именам полей
+   *
+   * @param $table
+   * @param array $data
+   * @param bool $filterByFields
+   * @return integer
    */
   static function create($table, array $data, $filterByFields = false) {
     $class = self::getClass($table);
@@ -65,6 +70,15 @@ class DbModelCore {
    */
   static function createAndGet($table, array $data, $filterByFields = false) {
     return self::get($table, self::create($table, $data, $filterByFields));
+  }
+
+  /**
+   * @api
+   * Создаёт модель, если она не существует и возвращает её
+   */
+  static function createOrGet($table, $param, array $data, $filterByFields = false) {
+    if (($r = self::get($table, $data[$param], $param))) return $r;
+    return self::createAndGet($table, $data);
   }
 
   /**
