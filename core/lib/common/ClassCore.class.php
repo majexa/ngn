@@ -191,7 +191,7 @@ class ClassCore {
 
   /**
    * @param string $str
-   * @param string $_tag
+   * @param string $_tag title/options/param
    * @return bool|string
    * @throws Exception
    */
@@ -211,9 +211,13 @@ class ClassCore {
       return false;
     } elseif ($_tag == 'param') {
       //                            @param    type          name              title
-      if (!preg_match_all("/^ *\\*\\s".$tag." +[a-zA-z|]* *\\$([a-zA-z]+) *([^\n]*)$/sm", $str, $m)) return false;
+      if (!preg_match_all("/^ *\\*\\s".$tag." +([a-zA-z|]+) *\\$([a-zA-z]+) *([^\n]*)$/sm", $str, $m)) return false;
       $r = [];
-      foreach ($m[1] as $n => $v) $r[] = [$v, $m[2][$n]];
+      foreach ($m[1] as $n => $v) $r[] = [
+        'type' => $v,
+        'name' => $m[2][$n],
+        'descr' => trim($m[3][$n])
+      ];
       return $r;
     } else {
       throw new Exception("Tag '$_tag' npt realized'");

@@ -29,12 +29,12 @@ abstract class CliAccessArgs extends CliAccess {
     for ($i = 0; $i < count($params); $i++) {
       /* @var ReflectionParameter $param */
       $param = $params[$i];
-      $variants = (isset($meta[$i][1]) and strstr($meta[$i][1], '|')) ? $meta[$i][1] : false;
+      $variants = (isset($meta[$i]['descr']) and strstr($meta[$i]['descr'], '|')) ? $meta[$i]['descr'] : false;
       $r[] = [
         'name'     => $param->getName(),
         'optional' => $param->isOptional(),
         'variants' => $variants,
-        'descr'    => $meta[$i][1],
+        'descr'    => $meta[$i]['descr'],
       ];
     }
     return $r;

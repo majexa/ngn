@@ -102,7 +102,7 @@ class Ddo {
    * @api
    * Задаёт dd-запись и выключает списочный режим вывода
    *
-   * @param $item
+   * @param array $item фсйцвйцав
    * @return $this
    */
   function setItem($item) {
@@ -169,7 +169,7 @@ class Ddo {
     $methods = DdoMethods::getInstance();
     foreach ($outputMethod[$this->layoutName] as $fieldName => $method) {
       if (empty($this->fields[$fieldName])) {
-        // Если output-метдо существует, но поле не должно выводиться
+        // Если output-метод существует, но поле не должно выводиться
         continue;
       }
       $fieldType = $this->fields[$fieldName]['type'];
