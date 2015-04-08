@@ -332,12 +332,12 @@ abstract class DataManagerAbstract extends Options2 {
     $this->beforeUpdateData = $this->getItemNonFormat($this->id);
     try {
       $this->data = $this->form->getData();
-//      die2($this->data);
       $this->fieldTypeAction('form2sourceFormat', $this->data);
       $this->form2sourceFormat();
       $this->replaceData();
       $this->beforeUpdate();
       $this->elementTypeAction('beforeCreateUpdate');
+      //die2($this->data);
       $this->_update();
     } catch (NgnValidError $e) {
       $this->validError = $e;

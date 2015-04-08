@@ -4,7 +4,7 @@ Ngn.Btn.AddAuthorized = function(eParent, opt) {
     new Ngn.Dialog.RequestForm({
       title: opt.dialogTitle || 'Добавление',
       width: 300,
-      url: './?a=json_new',
+      url: opt.basePath + '/?a=json_new',
       onOkClose: function() {
         window.location.reload();
       }
