@@ -745,7 +745,6 @@ class Form {
       $fields = $this->fields->getFieldsF();
     }
     if ($filter) $fields = Arr::filterByValue($fields, 'name', $filter);
-    //pr(Arr::get($fields, 'name'));
     foreach ($fields as $n => $opt) {
       if (!is_array($opt)) throw new Exception("Field #$n is not array");
       if ($this->fields->isFileType($opt['name'])) {
