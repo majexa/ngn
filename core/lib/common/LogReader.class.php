@@ -24,7 +24,7 @@ class LogReader {
    * @return Generator
    */
   static function _get($file) {
-    $a = function($file) {
+    $a = function ($file) {
       $handle = fopen($file, 'r');
       if ($handle) {
         $c = '';
@@ -39,7 +39,7 @@ class LogReader {
         fclose($handle);
       }
     };
-    $b = function() use ($file, $a) {
+    $b = function () use ($file, $a) {
       foreach ($a($file) as $p) {
         if (!preg_match('/(\d+.\d+.\d+ \d+.\d+.\d+): \((.*)\)\n(.*)\n<body>(.*)<\/body>\n<trace>(.*)<\/trace>/ms', $p, $m)) continue;
         $v = [];
@@ -48,10 +48,11 @@ class LogReader {
         $v['file'] = $file;
         $v['trace'] = $m[5];
         if ($m[3]) {
-          $params = explode(', ', $m[3]);
-          foreach ($params as $param) {
-            $r = explode(': ', $param);
-            $v[$r[0]] = $r[1];
+          if (!preg_match_all('/^([a-z]+): {(.*)},?/i', $m[3], $mm)) {
+            throw new Exception("wrong param string '{$m[3]}'");
+          }
+          foreach ($mm[1] as $k => $paramName) {
+            $v[$paramName] = $mm[2][$k];
           }
         }
         if (preg_match('/<post>(.*)<\/post>/ms', $p, $m)) $v['post'] = $m[1];

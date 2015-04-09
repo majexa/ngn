@@ -33,7 +33,7 @@ class LogWriter {
       if ($params) $s .= ', ';
     }
     $r = [];
-    foreach ($params as $k => $v) $r[] = "$k: $v";
+    foreach ($params as $k => $v) $r[] = $k.': {'.$v.'}';
     $s .= implode(', ', $r);
     // if ($params) $s .= St::enum($params, ', ', '$k.`: `.$v');
     $s .= "\n";
