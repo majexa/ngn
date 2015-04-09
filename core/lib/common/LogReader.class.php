@@ -48,7 +48,7 @@ class LogReader {
         $v['file'] = $file;
         $v['trace'] = $m[5];
         if ($m[3]) {
-          if (!preg_match_all('/^([a-z]+): {(.*)},?/i', $m[3], $mm)) {
+          if (!preg_match_all('/^([a-z]+): {(.*)},?/iU', $m[3], $mm)) {
             throw new Exception("wrong param string '{$m[3]}'");
           }
           foreach ($mm[1] as $k => $paramName) {
