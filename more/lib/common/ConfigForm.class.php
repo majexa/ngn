@@ -18,7 +18,7 @@ class ConfigForm extends Form {
   protected function _update(array $data) {
     $data = $data[$this->configKey];
     if (isset($this->firstLevelKey)) $data = Arr::assoc($data, $this->firstLevelKey);
-    SiteConfig::updateVar($this->configKey, $data, true);
+    ProjectConfig::updateVar($this->configKey, $data, true);
     Sflm::clearCache();
   }
 

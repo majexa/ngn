@@ -26,4 +26,8 @@ class Mysql {
     sys(self::$mysqlDumpPath.$uph." -f $dbName > $file");
   }
 
+  static function auth($r) {
+    return "-hlocalhost -u{$r['dbUser']} -p{$r['dbPass']}";
+  }
+
 }

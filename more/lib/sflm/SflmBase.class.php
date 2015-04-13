@@ -163,15 +163,21 @@ abstract class SflmBase {
     }
   }
 
+  /**
+   * @api
+   * Возвращает абсолютный путь к sf-ресурсу. sf-ресурсу это CSS/JS файл доступный через HTTP
+   * Т.е. если sflm-фронтенд используется на сайте site.com, то русурс $path должен быть доступен
+   * по ссылке http://site.com/$path
+   *
+   * @param string $path Путь к sf-русурсу
+   * @throws Exception
+   */
   function getAbsPath($path) {
-//    if (isset($this->absPathsCache[$path])) return $this->absPathsCache[$path];
     if ($this->isPackage($path)) throw new Exception("It ($path) can not be package");
     $path = parse_url($path)['path'];
     foreach (Sflm::$absBasePaths as $package => $absBasePath) {
       if (preg_match('/^\/?'.$package.'\//', $path)) {
         $r = "$absBasePath/".Misc::removePrefix("$package/", ltrim($path, '/'));
-//        $this->absPathsCache[$path] = $r;
-//        FileCache::c()->save($this->absPathsCache, 'sflm'.$this->type.'absPaths');
         return $r;
       }
     }
@@ -179,8 +185,6 @@ abstract class SflmBase {
     if (!$prefix) throw new Exception("Prefix is empty. Path: $path");
     if (in_array($prefix, RouterScripts::prefixes())) {
       $r = $this->getScriptAbsPath(Misc::removeSuffix('.php', $path));
-//      $this->absPathsCache[$path] = $r;
-//      FileCache::c()->save($this->absPathsCache, 'sflm'.$this->type.'absPaths');
       return $r;
     }
     throw new Exception("Unexpected prefix '$prefix' in path '$path'. Use Sflm::\$absBasePaths[prefix] = '/path/to/files' to register it.");

@@ -10,9 +10,18 @@ abstract class SflmFrontend {
    */
   public $name;
 
-  public $pathsCache, $id, $debug = false;
+  /**
+   * Пути ко всем ресурсам фроентенда, сохранённые в кэше. Тут собраны как статические пути, так и runtime-пути.
+   *
+   * @var
+   */
+  public $pathsCache;
 
-  public $base, $newPaths = [];
+  public $id, $debug = false;
+
+  public $base;
+
+  public $newPaths = [];
 
   function __construct(SflmBase $base, $name) {
     $this->id = Misc::randString(5);
@@ -65,9 +74,40 @@ abstract class SflmFrontend {
 
   public $extraCode = "\n//***";
 
+  /**
+   * @api
+   * Возвращает код Sflm-фронтенда
+   *
+   * @return string
+   * @throws Exception
+   */
   function code() {
     if ($this->stored) throw new Exception("Can't get code after frontend was stored. Reset or rerun frontend");
     return $this->_code();
+  }
+
+  protected $absPaths = [];
+
+  /**
+   * @api
+   * Добавляет все файлы в каталоге к Sflm-фронтенду
+   *
+   * @param $absFolder
+   */
+  function addFolder($absFolder) {
+    foreach (glob($absFolder.'/*.'.$this->base->type) as $file) {
+      $this->absPaths[] = $file;
+    }
+  }
+
+  /**
+   * @api
+   * Добавляет файл к Sflm-фронтенду
+   *
+   * @param $file
+   */
+  function addFile($file) {
+    $this->absPaths[] = $file;
   }
 
   function _code() {
@@ -75,11 +115,18 @@ abstract class SflmFrontend {
 //    if (($r = Mem::get($k)) !== false) {
 //      return $r;
 //    }
-    $r = $this->base->extractCode($this->getPaths());
+    $code = $this->base->extractCode($this->getPaths());
+    foreach ($this->absPaths as $file) $code .= "\n/*--|$file|--*/\n".file_get_contents($file);
 //    Mem::set($k, $r);
-    return $r;
+    return $code;
   }
 
+  /**
+   * Возвращает HTML-тег ссылающийся на скомпилированый файл с указанием версии для clientSide-кэширования
+   *
+   * @return string
+   * @throws Exception
+   */
   function getTags() {
     $this->checkStored();
     $html = $this->base->getTags($this->name, $this->_code());
@@ -102,6 +149,7 @@ abstract class SflmFrontend {
   protected $stored = false;
 
   /**
+   * @api
    * Сохраняет все новые пути фронтенда в кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего
    *
    * @param string $source
@@ -118,6 +166,7 @@ abstract class SflmFrontend {
     }
     $this->log("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
+    $this->storeAbsPaths();
     if ($this->base->storeLib($this->name, $this->code())) {
       $this->incrementVersion();
       $this->stored = true;
@@ -130,6 +179,10 @@ abstract class SflmFrontend {
     SflmCache::c()->save($this->getPaths(), $this->pathsCacheKey());
   }
 
+  function storeAbsPaths() {
+    SflmCache::c()->save($this->abs, $this->absPathsCacheKey());
+  }
+
   function filePath() {
     return $this->base->filePath($this->name);
   }
@@ -139,6 +192,10 @@ abstract class SflmFrontend {
   }
 
   function pathsCacheKey() {
+    return 'sflmPaths'.$this->cacheSuffix();
+  }
+
+  function absPathsCacheKey() {
     return 'sflmPaths'.$this->cacheSuffix();
   }
 

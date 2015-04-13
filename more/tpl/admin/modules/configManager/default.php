@@ -27,7 +27,7 @@ foreach ($d['sections'] as $name => $title) {
   $links[] = [
     'title' => $title,
     'class' =>
-      (SiteConfig::hasSiteVar($name) ? 'siteConfig' : 'list').
+      (ProjectConfig::hasSiteVar($name) ? 'siteConfig' : 'list').
       ($name == $d['configName'] ? ' sel' : ''),
     'link' => $this->getPath(3).'/'.$name
   ];

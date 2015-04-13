@@ -111,7 +111,8 @@ use Options;
     if ($this->isEmpty() and empty($this->options['value'])) {
       $this->options['value'] = null;
     }
-    if ($this->options['type'] == 'hidden') $this->options['noTypeCss'] = true;
+    //if (!isset($this->options['type'])) throw new Exception('type is not defined in '.get_class($this));
+    if (isset($this->options['type']) and $this->options['type'] == 'hidden') $this->options['noTypeCss'] = true;
     if (empty($this->options['help'])) $this->options['help'] = '';
     $this->baseName = BracketName::getPureName($this->options['name']);
     $this->prepareValue();

@@ -41,8 +41,8 @@ class ConfigManagerForm extends Form {
   protected function isDisabled($fieldName) {
     if ($this->configType == 'vars') return false;
     $curValue = $this->configValues[$fieldName];
-    SiteConfig::replaceConstant($this->configName, $fieldName, 'changed');
-    SiteConfig::replaceConstant($this->configName, $fieldName, $curValue);
+    ProjectConfig::replaceConstant($this->configName, $fieldName, 'changed');
+    ProjectConfig::replaceConstant($this->configName, $fieldName, $curValue);
   }
 
   protected function init() {
@@ -59,7 +59,7 @@ class ConfigManagerForm extends Form {
 
   protected function initStruct() {
     // Приведение типов. Т.е. пустой меняем на 'text'
-    $structs = SiteConfig::getStruct($this->configType);
+    $structs = ProjectConfig::getStruct($this->configType);
     if (!isset($structs[$this->configName])) throw new Exception('Structure "'.$this->configName.'" not exists');
     $struct = $structs[$this->configName];
     $struct['fields'] = isset($struct['type']) ? [$this->configName => $struct] : $this->getStructFields($struct['fields']);
@@ -92,10 +92,10 @@ class ConfigManagerForm extends Form {
     if (isset($this->configStruct['type']) and $data) $data = $data[$this->configName];
     if ($this->noRootKeys) $data = $data[$this->configName];
     if ($this->configType == 'vars') {
-      SiteConfig::updateVar($this->configName, $data);
+      ProjectConfig::updateVar($this->configName, $data);
     }
     else {
-      SiteConfig::replaceConstants($this->configName, $data);
+      ProjectConfig::replaceConstants($this->configName, $data);
     }
     $this->afterUpdate($data);
   }

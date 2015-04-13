@@ -34,11 +34,6 @@ return [
           'File'      => 'Файлы',
           'Memcached' => 'Memcached'
         ]
-      ],
-      'PROJECT_KEY'  => [
-        'title'    => 'Ключ проекта',
-        'disabled' => true,
-        'required' => true
       ]
       /*
       'IS_MEMCACHED' => array(
@@ -53,6 +48,11 @@ return [
     'title'  => 'More',
     'static' => true,
     'fields' => [
+      'PROJECT_KEY'  => [
+        'title'    => 'Ключ проекта',
+        'disabled' => true,
+        'required' => true
+      ],
       'SITE_DOMAIN'              => [
         'title' => 'Домен',
       ],

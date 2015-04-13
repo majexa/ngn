@@ -21,8 +21,8 @@ class CtrlAdminConfigManager extends CtrlAdmin {
     if ($this->configType == 'vars') $this->d['configName'] = $this->configName = isset($this->req->params[3]) ? $this->req->params[3] : $this->defaultVarName;
     else
       $this->d['configName'] = $this->configName = isset($this->req->params[3]) ? $this->req->params[3] : $this->defaultConstantName;
-    $this->d['sections'] = SiteConfig::getTitles($this->configType);
-    $this->d['canUpdate'] = SiteConfig::hasSiteVar($this->configName);
+    $this->d['sections'] = ProjectConfig::getTitles($this->configType);
+    $this->d['canUpdate'] = ProjectConfig::hasSiteVar($this->configName);
   }
 
   function action_default() {
@@ -44,12 +44,12 @@ class CtrlAdminConfigManager extends CtrlAdmin {
     $key = substr($key, 1, strlen($key));
     eval('unset($vars'.$key.');');
     if ($form->getType() == 'array') $vars = array_values($vars);
-    SiteConfig::updateVar($this->configName, $form->formatForUpdate($vars));
+    ProjectConfig::updateVar($this->configName, $form->formatForUpdate($vars));
   }
 
   function action_deleteSiteConfig() {
     if ($this->configType == 'constants') throw new Exception('You can not delete constants sections');
-    SiteConfig::deleteVarSection($this->configName);
+    ProjectConfig::deleteVarSection($this->configName);
     $this->redirect();
   }
 

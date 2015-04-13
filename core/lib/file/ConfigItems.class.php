@@ -23,7 +23,7 @@ class ConfigItems implements UpdatableItems {
     else $data['id'] = 1;
     $items = $this->getItems();
     $items[] = $data;
-    SiteConfig::updateVar($this->name, $items, true);
+    ProjectConfig::updateVar($this->name, $items, true);
     return $data['id'];
   }
 
@@ -36,7 +36,7 @@ class ConfigItems implements UpdatableItems {
       }
     }
     if (!isset($item)) throw new Exception("id '$id' not found");
-    SiteConfig::updateVar($this->name, $items, true);
+    ProjectConfig::updateVar($this->name, $items, true);
   }
 
   function update($id, array $data, $replace = false) {
@@ -48,7 +48,7 @@ class ConfigItems implements UpdatableItems {
       }
     }
     if (!isset($item)) throw new Exception("id '$id' not found");
-    SiteConfig::updateVar($this->name, array_values($items), true);
+    ProjectConfig::updateVar($this->name, array_values($items), true);
   }
 
   protected function mergeItem(&$item, $data) {
@@ -56,7 +56,7 @@ class ConfigItems implements UpdatableItems {
   }
 
   function delete($id) {
-    SiteConfig::updateVar($this->name, array_values(Arr::dropBySubKeys($this->getItems(), 'id', $id)), true);
+    ProjectConfig::updateVar($this->name, array_values(Arr::dropBySubKeys($this->getItems(), 'id', $id)), true);
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class SiteConfig {
+class ProjectConfig {
 
   static $varsFolder;
 
@@ -158,4 +158,4 @@ class SiteConfig {
 
 }
 
-SiteConfig::$varsFolder = PROJECT_PATH.'/config/vars';
+ProjectConfig::$varsFolder = PROJECT_PATH.'/config/vars';

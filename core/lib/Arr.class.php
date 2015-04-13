@@ -456,9 +456,9 @@ class Arr {
     throw new Exception("Array has only empty values: ".getPrr($arr));
   }
 
-  static function checkIsset(array $arr, $keys) {
+  static function checkIsset(array $arr, $keys, $shortError = false) {
     $keys = (array)$keys;
-    foreach ($keys as $k) if (!isset($arr[$k])) throw new Exception("Key '$k' does not exists in array: ".getPrr($arr));
+    foreach ($keys as $k) if (!isset($arr[$k])) throw new Exception("Key '$k' does not exists".($shortError ? ($shortError === true ? '' : ' '.$shortError) : ' in array: '.getPrr($arr)));
   }
 
   static function explodeCommas($s) {
