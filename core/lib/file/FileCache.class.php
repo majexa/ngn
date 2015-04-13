@@ -60,7 +60,6 @@ class FileCache {
    * @param   string  Zend_Cache-тэг
    */
   static function clean() {
-    //self::c()->clean();
     Dir::clear(self::folder());
   }
 

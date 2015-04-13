@@ -7,7 +7,12 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js', 'default');
   }
 
-
+    function testAbsPathExistsAfterRest() {
+        Sflm::frontend('js')->addFile(NGN_PATH.'/i/js/ngn/test/Ngn.Sub.js');
+        Sflm::frontend('js')->store();
+        Sflm::setFrontend('js');
+        print_r(Sflm::frontend('js')->getAbsPathsCache());
+    }
 
   /*
   function testValidClassesParsing() {

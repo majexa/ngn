@@ -15,13 +15,13 @@ abstract class SflmFrontend {
    *
    * @var
    */
-  public $pathsCache;
+  public $pathsCache, $absPathsCache;
 
   public $id, $debug = false;
 
   public $base;
 
-  public $newPaths = [];
+  public $newPaths = [], $newAbsPaths = [];
 
   function __construct(SflmBase $base, $name) {
     $this->id = Misc::randString(5);
@@ -30,7 +30,9 @@ abstract class SflmFrontend {
     Misc::checkEmpty($this->name, 'Frontend name not defined');
     $this->base->version = $this->version();
     $this->pathsCache = $this->getPathsCache() ?: $this->getStaticPaths();
+    $this->absPathsCache = $this->getAbsPathsCache();
     $this->init();
+      //if ($this->base->type == 'js') die2($this->absPathsCache);
   }
 
   protected function getStaticPaths() {
@@ -96,7 +98,7 @@ abstract class SflmFrontend {
    */
   function addFolder($absFolder) {
     foreach (glob($absFolder.'/*.'.$this->base->type) as $file) {
-      $this->absPaths[] = $file;
+      $this->addFile($file);
     }
   }
 
@@ -107,7 +109,18 @@ abstract class SflmFrontend {
    * @param $file
    */
   function addFile($file) {
-    $this->absPaths[] = $file;
+    if (in_array($file, $this->absPathsCache)) return;
+    $this->absPathsCache[] = $file;
+      $this->newAbsPaths[] = $file;
+  }
+
+  /**
+   * Возвращает сохраненные для текущего фронтенда runtime пути
+   *
+   * @return array
+   */
+  function getAbsPathsCache() {
+    return SflmCache::c()->load($this->absPathsCacheKey()) ?: [];
   }
 
   function _code() {
@@ -116,7 +129,7 @@ abstract class SflmFrontend {
 //      return $r;
 //    }
     $code = $this->base->extractCode($this->getPaths());
-    foreach ($this->absPaths as $file) $code .= "\n/*--|$file|--*/\n".file_get_contents($file);
+    foreach ($this->absPathsCache as $file) $code .= "\n/*--|$file|--*/\n".file_get_contents($file);
 //    Mem::set($k, $r);
     return $code;
   }
@@ -159,7 +172,7 @@ abstract class SflmFrontend {
   function store($source = 'direct') {
     $this->checkNotStored();
     $this->storeBacktrace = getBacktrace(false);
-    if (!$this->newPaths) {
+    if (!$this->newPaths and !$this->newAbsPaths) {
       $this->stored = true;
       $this->log("No new paths. Storing skipped");
       return;
@@ -175,12 +188,12 @@ abstract class SflmFrontend {
 
   protected $storeBacktrace;
 
-  function storePaths() {
+  protected function storePaths() {
     SflmCache::c()->save($this->getPaths(), $this->pathsCacheKey());
   }
 
-  function storeAbsPaths() {
-    SflmCache::c()->save($this->abs, $this->absPathsCacheKey());
+  protected function storeAbsPaths() {
+    SflmCache::c()->save($this->absPathsCache, $this->absPathsCacheKey());
   }
 
   function filePath() {
@@ -196,7 +209,7 @@ abstract class SflmFrontend {
   }
 
   function absPathsCacheKey() {
-    return 'sflmPaths'.$this->cacheSuffix();
+    return 'sflmAbsPaths'.$this->cacheSuffix();
   }
 
   /**
