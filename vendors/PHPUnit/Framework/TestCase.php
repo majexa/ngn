@@ -881,6 +881,7 @@ abstract class PHPUnit_Framework_TestCase extends PHPUnit_Framework_Assert imple
 
         // Restore the cwd if it was changed by the test
         if ($currentWorkingDirectory != getcwd()) {
+          die2($currentWorkingDirectory);
             chdir($currentWorkingDirectory);
         }
 

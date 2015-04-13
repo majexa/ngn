@@ -16,7 +16,7 @@ class PiwikStat {
       'urls' => 'http://'.SITE_DOMAIN
     ]);
     Misc::checkEmpty($siteId);
-    SiteConfig::updateSubVar('stat', 'siteId', $siteId);
+    ProjectConfig::updateSubVar('stat', 'siteId', $siteId);
   }
   
   function disable() {}

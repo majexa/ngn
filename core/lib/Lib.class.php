@@ -194,13 +194,13 @@ class Lib {
 
   static function addFolder($folder) {
     if (!file_exists($folder)) throw new NoFileException($folder);
-    if (self::$listIsFormed) throw new Exception("Can not add folder after classes list already formed. Check calles of undefined classes before this Lib::addFolder call. Backtrace of first call: \n".self::$firstCallBacktrace);
+    if (self::$listIsFormed) throw new Exception("Can not add folder after classes list already formed. Check calles of undefined classes before this Lib::addFolder call. Backtrace of first call: \n".preg_replace('/^/m', '  ', self::$initClassesFirstCallBacktrace));
     if (!in_array($folder, self::$libFolders)) self::$libFolders[] = $folder;
   }
 
   static $listIsFormed = false;
 
-  static $firstCallBacktrace;
+  static $initClassesFirstCallBacktrace;
 
   /**
    * Возвращает массив со списком существующих классаов
@@ -217,7 +217,7 @@ class Lib {
     if (isset(self::$libFolders)) foreach (self::$libFolders as $folder) self::loadFolder($folder);
     if (defined('SITE_LIB_PATH') and file_exists(SITE_LIB_PATH)) self::loadFolder(SITE_LIB_PATH);
     self::$listIsFormed = true;
-    self::$firstCallBacktrace = getBacktrace(false);
+    self::$initClassesFirstCallBacktrace = getBacktrace(false);
   }
 
   static protected function loadFolder($path) {
@@ -246,10 +246,13 @@ class Lib {
    * @throws Exception
    */
   static function enableCache($key = null) {
-    if (self::$cacheEnabled) throw new Exception('Lib cache already enabled');
+    if (self::$cacheEnabled) throw new Exception("Lib cache already enabled. Backtrace of enbale call: \n".preg_replace('/^/m', '  ', self::$enableCacheFirstCallBacktrace));
     if ($key) self::$cachePrefix = Misc::shortHash($key);
     self::$cacheEnabled = true;
+    self::$enableCacheFirstCallBacktrace = getBacktrace(false);
   }
+
+  protected static $enableCacheFirstCallBacktrace;
 
   static function getClassesListCached($forClass = null) {
     if (!self::$cacheEnabled) throw new Exception('Please enable cache [Lib::enableCache()] before use class '.($forClass ? '"'.$forClass.'" ' : '').'autoload');
@@ -264,7 +267,7 @@ class Lib {
       $cache->save(self::$libFolders, 'classesListLibFolders');
     }
     self::$listIsFormed = true;
-    self::$firstCallBacktrace = getBacktrace(false);
+    self::$initClassesFirstCallBacktrace = getBacktrace(false);
     return self::$list;
   }
 

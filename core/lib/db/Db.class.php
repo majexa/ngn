@@ -220,7 +220,7 @@ class Db extends DbSimple_Mysql {
   public $importFileSizeLimit = 0;
 
   function importFile($file) {
-    sys("mysql -h{$this->host} -u{$this->user} -p{$this->pass} --default_character_set utf8 {$this->name} < $file");
+    sys("mysql -h{$this->host} -u{$this->user} -p{$this->pass} --default_character_set utf8 {$this->name} < $file",true);
   }
 
   function importFile___OLD($file) {

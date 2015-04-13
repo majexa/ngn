@@ -68,7 +68,6 @@ class ClassCore {
     $classes = [];
     if ($prefix === false) $prefix = str_replace('Abstract', '', $ancestorClass);
     $n = 0;
-    //die2(FileCache::folder());
     foreach (Lib::getClassesListCached() as $class => $v) {
       if ($prefix and !self::hasPrefix($prefix, $class)) continue;
       $reflection = new ReflectionClass($class);

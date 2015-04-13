@@ -9,14 +9,9 @@ define('MORE_PATH', NGN_PATH . '/more');
 // Новый базовый путь в папке more
 Ngn::addBasePath(MORE_PATH, 1);
 
-// Для удачной инициализации NGN необходимо, что бы были определены следующие константы:
-if (!is_dir(NGN_PATH)) die('Dir "'.NGN_PATH.'" not exists'."\n".getBacktrace(false));
-
 if (!defined('PROJECT_PATH')) die('Error: PROJECT_PATH not defined'."\n".getBacktrace(false));
-if (file_exists(PROJECT_PATH.'/config/constants/more.php')) {
-  // опциональное определение констант, что определяются в следующем require
-  require PROJECT_PATH.'/config/constants/more.php';
-}
+
+Lib::requireIfExists(PROJECT_PATH.'/config/constants/more.php');
 
 if (!is_writable(PROJECT_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.PROJECT_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
 
@@ -45,3 +40,5 @@ Sflm::$absBasePaths['m'] = WEBROOT_PATH.'/m';
 
 // @todo why not used standard php method
 Err::noticeSwitch(true);
+
+define('MORE_ENABLED', true);

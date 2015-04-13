@@ -27,17 +27,8 @@ class SflmFrontendCss extends SflmFrontend {
     }
   }
 
-  protected $absFiles = [];
-
-  function addFolder($absFolder) {
-    foreach (glob("$absFolder/*.css") as $file) {
-      $this->absFiles[] = $file;
-    }
-  }
-
   function _code() {
     $code = preg_replace('/@import (.*)/', '', parent::_code());
-    foreach ($this->absFiles as $file) $code .= "\n/*--|$file|--*/\n".file_get_contents($file);
     return $code;
   }
 

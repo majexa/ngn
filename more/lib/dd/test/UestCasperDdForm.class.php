@@ -13,9 +13,9 @@ class UestCasperDdForm extends TestDd {
 
   function test() {
     print `pm localProject cc test`;
-    SiteConfig::updateSubVar('userReg', 'enable', true);
-    SiteConfig::updateSubVar('userReg', 'phoneConfirm', true);
-    SiteConfig::updateSubVar('userReg', 'phoneEnable', true);
+    ProjectConfig::updateSubVar('userReg', 'enable', true);
+    ProjectConfig::updateSubVar('userReg', 'phoneConfirm', true);
+    ProjectConfig::updateSubVar('userReg', 'phoneEnable', true);
     Casper::run(PROJECT_KEY, [
       "default/testDd/dialogForm",
       "default/testUsers/dialogAuth"

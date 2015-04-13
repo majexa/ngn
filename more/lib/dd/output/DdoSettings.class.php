@@ -104,15 +104,15 @@ class DdoSettings {
   }
 
   function updateShow($values) {
-    SiteConfig::updateVar($this->getKey('itemsShow'), $values, true);
+    ProjectConfig::updateVar($this->getKey('itemsShow'), $values, true);
   }
 
   function updateOutputMethod($values) {
-    SiteConfig::updateVar($this->getKey('outputMethod'), $values, true);
+    ProjectConfig::updateVar($this->getKey('outputMethod'), $values, true);
   }
 
   function updateTitled($values) {
-    SiteConfig::updateVar($this->getKey('titled'), $values, true);
+    ProjectConfig::updateVar($this->getKey('titled'), $values, true);
   }
 
   /**
@@ -123,7 +123,7 @@ class DdoSettings {
    * )
    */
   function updateOrderIds($oids, $layoutName) {
-    SiteConfig::updateVar($this->getKey('ddo/fieldOrder', $layoutName), $oids, true);
+    ProjectConfig::updateVar($this->getKey('ddo/fieldOrder', $layoutName), $oids, true);
   }
 
 }

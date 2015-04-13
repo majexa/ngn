@@ -2,11 +2,14 @@
 
 class TestSflmJs extends ProjectTestCase {
 
-/*  protected function setUp() {
+  protected function setUp() {
     Sflm::clearCache();
     Sflm::setFrontend('js', 'default');
   }
 
+
+
+  /*
   function testValidClassesParsing() {
     $r = SflmJsClasses::parseValidClasses("
 Ngn.Aaa
@@ -80,7 +83,7 @@ Ngn.aaa
   }
 
   function testEmptyNewPathsAfterReset() {
-    (new FieldEWisiwigSimpleLinks(['name' => 'dummy']))->typeJs();
+    (new FieldEWisiwigSimpleLinks(['name' => 'dummy']))->typeCssAndJs();
     Sflm::frontend('js')->store();
     Sflm::frontend('js')->getDeltaUrl();
     Sflm::setFrontend('js');
@@ -97,7 +100,7 @@ Ngn.aaa
     set_time_limit(1);
     Sflm::frontend('js')->addClass('Ngn.Preload');
   }
-*/
+
   function testDebugPaths() {
     //$this->_testDebugPaths('i/js/ngn/test/');
     $this->_testDebugPaths('Ngn.Sub');
@@ -120,5 +123,6 @@ Ngn.aaa
 TAGS;
     $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTags(), $tags));
   }
+  */
 
 }

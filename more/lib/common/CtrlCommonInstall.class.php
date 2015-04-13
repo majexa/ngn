@@ -54,8 +54,8 @@ class CtrlCommonInstall extends CtrlCommon {
     	$this->json['error'] = $oDBI->error;
     	return;
     }
-    SiteConfig::replaceConstant('database', 'DB_INSTALLED', true);
-    SiteConfig::updateConstants('database', [
+    ProjectConfig::replaceConstant('database', 'DB_INSTALLED', true);
+    ProjectConfig::updateConstants('database', [
       'DB_NAME' => $this->req->r['name'],
       'DB_USER' => $this->req->r['user'],
       'DB_PASS' => $this->req->r['pass'],
