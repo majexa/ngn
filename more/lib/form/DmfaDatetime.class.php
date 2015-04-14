@@ -4,6 +4,10 @@ class DmfaDatetime extends Dmfa {
 
   function form2sourceFormat($v) {
     if (!$v) return null;
+    if (!is_array($v)) {
+      // timestamp
+      return Date::db($v);
+    }
     return sprintf("%04s-%02s-%02s %02s:%02s:00", $v[2], $v[1], $v[0], $v[3], $v[4]);
   }
   
