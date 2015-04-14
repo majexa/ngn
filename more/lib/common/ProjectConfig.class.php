@@ -64,6 +64,7 @@ class ProjectConfig {
 
   static function updateVar($k, $v, $ignoreExistence = false) {
     if (($vars = Config::getFilePaths($k, 'vars')) !== false) {
+        die2($vars);
       $defaultValue = Config::getFileVar($vars[0]);
     }
     if (is_array($v) and !$ignoreExistence) {
@@ -73,7 +74,7 @@ class ProjectConfig {
       if (serialize($defaultValue) != serialize($v)) $newValue = $v;
     }
     if (isset($newValue)) {
-      unset(Config::$vars[$k]);
+        unset(Config::$vars[$k]);
       Config::updateVar(self::$varsFolder."/$k.php", $newValue);
     } else {
       //SiteConfig::deleteVarSection($k);

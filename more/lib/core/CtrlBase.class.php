@@ -265,7 +265,6 @@ abstract class CtrlBase {
       }
     }
     if (!$this->hasOutput) return '';
-
     header("Content-type: text/html; charset=".CHARSET);
     if (isset($this->output)) return $this->output;
     if (empty($this->d['tpl'])) {

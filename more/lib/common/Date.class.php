@@ -137,9 +137,6 @@ class Date {
           $str = str_replace(mb_strtolower($monthTitle, CHARSET), $n, $str);
         }
         // именительный падеж (типа не встречается)
-        //$monthConfigKey1 = preg_replace('/.*([a-z]{2}-month).*/', '$1s', $inFormat);
-        //foreach (array_flip(Config::getVar($monthConfigKey1)) as $monthTitle => $n)
-        //  $str = str_replace($monthTitle, $n, $str);
         $inFormat = preg_replace('/[a-z]{2}-month/', 'n', $inFormat);
       }
     }
@@ -164,7 +161,6 @@ class Date {
     return date('Y') - $y;
   }
 
-
   const TIME_H = 1;
   const TIME_HM = 2;
 
@@ -172,10 +168,5 @@ class Date {
     if ($format === Date::TIME_HM) return preg_replace('/(\d+:\d+):\d+/', '$1', $time);
     else return preg_replace('/(\d+):\d+:\d+/', '$1', $time);
   }
-
-  static function firstDayTimestamp() {
-
-  }
-  static function lastDayTimestamp() {}
 
 }
