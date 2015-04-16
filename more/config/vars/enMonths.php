@@ -2,7 +2,7 @@
 
 return [
   1 => 'January',
-  2 => 'Faburary',
+  2 => 'February',
   3 => 'March',
   4 => 'April',
   5 => 'May',
@@ -12,5 +12,5 @@ return [
   9 => 'September',
   10 => 'October',
   11 => 'November',
-  12 => 'Desember',
+  12 => 'December',
 ];
