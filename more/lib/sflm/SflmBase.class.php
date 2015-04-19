@@ -130,7 +130,8 @@ abstract class SflmBase {
   function storeLib($package, $code = null) {
     $file = $this->cacheFile($package);
     if (!$code) $code = $this->getPackageCode($package);
-    Misc::checkEmpty($code, "No code in package [$this->type::$package]");
+    if (!$code) return;
+    //Misc::checkEmpty($code, "No code in package [$this->type::$package]");
     if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
     Dir::make(Sflm::$uploadPath.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
