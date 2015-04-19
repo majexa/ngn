@@ -63,14 +63,14 @@ class Dir {
    * @return bool
    * @throws Exception
    */
-  static function remove($dirname, $removeItself = true) {
+  static function remove($dirname, $removeItself = true, $exceptingDotFiles = false) {
     if (!file_exists($dirname)) return false;
     if (is_file($dirname) or is_link($dirname)) {
       return unlink($dirname);
     }
     if (!$dir = dir($dirname)) throw new Exception("Check permissions for $dirname", true);
     while (false !== $entry = $dir->read()) {
-      if ($entry == '.' or $entry == '..') continue;
+      if (($exceptingDotFiles and $entry[0] == '.') or $entry == '.' or $entry == '..') continue;
       self::remove("$dirname/$entry");
     }
     $dir->close();
@@ -79,11 +79,9 @@ class Dir {
 
   /**
    * Удаляет содержимое директории
-   *
-   *
    */
-  static function clear($dirname) {
-    self::remove($dirname, false);
+  static function clear($dirname, $exceptingDotFiles = false) {
+    self::remove($dirname, false, $exceptingDotFiles);
   }
 
   static function getFiles_noCache($dirPath, $quietly = false) {
