@@ -32,7 +32,6 @@ abstract class SflmFrontend {
     $this->pathsCache = $this->getPathsCache() ?: $this->getStaticPaths();
     $this->absPathsCache = $this->getAbsPathsCache();
     $this->init();
-      //if ($this->base->type == 'js') die2($this->absPathsCache);
   }
 
   protected function getStaticPaths() {
@@ -246,7 +245,7 @@ abstract class SflmFrontend {
   function addLib($lib, $strict = false) {
     $this->checkNotStored();
     if (!$strict and !$this->base->exists($lib)) {
-      $this->log("Lib '$lib' does not exists");
+      $this->log("Lib or path '$lib' does not exists");
       return $this;
     }
     $this->log("Adding lib '$lib'");
@@ -270,14 +269,25 @@ abstract class SflmFrontend {
       $this->log("New path '$path' already exists");
       return;
     }
-    if (isset(Sflm::$debugPaths[$this->base->type]) and Arr::strExistsInvert(Sflm::$debugPaths[$this->base->type], $path)) {
-      $this->debugPaths[] = $path;
-      $this->log('Skipping debug path '.$path);
-      return;
-    }
+    if ($this->addDebugPath($path)) return;
     $this->log('Adding path '.$path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
+  }
+
+  /**
+   * Добавляет путь к отладочным-путям sflm-фронтенда, если он является таковым
+   *
+   * @param $path
+   * @return bool
+   */
+  function addDebugPath($path) {
+    if (isset(Sflm::$debugPaths[$this->base->type]) and Arr::strExistsInvert(Sflm::$debugPaths[$this->base->type], $path)) {
+      $this->debugPaths[] = $path;
+      $this->log('Adding debug path '.$path);
+      return true;
+    }
+    return false;
   }
 
   function getDeltaUrl() {

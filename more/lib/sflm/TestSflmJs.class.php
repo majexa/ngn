@@ -7,14 +7,13 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js', 'default');
   }
 
-    function testAbsPathExistsAfterRest() {
-        Sflm::frontend('js')->addFile(NGN_PATH.'/i/js/ngn/test/Ngn.Sub.js');
-        Sflm::frontend('js')->store();
-        Sflm::setFrontend('js');
-        print_r(Sflm::frontend('js')->getAbsPathsCache());
-    }
+  function testAbsPathExistsAfterRest() {
+    Sflm::frontend('js')->addFile(NGN_PATH.'/i/js/ngn/test/Ngn.Sub.js');
+    Sflm::frontend('js')->store();
+    Sflm::setFrontend('js');
+    Arr::strExists(Sflm::frontend('js')->getAbsPathsCache(), '/i/js/ngn/test/Ngn.Sub.js');
+  }
 
-  /*
   function testValidClassesParsing() {
     $r = SflmJsClasses::parseValidClasses("
 Ngn.Aaa
@@ -106,16 +105,16 @@ Ngn.aaa
     Sflm::frontend('js')->addClass('Ngn.Preload');
   }
 
-  function testDebugPaths() {
+  function testDebugPathTagsPresentsInResultHtml() {
     //$this->_testDebugPaths('i/js/ngn/test/');
-    $this->_testDebugPaths('Ngn.Sub');
+    $this->_testDebugPathRendersAsSeparateHtmlTags('Ngn.Sub');
   }
 
-  protected function _testDebugPaths($excepting) {
+  protected function _testDebugPathRendersAsSeparateHtmlTags($debugPath) {
     Sflm::$debugUrl = 'abc';
     Sflm::$debugPaths = [
       'js' => [
-        $excepting
+        $debugPath
       ]
     ];
     Sflm::clearCache();
@@ -128,6 +127,44 @@ Ngn.aaa
 TAGS;
     $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTags(), $tags));
   }
-  */
+
+  function testDebugPathOnAddingClass() {
+    // добавляем часть пути класса в список отладочных путей
+    Sflm::$debugPaths = [
+      'js' => [
+        'test/Ngn.Sub.B.js'
+      ]
+    ];
+    // добавляем класс
+    Sflm::frontend('js')->addClass('Ngn.Sub.B');
+    // получаем теги
+    Sflm::frontend('js')->store();
+    Sflm::frontend('js')->getTags();
+    Sflm::setFrontend('js');
+    // добавляем класс, но он уже в кэше. до добавления пути, где проверяются отладочные пути не доходит
+    Sflm::frontend('js')->addClass('Ngn.Sub.B');
+    Sflm::frontend('js')->store();
+    // тег есть
+    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTags(), 'Ngn.Sub.B'));
+    // класса не должно быть в основном файле
+    $this->assertFalse((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.B'));
+    // зато там должен быть Ngn.Sub.A от которого наследуется Ngn.Sub.B и которого нет в отладочных путях
+    $this->assertTrue((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.A'));
+  }
+
+//  function testDebugPathOnAddingLib() {
+//    Sflm::$debugPaths = [
+//      'js' => [
+//        'test/Ngn.sub.B.js'
+//      ]
+//    ];
+//    // добавляем библиотеку с отладочным путём test/Ngn.sub.B.js
+//    Sflm::setFrontend('js', 'test/dependencies');
+//    //Sflm::frontend('js')->addLib('test/dependencies');
+//    // проверяем есть ли среди тегов отладочный путь
+//    Sflm::frontend('js')->store();
+//    print Sflm::frontend('js')->getTags();
+//
+//  }
 
 }

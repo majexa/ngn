@@ -1,6 +1,7 @@
 <?php
 
-class SflmNotExists extends Exception {}
+class SflmNotExists extends Exception {
+}
 
 class SflmJsClasses {
 
@@ -28,7 +29,7 @@ class SflmJsClasses {
 
   function __construct(SflmFrontendJs $frontend, SflmJsClassPaths $classPaths = null) {
     $this->frontend = $frontend;
-    $this->classPaths = $classPaths ? : new SflmJsClassPaths($this);
+    $this->classPaths = $classPaths ?: new SflmJsClassPaths($this);
     $this->frontendClasses = new SflmJsFrontendClasses($this->frontend);
   }
 
@@ -70,6 +71,7 @@ class SflmJsClasses {
     if (!SflmJsClasses::isValidClass($class)) {
       throw new Exception("Class '$class' is not valid. src: $source");
     }
+    //die2($this->classPaths);
     if (!isset($this->classPaths[$class])) {
       $err = "Class '$class' does not exists. src: $source";
       if (!$strict) {
@@ -80,6 +82,7 @@ class SflmJsClasses {
     }
     if ($this->frontendClasses->exists($class)) {
       Sflm::log("Class '$class' exists. Skipped. src: $source");
+      $this->frontend->addDebugPath($this->classPaths[$class]);
       return false;
     }
     $this->frontendClasses->add($class, $source);
@@ -118,8 +121,7 @@ class SflmJsClasses {
    * @throws Exception
    */
   function processPath($path, $source = null, $name = null) {
-    if (Misc::hasSuffix('', $path))
-    if (in_array($path, $this->frontend->pathsCache)) {
+    if (Misc::hasSuffix('', $path)) if (in_array($path, $this->frontend->pathsCache)) {
       Sflm::log("Path '$path' in cache. Skipped");
       return;
     }
@@ -135,7 +137,7 @@ class SflmJsClasses {
     $thisCodeValidClassesDefinition = SflmJsClasses::parseValidClassesDefinition($code);
     foreach (SflmJsClasses::parseValidPreloadClasses($code) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
-      $this->addClass($class, ($name ? : $path ? : '').' preload');
+      $this->addClass($class, ($name ?: $path ?: '').' preload');
     }
     foreach (SflmJsClasses::parseRequired($code, 'before') as $class) {
       $this->addSomething($class, "$path requiredBefore");

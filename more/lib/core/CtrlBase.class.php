@@ -271,12 +271,12 @@ abstract class CtrlBase {
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
-    try {
+//    try {
       Sflm::frontend('js')->processHtml($html, 'page html post-process');
-    } catch (SflmNotExists $e) {
-      print $e->getMessage()."<br>---<pre>".htmlspecialchars($html)."</pre>";
-      die2();
-    }
+//    } catch (SflmNotExists $e) {
+//      print $e->getMessage()."<br>---<pre>".htmlspecialchars($html)."</pre>";
+//      die2();
+//    }
 
     $this->sflmStore();
     $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
