@@ -1,7 +1,7 @@
 <?php
 
 // ngn init
-define('NGN_ENV_PATH', dirname(dirname(__DIR__)));
+define('NGN_ENV_PATH', str_replace('\\', '/', dirname(dirname(__DIR__))));
 define('NGN_PATH', dirname(__DIR__));
 
 // web init
