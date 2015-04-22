@@ -66,6 +66,7 @@ class QueueWorker extends QueueBase {
     else {
       $class = ucfirst($data['class']);
       if ($data['method'] == '__construct') {
+        Arr::checkEmpty($data, 'data');
         new $class($data['data']);
       }
       else {
