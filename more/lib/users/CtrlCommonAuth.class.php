@@ -1,6 +1,10 @@
 <?php
 
-class CtrlCommonAuth extends CtrlCammon {
+class CtrlCommonAuth extends CtrlDefault {
+
+    protected function getParamActionN() {
+        return 2;
+    }
 
   protected function init() {
     $this->d['mainTpl'] = 'ajax';
