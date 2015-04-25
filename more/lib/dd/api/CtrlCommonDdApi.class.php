@@ -14,7 +14,7 @@ class CtrlCommonDdApi extends CtrlCommon {
     }
 
     function action_json_list() {
-        $this->json = $this->items->getItems();
+        $this->json['items'] = $this->items->getItems();
     }
 
 }
