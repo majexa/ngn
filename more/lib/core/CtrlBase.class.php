@@ -90,13 +90,6 @@ abstract class CtrlBase {
    */
   public $json;
 
-  /**
-   * ID пользователя
-   *
-   * @var integer
-   */
-  public $authUserId;
-
   public $allowRedirect = true;
 
   public $paramActionN;
@@ -165,7 +158,6 @@ abstract class CtrlBase {
   protected function beforeAction() {
     if ($this->error404) return;
     $this->initParams();
-    $this->setAuthUserId();
     $this->paramActionN = $this->getParamActionN();
     $this->addSubControllers();
     $this->initAction();
@@ -311,11 +303,6 @@ abstract class CtrlBase {
    *
    */
   function setActionParams() {
-  }
-
-  protected function setAuthUserId() {
-    $this->authUserId = Auth::get('id');
-    $this->d['authorized'] = $this->authUserId ? true : false;
   }
 
   protected function initParams() {

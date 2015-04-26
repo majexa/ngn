@@ -19,7 +19,7 @@ use ObjectProcessorCtrl;
    */
   abstract protected function _items();
 
-  abstract function getStrName();
+  abstract protected function getStrName();
   //function getStrName() {
   //  return lcfirst(Misc::removePrefix('Ctrl', get_class($this)));
   //}
