@@ -1,6 +1,6 @@
 <?php
 
-class CtrlCp extends CtrlCommon {
+class CtrlCp extends CtrlBase {
 
   protected function initMainTpl() {
     $this->d['mainTpl'] = 'cp/main';

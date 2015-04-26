@@ -16,6 +16,7 @@ class TestRunnerAbstract {
   protected $suite;
 
   function __construct($filterNames = null) {
+
     R::set('plainText', true);
     $this->suite = new PHPUnit_Framework_TestSuite('one');
     if ($filterNames) {
