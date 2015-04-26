@@ -188,7 +188,7 @@ abstract class SflmBase {
       $r = $this->getScriptAbsPath(Misc::removeSuffix('.php', $path));
       return $r;
     }
-    throw new Exception("Unexpected prefix '$prefix' in path '$path'. Use Sflm::\$absBasePaths[prefix] = '/path/to/files' to register it.");
+    throw new Exception("Unexpected prefix '$prefix' in path '$path'. Use Sflm::\$absBasePaths[prefix] = '/path/to/files' to register it in your init.php file.");
   }
 
   /**
