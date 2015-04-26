@@ -24,7 +24,7 @@ function htmlspecialcharsR(&$data) {
  *
  * @param  $var
  */
-function pr($var, $html = true, $trace = true) {
+function pr($var, $html = true, $trace = true, $offset = 0) {
   if (!getConstant('IS_DEBUG')) return;
   if (R::get('plainText')) $html = false;
   if ($html) print '<pre>';
@@ -33,7 +33,7 @@ function pr($var, $html = true, $trace = true) {
   if ($html) print '</pre>';
   if (!$html) print "\n";
   if ($trace) {
-    $backtrace = getBacktrace($html);
+    $backtrace = getBacktrace($html, $offset);
     if (!$html) $backtrace = CliColors::colored($backtrace, 'green');
     print $backtrace;
   }
@@ -140,7 +140,7 @@ function getFullTrace(Exception $e) {
 
 function die2($t = '', $html = true) {
   sendHeader();
-  pr($t, $html);
+  pr($t, $html, 2);
   die();
 }
 
