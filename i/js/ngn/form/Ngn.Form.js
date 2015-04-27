@@ -335,7 +335,6 @@ Ngn.Form = new Class({
   },
 
   _submitAjax: function() {
-    //throw new Error('!');
     new Ngn.Request.JSON({
       url: this.options.ajaxSubmitUrl || this.eForm.get('action'),
       onComplete: function(r) {
