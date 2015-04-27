@@ -21,6 +21,7 @@
 
 <div class="col">
   <? if (Misc::isGod()) { ?>
+    <?/*
     <h3>Размер</h3>
     <?
     $siteFiles = Dir::getSize(WEBROOT_PATH);
@@ -41,7 +42,6 @@
       <li><b>БД:</b> <?= File::format($s2) ?></li>
       <li><b>Вместе:</b> <?= File::format($siteFiles + $s2) ?></li>
     </ul>
-    <?/*
     <h3>Тестирование</h3>
     <? if ($_SESSION['testing']) { ?>
       <a href="<?= Tt()->getPath(1).'/default/switchTestingMode/0' ?>">Выключить</a>

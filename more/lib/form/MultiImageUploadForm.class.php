@@ -2,7 +2,13 @@
 
 class MultiImageUploadForm extends Form {
 
-  function __construct() {
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'baseUrl' => null
+    ]);
+  }
+
+  function __construct(array $options = []) {
     parent::__construct([
       [
         'title'        => 'Фотографии',
@@ -11,12 +17,12 @@ class MultiImageUploadForm extends Form {
         'multiple'     => true,
         'allowedMimes' => ['image/gif', 'image/jpeg', 'image/png', 'image/bmp']
       ]
-    ], [
+    ], array_merge($options, [
       'submitTitle' => 'Загрузить',
-      'idByClass' => true,
+      'idByClass'   => true,
       'jsClassById' => true
-    ]);
-    UploadTemp::extendFormOptions($this, '/json_upload');
+    ]));
+    UploadTemp::extendFormOptions($this, ($this->options['baseUrl'] ?: '').'/json_upload');
   }
 
 }
