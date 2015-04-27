@@ -8,9 +8,13 @@ class DdiCache extends FileCache {
     parent::__construct($options);
   }
 
-  static function folder(array $options) {
-    Dir::make(DATA_PATH.'/ddiCache/'.$options['strName']);
-    return DATA_PATH.'/ddiCache/'.$options['strName'];
+  static function folder() {
+    Dir::make(DATA_PATH.'/ddiCache');
   }
+
+//  static function folder(array $options) {
+//    Dir::make(DATA_PATH.'/ddiCache/'.$options['strName']);
+//    return DATA_PATH.'/ddiCache/'.$options['strName'];
+//  }
 
 }
