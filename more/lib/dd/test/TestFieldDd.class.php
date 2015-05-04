@@ -1,6 +1,6 @@
 <?php
 
-abstract class TestFieldDd extends TestFieldDdBase {
+abstract class TestFieldDd extends TestDd {
 
   /**
    * @var DdItemsManager
