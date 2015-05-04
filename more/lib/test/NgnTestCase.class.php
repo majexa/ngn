@@ -16,8 +16,4 @@ abstract class NgnTestCase extends PHPUnit_Framework_TestCase {
     return true;
   }
 
-  static function setUpBeforeClass() {}
-  
-  static function tearDownAfterClass() {}
-
 }

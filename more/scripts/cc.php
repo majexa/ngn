@@ -1,6 +1,6 @@
 <?php
 
 Sflm::clearCache();
-FileCache::clean();
+FileCache::c()->clean();
 UploadTemp::cleanup();
 print '<div id="result">success</div>';

@@ -5,6 +5,9 @@ abstract class TestFieldDdTagsAbstract extends TestFieldDd {
   protected $v1 = 'one', $v2 = 'two', $v3 = 'three', $itemId;
   static $tagFieldName = 'sample';
 
+  /**
+   * Создаёт теги, необходимые для работы теста
+   */
   function createTags() {
   }
 

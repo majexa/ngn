@@ -64,7 +64,6 @@ class ProjectConfig {
 
   static function updateVar($k, $v, $ignoreExistence = false) {
     if (($vars = Config::getFilePaths($k, 'vars')) !== false) {
-        die2($vars);
       $defaultValue = Config::getFileVar($vars[0]);
     }
     if (is_array($v) and !$ignoreExistence) {

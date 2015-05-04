@@ -21,12 +21,14 @@ class DaemonInstaller {
     ];
   }
 
+  protected $commentFlag = '';
+
   function install() {
     $for = '';
     for ($i = 1; $i <= $this->options['workers']; $i++) $for .= " $i";
     $c = '#! /bin/sh
 
-# ngn auto-generated worker
+# ngn auto-generated worker '.$this->commentFlag.'
 
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON='.$this->options['bin'].'
@@ -93,10 +95,12 @@ done
 
 exit 0';
     file_put_contents("/tmp/$this->name", $c);
-    print Cli::shell("sudo mv /tmp/$this->name /etc/init.d/$this->name");
-    print Cli::shell("sudo chmod +x /etc/init.d/$this->name");
-    print Cli::shell("sudo /etc/init.d/$this->name restart");
+    output2("Installing $this->name");
+    `sudo mv /tmp/$this->name /etc/init.d/$this->name`;
+    `sudo chmod +x /etc/init.d/$this->name`;
+    `sudo /etc/init.d/$this->name restart`;
     (new RcLocal)->add("$this->projectName-$this->daemonName");
+    return true;
   }
 
   protected function getProcessIds() {
@@ -114,7 +118,7 @@ exit 0';
   }
 
   function checkInstallation() {
-    if (!$this->getProcessIds()) throw new Exception('Installation failed: "'.str_replace('-', '/', $this->name).'"');
+    if (!$this->getProcessIds()) throw new Exception('Installation failed for "'.$this->name.'"');
   }
 
 

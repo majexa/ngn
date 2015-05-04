@@ -1,6 +1,5 @@
 <?php
 
-// @todo очищать ddi кеш после добавления поля
 class DdiCache extends FileCache {
 
   function __construct(array $options) {
@@ -8,13 +7,15 @@ class DdiCache extends FileCache {
     parent::__construct($options);
   }
 
-  static function folder() {
-    Dir::make(DATA_PATH.'/ddiCache');
+  static function folder(array $options) {
+    return Dir::make(DATA_PATH.'/ddiCache/'.$options['strName']);
   }
 
-//  static function folder(array $options) {
-//    Dir::make(DATA_PATH.'/ddiCache/'.$options['strName']);
-//    return DATA_PATH.'/ddiCache/'.$options['strName'];
-//  }
+  /**
+   * Удаляет кэш для всех структур
+   */
+  static function cleanAll() {
+    Dir::clear(DATA_PATH.'/ddiCache/', true);
+  }
 
 }

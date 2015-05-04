@@ -9,7 +9,25 @@ abstract class TestFieldDd extends TestFieldDdBase {
 
   static function setUpBeforeClass() {
     parent::setUpBeforeClass();
+    $fieldType = lcfirst( //
+      Misc::removePrefix('TestUiField', //
+        Misc::removePrefix('TestField', //
+          get_called_class())));
+    O::di('DdFieldsManager', static::$strName)->create(static::fieldData($fieldType));
+    O::di('DdFieldsManager', static::$strName)->create([
+      'name'  => 'sample2',
+      'title' => 'sample2',
+      'type'  => 'file'
+    ]);
     self::$im = DdCore::imDefault(static::$strName);
+  }
+
+  static protected function fieldData($fieldType) {
+    return [
+      'name'  => 'sample',
+      'title' => 'sample',
+      'type'  => $fieldType
+    ];
   }
 
   abstract function createData();

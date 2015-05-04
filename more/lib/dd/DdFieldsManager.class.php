@@ -95,11 +95,11 @@ class DdFieldsManager extends DbItemsManager {
   /**
    * Добавляет новое поле в структуру таблицы
    *
-   * @param string  Имя структуры
-   * @param string  Имя поля
-   * @param string  Тип
-   * @param string  Максимальная длина значения
-   * @param string  Кодировка
+   * @param string $name Имя структуры
+   * @param string $type Имя поля
+   * @param string $length Тип
+   * @param string $charsetCond Кодировка
+   * @param string|null $default Значение по-умолчанию
    */
   protected function __dbCreateField($name, $type, $length, $charsetCond, $default = null) {
     $this->__dbFieldAction("ADD $name", $type, $length, $charsetCond, $default);
@@ -120,7 +120,12 @@ class DdFieldsManager extends DbItemsManager {
     }
     $this->createFilter();
     $this->typeAction($this->data['type'], 'updateCreate', $this->data['name']);
+    $this->cleanItemsCache();
     return $groupId;
+  }
+
+  protected function cleanItemsCache() {
+    DdiCache::c(['strName' => $this->strName])->clean();
   }
 
   protected function afterUpdate() {
@@ -142,6 +147,7 @@ class DdFieldsManager extends DbItemsManager {
       $this->typeAction($this->data['type'], 'delete', $this->beforeUpdateData['name']);
       $this->typeAction($this->data['type'], 'updateCreate', $this->data['name']);
     }
+    $this->cleanItemsCache();
   }
 
   protected function typeAction($type, $action, $name) {
@@ -254,6 +260,7 @@ class DdFieldsManager extends DbItemsManager {
     }
     $this->deleteFilter();
     $this->typeAction($this->data['type'], 'delete', $this->data['name']);
+    $this->cleanItemsCache();
   }
 
   protected function renameImages($oldFieldName, $newFieldName) {

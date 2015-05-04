@@ -90,7 +90,8 @@ class ConfigManagerForm extends Form {
 
   protected function _update(array $data) {
     if (isset($this->configStruct['type']) and $data) $data = $data[$this->configName];
-    if ($this->noRootKeys) $data = $data[$this->configName];
+    //die2($data);
+    //if ($this->noRootKeys) $data = $data[$this->configName];
     if ($this->configType == 'vars') {
       ProjectConfig::updateVar($this->configName, $data);
     }

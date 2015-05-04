@@ -14,12 +14,12 @@ class TestFieldDdItemSelect extends TestFieldDdItemSelectAbstract {
   }
 
   function runTests($request = false) {
-    $this->a($this->itemId1, $this->v1);
+    $this->runTagTest($this->itemId1, $this->v1);
     $this->updateItem([static::$tagFieldName => $this->itemId2], $request);
-    $this->a($this->itemId2, $this->v2);
+    $this->runTagTest($this->itemId2, $this->v2);
   }
 
-  function a($tagId, $v) {
+  function runTagTest($tagId, $v) {
     $item = static::$im->items->getItemF($this->itemId);
     $this->assertTrue($item[static::$tagFieldName]['title'] == $v);
     $this->fillForm();

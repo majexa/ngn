@@ -23,6 +23,7 @@ require_once CORE_PATH.'/lib/common/NoFileException.class.php';
 require_once CORE_PATH.'/lib/O.class.php';
 require_once CORE_PATH.'/lib/Ngn.class.php';
 require_once CORE_PATH.'/lib/Misc.class.php'; // Miscellaneous functions
+require_once CORE_PATH.'/lib/cli/CliColors.class.php'; // Для отладки
 
 date_default_timezone_set('Europe/Moscow');
 

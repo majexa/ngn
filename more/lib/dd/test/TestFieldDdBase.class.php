@@ -14,7 +14,6 @@ abstract class TestFieldDdBase extends TestDd {
       'title' => 'sample2',
       'type'  => 'file'
     ]);
-
   }
 
   static protected function fieldData($fieldType) {

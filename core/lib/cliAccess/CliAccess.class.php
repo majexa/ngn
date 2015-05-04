@@ -83,7 +83,7 @@ abstract class CliAccess extends CliAccessAbstract {
       $class = $this->name2class($this->argParams[0]);
       $methods = $this->_getVisibleMethods($class);
       if (count($methods) == 1) {
-        $method = $methods[0]->name;
+        $method = $this->cleanMethodName($methods[0]->name);
         $params = array_slice($this->argParams, 1);
       } else {
         $method = $this->argParams[1];
@@ -91,6 +91,17 @@ abstract class CliAccess extends CliAccessAbstract {
       }
       return new CliAccessArgsArgs($class, $method, $params);
     }
+  }
+
+  /**
+   * Импользуется для очищения реального имени метода от системных префиксов
+   * @see CliAccessOptionsAbstract
+   *
+   * @param $method
+   * @return mixed
+   */
+  protected function cleanMethodName($method) {
+    return $method;
   }
 
   protected function _runner() {

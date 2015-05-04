@@ -32,30 +32,6 @@ class QueueWorker extends QueueBase {
     if ($this->isDebug()) LogWriter::v('processBody', $body);
     $data = json_decode($body, true);
     if ($this->isDebug()) LogWriter::v('processData', $data);
-    /**
-     * Примеры $data:
-     * [
-     *   'class' => 'className',
-     *   'method' => '__construct',
-     *   'data' => ['param1', 'param2', ...]
-     * ]
-     * [
-     *   'class' => 'className',
-     *   'method' => 'methodName',
-     *   'data' => ['param1', 'param2', ...]
-     * ]
-     * [
-     *   'class' => 'object',
-     *   'object' => $object,
-     *   'method' => 'method',
-     * ]
-     * [
-     *   'class' => 'object',
-     *   'object' => $longJobObject,
-     *   'method' => 'cycle',
-     *   'ljId' => 'ljSomeId'
-     * ]
-     */
     if ($data['class'] == 'object') {
       $o = unserialize($data['object']);
       if (isset($data['ljId']) and !is_subclass_of($o, 'LongJobAbstract')) throw new Exception('Object with class "'.get_class($o).'" must be subclass of "LongJobCycle"');
