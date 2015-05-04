@@ -129,6 +129,7 @@ class DdStructuresManager extends DbItemsManager {
   protected function beforeUpdate() {
     $old = $this->beforeUpdateData['name'];
     $new = $this->data['name'];
+    DdiCache::c(['strName' => $old])->clean();
     // Изменяем папку файлов
     if ($old != $new) {
       $this->renameFilesDb($old, $new);

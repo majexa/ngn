@@ -196,9 +196,15 @@ class ClassCore {
    */
   static function getDocComment($str, $_tag = 'title') {
     if ($_tag == 'title') {
-      $str = preg_replace('/^\s*\*\s*\n/m', '', $str); // убираем символы коммента
-      if (!preg_match_all('/^\s*\*\s+(?!@)([^\n]*)$/m', $str, $m)) return false; // если пустой
-      $r = implode(' ', $m[1]);
+      if (!preg_match_all('/^\s*\*(.*)$/m', $str, $m)) return false; // если пустой
+      $m[1] = array_filter($m[1], function($v) {
+        $v = ltrim($v);
+        if (!$v) return true;
+        if ($v[0] == '@') return false;
+        if ($v == '/') return false;
+        return true;
+      });
+      $r = implode("\n", $m[1]);
       $r = Misc::removeSuffix('*/', $r);
       if (($r = trim($r))) return $r;
       return false;

@@ -2,6 +2,40 @@
 
 class Queue extends QueueBase {
 
+
+  /**
+   * @api
+   * <pre>
+   * Примеры:
+   *
+   * {this}([
+   *   'class' => 'ClassName',
+   *   'data' => ['param1', 'param2', ...] // параметры конструктора
+   * ]);
+   *
+   * {this}([
+   *   'class' => 'ClassName',
+   *   'method' => 'methodName',
+   *   'data' => ['param1', 'param2', ...] // параметры метода
+   * ]);
+   *
+   * {this}([
+   *   'class' => 'object',
+   *   'object' => $object, // объект (должен уметь сеарилизоваться)
+   *   'method' => 'method' // его метод
+   * ]);
+   *
+   * {this}([
+   *   'class' => 'object',
+   *   'object' => $longJobObject,
+   *   'method' => 'cycle',
+   *   'ljId' => 'ljSomeId'
+   * ]);
+   * </pre>
+   *
+   * @param array $data
+   * @throws Exception
+   */
   function add(array $data) {
     Arr::checkEmpty($data, ['class']);
     if (!isset($data['method'])) $data['method'] = '__construct';

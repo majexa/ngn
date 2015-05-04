@@ -121,4 +121,8 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     return rtrim($multipleProcessorClass, 's');
   }
 
+  protected function cleanMethodName($method) {
+    return Misc::removePrefix('a_', $method);
+  }
+
 }
