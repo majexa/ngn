@@ -9,7 +9,7 @@ class DdItems extends Items {
 
   public $strData;
 
-  function __construct($strName, array $options = null) {
+  function __construct($strName, array $options = []) {
     $this->strName = $strName;
     parent::__construct(DdCore::table($this->strName), $options);
   }

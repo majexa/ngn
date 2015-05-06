@@ -8,7 +8,7 @@ class Items extends DbItems {
 
   protected $id;
 
-  function __construct($table, array $options = null) {
+  function __construct($table, array $options = []) {
     parent::__construct($table, $options);
     $this->id = R::set('n', (int)R::get('n') + 1);
   }

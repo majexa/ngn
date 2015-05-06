@@ -1,7 +1,7 @@
 <?php
 
 class DbItems implements UpdatableItems, ArrayAccess {
-  use Options
+  use Options;
 
   public $r = [];
 
@@ -40,7 +40,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
     return ['db' => null];
   }
 
-  function __construct($table, array $options = null) {
+  function __construct($table, array $options = []) {
     $this->table = $table;
     $this->setOptions($options);
     $this->db = $this->options['db'] ?: db();
