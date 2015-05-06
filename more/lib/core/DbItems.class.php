@@ -37,7 +37,10 @@ class DbItems implements UpdatableItems, ArrayAccess {
   public $cond;
 
   protected function defineOptions() {
-    return ['db' => null];
+    return [
+      'db' => null,
+      'paginationOptions' => []
+    ];
   }
 
   function __construct($table, array $options = []) {
@@ -202,7 +205,8 @@ class DbItems implements UpdatableItems, ArrayAccess {
 
   protected function _prepareItemsConds() {
     if ($this->isPagination) {
-      list($this->pNums, $offset, $this->itemsTotal, $this->pagesTotal, $this->pNext, $this->pPrev) = (new Pagination(['n' => $this->n]))->get($this->table, $this->cond, $this->filterSelectCond);
+      list($this->pNums, $offset, $this->itemsTotal, $this->pagesTotal, $this->pNext, $this->pPrev) = //
+        (new Pagination($this->options['paginationOptions']))->get($this->table, $this->cond, $this->filterSelectCond);
       $this->cond->setLimit($offset);
     }
   }
