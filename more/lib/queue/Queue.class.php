@@ -2,7 +2,6 @@
 
 class Queue extends QueueBase {
 
-
   /**
    * @api
    * <pre>
