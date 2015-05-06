@@ -42,12 +42,15 @@ class QueueWorker extends QueueBase {
     else {
       $class = ucfirst($data['class']);
       if ($data['method'] == '__construct') {
-        isset($data['data']) ? new $class($data['data']) : new $class;
+        $this->output("creating instance of $class with args: ".implode($data['data']));
+        (new ReflectionClass($class))->newInstanceArgs($data['data']);
       }
       else {
         if (isset($data['data'])) {
-          (new $class)->{$data['method']}($data['data']);
+          $this->output("calling {$data['method']} method of $class with args: ".implode($data['data']));
+          call_user_func_array([new $class, $data['method']], $data['data']);
         } else {
+          $this->output("calling {$data['method']} method of $class");
           (new $class)->{$data['method']}();
         }
       }
@@ -55,7 +58,7 @@ class QueueWorker extends QueueBase {
   }
 
   protected function isDebug() {
-    return false;
+    return true;
   }
 
 }

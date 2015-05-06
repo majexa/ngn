@@ -95,9 +95,10 @@ done
 
 exit 0';
     file_put_contents("/tmp/$this->name", $c);
-    output2("Installing $this->name");
+    output2("Installing {$this->options['workers']} workers of $this->name");
     `sudo mv /tmp/$this->name /etc/init.d/$this->name`;
     `sudo chmod +x /etc/init.d/$this->name`;
+    $this->killProcesses();
     `sudo /etc/init.d/$this->name restart`;
     (new RcLocal)->add("$this->projectName-$this->daemonName");
     return true;
@@ -105,7 +106,7 @@ exit 0';
 
   protected function getProcessIds() {
     $pattern = str_replace('-', '/', $this->name);
-    return str_replace("\n", ' ', `ps aux | grep $pattern | grep -v grep | awk '{print $2}'`);
+    return trim(str_replace("\n", ' ', `ps aux | grep $pattern | grep -v grep | awk '{print $2}'`));
   }
 
   protected function killProcesses() {
@@ -118,8 +119,8 @@ exit 0';
   }
 
   function checkInstallation() {
-    if (!$this->getProcessIds()) throw new Exception('Installation failed for "'.$this->name.'"');
+    if (!($r = $this->getProcessIds())) throw new Exception('Installation failed for "'.$this->name.'"');
+    output("Started processes: $r");
   }
-
 
 }
