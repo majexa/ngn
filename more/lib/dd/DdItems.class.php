@@ -9,9 +9,9 @@ class DdItems extends Items {
 
   public $strData;
 
-  function __construct($strName, Db $db = null) {
+  function __construct($strName, array $options = null) {
     $this->strName = $strName;
-    parent::__construct(DdCore::table($this->strName), $db);
+    parent::__construct(DdCore::table($this->strName), $options);
   }
 
   protected $fields;
