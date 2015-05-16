@@ -27,24 +27,21 @@ class LogWriter {
    * @param bool $force
    */
   static function html($name, $html, array $trace = [], array $params = [], $force = false) {
-    $s = '('.__FILE__.':'.__LINE__.")\n";
+    $r = [
+      'file' => __FILE__.':'.__LINE__,
+    ];
     if (!getConstant('CLI') and isset($_SERVER['REQUEST_URI'])) {
-      $s .= 'url: '.(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$_SERVER['REQUEST_URI'].', referer: '.(!empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '');
-      if ($params) $s .= ', ';
+      $r['url'] = (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '').$_SERVER['REQUEST_URI'];
+      $r['referer'] = !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
     }
-    $r = [];
-    foreach ($params as $k => $v) $r[] = $k.': {'.$v.'}';
-    $s .= implode(', ', $r);
-    // if ($params) $s .= St::enum($params, ', ', '$k.`: `.$v');
-    $s .= "\n";
-    $s .= "<body>".$html."</body>";
-    $html = false;
-    $s .= "\n<trace>".($trace ? _getBacktrace($trace, $html) : getBacktrace($html))."</trace>";
+    if ($params) $r['params'] = $params;
+    $r['body'] = $html;
+    $r['trace'] = $trace ? _getBacktrace($trace, false) : getBacktrace(false);
     if (!empty($_POST)) {
-      $s .= "\n<post>".print_r($_POST, true)."</post>";
+      $r['post'] = $_POST;
     }
-    $s .= "\n=====+=====\n";
-    self::str('r_'.$name, $s, null, $force);
+    $r['time'] = time();
+    self::str('r_'.$name, json_encode($r), null, $force, true);
   }
 
   /**
@@ -54,12 +51,13 @@ class LogWriter {
    * @param string $str Строка, которую нужно записать в лог-файл
    * @param string|null $logsPath Путь к папке с логами
    * @param bool $force Записывать лог в любом случае независимо от флага DO_NOT_LOG
+   * @param bool $disableTime Выключить запись даты/времени
    */
-  static function str($name, $str, $logsPath = null, $force = false) {
+  static function str($name, $str, $logsPath = null, $force = false, $disableTime = false) {
     if (!$force and getConstant('DO_NOT_LOG')) return;
     if (!defined('LOGS_PATH') and !$logsPath) return;
     if (self::$output) print "$str\n";
-    $str = date('d.m.Y H:i:s').": $str\n";
+    $str = $disableTime ? $str."\n" : date('d.m.Y H:i:s').": $str\n";
     $dir = $logsPath ? $logsPath : LOGS_PATH;
     if (!is_dir($dir)) die("Error: Logs dir '$dir' does not exists. Define LOGS_PATH constant");
     $exists = file_exists("$dir/$name.log");

@@ -11,7 +11,7 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', 'utf8_general_ci');
 
 require_once CORE_PATH.'/lib/R.class.php'; // Registry Class
-require_once CORE_PATH.'/lib/LogWriter.class.php';
+require_once CORE_PATH.'/lib/log/LogWriter.class.php';
 require_once CORE_PATH.'/lib/Err.class.php';
 require_once CORE_PATH.'/lib/misc.func.php';
 require_once CORE_PATH.'/lib/Arr.class.php'; // Array processing functions
