@@ -10,7 +10,7 @@ class DdoAdmin extends Ddo {
     ];
   }
 
-  function initFields() {
+  public function initFields() {
     parent::initFields();
     $this->fields = array_filter($this->fields, function ($f) {
       if (FieldCore::hasAncestor($f['type'], 'header')) return false;

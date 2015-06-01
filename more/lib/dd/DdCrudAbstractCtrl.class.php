@@ -46,7 +46,12 @@ use ObjectProcessorCtrl;
     return $this->objectProcess(new DdoAdmin($this->getStrName(), 'adminItems'), 'ddo');
   }
 
+  protected function addGridSfl() {
+    Sflm::frontend('css')->addLib('interface');
+  }
+
   protected function getGrid() {
+    $this->addGridSfl();
     return Ddo::getGrid($this->items()->getItems(), $this->ddoEdit());
   }
 

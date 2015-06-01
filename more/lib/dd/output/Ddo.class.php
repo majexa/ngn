@@ -84,7 +84,7 @@ class Ddo {
     return O::di('DdoFields', $this->settings, $this->layoutName, $this->strName, empty($this->options['fieldOptions']) ? [] : $this->options['fieldOptions']);
   }
 
-  protected function initFields() {
+  function initFields() {
     if (isset($this->fields)) return $this;
     $fields = $this->fields();
     $fields->isItemsList = $this->list;
