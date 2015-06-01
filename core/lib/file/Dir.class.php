@@ -281,7 +281,6 @@ class Dir {
         if (is_dir($path1) && $el != '.' && $el != '..') {
           if (!self::$replaceExistsFolders and is_dir($path2)) continue;
           if (!file_exists($path2)) mkdir($path2);
-          //if (!mkdir($path2)) throw new Exception("Cant make '$path2'. Already exists");
           self::copyPhpContents($path1, $path2);
         }
         elseif (is_file($path1)) {

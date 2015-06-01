@@ -265,11 +265,11 @@ abstract class CtrlBase {
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
     Sflm::frontend('js')->processHtml($html, 'page html post-process');
     $this->sflmStore();
-    try {
+    //try {
       $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
-    } catch (Exception $e) {
-      throw new Exception(get_class($this).': '.$e->getMessage());
-    }
+    //} catch (Exception $e) {
+    //  throw new Exception(get_class($this).': '.$e->getMessage());
+    //}
     $html = str_replace('{sflm}', $tags, $html);
     $this->d['processTime'] = getProcessTime();
     return $html;
