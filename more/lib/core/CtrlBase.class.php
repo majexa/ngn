@@ -263,17 +263,17 @@ abstract class CtrlBase {
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
-    Sflm::frontend('js')->processHtml($html, 'page html post-process');
-    $this->sflmStore();
-    //try {
-      $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
-    //} catch (Exception $e) {
-    //  throw new Exception(get_class($this).': '.$e->getMessage());
-    //}
-    $html = str_replace('{sflm}', $tags, $html);
+    $html = $this->processSflm($html);
     $this->d['processTime'] = getProcessTime();
     return $html;
   }
+
+    protected function processSflm($html) {
+      Sflm::frontend('js')->processHtml($html, 'page html post-process');
+      $this->sflmStore();
+      $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+      return str_replace('{sflm}', $tags, $html);
+    }
 
   /**
    * Здесь должны происходить операции, необходимые до вызова $this->action()

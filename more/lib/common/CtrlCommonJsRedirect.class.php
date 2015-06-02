@@ -1,6 +1,6 @@
 <?php
 
-class CtrlCommonJsRedirect extends CtrlCommon {
+class CtrlCommonJsRedirect extends CtrlBase {
 
   protected function init() {
     $this->d['mainTpl'] = 'clearTpl';
