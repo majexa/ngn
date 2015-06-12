@@ -138,16 +138,16 @@ Ngn.Btn.btn2 = function(caption, cls, prop) {
 };
 
 Ngn.Btn.flag1 = function(defaultFirstState, state1, state2) {
-  return Ngn.Btn.__flag(Ngn.btn1, defaultFirstState, state1, state2);
+  return Ngn.Btn.__flag(Ngn.Btn.tn1, defaultFirstState, state1, state2);
 };
 
 Ngn.Btn.flag2 = function(defaultFirstState, state1, state2) {
-  return Ngn.Btn.__flag(Ngn.btn2, defaultFirstState, state1, state2);
+  return Ngn.Btn.__flag(Ngn.Btn.btn2, defaultFirstState, state1, state2);
 };
 
 Ngn.Btn.__flag = function(btn, defaultFirstState, state1, state2) {
   var deflt = defaultFirstState ? state1 : state2;
-  return Ngn.Btn._flag(btn(deflt.title, deflt.cls), state1, state2);
+  return Ngn.Btn._flag(Ngn.Btn.btn2(deflt.title, deflt.cls), state1, state2);
 };
 
 Ngn.Btn._flag = function(eA, state1, state2) {

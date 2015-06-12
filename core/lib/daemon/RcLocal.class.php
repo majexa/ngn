@@ -11,7 +11,7 @@ class RcLocal {
     return strstr($this->c, '# ngn auto-generated workers');
   }
 
-  protected function rcLocalWrite($c) {
+  protected function write($c) {
     $tmpFile = Dir::make(TEMP_PATH).'/'.Misc::randString();
     file_put_contents($tmpFile, $c);
     $this->c = $c;
@@ -21,10 +21,20 @@ class RcLocal {
   protected $begin = "# ngn auto-generated workers begin\nsleep 15";
   protected $end = "# ngn auto-generated workers end";
 
+  protected function cmd($initDName) {
+    return "su user -c 'sudo /etc/init.d/$initDName start'";
+  }
+
+  /**
+   * Добавляет автозагрузчик
+   *
+   * @param string $initDName Имя файла в папке /etc/init.d/
+   * @throws Exception
+   */
   function add($initDName) {
-    $cmd = "su user -c 'sudo /etc/init.d/$initDName start'";
+    $cmd = $this->cmd($initDName);
     if (!$this->hasNgnWorkers()) {
-      $this->rcLocalWrite("\n\n$this->begin\n$cmd\n$this->end\n\n".$this->c);
+      $this->write("\n\n$this->begin\n$cmd\n$this->end\n\n".$this->c);
     }
     else {
       $m = $this->checkExistence();
@@ -32,9 +42,19 @@ class RcLocal {
         output("Worker '$initDName' already in rc.local");
       }
       else {
-        $this->rcLocalWrite(preg_replace("/($this->begin)(.*)($this->end)/ms", '$1$2'."$cmd\n".'$3', $this->c));
+        $this->write(preg_replace("/($this->begin)(.*)($this->end)/ms", '$1$2'."$cmd\n".'$3', $this->c));
       }
     }
+  }
+
+  /**
+   * Удаляет автозагрузчик
+   *
+   * @param string $initDName Имя файла в папке /etc/init.d/
+   * @throws Exception
+   */
+  function remove($initDName) {
+    $this->write(str_replace($this->cmd($initDName)."\n", '', file_get_contents('/etc/rc.local')));
   }
 
   protected function checkExistence() {
@@ -42,13 +62,9 @@ class RcLocal {
     return $m;
   }
 
-  function remove($initDName) {
-    throw new Exception('not realized');
-  }
-
   function cleanup() {
     $this->checkExistence();
-    $this->rcLocalWrite(preg_replace("/($this->begin)(.*)($this->end)/ms", '$1$2$3', $this->c));
+    $this->write(preg_replace("/($this->begin)(.*)($this->end)/ms", '$1$2$3', $this->c));
   }
 
 }

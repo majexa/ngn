@@ -6,6 +6,7 @@ class CliColors {
   static $backgroundColors = [];
 
   static function colored($string, $foregroundColor = null, $backgroundColor = null) {
+    if (getOS() == 'win') return $string;
     $colored = "";
     if (isset(CliColors::$foregroundColors[$foregroundColor])) {
       $colored .= "\033[".CliColors::$foregroundColors[$foregroundColor]."m";

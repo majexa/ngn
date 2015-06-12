@@ -1,6 +1,6 @@
 <?php
 
-class InotifyDaemonInstaller extends DaemonInstaller {
+class InotifyDaemonInstaller extends Daemon {
 
   protected function bin() {
     return '/usr/bin/php';

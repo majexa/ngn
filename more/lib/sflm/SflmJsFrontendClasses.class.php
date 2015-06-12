@@ -44,12 +44,12 @@ class SflmJsFrontendClasses extends ArrayAccesseble {
   }
 
   protected function retrieve() {
-    return SflmCache::c()->load('jsFrontendClasses'.$this->frontend->key());
+    return SflmCache::c()->load('sflmJsFrontendClasses'.$this->frontend->key());
   }
 
   function store() {
     if (!$this->r) Sflm::log('Storing existing objects. Nothing to store. Skipped');
-    SflmCache::c()->save($this->r, 'jsFrontendClasses'.$this->frontend->key());
+    SflmCache::c()->save($this->r, 'sflmJsFrontendClasses'.$this->frontend->key());
   }
 
 }

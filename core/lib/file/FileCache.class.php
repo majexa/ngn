@@ -46,7 +46,7 @@ class FileCache {
   }
 
   /**
-   * Удаляет все данные кэша по этому тэгу
+   * Удаляет все кэши по этому тэгу
    *
    * @param   string  Zend_Cache-тэг
    */
@@ -55,9 +55,7 @@ class FileCache {
   }
 
   /**
-   * Удаляет весь кэш
-   *
-   * @param   string  Zend_Cache-тэг
+   * Удаляет весь кэш данных
    */
   static function clean() {
     Dir::clear(static::folder(), true);
