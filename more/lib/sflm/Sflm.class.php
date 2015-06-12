@@ -126,7 +126,7 @@ class Sflm {
     }
   }
 
-  static $log = true;
+  static $log = false; // set true for debug
   static $debugPaths = [];
   static $debugUrl;
   static $webPath;
