@@ -49,7 +49,6 @@ abstract class SflmBase {
 
   protected function getPackageLibsR($package, $skipExistingPackages = true, $strict = false) {
     if (($libs = $this->getPackageLibs($package, $strict)) === false) return false;
-    prr([$package, $libs]);
     $r = [];
     $this->existingPackages[] = $package;
     foreach ($libs as $lib) {
@@ -127,10 +126,18 @@ abstract class SflmBase {
     return Sflm::$webPath.'/'.$this->filePath($package);
   }
 
+  /**
+   * Создаёт веб-кэш файл
+   *
+   * @param $package
+   * @param null $code
+   * @return bool
+   * @throws Exception
+   */
   function storeLib($package, $code = null) {
     $file = $this->cacheFile($package);
     if (!$code) $code = $this->getPackageCode($package);
-    if (!$code) return;
+    if (!$code) return false;
     //Misc::checkEmpty($code, "No code in package [$this->type::$package]");
     if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
     Dir::make(Sflm::$webPath.'/'.$this->type.'/cache');

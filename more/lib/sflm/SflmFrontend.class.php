@@ -162,7 +162,7 @@ abstract class SflmFrontend {
 
   /**
    * @api
-   * Сохраняет все новые пути фронтенда в кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего
+   * Сохраняет все новые пути кэш данных и создаёт веб-кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего
    *
    * @param string $source
    * @return $this
@@ -183,6 +183,16 @@ abstract class SflmFrontend {
       $this->incrementVersion();
       $this->stored = true;
     }
+  }
+
+  /**
+   * Этот метот нужно вызывать при создании проекта
+   * @throws Exception
+   */
+  function initStore() {
+    $this->base->storeLib($this->name, $this->code());
+    $this->incrementVersion();
+    $this->stored = true;
   }
 
   protected $storeBacktrace;
@@ -313,6 +323,17 @@ abstract class SflmFrontend {
     ProjectState::update($this->versionCacheKey(), $version);
     $this->base->version = $version;
     return true;
+  }
+
+  /**
+   * Парсит собранный веб-кэш файл и возвращает пути файлов находящихся в нём
+   *
+   * @return array
+   */
+  function parseWebCachePaths() {
+    $webPackageFile = Sflm::$webPath.'/'.$this->base->type.'/cache/'.$this->name.'.'.$this->base->type;
+    preg_match_all('/\\/\\*--\\|(.*)\\|--\\*\\//', file_get_contents($webPackageFile), $m);
+    return $m[1];
   }
 
 }
