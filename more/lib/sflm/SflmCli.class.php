@@ -15,16 +15,6 @@ class SflmCli {
   }
 
   /**
-   * Отображает пути sflm-фронтенда находящиеся в веб-кэше
-   */
-  function webPaths($frontend, $type) {
-    Sflm::setFrontend($type, $frontend)->initStore();
-    foreach (array_count_values(Sflm::setFrontend($type, $frontend)->parseWebCachePaths()) as $path => $count) {
-      print ($count == 1 ? $path : CliColors::colored($path.' {'.$count.'}', 'yellow'))."\n";
-    }
-  }
-
-  /**
    * Отображает версию sflm-фронтенда
    */
   function version($frontend, $type) {
