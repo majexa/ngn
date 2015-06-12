@@ -1,6 +1,6 @@
 <?php
 
-class DaemonInstaller {
+class Daemon {
   use Options;
 
   protected $projectName, $daemonName, $c;
@@ -99,10 +99,14 @@ exit 0';
     `sudo mv /tmp/$this->name /etc/init.d/$this->name`;
     `sudo chmod +x /etc/init.d/$this->name`;
     $this->killProcesses();
-    `sudo /etc/init.d/$this->name restart`;
+    $this->restart();
     (new RcLocal)->add("$this->projectName-$this->daemonName");
     return true;
   }
+
+    function restart() {
+        print `sudo /etc/init.d/$this->name restart`;
+    }
 
   protected function getProcessIds() {
     $pattern = str_replace('-', '/', $this->name);
@@ -110,10 +114,16 @@ exit 0';
   }
 
   protected function killProcesses() {
-    if ($ids = $this->getProcessIds()) sys("sudo kill $ids");
+    if ($ids = $this->getProcessIds()) sys("sudo kill $ids", true);
   }
 
-  function uninstall() {
+  function exists() {
+    return file_exists("/etc/init.d/$this->projectName-$this->daemonName");
+  }
+
+  function uninstall($ifExists = true) {
+    if ($ifExists and !$this->exists()) return;
+    $this->killProcesses();
     sys("sudo rm /etc/init.d/$this->projectName-$this->daemonName");
     (new RcLocal)->remove("$this->projectName-$this->daemonName");
   }

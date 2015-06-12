@@ -1,6 +1,3 @@
-/**
- * @requires MooRainbow
- */
 Ngn.Form.El.Color = new Class({
   Extends: Ngn.Form.El,
 
@@ -11,7 +8,7 @@ Ngn.Form.El.Color = new Class({
     eInput.addEvent('change', function() {
       eColor.setStyle('background-color', eInput.value);
     });
-    new MooRainbow(eInput, {
+    new Ngn.Rainbow(eInput, {
       eParent: eInput.getParent(),
       id: 'rainbow_' + eInput.get('name'),
       //styles: { // и так работает

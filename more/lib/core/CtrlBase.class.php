@@ -271,6 +271,7 @@ abstract class CtrlBase {
     protected function processSflm($html) {
       Sflm::frontend('js')->processHtml($html, 'page html post-process');
       $this->sflmStore();
+      Sflm::frontend('js')->getTags();
       $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
       return str_replace('{sflm}', $tags, $html);
     }

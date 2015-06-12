@@ -1,0 +1,2 @@
+// @requires MooRainbow
+Ngn.Depending = {};

@@ -5,7 +5,7 @@ class FieldEFontFamily extends FieldESelect {
   static $title = 'Шрифт';
 
   protected function defineOptions() {
-    return [
+    return array_merge(parent::defineOptions(), [
       'options' => array_merge(['' => 'по умолчанию'], Arr::toOptions([
         'Times New Roman',
         'Arial',
@@ -17,7 +17,7 @@ class FieldEFontFamily extends FieldESelect {
         'Georgia',
         'Courier New',
       ]))
-    ];
+    ]);
   }
 
 }

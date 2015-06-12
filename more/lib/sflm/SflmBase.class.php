@@ -49,6 +49,7 @@ abstract class SflmBase {
 
   protected function getPackageLibsR($package, $skipExistingPackages = true, $strict = false) {
     if (($libs = $this->getPackageLibs($package, $strict)) === false) return false;
+    prr([$package, $libs]);
     $r = [];
     $this->existingPackages[] = $package;
     foreach ($libs as $lib) {
@@ -101,11 +102,10 @@ abstract class SflmBase {
   }
 
   function extractCode(array $paths) {
-//    $cacheKey = 'sflmExtract'.md5(serialize($paths));
-//    if (($code = FileCache::c()->load($cacheKey)) !== false) {
-//      return $code;
-//    }
-    if (isset($this->extractCodeCache)) return $this->extractCodeCache;
+    $cacheKey = 'sflmExtract'.md5(serialize($paths));
+    if (($code = FileCache::c()->load($cacheKey)) !== false) {
+      return $code;
+    }
     $code = '';
     foreach ($paths as $path) {
       $absPath = $this->getAbsPath($path);
@@ -119,12 +119,12 @@ abstract class SflmBase {
         $code .= $this->getFileContents($absPath, $this->isStrictPath($path));
       }
     }
-//    FileCache::c()->save($code, $cacheKey);
+    FileCache::c()->save($code, $cacheKey);
     return $code;
   }
 
   function cacheFile($package) {
-    return Sflm::$uploadPath.'/'.$this->filePath($package);
+    return Sflm::$webPath.'/'.$this->filePath($package);
   }
 
   function storeLib($package, $code = null) {
@@ -133,17 +133,17 @@ abstract class SflmBase {
     if (!$code) return;
     //Misc::checkEmpty($code, "No code in package [$this->type::$package]");
     if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
-    Dir::make(Sflm::$uploadPath.'/'.$this->type.'/cache');
+    Dir::make(Sflm::$webPath.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
     return true;
   }
 
   function getCode($package) {
-    if (Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$uploadPath.'/'.$this->type.'/cache/'.$package.'.css')) {
+    if (Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$webPath.'/'.$this->type.'/cache/'.$package.'.css')) {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package);
     }
-    return file_get_contents(Sflm::$uploadPath.'/'.$this->type.'/cache/'.$package.'.'.$this->type);
+    return file_get_contents(Sflm::$webPath.'/'.$this->type.'/cache/'.$package.'.'.$this->type);
   }
 
   function exists($lib) {
@@ -222,8 +222,8 @@ abstract class SflmBase {
     $path = $p['path'];
     $cachePath = $this->getCachePath($path);
     $path = $this->getScriptAbsPath($path);
-    if (Sflm::$forceCache or !file_exists(Sflm::$uploadPath.'/'.$cachePath)) {
-      Dir::make(Sflm::$uploadPath.'/'.dirname($cachePath));
+    if (Sflm::$forceCache or !file_exists(Sflm::$webPath.'/'.$cachePath)) {
+      Dir::make(Sflm::$webPath.'/'.dirname($cachePath));
       if (!empty($p['query'])) {
         parse_str($p['query'], $q);
         if (!empty($q)) {
@@ -233,7 +233,7 @@ abstract class SflmBase {
       else {
         $q = [];
       }
-      file_put_contents(Sflm::$uploadPath.'/'.$cachePath, Misc::getIncludedByRequest($path, $q));
+      file_put_contents(Sflm::$webPath.'/'.$cachePath, Misc::getIncludedByRequest($path, $q));
     }
     return '/'.UPLOAD_DIR.'/'.$cachePath;
   }
@@ -244,7 +244,7 @@ abstract class SflmBase {
   }
 
   function clearPathCache($path) {
-    File::delete(Sflm::$uploadPath.'/'.$this->getCachePath($path));
+    File::delete(Sflm::$webPath.'/'.$this->getCachePath($path));
   }
 
   function getPackagePath($package) {
@@ -285,7 +285,7 @@ abstract class SflmBase {
   }
 
   function getUrl($package, $code = null, $force = true) {
-    if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$uploadPath.'/'.$this->filePath($package))) {
+    if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$webPath.'/'.$this->filePath($package))) {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package, $code);
     }

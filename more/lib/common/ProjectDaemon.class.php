@@ -1,6 +1,6 @@
 <?php
 
-class ProjectDaemonInstaller extends DaemonInstaller {
+class ProjectDaemon extends Daemon {
 
   protected $commentFlag = '(project)', $config;
 
@@ -23,13 +23,17 @@ class ProjectDaemonInstaller extends DaemonInstaller {
   }
 
   /**
-   * Возвращает имена установленных проектных демонов
+   * Возвращает имена установленных проектных демонов или демонов конкретного проекта
+   *
+   * @param null $projectName
+   * @return array
    */
-  static function getInstalled() {
+  static function getInstalled($projectName = null) {
     $r = [];
-    foreach (glob('/etc/init.d/*') as $file) {
+    $projectNameMask = $projectName ? $projectName.'-' : '';
+    foreach (glob('/etc/init.d/'.$projectNameMask.'*') as $file) {
       if (strstr(file_get_contents($file), '# ngn auto-generated worker (project)')) {
-        $r[] = $file;
+        $r[] = str_replace('/etc/init.d/'.$projectNameMask, '', $file);
       }
     }
     return $r;

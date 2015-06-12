@@ -65,6 +65,8 @@ class ProjectConfig {
   static function updateVar($k, $v, $ignoreExistence = false) {
     if (($vars = Config::getFilePaths($k, 'vars')) !== false) {
       $defaultValue = Config::getFileVar($vars[0]);
+    } else {
+      $defaultValue = [];
     }
     if (is_array($v) and !$ignoreExistence) {
       foreach ($v as $key => $value)

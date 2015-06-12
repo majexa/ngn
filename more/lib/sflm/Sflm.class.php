@@ -38,8 +38,8 @@ class Sflm {
   static protected $frontendName = null;
 
   static function clearCache() {
-    Dir::clear(Sflm::$uploadPath.'/js');
-    Dir::clear(Sflm::$uploadPath.'/css');
+    Dir::clear(Sflm::$webPath.'/js');
+    Dir::clear(Sflm::$webPath.'/css');
     SflmCache::clean();
     O::delete('SflmJs');
     O::delete('SflmCss');
@@ -129,7 +129,7 @@ class Sflm {
   static $log = true;
   static $debugPaths = [];
   static $debugUrl;
-  static $uploadPath;
+  static $webPath;
 
 }
 
@@ -140,4 +140,4 @@ Sflm::$absBasePaths = [
   'i' => NGN_PATH.'/i'
 ];
 Sflm::$output = false; // set true to debug
-Sflm::$uploadPath = UPLOAD_PATH;
+Sflm::$webPath = UPLOAD_PATH;

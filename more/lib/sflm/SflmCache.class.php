@@ -7,4 +7,12 @@ class SflmCache extends FileCache {
     return parent::c($options);
   }
 
+  static function clean() {
+    foreach (array_filter(glob(static::folder().'/*'), function($file) {
+      return Misc::hasPrefix('zend_cache---sflm', basename($file));
+    }) as $file) {
+      unlink($file);
+    }
+  }
+
 }

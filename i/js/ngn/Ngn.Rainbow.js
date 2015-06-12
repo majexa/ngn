@@ -1,20 +1,8 @@
-/***
- * MooRainbow
- *
- * @version    1.2b2
- * @license    MIT-style license
- * @author    Djamil Legato - < djamil [at] djamil.it >
- * @infos    http://moorainbow.woolly-sheep.net
- * @copyright  Author
- *
- *
- */
+Ngn.Rainbows = [];
 
-var Rainbows = [];
-
-var MooRainbow = new Class({
+Ngn.Rainbow = new Class({
   options: {
-    id: 'mooRainbow',
+    id: 'rainbow',
     styles: {},
     prefix: 'moor-',
     imgPath: 'images/',
@@ -82,7 +70,7 @@ var MooRainbow = new Class({
   },
 
   closeAll: function() {
-    Rainbows.each(function(obj) {
+    Ngn.Rainbows.each(function(obj) {
       obj.hide();
     });
 
@@ -107,7 +95,7 @@ var MooRainbow = new Class({
       hsb = rgb.rgbToHsb();
     }
 
-    this.setMooRainbow(rgb);
+    this.setRainbow(rgb);
     this.autoSet(hsb);
   },
 
@@ -136,7 +124,7 @@ var MooRainbow = new Class({
     this.pickerPos.y = this.snippet('curPos').t + curH;
   },
 
-  setMooRainbow: function(color, type) {
+  setRainbow: function(color, type) {
     if (!type || (type != 'hsb' && type != 'hex')) type = 'rgb';
     var rgb, hsb, hex;
 
@@ -274,7 +262,7 @@ var MooRainbow = new Class({
     var curW = this.snippet('curSize', 'int').w;
     this.pickerPos.x = this.snippet('curPos').l + curW;
     this.pickerPos.y = this.snippet('curPos').t + curH;
-    this.setMooRainbow(this.parseColors(this.pickerPos.x, this.pickerPos.y, this.sliderPos), 'hsb');
+    this.setRainbow(this.parseColors(this.pickerPos.x, this.pickerPos.y, this.sliderPos), 'hsb');
     this.fireEvent('onChange', [this.sets, this]);
   },
 
@@ -301,7 +289,7 @@ var MooRainbow = new Class({
     var arwH = this.snippet('arrSize', 'int'), hue;
 
     this.sliderPos = this.snippet('arrPos') - arwH;
-    this.setMooRainbow(this.parseColors(this.pickerPos.x, this.pickerPos.y, this.sliderPos), 'hsb');
+    this.setRainbow(this.parseColors(this.pickerPos.x, this.pickerPos.y, this.sliderPos), 'hsb');
     hue = [this.sets.hsb[0], 100, 100].hsbToRgb().rgbToHex();
     this.layout.overlay.setStyle('background-color', hue);
     this.fireEvent('onChange', [this.sets, this]);
@@ -465,7 +453,7 @@ var MooRainbow = new Class({
       'id': id
     }).inject(this.options.eParent);
 
-    Rainbows.push(this);
+    Ngn.Rainbows.push(this);
 
     var box = new Element('div', {
       'styles': {'position': 'relative'},
@@ -657,5 +645,5 @@ var MooRainbow = new Class({
   }
 });
 
-MooRainbow.implement(new Options);
-MooRainbow.implement(new Events);
+Ngn.Rainbow.implement(new Options);
+Ngn.Rainbow.implement(new Events);

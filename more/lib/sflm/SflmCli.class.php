@@ -2,12 +2,27 @@
 
 class SflmCli {
 
+  function cc() {
+    Sflm::clearCache();
+  }
+
   /**
-   * Отображает пути sflm-фронтенда
+   * Отображает пути sflm-фронтенда находящиеся в кэше данных
    */
   function paths($frontend, $type) {
     Sflm::setFrontendName($frontend);
     print implode("\n", Sflm::frontend($type)->getPaths())."\n";
+  }
+
+  /**
+   * Отображает пути sflm-фронтенда находящиеся в веб-кэше
+   */
+  function paths2($frontend, $type) {
+    $webPackageFile = Sflm::$webPath.'/'.$type.'/cache/'.$frontend.'.'.$type;
+    preg_match_all('/\\/\\*--\\|(.*)\\|--\\*\\//', file_get_contents($webPackageFile), $m);
+    foreach (array_count_values($m[1]) as $path => $count) {
+      print ($count == 1 ? $path : CliColors::colored($path.' {'.$count.'}', 'yellow'))."\n";
+    }
   }
 
   /**

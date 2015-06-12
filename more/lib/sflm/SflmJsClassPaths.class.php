@@ -5,7 +5,7 @@ class SflmJsClassPaths extends ArrayAccesseble {
   protected $classes;
 
   function __construct() {
-    if (($this->r = SflmCache::c()->load('jsClassPaths'))) return;
+    if (($this->r = SflmCache::c()->load('sflmJsClassPaths'))) return;
     $this->init();
   }
 
@@ -36,7 +36,7 @@ class SflmJsClassPaths extends ArrayAccesseble {
         }
       }
     }
-    SflmCache::c()->save($this->r, 'jsClassPaths');
+    SflmCache::c()->save($this->r, 'sflmJsClassPaths');
   }
 
   function fullPath() {
