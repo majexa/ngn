@@ -573,7 +573,27 @@ class Arr {
     return $arr;
   }
 
-  static function sortByArray(array $array, array $orderKeys) {
+  /**
+   * Сортирует ассоциативный массив $array по порядку ключей, указанных в $order
+   *
+   * Пример:
+   * Arr::sortAssoc([
+   *   'c' => 1,
+   *   'b' => 2,
+   *   'a' => 3
+   * ], ['a', 'b']);
+   * вернёт:
+   * [
+   *   'a' => 3,
+   *   'b' => 2,
+   *   'c' => 1
+   * ]
+   *
+   * @param array $array
+   * @param array $orderKeys
+   * @return array
+   */
+  static function sortAssoc(array $array, array $orderKeys) {
     $ordered = [];
     foreach ($orderKeys as $key) {
       if (array_key_exists($key, $array)) {
@@ -584,12 +604,74 @@ class Arr {
     return $ordered + $array;
   }
 
+  /**
+   * Сортирует массив с ассоциативными подмассивами по ключу $key подмассивов
+   *
+   * Пример:
+   * Arr::sortAssoc([
+   *   [
+   *     'id' => 1,
+   *     'oid' => 3
+   *   ],
+   *   [
+   *     'id' => 2,
+   *     'oid' => 1
+   *   ]
+   * ], 'oid');
+   * вернёт:
+   * [
+   *   [
+   *     'id' => 2,
+   *     'oid' => 1
+   *   ],
+   *   [
+   *     'id' => 1,
+   *     'oid' => 3
+   *   ]
+   * ]
+   *
+   * @param array $arr
+   * @param $key
+   * @param int $order
+   * @return array
+   */
   static function sortByOrderKey(array $arr, $key, $order = SORT_ASC) {
     if (!$arr) return [];
     foreach ($arr as $k => $v) {
       $o[$k] = isset($v[$key]) ? $v[$key] : 1000;
     }
     array_multisort($o, $order, $arr);
+    return $arr;
+  }
+
+  /**
+   * Сортирует массив с ассоциативными подмассивами по порядку кляючей $key, указанных в $orderKeys
+   *
+   * Пример:
+   * Arr::sortAssoc([
+   *   ['id' => 1],
+   *   ['id' => 2],
+   *   ['id' => 3]
+   * ], 'id', [3, 2, 1]);
+   * вернёт:
+   * [
+   *   ['id' => 3],
+   *   ['id' => 2],
+   *   ['id' => 1]
+   * ]
+   *
+   * @param array $arr
+   * @param $key
+   * @param array $orderKeys
+   * @return array
+   */
+  static function sortByArray(array $arr, $key, array $orderKeys) {
+    foreach ($arr as $k => $v) {
+      $order = array_search($v[$key], $orderKeys);
+      if ($order === false) $o[$k] = 100000;
+      else $o[$k] = $order;
+    }
+    array_multisort($o, SORT_ASC, $arr);
     return $arr;
   }
 

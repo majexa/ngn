@@ -85,7 +85,7 @@ class CtrlAdminUsers extends CtrlAdmin {
             ],
             'edit'   => 'Редактировать'
           ],
-          'data'      => Arr::append($data, array_values(Arr::sortByArray($exItem, array_keys($exFields))))
+          'data'      => Arr::append($data, array_values(Arr::sortAssoc($exItem, array_keys($exFields))))
         ];
       }, $r['items'])
     ];

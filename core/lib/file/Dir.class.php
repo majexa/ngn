@@ -422,7 +422,7 @@ class Dir {
     $files = glob("$folder/$globPattern");
     if (file_exists("$folder/order")) {
       foreach ($files as $v) $files2[basename($v)] = $v;
-      return array_values(Arr::sortByArray($files2, File::strings("$folder/order")));
+      return array_values(Arr::sortAssoc($files2, File::strings("$folder/order")));
     }
     return $files;
   }
