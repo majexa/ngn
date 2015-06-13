@@ -78,7 +78,7 @@ class Pagination extends Options2 {
         $descN--;
         if ($i <= $page - round($this->options['maxPages'] / 2) - 1 or $i >= $page + round($this->options['maxPages'] / 2) - 1
         ) continue;
-        $qstr2 = $self.'/pg'.$this->options['type'].$pageNumber;
+        $qstr2 = ($self == '/' ? $self.'pg' : $self.'/pg').$this->options['type'].$pageNumber;
         $d = [
           'title' => $pageNumber,
           'link'  => $this->options['selfPage'].$qstr2
