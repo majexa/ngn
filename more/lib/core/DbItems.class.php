@@ -163,14 +163,6 @@ class DbItems implements UpdatableItems, ArrayAccess {
   public $isPagination = false;
 
   /**
-   * Количество записей на одной странице
-   * Используется только при постраничной выборке ($this->isPagination = true)
-   *
-   * @var integer
-   */
-  public $n = 20;
-
-  /**
    * HTML код со ссылками на страницы
    *
    * @var strgin

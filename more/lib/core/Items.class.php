@@ -89,7 +89,7 @@ class Items extends DbItems {
   }
 
   function setN($n) {
-    if (($n = (int)$n) != 0) $this->n = $n;
+    if (($n = (int)$n) != 0) $this->options['paginationOptions']['n'] = $n;
     return $this;
   }
 
