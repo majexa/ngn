@@ -165,7 +165,7 @@ class Items extends DbItems {
     return $id;
   }
 
-  protected function cc($id) {
+  public function cc($id) {
   }
 
   function update($id, array $data) {

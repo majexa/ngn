@@ -85,7 +85,7 @@ class DdItems extends Items {
     return $items;
   }
 
-  protected function cc($id) {
+  public function cc($id) {
     $cache = DdiCache::c(['strName' => $this->strName]);
     $cache->remove('i'.$id);
     $cache->remove('fi'.$id);

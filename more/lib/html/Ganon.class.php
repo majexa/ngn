@@ -2,6 +2,11 @@
 
 class Ganon {
 
+  /**
+   * @param $str
+   * @param bool $return_root
+   * @return HTML_Parser_HTML5|null|string
+   */
   static function strGetDom($str, $return_root = true) {
     $a = new HTML_Parser_HTML5($str);
     return (($return_root) ? $a->root : $a);
