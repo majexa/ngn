@@ -42,15 +42,16 @@ class DdItemsManager extends DbItemsManager {
 
   protected function _afterUpdate() {
     parent::_afterUpdate();
-    $this->createItemCache($this->id);
+    $this->replaceItemCache($this->id);
   }
 
   protected function _afterCreate() {
     parent::_afterCreate();
-    $this->createItemCache($this->id);
+    $this->replaceItemCache($this->id);
   }
 
-  protected function createItemCache($id) {
+  protected function replaceItemCache($id) {
+    $this->items->cc($id);
     $this->items->getItem_cache($id);
   }
 
@@ -116,6 +117,12 @@ class DdItemsManager extends DbItemsManager {
   protected function replaceData() {
     parent::replaceData();
     foreach (Hook::paths('dd/itemsManagerReplaceData') as $path) include $path;
+  }
+
+  function dbUpdateFieldByKey($keyFieldName, $keyValue, $fieldName, $value) {
+    $itemId = Misc::checkEmpty(db()->selectCell("SELECT id FROM dd_i_".$this->strName." WHERE $keyFieldName=?", $keyValue));
+    db()->query("UPDATE dd_i_".$this->strName." SET $fieldName=? WHERE id=$itemId", $value);
+    $this->replaceItemCache($itemId);
   }
 
 }
