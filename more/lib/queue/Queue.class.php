@@ -51,4 +51,8 @@ class Queue extends QueueBase {
     }
   }
 
+  protected function isDebug() {
+    return false;
+  }
+
 }

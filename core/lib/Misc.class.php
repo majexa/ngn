@@ -2,7 +2,7 @@
 
 class Misc {
 
-  static function cut($s, $length, $end = '...', $strip = true) {
+  static function cut($s, $length = 20, $end = '...', $strip = true) {
     $s = trim($s);
     $s = preg_replace('/\s+/u', ' ', $s);
     $s = str_replace('&nbsp;', ' ', $s);
