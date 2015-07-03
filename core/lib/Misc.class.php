@@ -166,7 +166,7 @@ class Misc {
   }
 
   static function getFilePrefexedPath2($path, $prefix) {
-    return self::getFilePrefexedPath($path, $prefix, File::getExtension($path));
+    return self::getFilePrefexedPath($path, $prefix, preg_replace('/.*\\.([a-z0-9])/', '$1', $path));
   }
 
   static function replaceExtension($file, $extention) {
