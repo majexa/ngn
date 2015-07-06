@@ -441,4 +441,13 @@ class DdItems extends Items {
     parent::deactivate($id);
   }
 
+  function create(array $data) {
+    $id = parent::create($data);
+    Ngn::fireEvent('ddItems.create', [
+      'id' => $id,
+      'data' => $data
+    ]);
+    return $id;
+  }
+
 }
