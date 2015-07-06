@@ -11,9 +11,11 @@ class Ngn {
   static function fireEvent($name) {
     LogWriter::str('events', "fire event '$name'");
     $params = array_slice(func_get_args(), 1);
-    if (($func = Config::getVar('event/'.$name, true)) !== false and is_callable($func)) return call_user_func_array($func, $params);
-    elseif (isset(self::$events[$name])) {
+    if (isset(self::$events[$name])) {
       return call_user_func_array(self::$events[$name], $params);
+    }
+    elseif (($func = Config::getVar('event/'.$name, true)) !== false and is_callable($func)) {
+      return call_user_func_array($func, $params);
     }
   }
 

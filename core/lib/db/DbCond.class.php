@@ -240,7 +240,7 @@ class DbCond {
    * @param bool $strict
    */
   function addFromFilter($key, $from, $func = null, $strict = false) {
-    $this->addRangeFilter($key, $from, false, $func, $strict);
+    $this->addRangeFilter($key, $from, false, ['func' => $func], $strict);
   }
 
   /**
@@ -253,7 +253,7 @@ class DbCond {
    * @param bool $strict
    */
   function addToFilter($key, $to, $func = null, $strict = false) {
-    $this->addRangeFilter($key, false, $to, $func, $strict);
+    $this->addRangeFilter($key, false, $to, ['func' => $func], $strict);
   }
 
 
