@@ -210,7 +210,7 @@ Ngn.TextboxList.Autocomplete = new Class({
         if (this.currentRequest) {
           this.currentRequest.cancel();
         }
-        this.currentRequest = new Request.JSON({
+        this.currentRequest = new Ngn.Request.JSON({
           data: data,
           method: that.options.remote.method,
           onRequest: function() {

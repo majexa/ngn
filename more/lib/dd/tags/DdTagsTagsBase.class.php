@@ -33,8 +33,8 @@ abstract class DdTagsTagsBase {
     $this->cond = DbCond::get();
     if ($this->group->allowEdit) $this->cond->setOrder('oid');
     if (!$this->group->global) {
-      $this->cond->addF('groupName', $this->group->name);
-      $this->cond->addF('strName', $strName);
+      $this->cond->addF('tags.groupName', $this->group->name);
+      $this->cond->addF('tags.strName', $strName);
     }
     return $this->cond;
   }
@@ -70,8 +70,9 @@ abstract class DdTagsTagsBase {
     $text = str_replace('%', '', $text).'%';
     //return db()->query("SELECT * FROM {$this->group->table} ".$this->getSelectCond()->addLikeFilter('title', $text)->all()." ", $text);
     $cond = clone $this->getSelectCond();
-    $cond->addLikeFilter('t1.title', $text);
-    return db()->query("SELECT t1.*, t2.title AS parentTitle FROM {$this->group->table} AS t1 LEFT JOIN {$this->group->table} AS t2 ON t2.id=t1.parentId ".$cond->all()." ", $text);
+
+    $cond->addLikeFilter('tags.title', $text);
+    return db()->query("SELECT tags.*, t2.title AS parentTitle FROM {$this->group->table} LEFT JOIN {$this->group->table} AS t2 ON t2.id=tags.parentId ".$cond->all()." ", $text);
   }
 
   abstract function getData();
