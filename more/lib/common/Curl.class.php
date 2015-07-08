@@ -75,30 +75,22 @@ class Curl {
     return $headers[0]['Code'] == '200';
   }
 
-  function get($url) {
+  function get($url, $withHeaders = false) {
     if (!$this->fSocket) return false;
-    //$this->output('curl get: '.$url);
-    //$this->output('curl get: '.$url."\n".getBacktrace(false));
-    //$this->setopt(CURLOPT_HEADER, 1);
+    $this->setopt(CURLOPT_RETURNTRANSFER, true);
     $this->setopt(CURLOPT_NOBODY, 0);
     $this->setopt(CURLOPT_POST, 0);
     $this->setopt(CURLOPT_URL, $url);
+    if ($withHeaders) $this->setopt(CURLOPT_HEADER, 1);
     $result = $this->exec();
-    return $this->decodeResult ? $this->convert($result) : $result;
-  }
-
-  function copy_($url, $file) {
-    if (!$this->fSocket) return false;
-    if (!$this->exists($url)) throw new Exception("File '$url' does not exists");
-    $lfile = fopen($file, "w");
-    $this->setopt(CURLOPT_URL, $url);
-    $this->setopt(CURLOPT_HEADER, 0);
-    $this->setopt(CURLOPT_RETURNTRANSFER, 1);
-    $this->setopt(CURLOPT_FILE, $lfile);
-    $this->exec();
-    fclose($lfile);
-    $this->destroy();
-    return true;
+    $result = $this->decodeResult ? $this->convert($result) : $result;
+    if ($withHeaders) {
+      $pos = strpos($result, "\r\n\r\n");
+      $header = substr($result, 0, $pos);
+      $body = substr($result, $pos + 4, strlen($result));
+      return [$header, $body];
+    }
+    return $result;
   }
 
   function copy($url, $file) {
@@ -120,7 +112,6 @@ class Curl {
     $this->setopt(CURLOPT_URL, $url);
     $result = curl_exec($this->fSocket);
     return $result;
-    //return $this->convert($result);
   }
 
   function exec() {
@@ -128,8 +119,9 @@ class Curl {
   }
 
   /**
-   * @param   string      URL
-   * @return  HttpResult
+   * @param string $url URL
+   * @return HttpResult
+   * @throws Exception
    */
   function getObj($url) {
     $this->init();
@@ -152,7 +144,7 @@ class Curl {
 
   protected function convert($text) {
     return $text;
-    return $this->detectUTF8($this->getParsed($text, '<title>', '</title>')) ? $text : iconv($this->defaultInputEncoding, $this->encoding.'//IGNORE', $text);
+    // return $this->detectUTF8($this->getParsed($text, '<title>', '</title>')) ? $text : iconv($this->defaultInputEncoding, $this->encoding.'//IGNORE', $text);
   }
 
   function info($url, $opt) {

@@ -10,6 +10,26 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     return '';
   }
 
+  protected function showHelpForOneClass() {
+    return isset($this->argParams[0]) and !isset($this->argParams[1]) and in_array($this->argParams[0], Arr::get($this->getClasses(), 'name'));
+  }
+
+  protected function isHelp() {
+    if ($this->showHelpForOneClass()) {
+      return true;
+    }
+    return parent::isHelp();
+  }
+
+  protected function getHelpClasses() {
+    if ($this->showHelpForOneClass()) {
+      return array_filter($this->getClasses(), function(array $v) {
+        return $v['name'] == $this->argParams[0];
+      });
+    }
+    return parent::getHelpClasses();
+  }
+
   function getClasses() {
     return ClassCore::getDescendants('ArrayAccessebleOptions', ucfirst($this->prefix()));
   }
@@ -105,7 +125,7 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
       foreach ($options as $i => $opt) {
         $r[$opt['name']] = $args->params[$i + $offset];
-        //if ($opt['name'] == 'params') $r[$opt['name']] = Cli::strParamsToArray($r[$opt['name']]);
+        // if ($opt['name'] == 'params') $r[$opt['name']] = Cli::strParamsToArray($r[$opt['name']]);
       }
     }
     return $r;
