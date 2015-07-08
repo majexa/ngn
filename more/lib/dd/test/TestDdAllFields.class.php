@@ -7,18 +7,27 @@ class TestDdAllFields extends TestDd {
     /* @var $fm DdFieldsManager */
     $fm = O::di('DdFieldsManager', 'a');
     foreach (DdFieldCore::getTypes() as $type => $v) {
+      if ($type != 'imagesPreview') continue;
       if (in_array($type, [
         'ddItemSelectDepending',
         'ddFieldsMultiselect',
         'ddItemsSelect',
         'ddItemSelect'
-      ])
-      ) continue;
+      ])) continue;
       if (DdFieldCore::isFileType($type)) {
         copy(__DIR__.'/dummy.jpg', TEMP_PATH."/$type.jpg");
-        $fm->form->req->files[$type.'1'] = [
-          'tmp_name' => TEMP_PATH."/$type.jpg"
-        ];
+        if (DdFieldCore::isMultiFileType($type)) {
+          $fm->form->req->files[$type.'1'] = [
+            [
+              'tmp_name' => TEMP_PATH."/$type.jpg"
+            ]
+          ];
+        }
+        else {
+          $fm->form->req->files[$type.'1'] = [
+            'tmp_name' => TEMP_PATH."/$type.jpg"
+          ];
+        }
       }
       $id = $fm->create([
         'name'  => $type.'1',

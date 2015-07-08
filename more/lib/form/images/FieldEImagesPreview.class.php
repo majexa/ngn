@@ -1,30 +1,29 @@
 <?php
 
-class FieldEImagesPreview extends FieldEImage
-{
+class FieldEImagesPreview extends FieldEImage {
 
-    function defineOptions()
-    {
-        return array_merge(parent::defineOptions(), [
-          'multiple' => true
-        ]);
+  static $multi = true;
+
+  function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'multiple' => true
+    ]);
+  }
+
+  protected function htmlNav() {
+    $s = '';
+    if (($imagePaths = $this->dataValue())) {
+      foreach ($imagePaths as $imagePath) {
+        $imagePath = '/'.UPLOAD_DIR.'/'.$imagePath;
+        $s .= '<div class="imageCont">';
+        //if ($this->form->options['deleteFileUrl']) {
+        //  $s .= '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="iconBtn noborder delete confirm" title="Удалить"><i></i></a>';
+        //}
+        $s .= '<a href="'.$imagePath.'" class="thumb lightbox" title="Текущее изображение"><img src="'.Misc::getFilePrefexedPath($imagePath, 'sm_').'" /></a>';
+        $s .= '</div>';
+      }
     }
-
-    protected function htmlNav()
-    {
-        $s = '';
-        if (($imagePaths = $this->dataValue())) {
-            foreach ($imagePaths as $imagePath) {
-                $imagePath = '/'.UPLOAD_DIR.'/'.$imagePath;
-                $s .= '<div class="imageCont">';
-                //if ($this->form->options['deleteFileUrl']) {
-                //  $s .= '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].'" class="iconBtn noborder delete confirm" title="Удалить"><i></i></a>';
-                //}
-                $s .= '<a href="'.$imagePath.'" class="thumb lightbox" title="Текущее изображение"><img src="'.Misc::getFilePrefexedPath($imagePath, 'sm_').'" /></a>';
-                $s .= '</div>';
-            }
-        }
-        return <<<HTML
+    return <<<HTML
 <style>
 .fileNavImagesPreview .imageCont {
 position: relative;
@@ -49,6 +48,6 @@ margin-right: -10px;
   </div>
 </div>
 HTML;
-    }
+  }
 
 }
