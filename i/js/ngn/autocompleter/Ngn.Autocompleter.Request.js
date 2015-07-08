@@ -43,7 +43,7 @@ Ngn.Autocompleter.Request.JSON = new Class({
 
   initialize: function(el, url, options) {
     this.parent(el, options);
-    this.request = new Request.JSON($merge({
+    this.request = new Ngn.Request.JSON($merge({
       'url': url,
       'link': 'cancel'
     }, this.options.ajaxOptions)).addEvent('onComplete', this.queryResponse.bind(this));
