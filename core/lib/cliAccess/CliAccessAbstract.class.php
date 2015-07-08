@@ -103,13 +103,17 @@ TEXT
     print CliColors::colored($title.':', 'green')."\n";
   }
 
+  protected function getHelpClasses() {
+    return $this->getClasses();
+  }
+
   protected function help() {
     if (!CliAccess::$disableDescription) {
       if (!CliAccess::$proMode) print CliColors::colored('name', 'lightCyan')." - param\n";
       if (!CliAccess::$proMode) print '{'.CliColors::colored('name', 'darkGray')."} - optional param\n";
       if (!CliAccess::$proMode) print CliColors::colored('[...]', 'green')." - param variants\n";
     }
-    $classes = $this->getClasses();
+    $classes = $this->getHelpClasses();
     if ($classes) {
       if (!CliAccess::$proMode and !CliAccess::$disableDescription) print CliColors::colored('Supported commands:', 'yellow')."\n";
       if ($this->separateParentMethods) {
