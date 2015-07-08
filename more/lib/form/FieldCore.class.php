@@ -29,7 +29,7 @@ class FieldCore {
   static function staticProperty($type, $prop) {
     Misc::checkEmpty($type, '$type');
     $class = FieldCore::getClass($type);
-    if (!class_exists($class)) die2(Lib::getClassesListCached()[$class]);
+    if (!class_exists($class)) throw new Exception("$class class does not exists");
     if (isset($class::$$prop)) return $class::$$prop;
     return false;
   }
