@@ -102,7 +102,6 @@ class FieldEFile extends FieldEFileBase {
   }
 
   protected function processMultiple(array &$uploadedFileValue) {
-      print_r($uploadedFileValue);
     foreach ($uploadedFileValue as $k => $v) {
       $mime = $this->check($v);
       if ($this->options['allowedMimes'] and !in_array($mime, $this->options['allowedMimes'])) {

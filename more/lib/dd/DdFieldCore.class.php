@@ -26,6 +26,11 @@ class DdFieldCore {
     return FieldCore::hasAncestor($type, 'file');
   }
 
+  static function isMultiFileType($type) {
+    $class = FieldCore::getClass($type);
+    return FieldCore::hasAncestor($type, 'file') and !empty($class::$multi);
+  }
+
   static function isBoolType($type) {
     return FieldCore::hasAncestor($type, 'bool') or FieldCore::hasAncestor($type, 'boolCheckbox');
   }
