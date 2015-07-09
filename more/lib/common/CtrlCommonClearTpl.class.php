@@ -1,6 +1,6 @@
 <?php
 
-class CtrlCommonClearTpl extends CtrlCommon {
+class CtrlCommonClearTpl extends CtrlBase {
 
   protected function init() {
     $this->d['mainTpl'] = 'clearTpl';
