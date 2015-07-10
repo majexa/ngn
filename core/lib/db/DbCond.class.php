@@ -4,8 +4,6 @@
 
 class DbCond {
 
-  protected $nullFilters = [];
-
   public $filters;
 
   public $filterCond = '';
@@ -44,10 +42,16 @@ class DbCond {
   protected function _getConditions(array $except = []) {
     $conds = [];
     foreach (get_object_vars($this) as $k => $v) {
-      if (!is_string($v) or !Misc::hasSuffix('Cond', $k)) continue;
+      if (!Misc::hasSuffix('Cond', $k)) continue;
       $name = Misc::removeSuffix('Cond', $k);
       if (in_array($name, $except)) continue;
-      $conds[$name] = $v;
+      if (is_array($v)) {
+        foreach ($v as $n => $value) {
+          $conds[$name.'_'.$n] = $value;
+        }
+      } else {
+          $conds[$name] = $v;
+      }
     }
     return $conds;
   }
@@ -185,12 +189,12 @@ class DbCond {
     }
     if ($from !== false and !is_numeric($from)) $from = "'".mysql_real_escape_string($from)."'";
     if ($to !== false and !is_numeric($to)) $to = "'".mysql_real_escape_string($to)."'";
-    $this->rangeFilterCond = $this->filterMode." ". //
+    $this->rangeFilterCond[$key] = $this->filterMode." ". //
       ($from !== false ? ($func ? $func."(" : "")."$tablePrefix$key".($func ? ")" : ""). //
         (($strict == self::strictBoth or $strict == self::strictFrom) ? ' > ' : ' >= ').$from : ''). //
       ($to !== false ? (($from !== false ? ' AND ' : '').($func ? $func."(" : "")."$tablePrefix$key".($func ? ")" : ""). //
         (($strict == self::strictBoth or $strict == self::strictTo) ? ' < ' : ' <= ').$to) : '');
-    return $this;
+      return $this;
   }
 
   public $filterKeys = [];
@@ -226,6 +230,7 @@ class DbCond {
    * @param bool $isNull
    */
   function addNullFilter($key, $isNull = false) {
+    //die2('addNullFilter');
     $this->filters['null'][$key] = $isNull;
     $this->setNullCond();
   }
@@ -253,7 +258,7 @@ class DbCond {
    * @param bool $strict
    */
   function addToFilter($key, $to, $func = null, $strict = false) {
-    $this->addRangeFilter($key, false, $to, ['func' => $func], $strict);
+      $this->addRangeFilter($key, false, $to, ['func' => $func], $strict);
   }
 
 
@@ -310,11 +315,11 @@ class DbCond {
     return $this;
   }
 
+  protected $nullCond = '';
+
   protected function setNullCond() {
-    $type = 'null';
-    foreach ($this->nullFilters as $k => $isNull) {
-      $typeCond = $type.'Cond';
-      $this->$typeCond .= ' AND '.' '."{$this->tablePrefix}{$k}".($isNull ? ' = ' : ' != ')."''\n";
+    foreach ($this->filters['null'] as $k => $isNull) {
+      $this->nullCond .= ' AND '.' '."{$this->tablePrefix}{$k}".($isNull ? ' = ' : ' != ')."''\n";
     }
   }
 
