@@ -1,7 +1,13 @@
 // @requires s2/js/common/config?name=ruMonths
 Ngn.CalendarMonthSlider = new Class({
+  Implements: [Options],
 
-  initialize: function(eHeader) {
+  options: {
+    basePath: ''
+  },
+
+  initialize: function(eHeader, options) {
+    this.setOptions(options);
     this.currentMonth = eHeader.get('data-m');
     this.currentYear = eHeader.get('data-y');
     this.btnPrev = eHeader.getElement('.prev');
@@ -46,7 +52,7 @@ Ngn.CalendarMonthSlider = new Class({
     this.currentMonth = data[0];
     this.currentYear = data[1];
     el.set('html', Ngn.config.ruMonths[data[0]] + ' ' + data[1]);
-    el.set('href', 'd.' + data[0] + ';' + data[1]);
+    el.set('href', this.options.basePath + '/d.' + data[0] + ';' + data[1]);
   }
 
 });
