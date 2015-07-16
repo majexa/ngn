@@ -14,7 +14,7 @@ else
 fi
 CMD
     , false);
-    output($this->cmd->title().' - '.(strstr($r, 'exists') ? 'exists' : 'uploaded'));
+    output($this->cmd->title().': key '.(strstr($r, 'exists') ? 'exists' : 'uploaded'));
   }
 
 }

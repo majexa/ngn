@@ -1,25 +1,21 @@
 <?php
 
-class ShellSshPasswordCmd {
+class ShellSshCmd {
 
   protected $server;
 
   /**
-   * @param array $server [host, pass, port]
+   * @param array $server [host, user, port]
    */
   function __construct(array $server) {
-    $this->server = Arr::checkEmpty($server, ['host', 'pass']);
+    $this->server = Arr::checkEmpty($server, ['host']);
     if (!isset($this->server['user'])) $this->server['user'] = 'user';
   }
 
   protected function prepareCmd($cmd) {
     if (strstr($cmd, "\n")) $cmd = "<< EOF\n$cmd\nEOF";
     $port = isset($this->server['port']) ? ' -p '.$this->server['port'] : '';
-    return $this->sshpass()." ssh$port -T {$this->server['user']}@{$this->server['host']} $cmd";
-  }
-
-  function sshpass() {
-    return "sshpass -p '{$this->server['pass']}'";
+    return "ssh$port -T {$this->server['user']}@{$this->server['host']} $cmd";
   }
 
   function cmd($cmd, $output = true) {
