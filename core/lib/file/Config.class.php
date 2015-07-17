@@ -334,9 +334,9 @@ class Config {
   /**
    * Возвращает массив с существующими структурами конфигурационных констант или переменных
    *
-   * @param   string  Путь до каталога "ngn" или "site"
-   * @param   string  "constants" / "vars"
-   * @return  array
+   * @param string $folder Путь до каталога "ngn" или "site"
+   * @param string $type "constants" / "vars"
+   * @return array|mixed
    */
   static function getStruct($folder, $type) {
     if (!file_exists($folder.'/config/struct/'.$type.'.php')) return [];

@@ -23,7 +23,6 @@ class ClientTree {
     if ($tree = $this->initTree->getTree()) {
       $initNodes = $tree;
     }
-    //die2($initNodes);
     foreach ($initNodes as $initNode) {
       $node = $this->node($initNode);
       $this->setChildren($node, $initNode);

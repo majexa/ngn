@@ -3,7 +3,6 @@
 class DmfaTextareaTypo extends Dmfa {
 
    function elBeforeCreateUpdate(FieldEAbstract $el) {
-     die2(222);
      $formatText = O::get('FormatText', [
        'allowedTagsConfigName' => 'comments.allowedTags'
      ]);
