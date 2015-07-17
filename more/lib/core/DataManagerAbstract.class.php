@@ -20,7 +20,7 @@ abstract class DataManagerAbstract extends Options2 {
   abstract function getItem($id);
 
   /**
-   * Cоздавёт одну запись и возвращать её уникальный ID
+   * Cоздаёт одну запись и возвращать её уникальный ID
    *
    * @return mixed
    */
