@@ -66,8 +66,8 @@ class FormatText extends Options2 {
   /**
    * Типографиреут текст
    *
-   * @param   string   Текст
-   * @return  string   Преобразованный текст
+   * @param string $text Текст
+   * @return string
    */
   function typo($text) {
     return $this->cleanText($text);
@@ -106,6 +106,7 @@ class FormatText extends Options2 {
     $this->jevix->cfgSetTagIsEmpty(isset($emptyTags) ? $emptyTags : []);
     if (in_array('a', $tags)) $this->jevix->cfgSetTagParamsRequired('a', 'href');
     $errors = [];
+    $html = preg_replace('/<img[^>]+\\/>/', '<img$1>', $html); // fix for jevix bug
     $html = $this->jevix->parse($html, $errors);
     $html = str_replace('</quote><br/>', '</quote>', $html);
     return $html;
