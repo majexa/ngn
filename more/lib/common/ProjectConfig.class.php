@@ -113,9 +113,9 @@ class ProjectConfig {
   }
 
   static function getTitles($type) {
-    $structs = self::getStruct($type);
-    foreach ($structs as $name => $struct) {
-      $r[$name] = isset($struct['title']) ? $struct['title'] : $name;
+    $structures = self::getStruct($type);
+    foreach ($structures as $name => $v) {
+      $r[$name] = isset($v['title']) ? $v['title'] : $name;
     }
     return $r;
   }
@@ -127,10 +127,11 @@ class ProjectConfig {
    * @return  array
    */
   static function getStruct($type) {
-    $struct = Config::getStruct(CORE_PATH, $type);
-    $struct += Config::getStruct(MORE_PATH, $type);
-    $struct += Config::getStruct(PROJECT_PATH, $type);
-    return $struct;
+    $r = [];
+    foreach (array_reverse(Ngn::$basePaths) as $path) {
+      $r += Config::getStruct($path, $type);
+    }
+    return $r;
   }
 
   static function deleteVarSection($name) {

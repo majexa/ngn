@@ -21,8 +21,6 @@ abstract class Ssh2Connection {
     $this->attempt++;
     try {
       $this->connection = ssh2_connect($this->host, $this->port);
-
-      //die2($this->connection);
     } catch (Exception $e) {
       if (strstr($e->getMessage(), 'Error starting up SSH connection(-1): Unable to exchange encryption keys')) {
         output($e->getMessage());
