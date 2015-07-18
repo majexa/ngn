@@ -15,8 +15,8 @@ class Daemon {
 
   protected function defineOptions() {
     return [
-      'bin' => '/usr/bin/php',
-      'opts' => "/home/user/ngn-env/run/run.php {$this->projectName}/{$this->daemonName}",
+      'bin'     => '/usr/bin/php',
+      'opts'    => "/home/user/ngn-env/run/run.php {$this->projectName}/{$this->daemonName}",
       'workers' => 1
     ];
   }
@@ -38,11 +38,6 @@ QUIET="--quiet"
 
 if [ ! -f $DAEMON ]; then
    echo "NOT EXISTS: $DAEMON"
-   exit 0
-fi
-
-if [ ! -f $DAEMON_OPTS ]; then
-   echo "NOT EXISTS: $DAEMON_OPTS"
    exit 0
 fi
 
@@ -104,9 +99,9 @@ exit 0';
     return true;
   }
 
-    function restart() {
-        print `sudo /etc/init.d/$this->name restart`;
-    }
+  function restart() {
+    print `sudo /etc/init.d/$this->name restart`;
+  }
 
   protected function getProcessIds() {
     $pattern = str_replace('-', '/', $this->name);
