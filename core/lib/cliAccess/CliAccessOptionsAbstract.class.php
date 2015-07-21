@@ -57,6 +57,12 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
   }
 
   private function option(ReflectionMethod $method, $name) {
+    if ($name[0] == '{' and $name[strlen($name)-1] == '}') {
+      $name= trim($name, '{}');
+      $optional = true;
+    } else {
+      $optional = false;
+    }
     if ($name[0] == '@') {
       $name = ltrim($name, '@');
       $helpMethod = 'helpOpt_'.$name;
@@ -67,7 +73,7 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     }
     return [
       'name'     => $name,
-      'optional' => false,
+      'optional' => $optional,
       'variants' => $variants,
       'descr'    => false
     ];
@@ -123,9 +129,9 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
   protected function getMethodOptionsWithParams(CliAccessArgsArgs $args, $offset) {
     $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
+
       foreach ($options as $i => $opt) {
         $r[$opt['name']] = $args->params[$i + $offset];
-        // if ($opt['name'] == 'params') $r[$opt['name']] = Cli::strParamsToArray($r[$opt['name']]);
       }
     }
     return $r;

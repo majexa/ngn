@@ -70,7 +70,7 @@ class DdFieldsFields extends Fields {
         'name'  => 'virtual',
         'title' => 'виртуальное',
         'type'  => 'bool',
-        'help'  => ''
+        'help'  => '* Не имеют поля в БД<br>* Не учавствуют (по умолчанию) при создании/изменении записей'
       ]
     ]);
     if (Config::getVarVar('dd/common', 'enableFilters')) {

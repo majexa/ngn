@@ -885,7 +885,7 @@ class Form {
   }
 
   function debugElements($name = false) {
-    //$this->setElementsDataDefault();
+    $this->setElementsDataDefault();
     foreach ($this->els as $el) $name ? print $el->options['name'].', ' : prr($el->options);
     if ($name) print "\n";
   }
