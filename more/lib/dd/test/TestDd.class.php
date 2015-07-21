@@ -24,7 +24,7 @@ abstract class TestDd extends ProjectTestCase {
   }
 
   static function tearDownAfterClass() {
-    self::$sm->deleteByName(static::$strName);
+    //self::$sm->deleteByName(static::$strName);
   }
 
 }

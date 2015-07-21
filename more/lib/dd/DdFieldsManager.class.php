@@ -69,11 +69,13 @@ class DdFieldsManager extends DbItemsManager {
     }
     $this->data['filterable'] = $this->filterable();
     $this->data['strName'] = $this->strName;
+    $this->data['virtual'] = (int)DdFieldCore::getType($this->data['type'])['virtual'];
   }
 
   protected function dbCreateField() {
     if (!empty($this->data['virtual'])) return;
     $type = DdFieldCore::getType($this->data['type'])->r;
+    if (!empty($type['virtual'])) return;
     if (!isset($type['dbLength'])) $type['dbLength'] = null;
     $this->_dbCreateField($type);
   }
@@ -222,12 +224,12 @@ class DdFieldsManager extends DbItemsManager {
   /**
    * Изменяет поле в таблице структуры
    *
-   * @param   string  Имя структуры
-   * @param   string  Старое имя поля
-   * @param   string  Новое имя поля
-   * @param   string  Тип поля
-   * @param   string  Длина поля
-   * @param   string  Кодировки
+   * @param string $oldName Имя структуры
+   * @param string $newName Старое имя поля
+   * @param string $type Новое имя поля
+   * @param string $length Тип поля
+   * @param string $charsetCond Длина поля
+   * @param string|null $default Кодировки
    */
   protected function __dbUpdateFieldChange($oldName, $newName, $type, $length, $charsetCond, $default = null) {
     $this->__dbFieldAction("CHANGE $oldName $newName", $type, $length, $charsetCond, $default);
@@ -283,8 +285,6 @@ class DdFieldsManager extends DbItemsManager {
 
   /**
    * Удаляет все поля структуры
-   *
-   * @param   string   Имя структуры
    */
   function deleteFields() {
     foreach (db()->ids('dd_fields', DbCond::get()->addF('strName', $this->strName)) as $id) {

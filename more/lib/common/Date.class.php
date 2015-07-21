@@ -61,7 +61,7 @@ class Date {
   }
 
   /**
-   * Возвращает время в формате базы данных MySQL
+   * Возвращает дату и время в формате базы данных MySQL
    *
    * @param int $time
    * @return bool|string|void
@@ -71,6 +71,14 @@ class Date {
   }
 
   const DB_FORMAT = 'Y-m-d H:i:s';
+
+  static function dbDate($time = 0) {
+    return date('Y-m-d', $time ? $time : time());
+  }
+
+  static function dbTime($time = 0) {
+    return date('H:i:s', $time ? $time : time());
+  }
 
   /**
    * Преобразует timestamp в дату с текстовым месяцем
