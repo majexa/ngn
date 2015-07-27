@@ -41,7 +41,7 @@ function pr($var, $html = true, $trace = true, $offset = 0) {
 }
 
 function prr($var, $html = true) {
-  pr($var, $html, false);
+  pr($var, $html, true);
 }
 
 function prrc($var) {
