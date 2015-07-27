@@ -593,6 +593,10 @@ abstract class CtrlBase {
 
   protected function setPageTitle($title) {
     $this->d['pageTitle'] = $title;
+    $this->setPageHeadTitle($title);
+  }
+
+  protected function setPageHeadTitle($title) {
     $this->d['pageHeadTitle'] = $title.'. '.SITE_TITLE;
   }
 
