@@ -100,7 +100,7 @@ TEXT
 
   protected function renderClassTitle($class) {
     if (!($title = ClassCore::title($class))) return;
-    print CliColors::colored($title.':', 'green')."\n";
+    print CliColors::colored('----- '.$title.' -----', 'green')."\n";
   }
 
   protected function getHelpClasses() {
