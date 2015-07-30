@@ -66,7 +66,7 @@ TEXT
 
   function name2class($name) {
     $r = Arr::get($this->getClasses(), 'class', 'name');
-    if (!isset($r[$name])) throw new EmptyException("Class by name '$name' does not exists");
+    if (!isset($r[$name])) throw new EmptyException("Class by name '$name' does not exists. Currents cliAccess-wrapper classes map: ".getPrr($this->getClasses()));
     return $r[$name];
   }
 

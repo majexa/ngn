@@ -249,7 +249,7 @@ class Lib {
     if (self::$cacheEnabled) throw new Exception("Lib cache already enabled. Backtrace of enbale call: \n".preg_replace('/^/m', '  ', self::$enableCacheFirstCallBacktrace));
     if ($key) self::$cachePrefix = Misc::shortHash($key);
     self::$cacheEnabled = true;
-    self::$enableCacheFirstCallBacktrace = getBacktrace(false);
+    self::$enableCacheFirstCallBacktrace = getBacktrace(false, 1);
   }
 
   protected static $enableCacheFirstCallBacktrace;
