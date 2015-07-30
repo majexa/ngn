@@ -100,6 +100,7 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
   }
 
   protected function runMultiWrapper(CliAccessArgsArgs $args) {
+    // Получаем имя класса, у которого будет вызван экшн
     $realClass = method_exists($args->class, $args->method) ? $args->class : $this->getSingleProcessorClass($args->class);
     $realArgs = clone $args;
     $realArgs->class = $realClass;
@@ -109,8 +110,9 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     // foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
     $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams( //
       $realArgs, //
-      count($realClass::$requiredOptions) //
+      0 //
     ));
+    die2($options);
     $multiWrapper = (new $class($options));
     $multiWrapper->action($realArgs->method);
   }
@@ -123,13 +125,12 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
    * Возвращает этот массив.
    *
    * @param CliAccessArgsArgs $args
-   * @param $offset
+   * @param integer $offset С какого параметра начинать брать значения
    * @return array
    */
   protected function getMethodOptionsWithParams(CliAccessArgsArgs $args, $offset) {
     $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
-
       foreach ($options as $i => $opt) {
         $r[$opt['name']] = $args->params[$i + $offset];
       }
