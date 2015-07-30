@@ -31,18 +31,7 @@ Ngn.DdoItemEditBtns = new Class({
           new Ngn.Request({
             url: this.options.baseUrl + '?a=ajax_delete&id=' + this.id,
             onComplete: function() {
-              new Fx.Morph(eBtns, {
-                duration: 200
-              }).start({opacity: 0});
-              new Fx.Morph(eItem, {
-                onComplete: function() {
-                  eItem.destroy();
-                }
-              }).start({
-                  width: 0,
-                  'margin-right': 0,
-                  opacity: 0
-                });
+              this.fireEvent('deleteComplete');
             }.bind(this)
           }).send();
         }.bind(this)
