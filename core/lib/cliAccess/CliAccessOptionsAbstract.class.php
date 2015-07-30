@@ -23,7 +23,7 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
 
   protected function getHelpClasses() {
     if ($this->showHelpForOneClass()) {
-      return array_filter($this->getClasses(), function(array $v) {
+      return array_filter($this->getClasses(), function (array $v) {
         return $v['name'] == $this->argParams[0];
       });
     }
@@ -57,10 +57,11 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
   }
 
   private function option(ReflectionMethod $method, $name) {
-    if ($name[0] == '{' and $name[strlen($name)-1] == '}') {
-      $name= trim($name, '{}');
+    if ($name[0] == '{' and $name[strlen($name) - 1] == '}') {
+      $name = trim($name, '{}');
       $optional = true;
-    } else {
+    }
+    else {
       $optional = false;
     }
     if ($name[0] == '@') {
@@ -68,7 +69,8 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
       $helpMethod = 'helpOpt_'.$name;
       $class = $method->class;
       $variants = implode('|', $class::$helpMethod());
-    } else {
+    }
+    else {
       $variants = false;
     }
     return [
@@ -104,15 +106,9 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     $realClass = method_exists($args->class, $args->method) ? $args->class : $this->getSingleProcessorClass($args->class);
     $realArgs = clone $args;
     $realArgs->class = $realClass;
-    $requiredOptions = [];
     /* @var CliAccessOptionsMultiWrapper $multiWrapper */
     $class = $args->class;
-    // foreach ($realClass::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
-    $options = array_merge($requiredOptions, $this->getMethodOptionsWithParams( //
-      $realArgs, //
-      0 //
-    ));
-    die2($options);
+    $options = $this->getMethodOptionsWithParams($realArgs);
     $multiWrapper = (new $class($options));
     $multiWrapper->action($realArgs->method);
   }
@@ -128,10 +124,14 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
    * @param integer $offset С какого параметра начинать брать значения
    * @return array
    */
-  protected function getMethodOptionsWithParams(CliAccessArgsArgs $args, $offset) {
+  protected function getMethodOptionsWithParams(CliAccessArgsArgs $args, $offset = 0) {
     $r = [];
     if (($options = ($this->getMethodOptions((new ReflectionMethod($args->class, $args->method)))))) {
       foreach ($options as $i => $opt) {
+        if (!isset($args->params[$i + $offset])) {
+          if ($opt['optional']) continue;
+          throw new Exception("Required option #".($i + 1)." '{$opt['name']}' of method {$args->class}::{$args->method} not defined");
+        }
         $r[$opt['name']] = $args->params[$i + $offset];
       }
     }
