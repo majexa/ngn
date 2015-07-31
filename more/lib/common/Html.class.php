@@ -33,12 +33,16 @@ class Html {
    * @param   string  HTML
    * @param   string  Имя тэга
    * @param   array   Необходимый параметр тэга
-   *                  Пример: array('img', './u/img.png')
+   *                  Пример: ['src', './u/img.png']
    * @return  string  HTML
    */
-  static function removeTag($html, $tagName, $param = null) {
+  static function removeTag($html, $tagName, $param = null, $single = false) {
     if ($param) {
-      $regex = '/<(?='.$tagName.')([^>]+)'.$param[0].'=("|\'|)'.$param[1].'("|\'|)([^>]*)>/';
+      //$regex = '/<(?='.$tagName.')([^>]+)'.$param[0].'=("|\'|)'.$param[1].'("|\'|)([^>]*)>/';
+      $regex = '/<(?='.$tagName.')[^>]+'.$param[0].'=("|\'|)[^"\']*'.$param[1].'[^"\']*("|\'|)[^>]*>'. //
+        ($single ? '' : '.*<\\/'.$tagName.'>').'/';
+      preg_match($regex, $html, $m);
+      return [preg_replace($regex, '', $html), $m[0]];
     }
     else
       $regex = '/<(?='.$tagName.')([^>]*)>/';
