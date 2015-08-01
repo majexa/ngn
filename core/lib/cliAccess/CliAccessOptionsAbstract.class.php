@@ -93,7 +93,10 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
     else {
       $requiredOptions = [];
       $class = $args->class;
-      foreach ($class::$requiredOptions as $i => $name) $requiredOptions[$name] = $args->params[$i];
+      foreach ($class::$requiredOptions as $i => $name) {
+        if (!isset($args->params[$i])) throw new Exception("Option #".($i + 1)." '$name' not defined");
+        $requiredOptions[$name] = $args->params[$i];
+      }
       (new $class(array_merge( //
         $requiredOptions, //
         $this->getMethodOptionsWithParams($args, count($class::$requiredOptions)) //
