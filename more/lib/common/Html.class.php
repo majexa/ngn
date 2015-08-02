@@ -30,17 +30,17 @@ class Html {
   /**
    * Убирает тэг из HTML-кода
    *
-   * @param   string  HTML
-   * @param   string  Имя тэга
-   * @param   array   Необходимый параметр тэга
-   *                  Пример: ['src', './u/img.png']
-   * @return  string  HTML
+   * @param string $html HTML
+   * @param string $tagName Имя тэга
+   * @param array $param Необходимый параметр тэга. Пример: ['src', './u/img.png']
+   * @param bool $single
+   * @return array|mixed HTML / [Cleaned HTML / Cutted TAG]
    */
   static function removeTag($html, $tagName, $param = null, $single = false) {
     if ($param) {
       //$regex = '/<(?='.$tagName.')([^>]+)'.$param[0].'=("|\'|)'.$param[1].'("|\'|)([^>]*)>/';
       $regex = '/<(?='.$tagName.')[^>]+'.$param[0].'=("|\'|)[^"\']*'.$param[1].'[^"\']*("|\'|)[^>]*>'. //
-        ($single ? '' : '.*<\\/'.$tagName.'>').'/';
+        ($single ? '' : '.*<\\/'.$tagName.'>').'/U';
       preg_match($regex, $html, $m);
       return [preg_replace($regex, '', $html), $m[0]];
     }
