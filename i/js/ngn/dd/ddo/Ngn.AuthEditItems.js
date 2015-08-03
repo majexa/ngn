@@ -14,7 +14,6 @@ Ngn.AuthEditItems = new Class({
   },
 
   initBtns: function() {
-    c('888');
     var esItems = typeof(this.options.items) == 'object' ? //
       this.options.items : //
       document.getElements(this.options.items);
