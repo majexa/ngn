@@ -12,7 +12,7 @@ class ProjectDaemon extends Daemon {
   protected function defineOptions() {
     return [
       'bin'     => '/usr/bin/php',
-      'opts'    => "/home/user/ngn-env/projects/{$this->projectName}/{$this->daemonName}.php",
+      'opts'    => NGN_ENV_PATH."/projects/{$this->projectName}/{$this->daemonName}.php",
       'workers' => isset($this->config['workers']) ? $this->config['workers'] : 1
     ];
   }
