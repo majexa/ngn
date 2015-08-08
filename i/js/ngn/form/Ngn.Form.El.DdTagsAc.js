@@ -1,4 +1,4 @@
-Ngn.Form.El.DdTags = new Class({
+Ngn.Form.El.DdTagsAc = new Class({
   Extends: Ngn.Form.El.Dd,
 
   init: function() {
@@ -15,8 +15,8 @@ Ngn.Form.El.DdTags = new Class({
         }
       }
     });
-    if (Ngn.Form.El.DdTags.values[this.form.id]) {
-      var v = Ngn.Form.El.DdTags.values[this.form.id][this.name];
+    if (Ngn.Form.El.DdTagsAc.values[this.form.id]) {
+      var v = Ngn.Form.El.DdTagsAc.values[this.form.id][this.name];
       if (v) {
         for (var i = 0; i < v.length; i++) {
           if (!v[i][1]) continue;
@@ -31,4 +31,4 @@ Ngn.Form.El.DdTags = new Class({
   }
 
 });
-Ngn.Form.El.DdTags.values = {};
+Ngn.Form.El.DdTagsAc.values = {};

@@ -106,4 +106,12 @@ class DdTagsHtml {
     return $list;
   }
 
+  static function lst(array $nodes, $pagePath) {
+    $r = [];
+    foreach ($nodes as $v) {
+      $r[] = '<a href="'.$pagePath.'/t2.'.$v['groupName'].'.'.$v['id'].'">'.$v['title'].'</a>';
+    }
+    return implode(', ', $r);
+  }
+
 }
