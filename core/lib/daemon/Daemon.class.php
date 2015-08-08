@@ -16,7 +16,7 @@ class Daemon {
   protected function defineOptions() {
     return [
       'bin'     => '/usr/bin/php',
-      'opts'    => "/home/user/ngn-env/run/run.php {$this->projectName}/{$this->daemonName}",
+      'opts'    => NGN_ENV_PATH."/run/run.php {$this->projectName}/{$this->daemonName}",
       'workers' => 1
     ];
   }
