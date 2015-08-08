@@ -2,8 +2,8 @@
 
 // SMSC.RU API (smsc.ru) версия 3.3 (17.12.2014)
 
-define("SMSC_LOGIN", Config::getVarVar('smsc', 'masted'));      // логин клиента
-define("SMSC_PASSWORD", "08dbc75a4098fa9e3daa50258af12df6");  // пароль или MD5-хеш пароля в нижнем регистре
+define("SMSC_LOGIN", Config::getVarVar('smsc', 'login'));    // логин клиента
+define("SMSC_PASSWORD", Config::getVarVar('smsc', 'pass'));  // пароль или MD5-хеш пароля в нижнем регистре
 define("SMSC_POST", 0);          // использовать метод POST
 define("SMSC_HTTPS", 0);        // использовать HTTPS протокол
 define("SMSC_CHARSET", "windows-1251");  // кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
