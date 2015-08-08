@@ -530,14 +530,14 @@ return [
       ]
     ],
   ],
-  'littleSms'              => [
-    'title'  => 'Little SMS',
+  'smsc'              => [
+    'title'  => 'smsc.ru',
     'fields' => [
-      'user' => [
+      'login' => [
         'title' => 'Пользователь'
       ],
-      'key'  => [
-        'title' => 'API-key',
+      'pass'  => [
+        'title' => 'MD5 от пароля',
       ],
     ]
   ]
