@@ -67,6 +67,7 @@ Ngn.DdTags.Dialog.Flat = new Class({
   Extends: Ngn.Grid.Dialog.Request,
 
   options: {
+    basePath: '/admin/tags',
     gridOpts: {
       isSorting: true,
       menu: [
@@ -95,8 +96,15 @@ Ngn.DdTags.Dialog.Flat = new Class({
     }
   },
 
+  initialize: function(opt) {
+    c(opt);
+    console.trace('***');
+    this.parent(opt);
+  },
+
   setOptions: function(options) {
     this.parent(options);
+    if (!this.options.basePath) throw new Error('this.options.basePath not defined');
     this.options.gridOpts.basePath = this.options.basePath + '/' + options.data.groupId;
     //this.options.gridOpts.url = this.options.basePath + '/json_list'
     //this.options.gridOpts.listAjaxAction = 'json_list';

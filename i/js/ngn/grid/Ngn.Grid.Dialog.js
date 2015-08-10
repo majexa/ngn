@@ -12,9 +12,8 @@ Ngn.Grid.Dialog = new Class({
   init: function () {
     this.parent();
     if (this.options.textBefore) new Element('div', {'class':'textBefore', html: this.options.textBefore}).inject(this.message);
-    var eParent = new Element('div', {'class':'grid'}).inject(this.message);
+    this.options.gridOpts.eParent = new Element('div', {'class':'grid'}).inject(this.message);
     if (this.options.textAfter) new Element('div', {'class':'textAfter', html: this.options.textAfter}).inject(this.message);
-    this.options.gridOpts.eParent = eParent;
     this.initGrid();
   },
 
@@ -28,6 +27,7 @@ Ngn.Grid.Dialog.Request = new Class({
   Extends: Ngn.Grid.Dialog,
 
   beforeInitRequest: function() {
+    console.trace(this.options.gridOpts);
     this.grid = new this.options.gridClass(Object.merge(this.options.gridOpts, {
       eParent: this.message,
       fromDialog: true,
