@@ -1,31 +1,27 @@
 <? $this->tpl('admin/modules/ddField/header', $d) ?>
 
-<style>
-.t_header {
-background: #ebf4f4;
-}
-</style>
+  <style>
+    .t_header {
+      background: #ebf4f4;
+    }
+  </style>
 
 <?
 
-$d['items'] = array_filter($d['items'], function($v) { return $v['editable']; });
+$d['items'] = array_filter($d['items'], function ($v) {
+    return $v['editable'];
+  });
 $d['items'] = array_values($d['items']);
 $d['grid'] = [
   'head' => ['Название', 'Имя', 'Тип', '', 'Описание'],
-  'body' => array_map(function($v) use ($d) {
+  'body' => array_map(function ($v) use ($d) {
     $r = array_merge(Arr::filterByKeys($v, ['id', 'tagGroup']), [
       'rowClass' => 't_'.$v['type'].($v['defaultDisallow'] ? ' disallow' : ''),
-      'data'  => [
+      'data'     => [
         $v['title'].($v['required'] ? '<span style="color:#FF0000">*</span>' : ''),
         $v['name'],
         '<img src="'.DdFieldCore::getIconPath($v['type']).'" title="'.$v['type'].'">',
-        '<small>'.
-          ($v['notList'] ? '<nobr>{не выводится}</nobr>' : '').
-          ($v['system'] ? '<nobr>{системное}</nobr>' : '').
-          ($v['defaultDisallow'] ? '<nobr>{не доступно}</nobr>' : '').
-          (!$v['editable'] ? '<nobr>{не редактируется}</nobr>' : '').
-          ($v['filterable'] ? '<nobr>{фильтруемое}</nobr>' : '').
-          '&nbsp;</small>',
+        '<small>'.($v['notList'] ? '<nobr>{не выводится}</nobr>' : '').($v['system'] ? '<nobr>{системное}</nobr>' : '').($v['defaultDisallow'] ? '<nobr>{не доступно}</nobr>' : '').(!$v['editable'] ? '<nobr>{не редактируется}</nobr>' : '').($v['filterable'] ? '<nobr>{фильтруемое}</nobr>' : '').'&nbsp;</small>',
         $v['descr']
       ]
     ]);
@@ -46,31 +42,31 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
 
 ?>
 
-<div id="table"></div>
+  <div id="table"></div>
 
-<script>
+  <script>
 
-new Ngn.Grid({
-  isSorting: true,
-  toolActions: {
-    tags: function(row) {
-      Ngn.DdTags.dialog(row);
-    }
-  },
-  toolLinks: {
-    edit: function(row) {
-      return Ngn.getPath(3)+'?a=edit&id='+row.id;
-    },
-    delete: function(row) {
-      return Ngn.getPath(3)+'?a=delete&id='+row.id;
-    },
-    tags: function(row) {
-      return '#';
-    }
-  },
-  data: <?= Arr::jsObj($d['grid']) ?>
-});
-</script>
+    new Ngn.Grid({
+      isSorting: true,
+      toolActions: {
+        tags: function(row) {
+          Ngn.DdTags.dialog(row);
+        }
+      },
+      toolLinks: {
+        edit: function(row) {
+          return Ngn.getPath(3) + '?a=edit&id=' + row.id;
+        },
+        delete: function(row) {
+          return Ngn.getPath(3) + '?a=delete&id=' + row.id;
+        },
+        tags: function(row) {
+          return '#';
+        }
+      },
+      data: <?= Arr::jsObj($d['grid']) ?>
+    });
+  </script>
 
 <? /*if ($d['items']) { ?>
 <table cellpadding="0" cellspacing="0" id="itemsTable">
@@ -130,4 +126,5 @@ new Ngn.Grid({
 else {
   ?>
 <p><?= Lang::get('noFields') ?>. <a href="<?= $this->getPath() ?>?a=new"><?= Lang::get('create') ?>?</a></p>
-<? }*/ ?>
+<? }*/
+?>

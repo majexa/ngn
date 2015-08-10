@@ -264,7 +264,8 @@ class Misc {
     if (count($out) > 0) $out = implode($out);
     else $out = $in;
     if ($toLower) $out = strtolower($out);
-    $out = preg_replace('/--+/', '-', $out);
+    $out = trim($out, '-');
+    $out = preg_replace('/-+/', '-', $out);
     return $out;
   }
 

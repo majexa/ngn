@@ -51,7 +51,7 @@ class CtrlAdminTags extends CtrlAdmin {
         ],
       ];
     }
-    $this->addSubController(new SubCtrlTagsTree($this));
+    //$this->addSubController(new SubCtrlTagsTree($this));
   }
 
   protected function setPathTplData() {
