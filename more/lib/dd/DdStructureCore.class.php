@@ -27,18 +27,21 @@ class DdStructureCore {
    * @api
    * Создаёт структуру
    *
-   * @param string $name Имя структуры
-   * @param array $fields Массив полей структуры
+   * @param $name
+   * @param array $fields
+   * @return bool|int
+   * @throws AlreadyExistsException
    * @throws EmptyException
    * @throws Exception
    */
   static function create($name, array $fields) {
-    (new DdStructuresManager)->create([
+    $id = (new DdStructuresManager)->create([
       'title' => $name,
       'name' => $name
     ]);
     $fieldsManager = new DdFieldsManager($name);
     foreach ($fields as $field) $fieldsManager->create($field);
+    return $id;
   }
 
   /**
