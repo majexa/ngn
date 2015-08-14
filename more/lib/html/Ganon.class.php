@@ -22,6 +22,8 @@ class Ganon {
     return $formatter->format($root);
   }
 
+  static function dummy() {}
+
 }
 
 //START gan_tokenizer.php
@@ -677,6 +679,13 @@ class HTML_Parser extends HTML_Parser_Base {
     return $this->root->getInnerText();
   }
 
+  /**
+   * @param string $query
+   * @param bool $index
+   * @param bool $recursive
+   * @param bool $check_self
+   * @return null|HTML_Node[]
+   */
   function select($query = '*', $index = false, $recursive = true, $check_self = false) {
     return $this->root->select($query, $index, $recursive, $check_self);
   }
@@ -2032,6 +2041,13 @@ class HTML_Node {
     return $this->getChildrenByAttribute('name', $name, 'equals', 'total', $recursive);
   }
 
+  /**
+   * @param string $query
+   * @param bool $index
+   * @param bool $recursive
+   * @param bool $check_self
+   * @return null|HTML_Node[]
+   */
   function select($query = '*', $index = false, $recursive = true, $check_self = false) {
     $s = new $this->selectClass($this, $query, $check_self, $recursive);
     $res = $s->result;
