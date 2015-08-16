@@ -96,6 +96,11 @@ use ObjectProcessorCtrl;
     if ($this->items()->isPagination) $this->json['pagination'] = $this->items()->getPagination();
   }
 
+  function action_json_search() {
+    $this->items()->addSearchFilter('%'.$this->req->rq('word').'%');
+    $this->action_json_getItems();
+  }
+
   function action_ajax_delete() {
     $this->getIm()->delete($this->id());
   }

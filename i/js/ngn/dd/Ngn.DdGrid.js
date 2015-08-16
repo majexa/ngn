@@ -61,6 +61,31 @@ Ngn.DdGrid = new Class({
      }.bind(this));
      */
     this.parent();
+  },
+
+  initMenu: function() {
+    this.parent();
+    var timeoutId = 0;
+    var eSearch = new Element('input').inject(this.eMenu.getElement('.clear'), 'before');
+    eSearch.addEvent('keyup', function() {
+      clearTimeout(timeoutId);
+      timeoutId = this.loadSearchResults.delay(1000, this, eSearch.get('value'));
+    }.bind(this));
+  },
+
+  word: null,
+
+  loadSearchResults: function(word) {
+    if (this.word == word) return;
+    this.word = word;
+    Ngn.loading(true);
+    new Ngn.Request.JSON({
+      url: this.options.basePath + '/json_search?word=' + word,
+      onComplete: function(r) {
+        this.initInterface(r, true);
+        Ngn.loading(false);
+      }.bind(this)
+    }).send();
   }
 
 });

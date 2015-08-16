@@ -213,12 +213,20 @@ class DbCond {
    * @api
    * Добавляет фильтр поиска по маске
    *
-   * @param $key
+   * @param string|string[] $key
    * @param $text
    * @return $this
    */
   function addLikeFilter($key, $text) {
-    $this->likeCond = " AND $key LIKE '".mysql_real_escape_string($text)."'";
+    if (is_array($key)) {
+      $r = [];
+      foreach ($key as $k) {
+        $r[] = "{$this->table}.$k LIKE '".mysql_real_escape_string($text)."'";
+      }
+      $this->likeCond .= " AND (".implode(' OR ', $r).')';
+    } else {
+      $this->likeCond .= " AND {$this->table}.$key LIKE '".mysql_real_escape_string($text)."'";
+    }
     return $this;
   }
 
@@ -230,7 +238,6 @@ class DbCond {
    * @param bool $isNull
    */
   function addNullFilter($key, $isNull = false) {
-    //die2('addNullFilter');
     $this->filters['null'][$key] = $isNull;
     $this->setNullCond();
   }
