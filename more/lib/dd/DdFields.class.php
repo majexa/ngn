@@ -109,8 +109,15 @@ class DdFields extends Fields {
   }
 
   function getDateFields() {
+    return array_filter($this->getFields(), function ($v) {
+      return FieldCore::hasAncestor($v['type'], 'date');
+    });
+  }
+
+  function getTextFields() {
     return array_filter($this->getFields(), function (&$v) {
-      return ClassCore::hasAncestor(FieldCore::getClass($v['type']), 'FieldEDate');
+      if (FieldCore::hasAncestor($v['type'], 'num')) return false;
+      return FieldCore::hasAncestor($v['type'], 'text') or FieldCore::hasAncestor($v['type'], 'textarea');
     });
   }
 

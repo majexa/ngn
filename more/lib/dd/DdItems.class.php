@@ -450,4 +450,8 @@ class DdItems extends Items {
     return $id;
   }
 
+  function addSearchFilter($keyword) {
+    $this->cond->addLikeFilter(Arr::get($this->fields()->getTextFields(), 'name'), $keyword);
+  }
+
 }
