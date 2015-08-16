@@ -19,7 +19,7 @@ require_once CORE_PATH.'/lib/file/Dir.class.php'; // Directory processing functi
 require_once CORE_PATH.'/lib/file/File.class.php'; // File processing functions
 require_once CORE_PATH.'/lib/file/FileCache.class.php';
 require_once CORE_PATH.'/lib/Lib.class.php'; // Librarys, classes
-require_once CORE_PATH.'/lib/common/NoFileException.class.php';
+require_once CORE_PATH.'/lib/exceptions/NoFileException.class.php';
 require_once CORE_PATH.'/lib/O.class.php';
 require_once CORE_PATH.'/lib/Ngn.class.php';
 require_once CORE_PATH.'/lib/Misc.class.php'; // Miscellaneous functions

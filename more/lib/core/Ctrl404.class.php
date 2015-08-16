@@ -2,19 +2,18 @@
 
 class Ctrl404 extends CtrlCommon {
 
-  function __construct(Router $router, Exception $error, array $options = []) {
-    $this->error = $error;
-    parent::__construct($router, $options);
-  }
-
-  protected function initAction() {
-    $this->setAction('default');
-  }
-
   /**
    * @var Exception
    */
-  public $error;
+  protected $error;
+
+  function __construct(Router $router, Exception $error, array $options = []) {
+    if (!($error instanceof NotLoggableError) and !($error instanceof Error404)) {
+      Err::log($error);
+    }
+    $this->error = $error;
+    parent::__construct($router, $options);
+  }
 
   function action_default() {
     header('HTTP/1.0 404 Not Found');
