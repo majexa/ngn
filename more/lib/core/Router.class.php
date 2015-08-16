@@ -1,7 +1,7 @@
 <?php
 
 abstract class Router {
-use Options;
+  use Options;
 
   /**
    * Необходимо ли подключение к БД
@@ -52,16 +52,16 @@ use Options;
   function dispatch() {
     try {
       $this->controller = $this->getController();
+      if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
+      if (!is_object($this->controller)) throw new Error404('Controller not initialized');
+      // В этом месте, после диспатчинга контроллера, может произойти его подмена,
+      // т.е. контроллер $this->controller заменит себя другим контроллером или, другими словами, передаст управление
+      $this->controller->dispatch();
+      return $this;
     } catch (Exception $e) {
       $this->error($e);
       return $this;
     }
-    if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
-    if (!is_object($this->controller)) throw new Error404('Controller not initialized');
-    // В этом месте, после диспатчинга контроллера, может произойти его подмена,
-    // т.е. контроллер $this->controller заменит себя другим контроллером или, другими словами, передаст управление
-    $this->controller->dispatch();
-    return $this;
   }
 
   protected function headers() {
