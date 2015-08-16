@@ -40,25 +40,27 @@ use Options;
     if (($frontend = $this->getFrontendName())) Sflm::setFrontendName($frontend, true);
   }
 
+  /**
+   * @var null|Exception
+   */
+  protected $error = null;
+
+  protected function error(Exception $e) {
+    $this->error = $e;
+  }
+
   function dispatch() {
-    $this->controller = $this->getController();
+    try {
+      $this->controller = $this->getController();
+    } catch (Exception $e) {
+      $this->error($e);
+      return $this;
+    }
     if (getConstant('IS_DEBUG') and $this->req['showCtrl']) die2('Controller: '.get_class($this->controller));
     if (!is_object($this->controller)) throw new Error404('Controller not initialized');
     // В этом месте, после диспатчинга контроллера, может произойти его подмена,
     // т.е. контроллер $this->controller заменит себя другим контроллером или, другими словами, передаст управление
     $this->controller->dispatch();
-    return $this;
-
-    if (get_class($this->controller) == 'Ctrl404') {
-      $this->controller->dispatch();
-    } else {
-      try {
-        $this->controller->dispatch();
-      } catch (Exception $e) {
-        $this->controller = (new Ctrl404($this, $e))->dispatch();
-        if (get_class($e) != 'Error404') Err::log($e);
-      }
-    }
     return $this;
   }
 
@@ -117,13 +119,20 @@ use Options;
   protected $html;
 
   function getOutput() {
+    if ($this->error) {
+      return (new Ctrl404($this, $this->error))->dispatch()->getOutput();
+    }
     if (!$this->controller) throw new Exception('Controller not defined');
     Err::noticeSwitch(false);
-    $this->html = $this->controller->getOutput();
-    $this->afterOutput();
-    //$this->sflmStore();
-    //$this->sflmInject();
-    return $this->html;
+    try {
+      $this->html = $this->controller->getOutput();
+      $this->afterOutput();
+      //$this->sflmStore();
+      //$this->sflmInject();
+      return $this->html;
+    } catch (Exception $e) {
+      return (new Ctrl404($this, $e))->dispatch()->getOutput();
+    }
   }
 
 }

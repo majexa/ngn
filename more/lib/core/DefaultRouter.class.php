@@ -10,15 +10,7 @@ class DefaultRouter extends Router {
     return 'Ctrl';
   }
 
-  /**
-   * Какие у нас бывают роутинги
-   * Ctrl[ProjectName]Default
-   * CtrlDefault
-   * Ctrl[param 0]
-   *
-   * @return bool|Router
-   */
-  function _getController() {
+  protected function getControllerClass() {
     if (isset($this->req->params[0])) {
       $class = 'Ctrl'.ucfirst(PROJECT_KEY).ucfirst($this->req->params[0]);
       if (!class_exists($class)) {
@@ -41,6 +33,19 @@ class DefaultRouter extends Router {
       }
       if (!class_exists($class)) return false; // throw new NotFoundException("ctrl $class");
     }
+    return $class;
+  }
+
+  /**
+   * Какие у нас бывают роутинги
+   * Ctrl[ProjectName]Default
+   * CtrlDefault
+   * Ctrl[param 0]
+   *
+   * @return bool|Router
+   */
+  function _getController() {
+    if (!($class = $this->getControllerClass())) throw new Exception('no ctrl');
     return new $class($this);
   }
 
