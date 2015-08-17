@@ -44,22 +44,6 @@ class Db extends DbSimple_Mysql {
     return $this->name;
   }
 
-  function q($q) {
-    return $this->select($q);
-  }
-
-  function row($q) {
-    return $this->selectRow($q);
-  }
-
-  function col($q) {
-    return $this->selectCol($q);
-  }
-
-  function cell($q) {
-    return $this->selectCell($q);
-  }
-
   /**
    * Возвращает массив с именами всех таблиц NGN
    */
