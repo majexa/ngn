@@ -25,8 +25,7 @@ Ngn.Carousel.implement({
   
   select: function(index) {
     if (this.checkLink()) return this;
-    
-    if ($defined(this.selectedIndex)) {
+    if (this.selectedIndex) {
       // 0
       this.elements[this.selectedIndex].removeClass('sel');
       // -1
@@ -36,11 +35,8 @@ Ngn.Carousel.implement({
       if (this.elements[this.selectedIndex + this.initElementsN])
         this.elements[this.selectedIndex + this.initElementsN].removeClass('sel');
     }
-    
     this.toElementIndex(index-this.selectOffset);
-    
     this.selectedIndex = this.currentIndex + this.selectOffset;
-
     // 0
     this.elements[this.selectedIndex].addClass('sel');
     // -1
@@ -49,7 +45,6 @@ Ngn.Carousel.implement({
     // +1
     if (this.elements[this.selectedIndex + this.initElementsN])
       this.elements[this.selectedIndex + this.initElementsN].addClass('sel');
-    
     this.fireEvent('select', this.elements[this.selectedIndex].retrieve('initIndex'));
   },
   
