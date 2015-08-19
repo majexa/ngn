@@ -21,7 +21,6 @@ class DdoSettings {
   }
 
   function getVar($prefix, $suffix = null) {
-    output($this->getKey($prefix, $suffix));
     return Config::getVar($this->getKey($prefix, $suffix), true);
   }
 

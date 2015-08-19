@@ -401,6 +401,15 @@ class Ddo {
    * @return string
    * @throws Exception
    */
+
+    /**
+     * @api
+     * Созраняет отрендеренные данные в Excel-файл
+     *
+     * @param string $file Файл для сохранения
+     * @param bool $header Добавлять заголовоки колонок в таблицу
+     * @throws Exception
+     */
   function xls($file, $header = true) {
     Err::noticeSwitch(false);
     $this->check();
@@ -416,6 +425,7 @@ class Ddo {
       }
       $exl->writeLine($row);
     }
+    $exl->close();
     Err::noticeSwitchBefore();
   }
 

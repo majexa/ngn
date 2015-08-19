@@ -34,6 +34,15 @@ class Err {
     if (!$plainText) $errstr = str_replace("\n", "<br />", $errstr);
     else $errstr = strip_tags($errstr);
     print $errstr ? $errstr.($plainText ? "\n---------------\n" : '<hr />') : '';
+//      die2([
+//        Arr::append([
+//          [
+//            'file' => $errfile,
+//            'line' => $errline
+//          ]
+//        ], $trace),
+//        $trace
+//      ]);
     print empty($trace) ? getBacktrace(!$plainText) : _getBacktrace(Arr::append([
       [
         'file' => $errfile,

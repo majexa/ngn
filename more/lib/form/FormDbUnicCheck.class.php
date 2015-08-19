@@ -14,7 +14,7 @@ class FormDbUnicCheck {
     if (!$this->form->create and !$el->valueChanged) return;
     if (!$tableField) $tableField = $name;
     $this->cond->addF($tableField, $el->value());
-    if (db()->selectCell("SELECT * FROM {$this->cond->table}".$this->cond->all())) $el->error($errorText);
+    if (db()->selectCell("SELECT * FROM {$this->cond->table}".$this->cond)) $el->error($errorText);
   }
 
 }

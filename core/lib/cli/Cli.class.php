@@ -28,7 +28,9 @@ class Cli {
 
   static function shell($cmd, $output = true) {
     if ($output) output($cmd);
-    return `$cmd`;
+    $r = `$cmd`;
+    if ($output) print $r;
+    return $r;
   }
 
   static function confirm($text) {

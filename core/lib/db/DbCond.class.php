@@ -34,6 +34,10 @@ class DbCond {
     $this->tablePrefix = $table ? $table.'.' : '';
   }
 
+  function __toString() {
+      return $this->all();
+  }
+
   function all() {
     $conds = $this->getConditions();
     return $conds ? $this->getJoinCond()." WHERE 1\n".implode("\n", $conds)."\n" : '';

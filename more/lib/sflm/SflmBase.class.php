@@ -178,6 +178,7 @@ abstract class SflmBase {
    * по ссылке http://site.com/$path
    *
    * @param string $path Путь к sf-русурсу
+   * @return string
    * @throws Exception
    */
   function getAbsPath($path) {

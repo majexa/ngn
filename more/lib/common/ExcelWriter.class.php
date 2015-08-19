@@ -2,35 +2,37 @@
 
 class ExcelWriter {
 
-  public $fp = null, $error, $state = 'CLOSED', $newRow = false;
+  public $fp = null, $error, $state = self::STATE_CLOSED, $newRow = false;
 
   function __construct($file = "") {
     return $this->open($file);
   }
 
+  const STATE_OPENED = 1;
+  const STATE_CLOSED = 2;
+
   function open($file) {
-    if ($this->state != 'CLOSED') return false;
-    if (!empty($file)) $this->fp = fopen($file, "a+");
+    if ($this->state != self::STATE_CLOSED) return false;
+    if (!empty($file)) $this->fp = fopen($file, 'a+');
     else return false;
     if ($this->fp == false) return false;
-    $this->state = 'OPENED';
-    fwrite($this->fp, $this->GetHeader());
+    $this->state = self::STATE_OPENED;
+    fwrite($this->fp, $this->getHeader());
     return $this->fp;
   }
 
   function close() {
-    if ($this->state != 'OPENED') return false;
+    if ($this->state != self::STATE_OPENED) return;
     if ($this->newRow) {
       fwrite($this->fp, "</tr>");
       $this->newRow = false;
     }
-    fwrite($this->fp, $this->GetFooter());
+    fwrite($this->fp, $this->getFooter());
     fclose($this->fp);
-    $this->state = 'CLOSED';
-    return;
+    $this->state = self::STATE_CLOSED;
   }
 
-  function GetHeader() {
+  function getHeader() {
     $header = <<<EOH
 			<html xmlns:o="urn:schemas-microsoft-com:office:office"
 			xmlns:x="urn:schemas-microsoft-com:office:excel"
@@ -141,22 +143,22 @@ EOH;
     return $header;
   }
 
-  function GetFooter() {
+  function getFooter() {
     return "</table></body></html>";
   }
 
   function writeLine($row) {
     foreach ($row as &$v) $v = str_replace('→', '/', $v);
     $row = Misc::iconvR(CHARSET, 'cp1251', $row);
-    if ($this->state != 'OPENED') return false;
-    if (!is_array($row)) return false;
+    if ($this->state != self::STATE_OPENED) throw new Exception('!');
+    if (!is_array($row)) throw new Exception('!');
     fwrite($this->fp, "<tr>\n");
     foreach ($row as $col) fwrite($this->fp, "  <td width=64>$col</td>\n");
     fwrite($this->fp, "</tr>\n");
   }
 
   function writeRow() {
-    if ($this->state != 'OPENED') return false;
+    if ($this->state != self::STATE_OPENED) return false;
     if ($this->newRow == false) fwrite($this->fp, "<tr>");
     else
       fwrite($this->fp, "</tr><tr>");
@@ -164,8 +166,8 @@ EOH;
   }
 
   function writeCol($value) {
-    if ($this->state != 'OPENED') return false;
-    fwrite($this->fp, "<td class=xl24 width=64 >$value</td>");
+    if ($this->state != self::STATE_OPENED) return false;
+    fwrite($this->fp, "<td class=xl24 width=64>$value</td>");
   }
 
   function write($data) {

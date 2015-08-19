@@ -43,18 +43,6 @@ class SflmJsClasses {
     return $r;
   }
 
-  /*
-  protected function addClassStrict($class, $source) {
-    if ($this->frontendClasses->exists($class)) {
-      Sflm::output("Class '$class' exists on strict adding. Skipped. src: $source");
-      return;
-    }
-    $this->addClass($class, $source, function () use ($class, $source) {
-      throw new Exception(SflmJsClasses::captionPrefix($source, $class)." NOT FOUND");
-    });
-  }
-  */
-
   protected function namespaceInitExists($code, $namespace) {
     return preg_match("/$namespace = {}/", $code, $m);
   }
@@ -62,7 +50,6 @@ class SflmJsClasses {
   /**
    * @param string $class Имя класса или объекта
    * @param string $source Описание источника, откуда происходит добавление
-   * @param callable $failure
    * @param bool $strict
    * @return bool
    * @throws Exception
