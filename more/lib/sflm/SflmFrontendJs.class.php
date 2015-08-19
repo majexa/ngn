@@ -55,7 +55,7 @@ class SflmFrontendJs extends SflmFrontend {
 
   function processHtml($html, $source) {
     $this->checkNotStored();
-    if (!preg_match_all('!<script>(.*)</script>!s', $html, $m)) return;
+    if (!preg_match_all('!<script>(.*)</script>!s', $html, $m)) return false;
     foreach ($m[1] as $code) $this->processCode($code, $source);
     return $html;
   }

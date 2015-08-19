@@ -56,6 +56,7 @@ class Patcher {
   function patch() {
     $libIds = $this->getLastPatchLibIds();
     $projectIds = $this->getProjectCurrentPatchIds();
+      //die2([$libIds, $projectIds]);
     foreach ($projectIds as $lib => $projectId) if ($projectId < $libIds[$lib]) $this->runPatches($lib);
   }
 
