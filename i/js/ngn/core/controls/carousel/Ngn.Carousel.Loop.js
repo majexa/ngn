@@ -96,8 +96,8 @@ Ngn.Carousel.Loop = new Class({
   toElementIndex: function(index) {
     if(this.checkLink()) return this;
     if (index < 0) {
-      index += this.nextScreen(); // сначало меняем положение моментально
-      return this.toElementIndex(index); // потом повторяем сдвиг для узмененного индекса 
+      index += this.nextScreen(); // сначала меняем положение моментально
+      return this.toElementIndex(index); // потом повторяем сдвиг для измененного индекса 
     }
     else if (index+this.visibleElementsN > this.elements.length) {
       index += this.prevScreen();
@@ -111,7 +111,6 @@ Ngn.Carousel.Loop = new Class({
   setElementIndex: function(index) {
     this.set(index*this.elementWidth, 0);
     this.currentIndex = index;
-    //this.fireEvent('indexChange');
   },
   
   // возаращает дельту количества элементов сдвига

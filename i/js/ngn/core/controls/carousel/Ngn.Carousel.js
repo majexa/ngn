@@ -50,7 +50,7 @@ Ngn.Carousel = new Class({
   toNext: function() {
     if (!this.check()) return this;
     this.currentIndex = this.getNextIndex();
-    if (!this.elements[this.currentIndex]) return; // masted fix
+    if (!this.elements[this.currentIndex]) return;
     this.toElement(this.elements[this.currentIndex]);
     this.fireEvent('next');
     return this;
@@ -59,7 +59,7 @@ Ngn.Carousel = new Class({
   toPrevious: function() {
     if (!this.check()) return this;
     this.currentIndex = this.getPreviousIndex();
-    if (!this.elements[this.currentIndex]) return; // masted fix
+    if (!this.elements[this.currentIndex]) return;
     this.toElement(this.elements[this.currentIndex]);
     this.fireEvent('previous');
     return this;
