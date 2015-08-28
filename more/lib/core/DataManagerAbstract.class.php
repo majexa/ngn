@@ -90,6 +90,11 @@ abstract class DataManagerAbstract extends Options2 {
     $this->init();
   }
 
+  function html() {
+    if (!$this->requested) throw new Exception('U need to make request ['.get_class($this).'::requestCreate(), '.get_class($this).'::requestUpdate()] before call this method');
+    return $this->form->html();
+  }
+
   protected function defineOptions() {
     return [
       'strict'         => true,
@@ -118,6 +123,8 @@ abstract class DataManagerAbstract extends Options2 {
     return get_class($this);
   }
 
+  protected $requested = false;
+
   /**
    * @api
    * Создает новую запись
@@ -126,6 +133,7 @@ abstract class DataManagerAbstract extends Options2 {
    * @return bool|integer
    */
   function requestCreate(array $default = []) {
+    $this->requested = true;
     $this->form->fromRequest = true;
     $this->form->create = true;
     $this->initTinyInitJs();
@@ -183,6 +191,7 @@ abstract class DataManagerAbstract extends Options2 {
    */
   function requestUpdate($id) {
     if (!is_numeric($id)) throw new Exception('$id not numeric: '.$id);
+    $this->requested = true;
     $this->defaultData = Misc::checkEmpty($this->getItem($id), "item ID=$id does not exists");
     $this->fieldTypeAction('source2formFormat', $this->defaultData);
     $this->source2formFormat();
