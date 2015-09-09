@@ -6,32 +6,31 @@ class DefaultRouter extends Router {
     return 'default';
   }
 
-  protected function prefix() {
-    return 'Ctrl';
+  protected function prefix($prefix = '') {
+    return 'Ctrl'.$prefix;
   }
 
-  protected function getControllerClass() {
+  protected function getControllerClass($prefix = '') {
+    $ctrl = 'Ctrl'.$prefix;
     if (isset($this->req->params[0])) {
-      $class = 'Ctrl'.ucfirst(PROJECT_KEY).ucfirst($this->req->params[0]);
+      $class = $ctrl.ucfirst(PROJECT_KEY).ucfirst($this->req->params[0]);
       if (!class_exists($class)) {
-        $class = $this->prefix().ucfirst($this->req->params[0]);
+        $class = $this->prefix($prefix).$prefix.ucfirst($this->req->params[0]);
       }
     }
-
     $subDomain = rtrim(Misc::removeSuffix(SITE_DOMAIN, $_SERVER['HTTP_HOST']), '.');
     if (!isset($class) or !class_exists($class)) {
-
-      if ($subDomain and class_exists('Ctrl'.ucfirst(PROJECT_KEY).ucfirst($subDomain))) {
-        $class = 'Ctrl'.ucfirst(PROJECT_KEY).ucfirst($subDomain);
+      if ($subDomain and class_exists($ctrl.ucfirst(PROJECT_KEY).ucfirst($subDomain))) {
+        $class = $ctrl.ucfirst(PROJECT_KEY).ucfirst($subDomain);
       }
-      elseif (class_exists('Ctrl'.ucfirst(PROJECT_KEY).'Default')) {
-        $class = 'Ctrl'.ucfirst(PROJECT_KEY).'Default';
+      elseif (class_exists($ctrl.ucfirst(PROJECT_KEY).'Default')) {
+        $class = $ctrl.ucfirst(PROJECT_KEY).'Default';
       }
-      elseif (class_exists($this->prefix().'Default')) {
-        $class = $this->prefix().'Default';
+      elseif (class_exists($this->prefix($prefix).'Default')) {
+        $class = $this->prefix($prefix).'Default';
       }
       else {
-        $class = 'CtrlDefault';
+        $class = $ctrl.'Default';
       }
       if (!class_exists($class)) return false; // throw new NotFoundException("ctrl $class");
     }
