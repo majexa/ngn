@@ -60,4 +60,12 @@ class SflmFrontendJs extends SflmFrontend {
     return $html;
   }
 
+  function _code() {
+    $code = parent::_code();
+    $mtDependencies = O::get('SflmMtDependencies', NGN_ENV_PATH.'/mootools');
+    $mtCode = $mtDependencies->contents('Core');
+    $mtCode .= $mtDependencies->parse($code);
+    return $mtCode."\n".$code;
+  }
+
 }
