@@ -641,29 +641,6 @@ abstract class CtrlBase {
 
   function error404($title = 'Страница не найдена', $text = '') {
     throw new Exception($title);
-    /*
-    // я думаю, это лишний механизм
-    // вполне можно было бы обойтись выкидыванием эксепшенов,
-    // а шаблоны переопределять по существующим путям
-    header('HTTP/1.0 404 Not Found');
-    if (!$this->hasOutput) {
-      if ($this->isJson) $this->json['error'] = $title;
-      else print "<h1>$title</h1>$text";
-      return;
-    }
-    $this->setDefaultTpl();
-    $this->isDefaultAction = false;
-    // Если в результате экшенов получилось так, что была определена 404 страница,
-    // это значит, что экшен не прошел успешно и действий никаких после него 
-    // вызывать не надо
-    $this->afterActionDisabled = true;
-    $this->error404 = [
-      'backtrace' => getBacktrace(false),
-      $title
-    ];
-    $this->d['tpl'] = 'errors/404';
-    $this->d['text'] = $text;
-    */
   }
 
   protected function jsonFormAction(Form $form) {

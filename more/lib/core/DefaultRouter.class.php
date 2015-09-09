@@ -17,8 +17,10 @@ class DefaultRouter extends Router {
         $class = $this->prefix().ucfirst($this->req->params[0]);
       }
     }
+
     $subDomain = rtrim(Misc::removeSuffix(SITE_DOMAIN, $_SERVER['HTTP_HOST']), '.');
     if (!isset($class) or !class_exists($class)) {
+
       if ($subDomain and class_exists('Ctrl'.ucfirst(PROJECT_KEY).ucfirst($subDomain))) {
         $class = 'Ctrl'.ucfirst(PROJECT_KEY).ucfirst($subDomain);
       }

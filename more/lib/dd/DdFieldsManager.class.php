@@ -2,6 +2,11 @@
 
 class DdFieldsManager extends DbItemsManager {
 
+  /**
+   * @var DdFieldsForm
+   */
+  public $form;
+
   public $strName;
 
   /**

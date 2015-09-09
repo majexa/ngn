@@ -11,4 +11,7 @@
   }
 </style>
 
-<div class="error404"><?= $d['text'] ?></div>
+<div class="error404">
+    <h1>404 — Страница не найдена</h1>
+    <?= $d['text'] ?>
+</div>
