@@ -30,17 +30,20 @@ Ngn.DdoCutText = new Class({
         html: html.substr(this.options.charsLimit, html.length)
       }).inject(eText);
     }.bind(this));
-    new Ngn.GroupToggler(document.getElement('.ddItems'), {
-      itemSelector: '.item',
-      btnSelector: '.toggler',
-      bodySelector: '.afterCut',
-      itemIdParam: function(eItem) {
-        return str + eItem.get('data-id');
-      },
-      storage: false,
-      openForever: true,
-      displayValue: 'inline'
-    });
+    var eItems = document.getElement('.ddItems');
+    if (eItems) {
+      new Ngn.GroupToggler(eItems, {
+        itemSelector: '.item',
+        btnSelector: '.toggler',
+        bodySelector: '.afterCut',
+        itemIdParam: function(eItem) {
+          return str + eItem.get('data-id');
+        },
+        storage: false,
+        openForever: true,
+        displayValue: 'inline'
+      });
+    }
   }
 
 });

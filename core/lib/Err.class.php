@@ -43,7 +43,7 @@ class Err {
 //        ], $trace),
 //        $trace
 //      ]);
-    print empty($trace) ? getBacktrace(!$plainText) : _getBacktrace(Arr::append([
+    print empty($trace) ? getBacktrace(!$plainText, 2) : _getBacktrace(Arr::append([
       [
         'file' => $errfile,
         'line' => $errline

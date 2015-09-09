@@ -283,9 +283,9 @@ class Db extends DbSimple_Mysql {
     $this->query("DELETE FROM $table WHERE id=?d", $id);
   }
 
-  function update($table, $id, array $data) {
+  function update($table, $id, array $data, $idKey = 'id') {
     Misc::checkEmpty($data);
-    $this->query("UPDATE $table SET ?a WHERE id=?d", $data, $id);
+    $this->query("UPDATE $table SET ?a WHERE $idKey=?d", $data, $id);
   }
 
   function setPrefix($prefix) {

@@ -467,6 +467,11 @@ class Form {
   }
 
   /**
+   * @var null|FieldEAbstract
+   */
+  public $lastErrorElement = null;
+
+  /**
    * @api
    * Произваодит валидацию введёных в форму данных
    *
@@ -486,6 +491,7 @@ class Form {
           $this->globalError($el->error);
         } else {
           $this->lastError = $el->error;
+          $this->lastErrorElement = $el;
           $this->hasErrors = true;
         }
       }
