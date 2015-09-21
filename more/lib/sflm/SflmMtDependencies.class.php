@@ -4,6 +4,7 @@
  * MooTools Dependencies Manger
  */
 class SflmMtDependencies {
+use SflmMtDependenciesOrder;
 
   protected $mootoolsReposRoot, $buildFolder, $files, $dependencies = [], $data = [];
 
@@ -18,6 +19,7 @@ class SflmMtDependencies {
     $c = file_get_contents($file);
     $c = preg_replace('/\\/\\*<\d+\\.\d+compat>\\*\\/.*\\/\\*<\\/\d+\\.\d+compat>\\*\\//Ums', '', $c);
     $c = preg_replace('/\\/\\/<\d+\\.\d+compat>.*\\/\\/<\\/\d+\\.\d+compat>/Ums', '', $c);
+    $c = str_replace("\r", '', $c);
     return $c;
   }
 
@@ -30,7 +32,7 @@ class SflmMtDependencies {
   protected $parsedPackages = [];
 
   /**
-   * áÎÁÌÉÚÉÒÕÅÔ JavaScript ÎÁ ÎÁÌÉÞÉÅ × Î£Í MooTools ÂÉÂÌÉÏÔÅË É ×ÏÚ×ÒÁÝÁÅÔ JavaScript-ËÏÄ Ó ÎÉÍÉ
+   * ÐÐ½Ð°Ð»Ð¸Ð·Ð¸Ñ€ÑƒÐµÑ‚ JavaScript Ð½Ð° Ð½Ð°Ð»Ð¸Ñ‡Ð¸Ðµ Ð² Ð½Ñ‘Ð¼ MooTools Ð±Ð¸Ð±Ð»Ð¸Ð¾Ñ‚ÐµÐº Ð¸ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ JavaScript-ÐºÐ¾Ð´ Ñ Ð½Ð¸Ð¼Ð¸
    *
    * @param $code
    * @return string
@@ -38,49 +40,75 @@ class SflmMtDependencies {
    */
   function parse($code) {
     $r = '';
+    $r .= $this->addNamespace($code);
     foreach ($this->names() as $name) {
-      if (!preg_match('/[^.a-zA-Z0-9_$]'.$name.'/', $code)) continue;
-      $package = $this->find($name);
-      if (in_array($package['package'], $this->parsedPackages)) {
-        Sflm::log("Mt-package '{$package['package']}' already parsed (name: $name)");
-      }
-      Sflm::log("Adding mt-package '{$package['package']}' (name: $name)");
-      $r .= file_get_contents($package['file']);
+      if (!strstr($code, $name)) continue;
+      $r .= $this->parseContentsR($name, 'code');
     }
     return $r;
   }
 
+  protected $namespaceAdded = false;
+
+  protected function addNamespace($code) {
+    if ($this->namespaceAdded) return '';
+    if (strstr($code, 'Ngn.')) {
+      $this->namespaceAdded = true;
+      return "var Ngn = {};\n";
+    }
+    return '';
+  }
+
   /**
-   * ÷ÏÚ×ÒÁÝÁÅÔ ÓÏÄÅÒÖÁÎÉÅ ÆÁÊÌÁ × ÐÁËÅÔÅ
+   * Ð’Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÑ‚ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð° Ð² Ð¿Ð°ÐºÐµÑ‚Ðµ
    *
-   * @param string $name ðÁËÅÔ
+   * @param string $name ÐŸÐ°ÐºÐµÑ‚
    * @return mixed|string
    */
   function contents($name) {
-    return file_get_contents($this->find($name)['file']);
+    Sflm::log("Mt: getting contents of '$name' package");
+    return $this->getContents($this->find($name)['file']);
   }
 
-//
-//  function build($package, $buildFolder) {
-//    file_put_contents($buildFolder.'/'.$package.'.js', $this->packageContents($package));
-//  }
+  function parseContentsR($name, $source = 'default') {
+    $r = '';
+    $package = $this->find($name);
+    if (in_array($package['package'], $this->parsedPackages)) {
+      return '';
+    }
+    $this->parsedPackages[] = $package['package'];
+    if (!empty($package['requires'])) {
+      foreach ($package['requires'] as $_name) {
+        $r .= $this->parseContentsR($_name, $package['package']);
+      }
+    }
+    Sflm::log('Mt: adding "'.$package['package'].'", src: '.$source);
+    $r .= $this->getContents($package['file']);
+    return $r;
+  }
 
   protected function _loadDependencies($file) {
     $c = $this->getContents($file);
-    preg_match_all('|/\\*(.*)\\*/|msU', $c, $m);
-    foreach ($m[1] as $v) {
-      if (!preg_match('/name: ([^\n]+)/', $v, $m2)) continue;
-      $m2[1] = trim($m2[1]);
-      $this->data[$m2[1]]['package'] = $m2[1];
-      $this->data[$m2[1]]['file'] = (string)$file;
-      $this->addData($m2[1], $v, 'provides');
-      $this->addData($m2[1], $v, 'requires');
+    preg_match_all('|/\\*\\n---(.*)\.\.\.\\n|msU', $c, $m);
+    foreach ($m[1] as $mtDocComment) {
+      $d = sfYaml::load($mtDocComment);
+      $this->data[$d['name']]['package'] = $d['name'];
+      $this->data[$d['name']]['file'] = (string)$file;
+      $this->data[$d['name']]['provides'] = (array)$d['provides'];
+      if (isset($d['requires'])) {
+        $this->data[$d['name']]['requires'] = (array)$d['requires'];
+      }
     }
   }
 
   protected function addData($package, $v, $keyword) {
     if (preg_match('/'.$keyword.': ([^\n]+)/', $v, $m)) {
       $this->data[$package][$keyword] = array_map('trim', explode(',', trim(trim($m[1]), '[]')));
+      foreach ($this->data[$package][$keyword] as $k => $v) {
+        if (strstr($v, '/')) {
+          $this->data[$package][$keyword][$k] = preg_replace('/.*\\/(.*)/', '$1', $v);
+        }
+      }
     }
   }
 
@@ -99,6 +127,12 @@ class SflmMtDependencies {
    * @return array
    */
   function find($name) {
+    if (strstr($name, '/')) {
+      $name = explode('/', $name)[1];
+    }
+    if (isset($this->data[$name])) {
+      return $this->data[$name];
+    }
     foreach ($this->data as $package => $v) {
       if (in_array($name, $v['provides'])) {
         return $v;

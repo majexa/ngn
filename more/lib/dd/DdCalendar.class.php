@@ -24,11 +24,20 @@ class DdCalendar extends Calendar {
     $this->setStartDay(1);
   }
 
-  function getMonthView($month, $year) {
-    $this->daysDataExists = db()->selectCol(<<<SQL
-SELECT DISTINCT DAY(eventDate) FROM dd_i_{$this->strName} WHERE MONTH(eventDate)=$month and YEAR(eventDate)=$year
+  function getDaysDataExists($month, $year) {
+    return db()->selectCol(<<<SQL
+SELECT
+  DISTINCT DAY(eventDate)
+FROM dd_i_{$this->strName}
+WHERE
+  MONTH(eventDate)=$month AND
+  YEAR(eventDate)=$year
 SQL
     );
+  }
+
+  function getMonthView($month, $year) {
+    $this->daysDataExists = $this->getDaysDataExists($month, $year);
     return parent::getMonthView($month, $year);
   }
 
