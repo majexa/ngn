@@ -241,6 +241,7 @@ abstract class SflmBase {
       else {
         $q = [];
       }
+      die2("web 2");
       file_put_contents(Sflm::$webPath.'/'.$cachePath, Misc::getIncludedByRequest($path, $q));
     }
     return '/'.UPLOAD_DIR.'/'.$cachePath;
@@ -292,7 +293,7 @@ abstract class SflmBase {
     return $this->type.'/cache/'.str_replace('/', '-', $package).'.'.$this->type;
   }
 
-  function getUrl($package, $code = null, $force = true) {
+  function getUrl($package, $code = null, $force = false) {
     if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$webPath.'/'.$this->filePath($package))) {
       // Если идёт отладка статических файлов или собранного файла не существует
       $this->storeLib($package, $code);

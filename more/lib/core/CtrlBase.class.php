@@ -257,7 +257,7 @@ abstract class CtrlBase {
       }
     }
     if (!$this->hasOutput) return '';
-    header("Content-type: text/html; charset=".CHARSET);
+    if (empty($this->router->options['disableHeaders'])) header("Content-type: text/html; charset=".CHARSET);
     if (isset($this->output)) return $this->output;
     if (empty($this->d['tpl'])) {
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
@@ -271,7 +271,6 @@ abstract class CtrlBase {
     protected function processSflm($html) {
       Sflm::frontend('js')->processHtml($html, 'page html post-process');
       $this->sflmStore();
-      Sflm::frontend('js')->getTags();
       $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
       return str_replace('{sflm}', $tags, $html);
     }

@@ -140,7 +140,7 @@ abstract class SflmFrontend {
    * @throws Exception
    */
   function getTags() {
-    $this->checkStored();
+    //$this->checkStored();
     $html = $this->base->getTags($this->name, $this->_code());
 //    if (isset(Sflm::$debugPaths[$this->base->type])) {
 //      foreach (Sflm::$debugPaths[$this->base->type] as $path) {
@@ -171,11 +171,11 @@ abstract class SflmFrontend {
   function store($source = 'direct') {
     $this->checkNotStored();
     $this->storeBacktrace = getBacktrace(false);
-    if (!$this->newPaths and !$this->newAbsPaths) {
-      $this->stored = true;
-      $this->log("No new paths. Storing skipped");
-      return;
-    }
+//    if (!$this->newPaths and !$this->newAbsPaths) {
+//      $this->stored = true;
+//      $this->log("No new paths. Storing skipped");
+//      return;
+//    }
     $this->log("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     $this->storeAbsPaths();

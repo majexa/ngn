@@ -14,6 +14,12 @@ Ngn.FramesSlider = new Class({
       this.frames[i].setStyle('display', 'none');
     }
   },
+  /**
+   * Нет необходимости выставлять стили для фреймов. Их определение заложено в клиентской бизнес-логике
+   *
+   * @param framesContainer Контейнер по ширине одного фрейма
+   * @param options
+   */
   initialize: function(framesContainer, options) {
     this.setOptions(options);
     this.frameWidth = this.options.frameWidth || window.getSize().x;
@@ -55,9 +61,12 @@ Ngn.FramesSlider = new Class({
   initFramesWidth: function(offset) {
     this.eFrames.setStyle('width', this.framesWidth(offset) + 'px');
     for (var i = 0; i < this.frames.length; i++) {
-      this.frames[i].setStyle('width', this.frameWidth + 'px');
-      this.frames[i].setStyle('display', 'inline-block');
+      this.setFrameStyles(frame);
     }
+  },
+  setFrameStyles: function(frame) {
+    frame.setStyle('width', this.frameWidth + 'px');
+    frame.setStyle('float', 'left');
   },
   framesWidth: function(offset) {
     if (!offset) offset = 0;
@@ -83,11 +92,9 @@ Ngn.FramesSlider = new Class({
     this.initFramesWidth(1);
     this.frames.push(new Element('div', {
       'class': this.options.frameCssClass,
-      html: html,
-      styles: {
-        width: this.frameWidth
-      }
+      html: html
     }).inject(this.eFrames));
+    this.setFrameStyles(this.frames[this.frames.length - 1]);
   },
   popFrame: function() {
     this.frames[this.frames.length - 1].dispose();

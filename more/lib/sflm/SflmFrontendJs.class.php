@@ -7,8 +7,20 @@ class SflmFrontendJs extends SflmFrontend {
    */
   public $classes;
 
+  /**
+   * @var SflmMtDependencies
+   */
+  protected $mtDependencies;
+
+  /**
+   * @var string
+   */
+  protected $mtCode = '';
+
   protected function init() {
     $this->classes = new SflmJsClasses($this);
+    $this->mtDependencies = O::get('SflmMtDependencies', NGN_ENV_PATH.'/mootools');
+    //$this->mtCode = $this->mtDependencies->contents('Core'); // sflmJs-код не может существовать без mt-core кода
   }
 
   protected function __addPath($path, $source = null) {
@@ -51,6 +63,7 @@ class SflmFrontendJs extends SflmFrontend {
   function processCode($code, $source) {
     $this->checkNotStored();
     $this->classes->processCode($code, $source);
+    $this->mtCode .= $this->mtDependencies->parse($code);
   }
 
   function processHtml($html, $source) {
@@ -62,10 +75,8 @@ class SflmFrontendJs extends SflmFrontend {
 
   function _code() {
     $code = parent::_code();
-    $mtDependencies = O::get('SflmMtDependencies', NGN_ENV_PATH.'/mootools');
-    $mtCode = $mtDependencies->contents('Core');
-    $mtCode .= $mtDependencies->parse($code);
-    return $mtCode."\n".$code;
+    $this->mtCode .= $this->mtDependencies->parse($code);
+    return $this->mtCode.$code;
   }
 
 }
