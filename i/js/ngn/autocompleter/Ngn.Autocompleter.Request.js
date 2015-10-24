@@ -4,8 +4,8 @@ Ngn.Autocompleter.Request = new Class({
   options: {/*
    indicator: null,
    indicatorClass: null,
-   onRequest: $empty,
-   onComplete: $empty,*/
+   onRequest: Function.from(),
+   onComplete: Function.from(),*/
     postData: {},
     ajaxOptions: {},
     postVar: 'value'
@@ -43,7 +43,7 @@ Ngn.Autocompleter.Request.JSON = new Class({
 
   initialize: function(el, url, options) {
     this.parent(el, options);
-    this.request = new Ngn.Request.JSON($merge({
+    this.request = new Ngn.Request.JSON(Object.merge({
       'url': url,
       'link': 'cancel'
     }, this.options.ajaxOptions)).addEvent('onComplete', this.queryResponse.bind(this));
@@ -61,7 +61,7 @@ Ngn.Autocompleter.Request.HTML = new Class({
 
   initialize: function(el, url, options) {
     this.parent(el, options);
-    this.request = new Request.HTML($merge({
+    this.request = new Request.HTML(Object.merge({
       'url': url,
       'link': 'cancel',
       'update': this.choices

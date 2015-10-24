@@ -11,7 +11,7 @@ Ngn.Form.El.WisiwigSimple = new Class({
   init: function() {
     this.parent();
     var settings = new (this.getTinySettingsClass())(this.getTinySettingsOptions()).getSettings();
-    if (this.options.tinySettings) settings = $merge(settings, this.options.tinySettings);
+    if (this.options.tinySettings) settings = Object.merge(settings, this.options.tinySettings);
     new Ngn.TinyInit({
       parent: this.form.eForm,
       selector: '.name_' + this.name + ' textarea',

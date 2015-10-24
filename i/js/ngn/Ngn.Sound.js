@@ -9,15 +9,15 @@ Ngn.Sound = new Class({
     pan: 0,            //pan between -100 (left) and 100 (right)
     progressInterval: 500, //milliseconds between getProgress(); calls
     positionInterval: 500,//milliseconds between getPosition(); calls
-    onRegister: $empty,//fires when the sound is registered
-    onLoad: $empty,    //fires when the sound is downloaded
-    onPlay: $empty,    //fires when the sound begins playing
-    onPause: $empty,   //fires when the sound is paused
-    onStop: $empty,    //fires when the sound stops playing
-    onComplete: $empty, //fires when the sound completes playing
-    onProgress: $empty,//fires when download makes progress
-    onPosition: $empty,//fires when position within the song changes
-    onID3: $empty      //fires when ID3 tags become available
+    onRegister: Function.from(),//fires when the sound is registered
+    onLoad: Function.from(),    //fires when the sound is downloaded
+    onPlay: Function.from(),    //fires when the sound begins playing
+    onPause: Function.from(),   //fires when the sound is paused
+    onStop: Function.from(),    //fires when the sound stops playing
+    onComplete: Function.from(), //fires when the sound completes playing
+    onProgress: Function.from(),//fires when download makes progress
+    onPosition: Function.from(),//fires when position within the song changes
+    onID3: Function.from()      //fires when ID3 tags become available
   },
 
   initialize: function(url, manager, options) {

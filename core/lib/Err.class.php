@@ -29,7 +29,7 @@ class Err {
     ];
     if (!self::$show) return;
     if (!defined('IS_DEBUG') or IS_DEBUG === false) return;
-    $plainText = R::get('plainText');
+    $plainText = php_sapi_name() == 'cli' ? true : R::get('plainText');
     print $plainText ? "\n" : '<p class="error">';
     if (!$plainText) $errstr = str_replace("\n", "<br />", $errstr);
     else $errstr = strip_tags($errstr);

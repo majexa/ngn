@@ -1,6 +1,6 @@
 Ngn.cp = {
   init: function() {
-    if (Browser.Engine.trident) {
+    if (Browser.ie) {
       alert('Броузер Internet Explorer не боддерживается Панелью управления.');
       window.location = '/';
       return;

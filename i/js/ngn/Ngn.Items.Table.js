@@ -9,7 +9,7 @@ Ngn.Items.Table = new Class({
     itemElementSelector: 'tbody tr', // селектор строки
     isSorting: true,
     handle: '.dragBox',
-    onMoveComplete: $empty,
+    onMoveComplete: Function.from(),
     basePath: window.location.pathname
   },
 

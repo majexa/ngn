@@ -51,7 +51,7 @@ Ngn.Dialog.Loader.Advanced = new Class({
 
   options: {
     messageAreaClass: 'dialog-message dialog-message-loader',
-    onContinue: $empty(),
+    onContinue: Function.from(),
     noPadding: false
   },
 
@@ -81,7 +81,7 @@ Ngn.Dialog.Loader.Request = new Class({
 
   options: {
     loaderUrl: null,
-    onLoaderComplete: $empty,
+    onLoaderComplete: Function.from(),
     titleClose: false,
     footer: false
   },

@@ -15,9 +15,9 @@ Ngn.FramesSlider = new Class({
     }
   },
   /**
-   * Нет необходимости выставлять стили для фреймов. Их определение заложено в клиентской бизнес-логике
+   * п²п╣я┌ п╫п╣п╬п╠я┘п╬п╢п╦п╪п╬я│я┌п╦ п╡я▀я│я┌п╟п╡п╩я▐я┌я▄ я│я┌п╦п╩п╦ п╢п╩я▐ я└я─п╣п╧п╪п╬п╡. п≤я┘ п╬п©я─п╣п╢п╣п╩п╣п╫п╦п╣ п╥п╟п╩п╬п╤п╣п╫п╬ п╡ п╨п╩п╦п╣п╫я┌я│п╨п╬п╧ п╠п╦п╥п╫п╣я│-п╩п╬пЁп╦п╨п╣
    *
-   * @param framesContainer Контейнер по ширине одного фрейма
+   * @param framesContainer п п╬п╫я┌п╣п╧п╫п╣я─ п©п╬ я┬п╦я─п╦п╫п╣ п╬п╢п╫п╬пЁп╬ я└я─п╣п╧п╪п╟
    * @param options
    */
   initialize: function(framesContainer, options) {
@@ -43,9 +43,7 @@ Ngn.FramesSlider = new Class({
       onComplete: (function() {
         this.status = 0;
         this.eFramesContainer.setStyle('height', this.frames[this.frameN].getSize().y);
-        if (this.scrollStorage[this.frameN]) {
-          window.scrollTo(0, this.scrollStorage[this.frameN]);
-        }
+        window.scrollTo(0, this.getScrollOffset());
         if (this.oneTimeCompleteAction) {
           this.oneTimeCompleteAction();
           this.oneTimeCompleteAction = false;
@@ -53,15 +51,21 @@ Ngn.FramesSlider = new Class({
       }).bind(this)
     });
     window.addEvent('scroll', function(e) {
-      if (this.frameN == 2) return;
-      this.scrollStorage[this.frameN] = document.getScroll().y;
+      //if (this.frameN == 2) return;
+      this.scrollStorage[this.getScrollKey()] = document.getScroll().y;
     }.bind(this));
+  },
+  getScrollKey: function() {
+    return this.frameN;
+  },
+  getScrollOffset: function() {
+    return this.scrollStorage[this.getScrollKey()] || 0;
   },
   scrollStorage: {},
   initFramesWidth: function(offset) {
     this.eFrames.setStyle('width', this.framesWidth(offset) + 'px');
     for (var i = 0; i < this.frames.length; i++) {
-      this.setFrameStyles(frame);
+      this.setFrameStyles(this.frames[i]);
     }
   },
   setFrameStyles: function(frame) {

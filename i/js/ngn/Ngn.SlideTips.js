@@ -4,8 +4,8 @@ Ngn.SlideTips = new Class({
   
   options: {
     cycled: true,
-    onComplete: $empty, 
-    onShow: $empty
+    onComplete: Function.from(),
+    onShow: Function.from()
   },
   
   initialize: function(element, options) {

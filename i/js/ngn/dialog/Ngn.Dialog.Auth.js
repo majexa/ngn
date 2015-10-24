@@ -71,7 +71,7 @@ Ngn.Dialog.Auth = new Class({
   Implements: [Ngn.Dialog.Auth.Vk],
 
   options: {
-    onAuthComplete: $empty,
+    onAuthComplete: Function.from(),
     reloadOnAuth: true, //dialogClass: 'dialog fieldFullWidth',
     selectedTab: 0,
     id: 'auth',

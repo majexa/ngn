@@ -8,9 +8,9 @@ Ngn.Dotter = new Class({
     numDots: 10,
     property: 'text',
     reset: false/*,
-    onDot: $empty,
-    onStart: $empty,
-    onStop: $empty
+    onDot: Function.from(),
+    onStart: Function.from(),
+    onStop: Function.from()
     */
   },
 

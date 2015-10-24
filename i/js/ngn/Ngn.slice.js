@@ -46,7 +46,7 @@ Ngn.slice.Absolute = new Class({
         this.sliceEdit.container.removeClass('dragging');
       }.bind(this)
     };
-    new Drag.Move(sliceEdit.container, $merge({
+    new Drag.Move(sliceEdit.container, Object.merge({
       modifiers: {'x': 'left', 'y': 'top'},
       handle: btnMove
     }, opt));

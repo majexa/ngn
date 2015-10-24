@@ -6,7 +6,7 @@ Ngn.Dialog.Queue.Request = new Class({
   },
   
   getDialogOptions: function() {
-    return $merge(this.parent(), {
+    return Object.merge(this.parent(), {
       onSubmitSuccess: function(r) {
         if (r.dialog) {
           Ngn.Dialog.queue.add([eval(r.dialog.cls), r.dialog.options]);

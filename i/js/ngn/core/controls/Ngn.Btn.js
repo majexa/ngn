@@ -103,7 +103,7 @@ Ngn.Btn.btn = function(opt) {
   if (!opt) opt = {};
   if (!opt.cls) opt.cls = '';
   if (!opt.title && !opt.cls.contains('btn')) opt.cls = 'bordered ' + opt.cls;
-  var a = new Element('a', $merge({
+  var a = new Element('a', Object.merge({
     'class': (opt.cls.contains('icon') ? '' : 'smIcons ') + opt.cls,
     html: opt.title || ''
   }, opt.prop || {}));

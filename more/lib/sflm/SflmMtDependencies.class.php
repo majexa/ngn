@@ -43,7 +43,7 @@ use SflmMtDependenciesOrder;
     $r .= $this->addNamespace($code);
     foreach ($this->names() as $name) {
       if (!strstr($code, $name)) continue;
-      $r .= $this->parseContentsR($name, 'code');
+      $r .= $this->parseContentsR($name);
     }
     return $r;
   }
@@ -52,9 +52,9 @@ use SflmMtDependenciesOrder;
 
   protected function addNamespace($code) {
     if ($this->namespaceAdded) return '';
-    if (strstr($code, 'Ngn.')) {
+    if (strstr($code, Sflm::$namespace.'.')) {
       $this->namespaceAdded = true;
-      return "var Ngn = {};\n";
+      return "var ".Sflm::$namespace." = {};\n";
     }
     return '';
   }
@@ -70,7 +70,7 @@ use SflmMtDependenciesOrder;
     return $this->getContents($this->find($name)['file']);
   }
 
-  function parseContentsR($name, $source = 'default') {
+  function parseContentsR($name, $source = 'root') {
     $r = '';
     $package = $this->find($name);
     if (in_array($package['package'], $this->parsedPackages)) {

@@ -53,6 +53,7 @@ class Arr {
   }
 
   static function dropArr(array &$arr, array $arr3) {
+    $arr2 = [];
     for ($i = 0; $i < count($arr); $i++) {
       if (!in_array($arr[$i], $arr3)) $arr2[] = $arr[$i];
     }
@@ -188,13 +189,13 @@ class Arr {
     $new = [];
     if ($assoc) {
       foreach ($arr as $k => $v) {
-        if (is_array($v)) $v = Arr::filterEmpties($v);
+        if (is_array($v)) $v = self::filterEmpties($v);
         if ($v) $new[$k] = $v;
       }
     }
     else {
       foreach ($arr as $v) {
-        if (is_array($v)) $v = Arr::filterEmpties($v);
+        if (is_array($v)) $v = self::filterEmpties($v);
         if ($v) $new[] = $v;
       }
     }
@@ -321,7 +322,7 @@ class Arr {
     foreach ($array as $key => $value) {
       $jsKey = $isArray ? '' : "'".$key."': ";
       if (is_array($value)) {
-        $temp[] = $jsKey.Arr::_js($value, true, $_isArray);
+        $temp[] = $jsKey.self::_js($value, true, $_isArray);
       }
       else {
         if (is_numeric($value)) {
@@ -355,11 +356,11 @@ class Arr {
   }
 
   static function jsObj($array, $formatFirstLevelValue = true) {
-    return Arr::js($array, $formatFirstLevelValue, [false]);
+    return self::js($array, $formatFirstLevelValue, [false]);
   }
 
   static function jsArr($array, $formatFirstLevelValue = true) {
-    return Arr::js($array, $formatFirstLevelValue);
+    return self::js($array, $formatFirstLevelValue);
   }
 
   static function jsValue($v) {
@@ -376,10 +377,10 @@ class Arr {
       $assoc = self::isAssoc($v);
       foreach ($v as $kk => &$vv) {
         if ($assoc) {
-          $values[] = (is_int($kk) ? $kk : "'$kk'")." => ".Arr::formatValue($vv, $stringBools, $depth + 1);
+          $values[] = (is_int($kk) ? $kk : "'$kk'")." => ".self::formatValue($vv, $stringBools, $depth + 1);
         }
         else
-          $values[] = Arr::formatValue($vv, $stringBools, $depth + 1);
+          $values[] = self::formatValue($vv, $stringBools, $depth + 1);
       }
       if (count($values) == 1) return "[$values[0]]";
       $r = "[\n";
@@ -410,7 +411,7 @@ class Arr {
 
   /**
    * Преобразует строку вида "'asd'" '"asd"' или "false" в соответствующее
-   * значение типа string или boolen
+   * значение типа string или boolean
    *
    * @param   array
    * @return  array
@@ -432,7 +433,7 @@ class Arr {
    */
   static function transformValue($v) {
     if (is_array($v)) {
-      foreach ($v as &$vv) $vv = Arr::transformValue($vv);
+      foreach ($v as &$vv) $vv = self::transformValue($vv);
       return $v;
     }
     elseif (is_int($v)) return (int)$v;
@@ -560,14 +561,6 @@ class Arr {
     }
     return $r;
   }
-
-  /*
-  static function placeAfter(array $array, $currentKey, $afterKey, $assocKey = false) {
-    $value = $array[$currentKey];
-    unset($array[$currentKey]);
-    return self::injectAfter($array, $afterKey, [$value], $assocKey);
-  }
-  */
 
   static function replaceSubValue(array $arr, $key, $find, $replace) {
     foreach ($arr as $v) if ($v[$key] == $find) $v[$key] = $replace;

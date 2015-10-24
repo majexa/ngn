@@ -73,7 +73,7 @@ MooCountdown = new Class({
       startFont : '32',
       finishFont : '16',
       duration : 1000,
-      onComplete : $empty
+      onComplete : Function.from()
   },
   
   initialize : function(element,options){
@@ -87,7 +87,7 @@ MooCountdown.Date = new Class({
   Extends: MooCountdown,
   
   options: {
-      date : $empty,
+      date : Function.from(),
       text: ['year','day','hour','minute','second']
   },
   
@@ -196,7 +196,7 @@ MooCountdown.CountDown = new Class({
   Extends: MooCountdown,
   
   options: {
-      number : $empty
+      number : Function.from()
   },
   
   initialize : function(element,options){

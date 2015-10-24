@@ -16,7 +16,7 @@ var History = $extend(history, {
 
 });
 
-History.implement(new Events($empty));
+History.implement(new Events(Function.from()));
 
 History.implement({
 
@@ -25,7 +25,7 @@ History.implement({
 	start: function() {
 		if (this.started) return this;
 		this.state = this.getHash();
-		if (Browser.Engine.trident) {
+		if (Browser.ie) {
 			var iframe = new Element('iframe', {
 				'src': "javascript:'<html></html>'",
 				'styles': {

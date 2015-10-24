@@ -7,7 +7,7 @@ Ngn.Dialog.Alert = new Class({
   },
 
   initialize: function(_opts) {
-    var opts = $merge(_opts, {
+    var opts = Object.merge(_opts, {
       cancel: false,
       titleClose: false,
       bindBuildMessageFunction: true

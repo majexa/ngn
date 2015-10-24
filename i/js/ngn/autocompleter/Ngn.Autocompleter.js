@@ -3,13 +3,13 @@ Ngn.Autocompleter = new Class({
   Implements: [Options, Events],
 
   options: {/*
-   onOver: $empty,
-   onSelect: $empty,
-   onSelection: $empty,
-   onShow: $empty,
-   onHide: $empty,
-   onBlur: $empty,
-   onFocus: $empty,*/
+   onOver: Function.from(),
+   onSelect: Function.from(),
+   onSelection: Function.from(),
+   onShow: Function.from(),
+   onHide: Function.from(),
+   onBlur: Function.from(),
+   onFocus: Function.from(),*/
     minLength: 1,
     markQuery: true,
     width: 'inherit',
@@ -49,7 +49,7 @@ Ngn.Autocompleter = new Class({
     this.element = $(element);
     this.setOptions(options);
     this.build();
-    this.observer = new Ngn.Observer(this.element, this.prefetch.bind(this), $merge({
+    this.observer = new Ngn.Observer(this.element, this.prefetch.bind(this), Object.merge({
       'delay': this.options.delay
     }, this.options.observerOptions));
     this.queryValue = null;
@@ -86,12 +86,13 @@ Ngn.Autocompleter = new Class({
     if (!this.options.separator.test(this.options.separatorSplit)) {
       this.options.separatorSplit = this.options.separator;
     }
-    this.fx = (!this.options.fxOptions) ? null : new Fx.Tween(this.choices, $merge({
+    this.fx = (!this.options.fxOptions) ? null : new Fx.Tween(this.choices, Object.merge({
       'property': 'opacity',
       'link': 'cancel',
       'duration': 200
     }, this.options.fxOptions)).addEvent('onStart', Chain.prototype.clearChain).set(0);
-    this.element.setProperty('autocomplete', 'off').addEvent((Browser.Engine.trident || Browser.Engine.webkit) ? 'keydown' : 'keypress', this.onCommand.bind(this)).addEvent('click', this.onCommand.bind(this, [false])).addEvent('focus', this.toggleFocus.create({bind: this, arguments: true, delay: 100})).addEvent('blur', this.toggleFocus.create({bind: this, arguments: false, delay: 100}));
+//    this.element.setProperty('autocomplete', 'off').addEvent((Browser.ie || Browser.Engine.webkit) ? 'keydown' : 'keypress', this.onCommand.bind(this)).addEvent('click', this.onCommand.bind(this, [false])).addEvent('focus', this.toggleFocus.create({bind: this, arguments: true, delay: 100})).addEvent('blur', this.toggleFocus.create({bind: this, arguments: false, delay: 100}));
+    this.element.setProperty('autocomplete', 'off').addEvent('keydown', this.onCommand.bind(this)).addEvent('click', this.onCommand.bind(this, [false])).addEvent('focus', this.toggleFocus.create({bind: this, arguments: true, delay: 100})).addEvent('blur', this.toggleFocus.create({bind: this, arguments: false, delay: 100}));
   },
 
   destroy: function() {
@@ -337,7 +338,7 @@ Ngn.Autocompleter = new Class({
 var OverlayFix = new Class({
 
   initialize: function(el) {
-    if (Browser.Engine.trident) {
+    if (Browser.ie) {
       this.element = $(el);
       this.relative = this.element.getOffsetParent();
       this.fix = new Element('iframe', {
@@ -381,7 +382,7 @@ var OverlayFix = new Class({
 Element.implement({
 
   getSelectedRange: function() {
-    if (!Browser.Engine.trident) return {start: this.selectionStart, end: this.selectionEnd};
+    if (!Browser.ie) return {start: this.selectionStart, end: this.selectionEnd};
     var pos = {start: 0, end: 0};
     var range = this.getDocument().selection.createRange();
     if (!range || range.parentElement() != this) return pos;
@@ -402,7 +403,7 @@ Element.implement({
   },
 
   selectRange: function(start, end) {
-    if (Browser.Engine.trident) {
+    if (Browser.ie) {
       var diff = this.value.substr(start, end - start).replace(/\r/g, '').length;
       start = this.value.substr(0, start).replace(/\r/g, '').length;
       var range = this.createTextRange();

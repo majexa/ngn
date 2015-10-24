@@ -83,7 +83,7 @@ abstract class SflmFrontend {
    * @throws Exception
    */
   function code() {
-    if ($this->stored) throw new Exception("Can't get code after frontend was stored. Reset or rerun frontend");
+    if ($this->stored) throw new Exception("Can't get code after frontend was stored. Reset frontend");
     return $this->_code();
   }
 
@@ -168,7 +168,7 @@ abstract class SflmFrontend {
    * @return $this
    * @throws Exception
    */
-  function store($source = 'direct') {
+  function store($source = 'root') {
     $this->checkNotStored();
     $this->storeBacktrace = getBacktrace(false);
 //    if (!$this->newPaths and !$this->newAbsPaths) {
@@ -292,6 +292,10 @@ abstract class SflmFrontend {
    * @return bool
    */
   function addDebugPath($path) {
+    if (strstr($path, 'Ngn.FramesSlider.js')) {
+      //die2($path, false);
+    }
+    if (in_array($path, $this->debugPaths)) return true;
     if (isset(Sflm::$debugPaths[$this->base->type]) and Arr::strExistsInvert(Sflm::$debugPaths[$this->base->type], $path)) {
       $this->debugPaths[] = $path;
       $this->log('Adding debug path '.$path);

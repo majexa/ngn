@@ -83,7 +83,7 @@ Ngn.TreeEdit = new Class({
   init: function() {
     // this.defaults.openIcon = this.options.folderOpenIcon;
     // this.defaults.closeIcon = this.options.folderCloseIcon;
-    this.tree = new Ngn.Tree($merge(this.getTreeOptions(), this.options.ngnTreeOptions));
+    this.tree = new Ngn.Tree(Object.merge(this.getTreeOptions(), this.options.ngnTreeOptions));
     this.tree.wrapper.addEvent('click', function(e) {
       if (e.target == this.tree.wrapper) this.tree.unselect();
     }.bind(this));
@@ -179,7 +179,7 @@ Ngn.TreeEdit = new Class({
         this.reload();
         this.fireEvent('createComplete');
       }.bind(this)
-    }).GET($merge({
+    }).GET(Object.merge({
         title: title,
         parentId: where == 'inside' ? current.data.id : 0
       }, data));

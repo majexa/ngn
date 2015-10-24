@@ -2,7 +2,7 @@ Ngn.Dialog.Wysiwyg = new Class({
   Extends: Ngn.Dialog,
 
   initialize: function(_opts) {
-    var opts = $merge(_opts, {
+    var opts = Object.merge(_opts, {
       'ok': this.closeAction.bind(this),
       'bindBuildMessageFunction': true,
     });

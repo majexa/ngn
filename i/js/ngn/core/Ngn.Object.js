@@ -1,4 +1,5 @@
-Ngn.toObj = function(s, value) {
+Ngn.Object = {};
+Ngn.Object.fromString = function(s, value) {
   var a = s.split('.');
   for (var i = 0; i < a.length; i++) {
     var ss = a.slice(0, i + 1).join('.');

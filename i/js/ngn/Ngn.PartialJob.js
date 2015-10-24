@@ -5,9 +5,9 @@ Ngn.PartialJob = new Class({
     // status: $('status'),
     // url: null,
     maxErrors: 5, // Максимальное количество запросов, возвращающих неправильный результат
-    onError: $empty(),
-    onComplete: $empty(),
-    onStop: $empty(),
+    onError: Function.from(),
+    onComplete: Function.from(),
+    onStop: Function.from(),
     requestParams: {},
     unknownTotalCount: false,
     stepDelay: 0

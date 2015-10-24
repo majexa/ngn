@@ -192,7 +192,7 @@ Ngn.Grid = new Class({
           addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
         n++;
       }
-      row.tools = $merge(row.tools || {}, this.options.tools);
+      row.tools = Object.merge(row.tools || {}, this.options.tools);
       for (var cls in Ngn.arrToObj(row.tools)) {
         if (typeOf(row.tools[cls]) == 'object') {
           if (!row.tools[cls].type) throw new Error('row.tools[cls].type must be defined');
@@ -302,7 +302,7 @@ Ngn.GridBtnAction.New = new Class({
     new Ngn.Dialog.RequestForm(this.getDialogOptions());
   },
   getDialogOptions: function() {
-    return $merge({
+    return Object.merge({
       id: 'CHANGE_ME',
       dialogClass: 'dialog fieldFullWidth',
       url: this.grid.options.basePath + '/json_new',
@@ -323,7 +323,7 @@ Ngn.Grid.defaultMenu = [Ngn.Grid.menu['new']];
 
 Ngn.Grid.toolActions = {};
 Ngn.Grid.toolActions.edit = function(row, opt) {
-  new Ngn.Dialog.RequestForm($merge({
+  new Ngn.Dialog.RequestForm(Object.merge({
     id: 'CHANGE_ME',
     url: this.options.basePath + '?a=json_edit&id=' + row.id,
     width: 500,

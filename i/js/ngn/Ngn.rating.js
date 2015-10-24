@@ -1,10 +1,10 @@
 Ngn.rating = function(rate, addevents, options) {
   
-  var options = $merge({
+  var options = Object.merge({
     isMinus: true,
     maxStars: 5, 
-    clickEvent: $empty(),
-    onComplete: $empty(),
+    clickEvent: Function.from(),
+    onComplete: Function.from(),
     starTitle: 'Отдать %n',
     starMinusTitle: 'Забрать %n'
   }, options);

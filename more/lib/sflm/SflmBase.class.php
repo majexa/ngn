@@ -32,7 +32,11 @@ abstract class SflmBase {
     if (isset($this->packagesCache[$lib])) return $this->packagesCache[$lib];
     if (($r = $this->getPackageLibsR($lib, true, $strict)) === false) return $this->packagesCache[$lib] = [];
     $this->packagesCache[$lib] = $r;
-    Sflm::log("Got package '$lib' libs recursive: ".implode(", ", $this->packagesCache[$lib]));
+    if ($this->packagesCache[$lib]) {
+      Sflm::log("Got package '$lib' libs recursive: ".implode(", ", $this->packagesCache[$lib]));
+    } else {
+      Sflm::log("Package '$lib' is empty");
+    }
     return $this->packagesCache[$lib];
   }
 
@@ -181,9 +185,9 @@ abstract class SflmBase {
    * @return string
    * @throws Exception
    */
-  function getAbsPath($path) {
-    if ($this->isPackage($path)) throw new Exception("It ($path) can not be package");
-    $path = parse_url($path)['path'];
+  function getAbsPath($_path) {
+    if ($this->isPackage($_path)) throw new Exception("It ($_path) can not be package");
+    $path = parse_url($_path)['path'];
     foreach (Sflm::$absBasePaths as $package => $absBasePath) {
       if (preg_match('/^\/?'.$package.'\//', $path)) {
         $r = "$absBasePath/".Misc::removePrefix("$package/", ltrim($path, '/'));
@@ -191,7 +195,7 @@ abstract class SflmBase {
       }
     }
     $prefix = explode('/', $path)[0];
-    if (!$prefix) throw new Exception("Prefix is empty. Path: $path");
+    if (!$prefix) throw new Exception("Prefix is empty. Path: $_path");
     if (in_array($prefix, RouterScripts::prefixes())) {
       $r = $this->getScriptAbsPath(Misc::removeSuffix('.php', $path));
       return $r;
@@ -241,7 +245,6 @@ abstract class SflmBase {
       else {
         $q = [];
       }
-      die2("web 2");
       file_put_contents(Sflm::$webPath.'/'.$cachePath, Misc::getIncludedByRequest($path, $q));
     }
     return '/'.UPLOAD_DIR.'/'.$cachePath;

@@ -3,7 +3,7 @@ Ngn.Dialog.Tiny = new Class({
   
   initialize: function(_opts) {
     _opts.dialogClass = 'dialog dialog-tiny';
-    var opts = $merge(_opts, {
+    var opts = Object.merge(_opts, {
       'ok': this.closeAction.bind(this),
       'bindBuildMessageFunction': true
     });
@@ -20,7 +20,7 @@ Ngn.Dialog.Tiny = new Class({
     this.eTextarea.setStyle('width', '100%'); // нужно выставлять ширину именно яваскриптом
     (function(){
       c(this.id);
-      tinyMCE.init($merge(new Ngn.TinySettings().getSettings(), {
+      tinyMCE.init(Object.merge(new Ngn.TinySettings().getSettings(), {
         'elements': this.id,
         'attachId': this.id
       }));

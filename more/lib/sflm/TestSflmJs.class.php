@@ -7,7 +7,7 @@ class TestSflmJs extends ProjectTestCase {
     Sflm::setFrontend('js', 'default');
   }
 
-  function testAbsPathExistsAfterRest() {
+  function testAbsPathExistsAfterReset() {
     Sflm::frontend('js')->addFile(NGN_PATH.'/i/js/ngn/test/Ngn.Sub.js');
     Sflm::frontend('js')->store();
     Sflm::setFrontend('js');
@@ -106,7 +106,6 @@ Ngn.aaa
   }
 
   function testDebugPathTagsPresentsInResultHtml() {
-    //$this->_testDebugPaths('i/js/ngn/test/');
     $this->_testDebugPathRendersAsSeparateHtmlTags('Ngn.Sub');
   }
 
@@ -152,19 +151,14 @@ TAGS;
     $this->assertTrue((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.A'));
   }
 
-//  function testDebugPathOnAddingLib() {
-//    Sflm::$debugPaths = [
-//      'js' => [
-//        'test/Ngn.sub.B.js'
-//      ]
-//    ];
-//    // добавляем библиотеку с отладочным путём test/Ngn.sub.B.js
-//    Sflm::setFrontend('js', 'test/dependencies');
-//    //Sflm::frontend('js')->addLib('test/dependencies');
-//    // проверяем есть ли среди тегов отладочный путь
-//    Sflm::frontend('js')->store();
-//    print Sflm::frontend('js')->getTags();
-//
-//  }
+  function testImplementsExtendsAddsBefore() {
+    Sflm::frontend('js')->addClass('Ngn.B1');
+    Sflm::frontend('js')->store();
+    $c = file_get_contents(Sflm::$webPath.'/js/cache/default.js');
+    $this->assertTrue(strpos($c, 'Ngn.B1') > strpos($c, 'Ngn.C1.Ooo'), '"Extends: ..." pattern error');
+    $this->assertTrue(strpos($c, 'Ngn.B1') > strpos($c, 'Ngn.A1.Ooo'), '"Implements: ..." pattern error');
+    $this->assertTrue(strpos($c, 'Ngn.B1') > strpos($c, 'Ngn.D1'), '"Implements: ..." pattern error');
+    $this->assertTrue(strpos($c, 'Ngn.B1') > strpos($c, 'Ngn.E1'), '"e1: ..." pattern error');
+  }
 
 }
