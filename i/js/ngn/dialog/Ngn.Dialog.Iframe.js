@@ -13,11 +13,11 @@ Ngn.Dialog.Iframe = new Class({
 
   initialize: function(_opts) {
     //_opts.dialogClass = 'dialog dialog-textarea dialog-nopadding';
-    var opts = $merge(_opts, {
+    var opts = Object.merge(_opts, {
       ok: this.okAction.bind(this),
       bindBuildMessageFunction: true
     });
-    opts.iframeStyles = $merge({
+    opts.iframeStyles = Object.merge({
       'border': '0px',
       'width': '100%',
       'height': '100%'

@@ -25,7 +25,7 @@ Ngn.TinyInit = new Class({
           element.setProperty('id', realId);
           settings = {elements: realId};
           if (this.options.attachs) settings.attachId = this.options.attachIdTpl.replace('{fn}', element.get('name'));
-          settings = $merge(this.options.settings, settings);
+          settings = Object.merge(this.options.settings, settings);
           if (settings.attachId) settings.theme_advanced_buttons1_add = 'uploadFile,uploadImage,uploadImagePreview,image';
           tinyMCE.init(settings);
           Ngn.TinyInit.exists[id] ? Ngn.TinyInit.exists[id]++ : Ngn.TinyInit.exists[id] = 1;

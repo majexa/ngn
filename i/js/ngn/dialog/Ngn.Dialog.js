@@ -38,7 +38,7 @@ Ngn.Dialog = new Class({
     titleCloseTitle: 'Закрыть окно',
     titleTextClass: 'md-title-text move',
     url: null,
-    useFx: !Browser.Engine.trident,
+    useFx: !Browser.ie,
     //'useFx: false,
     width: 550,
     top: 30,
@@ -53,13 +53,13 @@ Ngn.Dialog = new Class({
     vResize: false,
     fixed: false,
     //maxHeight: null,
-    onComplete: $empty(),
-    onClose: $empty(),
-    onOkClose: $empty(),
-    onCancelClose: $empty(),
-    onHide: $empty(),
-    onRequest: $empty(),
-    onShow: $empty()
+    onComplete: Function.from(),
+    onClose: Function.from(),
+    onOkClose: Function.from(),
+    onCancelClose: Function.from(),
+    onHide: Function.from(),
+    onRequest: Function.from(),
+    onShow: Function.from()
   },
 
   delayedShow: false,
@@ -81,7 +81,7 @@ Ngn.Dialog = new Class({
     this.setOptions(_opts);
     // new Image().src = '/i/img/dialog/cross-pushed.png'; // preloading of hover cross
     if (this.options.id == 'dlg') {
-      this.options.id = 'dlg' + Ngn.randString(5);
+      this.options.id = 'dlg' + Ngn.String.rand(5);
       if (this.options.savePosition) throw new Error('Can not save position on random ID');
       if (this.options.vResize) throw new Error('Can not save size on random ID');
     }
@@ -104,7 +104,7 @@ Ngn.Dialog = new Class({
     this.dialogN = Ngn.dialogs.length() + 1;
     Ngn.dialogs[this.dialogId] = this;
     this.parentElement = $((this.options.parent || document.body));
-    var dialog_styles = $merge({
+    var dialog_styles = Object.merge({
       'display': 'none',
       'width': this.options.width.toInt() + 'px',
       'z-index': this.options.baseZIndex + (this.dialogN * 2)
@@ -116,7 +116,7 @@ Ngn.Dialog = new Class({
       'styles': dialog_styles
     }).inject(this.parentElement);
     if (this.options.fixed) this.dialog.setStyle('position', 'fixed');
-    this.fx = this.options.useFx ? new Fx.Tween(this.dialog, $merge({
+    this.fx = this.options.useFx ? new Fx.Tween(this.dialog, Object.merge({
       duration: 300
     }, this.options.fxOptions)) : null;
     if (this.fx) this.fx.set('opacity', 0);

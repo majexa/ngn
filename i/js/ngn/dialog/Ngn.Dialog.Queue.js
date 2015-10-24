@@ -3,7 +3,7 @@ Ngn.Dialog.Queue = new Class({
   Implements: [Options, Events],
 
   options: {
-    onComplete: $empty()
+    onComplete: Function.from()
   },
   
   current: 0,
@@ -31,7 +31,7 @@ Ngn.Dialog.Queue = new Class({
   },
   
   openCurrent: function() {
-    this.queue[this.current][1] = $merge(this.getDialogOptions(), this.queue[this.current][1]);
+    this.queue[this.current][1] = Object.merge(this.getDialogOptions(), this.queue[this.current][1]);
     new this.queue[this.current][0](this.queue[this.current][1]);
     if (this.current == 0) {
       this.shade = new Ngn.Dialog.Shade();

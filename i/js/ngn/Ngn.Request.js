@@ -4,7 +4,7 @@ Ngn.Request = new Class({
   id: null,
 
   initialize: function(options) {
-    this.id = Ngn.randString(20);
+    this.id = Ngn.String.rand(20);
     this.parent(options);
   },
 
@@ -64,7 +64,7 @@ Ngn.Request.JSON = new Class({
   Extends: Request.JSON,
 
   initialize: function(options) {
-    this.id = Ngn.randString(20);
+    this.id = Ngn.String.rand(20);
     this.parent(options);
   },
 

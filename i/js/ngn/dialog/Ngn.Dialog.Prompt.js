@@ -2,7 +2,7 @@ Ngn.Dialog.Prompt = new Class({
   Extends: Ngn.Dialog,
 
   initialize: function(_opts) {
-    var opts = $merge(_opts, {
+    var opts = Object.merge(_opts, {
       cancel: false,
       titleClose: false,
       bindBuildMessageFunction: true,

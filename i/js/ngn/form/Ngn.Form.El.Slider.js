@@ -10,9 +10,9 @@
 
     options: {
       /*
-       onTick: $empty(intPosition),
-       onChange: $empty(intStep),
-       onComplete: $empty(strStep),*/
+       onTick: Function.from()(intPosition),
+       onChange: Function.from()(intStep),
+       onComplete: Function.from()(strStep),*/
       onTick: function(position) {
         if (this.options.snap)
           position = this.toPosition(this.step);

@@ -2,7 +2,7 @@ Ngn.Dialog.Queue.Request.Form = new Class({
   Extends: Ngn.Dialog.Queue.Request,
   
   getDialogOptions: function() {
-    return $merge(this.parent(), {
+    return Object.merge(this.parent(), {
       onSubmitSuccess: function(r) {
         if ($defined(r.nextFormUrl))
           Ngn.Dialog.queue.add({ url: r.nextFormUrl });

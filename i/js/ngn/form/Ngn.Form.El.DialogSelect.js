@@ -43,7 +43,7 @@ Ngn.Form.El.DialogSelect = new Class({
     this.eSelectDialog.addEvent('click', function() {
       var cls = this.getDialogClass();
       if (!cls) throw new Error('class not found');
-      new cls($merge({
+      new cls(Object.merge({
         value: this.value
       }, this.getDialogOptions()));
     }.bind(this));

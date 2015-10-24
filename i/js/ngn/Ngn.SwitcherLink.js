@@ -10,8 +10,8 @@ Ngn.SwitcherLink = new Class({
     linkOff: '',
     titleOn: 'Включить',
     titleOff: 'Выключить',
-    onClick: $empty(),
-    onComplete: $empty()
+    onClick: Function.from(),
+    onComplete: Function.from()
   },
 
   initialize: function(el, options) {

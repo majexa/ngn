@@ -40,7 +40,9 @@ class DbSimple_Mysql extends DbSimple_Generic_Database {
 
   protected function connect() {
     $p = DbSimple_Generic::parseDSN($this->dns);
+    $errLevel = error_reporting(0);
     $this->link = mysql_connect($p['host'].(empty($p['port']) ? "" : ":".$p['port']), $p['user'], $p['pass'], true);
+    error_reporting($errLevel);
     $this->_resetLastError();
     if (!$this->link) {
       $this->_setDbError('mysql_connect()');

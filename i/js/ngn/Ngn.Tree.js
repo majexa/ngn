@@ -761,7 +761,7 @@ Ngn.Tree.Draw = {
 
 };
 
-Ngn.Tree.Draw.zeroSpace = Browser.Engine.trident ? '&shy;' : (Browser.Engine.webkit ? '&#8203' : '');
+Ngn.Tree.Draw.zeroSpace = Browser.ie ? '&shy;' : '&#8203';
 
 
 /*
@@ -1066,12 +1066,14 @@ Ngn.Tree.KeyNav = new Class({
   },
 
   attach: function() {
-    var event = Browser.Engine.trident || Browser.Engine.webkit ? 'keydown' : 'keypress';
+    //var event = Browser.ie || Browser.Engine.webkit ? 'keydown' : 'keypress';
+    var event = 'keydown';
     document.addEvent(event, this.bound.action);
   },
 
   detach: function() {
-    var event = Browser.Engine.trident || Browser.Engine.webkit ? 'keydown' : 'keypress';
+    //var event = Browser.ie || Browser.Engine.webkit ? 'keydown' : 'keypress';
+    var event = 'keydown';
     document.removeEvent(event, this.bound.action);
   },
 
@@ -1484,7 +1486,7 @@ Ngn.Tree.Drag = new Class({
     this.element = [this.current, this.target, this.where];
     this.document = tree.wrapper.getDocument();
 
-    this.selection = (Browser.Engine.trident) ? 'selectstart' : 'mousedown';
+    this.selection = (Browser.ie) ? 'selectstart' : 'mousedown';
 
     this.bound = {
       start: this.start.bind(this),

@@ -3,7 +3,7 @@ Ngn.Dialog.Textarea = new Class({
 
   initialize: function(_opts) {
     _opts.dialogClass = 'dialog dialog-textarea dialog-nopadding';
-    var opts = $merge(_opts, {
+    var opts = Object.merge(_opts, {
       ok: this.closeAction.bind(this),
       bindBuildMessageFunction: true
     });

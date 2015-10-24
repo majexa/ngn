@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('NGN_PATH')) die('NGN_PATH not defined'); // @LibStorageRemove
+if (!defined('NGN_PATH')) define('NGN_PATH', dirname(__DIR__));
 define('CORE_PATH', NGN_PATH . '/core');                  // @LibStorageRemove
 require_once CORE_PATH.'/lib/common.func.php';
 
@@ -68,3 +68,6 @@ setConstant('NGN_ENV_PATH', dirname(NGN_PATH));
 // ---------------- core constants -----------------
 
 require CORE_PATH.'/config/constants/default.php';
+
+// Новый базовый путь в папке "core"
+Ngn::addBasePath(NGN_PATH.'/core');

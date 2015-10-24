@@ -9,7 +9,7 @@ Ngn.Request.File = new Class({
   },
 
   initialize: function(options) {
-    this.id = Ngn.randString(20);
+    this.id = Ngn.String.rand(20);
     this.xhr = new Browser.Request();
     this.setOptions(options);
     this.clear();

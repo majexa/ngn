@@ -11,7 +11,7 @@ Ngn.Dialog.Captcha = new Class({
   },
 
   initialize: function(opts) {
-    var opts = $merge(opts, {
+    var opts = Object.merge(opts, {
       ok: this.okAction.bind(this)
     });
     this.parent(opts);

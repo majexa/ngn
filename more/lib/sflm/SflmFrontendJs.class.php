@@ -20,14 +20,13 @@ class SflmFrontendJs extends SflmFrontend {
   protected function init() {
     $this->classes = new SflmJsClasses($this);
     $this->mtDependencies = O::get('SflmMtDependencies', NGN_ENV_PATH.'/mootools');
-    //$this->mtCode = $this->mtDependencies->contents('Core'); // sflmJs-код не может существовать без mt-core кода
   }
 
   protected function __addPath($path, $source = null) {
     $this->addPath($path, $source);
   }
 
-  function addPath($path, $source = 'direct') {
+  function addPath($path, $source = 'root') {
     $this->classes->processPath($path, $source);
   }
 
@@ -38,7 +37,7 @@ class SflmFrontendJs extends SflmFrontend {
     return $this;
   }
 
-  function addClass($name, $source = 'direct', $strict = false) {
+  function addClass($name, $source = 'root', $strict = false) {
     $this->checkNotStored();
     return $this->classes->addClass($name, $source, $strict);
   }
@@ -55,26 +54,30 @@ class SflmFrontendJs extends SflmFrontend {
     return $this->base->getPaths('core', true);
   }
 
-  function store($source = 'direct') {
+  function store($source = 'root') {
     parent::store($source);
     $this->classes->frontendClasses->store();
   }
 
   function processCode($code, $source) {
     $this->checkNotStored();
+    R::set('code', $code);
     $this->classes->processCode($code, $source);
     $this->mtCode .= $this->mtDependencies->parse($code);
   }
 
   function processHtml($html, $source) {
     $this->checkNotStored();
-    if (!preg_match_all('!<script>(.*)</script>!s', $html, $m)) return false;
+    if (!preg_match_all('!<script>(.*)</script>!Us', $html, $m)) return false;
     foreach ($m[1] as $code) $this->processCode($code, $source);
     return $html;
   }
 
   function _code() {
     $code = parent::_code();
+    foreach ($this->debugPaths as $path) {
+      $this->mtCode .= $this->mtDependencies->parse(file_get_contents($this->base->getAbsPath($path)));
+    }
     $this->mtCode .= $this->mtDependencies->parse($code);
     return $this->mtCode.$code;
   }

@@ -87,7 +87,7 @@ Ngn.ResizableTextarea = new Class({
         document.onselectstart = function() { return false; }
         document.onmousedown = function() { return false; }
       }
-      if (Browser.Engine.trident) { el.handler.setCapture() }
+      if (Browser.ie) { el.handler.setCapture() }
       else  {
         document.addEvent('mousemove', function(e) { el.handler.fireEvent('mousemove', e) });
         document.addEvent('mouseup', function() { el.handler.fireEvent('mouseup') });
@@ -104,7 +104,7 @@ Ngn.ResizableTextarea = new Class({
         document.onmousedown = null;
         document.onselectstart = null;
       }
-      if (Browser.Engine.trident) { el.handler.releaseCapture(); }
+      if (Browser.ie) { el.handler.releaseCapture(); }
       else  {
         document.removeEvent('mousemove', function(e) { el.handler.fireEvent('mousemove', e) });
         document.removeEvent('mouseup', function() { el.handler.fireEvent('mousemove') });

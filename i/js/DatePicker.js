@@ -62,7 +62,7 @@ var DatePicker = new Class({
     allowEmpty: false,
     inputOutputFormat: 'U', // default to unix timestamp
     animationDuration: 250,
-    useFadeInOut: !Browser.Engine.trident, // dont animate fade-in/fade-out for IE
+    useFadeInOut: !Browser.ie, // dont animate fade-in/fade-out for IE
     startView: 'month', // allowed values: {time, month, year, decades}
     positionOffset: { x: 0, y: 0 },
     minDate: null, // { date: '[date-string]', format: '[date-string-interpretation-format]' }
@@ -72,9 +72,9 @@ var DatePicker = new Class({
     zIndex: 700,
     
     // and some event hooks:
-    onShow: $empty,   // triggered when the datepicker pops up
-    onClose: $empty,  // triggered after the datepicker is closed (destroyed)
-    onSelect: $empty  // triggered when a date is selected
+    onShow: Function.from(),   // triggered when the datepicker pops up
+    onClose: Function.from(),  // triggered after the datepicker is closed (destroyed)
+    onSelect: Function.from()  // triggered when a date is selected
   },
   
   initialize: function(attachTo, options) {
@@ -384,7 +384,7 @@ var DatePicker = new Class({
       .addEvents({
         click: function(e) {
           e.stop();
-          this.select($merge(this.dateToObject(this.d), { hours: this.picker.getElement('.hour').get('value').toInt(), minutes: this.picker.getElement('.minutes').get('value').toInt() }));
+          this.select(Object.merge(this.dateToObject(this.d), { hours: this.picker.getElement('.hour').get('value').toInt(), minutes: this.picker.getElement('.minutes').get('value').toInt() }));
         }.bind(this)
       })
       .set('maxlength', 2)
@@ -613,7 +613,7 @@ var DatePicker = new Class({
   },
   
   select: function(values) {
-    this.choice = $merge(this.choice, values);
+    this.choice = Object.merge(this.choice, values);
     var d = this.dateFromObject(this.choice);
     this.input.set('value', this.format(d, this.options.inputOutputFormat));
     this.visual.set('value', this.format(d, this.options.format));

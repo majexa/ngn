@@ -60,7 +60,7 @@ History.Route = new Class({
 		generate: function(values) {
 			return values[0];
 		},
-		onMatch: $empty
+		onMatch: Function.from()
 	},
 
 	initialize: function(options){

@@ -6,7 +6,7 @@ require_once NGN_PATH.'/init/core.php';
 // NGN more
 define('MORE_PATH', NGN_PATH . '/more');
 
-// Новый базовый путь в папке more
+// Новый базовый путь в папке "more"
 Ngn::addBasePath(MORE_PATH, 1);
 
 if (!defined('PROJECT_PATH')) die('Error: PROJECT_PATH not defined'."\n".getBacktrace(false));
@@ -37,6 +37,8 @@ require_once MORE_PATH.'/lib/sflm/SflmCache.class.php';
 require_once MORE_PATH.'/lib/sflm/Sflm.class.php';
 
 Sflm::$absBasePaths['m'] = WEBROOT_PATH.'/m';
+Sflm::$baseFolders = Ngn::$basePaths;
+Sflm::$namespace = 'Ngn';
 
 // @todo why not used standard php method
 Err::noticeSwitch(true);

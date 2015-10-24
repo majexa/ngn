@@ -34,7 +34,7 @@ class Sflm {
 
   // --
 
-  static $debug = false, $output = false, $forceCache, $version = false, $absBasePaths, $strictMode, $cache = [];
+  static $debug = false, $output = false, $forceCache, $version = false, $strictMode, $cache = [];
   static protected $frontendName = null;
 
   static function clearCache() {
@@ -107,6 +107,12 @@ class Sflm {
     return self::stripCommentsExceptMeta(file_get_contents($file));
   }
 
+  /**
+   * @param $absPath
+   * @param null $whyDoUWantToGetThis
+   * @return  string
+   * @throws Exception
+   */
   static function getPath($absPath, $whyDoUWantToGetThis = null) {
     foreach (Sflm::$absBasePaths as $folder => $absBasePath) {
       if (Misc::hasPrefix($absBasePath, $absPath)) {
@@ -121,15 +127,18 @@ class Sflm {
     if (self::$output) {
       if (strstr($s, 'Adding path')) outputColor($s, 'lightCyan');
       elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');
-      elseif (strstr($s, 'src: direct')) outputColor($s, 'yellow');
+      elseif (strstr($s, 'src: root')) outputColor($s, 'yellow');
       else strstr($s, 'src:') ? outputColor($s, 'cyan') : output($s);
     }
   }
 
-  static $log = false; // set true for debug
+  static $absBasePaths;
+  static $baseFolders = [];
+  static $log = true; // set true for debug
   static $debugPaths = [];
   static $debugUrl;
   static $webPath;
+  static $namespace = 'Default';
 
 }
 

@@ -8,8 +8,8 @@ Ngn.Rainbow = new Class({
     imgPath: 'images/',
     startColor: [255, 0, 0],
     wheel: false,
-    onComplete: $empty,
-    onChange: $empty,
+    onComplete: Function.from(),
+    onChange: Function.from(),
     eParent: null
   },
 
@@ -449,7 +449,7 @@ Ngn.Rainbow = new Class({
     var idPrefix = id + ' .' + prefix;
 
     this.layout = new Element('div', {
-      'styles': $merge({ 'display': 'block', 'position': 'absolute', zIndex: 10}, this.options.styles),
+      'styles': Object.merge({ 'display': 'block', 'position': 'absolute', zIndex: 10}, this.options.styles),
       'id': id
     }).inject(this.options.eParent);
 

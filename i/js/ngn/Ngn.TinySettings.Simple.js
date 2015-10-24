@@ -7,7 +7,7 @@ Ngn.TinySettings.Simple = new Class({
   },
 
   getSettings: function() {
-    return $merge(this.parent(), {
+    return Object.merge(this.parent(), {
       // justifyleft, justifycenter, justifyright
       theme_advanced_buttons1: 'undo,redo,bold,italic,formatselect,bullist,numlist,sub,sup,blockquote,cleanup,fullscreen,justifycenter',
       theme_advanced_buttons2: '',

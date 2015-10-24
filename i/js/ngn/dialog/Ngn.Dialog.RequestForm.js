@@ -8,9 +8,9 @@ Ngn.Dialog.RequestFormBase = new Class({
     getFormData: function() {
       return Ngn.Frm.toObj(this.form.eForm);
     },
-    onFormResponse: $empty,
-    onFormRequest: $empty,
-    onSubmitSuccess: $empty
+    onFormResponse: Function.from(),
+    onFormRequest: Function.from(),
+    onSubmitSuccess: Function.from()
   },
 
   initialize: function(options) {
@@ -122,7 +122,7 @@ Ngn.Dialog.Form = new Class({
   Extends: Ngn.Dialog.RequestFormBase,
 
   options: {
-    onSubmit: $empty
+    onSubmit: Function.from()
   },
 
   _submit: function() {

@@ -7,7 +7,7 @@ function playerReady(obj) {
 
 Ngn.video = function(options, flashvars) {
   
-  var options = $merge({
+  var options = Object.merge({
     'player': 'i/swf/mp/player.swf',
     'container': null,
     'wmode': 'opaque',
@@ -16,7 +16,7 @@ Ngn.video = function(options, flashvars) {
     'bgcolor': '#000000'
   }, options);
   
-  var flashvars = $merge({
+  var flashvars = Object.merge({
     //'mute': true,
     //'repeat': 'always',
     //'file': null,
