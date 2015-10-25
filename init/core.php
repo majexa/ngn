@@ -59,7 +59,7 @@ define('DATA_DIR', 'data');
 /**
  * Каталог для загружаеммых на сервер файлов
  */
-define('UPLOAD_DIR', 'u');
+setConstant('UPLOAD_DIR', 'u');
 
 // ------------------ ngn-env -----------------
 

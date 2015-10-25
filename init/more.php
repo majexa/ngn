@@ -26,7 +26,7 @@ if (!defined('LOGS_PATH')) {
   define('LOGS_PATH', PROJECT_PATH.'/'.LOGS_DIR);
 }
 
-define('UPLOAD_PATH', WEBROOT_PATH.'/'.UPLOAD_DIR);
+setConstant('UPLOAD_PATH', WEBROOT_PATH.'/'.UPLOAD_DIR);
 
 // sflm init
 

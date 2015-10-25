@@ -29,6 +29,7 @@ class Ngn {
    *                      Для папки проекта "site" в Ngn используется приоритет 5.
    */
   static function addBasePath($path, $priority = 0, $sflmPathPackage = null, $sflmPackageSubfolder = 'm') {
+    File::checkExists($path);
     if (file_exists("$path/lib")) Lib::addFolder("$path/lib");
     require_once __DIR__.'/file/Config.class.php';
     Config::addBasePath("$path/config", $priority);
