@@ -86,7 +86,11 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
   }
 
   protected function _run(CliAccessArgsArgs $args) {
-    $args->method = 'a_'.$args->method;
+    if (method_exists($args->class, $args->method) and (new ReflectionMethod($args->class, $args->method))->isPublic()) {
+      // direct hidden method exists
+    } else {
+      $args->method = 'a_'.$args->method;
+    }
     if (is_subclass_of($args->class, 'CliAccessOptionsMultiWrapper')) {
       $this->runMultiWrapper($args);
     }
