@@ -33,6 +33,7 @@ class Err {
     print $plainText ? "\n" : '<p class="error">';
     if (!$plainText) $errstr = str_replace("\n", "<br />", $errstr);
     else $errstr = strip_tags($errstr);
+    print $errno ? '#'.$errno.' ' : '';
     print $errstr ? $errstr.($plainText ? "\n---------------\n" : '<hr />') : '';
 //      die2([
 //        Arr::append([
@@ -128,6 +129,9 @@ class Err {
   }
 
   static function errorHandler($errno, $errstr, $errfile, $errline) {
+    if (strstr($errstr, 'Headers and client')) {
+      return;
+    }
     if (!(error_reporting() & $errno)) {
       // Этот код ошибки не включен в error_reporting
       return;
