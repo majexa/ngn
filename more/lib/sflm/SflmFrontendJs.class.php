@@ -19,7 +19,7 @@ class SflmFrontendJs extends SflmFrontend {
 
   protected function init() {
     $this->classes = new SflmJsClasses($this);
-    //$this->mtDependencies = O::get('SflmMtDependencies', NGN_ENV_PATH.'/mootools');
+    $this->mtDependencies = O::get('SflmMtDependencies', NGN_ENV_PATH.'/mootools');
   }
 
   protected function __addPath($path, $source = null) {
@@ -63,7 +63,7 @@ class SflmFrontendJs extends SflmFrontend {
     $this->checkNotStored();
     R::set('code', $code);
     $this->classes->processCode($code, $source);
-    //$this->mtCode .= $this->mtDependencies->parse($code);
+    $this->mtCode .= $this->mtDependencies->parse($code);
   }
 
   function processHtml($html, $source) {
@@ -73,13 +73,13 @@ class SflmFrontendJs extends SflmFrontend {
     return $html;
   }
 
-//  function _code() {
-//    $code = parent::_code();
-//    foreach ($this->debugPaths as $path) {
-//      $this->mtCode .= $this->mtDependencies->parse(file_get_contents($this->base->getAbsPath($path)));
-//    }
-//    $this->mtCode .= $this->mtDependencies->parse($code);
-//    return $this->mtCode.$code;
-//  }
+  function _code() {
+    $code = parent::_code();
+    foreach ($this->debugPaths as $path) {
+      $this->mtCode .= $this->mtDependencies->parse(file_get_contents($this->base->getAbsPath($path)));
+    }
+    $this->mtCode .= $this->mtDependencies->parse($code);
+    return $this->mtCode.$code;
+  }
 
 }
