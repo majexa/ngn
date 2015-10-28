@@ -68,7 +68,15 @@ class SflmJsClasses {
     }
     if ($this->frontendClasses->exists($class)) {
       Sflm::log("Class '$class' exists. Skipped. src: $source");
-      $this->frontend->addDebugPath($this->classPaths[$class]);
+      if ($this->frontend->addDebugPath($this->classPaths[$class])) {
+        if (($namespaceParents = $this->namespaceParents($class))) {
+          foreach ($namespaceParents as $parent) {
+            if (isset($this->classPaths[$parent])) {
+              $this->frontend->addDebugPath($this->classPaths[$parent]);
+            }
+          }
+        }
+      }
       return false;
     }
     $this->frontendClasses->add($class, $source);
@@ -86,9 +94,9 @@ class SflmJsClasses {
     $code = Sflm::getCode($this->frontend->base->getAbsPath($this->classPaths[$class]));
     // Проверяем всех предков, подключены ли они
     foreach ($namespaceParents as $parent) {
-      // Если неймспейс не найден в файле объекта и его нет в существующих объектах, то пытаемся добавить
+      // Если неймспейс не найден в файле класса и его нет в уже добавленных классах, то пытаемся добавить
       if (!$this->namespaceInitExists($code, $parent) and !$this->frontendClasses->exists($parent)) {
-        $this->addClass($parent, "[$source] ($class parent namespace)");
+        $this->addClass($parent, "$class parent namespace");
       }
     }
   }

@@ -43,6 +43,7 @@ Ngn.FramesSlider = new Class({
       onComplete: (function() {
         this.status = 0;
         this.eFramesContainer.setStyle('height', this.frames[this.frameN].getSize().y);
+        console.debug(this.getScrollOffset());
         window.scrollTo(0, this.getScrollOffset());
         if (this.oneTimeCompleteAction) {
           this.oneTimeCompleteAction();

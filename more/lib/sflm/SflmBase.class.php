@@ -131,22 +131,21 @@ abstract class SflmBase {
   }
 
   /**
-   * Создаёт веб-кэш файл
+   * Создаёт веб-кэш файл с записанным в него кодом
    *
-   * @param $package
-   * @param null $code
-   * @return bool
+   * @param string $package Имя пакета
+   * @param null|string $code null если код нужно получить автоматически по имени пакета, или string для прямой записи кода
+   * @return bool|string FALSE если запись не произошла, иначе путь к файлу
    * @throws Exception
    */
   function storeLib($package, $code = null) {
     $file = $this->cacheFile($package);
     if (!$code) $code = $this->getPackageCode($package);
     if (!$code) return false;
-    //Misc::checkEmpty($code, "No code in package [$this->type::$package]");
     if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
     Dir::make(Sflm::$webPath.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
-    return true;
+    return $file;
   }
 
   function getCode($package) {

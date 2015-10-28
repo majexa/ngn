@@ -83,6 +83,14 @@ class Sflm {
     self::$cache = [];
   }
 
+  /**
+   * Создаёт Фронтенд, а если он уже существует удаляет его предварительно
+   *
+   * @param $type
+   * @param null $name
+   * @return SflmFrontend
+   * @throws Exception
+   */
   static function setFrontend($type, $name = null) {
     if ($name) self::$frontendName = $name;
     if (self::$frontendName) {

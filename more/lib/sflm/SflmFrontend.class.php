@@ -179,11 +179,14 @@ abstract class SflmFrontend {
     $this->log("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     $this->storeAbsPaths();
-    if ($this->base->storeLib($this->name, $this->code())) {
+    if (($file = $this->base->storeLib($this->name, $this->code())) !== false) {
+      $this->uglify($file);
       $this->incrementVersion();
       $this->stored = true;
     }
   }
+
+  abstract protected function uglify($file);
 
   /**
    * Этот метот нужно вызывать при создании проекта
@@ -292,9 +295,6 @@ abstract class SflmFrontend {
    * @return bool
    */
   function addDebugPath($path) {
-    if (strstr($path, 'Ngn.FramesSlider.js')) {
-      //die2($path, false);
-    }
     if (in_array($path, $this->debugPaths)) return true;
     if (isset(Sflm::$debugPaths[$this->base->type]) and Arr::strExistsInvert(Sflm::$debugPaths[$this->base->type], $path)) {
       $this->debugPaths[] = $path;

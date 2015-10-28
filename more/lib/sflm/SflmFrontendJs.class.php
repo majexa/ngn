@@ -82,4 +82,8 @@ class SflmFrontendJs extends SflmFrontend {
     return $this->mtCode.$code;
   }
 
+  protected function uglify($file) {
+    sys("uglifyjs $file --compress --mangle -o $file");
+  }
+
 }
