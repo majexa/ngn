@@ -63,7 +63,7 @@ class Err {
     if (!headers_sent()) header('HTTP/1.0 404 Not Found');
     self::output($errno, $errstr, $errfile, $errline);
     LogWriter::v('errors', 'error: '.$errstr);
-    die();
+    exit(1);
   }
 
   /**
@@ -93,6 +93,7 @@ class Err {
     if (!headers_sent()) header('HTTP/1.0 404 Not Found');
     self::output($e->getCode(), "Uncaught exception: <i>".$e->getMessage().'</i><br /><br />', $e->getFile(), $e->getLine(), $e->getTrace());
     if (!is_a($e, 'NotLoggableError')) self::log($e);
+    exit(1);
   }
 
   static function shutdownHandler() {

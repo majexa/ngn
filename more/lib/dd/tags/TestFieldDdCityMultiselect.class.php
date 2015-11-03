@@ -7,6 +7,7 @@ class TestFieldDdCityMultiselect extends TestFieldDdTagsAbstract {
   }
 
   function runTests($request = false) {
+
     static::$im->items->addTagFilter(static::$tagFieldName, 300);
     $this->assertTrue(!empty(static::$im->items->getItems()[$this->itemId]), 'tag add fails');
     $item = static::$im->items->getItem($this->itemId);

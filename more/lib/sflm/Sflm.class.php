@@ -133,6 +133,7 @@ class Sflm {
   static function log($s) {
     if (self::$log) LogWriter::str('sflm', $s);
     if (self::$output) {
+      die2('!');
       if (strstr($s, 'Adding path')) outputColor($s, 'lightCyan');
       elseif (strstr($s, 'Skipped')) outputColor($s, 'darkGray');
       elseif (strstr($s, 'src: root')) outputColor($s, 'yellow');

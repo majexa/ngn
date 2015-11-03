@@ -1,9 +1,9 @@
--- version: 1590
+-- version: 1600
 
 CREATE TABLE IF NOT EXISTS `dd_fields` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `oid` int(6) NOT NULL DEFAULT '0',
-  `strName` varchar(20) NOT NULL,
+  `strName` varchar(64) NOT NULL,
   `name` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `help` varchar(255) DEFAULT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `dd_multivalues` (
 
 CREATE TABLE IF NOT EXISTS `dd_structures` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
+  `name` varchar(64) NOT NULL,
   `oid` int(6) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL,
   `descr` varchar(255) NOT NULL,
