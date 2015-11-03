@@ -712,6 +712,21 @@ class Arr {
       return (bool)strstr($haystack, $heedle);
     });
   }
+
+  /**
+   * Находит индекс элемента, содержащего строку
+   *
+   * @param array $haystacks Массив элементов
+   * @param string $heedle Искомая строка
+   * @return bool|int|string
+   */
+  static function strFind(array $haystacks, $heedle) {
+    foreach ($haystacks as $i => $v) {
+      if (strstr($v, $heedle)) return $i;
+    }
+    return false;
+  }
+
   static function strExistsInvert(array $heedles, $haystack) {
     return (bool)array_filter($heedles, function ($heedle) use ($haystack) {
       return (bool)strstr($haystack, $heedle);

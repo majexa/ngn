@@ -140,18 +140,13 @@ abstract class SflmFrontend {
    * @throws Exception
    */
   function getTags() {
-    //$this->checkStored();
     $html = $this->base->getTags($this->name, $this->_code());
-//    if (isset(Sflm::$debugPaths[$this->base->type])) {
-//      foreach (Sflm::$debugPaths[$this->base->type] as $path) {
-//        $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
-//      }
-//    }
-    //die2($this->debugPaths);
-    foreach ($this->debugPaths as $path) {
-      $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
-    }
+    $html .= $this->addDebugTags();
     return $html;
+  }
+
+  protected function addDebugTags() {
+    return '';
   }
 
   function getTag() {

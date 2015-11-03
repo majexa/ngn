@@ -82,6 +82,86 @@ class SflmFrontendJs extends SflmFrontend {
     return $this->mtCode.$code;
   }
 
+  protected function orderDebugPaths() {
+    $classes = [];
+    foreach ($this->debugPaths as $path) {
+      $path = Misc::removeSuffix('.js', $path);
+      $classes[] = preg_replace('/.*\\/([^\\/]+)/', '$1', $path);
+    }
+    $tree = [];
+    foreach ($classes as $i => $path) {
+      if (!strstr($path, '.')) continue;
+      // убираем последнюю часть с точкой (.Xxx)
+      $parent = preg_replace('/(.+)\\.[^.]+/', '$1', $path);
+      // находим индекс родителя
+      if (($n = array_search($parent, $classes))) {
+        $tree[$i] = [
+          'index' => $i,
+          'class' => $path,
+          'parent' => $n
+        ];
+      } else {
+        $tree[$i] = [
+          'index' => $i,
+          'class' => $path,
+          'parent' => 0
+        ];
+      }
+    }
+    $all = [];
+    $output = [];
+    $dangling = [];
+    foreach ($tree as $id => $entry) {
+      $entry['children'] = [];
+      // If this is a top-level node, add it to the output immediately
+      if (!$entry['parent']) {
+        $all[$id] = $entry;
+        $output[] =& $all[$id];
+      } else {
+        // If this isn't a top-level node, we have to process it later
+        $dangling[$id] = $entry;
+      }
+    }
+    // Process all 'dangling' nodes
+    while (count($dangling) > 0) {
+      foreach($dangling as $id => $entry) {
+        $pid = $entry['parent'];
+        // If the parent has already been added to the output, it's
+        // safe to add this node too
+        if (isset($all[$pid])) {
+          $all[$id] = $entry;
+          $all[$pid]['children'][] =& $all[$id];
+          unset($dangling[$id]);
+        }
+      }
+    }
+    $result = [];
+    foreach ($output as $v) {
+      $this->orderDebugPathsAddChildrenToResult($result, $v);
+    }
+    $this->debugPaths = $result;
+  }
+
+  function orderDebugPathsAddChildrenToResult(array &$r, array $v) {
+    $r[] = $this->debugPaths[$v['index']];
+    if ($v['children']) {
+      foreach ($v['children'] as $child) {
+        $this->orderDebugPathsAddChildrenToResult($r, $child);
+      }
+    }
+  }
+
+  protected function addDebugTags() {
+    $html = '';
+    if ($this->debugPaths) {
+      $this->orderDebugPaths();
+      foreach ($this->debugPaths as $path) {
+        $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
+      }
+    }
+    return $html;
+  }
+
   protected function uglify($file) {
     sys("uglifyjs $file --compress --mangle -o $file");
   }

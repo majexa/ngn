@@ -147,6 +147,7 @@ class Sflm {
   static $debugUrl;
   static $webPath;
   static $namespace = 'Default';
+  static $buildMode;
 
 }
 
@@ -158,3 +159,4 @@ Sflm::$absBasePaths = [
 ];
 Sflm::$output = true; // set true to debug
 Sflm::$webPath = defined('WEBROOT_PATH') ? UPLOAD_PATH : NGN_ENV_PATH.'/temp';
+Sflm::$buildMode = getConstant('BUILD_MODE');
