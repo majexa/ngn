@@ -1,22 +1,19 @@
 <?php
 
-Sflm::$output = true;
-foreach (Config::getVar('sflm/unicLinks') as $v) {
+Sflm::$output = false;
+if (!($links = Config::getVar('sflm/unicLinks', true))) return;
+foreach ($links as $link) {
   // traveling all links
-  output(SITE_DOMAIN.'/'.$v);
+  output(SITE_DOMAIN.'/'.$link);
   O::di('RouterManager', [
     'routerOptions' => [
       'disableHeaders' => true
     ],
     'req' => new Req([
-      'uri' => $v[0]
+      'uri' => $link[0]
     ])
   ])
     ->router()
     ->dispatch()
     ->getOutput();
-  // uglify
-  $uglified = $file = UPLOAD_DIR.'/js/cache/'.Sflm::frontendName(true).'.js';
-  //sys("uglifyjs $file --compress --mangle -o $uglified", true);
 }
-
