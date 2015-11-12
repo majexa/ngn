@@ -39,12 +39,12 @@ Ngn.Dialog.Prompt = new Class({
     this.close();
 
     var prompt_value = (_canceled === false ? null : $(this.dialogId + '_prompted').get('value'));
-    if (this.options.useFx && $defined(this.options.callback)) {
+    if (this.options.useFx && this.options.callback != undefined) {
       // bah.
       this.fx.start('opacity', 1, 0).chain(this.finishClose.bind(this)).chain(this.options.callback(prompt_value));
     } else {
       this.finishClose();
-      if ($defined(this.options.callback) && $type(this.options.callback) == 'function') {
+      if (this.options.callback != undefined && typeOf(this.options.callback) == 'function') {
         this.options.callback(prompt_value);
       }
     }

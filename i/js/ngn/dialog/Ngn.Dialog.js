@@ -1,5 +1,3 @@
-Ngn.dialogs = new Hash({});
-
 Ngn.Dialog = new Class({
   Implements: [Ngn.RequiredOptions, Events],
   options: {
@@ -91,7 +89,7 @@ Ngn.Dialog = new Class({
     if (this.options.noPadding) this.options.messageAreaClass += ' dialog-nopadding';
     if (this.options.reduceHeight) this.options.messageAreaClass += ' dialog-scroll';
     if ($(this.options.id + '_dialog')) {
-      c('Dialog with id=' + this.options.id + ' already opened. Aborted');
+      console.debug('Dialog with id=' + this.options.id + ' already opened. Aborted');
       return null;
     }
     if (this.options.bindBuildMessageFunction) this.options.message = this.buildMessage.bind(this, this.options.message);
@@ -101,8 +99,8 @@ Ngn.Dialog = new Class({
       onFailure: this.errorMessage.bind(this)
     });
     this.dialogId = this.options.id + '_dialog';
-    this.dialogN = Ngn.dialogs.length() + 1;
-    Ngn.dialogs[this.dialogId] = this;
+    this.dialogN = Ngn.Dialog.dialogs.getLength() + 1;
+    Ngn.Dialog.dialogs[this.dialogId] = this;
     this.parentElement = $((this.options.parent || document.body));
     var dialog_styles = Object.merge({
       'display': 'none',
@@ -141,7 +139,7 @@ Ngn.Dialog = new Class({
       this.titleText = new Element('span', {'class': this.options.titleTextClass, 'html': this.options.title}).inject(this.titlebar);
 
       if (this.options.titleClose != false) {
-        this.btnClose = Ngn.opacityBtn(new Element('span', {
+        this.btnClose = Ngn.Btn.opacity(new Element('span', {
           'id': this.options.id + '_closer',
           'class': this.options.titleCloseClass
           //'title': this.options.titleCloseTitle
@@ -157,7 +155,7 @@ Ngn.Dialog = new Class({
     if (this.options.height != 'auto') this.message.setStyle('max-height', this.options.height.toInt() + 'px');
     if (this.options.height != 'auto') this.message.setStyle('overflow-y', 'auto');
     this.beforeInitRequest();
-    if ($defined(this.options.url)) {
+    if (this.options.url != undefined) {
       this.dotter = new Ngn.Dotter(this.message);
       this.dotter.start();
       this.request.options.url = this.options.url;
@@ -166,7 +164,7 @@ Ngn.Dialog = new Class({
         this.request.send()
       }).delay(100, this);
       if (this.options.autoShow) this.delayedShow = true;
-    } else if ($defined(this.options.message)) {
+    } else if (this.options.message != undefined) {
       if (this.options.setMessageDelay) {
         (function() {
           this.setMessage(this.options.message);
@@ -190,10 +188,10 @@ Ngn.Dialog = new Class({
         this.createButton('cancel', this.options.id, this.options.cancelText, this.options.cancelClass, this.options.cancel, !this.options.cancelDestroy).inject(this.footer.firstChild, 'top');
       }
       this.status = new Element('div', {'class': 'foot-status'}).inject(this.footer.firstChild, 'top');
-      if ($type(this.options.buttons) == 'object') {
+      if (typeOf(this.options.buttons) == 'object') {
         for (var btn in this.options.buttons) {
           btn = this.options.buttons[btn];
-          this.createButton(btn.name, this.options.id, btn.text, btn.class_name, btn.action, !(btn.auto_close), ($defined(btn.tabindex) ? btn.tabindex : null)).inject(this.footer.firstChild, 'top');
+          this.createButton(btn.name, this.options.id, btn.text, btn.class_name, btn.action, !(btn.auto_close), ((btn.tabindex != undefined) ? btn.tabindex : null)).inject(this.footer.firstChild, 'top');
         }
       }
     }
@@ -276,9 +274,9 @@ Ngn.Dialog = new Class({
   },
 
   setMessage: function(_message, delayedShow) {
-    var message = ($type(_message) == 'function' ? _message() : _message);
+    var message = (typeOf(_message) == 'function' ? _message() : _message);
     if (this.dotter) this.dotter.stop();
-    if ($type(message) == 'element') {
+    if (typeOf(message) == 'element') {
       this.grabbed = message.getParent();
       if (this.grabbed != null) {
         message.removeClass('none');
@@ -289,7 +287,7 @@ Ngn.Dialog = new Class({
     } else {
       this.message.set('html', message);
     }
-    if (!$defined(delayedShow)) delayedShow = this.delayedShow;
+    if (delayedShow == undefined) delayedShow = this.delayedShow;
     if (this.delayedShow && delayedShow) {
       this.delayedShow = false;
       this.show();
@@ -359,7 +357,7 @@ Ngn.Dialog = new Class({
       id: id + '_' + name,
       href: 'javascript:void(0)',
       'class': 'btn',
-      tabindex: ($defined(tabindex) ? tabindex : (++this.tab_index)),
+      tabindex: (tabindex != undefined ? tabindex : (++this.tab_index)),
       html: this.getButtonInnerHtml(text)
     }).inject(eButton);
     if (action && action instanceof Function) {
@@ -377,7 +375,7 @@ Ngn.Dialog = new Class({
   },
 
   openShade: function() {
-    if ($defined(this.eShade)) return;
+    if (this.eShade != undefined) return;
     this.eShade = new Element('div', {
       'class': this.options.shadeClass,
       'styles': {
@@ -423,12 +421,12 @@ Ngn.Dialog = new Class({
     document.getElement('body').removeClass('noscroll');
     if ($(this.dialog)) {
       this.closed = true;
-      if ($defined(this.grabbed)) {
+      if (this.grabbed != undefined) {
         this.grabbed.grab(this.message.firstChild);
       }
       this.fireEvent('beforeClose');
       this.dialog.empty().dispose();
-      Ngn.dialogs.erase(this.dialogId);
+      Ngn.Dialog.dialogs.erase(this.dialogId);
       if (this.options.force) this.closeShade();
       this.fireEvent('close');
       this.isOkClose ? this.fireEvent('okClose') : this.fireEvent('cancelClose');
@@ -478,3 +476,5 @@ Ngn.Dialog.openWhenClosed = function(closingDialogObject, openDialogClass, optio
     new openDialogClass(options);
   }.periodical(500);
 };
+
+Ngn.Dialog.dialogs = new Hash({});

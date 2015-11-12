@@ -86,7 +86,8 @@ abstract class CliAccessOptionsAbstract extends CliAccess {
   }
 
   protected function _run(CliAccessArgsArgs $args) {
-    if (method_exists($args->class, $args->method) and (new ReflectionMethod($args->class, $args->method))->isPublic()) {
+    // Если нет метода с экшеном a_{method}, значит проверяем наличие прямого публичного метода
+    if (!method_exists($args->class, 'a_'.$args->method) and method_exists($args->class, $args->method) and (new ReflectionMethod($args->class, $args->method))->isPublic()) {
       // direct hidden method exists
     } else {
       $args->method = 'a_'.$args->method;

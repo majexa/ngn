@@ -27,7 +27,7 @@ Ngn.Form.El.Autocompleter.Autocompleter = new Class({
   initialize: function(eInput, options) {
     this.selectedValue = '';
     var type = eInput.getParent('.element').get('class').replace(/.*type_(\w+).*/, '$1');
-    var controller = '/' + Ngn.sflmFrontend + '/ac' + ucfirst(type);
+    var controller = '/' + Ngn.sflmFrontend + '/ac' + Ngn.String.ucfirst(type);
     this.parent(eInput, controller, options);
     this.eSpan = new Element('span', {'class': 'ac'});
     this.eSpan2 = new Element('span', {'class': 'ac2'});

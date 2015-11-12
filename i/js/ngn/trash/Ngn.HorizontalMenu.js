@@ -20,7 +20,7 @@ Ngn.HorizontalMenu = new Class({
         new Element('i').inject(eA, 'after');
       }
       eLi.addEvent('mouseover', function() {
-        $clear(eLi.retrieve('timerId'));
+        clearTimeout(eLi.retrieve('timerId'));
         this.show(eLi);
       }.bind(this));
       eLi.addEvent('mouseout', function(e) {

@@ -66,6 +66,10 @@ Ngn.Dialog.Auth.Vk = new Class({
 
 });
 
+if (!Ngn.sflmFrontend) throw new Error('Ngn.sflmFrontend not defined');
+
+// @requiresBefore s2/js/common/Ngn
+
 Ngn.Dialog.Auth = new Class({
   Extends: Ngn.Dialog.RequestFormTabs,
   Implements: [Ngn.Dialog.Auth.Vk],
@@ -130,7 +134,7 @@ Ngn.Dialog.Auth = new Class({
   },
 
   submitSuccessUserRegPhone: function(r) {
-    c('not realized');
+    console.debug('not realized');
     //this.authComplete();
   }
 

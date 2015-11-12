@@ -159,8 +159,8 @@ Ngn.TreeEdit = new Class({
   },
 
   create: function(title, action, data) {
-    if (!$defined(action)) action = 'create';
-    if (!$defined(data)) data = {};
+    if (!action != undefined) action = 'create';
+    if (!data != undefined) data = {};
     if (this.tree.selected && this.tree.selected.data) {
       // Узел выбран
       var where = 'inside';
@@ -191,9 +191,9 @@ Ngn.TreeEdit = new Class({
   },
 
   restoreState: function() {
-    c('1');
+    console.debug('1');
     if (this.stateStorage) {
-      c('2');
+      console.debug('2');
       this.stateStorage.restore();
     }
   },
@@ -300,7 +300,7 @@ Ngn.TreeEdit = new Class({
   },
 
   toggleButton: function(name, flag) {
-    if (!$defined(this.buttons[name])) return;
+    if (!this.buttons[name] != undefined) return;
     this.buttons[name].toggleDisabled(flag);
   },
 

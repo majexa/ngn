@@ -97,7 +97,7 @@ Ngn.DdTags.Dialog.Flat = new Class({
   },
 
   initialize: function(opt) {
-    c(opt);
+    console.debug(opt);
     console.trace('***');
     this.parent(opt);
   },

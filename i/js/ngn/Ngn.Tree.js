@@ -11,7 +11,7 @@ Ngn.Tree = new Class({
 
   initialize: function(options) {
     this.setOptions(options);
-    $extend(this, {
+    Object.append(this, {
       types: this.options.types,
       forest: this.options.forest,
       animateScroll: this.options.animateScroll,
@@ -332,12 +332,12 @@ Ngn.Tree.Node = new Class({
   Implements: [Events],
 
   initialize: function(structure, options) {
-    $extend(this, structure);
+    Object.append(this, structure);
     this.children = [];
     this.type = options.type || this.tree.dfltType;
     this.property = options.property || {};
     this.data = options.data;
-    this.state = $extend($unlink(this.tree.dfltState), options.state);
+    this.state = Object.append($unlink(this.tree.dfltState), options.state);
     this.$calculate();
     this.UID = Ngn.Tree.Node.UID++;
     Ngn.Tree.Nodes[this.UID] = this;
@@ -348,13 +348,13 @@ Ngn.Tree.Node = new Class({
   },
 
   $calculate: function() {
-    $extend(this, $unlink(this.tree.defaults));
+    Object.append(this, $unlink(this.tree.defaults));
     this.type = $splat(this.type);
     this.type.each(function(type) {
       var props = this.tree.types[type];
-      if (props) $extend(this, props);
+      if (props) Object.append(this, props);
     }, this);
-    $extend(this, this.property);
+    Object.append(this, this.property);
     return this;
   },
 
@@ -670,7 +670,7 @@ Ngn.Tree.Draw = {
   getHTML: function(node, html) {
     var prefix = node.tree.DOMidPrefix;
     var checkbox;
-    if ($defined(node.state.checked)) {
+    if (node.state.checked != undefined) {
       if (!node.hasCheckbox) node.state.checked = 'nochecked';
       checkbox = '<span class="ngn-tree-checkbox ngn-tree-node-' + node.state.checked + '" uid="' + node.UID + '">' + Ngn.Tree.Draw.zeroSpace + '</span>';
     } else {
@@ -795,7 +795,7 @@ Ngn.Tree.implement({
 
   select: function(node, userSelect) {
     if (!node) return this;
-    if (!$defined(userSelect)) userSelect = true;
+    if (!userSelect != undefined) userSelect = true;
     var current = this.selected;
     if (current == node) return this;
     if (current) {
@@ -992,7 +992,7 @@ Ngn.Tree.implement({
       if (!options.json) tree.fireEvent('load', [json.tree]);
       return tree;
     }
-    options = $extend($extend({
+    options = Object.append(Object.append({
       isSuccess: $lambda(true),
       secure: true,
       onSuccess: success,
@@ -1022,7 +1022,7 @@ Ngn.Tree.Node.implement({
       self.tree.fireEvent('loadNode', self);
       return self;
     }
-    options = $extend($extend($extend({
+    options = Object.append(Object.append(Object.append({
       isSuccess: $lambda(true),
       secure: true,
       onSuccess: success,
@@ -1457,7 +1457,7 @@ Ngn.Tree.Drag = new Class({
   initialize: function(tree, options) {
     tree.drag = this;
     this.setOptions(options);
-    $extend(this, {
+    Object.append(this, {
       tree: tree,
       snap: this.options.snap,
       groups: [],
@@ -1469,7 +1469,7 @@ Ngn.Tree.Drag = new Class({
 
     this.setDroppables(this.options.droppables);
 
-    $extend(tree.defaults, {
+    Object.append(tree.defaults, {
       dropDenied: [],
       dragDisabled: false
     });
@@ -1587,7 +1587,7 @@ Ngn.Tree.Drag = new Class({
   onleave: function() {
     this.tree.unselect();
     this.clean();
-    $clear(this.scrolling);
+    clearTimeout(this.scrolling);
     this.scrolling = null;
     this.target = false;
   },
@@ -1653,7 +1653,7 @@ Ngn.Tree.Drag = new Class({
       }.periodical(this.options.scrollDelay, this, [sign]);
     }
     if (!sign) {
-      $clear(this.scrolling);
+      clearTimeout(this.scrolling);
       this.scrolling = null;
     }
   },
@@ -1723,7 +1723,7 @@ Ngn.Tree.Drag = new Class({
   clean: function() {
     this.pointer.style.width = 0;
     if (this.openTimer) {
-      $clear(this.openTimer);
+      clearTimeout(this.openTimer);
       this.openTimer = false;
       this.wrapper.style.cursor = 'inherit';
       this.wrapper = false;
@@ -1873,7 +1873,7 @@ Ngn.Tree.Drag = new Class({
 
   onstop: function() {
     this.clean();
-    $clear(this.scrolling);
+    clearTimeout(this.scrolling);
   }
 });
 

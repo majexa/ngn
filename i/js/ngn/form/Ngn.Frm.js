@@ -80,10 +80,10 @@ Ngn.Frm.disable = function(eForm, flag) {
   eForm.getElements(Ngn.Frm.selector).each(function(el) {
     el.set('disabled', flag);
   });
-  // c(Ngn.Frm.virtualElements);
+  // console.debug(Ngn.Frm.virtualElements);
   for (var i = 0; i < Ngn.Frm.virtualElements.length; i++) {
     // var o = Ngn.Frm.virtualElements[i];
-    // c([o, o.getForm()]);
+    // console.debug([o, o.getForm()]);
     // if (o.getForm() && o.getForm().get('id') != eForm.get('id')) return;
     // o.toggleDisabled(!flag);
   }
@@ -101,7 +101,7 @@ Ngn.Frm.addEvent = function(event, name, callback, args) {
 }
 
 Ngn.enumm = function(arr, tpl, glue) {
-  if (!$defined(glue)) glue = '';
+  if (glue == undefined) glue = '';
   for (var i = 0; i < arr.length; i++)
     arr[i] = tpl.replace('{v}', arr[i]);
   return arr.join(glue);
@@ -116,10 +116,10 @@ Ngn.Frm.getBracketNameKeys = function(name) {
   m = name.match(/([^[]*)\[/);
   if (!m) return [name];
   var keys = [];
-  keys.extend([m[1]]);
+  keys.append([m[1]]);
   var re = /\[([^\]]*)\]/g;
   while (m = re.exec(name)) {
-    keys.extend([m[1]]);
+    keys.append([m[1]]);
   }
   return keys;
 };
@@ -127,7 +127,7 @@ Ngn.Frm.getBracketNameKeys = function(name) {
 Ngn.Frm.fillEmptyObject = function(object, keys) {
   for (var i = 0; i < keys.length - 1; i++) {
     var p = 'object' + (Ngn.enumm(keys.slice(0, i + 1), "['{v}']"));
-    eval('if (!$defined(' + p + ')) ' + p + ' = {}');
+    eval('if (' + p + ' == undefined) ' + p + ' = {}');
   }
 };
 
@@ -139,7 +139,7 @@ Ngn.Frm.setValueByBracketName = function(o, name, value) {
   var p = 'o';
   for (var i = 0; i < keys.length; i++) p += "['" + keys[i] + "']";
   if (name.contains('[]')) {
-    eval(p + ' = $defined(' + p + ') ? ' + p + '.concat(value) : [value]');
+    eval(p + ' = (' + p + ' != undefined) ? ' + p + '.concat(value) : [value]');
   } else {
     //eval(p+' = $defined('+p+') ? [].concat('+p+', value) : value');
     eval(p + ' = value');
@@ -159,7 +159,7 @@ Ngn.Frm.toObj = function(eContainer, except) {
   eContainer = $(eContainer);
   var typeMatch = 'text' + (!except.contains('hidden') ? '|hidden' : '') + (!except.contains('password') ? '|password' : '');
   var elements = eContainer.getElements(Ngn.Frm.selector);
-  c(elements);
+  console.debug(elements);
   for (var i = 0; i < elements.length; i++) {
     var el = elements[i];
     if (!el.name) continue;
@@ -212,7 +212,7 @@ Ngn.Frm.initTranslateField = function(eMasterField, eTranslatedField) {
 };
 
 Ngn.Frm.initCopySelectValue = function(eSelectField, eSlaveField, param) {
-  if (!$defined(param)) param = 'value';
+  if (param == undefined) param = 'value';
   var eSelectField = $(eSelectField);
   var eSlaveField = $(eSlaveField);
   eSlaveField.addEvent('keyup', function() {

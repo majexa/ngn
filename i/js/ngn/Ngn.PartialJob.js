@@ -33,9 +33,9 @@ Ngn.PartialJob = new Class({
   
   _makeStep: function(step) {
     if (this.stopped) return;
-    var req = new Hash({ step: step });
-    if (this.options.requestParams) req.extend(this.options.requestParams);
-    if (this.firstStepExtraParams) req.extend(this.firstStepExtraParams);
+    var req = { step: step };
+    if (this.options.requestParams) req.append(this.options.requestParams);
+    if (this.firstStepExtraParams) req.append(this.firstStepExtraParams);
     new Ngn.Request.JSON({
       url: this.options.url,
       onSuccess: function(data) {
@@ -48,7 +48,7 @@ Ngn.PartialJob = new Class({
           return;
         }
         if (data.step === undefined) {
-          c(data);
+          console.debug(data);
           throw new Error('step not defined in json data');
         }
         this.curStep = data.step.toInt();

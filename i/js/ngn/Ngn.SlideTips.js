@@ -19,7 +19,7 @@ Ngn.SlideTips = new Class({
     this.eNums = this.element.getElement('.nums');
     this.n = 0;
     this.process = false;
-    this.cycled = $defined(this.options.cycled) ? true : false;
+    this.cycled = this.options.cycled != undefined ? true : false;
 
     this.element.setStyle('display', 'none');
     
@@ -84,7 +84,7 @@ Ngn.SlideTips = new Class({
     // Процесс перелистывания начался
     // До того момента, как он не закончиться, переключать нельзя
     this.process = true;
-    if ($defined(this.curN)) { // Уже существует открытая секция
+    if (this.curN  != undefined) { // Уже существует открытая секция
       this.fxs[this.curN].slideOut().chain(function() { // Закрываем секцию
         this._show(n); // Отображаем секцию N
       }.bind(this));

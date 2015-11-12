@@ -16,8 +16,8 @@ Ngn.Dialog.RequestFormBase = new Class({
   initialize: function(options) {
     options = options || {};
     options.ok = this.submit.bind(this);
-    if (!$defined(options.submitUrl)) {
-      if (!$defined(options.jsonSubmit)) options.jsonSubmit = false;
+    if (options.submitUrl == undefined) {
+      if (options.jsonSubmit == undefined) options.jsonSubmit = false;
       options.submitUrl = options.url;
     }
     this.parent(options);

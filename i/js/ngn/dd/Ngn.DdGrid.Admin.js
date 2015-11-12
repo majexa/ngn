@@ -38,6 +38,6 @@ Ngn.DdGrid.Admin = new Class({
  * @returns Ngn.DdGrid.Admin
  */
 Ngn.DdGrid.Admin.factory = function(strName, options) {
-  var cls = eval('Ngn.DdGrid.Admin.' + ucfirst(strName));
+  var cls = eval('Ngn.DdGrid.Admin.' + Ngn.String.ucfirst(strName));
   return cls ? new cls(options) : new Ngn.DdGrid.Admin(options);
 };

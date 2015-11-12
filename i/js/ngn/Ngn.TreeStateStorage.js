@@ -36,7 +36,7 @@ Ngn.TreeStateStorage = new Class({
     var stored, node;
     if (!data) this.restored = this.restored || this.read();
     var restored = data || this.restored;
-    c(restored);
+    console.debug(restored);
     for (var i = 0; i < restored.length; i++) {
       stored = restored[i];
       node = this.options.retrieve(stored);

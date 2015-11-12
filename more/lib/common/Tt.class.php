@@ -45,7 +45,9 @@ class Tt {
         $openCommentBegin = $closeCommentBegin = '<!-- ';
         $openCommentEnd = $closeCommentEnd = ' -->';
       }
-      if (getConstant('TEMPLATE_DEBUG')) print "\n".$openCommentBegin.$body1.$openCommentEnd."\n";
+      if (getConstant('TEMPLATE_DEBUG')) {
+        print "\n".$openCommentBegin.$body1.$openCommentEnd."\n";
+      }
       if (Err::$throwNotices) {
         Err::noticeSwitch(false);
         $notices = true;

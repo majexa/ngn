@@ -50,7 +50,7 @@ Ngn.Sound = new Class({
   },
 
   jumpTo: function(seconds) {
-    $clear(this.listeners.position);
+    clearTimeout(this.listeners.position);
     this.start(seconds);
   },
 
@@ -102,9 +102,9 @@ Ngn.Sound = new Class({
   },
 
   checkProgress: function() {
-    if ($type(this.filesize) !== "number") { this.filesize = this.getFilesize(); }
+    if (typeOf(this.filesize) !== "number") { this.filesize = this.getFilesize(); }
     var loaded = this.getBytesLoaded(); 
-    if ($type(loaded) === "number" && loaded !== this.listeners.lastProgress) { 
+    if (typeOf(loaded) === "number" && loaded !== this.listeners.lastProgress) {
       var total = this.getFilesize();
       this.listeners.lastProgress = loaded;
       this.fireEvent('onProgress', [loaded, total]); 
@@ -114,7 +114,7 @@ Ngn.Sound = new Class({
   checkPosition: function() {
     var position = this.getPosition();
     this.duration = this.getDuration();
-    if ($type(position) === "number" && position !== this.listeners.lastPosition) { 
+    if (typeOf(position) === "number" && position !== this.listeners.lastPosition) {
       this.listeners.lastPosition = position;
       this.fireEvent('onPosition', [(position / 1000).round(), (this.duration / 1000).round()]);
     }
@@ -130,7 +130,7 @@ Ngn.Sound = new Class({
   },
 
   onLoad: function() {
-    $clear(this.listeners.progress);
+    clearTimeout(this.listeners.progress);
     this.checkProgress();
   },
 
@@ -144,7 +144,7 @@ Ngn.Sound = new Class({
   },
 
   onStop: function() {
-    $clear(this.listeners.position);
+    clearTimeout(this.listeners.position);
     if (this.pausedAt === 0) { this.fireEvent('onPosition', [0, this.duration]); }
     this.playing = false;
   }
@@ -262,7 +262,7 @@ Ngn.Sound.Player = new Class({
         var percent = (loaded / total*100).round(2);
         //this.options.player.seekbar.get('tween').start('width', percent);
         this.options.player.seekbar.setStyle('width', percent);
-        c('Загружено ' + loaded + '. Всего: ' + total);
+        console.debug('Загружено ' + loaded + '. Всего: ' + total);
       },
       // duration - сколько секунд загружено
       onPosition: function(position, duration) {
@@ -270,7 +270,7 @@ Ngn.Sound.Player = new Class({
         // this.position.get('tween').start('left', percent);
         var p = this.options.player;
         //c(duration);
-        c('Flash послал комманду установить позицию на ' + position + ' секунд. Всего загружено: ' + duration + ' секунд');
+        console.debug('Flash послал комманду установить позицию на ' + position + ' секунд. Всего загружено: ' + duration + ' секунд');
         p.position.setStyle('left', (-Math.round(p.position.getSize().x/2) + (p.seekbar.getSize().x / 100 * percent)) + 'px');
       },
       onID3: function(key, value) {
@@ -317,14 +317,14 @@ Ngn.Sound.Player = new Class({
       // sound.duration - сколько милесекунд загружено
       var ms = ((e.page.x - coords.left)/coords.width)*sound.duration;
       
-      // c([((e.page.x - coords.left)/coords.width), sound.duration]);
-      c('Всего загружено милесекунд: ' + sound.duration);
+      // console.debug([((e.page.x - coords.left)/coords.width), sound.duration]);
+      console.debug('Всего загружено милесекунд: ' + sound.duration);
       
       this.position.setStyles({
         'left': (e.page.x - coords.left - Math.round(this.position.getSize().x / 2)) + 'px',
         //'top': e.page.y + 'px'
       });
-      c('Пытаемся установить курсор на ' + ms + ' милесекунд');
+      console.debug('Пытаемся установить курсор на ' + ms + ' милесекунд');
       sound.jumpTo(ms);
     }.bind(this));
     this.el.inject(this.ePlaylist);
@@ -339,14 +339,14 @@ Ngn.Sound.Player = new Class({
   
   initCursor: function() {
     this.cursorHide = function() {
-      $clear(this.timeoutId);
+      clearTimeout(this.timeoutId);
       this.timeoutId = (function() {
         this.seekbarContainer.removeClass('over');
         this.cursor.setStyle('visibility', 'hidden');
       }).delay(100, this);
     }.bind(this);
     this.cursorShow = function() {
-      $clear(this.timeoutId);
+      clearTimeout(this.timeoutId);
       this.seekbarContainer.addClass('over');
       this.cursor.setStyle('visibility', 'visible');
     }.bind(this);
@@ -399,7 +399,7 @@ Ngn.Sound.Player = new Class({
   },
   
   stopTimer: function() {
-    $clear(this.timerId);
+    clearTimeout(this.timerId);
   }
   
 });

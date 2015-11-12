@@ -221,7 +221,7 @@ Ngn.Rainbow = new Class({
 
     this.layout.overlay2.addEvent('mousedown', function(e) {
       e = new Event(e);
-      // c([e.page.x, this.layout.overlay.getLeft(), curW]);
+      // console.debug([e.page.x, this.layout.overlay.getLeft(), curW]);
       this.layout.cursor.setStyles({
         'top': e.page.y - this.layout.overlay.getTop() - curH,
         'left': e.page.x - this.layout.overlay.getLeft() - curW

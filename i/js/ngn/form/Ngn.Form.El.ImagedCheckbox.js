@@ -7,8 +7,8 @@ Ngn.Form.El.ImagedCheckbox = new Class({
     elements.each(function(eWrapper) {
       eWrapper.addEvent('click', function(e) {
         var eInput = eWrapper.getElement('input');
-        c(eInput);
-        c(eInput.get('checked'));
+        console.debug(eInput);
+        console.debug(eInput.get('checked'));
         if (eInput.get('checked')) {
           eWrapper.addClass('selected');
           eInput.set('checked', true);

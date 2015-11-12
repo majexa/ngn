@@ -229,7 +229,7 @@ Ngn.Btn.FileUpload = new Class({
         var loaded = event.loaded, total = event.total;
         var proc = parseInt(loaded / total * 100, 10).limit(0, 100);
         //c('Загружено ' + proc + '%');
-        //if (proc == 100) c('Загрузка завершена');
+        //if (proc == 100) console.debug('Загрузка завершена');
       }.bind(this),
       onComplete: function(r) {
         this.btn.toggleDisabled(true);
@@ -242,3 +242,30 @@ Ngn.Btn.FileUpload = new Class({
   }
 
 });
+
+Ngn.Btn.addAction = function(selector, action, parent) {
+  var esBtn = (parent ? parent : document).getElements(selector);
+  if (!esBtn) return;
+  esBtn.each(function(eBtn) {
+    action = action.pass(eBtn);
+    eBtn.addEvent('click', function(e) {
+      e.preventDefault();
+      action(e);
+    });
+  });
+};
+
+Ngn.Btn.opacity = function(eBtn, outOp, overOp) {
+  var fx = new Fx.Morph(eBtn, { duration: 'short', link: 'cancel' });
+  if (!outOp != undefined) outOp = 0.4;
+  if (!overOp != undefined) overOp = 1;
+  eBtn.set('opacity', outOp);
+  eBtn.addEvent('mouseover', function() {
+    fx.start({'opacity': [outOp, overOp]});
+  });
+  eBtn.addEvent('mouseout', function() {
+    fx.start({'opacity': [overOp, outOp]});
+  });
+  return eBtn;
+};
+

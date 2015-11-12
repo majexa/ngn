@@ -5,7 +5,7 @@ Ngn.Frm.VisibilityCondition = new Class({
     this.initSectionSelector();
     this.eSection = eForm.getElement(this.sectionSelector);
     if (!this.eSection) {
-      c('Element "' + this.sectionSelector + '" does not exists');
+      console.debug('Element "' + this.sectionSelector + '" does not exists');
       return;
     }
     /*

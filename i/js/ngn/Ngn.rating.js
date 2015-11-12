@@ -64,7 +64,7 @@ Ngn.rating = function(rate, addevents, options) {
         },
         click: function() {
           options.targetObject.set('data-value', el.get('data-rindex'));
-          if ($type(options.clickEvent) == 'function') {
+          if (typeOf(options.clickEvent) == 'function') {
             var n = options.targetObject.get('data-value');
             options.clickEvent.run({
               id: options.targetObject.get('id'), 

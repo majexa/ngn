@@ -288,7 +288,7 @@ Ngn.Form = new Class({
     if (!vc) return;
     vc = JSON.decode(vc.get('html'));
     for (var i = 0; i < vc.length; i++) {
-      var cls = eval('Ngn.Frm.VisibilityCondition.' + ucfirst(vc[i][3]));
+      var cls = eval('Ngn.Frm.VisibilityCondition.' + Ngn.String.ucfirst(vc[i][3]));
       this.visibilityConditions[vc[i][0]] = new cls(this.eForm, vc[i][0], vc[i][1], vc[i][2]);
     }
   },
@@ -368,7 +368,7 @@ Ngn.Form.factory = function(eForm, opts) {
   var name = 'Ngn.' + (eForm.get('data-class') || 'Form');
   var cls = eval(name);
   if (!cls) throw new Error('class ' + name + ' not found');
-  c('init ' + name);
+  console.debug('init ' + name);
   return new cls(eForm, opts);
 };
 
@@ -389,7 +389,7 @@ Ngn.Form.ElInit = new Class({
     els.each(function(eRow) {
       //c('1' + this.type);
       if (!eRow.get('data-typejs')) return;
-      var clsName = 'Ngn.Form.El.' + ucfirst(this.type)
+      var clsName = 'Ngn.Form.El.' + Ngn.String.ucfirst(this.type)
       var cls = eval(clsName);
       if (cls === undefined) throw new Error('Class "' + clsName + '" is not defined');
       //c('2' + this.type);
@@ -405,7 +405,7 @@ Ngn.Form.ElInit = new Class({
 // ------------------- Form Elements Framework ----------------------
 
 Ngn.Form.ElInit.factory = function(form, type) {
-  var cls = eval('Ngn.Form.ElInit.' + ucfirst(type));
+  var cls = eval('Ngn.Form.ElInit.' + Ngn.String.ucfirst(type));
   if (cls) return new cls(form, type);
   return new Ngn.Form.ElInit(form, type);
 };
@@ -427,10 +427,10 @@ Ngn.Form.El = new Class({
     this.form.els[this.name] = this;
     if (Ngn.Form.elOptions[this.name]) this.options = Ngn.Form.elOptions[this.name];
     this.init();
-    c('Ngn.Form.El.' + ucfirst(this.type) + ' initialized');
+    console.debug('Ngn.Form.El.' + Ngn.String.ucfirst(this.type) + ' initialized');
   },
   fireFormElEvent: function(event, value) {
-    this.form.fireEvent('el' + ucfirst(this.name) + ucfirst(event), value);
+    this.form.fireEvent('el' + Ngn.String.ucfirst(this.name) + Ngn.String.ucfirst(event), value);
   },
   init: function() {
   }
@@ -626,7 +626,7 @@ Form.Validator.addAllThese([
     errorMsg: 'неправильный формат',
     test: function(element) {
       if (!element.value) return true;
-      element.value = trim(element.value);
+      element.value = element.value.trim();
       element.value = element.value.replace(/[\s\-\(\)]/g, '');
       element.value = element.value.replace(/^8(.*)/g, '+7$1');
       return /^\+\d{11}$/g.test(element.value);

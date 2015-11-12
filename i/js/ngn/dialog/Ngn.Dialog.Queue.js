@@ -14,7 +14,7 @@ Ngn.Dialog.Queue = new Class({
    * @param options
    */
   initialize: function(queue, options) {
-    if ($defined(Ngn.Dialog.queue)) new Error('You can create only one queue instance');
+    if (Ngn.Dialog.queue != undefined) new Error('You can create only one queue instance');
     Ngn.Dialog.queue = this;
     this.queue = queue;
     this.setOptions(options);
@@ -26,7 +26,7 @@ Ngn.Dialog.Queue = new Class({
   },
   
   getNextOptions: function() {
-    return $defined(this.queue[this.current+1]) ?
+    return (this.queue[this.current+1] != undefined) ?
       this.queue[this.current+1][1] : false;
   },
   
@@ -47,14 +47,14 @@ Ngn.Dialog.Queue = new Class({
       }.bind(this),
       onOkClose: function() {
         //c('onOkClose added by queue');
-        c('queue length: '+this.queue.length);
+        console.debug('queue length: '+this.queue.length);
         if (this.current == this.queue.length-1) {
           this.shade.closeShade();
           this.fireEvent('complete');
           return;
         }
         this.current++;
-        c('openCurrent');
+        console.debug('openCurrent');
         this.openCurrent();
       }.bind(this)
     };

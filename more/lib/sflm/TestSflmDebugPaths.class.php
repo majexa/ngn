@@ -7,30 +7,30 @@ class TestSflmDebugPaths extends ProjectTestCase {
     Sflm::setFrontend('js', 'default');
   }
 
-//  function testDebugPathOnAddingClass() {
-//    // добавляем часть пути класса в список отладочных путей
-//    Sflm::$debugPaths = [
-//      'js' => [
-//        'test/Ngn.Sub.B.js'
-//      ]
-//    ];
-//    // добавляем класс
-//    Sflm::frontend('js')->addClass('Ngn.Sub.B');
-//    // сохраняем собранный файл фронтенда
-//    Sflm::frontend('js')->store();
-//    // переопределяем фронтенд
-//    Sflm::setFrontend('js');
-//    // добавляем класс
-//    Sflm::frontend('js')->addClass('Ngn.Sub.B');
-//    // сохраняем собранный файл фронтенда
-//    Sflm::frontend('js')->store();
-//    // отдельный тег для файла отладочного класса есть
-//    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTags(), 'Ngn.Sub.B'));
-//    // отладочного класса не должно быть в основном файле
-//    $this->assertFalse((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.B'));
-//    // зато там должен быть Ngn.Sub.A от которого наследуется Ngn.Sub.B и которого нет в отладочных путях
-//    $this->assertTrue((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.A'));
-//  }
+  function testDebugPathOnAddingClass() {
+    // добавляем часть пути класса в список отладочных путей
+    Sflm::$debugPaths = [
+      'js' => [
+        'test/Ngn.Sub.B.js'
+      ]
+    ];
+    // добавляем класс
+    Sflm::frontend('js')->addClass('Ngn.Sub.B');
+    // сохраняем собранный файл фронтенда
+    Sflm::frontend('js')->store();
+    // переопределяем фронтенд
+    Sflm::setFrontend('js');
+    // добавляем класс
+    Sflm::frontend('js')->addClass('Ngn.Sub.B');
+    // сохраняем собранный файл фронтенда
+    Sflm::frontend('js')->store();
+    // отдельный тег для файла отладочного класса есть
+    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTags(), 'Ngn.Sub.B'));
+    // отладочного класса не должно быть в основном файле
+    $this->assertFalse((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.B'));
+    // зато там должен быть Ngn.Sub.A от которого наследуется Ngn.Sub.B и которого нет в отладочных путях
+    $this->assertTrue((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.A'));
+  }
 
   /**
    * Тоже самое, что и предыдущий пример, только проверяем так же наличие файла родителя среди отладочных тэгов

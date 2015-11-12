@@ -9,7 +9,7 @@ Ngn.Request = new Class({
   },
 
   success: function(text, xml) {
-    Arr.drop(Ngn.Request.inProgress, this.id);
+    Ngn.Arr.drop(Ngn.Request.inProgress, this.id);
     if (text.contains('Error: ')) {
       return;
     }
@@ -69,7 +69,7 @@ Ngn.Request.JSON = new Class({
   },
 
   success: function(text) {
-    Arr.drop(Ngn.Request.inProgress, this.id);
+    Ngn.Arr.drop(Ngn.Request.inProgress, this.id);
     try {
       this.response.json = Ngn.json.decode(text, this.options.secure);
     } catch (e) {

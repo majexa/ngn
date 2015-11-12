@@ -52,7 +52,7 @@ Ngn.vk.massMsg.Dialog = new Class({
       }
     }.bind(this));
     this.addEvent('close', function() {
-      $clear(this.msgSendTimeoutId);
+      clearTimeout(this.msgSendTimeoutId);
     }.bind(this));    
   },
   

@@ -25,7 +25,7 @@ Ngn.Items = new Class({
   },
   
   getId: function(eItem) {
-    if (!eItem.get('id')) c(eItem);
+    if (!eItem.get('id')) console.debug(eItem);
     return eItem.get('id').split('_')[1];
   },
 

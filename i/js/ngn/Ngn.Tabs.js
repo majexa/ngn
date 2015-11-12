@@ -78,14 +78,16 @@ Ngn.Tabs = new Class({
         title: title
       }).grab(
         new Element('span', {html: text, 'class': 'pseudoLink'})
-      )).addEvent(evt, this.onClick.bindWithEvent(this, [pos])).inject(this.eMenu)
+      )).addEvent(evt, function(pos) {
+        this.onClick(pos);
+      }.bind(this, pos)).inject(this.eMenu)
     };
-    if (!grab && $type(content) == 'string') tab.url = content;
+    if (!grab && typeOf(content) == 'string') tab.url = content;
     this.tabs.push(tab);
     return this.fireEvent('onAdded', [tab.toggle, tab.container, pos]);
   },
 
-  onClick: function(evt, index) {
+  onClick: function(index) {
     this.select(index);
     if (this.options.stopClickEvent) return false;
   },
@@ -96,6 +98,7 @@ Ngn.Tabs = new Class({
    * @param {Number} Tab-index
    */
   select: function(index) {
+    //console.debug('>'+index);
     if (this.selected === index || !this.tabs[index]) return this;
     if (this.ajax) this.ajax.cancel().removeEvents();
     var tab = this.tabs[index];
@@ -103,7 +106,7 @@ Ngn.Tabs = new Class({
     if (this.selected !== null) {
       var current = this.tabs[this.selected];
       if (this.ajax && this.ajax.running) this.ajax.cancel();
-      params.extend([current.toggle, current.container, this.selected]);
+      params.append([current.toggle, current.container, this.selected]);
       this.fireEvent('onDeselect', [current.toggle, current.container, this.selected]);
     }
     

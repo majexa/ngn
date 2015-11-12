@@ -14,7 +14,7 @@ Ngn.Form.El.Phone = new Class({
   Extends: Ngn.Form.El,
 
   init: function() {
-    if (Browser.Platform.android) return;
+    if (Browser.platform == 'android') return;
     this.eRow.getElement('input').frmmask("fixed.phone-ru");
   }
 

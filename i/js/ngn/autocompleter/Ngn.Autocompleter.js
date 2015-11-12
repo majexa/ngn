@@ -262,7 +262,7 @@ Ngn.Autocompleter = new Class({
   update: function(tokens) {
     this.choices.empty();
     this.cached = tokens;
-    var type = tokens && $type(tokens);
+    var type = tokens && typeOf(tokens);
     if (type == 'object') tokens = new Hash(tokens); // added by masted
     if (!type || (type == 'array' && !tokens.length) || (type == 'hash' && !tokens.getLength())) {
       (this.options.emptyChoices || this.hideChoices).call(this);
@@ -360,7 +360,7 @@ var OverlayFix = new Class({
       var coords = this.element.getCoordinates(this.relative);
       delete coords.right;
       delete coords.bottom;
-      this.fix.setStyles($extend(coords, {
+      this.fix.setStyles(Object.append(coords, {
         'display': '',
         'zIndex': (this.element.getStyle('zIndex') || 1) - 1
       }));

@@ -152,22 +152,6 @@ Array.prototype.get = function(k, v) {
   return false;
 };
 
-Arr = {};
-Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists in an array
-  var found = false, key, strict = !!strict;
-  for (key in haystack) {
-    if ((strict && haystack[key] === needle) || (!strict && haystack[key] == needle)) {
-      found = true;
-      break;
-    }
-  }
-  return found;
-};
-
-Arr.drop = function(array, value) {
-  return array.splice(array.indexOf(value), 1);
-};
-
 //--------------------------------------------------------------------------
 
 Ngn.checkboxesSelected = function(esCheckboxes) {
@@ -233,10 +217,6 @@ function abbreviate(elements, n) {
   });
 };
 
-function ucfirst(str) {
-  var f = str.charAt(0).toUpperCase();
-  return f + str.substr(1, str.length - 1);
-};
 
 Ngn.settings = function(name, callback) {
   Asset.javascript('/c2/jsSettings/' + name, {
@@ -274,7 +254,7 @@ Ngn.getParam = function(n, zeroOnUndefined) {
 
 Ngn._getParam = function(url, n, zeroOnUndefined) {
   var p = url.split('/');
-  return $defined(p[n]) ? p[n] : ($defined(zeroOnUndefined) ? 0 : false);
+  return p[n] != undefined ? p[n] : (zeroOnUndefined != undefined ? 0 : false);
 };
 
 Ngn.getRandomInt = function(min, max) {
@@ -291,7 +271,7 @@ Ngn.randString = function(len) {
 };
 
 Ngn.setToCenter = function(element, eParent, offset) {
-  if (!$defined(eParent)) eParent = element.getParent();
+  if (!eParent != undefined) eParent = element.getParent();
   if (!offset) offset = {};
   offset = Object.merge({x: 0, y: 0}, offset);
   element.setStyles({
@@ -301,29 +281,29 @@ Ngn.setToCenter = function(element, eParent, offset) {
 };
 
 Ngn.setToCenterHor = function(element, eParent) {
-  if (!$defined(eParent)) eParent = element.getParent();
+  if (!eParent != undefined) eParent = element.getParent();
   element.setStyles({
     'left': Math.round(eParent.getSize().x / 2 - element.getSize().x / 2)
   });
 };
 
 Ngn.setToCenterRelVer = function(element, eParent) {
-  if (!$defined(eParent)) eParent = element.getParent();
+  if (!eParent != undefined) eParent = element.getParent();
   element.setStyles({
     'margin-top': Math.round(eParent.getSize().y / 2 - element.getSize().y / 2) + 'px'
   });
 };
 
 Ngn.setToCenterRelHor = function(element, eParent) {
-  if (!$defined(eParent)) eParent = element.getParent();
+  if (!eParent != undefined) eParent = element.getParent();
   element.setStyles({
     'margin-left': Math.round(eParent.getSize().x / 2 - element.getSize().x / 2) + 'px'
   });
 };
 
 Ngn.setToTopRight = function(element, eParent, margin) {
-  if (!$defined(eParent)) eParent = element.getParent();
-  if (!$defined(margin)) margin = [0, 0];
+  if (!eParent != undefined) eParent = element.getParent();
+  if (!margin != undefined) margin = [0, 0];
   element.setStyles({
     'top': margin[1],
     'left': eParent.getSize().x - element.getSize().x - margin[0]
@@ -331,8 +311,8 @@ Ngn.setToTopRight = function(element, eParent, margin) {
 };
 
 Ngn.setToBottomRight = function(element, eParent, margin) {
-  if (!$defined(eParent)) eParent = element.getParent();
-  if (!$defined(margin)) margin = [0, 0];
+  if (!eParent != undefined) eParent = element.getParent();
+  if (!margin != undefined) margin = [0, 0];
   element.setStyles({
     'top': eParent.getSize().y - margin[1],
     'left': eParent.getSize().x - element.getSize().x - margin[0]
@@ -340,8 +320,8 @@ Ngn.setToBottomRight = function(element, eParent, margin) {
 };
 
 Ngn.setToCenterRight = function(element, eParent, margin) {
-  if (!$defined(eParent)) eParent = element.getParent();
-  if (!$defined(margin)) margin = [0, 0];
+  if (!eParent != undefined) eParent = element.getParent();
+  if (!margin != undefined) margin = [0, 0];
   element.setStyles({
     'top': Math.round(eParent.getSize().y / 2 - element.getSize().y / 2) - margin[1],
     'left': eParent.getSize().x - element.getSize().x - margin[0]
@@ -349,8 +329,8 @@ Ngn.setToCenterRight = function(element, eParent, margin) {
 };
 
 Ngn.setToCenterLeft = function(element, eParent, margin) {
-  if (!$defined(eParent)) eParent = element.getParent();
-  if (!$defined(margin)) margin = [0, 0];
+  if (!eParent != undefined) eParent = element.getParent();
+  if (!margin != undefined) margin = [0, 0];
   element.setStyles({
     'top': Math.round(eParent.getSize().y / 2 - element.getSize().y / 2) - margin[1],
     'left': margin[0]
@@ -487,20 +467,6 @@ Ngn.loading = function(state) {
     });
   }
   el.setStyle('visibility', state ? 'visible' : 'hidden');
-};
-
-Ngn.opacityBtn = function(eBtn, outOp, overOp) {
-  var fx = new Fx.Morph(eBtn, { duration: 'short', link: 'cancel' });
-  if (!$defined(outOp)) outOp = 0.4;
-  if (!$defined(overOp)) overOp = 1;
-  eBtn.set('opacity', outOp);
-  eBtn.addEvent('mouseover', function() {
-    fx.start({'opacity': [outOp, overOp]});
-  });
-  eBtn.addEvent('mouseout', function() {
-    fx.start({'opacity': [overOp, outOp]});
-  });
-  return eBtn;
 };
 
 Ngn.hHandler = function(eHandler, eContainer, wId, dragOptions) {
@@ -743,12 +709,12 @@ Ngn._whenElPresents = function(elGetter, action, maxAttempts) {
   var id = function() {
     n++;
     if (find()) {
-      $clear(id);
+      clearTimeout(id);
       action(el);
       return;
     }
     if (n == maxAttempts) {
-      $clear(id);
+      clearTimeout(id);
       throw new Error('Element not presents after ' + maxAttempts + ' attempts');
     }
   }.periodical(200);
@@ -759,15 +725,6 @@ Ngn.whenElPresents = function(eParent, selector, action) {
     return eParent.getElement(selector);
   }, action);
 };
-
-Ngn.EmptyError = new Class({
-  Extends: Error,
-
-  initialize: function(v) {
-    this.message = '"' + v + '" can not be empty';
-  }
-
-});
 
 function http_build_query(formdata, numeric_prefix, arg_separator) {
   var key, use_val, use_key, i = 0, tmp_arr = [];

@@ -64,6 +64,7 @@ class SflmJsClasses {
         Sflm::log($err);
         return false;
       }
+      die2($this->classPaths);
       throw new SflmNotExists($err);
     }
     if ($this->frontendClasses->exists($class)) {
@@ -126,7 +127,12 @@ class SflmJsClasses {
     $this->processCode($code, $path, $name, $path);
   }
 
+  function getAbsPath($class) {
+    return $this->frontend->base->getAbsPath($this->classPaths[$class]);
+  }
+
   function processCode($code, $source, $name = null, $path = null) {
+    // $this->frontend->mtProcessCode($code); // mootools зависимости
     $this->frontendClasses->processCode($code, $source); // ------ добавили класс
     $thisCodeValidClassesDefinition = SflmJsClasses::parseValidClassesDefinition($code);
     foreach (SflmJsClasses::parseValidPreloadClasses($code) as $class) {
@@ -139,15 +145,8 @@ class SflmJsClasses {
     Sflm::log('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
     if ($path) $this->frontend->_addPath($path); // -------------- добавили путь (!)
     Sflm::log("Processing valid-class patterns in '$source'");
-//    if (strstr($code, 'Ngn.FramesSlider.List')) {
-//      die2('8');
-//    }
-//    if (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code))) {
-//      print "\n========\n".$code."\n========\n";
-//    }
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
-      //print '* '.$class."\n";
       $this->addClass($class, "$source valid-class pattern");
     }
     foreach (SflmJsClasses::parseRequired($code, 'after') as $class) {
@@ -231,6 +230,7 @@ class SflmJsClasses {
   static function parseValidPreloadClasses($code) {
     $classes = [];
     if (preg_match_all('/[A-Za-z0-9]:\s*(.+)/', $code, $m)) {
+//    if (preg_match_all('/[A-Za-z0-9]:\s*([A-Za-z0-9._]+)/', $code, $m)) { // problem with "a: [b, c]" patterns
       foreach ($m[1] as $pattern) {
         $pattern = trim($pattern);
         $pattern = trim($pattern, ',');

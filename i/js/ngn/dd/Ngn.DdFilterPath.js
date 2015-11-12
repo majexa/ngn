@@ -119,7 +119,7 @@ Ngn.DdFilterPath.Interface = new Class({
           var els = Ngn.Frm.getElements(name);
           for (var i = 0; i < els.length; i++) {
             if (els[i].get('type') == 'checkbox') {
-              if (Arr.inn(els[i].get('value'), value)) els[i].set('checked', true);
+              if (Ngn.Arr.inn(els[i].get('value'), value)) els[i].set('checked', true);
             } else {
               els[i].set('value', value);
             }
@@ -159,7 +159,7 @@ Ngn.DdFilterPath.Interface = new Class({
        return;
        el.getElement('.ok').addEvent('click', function() {
        var d = Ngn.Frm.toObj(el);
-       c(d);
+       console.debug(d);
 
        return;
        if (Object.eq(d.from, d.to)) {

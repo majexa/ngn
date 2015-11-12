@@ -63,8 +63,8 @@ Ngn.Carousel.Select = new Class({
     this.btns = btns;
     Ngn.setToCenterRelVer(this.btns[0]);
     Ngn.setToCenterRelVer(this.btns[1]);
-    Ngn.opacityBtn(this.btns[0], 0.1, 0.4);
-    Ngn.opacityBtn(this.btns[1], 0.1, 0.4);
+    Ngn.Btn.opacity(this.btns[0], 0.1, 0.4);
+    Ngn.Btn.opacity(this.btns[1], 0.1, 0.4);
     this.btns[0].addEvent('click', function() {
       this.carousel.toPrevious();
     }.bind(this));

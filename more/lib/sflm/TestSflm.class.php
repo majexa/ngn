@@ -8,7 +8,7 @@ class TestSflm extends ProjectTestCase {
       'js'
     ];
     $frontends = [
-      'default',
+      //'default',
       'admin'
     ];
     foreach ($types as $type) {

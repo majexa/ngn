@@ -81,7 +81,7 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function initMainTpl() {
-    if ($this->req->forceAuth() and $this->req->isDebug()) {
+    if ($this->req->isDebug()) {
       parent::initMainTpl();
       return;
     }

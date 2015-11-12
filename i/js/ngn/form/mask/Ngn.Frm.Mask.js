@@ -4,7 +4,7 @@ Object.append(Element.NativeEvents, {
   'paste': 2, 'input': 2
 });
 Element.Events.paste = {
-  base: (Browser.Platform.ios || Browser.opera || (Browser.firefox && Browser.version < 3)) ? 'input' : 'paste',
+  base: 'paste',
   condition: function(e) {
     this.fireEvent('paste', e, 1);
     return false;
@@ -96,7 +96,7 @@ Ngn.Frm.Mask = new Class({
     o.isSelection = (o.range.start !== o.range.end);
     // 8 == backspace && 46 == delete && 127 == iphone's delete
     o.isDelKey = (keyCode == 46 && (event.type != 'keypress' || ((Browser.firefox || Browser.opera) && !event.which)));
-    o.isBksKey = (keyCode == 8 || (Browser.Platform.ios && e.code == 127));
+    o.isBksKey = (keyCode == 8 || (Browser.platform == 'ios' && e.code == 127));
     o.isRemoveKey = (o.isBksKey || o.isDelKey);
     func && func.call(this, e, o);
     return true;
@@ -269,7 +269,7 @@ Ngn.Frm.Mask.extend({
       127: 'delete'
     };
 
-    if (Browser.Platform.ios) {
+    if (Browser.platform == 'ios') {
       ignoreKeys = iphoneIgnoreKeys;
     } else {
       // f1, f2, f3 ... f12

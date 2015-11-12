@@ -16,7 +16,7 @@ Ngn.PartialJob.Parallel = new Class({
 
   makeStep: function(step) {
     if (this.stepsRemains < 0) {
-      $clear(this.timeouts[step]);
+      clearTimeout(this.timeouts[step]);
       return;
     }
     this.parent(step);

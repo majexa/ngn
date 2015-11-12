@@ -14,7 +14,7 @@ class Casper {
     $steps = json_encode($steps);
     if (strstr($steps, "'")) throw new Exception('Data can not contains single quotes');
     $casperFolder = NGN_PATH.'/more/casper';
-    $cmd = "echo '$steps' | casperjs $casperFolder/test.js --stepsFile=$projectDir --disableCapture=1";
+    $cmd = "echo '$steps' | casperjs $casperFolder/test.js --testName=$projectDir --disableCapture=1";
     //$cmd = "echo '$steps' | casperjs $casperFolder/test.js --projectDir=$projectDir --disableCapture=1";
     print $cmd."\n\n";
     $process = proc_open($cmd, [['pipe', 'r'], ['pipe', 'w'], ['pipe', 'w']], $pipes, realpath('./'), []);
@@ -36,7 +36,7 @@ class Casper {
     $casperFolder = NGN_PATH.'/more/casper';
     if (!strstr($test, '/')) $test = "$casperFolder/test/$test.json";
     else $test = "$test.json";
-    $cmd = "casperjs $casperFolder/test.js --projectDir=$projectDir --stepsFile=$test";
+    $cmd = "casperjs $casperFolder/test.js --projectDir=$projectDir --testName=$test";
     print `$cmd`;
   }
 

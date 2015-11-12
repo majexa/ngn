@@ -63,6 +63,10 @@ class SflmFrontendJs extends SflmFrontend {
     $this->checkNotStored();
     R::set('code', $code);
     $this->classes->processCode($code, $source);
+    $this->mtProcessCode($code);
+  }
+
+  function mtProcessCode($code) {
     $this->mtCode .= $this->mtDependencies->parse($code);
   }
 
@@ -163,7 +167,7 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   protected function uglify($file) {
-    sys("uglifyjs $file --compress --mangle -o $file");
+    //sys("uglifyjs $file --compress --mangle -o $file");
   }
 
 }

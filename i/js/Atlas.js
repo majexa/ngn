@@ -102,13 +102,13 @@ var Atlas = new Class({
   },  
   
   geocode: function(location) {
-    var type = $type(location);
+    var type = typeOf(location);
     if(type == "array") {
       return new GLatLng(location[0], location[1]);
     }
   },
   setLocations: function() {
-    var type = $type(this.options.locations);
+    var type = typeOf(this.options.locations);
     if(type == "array") {
       this.locations = this.options.locations;
     }
@@ -117,7 +117,7 @@ var Atlas = new Class({
         url: this.options.locations,
         noCache: true,
         onSuccess: function(data) {
-          if($type(data) == "array") {
+          if(typeOf(data) == "array") {
             this.locations = data;
           }
         }.bind(this)

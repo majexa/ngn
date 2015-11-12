@@ -41,7 +41,7 @@ Ngn.Dialog.Confirm.Mem = new Class({
 
   finishClose: function() {
     if (this.isOkClose) {
-      c([this.options.id + 'confirmMem', this.eMemCheckbox.get('checked')]);
+      console.debug([this.options.id + 'confirmMem', this.eMemCheckbox.get('checked')]);
       Ngn.storage.set(this.options.id + 'confirmMem', this.eMemCheckbox.get('checked'));
     }
     this.parent();

@@ -263,9 +263,7 @@ abstract class CtrlBase {
       throw new Exception("<b>\$this->d['tpl']</b> in <b>".get_class($this)."</b> class not defined");
     }
     $html = $this->tt->getTpl($this->d['mainTpl'], $this->d);
-    $html = FileCache::func(function () use ($html) {
-      return $this->processSflm($html);
-    }, 'sflm');
+    $html = $this->processSflm($html);
     $this->d['processTime'] = getProcessTime();
     return $html;
   }

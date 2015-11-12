@@ -279,6 +279,7 @@ abstract class SflmFrontend {
     }
     if ($this->addDebugPath($path)) return;
     $this->log('Adding path '.$path);
+//    prr('Adding path '.$path);
     $this->newPaths[] = $path;
     $this->pathsCache[] = $path;
   }

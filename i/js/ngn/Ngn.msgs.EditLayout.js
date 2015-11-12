@@ -7,7 +7,7 @@ Ngn.msgs.EditLayout = new Class({
       btn.addEvent('click', function(e) {
         e.preventDefault();
         var method = 'this.objMsg.action_' + btn.getProperty('class');
-        if ($defined(eval(method))) {
+        if (eval(method) != undefined) {
           eval(method+'(id)');
         }
       }.bind(this));

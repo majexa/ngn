@@ -143,7 +143,7 @@ function getFullTrace(Exception $e) {
 function die2($t = '', $html = true) {
   sendHeader();
   pr($t, $html, true, 2);
-  die();
+  exit(1);
 }
 
 function die3($t) {

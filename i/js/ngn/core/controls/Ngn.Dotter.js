@@ -48,7 +48,7 @@ Ngn.Dotter = new Class({
 
   stop: function() {
     this.running = this.loaded = false;
-    $clear(this.periodical);
+    clearTimeout(this.periodical);
     this.fireEvent('stop');
     return this;
   }

@@ -138,7 +138,7 @@ Ngn.Select = this.Select = new Class({
 
         // create the options wrapper
         var pos = el.getPosition((!!this.options.positionRelativeSelector ? el.getParent(this.options.positionRelativeSelector) : null));
-        c([pos.y, el.retrieve("triggerElement").getSize().y]);
+        console.debug([pos.y, el.retrieve("triggerElement").getSize().y]);
         el.store("wrapper", new Element("div", {
             "class": this.options.wrapperClass,
             styles: {

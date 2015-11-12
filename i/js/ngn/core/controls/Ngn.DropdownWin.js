@@ -111,7 +111,7 @@ Ngn.DropdownWin = new Class({
   cancelHide: function() {
     if (!this.hideId) return;
     this.hiding = false;
-    $clear(this.hideId);
+    clearTimeout(this.hideId);
   },
   
   initWinPosition: function() {

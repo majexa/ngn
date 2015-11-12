@@ -66,7 +66,7 @@ History.Route = new Class({
 	initialize: function(options){
 		this.setOptions(options);
 		this.pattern = this.options.pattern || '(.*)';
-		if ($type(this.pattern) == 'string') this.pattern = new RegExp(this.pattern, this.options.flags);
+		if (typeOf(this.pattern) == 'string') this.pattern = new RegExp(this.pattern, this.options.flags);
 		this.values = this.defaults = this.options.defaults.slice();
 		History.register(this);
 		return this;

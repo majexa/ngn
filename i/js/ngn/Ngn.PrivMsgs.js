@@ -94,7 +94,7 @@ var PrivMsgsLayout = new Class({
     this.sendTimeoutId = this.sendTimeout.delay(this.timeout, this);
   },
   sendComplete: function(data) {
-    $clear(this.sendTimeoutId);
+    clearTimeout(this.sendTimeoutId);
     this.activateTextarea();
     this.activateSendBtn();
     this.msgTextarea.value = '';
@@ -167,7 +167,7 @@ var PrivMsgsLayout = new Class({
     Cookie.write('refrash', 1);
   },
   stopRefrash: function() {
-    $clear(this.refrashFuncId);
+    clearTimeout(this.refrashFuncId);
     Cookie.write('refrash', 0);
   },
 

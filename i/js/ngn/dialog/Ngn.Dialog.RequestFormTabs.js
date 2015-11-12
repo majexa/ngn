@@ -91,7 +91,7 @@ Ngn.Dialog.RequestFormTabs = new Class({
         } else {
           var formName = eForm.get('name');
           if (formName) {
-            var methodName = 'this.submitSuccess'+ucfirst(eForm.get('name'));
+            var methodName = 'this.submitSuccess'+Ngn.String.ucfirst(eForm.get('name'));
             var method = eval(methodName);
             try {
               method.bind(this)(r);
