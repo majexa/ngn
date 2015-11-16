@@ -95,9 +95,9 @@ class SflmFrontendJs extends SflmFrontend {
     $tree = [];
     foreach ($classes as $i => $path) {
       if (!strstr($path, '.')) continue;
-      // убираем последнюю часть с точкой (.Xxx)
+      // О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫ О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ (.Xxx)
       $parent = preg_replace('/(.+)\\.[^.]+/', '$1', $path);
-      // находим индекс родителя
+      // О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
       if (($n = array_search($parent, $classes))) {
         $tree[$i] = [
           'index' => $i,
@@ -167,7 +167,7 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   protected function uglify($file) {
-    //sys("uglifyjs $file --compress --mangle -o $file");
+    sys("uglifyjs $file --compress --mangle -o $file");
   }
 
 }

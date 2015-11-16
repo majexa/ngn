@@ -9,6 +9,10 @@ class SflmJsClassPaths extends ArrayAccesseble {
     $this->init();
   }
 
+  function getAbsPath($class) {
+    return (new SflmJs)->getAbsPath($this->r[$class]);
+  }
+
   protected function files() {
     $files = [];
     foreach (Sflm::$absBasePaths as $path) {

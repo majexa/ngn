@@ -34,8 +34,8 @@ class SflmFrontendCss extends SflmFrontend {
 
 
   protected function uglify($file) {
-    //sys("uglifycss $file > {$file}.tmp");
-    //rename("{$file}.tmp", $file);
+    sys("uglifycss $file > {$file}.tmp");
+    rename("{$file}.tmp", $file);
   }
 
 }

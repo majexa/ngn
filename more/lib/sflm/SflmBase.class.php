@@ -180,7 +180,7 @@ abstract class SflmBase {
    * Т.е. если sflm-фронтенд используется на сайте site.com, то русурс $path должен быть доступен
    * по ссылке http://site.com/$path
    *
-   * @param string $path Путь к sf-русурсу
+   * @param string $_path Путь к sf-русурсу
    * @return string
    * @throws Exception
    */
