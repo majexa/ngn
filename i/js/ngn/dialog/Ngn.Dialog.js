@@ -201,7 +201,7 @@ Ngn.Dialog = new Class({
       this.drag = new Drag.Move(this.dialog, {
         handle: this.titlebar,
         onComplete: function() {
-          if (this.options.savePosition) Ngn.storage.json.set('dialogPos' + this.options.id, this.dialog.getPosition());
+          if (this.options.savePosition) Ngn.Storage.json.set('dialogPos' + this.options.id, this.dialog.getPosition());
           window.fireEvent('dialogMove', this);
         }.bind(this)
       });
@@ -233,7 +233,7 @@ Ngn.Dialog = new Class({
 
   initSavedPosition: function() {
     if (this.options.id == 'dlg') throw new Error('Can not use default id for such dialog');
-    var pos = Ngn.storage.json.get('dialogPos' + this.options.id);
+    var pos = Ngn.Storage.json.get('dialogPos' + this.options.id);
     if (pos) this.dialog.setPosition(pos); else this.initCenterPosition();
   },
 

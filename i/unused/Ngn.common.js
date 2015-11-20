@@ -122,11 +122,6 @@ Ngn.arrToObj = function(arr) {
   return r;
 };
 
-Ngn.bindSizes = function(eFrom, eTo) {
-  eFrom.addEvent('resize', function() {
-    eTo.setSize(eFrom.getSize());
-  });
-};
 
 Hash.implement({
   length: function() {
@@ -369,7 +364,7 @@ Ngn.clearParagraphs = function(s) {
   return s.replace(/(<p>)(&nbsp;)?(<\/p>)/g, '').replace(/\n/g, '');
 }
 
-Ngn.localStorage = {
+Ngn.LocalStorage = {
   clean: function() {
     if (!localStorage) return;
     try {
@@ -386,7 +381,7 @@ Ngn.localStorage = {
     localStorage.removeItem(key);
   }
 };
-Ngn.localStorage.json = {
+Ngn.LocalStorage.json = {
   get: function(key) {
     if (!localStorage) return false;
     return JSON.decode(localStorage.getItem(key));
@@ -396,7 +391,7 @@ Ngn.localStorage.json = {
   }
 };
 
-Ngn.storage = {
+Ngn.Storage = {
   get: function(key) {
     if (localStorage) {
       var v = localStorage.getItem(key);
@@ -420,19 +415,19 @@ Ngn.storage = {
   }
 };
 
-Ngn.storage.int = {
+Ngn.Storage.int = {
 
   get: function(key) {
-    return parseInt(Ngn.storage.get(key));
+    return parseInt(Ngn.Storage.get(key));
   }
 
 };
 
-Ngn.storage.json = {
+Ngn.Storage.json = {
   get: function(key) {
     try {
       if (localStorage) {
-        var r = Ngn.localStorage.json.get(key);
+        var r = Ngn.LocalStorage.json.get(key);
       } else {
         var r = JSON.decode(Cookie.read(key));
       }
@@ -443,7 +438,7 @@ Ngn.storage.json = {
   },
   set: function(key, data) {
     if (localStorage)
-      Ngn.localStorage.json.set(key, data); else
+      Ngn.LocalStorage.json.set(key, data); else
       Cookie.write(key, JSON.encode(data));
   }
 };
@@ -470,7 +465,7 @@ Ngn.loading = function(state) {
 };
 
 Ngn.hHandler = function(eHandler, eContainer, wId, dragOptions) {
-  var w = Ngn.storage.get(wId);
+  var w = Ngn.Storage.get(wId);
   dragOptions = dragOptions || {};
   if (w) eContainer.setStyle('width', w);
   new Drag(eContainer, Object.merge({
@@ -478,7 +473,7 @@ Ngn.hHandler = function(eHandler, eContainer, wId, dragOptions) {
     modifiers: {x: 'width', y: false},
     snap: 0,
     onComplete: function(el) {
-      Ngn.storage.set(wId, el.getStyle('width'));
+      Ngn.Storage.set(wId, el.getStyle('width'));
     }
   }, dragOptions));
 };
@@ -694,34 +689,8 @@ Ngn.cutElementText = function(el, length) {
   el.set('title', text);
 };
 
-Ngn._whenElPresents = function(elGetter, action, maxAttempts) {
-  var el;
-  el = elGetter();
-  find = function() {
-    return el = elGetter();
-  };
-  if (find()) {
-    action(el);
-    return;
-  }
-  maxAttempts = maxAttempts || 10;
-  var n = 1;
-  var id = function() {
-    n++;
-    if (find()) {
-      clearTimeout(id);
-      action(el);
-      return;
-    }
-    if (n == maxAttempts) {
-      clearTimeout(id);
-      throw new Error('Element not presents after ' + maxAttempts + ' attempts');
-    }
-  }.periodical(200);
-};
-
 Ngn.whenElPresents = function(eParent, selector, action) {
-  return Ngn._whenElPresents(function() {
+  return Ngn.Element._whenElPresents(function() {
     return eParent.getElement(selector);
   }, action);
 };

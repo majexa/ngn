@@ -22,7 +22,7 @@ Ngn.Grid.Resizeble.Col = new Class({
         this.resizeble.resizeLastCol();
       }.bind(this),
       onComplete: function() {
-        Ngn.storage.set('gridColWidth' + this.resizeble.grid.options.id + (this.colN - 1), parseInt(this.getElements(1)[0].getStyle('width')));
+        Ngn.Storage.set('gridColWidth' + this.resizeble.grid.options.id + (this.colN - 1), parseInt(this.getElements(1)[0].getStyle('width')));
       }.bind(this),
       snap: 0
     });

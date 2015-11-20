@@ -27,10 +27,10 @@ Ngn.HidebleBar = new Class({
       duration: 100,
       onComplete: function() {
         this.hide();
-        Ngn.storage.set('hidebleBar' + this.id, false);
+        Ngn.Storage.set('hidebleBar' + this.id, false);
       }.bind(this)
     });
-    var state = Ngn.storage.bget('hidebleBar' + this.id);
+    var state = Ngn.Storage.bget('hidebleBar' + this.id);
     if (!state) {
       (function() {
         fxHide.hide();
@@ -44,7 +44,7 @@ Ngn.HidebleBar = new Class({
       duration: 100,
       onComplete: function() {
         window.fireEvent('resize');
-        Ngn.storage.set('hidebleBar' + this.id, true);
+        Ngn.Storage.set('hidebleBar' + this.id, true);
         this.eHandlerShow.setStyle('visibility', 'hidden');
       }.bind(this)
     });

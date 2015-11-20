@@ -23,7 +23,7 @@ Ngn.Grid.Resizeble = new Class({
   },
 
   getWrWidth: function(n) {
-    var w = Ngn.storage.get('gridColWidth' + this.grid.options.id + n);
+    var w = Ngn.Storage.get('gridColWidth' + this.grid.options.id + n);
     if (w > this.options.maxColWidth) w = this.options.maxColWidth;
     return w || this.defaultColWidth;
   },

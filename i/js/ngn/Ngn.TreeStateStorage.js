@@ -17,18 +17,18 @@ Ngn.TreeStateStorage = new Class({
     this.nodes = [];
     this.initToggleStore();
     this.tree.addEvent('selectChange', function(node) {
-      Ngn.storage.set(this.tree.id + 'selected', this.options.store(node));
+      Ngn.Storage.set(this.tree.id + 'selected', this.options.store(node));
     }.bind(this));
   },
 
   write: function(){
     //c(['w', this.tree.id+'toggle', this.nodes]);
     this.restored = this.nodes;
-    Ngn.storage.json.set(this.tree.id+'toggle', this.nodes);
+    Ngn.Storage.json.set(this.tree.id+'toggle', this.nodes);
   },
   
   read: function(){
-    return Ngn.storage.json.get(this.tree.id+'toggle') || [];
+    return Ngn.Storage.json.get(this.tree.id+'toggle') || [];
   },
   
   restore: function(data){
@@ -36,14 +36,13 @@ Ngn.TreeStateStorage = new Class({
     var stored, node;
     if (!data) this.restored = this.restored || this.read();
     var restored = data || this.restored;
-    console.debug(restored);
     for (var i = 0; i < restored.length; i++) {
       stored = restored[i];
       node = this.options.retrieve(stored);
       if (node) node.toggle(true);
     }
     // select restore
-    var selected = Ngn.storage.get(this.tree.id + 'selected');
+    var selected = Ngn.Storage.get(this.tree.id + 'selected');
     if (selected) {
       var node = this.options.retrieve(selected);
       if (node) {

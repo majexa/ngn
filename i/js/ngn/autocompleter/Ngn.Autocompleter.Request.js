@@ -13,7 +13,7 @@ Ngn.Autocompleter.Request = new Class({
   },
 
   query: function() {
-    var data = $unlink(this.options.postData) || {};
+    var data = Object.clone(this.options.postData) || {};
     data[this.options.postVar] = this.queryValue;
     var indicator = $(this.options.indicator);
     if (indicator) indicator.setStyle('display', '');

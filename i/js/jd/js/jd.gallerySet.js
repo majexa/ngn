@@ -79,7 +79,7 @@ jd.gallerySet = new Class({
 		}).set('html', this.options.textShowGallerySelector).addEvent(
 			'click',
 			function(){ this.toggleGallerySelector(true); }.bind(this)
-		).injectInside(this.galleryElement);
+		).inject(this.galleryElement);
 		this.addEvent('onShowCarousel', function(){this.gallerySelectorBtn.setStyle('zIndex', 10)}.bind(this));
 		this.addEvent('onCarouselHidden', function(){this.gallerySelectorBtn.setStyle('zIndex', 15)}.bind(this));
 	},
@@ -87,7 +87,7 @@ jd.gallerySet = new Class({
 		this.gallerySelector = new Fx.Morph(
 			new Element('div').addClass(
 				'gallerySelector'
-			).injectInside(
+			).inject(
 				this.galleryElement
 			).setStyles({
 				'display': 'none',
@@ -97,7 +97,7 @@ jd.gallerySet = new Class({
 		this.gallerySelectorTitle = 
 			new Element('h2').set('html', 
 				this.options.textGallerySelector
-			).injectInside(this.gallerySelector.element);
+			).inject(this.gallerySelector.element);
 		var gallerySelectorHeight = this.galleryElement.offsetHeight - 50 - 10 - 2;
 		this.gallerySelectorWrapper = new Fx.Morph(
 			new Element('div').addClass(
@@ -105,9 +105,9 @@ jd.gallerySet = new Class({
 			).setStyle(
 				'height',
 				gallerySelectorHeight + "px"
-			).injectInside(this.gallerySelector.element)
+			).inject(this.gallerySelector.element)
 		);
-		this.gallerySelectorInner =	new Element('div').addClass('gallerySelectorInner').injectInside(this.gallerySelectorWrapper.element);
+		this.gallerySelectorInner =	new Element('div').addClass('gallerySelectorInner').inject(this.gallerySelectorWrapper.element);
 		this.gallerySelectorWrapper.scroller = new Scroller(this.gallerySelectorWrapper.element, {
 			area: 100,
 			velocity: 0.3
@@ -119,7 +119,7 @@ jd.gallerySet = new Class({
 		var galleryButtonWidth =
 			((this.galleryElement.offsetWidth - 30) / 2) - 14;
 		this.gallerySet.each(function(galleryItem, index){
-			var button = new Element('div').addClass('galleryButton').injectInside(
+			var button = new Element('div').addClass('galleryButton').inject(
 				this.gallerySelectorInner
 			).addEvents({
 				'mouseover': function(myself){
@@ -141,11 +141,11 @@ jd.gallerySet = new Class({
 			new Element('div').addClass('preview').setStyle(
 				'backgroundImage',
 				"url('" + thumbnail + "')"
-			).injectInside(button);
-			new Element('h3').set('html', galleryItem.title).injectInside(button);
-			new Element('p').addClass('info').set('html', formatString(this.options.textGalleryInfo, galleryItem.elements.length)).injectInside(button);
+			).inject(button);
+			new Element('h3').set('html', galleryItem.title).inject(button);
+			new Element('p').addClass('info').set('html', formatString(this.options.textGalleryInfo, galleryItem.elements.length)).inject(button);
 		}, this);
-		new Element('br').injectInside(this.gallerySelectorInner).setStyle('clear','both');
+		new Element('br').inject(this.gallerySelectorInner).setStyle('clear','both');
 	},
 	toggleGallerySelector: function(state) {
 		if (state)

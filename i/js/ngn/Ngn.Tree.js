@@ -37,7 +37,7 @@ Ngn.Tree = new Class({
     this.updateOpenState();
     if (this.options.expandTo) this.initExpandTo();
     this.DOMidPrefix = 'ngn-tree-';
-    this.wrapper = new Element('div').addClass('ngn-tree-wrapper').injectInside(this.container);
+    this.wrapper = new Element('div').addClass('ngn-tree-wrapper').inject(this.container);
     this.events();
     this.initScroll();
     this.initSelection();
@@ -337,7 +337,7 @@ Ngn.Tree.Node = new Class({
     this.type = options.type || this.tree.dfltType;
     this.property = options.property || {};
     this.data = options.data;
-    this.state = Object.append($unlink(this.tree.dfltState), options.state);
+    this.state = Object.append(Object.clone(this.tree.dfltState), options.state);
     this.$calculate();
     this.UID = Ngn.Tree.Node.UID++;
     Ngn.Tree.Nodes[this.UID] = this;
@@ -348,8 +348,8 @@ Ngn.Tree.Node = new Class({
   },
 
   $calculate: function() {
-    Object.append(this, $unlink(this.tree.defaults));
-    this.type = $splat(this.type);
+    Object.append(this, Object.clone(this.tree.defaults));
+    this.type = Array.from(this.type);
     this.type.each(function(type) {
       var props = this.tree.types[type];
       if (props) Object.append(this, props);
@@ -409,7 +409,7 @@ Ngn.Tree.Node = new Class({
   },
 
   recursive: function(fn, args) {
-    args = $splat(args);
+    args = Array.from(args);
     if (fn.apply(this, args) !== false) {
       this.children.each(function(node) {
         if (node.recursive(fn, args) === false) {
@@ -704,7 +704,7 @@ Ngn.Tree.Draw = {
   },
 
   forestRoot: function(tree) {
-    var container = new Element('div').addClass('ngn-tree-children-root').injectInside(tree.wrapper);
+    var container = new Element('div').addClass('ngn-tree-children-root').inject(tree.wrapper);
     Ngn.Tree.Draw.children(tree.root, container);
   },
 
@@ -782,7 +782,9 @@ Ngn.Tree.implement({
 
   initSelection: function() {
     this.defaults.selectClass = '';
-    this.wrapper.addEvent('mousedown', this.attachSelect.bindWithEvent(this));
+    this.wrapper.addEvent('mousedown', function() {
+      this.attachSelect();
+    }.bind(this));
   },
 
   attachSelect: function(event) {
@@ -871,13 +873,13 @@ Ngn.Tree.implement({
       name: false,
       node: false
     };
-    this.hoverState = $unlink(this.defaultHoverState);
+    this.hoverState = Object.clone(this.defaultHoverState);
   },
 
   hover: function() {
     var cnode = this.mouse.node;
     var ctarget = this.mouse.target;
-    $each(this.hoverState, function(node, target, state) {
+    Array.each(this.hoverState, function(node, target, state) {
       if (node == cnode && (target == 'node' || target == ctarget)) return;
       if (node) {
         Ngn.Tree.Hover.out(node, target);
@@ -895,7 +897,7 @@ Ngn.Tree.implement({
   },
 
   updateHover: function() {
-    this.hoverState = $unlink(this.defaultHoverState);
+    this.hoverState = Object.clone(this.defaultHoverState);
     this.hover();
   }
 
@@ -972,7 +974,7 @@ Ngn.Tree.implement({
 
   load: function(options) {
     var tree = this;
-    this.loadOptions = this.loadOptions || $lambda({});
+    this.loadOptions = this.loadOptions || Function.from({});
     function success(json) {
       var childrenRoot = tree.wrapper.getElement('.ngn-tree-children-root');
       if (childrenRoot) childrenRoot.destroy();
@@ -993,7 +995,7 @@ Ngn.Tree.implement({
       return tree;
     }
     options = Object.append(Object.append({
-      isSuccess: $lambda(true),
+      isSuccess: Function.from(true),
       secure: true,
       onSuccess: success,
       method: 'get'
@@ -1023,7 +1025,7 @@ Ngn.Tree.Node.implement({
       return self;
     }
     options = Object.append(Object.append(Object.append({
-      isSuccess: $lambda(true),
+      isSuccess: Function.from(true),
       secure: true,
       onSuccess: success,
       method: 'get'
@@ -1329,7 +1331,7 @@ Ngn.Tree.Node.implement({
     function copy(structure) {
       var node = structure.node;
       var tree = structure.tree;
-      var options = $unlink({
+      var options = Object.clone({
         property: node.property,
         type: node.type,
         state: node.state,
@@ -1478,7 +1480,7 @@ Ngn.Tree.Drag = new Class({
       tree.root.dropDenied.combine(['before', 'after']);
     });
 
-    this.pointer = new Element('div').addClass('ngn-tree-pointer').injectInside(tree.wrapper);
+    this.pointer = new Element('div').addClass('ngn-tree-pointer').inject(tree.wrapper);
 
     this.current = Ngn.Tree.Drag.current;
     this.target = Ngn.Tree.Drag.target;
@@ -1495,7 +1497,7 @@ Ngn.Tree.Drag = new Class({
       drag: this.drag.bind(this),
       stop: this.stop.bind(this),
       cancel: this.cancel.bind(this),
-      eventStop: $lambda(false),
+      eventStop: Function.from(false),
       leave: this.leave.bind(this),
       enter: this.enter.bind(this),
       keydown: this.keydown.bind(this)
@@ -1535,7 +1537,7 @@ Ngn.Tree.Drag = new Class({
   },
 
   addToGroups: function(groups) {
-    groups = $splat(groups);
+    groups = Array.from(groups);
     this.groups.combine(groups);
     groups.each(function(group) {
       Ngn.Tree.Drag.groups[group] = (Ngn.Tree.Drag.groups[group] || []).include(this);
@@ -1543,7 +1545,7 @@ Ngn.Tree.Drag = new Class({
   },
 
   setDroppables: function(droppables) {
-    this.droppables.combine($splat(droppables));
+    this.droppables.combine(Array.from(droppables));
     this.groups.each(function(group) {
       this.droppables.combine(Ngn.Tree.Drag.groups[group]);
     }, this);
@@ -1666,7 +1668,7 @@ Ngn.Tree.Drag = new Class({
 
     var target = this.tree.mouse.target;
     if (!target) return;
-    this.current = $splat(this.options.startPlace).contains(target) ? this.tree.mouse.node : false;
+    this.current = Array.from(this.options.startPlace).contains(target) ? this.tree.mouse.node : false;
     if (!this.current || this.current.dragDisabled) {
       return;
     }
@@ -1734,7 +1736,7 @@ Ngn.Tree.Drag = new Class({
   addGhost: function() {
     var wrapper = this.current.getDOM('wrapper');
     var ghost = new Element('span').addClass('ngn-tree-ghost');
-    ghost.adopt(Ngn.Tree.Draw.node(this.current).getFirst()).injectInside(document.body).addClass('ngn-tree-ghost-notAllowed').setStyle('position', 'absolute');
+    ghost.adopt(Ngn.Tree.Draw.node(this.current).getFirst()).inject(document.body).addClass('ngn-tree-ghost-notAllowed').setStyle('position', 'absolute');
     new Element('span').set('html', Ngn.Tree.Draw.zeroSpace).injectTop(ghost);
     ghost.getLast().getFirst().className = '';
     Ngn.Tree.Drag.ghost = ghost;
@@ -2062,7 +2064,7 @@ Ngn.Tree.Rename = {
       left: -2000,
       top: 0,
       padding: 0
-    }).injectInside(document.body);
+    }).inject(document.body);
     input.addEvent('keydown', function(event) {
       (function() {
         input.setStyle('width', Math.max(20, span.set('html', input.value.replace(/\s/g, '&nbsp;')).offsetWidth + 15));

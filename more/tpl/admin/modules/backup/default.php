@@ -37,7 +37,7 @@ if (items) {
     el.addEvent('click', function() {
       if (!confirm('Вы уверены, что хотите заменить сайт резервной копией от ' + el.get('data-time'))) return false;
       new Ngn.Dialog.Loader.Simple({title: 'Подождите, происходит восстановление из резервной копии от ' + el.get('data-time')});
-      Ngn.localStorage.clean();
+      Ngn.LocalStorage.clean();
     });
   });
 }

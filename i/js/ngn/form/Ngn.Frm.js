@@ -232,10 +232,10 @@ Ngn.Frm.initCopySelectTitle = function(eSelectField, eSlaveField) {
 Ngn.Frm.storable = function(eInput) {
   if (!eInput.get('id')) throw new Error('ID param mast be defined');
   var store = function() {
-    Ngn.storage.set(eInput.get('id'), eInput.get('value'));
+    Ngn.Storage.set(eInput.get('id'), eInput.get('value'));
   };
   var restore = function() {
-    eInput.set('value', Ngn.storage.get(eInput.get('id')));
+    eInput.set('value', Ngn.Storage.get(eInput.get('id')));
   };
   restore();
   eInput.addEvent('keypress', function() {

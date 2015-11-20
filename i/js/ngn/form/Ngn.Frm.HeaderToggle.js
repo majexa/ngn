@@ -9,12 +9,12 @@ Ngn.Frm.HeaderToggle = new Class({
     this.eHeader = this.eBtn.getParent();
     this.eToggle = this.eBtn.getParent().getParent();
     this.eHeader.inject(this.eToggle, 'before');
-    var saved = Ngn.storage.get(eBtn.get('data-name'));
+    var saved = Ngn.Storage.get(eBtn.get('data-name'));
     if (saved == undefined) this.toggle(this.opened); else this.toggle(saved);
     this.eBtn.addEvent('click', function(e) {
       e.preventDefault();
       this.toggle(!this.opened);
-      Ngn.storage.set(this.eBtn.get('data-name'), this.opened);
+      Ngn.Storage.set(this.eBtn.get('data-name'), this.opened);
     }.bind(this));
   },
 
@@ -41,11 +41,11 @@ Ngn.Frm.headerToggleFx = function(btns) {
       transition: Fx.Transitions.Pow.easeOut,
       onComplete: function() {
         setArrow(opened);
-        Ngn.storage.set(btn.get('data-name'), opened ? 1 : 0);
+        Ngn.Storage.set(btn.get('data-name'), opened ? 1 : 0);
       }
     });
     var opened = true;
-    var saved = Ngn.storage.get(btn.get('data-name'));
+    var saved = Ngn.Storage.get(btn.get('data-name'));
     if (!saved || saved == 0) {
       fx.hide();
       opened = false;

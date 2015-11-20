@@ -16,10 +16,10 @@ Ngn.Dialog.Confirm.Mem = new Class({
     if (this.options.notAskSomeTime) {
       if (this.timeoutId) clearTimeout(this.timeoutId);
       this.timeoutId = (function() {
-        Ngn.storage.remove(this.options.id + 'confirmMem');
+        Ngn.Storage.remove(this.options.id + 'confirmMem');
       }).delay(120000, this);
     }
-    if (Ngn.storage.get(this.options.id + 'confirmMem')) {
+    if (Ngn.Storage.get(this.options.id + 'confirmMem')) {
       this.fireEvent('okClose');
       return;
     }
@@ -42,7 +42,7 @@ Ngn.Dialog.Confirm.Mem = new Class({
   finishClose: function() {
     if (this.isOkClose) {
       console.debug([this.options.id + 'confirmMem', this.eMemCheckbox.get('checked')]);
-      Ngn.storage.set(this.options.id + 'confirmMem', this.eMemCheckbox.get('checked'));
+      Ngn.Storage.set(this.options.id + 'confirmMem', this.eMemCheckbox.get('checked'));
     }
     this.parent();
   }

@@ -37,14 +37,14 @@ Ngn.GroupToggler = new Class({
           })
         } else {
           eBody.setStyle('display', this.display(id, true));
-          Ngn.storage.set(this.id(id), !this.get(id));
+          Ngn.Storage.set(this.id(id), !this.get(id));
         }
       }.bind(this));
     }.bind(this));
   },
 
   get: function(id) {
-    return Ngn.storage.get(this.id(id)) ? true : false;
+    return Ngn.Storage.get(this.id(id)) ? true : false;
   },
 
   display: function(id, invert) {

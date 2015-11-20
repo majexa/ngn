@@ -14,7 +14,7 @@ Ngn.UlMenu = new Class({
     });
     this.element.getElements('li').each(function(eLi) {
       var eA = eLi.getElement('a');
-      if (Ngn.storage.bget('ulMenu' + eLi.get('id'))) {
+      if (Ngn.Storage.bget('ulMenu' + eLi.get('id'))) {
         eLi.addClass('opened');
         var eUl = eA.getNext();
         if (eUl) {
@@ -36,11 +36,11 @@ Ngn.UlMenu = new Class({
         if (eUl.getStyle('display') == 'none') {
           eUl.setStyle('display', 'block');
           eLi.addClass('opened');
-          Ngn.storage.set('ulMenu' + eLi.get('id'), true);
+          Ngn.Storage.set('ulMenu' + eLi.get('id'), true);
         } else {
           eUl.setStyle('display', 'none');
           eLi.removeClass('opened');
-          Ngn.storage.remove('ulMenu' + eLi.get('id'), false);
+          Ngn.Storage.remove('ulMenu' + eLi.get('id'), false);
         }
         return false;
       });

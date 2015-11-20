@@ -33,8 +33,8 @@ Ngn.ResizableTextarea = new Class({
     el.eResizable.setStyle('border-bottom', '0px');
     var storeKey = el.getElement(this.options.textareaSelector).get('name');
     
-    var savedWidth = Ngn.storage.get(storeKey+'w');
-    var savedHeight = Ngn.storage.get(storeKey+'h');
+    var savedWidth = Ngn.Storage.get(storeKey+'w');
+    var savedHeight = Ngn.Storage.get(storeKey+'h');
     
     if (savedHeight) new Fx.Tween(el.eResizable, {
       duration: 'short',
@@ -125,7 +125,7 @@ Ngn.ResizableTextarea = new Class({
             el.eResizable.newWidth = this.options.size.x[0];
           else el.eResizable.newWidth = this.options.size.x[1];
           el.eResizable.setStyle('width', el.eResizable.newWidth);
-          Ngn.storage.set(storeKey+'w', textarea.newWidth);
+          Ngn.Storage.set(storeKey+'w', textarea.newWidth);
           el.handler.setStyle('left', el.eResizable.newWidth - el.handler.left - el.getStyle('border-left-width').toInt());
         }
         if (this.options.modifiers.y) {
@@ -138,7 +138,7 @@ Ngn.ResizableTextarea = new Class({
             el.eResizable.newHeight = this.options.size.y[0];
           else el.eResizable.newHeight = this.options.size.y[1];
           el.eResizable.setStyle('height', el.eResizable.newHeight);    // Меняем высоту texarea
-          Ngn.storage.set(storeKey+'h', el.eResizable.newHeight); // Записываем в storage
+          Ngn.Storage.set(storeKey+'h', el.eResizable.newHeight); // Записываем в storage
           //el.handler.setStyle('top', el.eResizable.newHeight - el.handler.top - el.getStyle('border-top-width').toInt());
         }
         this.options.onResize(el);

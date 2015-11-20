@@ -36,7 +36,7 @@ Ngn.TreeEdit = new Class({
             'visibility': 'hidden'
           }
         }).inject(this.container, 'bottom');
-        Ngn.bindSizes(this.container, this.eTreeShade);
+        Ngn.Element.bindSizes(this.container, this.eTreeShade);
       }.bind(this)).delay(10);
     }.bind(this));
   },
@@ -187,25 +187,23 @@ Ngn.TreeEdit = new Class({
 
   storeTreeData: function(data) {
     if (!this.options.enableStorage) return;
-    Ngn.localStorage.json.set(this.options.id + 'tree', data);
+    Ngn.LocalStorage.json.set(this.options.id + 'tree', data);
   },
 
   restoreState: function() {
-    console.debug('1');
     if (this.stateStorage) {
-      console.debug('2');
       this.stateStorage.restore();
     }
   },
 
   getStoredTreeData: function() {
     if (!this.options.enableStorage) return false;
-    return Ngn.localStorage.json.get(this.options.id + 'tree');
+    return Ngn.LocalStorage.json.get(this.options.id + 'tree');
   },
 
   removeStoredTreeData: function() {
     if (!this.options.enableStorage) return false;
-    return Ngn.localStorage.removeItem(this.options.id + 'tree');
+    return Ngn.LocalStorage.remove(this.options.id + 'tree');
   },
 
   // выполняется в самом начале один раз

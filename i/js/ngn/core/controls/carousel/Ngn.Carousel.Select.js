@@ -17,9 +17,9 @@ Ngn.Carousel.implement({
       e.wheel > 0 ? this.toPrevious() : this.toNext();
     }.bind(this));
     this.addEvent('toElement', function(){
-      Ngn.storage.set(this.options.id+'index', this.currentIndex);
+      Ngn.Storage.set(this.options.id+'index', this.currentIndex);
     }.bind(this));
-    var savedIndex = Ngn.storage.int.get(this.options.id+'index');
+    var savedIndex = Ngn.Storage.int.get(this.options.id+'index');
     if (savedIndex) this.setElementIndex(savedIndex);
   },
   

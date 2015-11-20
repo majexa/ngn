@@ -133,7 +133,7 @@ var gallery = {
 			this.currentLink = new Element('a').addClass('open').setProperties({
 				href: '#',
 				title: ''
-			}).injectInside(element);
+			}).inject(element);
 			if ((!this.options.showArrows) && (!this.options.showCarousel))
 				this.galleryElement = element = this.currentLink;
 			else
@@ -146,14 +146,14 @@ var gallery = {
 			var leftArrow = new Element('a').addClass('left').addEvent(
 				'click',
 				this.prevItem.bind(this)
-			).injectInside(element);
+			).inject(element);
 			var rightArrow = new Element('a').addClass('right').addEvent(
 				'click',
 				this.nextItem.bind(this)
-			).injectInside(element);
+			).inject(element);
 			this.galleryElement.addClass(this.options.withArrowsClass);
 		}
-		this.loadingElement = new Element('div').addClass('loadingElement').injectInside(element);
+		this.loadingElement = new Element('div').addClass('loadingElement').inject(element);
 		if (this.options.showInfopane) this.initInfoSlideshow();
 		if (this.options.showCarousel) this.initCarousel();
 		this.doSlideShow(1);
@@ -221,7 +221,7 @@ var gallery = {
 					'padding':'0px',
 					'backgroundPosition':"center center",
 					'opacity':'0'
-				}).injectInside(el),
+				}).inject(el),
 				{duration: this.options.fadeDuration}
 			);
 			if (this.options.preloader)
@@ -374,13 +374,13 @@ var gallery = {
 		var carouselElement;
 		if (!this.options.useExternalCarousel)
 		{
-			var carouselContainerElement = new Element('div').addClass('carouselContainer').injectInside(this.galleryElement);
+			var carouselContainerElement = new Element('div').addClass('carouselContainer').inject(this.galleryElement);
 			this.carouselContainer = new Fx.Morph(carouselContainerElement, {transition: Fx.Transitions.Expo.easeOut});
 			this.carouselContainer.normalHeight = carouselContainerElement.offsetHeight;
 			this.carouselContainer.set({'opacity': this.options.carouselMinimizedOpacity, 'top': (this.options.carouselMinimizedHeight - this.carouselContainer.normalHeight)});
 			this.carouselBtn = new Element('a').addClass('carouselBtn').setProperties({
 				title: this.options.textShowCarousel
-			}).injectInside(carouselContainerElement);
+			}).inject(carouselContainerElement);
 			if(this.options.carouselPreloader)
 				this.carouselBtn.set('html', this.options.textPreloadingCarousel);
 			else
@@ -394,7 +394,7 @@ var gallery = {
 			);
 			this.carouselActive = false;
 	
-			carouselElement = new Element('div').addClass('carousel').injectInside(carouselContainerElement);
+			carouselElement = new Element('div').addClass('carousel').inject(carouselContainerElement);
 			this.carousel = new Fx.Morph(carouselElement);
 		} else {
 			carouselElement = $(this.options.carouselElement).addClass('jdExtCarousel');
@@ -402,11 +402,11 @@ var gallery = {
 		this.carouselElement = new Fx.Morph(carouselElement, {transition: Fx.Transitions.Expo.easeOut});
 		this.carouselElement.normalHeight = carouselElement.offsetHeight;
 		if (this.options.showCarouselLabel)
-			this.carouselLabel = new Element('p').addClass('label').injectInside(carouselElement);
-		carouselWrapper = new Element('div').addClass('carouselWrapper').injectInside(carouselElement);
+			this.carouselLabel = new Element('p').addClass('label').inject(carouselElement);
+		carouselWrapper = new Element('div').addClass('carouselWrapper').inject(carouselElement);
 		this.carouselWrapper = new Fx.Morph(carouselWrapper, {transition: Fx.Transitions.Expo.easeOut});
 		this.carouselWrapper.normalHeight = carouselWrapper.offsetHeight;
-		this.carouselInner = new Element('div').addClass('carouselInner').injectInside(carouselWrapper);
+		this.carouselInner = new Element('div').addClass('carouselInner').inject(carouselWrapper);
 		if (this.options.activateCarouselScroller)
 		{
 			this.carouselWrapper.scroller = new Scroller(carouselWrapper, {
@@ -482,7 +482,7 @@ var gallery = {
 					marginLeft: this.options.thumbSpacing + "px",
 					width: this.options.thumbWidth + "px",
 					height: this.options.thumbHeight + "px"
-				}).injectInside(element), {duration: 200}).start({
+				}).inject(element), {duration: 200}).start({
 					'opacity': this.options.thumbIdleOpacity
 				});
 			currentImg.element.addEvents({
@@ -559,9 +559,9 @@ var gallery = {
 	initInfoSlideshow: function() {
 		/*if (this.slideInfoZone.element)
 			this.slideInfoZone.element.remove();*/
-		this.slideInfoZone = new Fx.Morph(new Element('div').addClass('slideInfoZone').injectInside($(this.galleryElement))).set({'opacity':0});
-		var slideInfoZoneTitle = new Element('h2').injectInside(this.slideInfoZone.element);
-		var slideInfoZoneDescription = new Element('p').injectInside(this.slideInfoZone.element);
+		this.slideInfoZone = new Fx.Morph(new Element('div').addClass('slideInfoZone').inject($(this.galleryElement))).set({'opacity':0});
+		var slideInfoZoneTitle = new Element('h2').inject(this.slideInfoZone.element);
+		var slideInfoZoneDescription = new Element('p').inject(this.slideInfoZone.element);
 		this.slideInfoZone.normalHeight = this.slideInfoZone.element.offsetHeight;
 		this.slideInfoZone.element.setStyle('opacity',0);
 	},
