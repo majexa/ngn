@@ -1184,12 +1184,13 @@ Ngn.Tree.KeyNav = new Class({
 
 });
 
-Event.Keys.extend({
-  'pgdown': 34,
-  'pgup': 33,
-  'home': 36,
-  'end': 35
-});
+// @todo восстановить ф-л
+//Event.Keys.exntend({
+//  'pgdown': 34,
+//  'pgup': 33,
+//  'home': 36,
+//  'end': 35
+//});
 
 
 /*

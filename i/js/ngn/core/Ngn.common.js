@@ -99,7 +99,7 @@ Object.eq = function(obj1, obj2) {
 };
 
 Object.isEmpty = function(obj) {
-  for (var i in Ngn.arrToObj(obj)) if (obj[i]) return false;
+  for (var i in Ngn.Object.fromArray(obj)) if (obj[i]) return false;
   return true;
 };
 

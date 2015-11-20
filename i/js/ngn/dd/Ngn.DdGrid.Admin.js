@@ -4,14 +4,14 @@ Ngn.DdGrid.Admin = new Class({
   Extends: Ngn.DdGrid,
   options: {
     resizeble: true,
-    basePath: Ngn.getPath(3),
+    basePath: Ngn.Url.getPath(3),
     filterPath: new Ngn.DdFilterPath(4),
     listAction: 'editContent',
     // idParam: 'itemId',
     toolActions: {
       edit: function(row) {
         new Ngn.Dialog.RequestForm({
-          url: Ngn.getPath(4) + '?a=json_edit&itemId=' + row.id,
+          url: Ngn.Url.getPath(4) + '?a=json_edit&itemId=' + row.id,
           reduceHeight: true,
           title: false,
           onOkClose: function() {
@@ -22,7 +22,7 @@ Ngn.DdGrid.Admin = new Class({
     },
     toolLinks: {
       edit: function(row) {
-        return Ngn.getPath(4) + '?a=edit&itemId=' + row.id;
+        return Ngn.Url.getPath(4) + '?a=edit&itemId=' + row.id;
       }
     }
   }

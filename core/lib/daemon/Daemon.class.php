@@ -45,7 +45,7 @@ for N in'.$for.'
 do
   DESC="'.$this->projectName.' '.$this->daemonName.' daemon ${N}"
   PIDFILE="/var/run/${NAME}-${N}.pid"
-  START_OPTS="--start ${QUIET} --chuid user:user --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS} ${N}"
+  START_OPTS="--start ${QUIET} --chuid user:user --background --make-pidfile --pidfile ${PIDFILE} --exec ${DAEMON} ${DAEMON_OPTS} n=${N}"
   STOP_OPTS="--stop --pidfile ${PIDFILE}"
   set -e
   case "$1" in

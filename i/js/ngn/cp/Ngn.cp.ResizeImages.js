@@ -29,7 +29,7 @@ Ngn.cp.ResizeImages = new Class({
     //new Fx.Scroll(window).toElement($(type + 'Wi'));
     new Fx.Scroll(window).toTop();
     new Ngn.PartialJob(
-      Ngn.getPath() + '?a=json_resize' + type.capitalize() + 'Images',
+      Ngn.Url.getPath() + '?a=json_resize' + type.capitalize() + 'Images',
       {
         loaderTitleComplete: 'Готово. Сохраняем форму',
         loaderTitleStart: 'Происходит изменение размеров ' +

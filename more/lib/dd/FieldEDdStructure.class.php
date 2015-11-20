@@ -26,7 +26,7 @@ $('{$this->form->id()}').getElements('.type_ddStructure select').each(function(e
   var eEditStrBtn = eCont.getElement('.iconBtn');
   eEditStrBtn.addEvent('click', function(e){
     var strName = eSelect.get('value');
-    if (strName) window.open(Ngn.getPath(1) + '/ddField/' + strName, '_blank');
+    if (strName) window.open(Ngn.Url.getPath(1) + '/ddField/' + strName, '_blank');
     else alert('Структура не задана');
     return false;
   });

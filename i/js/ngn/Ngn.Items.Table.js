@@ -81,7 +81,7 @@ Ngn.Items.Table = new Class({
   initItems: function() {
     this.parent();
     this.eItemsTableBody = this.eItems.getElement('tbody');
-    Ngn.fixEmptyTds(this.eItemsTableBody);
+    Ngn.Html.fixEmptyTds(this.eItemsTableBody);
     this.initSorting();
   }
 

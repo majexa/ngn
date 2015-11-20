@@ -32,7 +32,7 @@ Ngn.Grid = new Class({
   init: function() {
     if (!this.options.eParent) throw new Ngn.EmptyError('this.options.eParent');
     if (this.options.basePath == '/') this.options.basePath = '';
-    if (this.options.basePath) this.options.id = this.options.basePath.hashCode();
+    if (this.options.basePath) this.options.id = Ngn.String.hashCode(this.options.basePath);
     this.eParent = $(this.options.eParent);
     this.initMenu();
     this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable' + (this.options.resizeble ? ' resizeble' : '') + '"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
@@ -139,7 +139,7 @@ Ngn.Grid = new Class({
   },
 
   initHead: function(head) {
-    head = Ngn.arrToObj(head);
+    head = Ngn.Object.fromArray(head);
     this.esTh = [];
     this.eHeadTr.set('html', '');
     new Element('th').inject(this.eHeadTr);
@@ -152,7 +152,7 @@ Ngn.Grid = new Class({
 
   initBody: function(rows) {
     if (!rows) throw new Ngn.EmptyError('rows');
-    rows = Ngn.arrToObj(rows);
+    rows = Ngn.Object.fromArray(rows);
     var eBody = this.options.eItems.getElement('tbody');
     eBody.set('html', '');
     for (var k in rows) {
@@ -177,7 +177,7 @@ Ngn.Grid = new Class({
       }
       if (this.options.isSorting) Elements.from('<td><div class="dragBox"></div></td>')[0].inject(eTools);
       var n = 0;
-      for (var name in Ngn.arrToObj(row.data)) {
+      for (var name in Ngn.Object.fromArray(row.data)) {
         var prop = {};
         if (typeOf(row.data[name]) == 'object') {
           var value = row.data[name][0];
@@ -193,7 +193,7 @@ Ngn.Grid = new Class({
         n++;
       }
       row.tools = Object.merge(row.tools || {}, this.options.tools);
-      for (var cls in Ngn.arrToObj(row.tools)) {
+      for (var cls in Ngn.Object.fromArray(row.tools)) {
         if (typeOf(row.tools[cls]) == 'object') {
           if (!row.tools[cls].type) throw new Error('row.tools[cls].type must be defined');
           if (Ngn.Items.toolActions[row.tools[cls].type]) {

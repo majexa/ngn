@@ -64,7 +64,6 @@ class SflmJsClasses {
         Sflm::log($err);
         return false;
       }
-      die2($this->classPaths);
       throw new SflmNotExists($err);
     }
     if ($this->frontendClasses->exists($class)) {

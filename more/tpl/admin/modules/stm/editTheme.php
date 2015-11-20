@@ -30,7 +30,7 @@ $link = '/?theme[location]='.$d['params'][3].'&theme[design]='.$d['params'][5].'
     prop: {
       events: {
         click: function(e) {
-          window.open(Ngn.getPath(false, 123).replace('editTheme', 'editMenu'));
+          window.open(Ngn.Url.getPath(false, 123).replace('editTheme', 'editMenu'));
           return false;
         }
       }

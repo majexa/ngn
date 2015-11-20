@@ -28,7 +28,7 @@ Ngn.cp.DdItemsGroup = new Class({
       if (!Ngn.checkboxesSelected(this.esCheckboxes)) return;
       new Ngn.Dialog.Loader.Simple({title: 'Идёт удаление. Подождите'});
       new Request({
-        url: Ngn.getPath() + '?a=ajax_deleteGroup&' +
+        url: Ngn.Url.getPath() + '?a=ajax_deleteGroup&' +
           Hash.toQueryString(Ngn.Frm.toObj(this.eItemsForm)),
         onComplete: function() {
           (function() {

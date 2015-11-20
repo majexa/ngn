@@ -55,10 +55,10 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
       },
       toolLinks: {
         edit: function(row) {
-          return Ngn.getPath(3) + '?a=edit&id=' + row.id;
+          return Ngn.Url.getPath(3) + '?a=edit&id=' + row.id;
         },
         delete: function(row) {
-          return Ngn.getPath(3) + '?a=delete&id=' + row.id;
+          return Ngn.Url.getPath(3) + '?a=delete&id=' + row.id;
         },
         tags: function(row) {
           return '#';

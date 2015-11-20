@@ -9,10 +9,10 @@
       var eFilter = $('filter_<?= $d['filter']['name'] ?>');
       eFilter.addEvent('change', function(e) {
         if (this.get('value')) {
-          window.location = Ngn.getPath(4) + '/' + '<?= $d['filter']['param'] ?>' + '.' + 
+          window.location = Ngn.Url.getPath(4) + '/' + '<?= $d['filter']['param'] ?>' + '.' +
             this.get('name') + '.' + eFilter.get('value');
         } else {
-          window.location = Ngn.getPath(4);
+          window.location = Ngn.Url.getPath(4);
         }
       });
       </script>

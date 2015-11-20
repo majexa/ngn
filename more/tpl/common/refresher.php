@@ -11,7 +11,7 @@
   (function() {
     var eWorkflow = document.getElement('.refresher');
     new Request({
-      url: Ngn.getPath(),
+      url: Ngn.Url.getPath(),
       onComplete: function(html) {
         Elements.from(html).each(function(el) {
           if (el.get('tag') == 'div') {

@@ -1,4 +1,3 @@
-<?php
 
 $options = R::get('options');
 $im = DdCore::imSystem($options['str']);

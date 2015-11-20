@@ -8,7 +8,7 @@
       cls: 'settings',
       action: function() {
         new Ngn.Dialog.RequestForm({
-          url: Ngn.getPath(1) + '/ddItems/' + Ngn.getParam(2) + '/json_settings',
+          url: Ngn.Url.getPath(1) + '/ddItems/' + Ngn.getParam(2) + '/json_settings',
           onOkClose: function() {
             window.location.reload();
           }

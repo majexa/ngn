@@ -5,7 +5,7 @@
 window.addEvent('domready', function(){
   new Ngn.Items.Table();
   new Ngn.Frm.Saver($('form'), {
-    url: Ngn.getPath(4) + '?a=json_updateFieldsOutputSettings'
+    url: Ngn.Url.getPath(4) + '?a=json_updateFieldsOutputSettings'
   });
 });
 </script>

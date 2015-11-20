@@ -1,7 +1,7 @@
 Ngn.RequestFieldsSelect = new Class({
   
   initialize: function(eSelectContainer, options) {
-    if (!options.url) options.url = Ngn.getPath();
+    if (!options.url) options.url = Ngn.Url.getPath();
     this.eSelect = eSelectContainer.getElement('select');
     var eRequestFieldsContainer = new Element('div', {'class': 'requestFields'}).
       inject(eSelectContainer, 'after');

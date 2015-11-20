@@ -37,7 +37,7 @@ Ngn.ItemRating = new Class({
         maxStars: this.options.maxStars,
         clickEvent: function(opt) {
           new Request({
-            url: Ngn.getPath(1) + '?a=ajax_rate&cartId=' + opt.id + '&n=' + opt.n,
+            url: Ngn.Url.getPath(1) + '?a=ajax_rate&cartId=' + opt.id + '&n=' + opt.n,
             onComplete: opt.onComplete
           }).send();
         },

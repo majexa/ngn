@@ -10,7 +10,7 @@ Ngn.cp.DdItemsTable = new Class({
     this.addBtnsActions([
       ['a.editDate', function(itemId) {
         new Ngn.Dialog.RequestForm({
-          url: Ngn.getPath(3)+'/json_editItemSystemDates/'+itemId
+          url: Ngn.Url.getPath(3)+'/json_editItemSystemDates/'+itemId
         });
       }]
     ]);
