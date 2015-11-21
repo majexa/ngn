@@ -42,7 +42,7 @@ Ngn.DdTags.Dialog.Tree = new Class({
   init: function() {
     this.eTreeContainer = this.message.getElement('.treeContainer');
     this.eTreeMenu = this.message.getElement('.treeMenu');
-    var tree = this.getTreeEdit()(
+    var tree = new Ngn.TreeEdit.Tags(
       this.eTreeContainer,
       this.options.data.groupId,
       {
@@ -62,7 +62,7 @@ Ngn.DdTags.Dialog.Tree = new Class({
   },
 
   getTreeEdit: function() {
-    return new Ngn.TreeEdit.Tags;
+    return Ngn.TreeEdit.Tags;
   }
 
 });
