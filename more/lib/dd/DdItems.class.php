@@ -14,6 +14,13 @@ class DdItems extends Items {
     parent::__construct(DdCore::table($this->strName), $options);
   }
 
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'filesRoot' => UPLOAD_PATH,
+      'filesRootUrl' => '/'.UPLOAD_DIR
+    ]);
+  }
+
   protected $fields;
 
   /**
@@ -326,21 +333,21 @@ class DdItems extends Items {
     $types = $this->fields()->getTypes();
     foreach (array_keys($this->fields()->getFileFields()) as $name) {
       if (is_array($item[$name])) continue;
-      if (empty($item[$name]) or !file_exists(UPLOAD_PATH.'/'.$item[$name])) {
+      if (empty($item[$name]) or !file_exists($this->options['filesRoot'].'/'.$item[$name])) {
         $item[$name] = '';
         $item['sm_'.$name] = '';
         $item['md_'.$name] = '';
         continue;
       }
       else {
-        $item[$name.'_fSize'] = filesize(UPLOAD_PATH.'/'.$item[$name]);
+        $item[$name.'_fSize'] = filesize($this->options['filesRoot'].'/'.$item[$name]);
         if (FieldCore::hasAncestor($types[$name], 'image')) {
-          $item[$name] = '/'.UPLOAD_DIR.'/'.$item[$name];
+          $item[$name] = $this->options['filesRootUrl'].'/'.$item[$name];
           $item['sm_'.$name] = Misc::getFilePrefexedPath($item[$name], 'sm_');
           $item['md_'.$name] = Misc::getFilePrefexedPath($item[$name], 'md_');
         }
         else {
-          $item[$name] = '/'.UPLOAD_DIR.'/'.$item[$name];
+          $item[$name] = $this->options['filesRootUrl'].'/'.$item[$name];
         }
       }
     }

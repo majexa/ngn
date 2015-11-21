@@ -144,6 +144,9 @@ class SflmJsClasses {
     Sflm::log('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
     if ($path) $this->frontend->_addPath($path); // -------------- добавили путь (!)
     Sflm::log("Processing valid-class patterns in '$source'");
+    //prr(Sflm::stripComments($code));
+    //if (strstr($code, 'Ngn.ListSlider')) die2(SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)));
+    //die2(SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)));
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
       $this->addClass($class, "$source valid-class pattern");
