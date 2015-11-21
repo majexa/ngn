@@ -42,7 +42,8 @@ Ngn.DdTags.Dialog.Tree = new Class({
   init: function() {
     this.eTreeContainer = this.message.getElement('.treeContainer');
     this.eTreeMenu = this.message.getElement('.treeMenu');
-    var tree = new Ngn.TreeEdit.Tags(
+    var treeEditClass = this.getTreeEditClass();
+    var treeEdit = new treeEditClass(
       this.eTreeContainer,
       this.options.data.groupId,
       {
@@ -53,15 +54,15 @@ Ngn.DdTags.Dialog.Tree = new Class({
         }.bind(this)
       }
     ).init();
-    tree.addEvent('dataLoad', function() {
+    treeEdit.addEvent('dataLoad', function() {
       //this.eTreeContainer.setStyle('height', (this.message.getSize().y - this.eTreeMenu.getSize().y) + 'px');
       this.eTreeContainer.setStyle('height', '200px');
       this.initReduceHeight(true);
-      //tree.toggleAll(true);
+      //treeEdit.toggleAll(true);
     }.bind(this));
   },
 
-  getTreeEdit: function() {
+  getTreeEditClass: function() {
     return Ngn.TreeEdit.Tags;
   }
 
