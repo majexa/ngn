@@ -174,7 +174,7 @@ abstract class SflmFrontend {
     $this->log("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     $this->storeAbsPaths();
-    if (($file = $this->base->storeLib($this->name, $this->code())) !== false) {
+    if (($file = $this->base  ->storeLib($this->name, $this->code())) !== false) {
       $this->uglify($file);
       $this->incrementVersion();
       $this->stored = true;
