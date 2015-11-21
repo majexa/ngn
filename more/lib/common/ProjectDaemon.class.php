@@ -5,7 +5,7 @@ class ProjectDaemon extends Daemon {
   protected $commentFlag = '(project)', $config;
 
   function __construct($projectName, $daemonName, array $options = []) {
-    $this->config = json_decode(`run site $projectName var $daemonName`, JSON_FORCE_OBJECT);
+    $this->config = json_decode(`run site $projectName var varName=$daemonName`, JSON_FORCE_OBJECT);
     parent::__construct($projectName, $daemonName, $options);
   }
 

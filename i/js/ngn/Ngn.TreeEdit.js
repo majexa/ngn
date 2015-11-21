@@ -84,6 +84,17 @@ Ngn.TreeEdit = new Class({
     // this.defaults.openIcon = this.options.folderOpenIcon;
     // this.defaults.closeIcon = this.options.folderCloseIcon;
     this.tree = new Ngn.Tree(Object.merge(this.getTreeOptions(), this.options.ngnTreeOptions));
+    this.initEvents();
+    this.bindButtons();
+    this.toggleButtons();
+    //this.initCollapseButtons();
+    if (this.options.enableStorage) this.stateStorage = new Ngn.TreeStateStorage(this.tree);
+    this.initLoadEvents();
+    this.loadFromStorage() || this.load();
+    return this;
+  },
+
+  initEvents: function() {
     this.tree.wrapper.addEvent('click', function(e) {
       if (e.target == this.tree.wrapper) this.tree.unselect();
     }.bind(this));
@@ -134,13 +145,6 @@ Ngn.TreeEdit = new Class({
     this.tree.addEvent('add', function(node, current, where) {
       this.select(node);
     });
-    this.bindButtons();
-    this.toggleButtons();
-    //this.initCollapseButtons();
-    if (this.options.enableStorage) this.stateStorage = new Ngn.TreeStateStorage(this.tree);
-    this.initLoadEvents();
-    this.loadFromStorage() || this.load();
-    return this;
   },
 
   getTreeDragOptions: function() {

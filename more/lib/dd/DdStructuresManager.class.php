@@ -182,6 +182,11 @@ class DdStructuresManager extends DbItemsManager {
     Dir::remove(UPLOAD_PATH.'/'.DdCore::filesDir($name));
   }
 
+  function cleanupStructureItems($name) {
+    db()->query("TRUNCATE TABLE ".DdCore::table($name));
+    Dir::clear(UPLOAD_PATH.'/'.DdCore::filesDir($name));
+  }
+
   function deleteByName($name) {
     if (!($id = db()->selectCell("SELECT id FROM dd_structures WHERE name=?", $name))) return;
     $this->delete($id);
