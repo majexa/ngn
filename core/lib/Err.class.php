@@ -35,15 +35,6 @@ class Err {
     else $errstr = strip_tags($errstr);
     print $errno ? '#'.$errno.' ' : '';
     print $errstr ? $errstr.($plainText ? "\n---------------\n" : '<hr />') : '';
-//      die2([
-//        Arr::append([
-//          [
-//            'file' => $errfile,
-//            'line' => $errline
-//          ]
-//        ], $trace),
-//        $trace
-//      ]);
     print empty($trace) ? getBacktrace(!$plainText, 2) : _getBacktrace(Arr::append([
       [
         'file' => $errfile,
@@ -53,6 +44,12 @@ class Err {
     print $plainText ? "\n" : '</p>';
   }
 
+  /**
+   * Возвращает Exception в удобочитаемом виде
+   *
+   * @param Exception $e
+   * @return string
+   */
   static function outputException(Exception $e) {
     ob_start();
     self::output($e->getCode(), $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTrace());

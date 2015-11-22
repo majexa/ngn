@@ -75,6 +75,7 @@ use ObjectProcessorCtrl;
   abstract protected function id();
 
   function action_json_new() {
+    //if (!Auth::get('id')) throw new AccessDenied;
     $im = $this->getIm();
     $im->form->options['submitTitle'] = 'Создать';
     $im->form->action = $this->req->options['uri'];

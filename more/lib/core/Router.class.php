@@ -43,7 +43,7 @@ abstract class Router {
   /**
    * @var null|Exception
    */
-  protected $error = null;
+  public $error = null;
 
   protected function error(Exception $e) {
     $this->error = $e;
@@ -112,7 +112,7 @@ abstract class Router {
   }
 
   protected function sflmInject() {
-    $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+    $tags = Sflm::frontend('js')->getTagsDebug()."\n".Sflm::frontend('css')->getTagsDebug();
     $this->html = str_replace('{sflm}', $tags, $this->html);
   }
 

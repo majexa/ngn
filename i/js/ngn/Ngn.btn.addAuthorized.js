@@ -1,5 +1,6 @@
 Ngn.Btn.AddAuthorized = function(eParent, opt) {
   if (!opt) opt = {};
+  if (!opt.basePath) opt.basePath = window.location.pathname;
   var add = function() {
     new Ngn.Dialog.RequestForm({
       title: opt.dialogTitle || 'Добавление',

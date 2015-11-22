@@ -9,7 +9,7 @@ class SflmCache extends FileCache {
 
   static function clean() {
     foreach (array_filter(glob(static::folder().'/*'), function($file) {
-      return Misc::hasPrefix('zend_cache---sflm', basename($file));
+      return (bool)strstr(basename($file), '-sflm');
     }) as $file) {
       unlink($file);
     }

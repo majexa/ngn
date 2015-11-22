@@ -25,7 +25,7 @@ class TestSflmDebugPaths extends ProjectTestCase {
     // сохраняем собранный файл фронтенда
     Sflm::frontend('js')->store();
     // отдельный тег для файла отладочного класса есть
-    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTags(), 'Ngn.Sub.B'));
+    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTagsDebug(), 'Ngn.Sub.B'));
     // отладочного класса не должно быть в основном файле
     $this->assertFalse((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.B'));
     // зато там должен быть Ngn.Sub.A от которого наследуется Ngn.Sub.B и которого нет в отладочных путях
@@ -53,10 +53,10 @@ class TestSflmDebugPaths extends ProjectTestCase {
     // сохраняем собранный файл фронтенда
     Sflm::frontend('js')->store();
     // должен присутствовать отдельный тег так же для файла неймспейса
-    $parentPos = strpos(Sflm::frontend('js')->getTags(), 'Ngn.Sub.js');
+    $parentPos = strpos(Sflm::frontend('js')->getTagsDebug(), 'Ngn.Sub.js');
     $this->assertTrue($parentPos !== false);
     // ну и для самого класса, как и в предыдущем примере
-    $classPos = strpos(Sflm::frontend('js')->getTags(), 'Ngn.Sub.B.js');
+    $classPos = strpos(Sflm::frontend('js')->getTagsDebug(), 'Ngn.Sub.B.js');
     $this->assertTrue($classPos !== false);
     // отладочные теги должны выводиться начиная с самого раннего родителя в неймспейсах
     $this->assertTrue($parentPos < $classPos);

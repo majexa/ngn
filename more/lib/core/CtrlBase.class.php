@@ -193,6 +193,7 @@ abstract class CtrlBase {
   }
 
   protected function sflmStore() {
+    if (!Sflm::$buildMode) return;
     if (!empty($this->req->options['disableSflmStore'])) return;
     Sflm::frontend('js')->store('afterAction');
     Sflm::frontend('css')->store('afterAction');
@@ -269,9 +270,14 @@ abstract class CtrlBase {
   }
 
   protected function processSflm($html) {
+    if (!Sflm::$buildMode) {
+      // режим, когда все нужные файлы уже существуют
+      $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+      return str_replace('{sflm}', $tags, $html);
+    }
     Sflm::frontend('js')->processHtml($html, 'page html post-process');
     $this->sflmStore();
-    $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+    $tags = Sflm::frontend('js')->getTagsDebug()."\n".Sflm::frontend('css')->getTagsDebug();
     return str_replace('{sflm}', $tags, $html);
   }
 

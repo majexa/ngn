@@ -70,7 +70,7 @@ class Sflm {
   }
 
   static function getTags() {
-    return Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+    return Sflm::frontend('js')->getTagsDebug()."\n".Sflm::frontend('css')->getTagsDebug();
   }
 
   static function frontendName($strict = false) {

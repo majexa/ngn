@@ -123,26 +123,25 @@ abstract class SflmFrontend {
   }
 
   function _code() {
-//    $k = md5(serialize($this->getPaths()));
-//    if (($r = Mem::get($k)) !== false) {
-//      return $r;
-//    }
     $code = $this->base->extractCode($this->getPaths());
     foreach ($this->absPathsCache as $file) $code .= "\n/*--|$file|--*/\n".file_get_contents($file);
-//    Mem::set($k, $r);
     return $code;
   }
 
   /**
-   * Возвращает HTML-тег ссылающийся на скомпилированый файл с указанием версии для clientSide-кэширования
+   * Возвращает HTML-тег ссылающийся на скомпилированый файл с указанием версии для clientSide-кэширования. Используется в режиме отладки
    *
    * @return string
    * @throws Exception
    */
-  function getTags() {
+  function getTagsDebug() {
     $html = $this->base->getTags($this->name, $this->_code());
     $html .= $this->addDebugTags();
     return $html;
+  }
+
+  function getTags() {
+    return $this->base->getTags($this->name);
   }
 
   protected function addDebugTags() {
