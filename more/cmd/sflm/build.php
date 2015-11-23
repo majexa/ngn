@@ -13,6 +13,12 @@ Sflm::clearCache();
 
 class SflmBuild {
 
+  public $projectName;
+
+  function __construct() {
+    $this->projectName = basename(WEBROOT_PATH);
+  }
+
   function testNames() {
     $r = ['index'];
     foreach (glob(PROJECT_PATH."/casper/test/*.json") as $f) {
@@ -22,20 +28,20 @@ class SflmBuild {
   }
 
   function run() {
-    print `pm localProject replaceConstant nnway more BUILD_MODE true`;
+    print `pm localProject replaceConstant {$this->projectName} more BUILD_MODE true`;
     foreach ($this->testNames() as $testName) {
       $this->runTest($testName);
     }
+    print `pm localProject replaceConstant {$this->projectName} more BUILD_MODE false`;
   }
 
   public $effectedTests = [];
 
   function runTest($testName) {
-    $projectName = basename(WEBROOT_PATH);
     $o = [];
-    exec("cst $projectName $testName", $o, $code);
+    exec("cst {$this->projectName} $testName", $o, $code);
     if ($code) throw new Exception(implode("\n", $o));
-    $this->effectedTests[] = str_replace(NGN_ENV_PATH.'/projects/', '', "cst: $projectName/$testName");
+    $this->effectedTests[] = str_replace(NGN_ENV_PATH.'/projects/', '', "cst: {$this->projectName}/$testName");
   }
 
 }

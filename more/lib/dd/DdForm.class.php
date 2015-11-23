@@ -31,4 +31,8 @@ class DdForm extends Form {
     ]);
   }
 
+  protected function initId() {
+    $this->_id = 'f'.$this->strName;
+  }
+
 }
