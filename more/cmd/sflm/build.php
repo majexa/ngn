@@ -3,10 +3,8 @@
 $_SESSION['auth'] = [
   'id'     => 1,
   'login'  => 'admin',
-  'status' => 0,
   'active' => 1,
-  'email'  => 'dummy@test.com',
-  'phone'  => '+79202560771',
+  'email'  => 'dummy@test.com'
 ];
 Sflm::$output = false;
 Sflm::clearCache();
