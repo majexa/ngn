@@ -173,9 +173,15 @@ abstract class SflmFrontend {
     $this->log("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     $this->storeAbsPaths();
-    if (($file = $this->base  ->storeLib($this->name, $this->code())) !== false) {
-      $this->uglify($file);
-      $this->incrementVersion();
+    if (($file = $this->base->storeLib($this->name, $this->code())) !== false) {
+      $originFolder = dirname(dirname($file)).'/origin';
+      Dir::make($originFolder);
+      $originFile = $originFolder.'/'.basename($file);
+      if (!file_exists($originFile) or hash_file('md5', $originFile) != hash_file('md5', $file)) {
+        copy($file, $originFile);
+        $this->uglify($file);
+        $this->incrementVersion();
+      }
       $this->stored = true;
     }
   }

@@ -1,14 +1,5 @@
 <?php
 
-$_SESSION['auth'] = [
-  'id'     => 1,
-  'login'  => 'admin',
-  'active' => 1,
-  'email'  => 'dummy@test.com'
-];
-Sflm::$output = false;
-Sflm::clearCache();
-
 class SflmBuild {
 
   public $projectName;
@@ -26,6 +17,15 @@ class SflmBuild {
   }
 
   function run() {
+    $_SESSION['auth'] = [
+      'id'     => 1,
+      'login'  => 'admin',
+      'active' => 1,
+      'email'  => 'dummy@test.com'
+    ];
+    Sflm::$output = false;
+    Sflm::clearCache();
+    //
     print `pm localProject replaceConstant {$this->projectName} more BUILD_MODE true`;
     foreach ($this->testNames() as $testName) {
       $this->runTest($testName);
@@ -46,7 +46,3 @@ class SflmBuild {
 
 (new SflmBuild)->run();
 
-//print `pm localProject replaceConstant nnway more BUILD_MODE true`;
-//travel();
-//print `pm localProject replaceConstant nnway more BUILD_MODE false`;
-//travel();

@@ -38,8 +38,8 @@ class Sflm {
   static protected $frontendName = null;
 
   static function clearCache() {
-    Dir::clear(Sflm::$webPath.'/js');
-    Dir::clear(Sflm::$webPath.'/css');
+    Dir::clear(Sflm::$webPath.'/js/cache');
+    Dir::clear(Sflm::$webPath.'/css/cache');
     SflmCache::clean();
     O::delete('SflmJs');
     O::delete('SflmCss');

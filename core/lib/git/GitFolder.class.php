@@ -54,10 +54,10 @@ class GitFolder extends GitBase {
    *
    * @return bool
    */
-  function commit() {
+  function commit($comment = null) {
     print `git add --all .`;
-    $date = date('d.m.Y H:i:s');
-    system("git commit -am \"Auto-commit on $date\"", $exitCode);
+    if (!$comment) $comment = 'Auto-commit on '.date('d.m.Y H:i:s');
+    system("git commit -am \"$comment\"", $exitCode);
     return !$exitCode;
   }
 
