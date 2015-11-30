@@ -10,7 +10,7 @@ class FieldEWisiwig extends FieldETextarea {
       'rowClass' => 'elWisiwig',
       'jsOptions' => [
         'tinySettings' => [
-          'content_css' => Sflm::lib('css')->getUrl('tinyContent')
+          //'content_css' => Sflm::lib('css')->getUrl('tinyContent')
         ]
       ]
     ]);

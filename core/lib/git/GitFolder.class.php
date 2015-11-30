@@ -34,7 +34,11 @@ class GitFolder extends GitBase {
   }
 
   function isClean() {
-    return (bool)strstr($this->shellexec("git status", false), 'working directory clean');
+    return (bool)strstr($this->shellexec("git status", false, true), 'working directory clean');
+  }
+
+  function onBranch() {
+    return !(bool)strstr($this->shellexec("git status", false, true), 'Not currently on any branch');
   }
 
   function checkIsClean($message = 'Folder %s is not clear') {

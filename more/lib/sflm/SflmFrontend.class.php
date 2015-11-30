@@ -177,7 +177,7 @@ abstract class SflmFrontend {
       $originFolder = dirname(dirname($file)).'/origin';
       Dir::make($originFolder);
       $originFile = $originFolder.'/'.basename($file);
-      if (!file_exists($originFile) or hash_file('md5', $originFile) != hash_file('md5', $file)) {
+      if (!file_exists($originFile) or filesize($originFile) != filesize($file)) {
         copy($file, $originFile);
         $this->uglify($file);
         $this->incrementVersion();

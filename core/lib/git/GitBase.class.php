@@ -38,8 +38,14 @@ class GitBase {
     return $folders;
   }
 
-  protected function shellexec($cmd, $output = true) {
+  protected $cache = [];
+
+  protected function shellexec($cmd, $output = true, $cache = false) {
     $r = Cli::shell($cmd.' 2>&1', $output); // перенаправляем stderr в stdout
+    if ($cache) {
+      if (isset($this->cache[$cmd])) return $this->cache[$cmd];
+      $this->cache[$cmd] = $r;
+    }
     if (strstr($r, 'fatal:')) $this->throwError($cmd, $r);
     return $r;
   }
