@@ -17,7 +17,7 @@ class GitFolder extends GitBase {
   }
 
   function reset() {
-    return $this->resetToRemote('origin');
+    return $this->resetToRemote('origin', true);
   }
   
   function resetToRemote($remote, $forceRevCheck = false) {
