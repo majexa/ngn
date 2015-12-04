@@ -41,6 +41,10 @@ class GitFolder extends GitBase {
     return !(bool)strstr($this->shellexec("git status", false, true), 'Not currently on any branch');
   }
 
+  function currentBranch() {
+    return trim(preg_replace('/.*On branch (.*)\n.*/', '$1', $this->shellexec("git status", false, true)));
+  }
+
   function checkIsClean($message = 'Folder %s is not clear') {
     if (!$this->isClean()) {
       print $this->shellexec("git status");
@@ -59,9 +63,9 @@ class GitFolder extends GitBase {
    * @return bool
    */
   function commit($comment = null) {
-    print `git add --all .`;
+    `git add --all .`;
     if (!$comment) $comment = 'Auto-commit on '.date('d.m.Y H:i:s');
-    system("git commit -am \"$comment\"", $exitCode);
+    exec("git commit -am \"$comment\"", $o, $exitCode);
     return !$exitCode;
   }
 
@@ -88,7 +92,7 @@ class GitFolder extends GitBase {
     }
     $branch = $this->wdBranch();
     if (!$hasLocalChanges and !$this->_hasChanges($remotes, $branch)) {
-      output("$folder ($branch): no changes remote and local changes");
+      output("$folder ($branch): no remote and local changes");
       return true;
     }
     foreach ($remotes as $remote) {

@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Делает SFLM-билд с помощью набора Client-Side тестов
+ */
 class SflmBuild {
 
   public $projectName;
@@ -17,6 +20,11 @@ class SflmBuild {
   }
 
   function run() {
+    if (!file_exists(PROJECT_PATH.'/config/constants/more.php')) {
+      print "Creating SFLM-build skipped on '{$this->projectName}' project\n";
+      return;
+    }
+    print "Creating SFLM-build on '{$this->projectName}' project\n";
     $_SESSION['auth'] = [
       'id'     => 1,
       'login'  => 'admin',
@@ -30,11 +38,13 @@ class SflmBuild {
     foreach ($this->testNames() as $testName) {
       $this->runTest($testName);
     }
-    print 'Origin size: '.File::format(filesize(Sflm::$webPath.'/js/origin/default.js'));
-    print ', Uglified size: '.File::format(filesize(Sflm::$webPath.'/js/cache/default.js'));
-    print ', Version before: '.$v1.', Version after: '.Sflm::frontend('js', 'default')->version();
-    print "\n";
-    // --
+    $s = "SFLM-build created";
+    $s .= "\nOrigin / Uglified sizes: ". //
+      (file_exists(Sflm::$webPath.'/js/origin/default.js') ? File::format(filesize(Sflm::$webPath.'/js/origin/default.js')) : 'none').//
+      ' / '. //
+      (file_exists(Sflm::$webPath.'/js/cache/default.js') ? File::format(filesize(Sflm::$webPath.'/js/cache/default.js')) : 'none');
+    $s .= "\nVersion before / after: ".$v1.' / '.Sflm::frontend('js', 'default')->version();
+    print $s."\n-------\n";
     ProjectConfig::replaceConstant('more', 'BUILD_MODE', false);
   }
 

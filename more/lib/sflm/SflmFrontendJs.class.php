@@ -167,7 +167,7 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   protected function uglify($file) {
-    //sys("uglifyjs $file --compress --mangle -o $file");
+    sys("uglifyjs $file --compress --mangle -o $file");
   }
 
 }

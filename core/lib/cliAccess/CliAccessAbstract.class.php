@@ -181,6 +181,7 @@ TEXT
     $nameCmd = $name ? ' '.$name : '';
     $s = '';
     foreach ($methods as $method) {
+      $method['title'] = preg_replace('/(.*)\n.*/', '$1', $method['title']);
       $rOptions = $this->renderMethodOptions($method['options']);
       $rOptions = $rOptions ? ' '.$rOptions : '';
       if (!empty($method['title']) and getOS() == 'win') $method['title'] = Misc::transit($method['title'], false, false);
