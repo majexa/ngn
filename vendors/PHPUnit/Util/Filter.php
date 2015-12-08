@@ -55,84 +55,79 @@
  * @link       http://www.phpunit.de/
  * @since      Class available since Release 2.0.0
  */
-class PHPUnit_Util_Filter
-{
-    /**
-     * Filters stack frames from PHPUnit classes.
-     *
-     * @param  Exception $e
-     * @param  boolean   $asString
-     * @return string
-     */
-    public static function getFilteredStacktrace(Exception $e, $asString = TRUE)
-    {
-        if (!defined('PHPUNIT_TESTSUITE')) {
-            $blacklist = PHPUnit_Util_GlobalState::phpunitFiles();
-        } else {
-            $blacklist = [];
-        }
+class PHPUnit_Util_Filter {
+  /**
+   * Filters stack frames from PHPUnit classes.
+   *
+   * @param  Exception $e
+   * @param  boolean $asString
+   * @return string
+   */
+  public static function getFilteredStacktrace(Exception $e, $asString = TRUE) {
+    if (!defined('PHPUNIT_TESTSUITE')) {
+      $blacklist = PHPUnit_Util_GlobalState::phpunitFiles();
+    }
+    else {
+      $blacklist = [];
+    }
 
+    if ($asString === TRUE) {
+      $filteredStacktrace = '';
+    }
+    else {
+      $filteredStacktrace = [];
+    }
+    if ($e instanceof PHPUnit_Framework_SyntheticError) {
+      $eTrace = $e->getSyntheticTrace();
+      $eFile = $e->getSyntheticFile();
+      $eLine = $e->getSyntheticLine();
+    }
+    else {
+      if ($e->getPrevious()) {
+        $eTrace = $e->getPrevious()->getTrace();
+      }
+      else {
+        $eTrace = $e->getTrace();
+      }
+      $eFile = $e->getFile();
+      $eLine = $e->getLine();
+    }
+    $new = [];
+    foreach ($eTrace as $v) {
+      if (strstr($v['class'], 'TestRunnerAbstract')) break;
+    }
+    $eTrace = $new;
+    if (!self::frameExists($eTrace, $eFile, $eLine)) {
+      array_unshift($eTrace, ['file' => $eFile, 'line' => $eLine]);
+    }
+    foreach ($eTrace as $frame) {
+      if (isset($frame['file']) && is_file($frame['file']) && !isset($blacklist[$frame['file']])) {
         if ($asString === TRUE) {
-            $filteredStacktrace = '';
-        } else {
-            $filteredStacktrace = [];
+          $filteredStacktrace .= sprintf("%s:%s\n",
+            $frame['file'], isset($frame['line']) ? $frame['line'] : '?');
         }
-
-        if ($e instanceof PHPUnit_Framework_SyntheticError) {
-            $eTrace = $e->getSyntheticTrace();
-            $eFile  = $e->getSyntheticFile();
-            $eLine  = $e->getSyntheticLine();
-        } else {
-            if ($e->getPrevious()) {
-                $eTrace = $e->getPrevious()->getTrace();
-            } else {
-                $eTrace = $e->getTrace();
-            }
-            $eFile  = $e->getFile();
-            $eLine  = $e->getLine();
+        else {
+          $filteredStacktrace[] = $frame;
         }
+      }
+    }
+    return $filteredStacktrace;
+  }
 
-        if (!self::frameExists($eTrace, $eFile, $eLine)) {
-            array_unshift(
-              $eTrace, ['file' => $eFile, 'line' => $eLine]
-            );
-        }
-
-        foreach ($eTrace as $frame) {
-            if (isset($frame['file']) && is_file($frame['file']) &&
-                !isset($blacklist[$frame['file']])) {
-                if ($asString === TRUE) {
-                    $filteredStacktrace .= sprintf(
-                      "%s:%s\n",
-
-                      $frame['file'],
-                      isset($frame['line']) ? $frame['line'] : '?'
-                    );
-                } else {
-                    $filteredStacktrace[] = $frame;
-                }
-            }
-        }
-
-        return $filteredStacktrace;
+  /**
+   * @param  array $trace
+   * @param  string $file
+   * @param  int $line
+   * @return boolean
+   * @since  Method available since Release 3.3.2
+   */
+  public static function frameExists(array $trace, $file, $line) {
+    foreach ($trace as $frame) {
+      if (isset($frame['file']) && $frame['file'] == $file && isset($frame['line']) && $frame['line'] == $line) {
+        return TRUE;
+      }
     }
 
-    /**
-     * @param  array  $trace
-     * @param  string $file
-     * @param  int    $line
-     * @return boolean
-     * @since  Method available since Release 3.3.2
-     */
-    public static function frameExists(array $trace, $file, $line)
-    {
-        foreach ($trace as $frame) {
-            if (isset($frame['file']) && $frame['file'] == $file &&
-                isset($frame['line']) && $frame['line'] == $line) {
-                return TRUE;
-            }
-        }
-
-        return FALSE;
-    }
+    return FALSE;
+  }
 }
