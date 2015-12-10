@@ -169,8 +169,24 @@ class Date {
     return date('Y') - $y;
   }
 
+
   const TIME_H = 1;
   const TIME_HM = 2;
+  const TIME_HMS = 3;
+
+  static function recentTime($time, $format = Date::TIME_HM) {
+    if ($format == Date::TIME_HM) {
+      $timeFormat = 'H:i';
+    } elseif ($format == Date::TIME_HMS) {
+      $timeFormat = 'H:i:s';
+    } else {
+      $timeFormat = 'H';
+    }
+    if (date('dmY', $time) == date('dmY')) {
+      return date($timeFormat, $time);
+    }
+    return Date::str($time).' '.date($timeFormat, $time);
+  }
 
   static function time($time, $format = Date::TIME_HM) {
     if ($format === Date::TIME_HM) return preg_replace('/(\d+:\d+):\d+/', '$1', $time);
