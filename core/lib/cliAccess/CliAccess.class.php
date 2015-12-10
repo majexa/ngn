@@ -53,6 +53,7 @@ abstract class CliAccess extends CliAccessAbstract {
     $argsSub = clone $args;
     if ((new ReflectionClass($r->class))->isAbstract()) throw new Exception('Can not be abstract');
     $argsSub->class = $r->class;
+    //die2($args);
     new CliAccessArgsSingleSub($argsSub, $this->_runner(), $r->name.' '.$args->params[0]);
   }
 
