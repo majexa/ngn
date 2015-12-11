@@ -283,7 +283,13 @@ trait DdParamFilterCtrl {
       $this->paramFilterItems()->addF('id', 0);
       return;
     }
-    $this->paramFilterItems()->addTagFilter($tagField, is_array($tagValue) ? $tagValue : explode(',', $tagValue), $byId);
+    try {
+      $this->paramFilterItems()->addTagFilter($tagField, is_array($tagValue) ? $tagValue : explode(',', $tagValue), $byId);
+    } catch (Exception $e) {
+      if ($e->getCode() == 10) {
+        throw new Error404($e->getMessage());
+      }
+    }
   }
 
   public $curUser = false;

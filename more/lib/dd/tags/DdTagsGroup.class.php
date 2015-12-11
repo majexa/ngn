@@ -23,7 +23,7 @@ class DdTagsGroup {
     Misc::checkEmpty($strName, '$strName');
     Misc::checkEmpty($name, '$name');
     $this->p = self::getData($strName, $name);
-    if (empty($this->p['fieldType'])) throw new Exception('Field for tag "'.$name.'" of "'.$strName.'" structure does not exists');
+    if (empty($this->p['fieldType'])) throw new Exception('Field for tag "'.$name.'" of "'.$strName.'" structure does not exists', 10);
     $this->p['tagsGetterStrName'] = empty($this->p['masterStrName']) ? $this->p['strName'] : $this->p['masterStrName'];
     $this->p['tree'] = DdTags::isTree($this->p['fieldType']);
     $this->p['multi'] = DdTags::isMulti($this->p['fieldType']);
