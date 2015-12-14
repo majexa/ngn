@@ -324,7 +324,7 @@ Ngn.Form = new Class({
 
   initFileNav: function() {
     this.eForm.getElements('.fileNav').each(function(eFileNav) {
-      Ngn.addAjaxAction(eFileNav.getElement('.delete'), 'delete', function() {
+      Ngn.Btn.addAjaxAction(eFileNav.getElement('.delete'), 'delete', function() {
         eFileNav.dispose();
       });
     });

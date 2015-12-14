@@ -269,3 +269,21 @@ Ngn.Btn.opacity = function(eBtn, outOp, overOp) {
   return eBtn;
 };
 
+Ngn.Btn.addAjaxAction = function(eBtn, action, onComplete) {
+  if (!eBtn) return;
+  onComplete = onComplete ? onComplete : Function.from();
+  eBtn.addEvent('click', function(e) {
+    e.preventDefault();
+    if (eBtn.hasClass('confirm') && !Ngn.confirm()) return;
+    if (eBtn.hasClass('loading')) return;
+    if (eBtn.retrieve('disabled')) return;
+    eBtn.addClass('loading');
+    new Ngn.Request({
+      url: eBtn.get('href').replace(action, 'ajax_' + action),
+      onComplete: function() {
+        onComplete();
+        eBtn.removeClass('loading');
+      }
+    }).send();
+  });
+};

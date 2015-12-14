@@ -112,3 +112,25 @@ Ngn.Request.JSON.throwServerError = function(r) {
 };
 
 Ngn.Request.sflJsDeltaUrlOnLoad = false;
+
+Ngn.Request.Iface = {};
+
+Ngn.Request.Iface.loading = function(state) {
+  var el = $('globalLoader');
+  if (!el) {
+    var el = Elements.from('<div id="globalLoader" class="globalLoader"></div>')[0].inject(document.getElement('body'), 'top');
+    el.setStyle('top', window.getScroll().y);
+    window.addEvent('scroll', function() {
+      el.setStyle('top', window.getScroll().y);
+    });
+  }
+  el.setStyle('visibility', state ? 'visible' : 'hidden');
+};
+
+Ngn.Request.settings = function(name, callback) {
+  Asset.javascript('/c2/jsSettings/' + name, {
+    onLoad: function() {
+      callback(eval('Ngn.settings.' + name.replace(/\//g, '.')));
+    }
+  });
+};
