@@ -161,8 +161,9 @@ TAGS;
     $this->assertTrue(strpos($c, 'Ngn.B1') > strpos($c, 'Ngn.E1'), '"e1: ..." pattern error');
   }
 
-//  function testParseValidPreloadClasses() {
-//    $this->assertTrue(SflmJsClasses::parseValidPreloadClasses('Ngn.A = new Class({ Extends: Ngn.B });')[0] === 'Ngn.B');
-//  }
+  function testParseClassFunctionUsage() {
+    $classes = SflmJsClasses::parseValidClassesUsage('Ngn.A1.aaa.bbb');
+    $this->assertTrue($classes[0] == 'Ngn.A1');
+  }
 
 }

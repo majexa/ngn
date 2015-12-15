@@ -206,10 +206,22 @@ class SflmJsClasses {
     return $classes;
   }
 
-  static protected function parseValidClassesUsage($code) {
+  static function stripFunctionsAtTheEnd($class) {
+    $classes = explode('.', $class);
+    $_classes = [];
+    for ($i = 0; $i < count($classes); $i++) {
+      if (!$classes[$i]) break;
+      if (!Misc::firstIsUpper($classes[$i])) break;
+      $_classes[] = $classes[$i];
+    }
+    return implode('.', $_classes);
+  }
+
+  static function parseValidClassesUsage($code) {
     $classes = [];
     if (preg_match_all('/(Ngn\.[A-Za-z.0-9]+)/', $code, $m)) {
       foreach ($m[1] as $piece) {
+        $piece = self::stripFunctionsAtTheEnd($piece);
         if (in_array($piece, $classes)) continue;
         if (!SflmJsClasses::isValidClass($piece)) {
           if (SflmJsClasses::isValidClassMethod($piece)) {
