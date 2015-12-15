@@ -34,7 +34,7 @@ Ngn.Frm.SaverBase = new Class({
     var p = Ngn.Frm.toObj(this.eForm);
     var postHash = JSON.encode(p);
     if (postHash == this.hash) return;
-    Ngn.loading(true);
+    Ngn.Request.Iface.loading(true);
     this.saving = true;
     Ngn.Frm.disable(this.eForm, true);
     new (this.options.jsonRequest ? Request.JSON : Request)({
@@ -42,7 +42,7 @@ Ngn.Frm.SaverBase = new Class({
       onSuccess: function(r) {
         this.saving = false;
         this.hash = postHash;
-        Ngn.loading(false);
+        Ngn.Request.Iface.loading(false);
         Ngn.Frm.disable(this.eForm, false);
       }.bind(this)
     }).post(p);

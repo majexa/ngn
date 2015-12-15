@@ -47,13 +47,14 @@ Ngn.Grid = new Class({
 
   initMenu: function() {
     var grid = this, action;
+    Ngn.loading
     this.eMenu = Elements.from('<div class="itemsTableMenu dgray"><div class="clear"></div></div>')[0].inject(this.eParent);
     if (!this.options.menu) return;
     for (var i = 0; i < this.options.menu.length; i++) {
       (function() {
         var v = grid.options.menu[i];
         var keys = Object.keys(v.action);
-        if (keys.length && in_array('$constructor', keys)) {
+        if (keys.length && Ngn.Arr.inn('$constructor', keys)) {
           // класс Ngn.GridBtnAction.*
           action = new v.action(grid);
           action.id = v.cls;
@@ -96,7 +97,7 @@ Ngn.Grid = new Class({
 
   reload: function(itemId, skipLoader) {
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
-    Ngn.loading(true);
+    Ngn.Request.Iface.loading(true);
     new Ngn.Request.JSON({
       url: this.getLink(true),
       onComplete: function(r) {
@@ -105,7 +106,7 @@ Ngn.Grid = new Class({
         }
         this.initInterface(r, true);
         this.fireEvent('reloadComplete', r);
-        Ngn.loading(false);
+        Ngn.Request.Iface.loading(false);
         this.rowFlash(itemId);
       }.bind(this)
     }).send();
@@ -236,12 +237,12 @@ Ngn.Grid = new Class({
       if (!fromAjax) el.store('href', el.get('href'));
       el.addEvent('click', function(e) {
         new Event(e).stop();
-        Ngn.loading(true);
+        Ngn.Request.Iface.loading(true);
         this.currentPage = el.get('href').replace(/.*pg(\d+)/, '$1');
         new Ngn.Request.JSON({
           url: el.retrieve('href'),
           onComplete: function(r) {
-            Ngn.loading(false);
+            Ngn.Request.Iface.loading(false);
             this.initInterface(r, true);
           }.bind(this)
         }).send();

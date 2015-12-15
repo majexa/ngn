@@ -293,14 +293,16 @@ trait DdParamFilterCtrl {
   }
 
   public $curUser = false;
+  public $curUserId = false;
 
   /**
    * @param integer $userId ID пользователя
    * @throws EmptyException
    */
   function setFilterUser($userId) {
-    $this->curUser = Misc::checkEmpty(DbModelCore::get('users', $userId));
-    $this->paramFilterItems()->addF('userId', $this->curUser['id']);
+    $this->curUser = DbModelCore::get('users', $userId);
+    $this->curUserId = $userId;
+    $this->paramFilterItems()->addF('userId', $userId);
   }
 
 }

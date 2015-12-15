@@ -78,12 +78,12 @@ Ngn.DdGrid = new Class({
   loadSearchResults: function(word) {
     if (this.word == word) return;
     this.word = word;
-    Ngn.loading(true);
+    Ngn.Request.Iface.loading(true);
     new Ngn.Request.JSON({
       url: this.options.basePath + '/json_search?word=' + word,
       onComplete: function(r) {
         this.initInterface(r, true);
-        Ngn.loading(false);
+        Ngn.Request.Iface.loading(false);
       }.bind(this)
     }).send();
   }

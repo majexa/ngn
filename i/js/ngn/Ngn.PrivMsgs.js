@@ -532,7 +532,7 @@ var ContactsLayout = new Class({
       new ContextMenuUser(
         'msg',
         userLink,
-        $('contextMenuContacts').clone().injectAfter(user),
+        $('contextMenuContacts').clone().inject(user, 'after'),
         userData,
         this
       );
@@ -547,7 +547,7 @@ var ContactsLayout = new Class({
       new ContextMenuUser(
         'msg',
         userLink,
-        $('contextMenuSearch').clone().injectAfter(user),
+        $('contextMenuSearch').clone().inject(user, 'after'),
         userData,
         this
       );

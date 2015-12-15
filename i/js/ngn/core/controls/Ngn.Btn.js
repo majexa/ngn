@@ -109,7 +109,7 @@ Ngn.Btn.btn = function(opt) {
   }, opt.prop || {}));
   if (opt.caption) {
     a.set('title', opt.caption);
-    a.setTip(opt.caption);
+    Ngn.Element.setTip(a, opt.caption);
   }
   new Element('i').inject(a, 'top');
   return a;

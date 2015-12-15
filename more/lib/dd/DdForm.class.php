@@ -19,7 +19,7 @@ class DdForm extends Form {
   }
 
   protected function jsInitTagValues() {
-    return "Ngn.toObj('Ngn.Form.El.DdTagsAc.values.{$this->id()}', {});";
+    return "Ngn.Object.fromString('Ngn.Form.El.DdTagsAc.values.{$this->id()}', {});";
   }
 
   protected function defineOptions() {

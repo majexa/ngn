@@ -37,3 +37,17 @@ Ngn.Element.bindSizes = function(eFrom, eTo) {
     eTo.setSize(eFrom.getSize());
   });
 };
+
+Ngn.Element.initTips = function(els) {
+  if (!Ngn.tips) Ngn.Element.tips = new Tips(els);
+};
+
+Ngn.Element.setTip = function(el, title) {
+  if (!Ngn.Element.tips) Ngn.Element.initTips(el);
+  if (el.retrieve('tip:native')) {
+    Ngn.Element.tips.hide(el);
+    this.store('tip:title', title);
+  } else {
+    Ngn.Element.tips.attach(el);
+  }
+};

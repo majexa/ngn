@@ -745,7 +745,7 @@ Ngn.Tree.Draw = {
     element = element || node.getDOM('node') || this.node(node);
     var previous = node.getPrevious();
     if (previous) {
-      element.injectAfter(previous.getDOM('node'));
+      element.inject(previous.getDOM('node'), 'after');
       return;
     }
     var container;
@@ -1737,7 +1737,7 @@ Ngn.Tree.Drag = new Class({
     var wrapper = this.current.getDOM('wrapper');
     var ghost = new Element('span').addClass('ngn-tree-ghost');
     ghost.adopt(Ngn.Tree.Draw.node(this.current).getFirst()).inject(document.body).addClass('ngn-tree-ghost-notAllowed').setStyle('position', 'absolute');
-    new Element('span').set('html', Ngn.Tree.Draw.zeroSpace).injectTop(ghost);
+    new Element('span').set('html', Ngn.Tree.Draw.zeroSpace).inject(ghost, 'top');
     ghost.getLast().getFirst().className = '';
     Ngn.Tree.Drag.ghost = ghost;
   },

@@ -1,4 +1,4 @@
-//Ngn.toObj('Ngn.DdTags.Dialog');
+//Ngn.Object.fromString('Ngn.DdTags.Dialog');
 Ngn.DdTags = {};
 Ngn.DdTags.Dialog = {};
 
@@ -17,43 +17,50 @@ Ngn.DdTags.Dialog.Tree = new Class({
   options: {
     id: 'editTags',
     title: 'Редактирование рубрик',
-    basePath: '/admin/tags'
+    basePath: '/admin/tags',
+    menu: [{
+      name: 'add',
+      title: 'Создать'
+    }, {
+      name: 'rename',
+      title: 'Переименовать'
+    }, {
+      name: 'delete',
+      title: 'Удалить'
+    }]
     //data: {
     //  groupId: null
     //}
   },
 
   buildMessage: function() {
-    return Elements.from('\
-<div>\
+    var html = '<div>\
   <div class="treeMenu iconsSet">\
     <small>\
-      <a href="#" class="add dgray"><i></i>Создать</a>\
-      <a href="#" class="rename dgray"><i></i>Переименовать</a>\
-      <a href="#" class="delete dgray"><i></i>Удалить</a>\
-    </small>\
+    ';
+    for (var i = 0; i < this.options.menu.length; i++) {
+      html += '<a href="#" class="' + this.options.menu[i].name + ' dgray"><i></i>' + this.options.menu[i].title + '</a>'
+    }
+    html += '</small>\
     <div class="clear"><!-- --></div>\
   </div>\
   <div class="treeContainer"></div></div>\
 </div>\
-    ')[0];
+    ';
+    return Elements.from(html)[0];
   },
 
   init: function() {
     this.eTreeContainer = this.message.getElement('.treeContainer');
     this.eTreeMenu = this.message.getElement('.treeMenu');
     var treeEditClass = this.getTreeEditClass();
-    var treeEdit = new treeEditClass(
-      this.eTreeContainer,
-      this.options.data.groupId,
-      {
+    var treeEdit = new treeEditClass(this.eTreeContainer, this.options.data.groupId, {
         actionUrl: this.options.basePath,
         buttons: this.eTreeMenu,
         onUpdate: function() {
           //this.updateBlock();
         }.bind(this)
-      }
-    ).init();
+      }).init();
     treeEdit.addEvent('dataLoad', function() {
       //this.eTreeContainer.setStyle('height', (this.message.getSize().y - this.eTreeMenu.getSize().y) + 'px');
       this.eTreeContainer.setStyle('height', '200px');
@@ -75,25 +82,23 @@ Ngn.DdTags.Dialog.Flat = new Class({
     basePath: '/admin/tags',
     gridOpts: {
       isSorting: true,
-      menu: [
-        {
-          title: 'Добавить тэг',
-          cls: 'add',
-          action: function(grid) {
-            var title = prompt('Введите название');
-            if (title) {
-              new Ngn.Request({
-                url: grid.options.basePath + '?a=ajax_create',
-                onComplete: function() {
-                  grid.reload();
-                }.bind(this)
-              }).post({
+      menu: [{
+        title: 'Добавить тэг',
+        cls: 'add',
+        action: function(grid) {
+          var title = prompt('Введите название');
+          if (title) {
+            new Ngn.Request({
+              url: grid.options.basePath + '?a=ajax_create',
+              onComplete: function() {
+                grid.reload();
+              }.bind(this)
+            }).post({
                 title: title
               });
-            }
           }
         }
-      ],
+      }],
       toolActions: {
         edit: Ngn.Items.toolActions.inlineTextEdit
         //delete: Ngn.Items.toolActions.delete

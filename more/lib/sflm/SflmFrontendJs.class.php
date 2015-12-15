@@ -146,6 +146,7 @@ class SflmFrontendJs extends SflmFrontend {
     $this->debugPaths = $result;
   }
 
+
   function orderDebugPathsAddChildrenToResult(array &$r, array $v) {
     $r[] = $this->debugPaths[$v['index']];
     if ($v['children']) {

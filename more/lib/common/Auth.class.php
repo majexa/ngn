@@ -17,7 +17,7 @@ class Auth {
 
   static $errors;
 
-  protected static $auth;
+  static $auth;
 
   const ERROR_AUTH_NO_LOGIN = 1;
 
@@ -219,7 +219,7 @@ class Auth {
   }
 
   static function setAuth() {
-    if (self::$auth) return self::$auth;
+    if (isset(self::$auth)) return self::$auth;
     self::$expires = self::$doNotSavePass ? 0 : 60 * 60 * 24 * 10;
     if (($auth = self::loginPage())) {
       //
@@ -228,8 +228,7 @@ class Auth {
       $auth['msg'] = self::$errors[0]['text'];
       $auth['errors'] = self::$errors;
     }
-    self::$auth = $auth;
-    return $auth;
+    return self::$auth = $auth;
   }
 
   static function check() {
@@ -244,8 +243,7 @@ class Auth {
   }
 
   static function getAll() {
-    retuirn(($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
-    die2('-');
+    return (($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
   }
 
 }

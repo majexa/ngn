@@ -562,7 +562,7 @@ Ngn.Rainbow = new Class({
     inputHU.inject(HU).addClass(prefix + 'HueInput');
     SA.appendText(' %');
     BR.appendText(' %');
-    new Element('span', {'styles': {'position': 'absolute'}, 'class': prefix + 'ballino'}).set('html', " &deg;").injectAfter(HU);
+    new Element('span', {'styles': {'position': 'absolute'}, 'class': prefix + 'ballino'}).set('html', " &deg;").inject(HU, 'after');
 
     //var hex = new Element('label').inject(box).setStyle('position', 'absolute').addClass(prefix + 'hexLabel').appendText('#hex: ').adopt(new Element('input').addClass(prefix + 'hexInput'));
 
