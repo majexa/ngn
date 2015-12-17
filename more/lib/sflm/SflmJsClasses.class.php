@@ -119,7 +119,8 @@ class SflmJsClasses {
       Sflm::log("Path '$path' in cache. Skipped");
       return;
     }
-    if (in_array($path, $this->processedPaths)) throw new Exception("Path '$path' already processed. src: $source | $name!");
+    //if (in_array($path, $this->processedPaths)) throw new Exception("Path '$path' already processed. src: $source | $name!");
+    if (in_array($path, $this->processedPaths)) return;
     Sflm::log("Processing contents of '$path'");
     $this->processedPaths[] = $path;
     $code = Sflm::getCode($this->frontend->base->getAbsPath($path));
