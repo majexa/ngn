@@ -8,7 +8,7 @@ use SflmMtDependenciesOrder;
 
   protected $mootoolsReposRoot, $buildFolder, $files, $dependencies = [], $data = [];
 
-  function __construct($mootoolsReposRoot) {
+  function __construct() {
     $this->loadFiles('core');
     $this->loadFiles('more');
     $this->loadDependencies();
