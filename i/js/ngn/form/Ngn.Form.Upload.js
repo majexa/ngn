@@ -28,8 +28,7 @@ Ngn.Form.Upload = new Class({
   inProgress: false,
 
   init: function() {
-    //this.eCaption = new Element('div.uploadFiles').inject(this.eInput, 'after');
-    this.eProgress = new Element('div.fileProgress').setStyle('display', 'none').inject(this.eCaption, 'after');
+    this.eProgress = new Element('div.fileProgress').inject(this.eCaption, 'after');
     this.requestFile = new Ngn.Request.File({
       url: this.options.url,
       onRequest: function() {
@@ -40,8 +39,10 @@ Ngn.Form.Upload = new Class({
       onProgress: function(event) {
         var loaded = event.loaded, total = event.total;
         var proc = parseInt(loaded / total * 100, 10).limit(0, 100);
+        if (!proc) return;
         this.eProgress.setStyle('width', proc + '%');
         if (proc == 100) this.eCaption.set('html', 'Загрузка завершена');
+        else if (proc) this.eCaption.set('html', proc + '%');
       }.bind(this),
       onComplete: function(r) {
         this.inProgress = false;
