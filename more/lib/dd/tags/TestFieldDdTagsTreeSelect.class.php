@@ -26,7 +26,8 @@ class TestFieldDdTagsTreeSelect extends TestFieldDdTagsTreeAbstract {
   }
 
   function ddoTest($item, $tagId, $v) {
-    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), '<span><a href="//t2.sample.'.$this->tagId1.'">'.$this->v1.'</a> → <a href="//t2.sample.'.$tagId.'">'.$v.'</a></span>'), 'ddoTest');
+    $html = (new Ddo('a', 'siteItem'))->setItem($item)->els();
+    $this->assertTrue((bool)strstr($html, '<span><a href="/t2.sample.'.$this->tagId1.'">'.$this->v1.'</a> → <a href="/t2.sample.'.$tagId.'">'.$v.'</a></span>'), 'ddoTest. expecting: t2.sample.'.$tagId.'; get: '.$html);
   }
 
 }
