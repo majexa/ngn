@@ -19,7 +19,7 @@ class SflmFrontendJs extends SflmFrontend {
 
   protected function init() {
     $this->classes = new SflmJsClasses($this);
-    $this->mtDependencies = O::get('SflmMtDependencies', NGN_ENV_PATH.'/mootools');
+    $this->mtDependencies = O::get('SflmMtDependencies');
   }
 
   protected function __addPath($path, $source = null) {
@@ -145,7 +145,6 @@ class SflmFrontendJs extends SflmFrontend {
     }
     $this->debugPaths = $result;
   }
-
 
   function orderDebugPathsAddChildrenToResult(array &$r, array $v) {
     $r[] = $this->debugPaths[$v['index']];

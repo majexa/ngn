@@ -8,8 +8,7 @@ use SflmMtDependenciesOrder;
 
   protected $mootoolsReposRoot, $buildFolder, $files, $dependencies = [], $data = [];
 
-  function __construct($mootoolsReposRoot) {
-    $this->mootoolsReposRoot = $mootoolsReposRoot;
+  function __construct() {
     $this->loadFiles('core');
     $this->loadFiles('more');
     $this->loadDependencies();
@@ -113,7 +112,7 @@ use SflmMtDependenciesOrder;
   }
 
   protected function loadFiles($type) {
-    $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->mootoolsReposRoot."/$type/Source"), RecursiveIteratorIterator::SELF_FIRST);
+    $objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(NGN_ENV_PATH."/mootools-$type/Source"), RecursiveIteratorIterator::SELF_FIRST);
     foreach ($objects as $object) {
       if (is_dir($object)) continue;
       if (!Misc::hasSuffix('.js', $object)) continue;
