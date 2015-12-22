@@ -40,6 +40,12 @@ use SflmMtDependenciesOrder;
   function parse($code) {
     $r = '';
     $r .= $this->addNamespace($code);
+    if (strstr($code, 'window.addEvent(')) {
+      $r .= $this->parseContentsR('Element.Event');
+    }
+    if (strstr($code, 'domready')) {
+      $r .= $this->parseContentsR('DOMReady');
+    }
     foreach ($this->names() as $name) {
       if (!strstr($code, $name)) continue;
       $r .= $this->parseContentsR($name);

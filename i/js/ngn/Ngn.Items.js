@@ -128,7 +128,7 @@ Ngn.Items = new Class({
   },
   
   reload: function() {
-    Ngn.loading(true);
+    Ngn.Request.Iface.loading(true);
     new Request({
       url: window.location.pathname + '?a=ajax_reload',
       onComplete: function(html) {
@@ -136,7 +136,7 @@ Ngn.Items = new Class({
         this.eItems.set('html', html);
         this.init();
         Ngn.cp.initTooltips();
-        Ngn.loading(false);
+        Ngn.Request.Iface.loading(false);
         this.fireEvent('reloadComplete');
       }.bind(this)
     }).send();

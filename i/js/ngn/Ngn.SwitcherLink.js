@@ -19,10 +19,10 @@ Ngn.SwitcherLink = new Class({
     this.el = $(el) || el;
     if (this.options.textSelector) this.text = this.el.getElement(this.options.textSelector);
     if (this.el.hasClass(this.options.classOn)) {
-      this.el.setTip(this.options.titleOff);
+      Ngn.Element.setTip(this.el, this.options.titleOff);
       if (this.text) this.text.set('text', this.options.titleOff);
     } else {
-      this.el.setTip(this.options.titleOn);
+      Ngn.Element.setTip(this.el, this.options.titleOn);
       if (this.text) this.text.set('text', this.options.titleOn);
     }
     this.setTip(this.el.hasClass(this.options.classOn));
@@ -48,12 +48,12 @@ Ngn.SwitcherLink = new Class({
     if (enabled) {
       this.el.removeClass(this.options.classOff);
       this.el.addClass(this.options.classOn);
-      this.el.setTip(this.options.titleOff);
+      Ngn.Element.setTip(this.el, this.options.titleOff);
       if (this.text) this.text.set('text', this.options.titleOff);
     } else {
       this.el.removeClass(this.options.classOn);
       this.el.addClass(this.options.classOff);
-      this.el.setTip(this.options.titleOn);
+      Ngn.Element.setTip(this.el, this.options.titleOn);
       if (this.text) this.text.set('text', this.options.titleOn);
     }
   }

@@ -22,11 +22,12 @@ class TestFieldDdTagsTreeSelect extends TestFieldDdTagsTreeAbstract {
   }
 
   function formTest($html, $tagId, $v) {
-    $this->assertTrue((bool)strstr($html, 'name="sample" value="'.$tagId.'" id="f_sample_'.$tagId.'" checked />'), 'value="'.$tagId.'" id="f_sample_'.$tagId." checked\n--\n".$html);
+    $this->assertTrue((bool)strstr($html, 'name="sample" value="'.$tagId.'" id="f_sample_'.$tagId.'" checked />'), 'value="'.$tagId.'" id="f_sample_'.$tagId." checked\n--\n".$html, 'formTest');
   }
 
   function ddoTest($item, $tagId, $v) {
-    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), '<span><a href="//t2.sample.'.$this->tagId1.'">'.$this->v1.'</a> → <a href="//t2.sample.'.$tagId.'">'.$v.'</a></span>'));
+    $html = (new Ddo('a', 'siteItem'))->setItem($item)->els();
+    $this->assertTrue((bool)strstr($html, '<span><a href="/t2.sample.'.$this->tagId1.'">'.$this->v1.'</a> → <a href="/t2.sample.'.$tagId.'">'.$v.'</a></span>'), 'ddoTest. expecting: t2.sample.'.$tagId.'; get: '.$html);
   }
 
 }

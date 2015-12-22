@@ -94,7 +94,7 @@ class PHPUnit_Util_Filter {
     }
     $new = [];
     foreach ($eTrace as $v) {
-      if (strstr($v['class'], 'TestRunnerAbstract')) break;
+      if (isset($v['class']) and strstr($v['class'], 'TestRunnerAbstract')) break;
     }
     $eTrace = $new;
     if (!self::frameExists($eTrace, $eFile, $eLine)) {

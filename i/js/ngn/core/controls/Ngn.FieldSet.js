@@ -225,7 +225,7 @@ Ngn.FieldSet = new Class({
       //if (eLabel) eLabel.set('for', eInput.get('id'));
       this.initInput(eInput);
     }.bind(this));
-    eNewRow.injectAfter(eLastRow);
+    eNewRow.inject(eLastRow, 'after');
     this.createDeleteButton(eNewRow);
     this.fireEvent('addRow');
     if (this.options.addRowNumber) this.addRowNumber(eNewRow, nextRowN);

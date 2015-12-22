@@ -18,9 +18,17 @@ Ngn.NumberSelect = new Class({
     eInput.addEvent('keypress', function() {
       this.fireEvent('change', parseInt(this.eInput.get('value')));
     }.bind(this));
-    new Element('input', { 'class' : 'btnInput prev', type: 'button' }).inject(eInput, 'before').
+    new Element('input', {
+      'class' : 'btnInput prev',
+      type: 'button',
+      value: '-'
+    }).inject(eInput, 'before').
       addEvent('click', this.prev.bind(this));
-    new Element('input', { 'class' : 'btnInput next', type: 'button' }).inject(eInput, 'after').
+    new Element('input', {
+      'class' : 'btnInput next',
+      type: 'button',
+      value: '+'
+    }).inject(eInput, 'after').
       addEvent('click', this.next.bind(this));
   },
 

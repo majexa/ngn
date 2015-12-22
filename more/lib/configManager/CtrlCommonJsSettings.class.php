@@ -15,7 +15,7 @@ class CtrlCommonJsSettings extends CtrlBase {
     } else {
       $v = Config::getVar($name, true);
     }
-    print "\n// Dynamic settings:\nNgn.toObj('$s');\n".$s.' = '.json_encode($v)."\n";
+    print "\n// Dynamic settings:\nNgn.Object.fromString('$s');\n".$s.' = '.json_encode($v)."\n";
   }
 
 }
