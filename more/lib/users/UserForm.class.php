@@ -2,7 +2,7 @@
 
 class UserForm extends UserBaseForm {
 
-  protected $filterFields = ['login', 'user', 'pass', 'email', 'name', 'phone', 'extra'];
+  protected $filterFields = ['login', 'user', 'pass', 'email', 'name', 'phone', 'extra', 'role'];
   public $strName = UsersCore::extraStrName;
 
   protected function defineOptions() {
@@ -41,6 +41,9 @@ class UserForm extends UserBaseForm {
       'type'         => 'password',
       'required'     => true
     ];
+    if (Config::getVarVar('userReg', 'roleEnable', true)) {
+      $fields[] = $this->getRoleField();
+    }
     if (Config::getVarVar('userReg', 'extraData')) {
       $fields = array_merge($fields, [
         [
@@ -62,20 +65,14 @@ class UserForm extends UserBaseForm {
   protected function init() {
     parent::init();
     if (!empty($this->fields->fields['phone'])) $this->fields->fields['phone']['options']['disabled'] = true;
-    $this->initRole();
-  }
-
-  protected function initRole() {
-    if (Config::getVarVar('role', 'enable', true)) {
-      $this->fields = Arr::append([$this->getRoleField()], $this->fields);
-    }
   }
 
   protected function getRoleField() {
     return [
       'title' => 'Тип профиля',
       'name'  => 'role',
-      'type'  => 'userRole'
+      'type'  => 'userRole',
+      'required' => true
     ];
   }
 

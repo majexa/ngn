@@ -17,5 +17,6 @@ return [
   'pageIds' => [],
   'redirectToFirstPage' => false,
   'extraData' => false,
-  'titleName' => 'email'
+  'titleName' => 'email',
+  'roleEnable' => false
 ];

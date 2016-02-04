@@ -21,9 +21,9 @@ abstract class FieldEInput extends FieldEAbstract {
     return $opt;
   }
 
-    protected function allowedTagParams() {
-        return ['name', 'maxlength', 'value', 'disabled', 'placeholder', 'autocomplete'];
-    }
+  protected function allowedTagParams() {
+    return ['name', 'maxlength', 'value', 'disabled', 'placeholder', 'autocomplete'];
+  }
 
   protected function prepareInputValue($value) {
     return $value;

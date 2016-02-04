@@ -46,7 +46,7 @@ Ngn.Element.setTip = function(el, title) {
   if (!Ngn.Element.tips) Ngn.Element.initTips(el);
   if (el.retrieve('tip:native')) {
     Ngn.Element.tips.hide(el);
-    this.store('tip:title', title);
+    el.store('tip:title', title);
   } else {
     Ngn.Element.tips.attach(el);
   }

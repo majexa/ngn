@@ -98,7 +98,6 @@ Ngn.Tabs = new Class({
    * @param {Number} Tab-index
    */
   select: function(index) {
-    //console.debug('>'+index);
     if (this.selected === index || !this.tabs[index]) return this;
     if (this.ajax) this.ajax.cancel().removeEvents();
     var tab = this.tabs[index];

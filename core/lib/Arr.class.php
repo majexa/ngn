@@ -87,6 +87,12 @@ class Arr {
     return isset($arr[$key]) ? $arr[$key] : false;
   }
 
+  /**
+   * @param array $arr
+   * @param $k1
+   * @param $v1
+   * @return bool|array
+   */
   static function getValueByKey(array $arr, $k1, $v1) {
     foreach ($arr as $v) if (isset($v[$k1]) and $v[$k1] == $v1) return $v;
     return false;

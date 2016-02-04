@@ -7,6 +7,7 @@ Ngn.DdoItemsEdit = new Class({
   },
 
   initItem: function(eItem) {
+    console.debug('!');
     new Ngn.DdoItemEditBtns( //
       eItem.get('data-id'), //
       new Element('div', {'class': 'btns'}).inject(eItem, 'top'), //

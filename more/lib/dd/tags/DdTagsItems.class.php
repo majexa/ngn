@@ -175,7 +175,9 @@ SQL
    * Удаляет все тэг-записи определенной dd-записи в группе,
    * обновляет кол-во записей в тегах
    *
-   * @param  integer ID dd-записи
+   * @param integer $itemId ID dd-записи
+   * @throws EmptyException
+   * @throws Exception
    */
   function delete($itemId) {
     $tagItems = $this->getFlat($itemId);
@@ -322,9 +324,11 @@ SQL
     $itemIds = (array)$itemIds;
     $params = [
       'tagItems.*',
-      'tagItems.tagId AS id', // нужно для построения дерева
-      "tags.title",
+      'tagItems.tagId AS id' // нужно для построения дерева
     ];
+    if ($this->group->table == 'tags') {
+      $params[] = "tags.title";
+    }
     if ($this->group->allowEdit) {
       $params[] = 'tags.name';
       $params[] = 'tags.parentId';
@@ -333,7 +337,7 @@ SQL
     $q = "
     SELECT $params
     FROM tagItems
-    LEFT JOIN {$this->group->table} tags ON tagItems.tagId=tags.id
+    LEFT JOIN {$this->group->table} AS tags ON tagItems.tagId=tags.id
     WHERE
       tagItems.strName=? AND
       tagItems.groupName=? AND

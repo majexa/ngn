@@ -225,7 +225,7 @@ class ClassCore {
       ];
       return $r;
     } else {
-      throw new Exception("Tag '$_tag' npt realized'");
+      throw new Exception("Tag '$_tag' not realized'");
     }
   }
 

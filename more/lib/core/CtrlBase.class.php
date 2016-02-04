@@ -314,7 +314,7 @@ abstract class CtrlBase {
 
   protected function initParams() {
     $this->d['curUrl'] = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
-    $this->d['params'] = $this->req->params = $this->req->params;
+    $this->d['curPath'] = $this->req->path();
     $this->d['base'] = $this->req->getAbsBase();
   }
 
@@ -646,7 +646,7 @@ abstract class CtrlBase {
   }
 
   function error404($title = 'Страница не найдена', $text = '') {
-    throw new Exception($title);
+    throw new Error404($title);
   }
 
   protected function jsonFormAction(Form $form) {
@@ -679,6 +679,28 @@ abstract class CtrlBase {
         'header' => $header,
         'items'  => $items
       ]);
+  }
+
+  protected function processFormTabs(array $paths) {
+    foreach ($paths as $uri) {
+      $ctrl = O::di('RouterManager', [
+        'req' => new Req([
+          'uri'              => $uri,
+          'disableSflmStore' => true
+        ])
+      ])->router()->dispatch()->controller;
+      if (empty($ctrl->json['form'])) {
+        throw new Exception("no form by uri '$uri'.".get_class($ctrl).'::'.$ctrl->action);
+      }
+      $form = [
+        'id'    => Html::getParam($ctrl->json['form'], 'id'),
+        'title' => isset($ctrl->json['title']) ? $ctrl->json['title'] : 'empty',
+        'html'  => $ctrl->json['form']
+      ];
+      if ($ctrl->actionResult) $form['submitTitle'] = $ctrl->actionResult->options['submitTitle'];
+      $d['forms'][] = $form;
+    }
+    $this->json['tabs'] = $this->tt->getTpl('common/dialogFormTabs', $d);
   }
 
   static function debug($d) {

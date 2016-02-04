@@ -368,7 +368,6 @@ Ngn.Form.factory = function(eForm, opts) {
   var name = 'Ngn.' + (eForm.get('data-class') || 'Form');
   var cls = eval(name);
   if (!cls) throw new Error('class ' + name + ' not found');
-  console.debug('init ' + name);
   return new cls(eForm, opts);
 };
 
@@ -387,14 +386,11 @@ Ngn.Form.ElInit = new Class({
     var els = this.form.eForm.getElements('.type_' + this.type);
     if (!els.length) throw new Error('No ".type_' + this.type + '" elements was found. Maybe use FieldEAbstract::_html() instead of html()');
     els.each(function(eRow) {
-      //c('1' + this.type);
       if (!eRow.get('data-typejs')) return;
       var clsName = 'Ngn.Form.El.' + Ngn.String.ucfirst(this.type)
       var cls = eval(clsName);
       if (cls === undefined) throw new Error('Class "' + clsName + '" is not defined');
-      //c('2' + this.type);
       if (eRow.retrieve('initialized')) return;
-      //c('3' + this.type + ' ' + clsName);
       new cls(this.type, this.form, eRow);
       eRow.store('initialized', true);
     }.bind(this));

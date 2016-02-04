@@ -3,7 +3,7 @@
 class DmfaDdUserImage extends DmfaImagePreview {
 
   /**
-   * @var DdItemsManagerPage
+   * @var DdItemsManager
    */
   protected $dm;
 

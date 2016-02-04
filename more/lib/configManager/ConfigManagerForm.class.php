@@ -9,6 +9,7 @@ class ConfigManagerForm extends Form {
    * @param string $name Имя конфигурационной группы (admins/database/emails/...)
    */
   function __construct($type, $name) {
+
     $type = str_replace('vvv', 'vars', $type);
     $this->configType = $type;
     $this->configName = $name;
@@ -90,8 +91,6 @@ class ConfigManagerForm extends Form {
 
   protected function _update(array $data) {
     if (isset($this->configStruct['type']) and $data) $data = $data[$this->configName];
-    //die2($data);
-    //if ($this->noRootKeys) $data = $data[$this->configName];
     if ($this->configType == 'vars') {
       ProjectConfig::updateVar($this->configName, $data);
     }

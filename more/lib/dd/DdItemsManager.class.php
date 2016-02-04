@@ -62,6 +62,7 @@ class DdItemsManager extends DbItemsManager {
         $data[$k] = $v;
         continue;
       }
+      // Для теговых полей данные сохраняются в табличку tagItems
       if (!DdTags::isTag($type)) $data[$k] = $v;
     }
     return $this->items->create($data);

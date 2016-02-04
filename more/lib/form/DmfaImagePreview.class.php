@@ -11,7 +11,8 @@ class DmfaImagePreview extends DmfaImage {
       if ($el['required']) {
         // И поле обязательно, удаляем запись
         $this->dm->delete($this->dm->id);
-      } else {
+      }
+      else {
         // Очищаем поле
         $this->dm->updateField($this->dm->id, $el['name'], '');
       }
@@ -21,12 +22,11 @@ class DmfaImagePreview extends DmfaImage {
     }
     if (($wmConf = Config::getVar('watermark', true)) and $wmConf['enable']) {
       // Делаем вотермарк для превьюшки
-      $oIW = new ImageWatermark(WEBROOT_PATH.'/'.$wmConf['path'], 
-        $wmConf['rightOffset'], $wmConf['bottomOffset']);
-      if ($wmConf['q']) $oIW->jpegQuality = $wmConf['q'];
-      $oIW->make(Misc::getFilePrefexedPath($imageRoot, 'md_'));
+      $watermark = new ImageWatermark(WEBROOT_PATH.'/'.$wmConf['path'], $wmConf['rightOffset'], $wmConf['bottomOffset']);
+      if ($wmConf['q']) $watermark->jpegQuality = $wmConf['q'];
+      $watermark->make(Misc::getFilePrefexedPath($imageRoot, 'md_'));
       copy($imageRoot, Misc::getFilePrefexedPath($imageRoot, 'orig_'));
-      $oIW->make($imageRoot);
+      $watermark->make($imageRoot);
     }
   }
 

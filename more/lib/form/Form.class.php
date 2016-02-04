@@ -311,6 +311,7 @@ class Form {
       $elHtml = $this->htmlElementError($el, $elHtml);
       $elHtml = $this->htmlElementTitle($el, $elHtml);
       $elHtml = $this->htmlElementHelp($el, $elHtml);
+      $elHtml .= $el->postRowHtml();
     }
     if (in_array($el->type, $this->closingHeaderTypes)) $elHtml = $this->closeAllOpenedHeaders('closing type').$elHtml;
     return $elHtml;
@@ -451,6 +452,10 @@ class Form {
   }
   */
 
+  /**
+   * @api
+   * Переопределите этот метод для определения кастомных ошибок формы
+   */
   protected function _initErrors() {
   }
 

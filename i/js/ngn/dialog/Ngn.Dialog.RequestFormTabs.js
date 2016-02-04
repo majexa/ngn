@@ -8,7 +8,9 @@ Ngn.Dialog.RequestFormTabs = new Class({
     draggable: true,
     openerType: 'default',
     okDestroy: false,
-    dialogClass: 'dialog dialog-tabs'
+    dialogClass: 'dialog dialog-tabs',
+    closeOnSubmited: true,
+    onSubmited: Function.from()
   },
 
   initialize: function(opts) {
@@ -42,18 +44,17 @@ Ngn.Dialog.RequestFormTabs = new Class({
       this.setSubmitTitle(index);
     }.bind(this));
     this.tabs.eMenu.inject(this.titleText);
-    for (var i=0; i<this.tabs.tabs.length; i++) {
+    for (var i = 0; i < this.tabs.tabs.length; i++) {
       this.tabs.tabs[i].submitTitle = this.tabs.tabs[i].container.get('data-submitTitle');
     }
-    this.message.getElements('form').each(function(eForm, n) {
+    this.message.getElements('form').each(function(eForm) {
       this.initForm(eForm);
     }.bind(this));
   },
 
   setSubmitTitle: function(tabIndex) {
     if (!this.tabs.tabs[tabIndex]) tabIndex = 0;
-    if (this.tabs.tabs[tabIndex].submitTitle) this.setOkText(this.tabs.tabs[tabIndex].submitTitle);
-    else this.setOkText(this.options.okText);
+    if (this.tabs.tabs[tabIndex].submitTitle) this.setOkText(this.tabs.tabs[tabIndex].submitTitle); else this.setOkText(this.options.okText);
   },
 
   forms: {},
@@ -80,7 +81,7 @@ Ngn.Dialog.RequestFormTabs = new Class({
           new Request.JSON({
             url: r.nextFormUrl,
             onComplete: function(r2) {
-              if (!r2.form) throw new Error('Form does not exists in next form url "'+r.nextFormUrl+'"');
+              if (!r2.form) throw new Error('Form does not exists in next form url "' + r.nextFormUrl + '"');
               var eNewForm = Elements.from(r2.form)[0].getElement('form');
               this.tabs.tabs[this.tabs.selected].name = eNewForm.get('id');
               if (r2.submitTitle) this.tabs.tabs[this.tabs.selected].submitTitle = r2.submitTitle;
@@ -89,16 +90,16 @@ Ngn.Dialog.RequestFormTabs = new Class({
             }.bind(this)
           }).send();
         } else {
+          // Complete
           var formName = eForm.get('name');
           if (formName) {
-            var methodName = 'this.submitSuccess'+Ngn.String.ucfirst(eForm.get('name'));
+            var methodName = 'this.submitSuccess' + Ngn.String.ucfirst(eForm.get('name'));
             var method = eval(methodName);
-            try {
-              method.bind(this)(r);
-            } catch (e) {
-              throw new Error('Method "'+methodName+'" does not exists');
-            }
+            if (!method) throw new Error('Method "' + methodName + '" does not exists');
+            method.bind(this)(r);
           }
+          if (this.options.closeOnComplete) this.close();
+          this.fireEvent('submited');
         }
       } else {
         var par = eForm.getParent();

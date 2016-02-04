@@ -56,7 +56,7 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       ]);
     }
     else {
-      (new Smsc)->send_sms($phone, "CODE: $code");
+      (new Smsc)->sendSms($phone, "CODE: $code");
     }
   }
 

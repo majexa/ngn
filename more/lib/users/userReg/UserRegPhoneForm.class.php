@@ -5,16 +5,15 @@ class UserRegPhoneForm extends UserBaseForm {
   function id() {
     return 'formUserRegPhone';
   }
+  
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'submitTitle' => 'Продолжить'
+    ]);
+  }
 
   function __construct(array $options = []) {
-    $options['submitTitle'] = 'Продолжить';
     parent::__construct([
-      [
-        'title'    => 'Ваш телефон',
-        'name'     => 'phone',
-        'type'     => 'phone',
-        'required' => true
-      ],
       [
         'title'    => 'Ваш телефон',
         'name'     => 'phone',
@@ -58,7 +57,7 @@ Ngn.Frm.phoneConfirm = function(method) {
     onComplete: function(r) {
       btn.toggleDisabled(true);
       if (r.validError) {
-        eInput = form.eForm.getElement('[name=phone]');
+        var eInput = form.eForm.getElement('[name=phone]');
         form.validator.showNewAdvice('asd', eInput, r.validError);
       }
     }
@@ -76,6 +75,11 @@ JS;
   }
 
   protected function initErrors() {
+    $phone = $this->getElement('phone');
+    if (!$phone->valueChanged) {
+      $phone->error('Телефон не изменился');
+      return;
+    }
     parent::initErrors();
     $this->initCodeError();
   }

@@ -63,21 +63,37 @@ class ProjectConfig {
   }
 
   static function updateVar($k, $v, $ignoreExistence = false) {
+    $currentValue = Config::getVar($k);
     if (($vars = Config::getFilePaths($k, 'vars')) !== false) {
       $defaultValue = Config::getFileVar($vars[0]);
-    } else {
+    }
+    else {
       $defaultValue = [];
     }
+    $newValue = $currentValue;
     if (is_array($v) and !$ignoreExistence) {
-      foreach ($v as $key => $value)
-        if (!isset($defaultValue[$key]) or $defaultValue[$key] != $value) $newValue[$key] = $value;
-    } else {
+      // для каждого элемента массива проверяем
+      foreach ($v as $key => $value) {
+        if (!isset($currentValue[$key]) or $currentValue[$key] != $value) {
+          // если отличается от текущего состояния
+          if (!isset($defaultValue[$key]) or $value != $defaultValue[$key]) {
+            // если отличается от дефолтного, апдейтим
+            $newValue[$key] = $value;
+          } else {
+            // если такое же, как дефолтного, удаляем
+            unset($newValue[$key]);
+          }
+        }
+      }
+    }
+    else {
       if (serialize($defaultValue) != serialize($v)) $newValue = $v;
     }
-    if (isset($newValue)) {
-        unset(Config::$vars[$k]);
+    if ($newValue) {
+      unset(Config::$vars[$k]);
       Config::updateVar(self::$varsFolder."/$k.php", $newValue);
-    } else {
+    }
+    else {
       //SiteConfig::deleteVarSection($k);
     }
   }
@@ -123,7 +139,7 @@ class ProjectConfig {
   /**
    * Возвращает массив с существующими структурами конфигурационных констант или переменных
    *
-   * @param   string  "constants" / "vars"
+   * @param   string "constants" / "vars"
    * @return  array
    */
   static function getStruct($type) {

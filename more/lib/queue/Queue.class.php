@@ -4,9 +4,7 @@ class Queue extends QueueBase {
 
   /**
    * @api
-   * <pre>
-   * Примеры:
-   *
+   * @examples
    * {this}([
    *   'class' => 'ClassName',
    *   'data' => ['param1', 'param2', ...] // параметры конструктора
@@ -30,7 +28,6 @@ class Queue extends QueueBase {
    *   'method' => 'cycle',
    *   'ljId' => 'ljSomeId'
    * ]);
-   * </pre>
    *
    * @param array $data
    * @throws Exception

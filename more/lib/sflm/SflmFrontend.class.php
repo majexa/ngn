@@ -35,7 +35,7 @@ abstract class SflmFrontend {
   }
 
   protected function getStaticPaths() {
-    return $this->base->getPaths($this->name, true);
+    return $this->base->getPaths($this->name, false);
   }
 
   /**

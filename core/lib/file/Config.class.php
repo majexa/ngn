@@ -241,6 +241,7 @@ class Config {
   static function cleanCache($file) {
     $key = str_replace('.php', '', explode('/vars/', $file)[1]);
     if (isset(self::$vars[$key])) unset(self::$vars[$key]);
+    if (function_exists('opcache_reset')) opcache_reset();
   }
 
   /**

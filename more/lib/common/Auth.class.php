@@ -17,6 +17,9 @@ class Auth {
 
   static $errors;
 
+  /**
+   * @var bool|DbModelUsers
+   */
   static $auth;
 
   const ERROR_AUTH_NO_LOGIN = 1;
@@ -38,7 +41,7 @@ class Auth {
    *
    * @param   string  Логин
    * @param   string  Закриптованиый пароль
-   * @return  bool/DbModelUsers
+   * @return  bool|DbModelUsers
    */
   static function checkLoginPass($login, $encryptedPass) {
     $login = trim($login);
@@ -142,7 +145,9 @@ class Auth {
   }
 
   static function loginById($id) {
-    self::save(Misc::checkEmpty(DbModelCore::get('users', $id)));
+    $user = Misc::checkEmpty(DbModelCore::get('users', $id));
+    self::save($user);
+    return self::$auth = $user;
   }
 
   static function logout() {
@@ -238,7 +243,7 @@ class Auth {
 
   static function get($param) {
     if (!$param) throw new Exception('Use getAll');
-    $auth = self::setAuth();
+    if (!($auth = self::setAuth())) return null;
     return isset($auth[$param]) ? $auth[$param] : null;
   }
 

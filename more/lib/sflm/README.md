@@ -36,18 +36,18 @@ regexp: [A-Z]*.js
 
 Первый пример - пустой вызов. Подключаются базовые библиотеки.
 <div class="console">
-  <div class="help">
-    > <span class="cmd">run "Sflm::$output = true; Sflm::$uploadPath = '/home/user/ngn-env/temp'; Sflm::setFrontendName('a'); Sflm::clearCache(); Sflm::frontend('js')->store();"</span>
+  <div class="help" title="Команда, выдающая текст в рамке">
+    <span class="blink">></span> <span class="cmd">run "Sflm::$output = true; Sflm::setFrontendName('a'); Sflm::clearCache(); Sflm::frontend('js')->store();"</span>
   </div>
-  Generate frontend [js::a] instance<br>Got package 'core' libs recursive: i/js/mootools/mootools-core-1.4.0.js, i/js/mootools/mootools-more-1.4.0.1.js, i/js/ngn/Ngn.js, s2/js/common/Ngn, i/js/ngn/Ngn.Request.js, i/js/phpFunctions.js<br>js: No new paths. Storing skipped<br>
+  &lt;Generate frontend [js::a] instance&gt;<br>&lt;Package 'core' is empty&gt;<br>&lt;js: Update collected 'a.js' file after adding lib from 'root' source&gt;<br>&lt;Package 'a' (sfl/js/a) does not exists&gt;<br>&lt;Storing existing objects. Nothing to store. Skipped&gt;<br>
 </div>
 
 В следующем примере происходит добавление всего одного класса `Ngn.Dialog`. Посмотрите какие необходимые библиотеки подключаются в результате:
 <div class="console">
-  <div class="help">
-    > <span class="cmd">run "Sflm::$output = true; Sflm::$uploadPath = '/home/user/ngn-env/temp'; Sflm::setFrontendName('a'); Sflm::clearCache(); Sflm::frontend('js')->addClass('Ngn.Dialog'); Sflm::frontend('js')->store();"</span>
+  <div class="help" title="Команда, выдающая текст в рамке">
+    <span class="blink">></span> <span class="cmd">run "Sflm::$output = true; Sflm::setFrontendName('a'); Sflm::clearCache(); Sflm::frontend('js')->addClass('Ngn.Dialog'); Sflm::frontend('js')->store();"</span>
   </div>
-  Generate frontend [js::a] instance<br>Got package 'core' libs recursive: i/js/mootools/mootools-core-1.4.0.js, i/js/mootools/mootools-more-1.4.0.1.js, i/js/ngn/Ngn.js, s2/js/common/Ngn, i/js/ngn/Ngn.Request.js, i/js/phpFunctions.js<br><span style="color: #ff0">Add frontend class 'Ngn.Dialog'. src: direct</span><br>Processing contents of 'i/js/ngn/dialog/Ngn.Dialog.js'<br><span style="color: #00C0C0">Adding class 'Ngn.Dialog' (src: i/js/ngn/dialog/Ngn.Dialog.js). PATH i/js/ngn/dialog/Ngn.Dialog.js</span><br><span style="color: aqua">js: Adding path i/js/ngn/dialog/Ngn.Dialog.js</span><br>Processing valid-class patterns in 'i/js/ngn/dialog/Ngn.Dialog.js'<br><span style="color: gray">Class 'Ngn.RequiredOptions' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern</span><br><span style="color: #00C0C0">Add frontend class 'Ngn.Dialog.VResize'. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern</span><br>Processing contents of 'i/js/ngn/dialog/Ngn.Dialog.VResize.js'<br><span style="color: #00C0C0">Adding class 'Ngn.Dialog.VResize' (src: i/js/ngn/dialog/Ngn.Dialog.VResize.js). PATH i/js/ngn/dialog/Ngn.Dialog.VResize.js</span><br><span style="color: aqua">js: Adding path i/js/ngn/dialog/Ngn.Dialog.VResize.js</span><br>Processing valid-class patterns in 'i/js/ngn/dialog/Ngn.Dialog.VResize.js'<br><span style="color: gray">Class 'Ngn.Request.JSON' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern</span><br><span style="color: gray">Class 'Ngn.Request' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern</span><br><span style="color: #00C0C0">Add frontend class 'Ngn.Dotter'. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern</span><br>Processing contents of 'i/js/ngn/core/controls/Ngn.Dotter.js'<br><span style="color: #00C0C0">Adding class 'Ngn.Dotter' (src: i/js/ngn/core/controls/Ngn.Dotter.js). PATH i/js/ngn/core/controls/Ngn.Dotter.js</span><br><span style="color: aqua">js: Adding path i/js/ngn/core/controls/Ngn.Dotter.js</span><br>Processing valid-class patterns in 'i/js/ngn/core/controls/Ngn.Dotter.js'<br>js: Update collected 'a.js' file after adding lib from 'direct' source<br><br>Undefined property: SflmFrontendJs::$abs<br>---------------<br>C:\www\refactor\ngn-env\ngn\core\lib\Err.class.php:37<br>C:\www\refactor\ngn-env\ngn\core\lib\Err.class.php:128<br>C:\www\refactor\ngn-env\ngn\more\lib\sflm\SflmFrontend.class.php:183<br>C:\www\refactor\ngn-env\ngn\more\lib\sflm\SflmFrontend.class.php:169<br>C:\www\refactor\ngn-env\ngn\more\lib\sflm\SflmFrontendJs.class.php:47<br>C:\www\refactor\ngn-env\run\lib\ClRun.class.php(121) : eval()'d code:1<br>C:\www\refactor\ngn-env\run\lib\ClRun.class.php:121<br>C:\www\refactor\ngn-env\run\lib\ClRun.class.php:61<br>C:\www\refactor\ngn-env\run\run.php:20<br><br>
+  &lt;Generate frontend [js::a] instance&gt;<br>&lt;Package 'core' is empty&gt;<br>&lt;Add frontend class 'Ngn.Dialog'. src: root&gt;<br>&lt;Processing contents of 'i/js/ngn/dialog/Ngn.Dialog.js'&gt;<br>&lt;Add frontend class 'Ngn.RequiredOptions'. src: Ngn.Dialog preload&gt;<br>&lt;Processing contents of 'i/js/ngn/core/Ngn.RequiredOptions.js'&gt;<br>&lt;Adding class 'Ngn.RequiredOptions' (src: i/js/ngn/core/Ngn.RequiredOptions.js). PATH i/js/ngn/core/Ngn.RequiredOptions.js&gt;<br>&lt;js: Adding path i/js/ngn/core/Ngn.RequiredOptions.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/Ngn.RequiredOptions.js'&gt;<br>&lt;Adding class 'Ngn.Dialog' (src: i/js/ngn/dialog/Ngn.Dialog.js). PATH i/js/ngn/dialog/Ngn.Dialog.js&gt;<br>&lt;js: Adding path i/js/ngn/dialog/Ngn.Dialog.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/dialog/Ngn.Dialog.js'&gt;<br>&lt;Class 'Ngn.RequiredOptions' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.String'. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/Ngn.String.js'&gt;<br>&lt;Adding class 'Ngn.String' (src: i/js/ngn/core/Ngn.String.js). PATH i/js/ngn/core/Ngn.String.js&gt;<br>&lt;js: Adding path i/js/ngn/core/Ngn.String.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/Ngn.String.js'&gt;<br>&lt;Add frontend class 'Ngn.Number'. src: i/js/ngn/core/Ngn.String.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/Ngn.Number.js'&gt;<br>&lt;Adding class 'Ngn.Number' (src: i/js/ngn/core/Ngn.Number.js). PATH i/js/ngn/core/Ngn.Number.js&gt;<br>&lt;js: Adding path i/js/ngn/core/Ngn.Number.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/Ngn.Number.js'&gt;<br>&lt;Add frontend class 'Ngn.Dialog.VResize'. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/dialog/Ngn.Dialog.VResize.js'&gt;<br>&lt;Adding class 'Ngn.Dialog.VResize' (src: i/js/ngn/dialog/Ngn.Dialog.VResize.js). PATH i/js/ngn/dialog/Ngn.Dialog.VResize.js&gt;<br>&lt;js: Adding path i/js/ngn/dialog/Ngn.Dialog.VResize.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/dialog/Ngn.Dialog.VResize.js'&gt;<br>&lt;Add frontend class 'Ngn.Element'. src: i/js/ngn/dialog/Ngn.Dialog.VResize.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/Ngn.Element.js'&gt;<br>&lt;Adding class 'Ngn.Element' (src: i/js/ngn/core/Ngn.Element.js). PATH i/js/ngn/core/Ngn.Element.js&gt;<br>&lt;js: Adding path i/js/ngn/core/Ngn.Element.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/Ngn.Element.js'&gt;<br>&lt;Add frontend class 'Ngn.Storage'. src: i/js/ngn/dialog/Ngn.Dialog.VResize.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/Ngn.Storage.js'&gt;<br>&lt;Adding class 'Ngn.Storage' (src: i/js/ngn/core/Ngn.Storage.js). PATH i/js/ngn/core/Ngn.Storage.js&gt;<br>&lt;js: Adding path i/js/ngn/core/Ngn.Storage.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/Ngn.Storage.js'&gt;<br>&lt;Add frontend class 'Ngn.LocalStorage'. src: i/js/ngn/core/Ngn.Storage.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/Ngn.LocalStorage.js'&gt;<br>&lt;Adding class 'Ngn.LocalStorage' (src: i/js/ngn/core/Ngn.LocalStorage.js). PATH i/js/ngn/core/Ngn.LocalStorage.js&gt;<br>&lt;js: Adding path i/js/ngn/core/Ngn.LocalStorage.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/Ngn.LocalStorage.js'&gt;<br>&lt;Add frontend class 'Ngn.Request.JSON'. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.Request'. src: Ngn.Request.JSON parent namespace&gt;<br>&lt;Processing contents of 'i/js/ngn/Ngn.Request.js'&gt;<br>&lt;Add frontend class 'Ngn.Request.Loading'. src: i/js/ngn/Ngn.Request.js&gt;<br>&lt;Add frontend class 'Ngn.Request.Iface'. src: i/js/ngn/Ngn.Request.js&gt;<br>&lt;Adding class 'Ngn.Request' (src: i/js/ngn/Ngn.Request.js). PATH i/js/ngn/Ngn.Request.js&gt;<br>&lt;js: Adding path i/js/ngn/Ngn.Request.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/Ngn.Request.js'&gt;<br>&lt;Class 'Ngn.String' exists. Skipped. src: i/js/ngn/Ngn.Request.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.Arr'. src: i/js/ngn/Ngn.Request.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/Ngn.Arr.js'&gt;<br>&lt;Adding class 'Ngn.Arr' (src: i/js/ngn/core/Ngn.Arr.js). PATH i/js/ngn/core/Ngn.Arr.js&gt;<br>&lt;js: Adding path i/js/ngn/core/Ngn.Arr.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/Ngn.Arr.js'&gt;<br>&lt;Path 'i/js/ngn/Ngn.Request.js' in cache. Skipped&gt;<br>&lt;Class 'Ngn.Request' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.Btn'. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/controls/Ngn.Btn.js'&gt;<br>&lt;Add frontend class 'Ngn.Btn.Action'. src: i/js/ngn/core/controls/Ngn.Btn.js&gt;<br>&lt;Add frontend class 'Ngn.Btn.FileUpload'. src: i/js/ngn/core/controls/Ngn.Btn.js&gt;<br>&lt;Adding class 'Ngn.Btn' (src: i/js/ngn/core/controls/Ngn.Btn.js). PATH i/js/ngn/core/controls/Ngn.Btn.js&gt;<br>&lt;js: Adding path i/js/ngn/core/controls/Ngn.Btn.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/controls/Ngn.Btn.js'&gt;<br>&lt;Add frontend class 'Ngn.Dialog.Confirm.Mem'. src: i/js/ngn/core/controls/Ngn.Btn.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.Dialog.Confirm'. src: Ngn.Dialog.Confirm.Mem parent namespace&gt;<br>&lt;Processing contents of 'i/js/ngn/dialog/Ngn.Dialog.Confirm.js'&gt;<br>&lt;Add frontend class 'Ngn.Dialog.Msg'. src: Ngn.Dialog.Confirm preload&gt;<br>&lt;Processing contents of 'i/js/ngn/dialog/Ngn.Dialog.Msg.js'&gt;<br>&lt;Class 'Ngn.Dialog' exists. Skipped. src: Ngn.Dialog.Msg preload&gt;<br>&lt;Adding class 'Ngn.Dialog.Msg' (src: i/js/ngn/dialog/Ngn.Dialog.Msg.js). PATH i/js/ngn/dialog/Ngn.Dialog.Msg.js&gt;<br>&lt;js: Adding path i/js/ngn/dialog/Ngn.Dialog.Msg.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/dialog/Ngn.Dialog.Msg.js'&gt;<br>&lt;Class 'Ngn.Dialog' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.Msg.js valid-class pattern&gt;<br>&lt;Adding class 'Ngn.Dialog.Confirm' (src: i/js/ngn/dialog/Ngn.Dialog.Confirm.js). PATH i/js/ngn/dialog/Ngn.Dialog.Confirm.js&gt;<br>&lt;js: Adding path i/js/ngn/dialog/Ngn.Dialog.Confirm.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/dialog/Ngn.Dialog.Confirm.js'&gt;<br>&lt;Class 'Ngn.Dialog.Msg' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.Confirm.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/dialog/Ngn.Dialog.Confirm.Mem.js'&gt;<br>&lt;Class 'Ngn.Dialog.Confirm' exists. Skipped. src: Ngn.Dialog.Confirm.Mem preload&gt;<br>&lt;Adding class 'Ngn.Dialog.Confirm.Mem' (src: i/js/ngn/dialog/Ngn.Dialog.Confirm.Mem.js). PATH i/js/ngn/dialog/Ngn.Dialog.Confirm.Mem.js&gt;<br>&lt;js: Adding path i/js/ngn/dialog/Ngn.Dialog.Confirm.Mem.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/dialog/Ngn.Dialog.Confirm.Mem.js'&gt;<br>&lt;Class 'Ngn.Dialog.Confirm' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.Confirm.Mem.js valid-class pattern&gt;<br>&lt;Class 'Ngn.Storage' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.Confirm.Mem.js valid-class pattern&gt;<br>&lt;Class 'Ngn.Element' exists. Skipped. src: i/js/ngn/core/controls/Ngn.Btn.js valid-class pattern&gt;<br>&lt;Class 'Ngn.Request' exists. Skipped. src: i/js/ngn/core/controls/Ngn.Btn.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.Request.File'. src: i/js/ngn/core/controls/Ngn.Btn.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/form/Ngn.Request.File.js'&gt;<br>&lt;Class 'Ngn.Request.JSON' exists. Skipped. src: Ngn.Request.File preload&gt;<br>&lt;Adding class 'Ngn.Request.File' (src: i/js/ngn/form/Ngn.Request.File.js). PATH i/js/ngn/form/Ngn.Request.File.js&gt;<br>&lt;js: Adding path i/js/ngn/form/Ngn.Request.File.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/form/Ngn.Request.File.js'&gt;<br>&lt;Class 'Ngn.Request.JSON' exists. Skipped. src: i/js/ngn/form/Ngn.Request.File.js valid-class pattern&gt;<br>&lt;Class 'Ngn.String' exists. Skipped. src: i/js/ngn/form/Ngn.Request.File.js valid-class pattern&gt;<br>&lt;Class 'Ngn.Request' exists. Skipped. src: i/js/ngn/form/Ngn.Request.File.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.Frm'. src: i/js/ngn/core/controls/Ngn.Btn.js requiredAfter&gt;<br>&lt;Processing contents of 'i/js/ngn/form/Ngn.Frm.js'&gt;<br>&lt;Adding class 'Ngn.Frm' (src: i/js/ngn/form/Ngn.Frm.js). PATH i/js/ngn/form/Ngn.Frm.js&gt;<br>&lt;js: Adding path i/js/ngn/form/Ngn.Frm.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/form/Ngn.Frm.js'&gt;<br>&lt;Class 'Ngn.Storage' exists. Skipped. src: i/js/ngn/form/Ngn.Frm.js valid-class pattern&gt;<br>&lt;Add frontend class 'Ngn.Dotter'. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;Processing contents of 'i/js/ngn/core/controls/Ngn.Dotter.js'&gt;<br>&lt;Adding class 'Ngn.Dotter' (src: i/js/ngn/core/controls/Ngn.Dotter.js). PATH i/js/ngn/core/controls/Ngn.Dotter.js&gt;<br>&lt;js: Adding path i/js/ngn/core/controls/Ngn.Dotter.js&gt;<br>&lt;Processing valid-class patterns in 'i/js/ngn/core/controls/Ngn.Dotter.js'&gt;<br>&lt;Class 'Ngn.Storage' exists. Skipped. src: i/js/ngn/dialog/Ngn.Dialog.js valid-class pattern&gt;<br>&lt;js: Update collected 'a.js' file after adding lib from 'root' source&gt;<br>&lt;Mt: adding &quot;Core&quot;, src: Array&gt;<br>&lt;Mt: adding &quot;Array&quot;, src: Browser&gt;<br>&lt;Mt: adding &quot;Function&quot;, src: Browser&gt;<br>&lt;Mt: adding &quot;Number&quot;, src: Browser&gt;<br>&lt;Mt: adding &quot;String&quot;, src: Browser&gt;<br>&lt;Mt: adding &quot;Browser&quot;, src: Element&gt;<br>&lt;Mt: adding &quot;Object&quot;, src: Element&gt;<br>&lt;Mt: adding &quot;Slick.Parser&quot;, src: Element&gt;<br>&lt;Mt: adding &quot;Slick.Finder&quot;, src: Element&gt;<br>&lt;Mt: adding &quot;Element&quot;, src: Element.Event&gt;<br>&lt;Mt: adding &quot;Event&quot;, src: Element.Event&gt;<br>&lt;Mt: adding &quot;Element.Event&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Class&quot;, src: Class.Extras&gt;<br>&lt;Mt: adding &quot;Class.Extras&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Fx&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Element.Style&quot;, src: Fx.CSS&gt;<br>&lt;Mt: adding &quot;Fx.CSS&quot;, src: Fx.Morph&gt;<br>&lt;Mt: adding &quot;Fx.Morph&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Fx.Tween&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Request&quot;, src: root&gt;<br>&lt;Mt: adding &quot;JSON&quot;, src: Request.JSON&gt;<br>&lt;Mt: adding &quot;Request.JSON&quot;, src: root&gt;<br>&lt;Mt: adding &quot;More&quot;, src: Hash&gt;<br>&lt;Mt: adding &quot;Hash&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Cookie&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Element.Dimensions&quot;, src: Drag&gt;<br>&lt;Mt: adding &quot;Drag&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Drag.Move&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Elements.From&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Tips&quot;, src: root&gt;<br>&lt;Mt: adding &quot;Asset&quot;, src: root&gt;<br>
 </div>
 
 ##Архитектура##
@@ -67,6 +67,8 @@ JS-объектов может происходить где угодно, но 
 Он вызывается в `CtrlBase::getOutput()` уже после вывода.
 
 ##Кэширование##
+
+<p class="important" markdown="1">Используйте константу BUILD_MODE что бы включить режим runtime-сборки в базовом контроллере `CtrlBase`.</p>
 
 Кэширование происходит на уровне sflm-фронтенда.
 Сохранение путей фронтенда осуществляется методом `SflmFrontend::storePaths()`.
@@ -126,12 +128,11 @@ sflm-фронтенд "admin".
 подключатся в первую очереь для него.
 
 ##API###
-<div class="api" markdown="1"><div class="help">@api</div>- SflmFrontend::__code__()<br><i style='color:#666'>Возвращает код Sflm-фронтенда</i>
-- SflmFrontend::__addFolder__($absFolder)<br><i style='color:#666'>Добавляет все файлы в каталоге к Sflm-фронтенду</i>
-- SflmFrontend::__addFile__($file)<br><i style='color:#666'>Добавляет файл к Sflm-фронтенду</i>
-- SflmFrontend::__store__([$source])<br><i style='color:#666'>Сохраняет все новые пути фронтенда в кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего</i>
-    - string __source__
-</div>
+Коллекцианирует и кэширует пути к статическим файлам во время выполнения приложения<pre><code class="php">// Возвращает код Sflm-фронтенда
+SflmFrontend::</code></pre><div></div><pre><code class="php">// Добавляет все файлы в каталоге к Sflm-фронтенду
+SflmFrontend::</code></pre><div></div><pre><code class="php">// Добавляет файл к Sflm-фронтенду
+SflmFrontend::</code></pre><div></div><pre><code class="php">// Сохраняет все новые пути кэш данных и создаёт веб-кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего
+SflmFrontend::</code></pre><div class="apiParams"><p><span class="varType">string</span> <b>$source</b></p></div>
 
 
 ##Подключение зависимостей из JS-файлов##
@@ -140,6 +141,7 @@ sflm-фронтенд "admin".
 
 ##Отладка отдельных файлов##
 {tag Отладка CSS/JS файлов}
+
 При работе с JS-библиотекми, собранными через Sflm важно сохранить быстроту разработки и отладки, но при этом не
 потерять фишки по автоматическому отслеживанию связей. Ведь одни обеспечивают надёжность сборки компонентов и
 уберегают от лишней рутины. Sflm имеет встроенный механизм отладки отдельных файлов на локальном сервере.
@@ -163,30 +165,28 @@ sflm-фронтенд "admin".
         'i/ngn/dialog/'
       ]
     ];
-    
-После этого останется лишь запустить локальный веб-сервер в папке проекта
 
-    php -S localhost:8888
+<p class="important" markdown="1"> После добавления путей в Sflm::$debugPaths, необходимо очистить кэш приложения</p>
     
 ##Примеры состояний sflm-фронтенда##
 Текущее содержание sflm-фронтенда можно посмотреть через командную строку. Для этого
 существует cli-утилита `sflm`.
 
 <div class="console">
-  <div class="help">
-    > <span class="cmd">sflm docdemo</span>
+  <div class="help" title="Команда, выдающая текст в рамке">
+    <span class="blink">></span> <span class="cmd">sflm docdemo</span>
   </div>
   
 </div>
 <div class="console">
-  <div class="help">
-    > <span class="cmd">sflm docdemo paths default css</span>
+  <div class="help" title="Команда, выдающая текст в рамке">
+    <span class="blink">></span> <span class="cmd">sflm docdemo paths default css</span>
   </div>
   
 </div>
 <div class="console">
-  <div class="help">
-    > <span class="cmd">sflm docdemo paths default js</span>
+  <div class="help" title="Команда, выдающая текст в рамке">
+    <span class="blink">></span> <span class="cmd">sflm docdemo paths default js</span>
   </div>
   
 </div>

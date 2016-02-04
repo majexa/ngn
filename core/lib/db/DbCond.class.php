@@ -250,10 +250,10 @@ class DbCond {
    * @api
    * Добавляет фильтр "больше чем ..."
    *
-   * @param $key
-   * @param $from
-   * @param null $func
-   * @param bool $strict
+   * @param string $key Имя поля
+   * @param integer|string $from С какого значения начинается фильтр
+   * @param string $func Имя MySQL-функции для обработки значения
+   * @param bool $strict Строгое ли неравенство > / >=
    */
   function addFromFilter($key, $from, $func = null, $strict = false) {
     $this->addRangeFilter($key, $from, false, ['func' => $func], $strict);

@@ -23,7 +23,7 @@ class UserBaseForm extends Form {
     $codeEl = $this->getElement('code');
     if (getConstant('TESTING') and $codeEl->value() == '123') return;
     $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $this->getElement('phone')->value(), $codeEl->value());
-    if (!$exists) $this->globalError('Неверный код подтверждения');
+    if (!$exists) $codeEl->error('Неверный код подтверждения');
   }
 
 }

@@ -24,28 +24,6 @@ class CtrlCommonAuth extends CtrlDefault {
     $this->processFormTabs($urls);
   }
 
-  protected function processFormTabs(array $paths, $tpl = 'common/dialogFormTabs') {
-    foreach ($paths as $uri) {
-      $ctrl = (new RouterManager([
-        'req' => new Req([
-          'uri'              => $uri,
-          'disableSflmStore' => true
-        ])
-      ]))->router()->dispatch()->controller;
-      if (empty($ctrl->json['form'])) {
-        throw new Exception("no form by uri '$uri'");
-      }
-      $form = [
-        'id'    => Html::getParam($ctrl->json['form'], 'id'),
-        'title' => $ctrl->json['title'],
-        'html'  => $ctrl->json['form']
-      ];
-      if ($ctrl->actionResult) $form['submitTitle'] = $ctrl->actionResult->options['submitTitle'];
-      $d['forms'][] = $form;
-    }
-    $this->json['tabs'] = $this->tt->getTpl('common/auth-ajax', $d);
-  }
-
   function action_json_form() {
     $form = new AuthForm;
     $form->action = '/'.Sflm::frontendName(true).'/auth/json_form';

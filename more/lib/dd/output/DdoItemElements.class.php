@@ -42,7 +42,11 @@ class DdoItemElements {
       }
       $type = DdFieldCore::getType($fields[$n]['type'], false);
       if (empty($type['noElementTag'])) {
-        $value = $this->item[$fields[$n]['name']];
+        if ($fields[$n]['virtual']) {
+          $value = null;
+        } else {
+          $value = $this->item[$fields[$n]['name']];
+        }
         if ($this->ddo->disallowEmpties and !$value and in_array($fields[$n]['name'], $this->ddo->disallowEmpties)) {
           continue;
         }

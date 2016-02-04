@@ -6,8 +6,8 @@ define("SMSC_LOGIN", Config::getVarVar('smsc', 'login'));    // логин кл�
 define("SMSC_PASSWORD", Config::getVarVar('smsc', 'pass'));  // пароль или MD5-хеш пароля в нижнем регистре
 define("SMSC_POST", 0);          // использовать метод POST
 define("SMSC_HTTPS", 0);        // использовать HTTPS протокол
-define("SMSC_CHARSET", "windows-1251");  // кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
-define("SMSC_DEBUG", 0);        // флаг отладки
+define("SMSC_CHARSET", 'utf-8');  // кодировка сообщения: utf-8, koi8-r или windows-1251 (по умолчанию)
+define("SMSC_DEBUG", false);        // флаг отладки
 define("SMTP_FROM", "api@smsc.ru");     // e-mail адрес отправителя
 
 
@@ -40,45 +40,29 @@ class SmscException extends Exception {
 class Smsc {
 
   /**
-   * Функция отправки SMS
-   * обязательные параметры:
+   * @api
+   * Отправляет SMS
    *
-   * $phones - список телефонов через запятую или точку с запятой
-   * $message - отправляемое сообщение
-   *
-   * необязательные параметры:
-   *
-   * $translit - переводить или нет в транслит (1,2 или 0)
-   * $time - необходимое время доставки в виде строки (DDMMYYhhmm, h1-h2, 0ts, +m)
-   * $id - идентификатор сообщения. Представляет собой 32-битное число в диапазоне от 1 до 2147483647.
-   * $format - формат сообщения (0 - обычное sms, 1 - flash-sms, 2 - wap-push, 3 - hlr, 4 - bin, 5 - bin-hex, 6 - ping-sms, 7 - mms, 8 - mail)
-   * $sender - имя отправителя (Sender ID). Для отключения Sender ID по умолчанию необходимо в качестве имени
-   * передать пустую строку или точку.
-   * $query - строка дополнительных параметров, добавляемая в URL-запрос ("valid=01:00&maxsms=3&tz=2")
-   * $files - массив путей к файлам для отправки mms или e-mail сообщений
-   *
-   * возвращает массив (<id>, <количество sms>, <стоимость>, <баланс>) в случае успешной отправки
-   * либо массив (<id>, -<код ошибки>) в случае ошибки
-   *
-   * @param $phones
-   * @param $message
-   * @param int $translit
-   * @param int $time
-   * @param int $id
-   * @param int $format
-   * @param bool $sender
-   * @param string $query
-   * @param array $files
+   * @param string $phones Список телефонов через запятую или точку с запятой
+   * @param string $message Отправляемое сообщение
+   * @param int $translit Переводить или нет в транслит (1,2 или 0)
+   * @param int $time Необходимое время доставки в виде строки (DDMMYYhhmm, h1-h2, 0ts, +m)
+   * @param int $id Идентификатор сообщения. Представляет собой 32-битное число в диапазоне от 1 до 2147483647.
+   * @param int $format Формат сообщения (0 - обычное sms, 1 - flash-sms, 2 - wap-push, 3 - hlr, 4 - bin, 5 - bin-hex, 6 - ping-sms, 7 - mms, 8 - mail)
+   * @param bool $sender Имя отправителя (Sender ID). Для отключения Sender ID по умолчанию необходимо в качестве имени передать пустую строку или точку.
+   * @param string $query Строка дополнительных параметров, добавляемая в URL-запрос ("valid=01:00&maxsms=3&tz=2")
+   * @param array $files Массив путей к файлам для отправки mms или e-mail сообщений возвращает массив (<id>, <количество sms>, <стоимость>, <баланс>) в случае успешной отправки либо массив (<id>, -<код ошибки>) в случае ошибки
    * @return array
    * @throws SmscException
    */
-  function send_sms($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = false, $query = "", $files = array()) {
+  function sendSms($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = false, $query = "", $files = array()) {
     static $formats = array(1 => "flash=1", "push=1", "hlr=1", "bin=1", "bin=2", "ping=1", "mms=1", "mail=1");
-    $m = $this->_smsc_send_cmd("send", "cost=3&phones=".urlencode($phones)."&mes=".urlencode($message)."&translit=$translit&id=$id".($format > 0 ? "&".$formats[$format] : "").($sender === false ? "" : "&sender=".urlencode($sender)).($time ? "&time=".urlencode($time) : "").($query ? "&$query" : ""), $files);
+    $m = $this->smscSendCmd("send", "cost=3&phones=".urlencode($phones)."&mes=".urlencode($message)."&translit=$translit&id=$id".($format > 0 ? "&".$formats[$format] : "").($sender === false ? "" : "&sender=".urlencode($sender)).($time ? "&time=".urlencode($time) : "").($query ? "&$query" : ""), $files);
     // (id, cnt, cost, balance) или (id, -error)
     if (SMSC_DEBUG) {
       if ($m[1] > 0) echo "Сообщение отправлено успешно. ID: $m[0], всего SMS: $m[1], стоимость: $m[2], баланс: $m[3].\n";
       else {
+        die2($m);
         throw new SmscException(-$m[1].($m[0] ? ", ID: ".$m[0] : ""));
       }
     }
@@ -97,7 +81,7 @@ class Smsc {
    * @param string $sender
    * @return bool
    */
-  function send_sms_mail($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = "") {
+  function sendSmsMail($phones, $message, $translit = 0, $time = 0, $id = 0, $format = 0, $sender = "") {
     return mail("send@send.smsc.ru", "", SMSC_LOGIN.":".SMSC_PASSWORD.":$id:$time:$translit,$format,$sender:$phones:$message", "From: ".SMTP_FROM."\nContent-Type: text/plain; charset=".SMSC_CHARSET."\n");
   }
 
@@ -128,9 +112,9 @@ class Smsc {
    * @return array
    * @throws SmscException
    */
-  function get_sms_cost($phones, $message, $translit = 0, $format = 0, $sender = false, $query = "") {
+  function getSmsCost($phones, $message, $translit = 0, $format = 0, $sender = false, $query = "") {
     static $formats = array(1 => "flash=1", "push=1", "hlr=1", "bin=1", "bin=2", "ping=1", "mms=1", "mail=1");
-    $m = $this->_smsc_send_cmd("send", "cost=1&phones=".urlencode($phones)."&mes=".urlencode($message).($sender === false ? "" : "&sender=".urlencode($sender))."&translit=$translit".($format > 0 ? "&".$formats[$format] : "").($query ? "&$query" : ""));
+    $m = $this->smscSendCmd("send", "cost=1&phones=".urlencode($phones)."&mes=".urlencode($message).($sender === false ? "" : "&sender=".urlencode($sender))."&translit=$translit".($format > 0 ? "&".$formats[$format] : "").($query ? "&$query" : ""));
     // (cost, cnt) или (0, -error)
     if (SMSC_DEBUG) {
       if ($m[1] > 0) echo "Стоимость рассылки: $m[0]. Всего SMS: $m[1]\n";
@@ -172,8 +156,8 @@ class Smsc {
    * @return array
    * @throws SmscException
    */
-  function get_status($id, $phone, $all = 0) {
-    $m = $this->_smsc_send_cmd("status", "phone=".urlencode($phone)."&id=".urlencode($id)."&all=".(int)$all);
+  function getStatus($id, $phone, $all = 0) {
+    $m = $this->smscSendCmd("status", "phone=".urlencode($phone)."&id=".urlencode($id)."&all=".(int)$all);
     // (status, time, err, ...) или (0, -error)
     if (!strpos($id, ",")) {
       if (SMSC_DEBUG) if ($m[1] != "" && $m[1] >= 0) echo "Статус SMS = $m[0]", $m[1] ? ", время изменения статуса - ".date("d.m.Y H:i:s", $m[1]) : "", "\n";
@@ -194,12 +178,12 @@ class Smsc {
    *
    * @return string|bool
    */
-  function get_balance() {
-    $m = $this->_smsc_send_cmd("balance"); // (balance) или (0, -error)
+  function getBalance() {
+    $m = $this->smscSendCmd("balance"); // (balance) или (0, -error)
     if (SMSC_DEBUG) {
       if (!isset($m[1])) echo "Сумма на счете: ", $m[0], "\n";
       else
-        SmscException(-$m[1]);
+        throw new SmscException(-$m[1]);
     }
     return isset($m[1]) ? false : $m[0];
   }
@@ -212,7 +196,7 @@ class Smsc {
    * @param array $files
    * @return array
    */
-  function _smsc_send_cmd($cmd, $arg = "", $files = array()) {
+  protected function smscSendCmd($cmd, $arg = "", $files = array()) {
     $url = (SMSC_HTTPS ? "https" : "http")."://smsc.ru/sys/$cmd.php?login=".urlencode(SMSC_LOGIN)."&psw=".urlencode(SMSC_PASSWORD)."&fmt=1&charset=".SMSC_CHARSET."&".$arg;
     $i = 0;
     do {

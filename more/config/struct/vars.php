@@ -282,7 +282,11 @@ return [
         'required' => true,
         'type'     => 'select',
         'options'  => UsersCore::getTitleNames()
-      ]
+      ],
+      'roleEnable'            => [
+        'title' => 'Включить роли пользователей',
+        'type'  => 'bool'
+      ],
     ],
     'visibilityConditions' => [
       [
@@ -294,67 +298,6 @@ return [
     'dependRequire'        => [
       ['phoneConfirm', 'phoneEnable']
     ],
-  ],
-  'role'                   => [
-    'title'                => 'Роли',
-    'fields'               => [
-      'enable' => [
-        'title' => 'Включить роль',
-        'type'  => 'bool'
-      ],
-      'role'   => ['type' => 'header'],
-      'roles'  => [
-        'title'  => 'Роли',
-        'type'   => 'fieldSet',
-        'fields' => [
-          [
-            'title' => 'Имя роли',
-            'name'  => 'name',
-            'type'  => 'name'
-          ],
-          [
-            'title' => 'Название роли',
-            'name'  => 'title'
-          ],
-          [
-            'title' => 'Описание роли',
-            'name'  => 'text',
-            'type'  => 'textarea'
-          ],
-        ]
-      ],
-      'priv'   => [
-        'title'  => 'Привелегии',
-        'type'   => 'fieldSet',
-        'fields' => [
-          [
-            'title' => 'Имя роли',
-            'name'  => 'role',
-            //'type' => 'select',
-            //'options' => Config::getVarVar('role', 'roles', true)
-          ],
-          [
-            'title' => 'Раздел',
-            'name'  => 'pageId',
-            'type'  => 'pageId'
-
-            //'type' => 'select',
-            //'options' => Config::getVarVar('role', 'roles', true)
-          ],
-          [
-            'title' => 'Разрешенная привелегия',
-            'name'  => 'priv'
-          ]
-        ]
-      ]
-    ],
-    'visibilityConditions' => [
-      [
-        'headerName'    => 'role',
-        'condFieldName' => 'enable',
-        'cond'          => 'v == true',
-      ]
-    ]
   ],
   'adminPriv'              => [
     'title'  => 'Админ: привелегии',

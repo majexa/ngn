@@ -35,7 +35,8 @@ class DbModelCore {
 
   /**
    * @api
-   * Создаёт запись с данными `$data` в таблице `$table` и возвращает ID записи. Если `$filterByFields=true`, данные фильтруются по именам полей
+   * Создаёт запись с данными `$data` в таблице `$table` и возвращает ID записи.
+   * Если `$filterByFields=true`, данные фильтруются по именам полей
    *
    * @param $table
    * @param array $data
@@ -83,7 +84,8 @@ class DbModelCore {
 
   /**
    * @api
-   * Изменяет на строчку с `ID=$id` в таблице `$table` на основе данных `$data`. Если $filterByFields=true, данные фильтруются по именам полей
+   * Изменяет на строчку с `ID=$id` в таблице `$table` на основе данных `$data`.
+   * Если $filterByFields=true, данные фильтруются по именам полей
    */
   static function update($table, $id, array $data, $filterByFields = false) {
     $class = self::getClass($table);
@@ -101,7 +103,8 @@ class DbModelCore {
 
   /**
    * @api
-   * Если строка с `ID=$id` существует, выполняет `DbModelCore::update()`, иначе `DbModelCore::create()`
+   * Если строка с `ID=$id` существует, выполняет `DbModelCore::update()`,
+   * иначе `DbModelCore::create()`
    */
   static function replace($table, $id, array $data, $filterByFields = false) {
     if (self::get($table, $id)) {

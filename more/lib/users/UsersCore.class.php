@@ -52,7 +52,7 @@ class UsersCore {
   static $avatarCachePath = 'user-cache';
 
   static function avatarImgResized($userId, $login, $w, $h) {
-    if (!in_array([$w, $h], Config::getVar('avatarSizes'))) throw new Exception("Size {$w}x{$h} not allowed");
+    //if (!in_array([$w, $h], Config::getVar('avatarSizes'))) throw new Exception("Size {$w}x{$h} not allowed");
     $path = self::imagePath($userId);
     $file = UPLOAD_PATH.'/'.$path;
     if (!file_exists($file)) return self::_avatarImg($userId, $login);
@@ -65,7 +65,7 @@ class UsersCore {
   }
 
   static function cleanAvatarCache($userId) {
-    foreach (Config::getVar('avatarSizes') as $v) File::delete(UPLOAD_PATH.'/'.self::$avatarCachePath.'/'.$v[0].'x'.$v[1].'/'.$userId.'.jpg');
+    //foreach (Config::getVar('avatarSizes') as $v) File::delete(UPLOAD_PATH.'/'.self::$avatarCachePath.'/'.$v[0].'x'.$v[1].'/'.$userId.'.jpg');
   }
 
   static function _avatarImg($userId, $login, $path = null) {
@@ -146,7 +146,8 @@ class UsersCore {
       $user = DbModelCore::get('users', $user);
       if (empty($user)) return 'no user '.$userId;
     }
-    return BracketName::getValue($user->r, self::titleName());
+    $titleName = self::titleName();
+    return BracketName::getValue($user->r, $titleName) ?: "no&nbsp;$titleName";
   }
 
   static $staticTitleNames = ['login', 'email', 'phone'];

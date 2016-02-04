@@ -75,11 +75,12 @@ Ngn.Dialog.Auth = new Class({
   Implements: [Ngn.Dialog.Auth.Vk],
 
   options: {
+    closeOnComplete: false,
     onAuthComplete: Function.from(),
     reloadOnAuth: true, //dialogClass: 'dialog fieldFullWidth',
     selectedTab: 0,
     id: 'auth',
-    url: '/' + Ngn.sflmFrontend + '/auth/json_auth',
+    url: '/default/auth/json_auth',
     width: 300,
     completeUrl: null,
     fromVkEnabled: false

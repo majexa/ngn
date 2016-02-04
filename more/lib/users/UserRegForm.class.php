@@ -7,7 +7,7 @@ class UserRegForm extends UserForm {
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'name' => 'userReg',
-      'submitTitle' => 'Зарегистрироваться',
+      'submitTitle' => 'Готово',
       'active' => !Config::getVarVar('userReg', 'activation')
     ]);
   }

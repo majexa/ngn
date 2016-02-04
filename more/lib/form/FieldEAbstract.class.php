@@ -239,7 +239,6 @@ use Options;
     if (!$this->options['useTypeJs']) return '';
     Sflm::frontend('js')->addLib("formEl/$this->type", false);
     Sflm::frontend('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
-    if (strstr($this->type, 'DdTagsConsecutiveSelect')) die2($this->type);
     Sflm::frontend('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
     if (!$this->form) return '';
     return "\n// -- type: {$this->type} --\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
@@ -250,6 +249,10 @@ use Options;
   function __set($name, $v) {
     if ($name == 'error') $this->errorBacktrace = getBacktrace();
     $this->$name = $v;
+  }
+
+  function postRowHtml() {
+    return '';
   }
 
 }

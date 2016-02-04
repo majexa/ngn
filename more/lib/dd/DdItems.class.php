@@ -293,7 +293,7 @@ class DdItems extends Items {
     $this->fieldTagTypes = Arr::get($this->fields()->getTagFields(), 'type', 'name');
   }
 
-  private function extendItemsUsers(&$items) {
+  function extendItemsUsers(&$items) {
     foreach ($this->fields()->getFields() as $name => $v) {
       if ($v['type'] == 'user') $names[] = $name;
     }
