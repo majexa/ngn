@@ -68,11 +68,7 @@ class DdStructureCore {
    * Создаёт структуры из файлов structures.php найденных в базовых ngn-директориях
    */
   static function install() {
-    print "\n\n8888888\n\n";
-//    $structures = require $file;
-//    foreach ($structures as $strName => $strFields) {
-//      DdStructureCore::install($strName, $strFields);
-//    }
+    throw new Exception(__CLASS__.'::install() is not yet implemented');
   }
 
   /**

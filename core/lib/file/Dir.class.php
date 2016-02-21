@@ -9,7 +9,9 @@ class Dir {
     $folders = explode('/', trim($extraPath, '/'));
     foreach ($folders as $folder) {
       $existsPath .= '/'.$folder;
-      if (!is_dir($existsPath)) self::makeDir($existsPath);
+      if (!file_exists($existsPath)) {
+        self::makeDir($existsPath);
+      }
     }
     return Misc::clearLastSlash($existsPath);
   }

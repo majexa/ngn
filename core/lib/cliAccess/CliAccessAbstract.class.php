@@ -197,7 +197,7 @@ TEXT
     if ($name and $this->isMultiWrapper($class)) {
       $s .= //
         $this->runner()." $name ". //
-        CliColors::colored("{the same options as $name}", 'cyan')."\n";
+        CliColors::colored('{the same options as "'.$this->_runner().' '.rtrim($name, 's').'" command}', 'cyan')."\n";
     }
     return $s;
   }
