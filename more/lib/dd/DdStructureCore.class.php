@@ -16,7 +16,7 @@ class DdStructureCore {
       'name' => 'static_id',
       'title' => 'static_id',
       'type' => 'num',
-      'system' => 1, 
+      'system' => 1,
       'editable' => 0,
       'virtual' => 1,
       'notList' => 1 
@@ -25,23 +25,54 @@ class DdStructureCore {
 
   /**
    * @api
-   * Создаёт структуру
+   * Создаёт структуру или изменяет существующую структуру, включая поля.
+   * Возвращает true, если были произведены изменения или false, если не были.
    *
-   * @param $name
-   * @param array $fields
-   * @return bool|int
-   * @throws AlreadyExistsException
-   * @throws EmptyException
+   * @param string $strName
+   * @param array $strFields
+   * @param bool $strict
+   * @return bool
+   * @throws EmptyException|AlreadyExistsException
    * @throws Exception
    */
-  static function create($name, array $fields) {
-    $id = (new DdStructuresManager)->create([
-      'title' => $name,
-      'name' => $name
-    ]);
-    $fieldsManager = new DdFieldsManager($name);
-    foreach ($fields as $field) $fieldsManager->create($field);
-    return $id;
+  static function create($strName, array $strFields, $strict = true) {
+    $updated = false;
+    try {
+      DdStructureCore::create($strName, $strFields);
+      output2("Structure '$strName' created");
+      $updated = true;
+    } catch (AlreadyExistsException $e) {
+      if ($strict) throw $e;
+    }
+    $fieldsManager = new DdFieldsManager($strName);
+    foreach ($strFields as $strField) {
+      if (($existingField = $fieldsManager->items->getItemByField('name', $strField['name']))) {
+        $strFieldKeys = array_keys($strField);
+        $existingFieldFiltered = Arr::filterByKeys($existingField, $strFieldKeys);
+        if ($existingFieldFiltered != $strField) {
+          $updated = true;
+          output("Updating '{$existingField['name']}' field. (str: $strName)");
+          $fieldsManager->update($existingField['id'], $strField);
+        }
+      } else {
+        $updated = true;
+        output("Creating '{$strField['name']}' field. (str: $strName)");
+        $fieldsManager->create($strField);
+      }
+    }
+    return $updated;
+  }
+
+  /**
+   * @api
+   * Создаёт структуры из файлов structures.php найденных в базовых ngn-директориях
+   */
+  static function install() {
+    print "\n\n8888888\n\n";
+//    $structures = require $file;
+//    foreach ($structures as $strName => $strFields) {
+//      DdStructureCore::install($strName, $strFields);
+//    }
   }
 
   /**
@@ -59,5 +90,6 @@ class DdStructureCore {
       'name' => $newName
     ]);
   }
+
 
 }

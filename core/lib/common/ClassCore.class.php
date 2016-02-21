@@ -9,20 +9,20 @@ class ClassCore {
   }
 
   static function getAncestorsByPrefix($class, $prefix) {
-    return array_filter(self::getAncestors($class), function($str) use ($prefix) {
+    return array_filter(self::getAncestors($class), function ($str) use ($prefix) {
       return self::hasPrefix($prefix, $str);
     });
   }
 
   static function getAncestorNames($class, $prefix) {
-    return Arr::filterEmptiesR(array_map(function($v) use ($prefix) {
+    return Arr::filterEmptiesR(array_map(function ($v) use ($prefix) {
       return lcfirst(Misc::removePrefix($prefix, $v));
     }, self::getAncestorsByPrefix($class, $prefix)));
   }
 
   static function getFirstAncestor($name, $masterPrefix, $prefix) {
     if (!class_exists($masterPrefix.ucfirst($name))) return false;
-    $r = array_map(function($v) use ($masterPrefix, $prefix) {
+    $r = array_map(function ($v) use ($masterPrefix, $prefix) {
       return $prefix.Misc::removePrefix($masterPrefix, $v);
     }, self::getAncestorsByPrefix($masterPrefix.ucfirst($name), $masterPrefix));
     if (empty($r)) return false;
@@ -150,12 +150,12 @@ class ClassCore {
   }
 
   static function getNames($prefix) {
-    return array_map(function($class) use ($prefix) {
+    return array_map(function ($class) use ($prefix) {
       return ClassCore::classToName($prefix, $class);
-    }, array_filter(self::getClassesByPrefix($prefix), function($class) {
-        $refl = new ReflectionClass($class);
-        return !$refl->isAbstract();
-      }));
+    }, array_filter(self::getClassesByPrefix($prefix), function ($class) {
+      $refl = new ReflectionClass($class);
+      return !$refl->isAbstract();
+    }));
   }
 
   static function getParents($class) {
@@ -175,7 +175,8 @@ class ClassCore {
     if ($method) {
       if (is_object($class)) $class = get_class($class);
       if (!method_exists($class, $method)) throw new Exception("Method '$class::$method' does not exists");
-    } elseif (!class_exists($class)) {
+    }
+    elseif (!class_exists($class)) {
       throw new Exception("Class '$class' does not exists");
     }
   }
@@ -189,42 +190,110 @@ class ClassCore {
   }
 
   /**
-   * @param string $str
-   * @param string $_tag title/options/param
+   * Returns special tag from first found DocBlock in $content
+   *
+   * @param string $content
+   * @param string $tag title/options/param/doc
    * @return bool|string
    * @throws Exception
    */
-  static function getDocComment($str, $_tag = 'title') {
+  static function getDocComment($content, $tag = 'title', $debug = false) {
+    foreach (self::getDocBlocks($content, $debug) as $docBlock) {
+      if (($r = self::getDocTag($docBlock, $tag, $debug))) return $r;
+    }
+    return false;
+  }
+
+  /**
+   * Returns special tags from all found DocBlocks in $content
+   *
+   * @param string $content
+   * @param string $tag title/options/param/doc
+   * @return bool|array
+   * @throws Exception
+   */
+  static function getDocComments($content, $tag = 'title') {
+    $r = [];
+    foreach (self::getDocBlocks($content) as $docBlock) {
+      if (($item = self::getDocTag($docBlock, $tag))) {
+        $r[] = $item;
+      }
+    }
+    return $r;
+  }
+
+  static protected function getDocBlocks($str, $debug = false) {
+    // Выбираем doc-блоки
+    preg_match_all('/\/\*\*(.*)\*\//msU', $str, $m);
+    $docBlocks = [];
+    // Убираем звёздочки в начале строк
+    foreach ($m[1] as $v) {
+      $docBlocks[] = trim(preg_replace('/^ +(.*)/m', '$1', preg_replace('/^\s*\*(.*)/m', '$1', $v)));
+    }
+    return $docBlocks;
+  }
+
+  /**
+   * @param string $docBlock
+   * @param string $_tag
+   * @return bool|string
+   * @throws Exception
+   */
+  static protected function getDocTag($docBlock, $_tag, $debug = false) {
+    // В каждом из блоков ищем необходимый тэг
     if ($_tag == 'title') {
-      if (!preg_match_all('/^\s*\*(.*)$/m', $str, $m)) return false; // если пустой
-      $m[1] = array_filter($m[1], function($v) {
-        $v = ltrim($v);
-        if (!$v) return true;
-        if ($v[0] == '@') return false;
-        if ($v == '/') return false;
-        return true;
-      });
-      $r = implode("\n", $m[1]);
-      $r = Misc::removeSuffix('*/', $r);
-      if (($r = trim($r))) return $r;
-      return false;
+      $r = '';
+      // Всё, что до тэгов, начинающихся с собаки - заголовок
+      foreach (explode("\n", $docBlock) as $line) {
+        if (!$line) {
+          $r .= "\n";
+          continue;
+        }
+        if ($line[0] == '@') break;
+        $r .= $line."\n";
+      }
+      return trim($r);
     }
     $tag = '@'.$_tag;
-    if ($_tag == 'options') {
-      if (!preg_match("/".$tag."\\s+(.*)(\\r\\n|\\r|\\n)/s", $str, $m)) return false;
-      if (!empty($m[1])) return trim($m[1]);
-      return false;
-    } elseif ($_tag == 'param') {
-      //                            @param    type          name              title
-      if (!preg_match_all("/^ *\\*\\s".$tag." +([a-zA-z|]+) *\\$([a-zA-z]+) *([^\n]*)$/sm", $str, $m)) return false;
+    if ($_tag == 'options') { // single line tag
+      // получаем строку, справа от тэга $tag
+      if (!preg_match("/^".$tag."\\s+(.*)$/m", $docBlock, $m)) return false;
+      return $m[1];
+    }
+    elseif ($_tag == 'param') {
+      //                            @param    type          name                        title
+      if (!preg_match_all("/^".$tag." +([a-zA-z|]+) *\\$(".Misc::$validNamePattern."+) *([^\n]*)$/sm", $docBlock, $m)) return false;
       $r = [];
       foreach ($m[1] as $n => $v) $r[] = [
-        'type' => $v,
-        'name' => $m[2][$n],
+        'type'  => $v,
+        'name'  => $m[2][$n],
         'descr' => trim($m[3][$n])
       ];
       return $r;
-    } else {
+    }
+    elseif ($_tag == 'doc') { // multi line tag with title
+      if (!strstr($docBlock, $tag)) return false;
+      $text = '';
+      $lines = explode("\n", $docBlock);
+      $tagBodyStated = false;
+      for ($i = 0; $i < count($lines); $i++) {
+        if ($lines[$i] and Misc::hasPrefix($tag, $lines[$i])) {
+          $tagBodyStated = true;
+          $path = trim(Misc::removePrefix($tag, $lines[$i]));
+          if (!$path) throw new Exception('tag @doc must contain path after tag');
+          continue;
+        }
+        if ($tagBodyStated) {
+          $text .= $lines[$i]."\n";
+        }
+      }
+      if (!$tagBodyStated) throw new Exception('Error');
+      return [
+        'text' => $text,
+        'path' => $path
+      ];
+    }
+    else {
       throw new Exception("Tag '$_tag' not realized'");
     }
   }

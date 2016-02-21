@@ -145,8 +145,10 @@ class Misc {
     return preg_match('/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i', $email);
   }
 
+  static $validNamePattern = '[a-zA-Z][a-zA-Z0-9-_]';
+
   static function validName($name) {
-    return preg_match('/^[a-z][a-z0-9-_]*$/i', $name);
+    return preg_match('/^'.self::$validNamePattern.'*$/', $name);
   }
 
   static function quoted2arr($s) {
