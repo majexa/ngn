@@ -81,7 +81,6 @@ abstract class Router {
     }
     elseif (isset($this->req->g['clear'])) {
       Auth::clear();
-      //header('Location: '.St::removeUrlGetParams($_SERVER['REQUEST_URI'], array('clear')));
     }
     else {
       Auth::setAuth();

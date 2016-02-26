@@ -27,11 +27,9 @@ class AdminRouter extends Router {
   function _getController() {
     if (empty($this->req->params[0])) {
       redirect('admin');
-      return;
+      die();
     }
-    if ( /*Auth::get('id') and */
-    isset($this->req->params[1])
-    ) {
+    if (isset($this->req->params[1])) {
       $this->module = $this->req->params[1];
       $this->moduleSubfolder = '/'.$this->module;
     }
@@ -43,6 +41,11 @@ class AdminRouter extends Router {
     return $this->__getController();
   }
 
+  /**
+   * @throws Exception
+   * @throws NotLoggableError
+   * @return CtrlBase
+   */
   protected function __getController() {
     if ($this->req->params[0] == 'god' and Auth::get('id') and !Misc::isGod()) {
       throw new Exception("God mode not allowed:\n"."Possible reasons:\n"."* Current user is not god\n"."* Current IP is not presents in developers IPs list\n");
