@@ -38,7 +38,10 @@ class DdStructureCore {
   static function create($strName, array $strFields, $strict = true) {
     $updated = false;
     try {
-      DdStructureCore::create($strName, $strFields);
+      (new DdStructuresManager)->create([
+        'title' => $strName,
+        'name' => $strName
+      ]);
       output2("Structure '$strName' created");
       $updated = true;
     } catch (AlreadyExistsException $e) {
@@ -87,5 +90,8 @@ class DdStructureCore {
     ]);
   }
 
+  static function asd() {
+    print "\n^^^\n";
+  }
 
 }

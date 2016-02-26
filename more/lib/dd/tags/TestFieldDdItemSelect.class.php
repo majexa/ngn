@@ -23,8 +23,8 @@ class TestFieldDdItemSelect extends TestFieldDdItemSelectAbstract {
     $item = static::$im->items->getItemF($this->itemId);
     $this->assertTrue($item[static::$tagFieldName]['title'] == $v);
     $this->fillForm();
-    $this->assertTrue((bool)strstr(static::$im->form->html(), '<option value="'.$tagId.'" selected>'.$v.'</option>'));
-    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), ">$v</div>"));
+    $this->assertTrue((bool)strstr(static::$im->form->html(), '<option value="'.$tagId.'" selected>'.$v.'</option>'), 'element html check');
+    $this->assertTrue((bool)strstr((new Ddo('a', 'siteItem'))->setItem($item)->els(), ">$v</div>"), 'ddo check');
   }
 
 }
