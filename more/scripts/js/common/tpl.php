@@ -15,4 +15,4 @@ if (isset($_REQUEST['controller'])) {
 } else {
   $html = Tt()->getTpl($_REQUEST['path']);
 }
-print "Ngn.tpls.{$_REQUEST['name']} = ".Arr::jsString($html).";";
+print "Ngn.toObj('Ngn.tpls.{$_REQUEST['name']}', ".Arr::jsString($html).");";

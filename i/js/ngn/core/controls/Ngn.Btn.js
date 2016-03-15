@@ -14,7 +14,6 @@ Ngn.Btn = new Class({
     this.setOptions(options);
     this.setAction(action);
     this.el = el;
-    //this.initVirtualElement(this.el);
     this.toggleDisabled(true);
     var up = function() {
       if (!this.enable) return;
@@ -109,7 +108,7 @@ Ngn.Btn.btn = function(opt) {
   }, opt.prop || {}));
   if (opt.caption) {
     a.set('title', opt.caption);
-    Ngn.Element.setTip(a, opt.caption);
+    //Ngn.Element.setTip(a, opt.caption);
   }
   new Element('i').inject(a, 'top');
   return a;
@@ -156,14 +155,14 @@ Ngn.Btn._flag = function(eA, state1, state2) {
     var flag = eA.hasClass(state1.cls);
     var newState = flag ? state2 : state1;
     var curState = flag ? state1 : state2;
-    if (curState.confirm !== undefined) if (!Ngn.confirm(curState.confirm)) return;
+    if (curState.confirm !== undefined) if (!confirm(curState.confirm)) return;
     new Ngn.Request({
       url: curState.url,
       onComplete: function() {
         eA.removeClass(curState.cls);
         eA.addClass(newState.cls);
         eA.set('title', newState.title);
-        Ngn.addTips(eA);
+        //Ngn.addTips(eA);
       }
     }).send();
   });

@@ -47,7 +47,7 @@ Ngn.Dialog.RequestFormBase = new Class({
       ajaxSubmitUrl: this.options.submitUrl,
       disableInit: true
     });
-    this.form.options.dialog = this; // Важно создавать передавать объект Диалога в объект 
+    this.form.options.dialog = this; // Важно передавать объект Диалога в объект
     // Формы после выполнения конструктура, иначе объект
     // Даилога не будет содержать созданого объекта Формы
     this.form.init();

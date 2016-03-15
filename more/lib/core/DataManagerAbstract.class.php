@@ -621,7 +621,7 @@ abstract class DataManagerAbstract extends Options2 {
     $this->form->defaultElements[] = [
       'type' => 'js',
       'js'   => '
-new Ngn.TinyInit($merge(
+new Ngn.TinyInit(Object.merge(
   {settings: new Ngn.TinySettings().getSettings()},
   '.$opt.'
 ));'

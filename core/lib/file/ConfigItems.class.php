@@ -18,7 +18,11 @@ class ConfigItems implements UpdatableItems {
 
   function create(array $data) {
     if (($items = $this->getItems())) {
-      $data['id'] = Arr::last($items)['id']+1;
+      $id = 0;
+      foreach ($items as $v) {
+        if ($v['id'] > $id) $id = $v['id'];
+      }
+      $data['id'] = $id + 1;
     }
     else $data['id'] = 1;
     $items = $this->getItems();

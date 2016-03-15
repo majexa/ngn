@@ -13,3 +13,4 @@ Ngn.Arr.inn = function(needle, haystack, strict) {  // Checks if a value exists 
 Ngn.Arr.drop = function(array, value) {
   return array.splice(array.indexOf(value), 1);
 };
+

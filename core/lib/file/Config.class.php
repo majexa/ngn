@@ -244,6 +244,11 @@ class Config {
     if (function_exists('opcache_reset')) opcache_reset();
   }
 
+  static function cleanCacheByKey($key) {
+    if (isset(self::$vars[$key])) unset(self::$vars[$key]);
+    if (function_exists('opcache_reset')) opcache_reset();
+  }
+
   /**
    * Возвращает массив с данными конфигурации
    */

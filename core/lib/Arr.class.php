@@ -394,8 +394,8 @@ class Arr {
       $r .= str_repeat('  ', $depth)."]";
       return $r;
     }
-    elseif ($v == 'true' or $v == 'false') {
-      return $v == 'true' ? ($stringBools ? 'true' : true) : ($stringBools ? 'false' : false);
+    elseif ($v === 'true' or $v === 'false') {
+      return $v === 'true' ? ($stringBools ? 'true' : true) : ($stringBools ? 'false' : false);
     }
     elseif (is_bool($v)) {
       return $v ? ($stringBools ? 'true' : true) : ($stringBools ? 'false' : false);

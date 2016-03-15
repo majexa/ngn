@@ -8,4 +8,4 @@ Ngn.toObj = function(s, value) {
   if (value) eval(s + ' = value');
 };
 
-console.debug('!!!');
+if (!Ngn.tpls) Ngn.tpls = {};

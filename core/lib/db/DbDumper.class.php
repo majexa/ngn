@@ -12,7 +12,7 @@ class DbDumper {
 
   function __construct($db = null, array $options = []) {
     $this->setOptions($options);
-    $this->db = $db ? : db();
+    $this->db = $db ?: db();
     $this->cond = new DbCond;
   }
 
@@ -53,18 +53,19 @@ class DbDumper {
 
   protected $fp, $toFile;
 
+  protected $lf = "\n";
+
   /**
    * Делает дамп базы
    *
-   * @param   string Файл для экспорта
-   * @param   string|array   Таблицы для дампа или null, если нужен дамп всех таблиц базы
-   * @return  string  Дамп
+   * @param $toFile string Файл для экспорта
+   * @param null $onlyTables string|array Таблицы для дампа или null, если нужен дамп всех таблиц базы
+   * @throws Exception string Дамп
    */
   function createDump($toFile, $onlyTables = null) {
     $this->toFile = $toFile;
     if ($onlyTables) $onlyTables = (array)$onlyTables;
     // Set line feed
-    $lf = "\n";
     $result = mysql_query("SHOW TABLES", $this->db->link) or die(mysql_error());
     $tables = $this->result2Array(0, $result);
     $this->filterTables($tables);
@@ -78,107 +79,112 @@ class DbDumper {
     }
     if (empty($this->options['noHeaders'])) {
       // Set header
-      $dumpHeader = "#".$lf;
-      $dumpHeader .= "# DbDumper SQL Dump".$lf;
-      $dumpHeader .= "# Version 1.0".$lf;
-      $dumpHeader .= "# ".$lf;
-      $dumpHeader .= "# Host: ".$this->db->getHost().$lf;
-      $dumpHeader .= "# Generation Time: ".date("M j, Y \\a\\t H:i").$lf;
-      $dumpHeader .= "# Server version: ".mysql_get_server_info().$lf;
-      if ($this->db->getName()) $dumpHeader .= "# Database : `".$this->db->getName()."`".$lf;
+      $dumpHeader = "#".$this->lf;
+      $dumpHeader .= "# DbDumper SQL Dump".$this->lf;
+      $dumpHeader .= "# Version 1.0".$this->lf;
+      $dumpHeader .= "# ".$this->lf;
+      $dumpHeader .= "# Host: ".$this->db->getHost().$this->lf;
+      $dumpHeader .= "# Generation Time: ".date("M j, Y \\a\\t H:i").$this->lf;
+      $dumpHeader .= "# Server version: ".mysql_get_server_info().$this->lf;
+      if ($this->db->getName()) $dumpHeader .= "# Database : `".$this->db->getName()."`".$this->lf;
       $dumpHeader .= "#";
       $this->write($dumpHeader);
     }
     $tablesN = 0;
-    $groupN = 1;
-    // Generate dumptext for the tables. 
+    // Generate dumptext for the tables.
     foreach ($tables as $table) {
       $tablesN++;
       if (isset($onlyTables) and !in_array($table, $onlyTables)) {
         continue;
       }
-      $tableHeader = $lf.$lf."# --------------------------------------------------------".$lf.$lf;
+      $tableHeader = $this->lf.$this->lf."# --------------------------------------------------------".$this->lf.$this->lf;
       if ($this->dumpStructure) {
         if ($this->autoIncrementToNull) $createTable[$table][0] = preg_replace('/AUTO_INCREMENT=\d+ / ', '', $createTable[$table][0]);
-        $tableHeader .= "#".$lf."# Table structure for table `$table`".$lf;
-        $tableHeader .= "#".$lf.$lf;
+        $tableHeader .= "#".$this->lf."# Table structure for table `$table`".$this->lf;
+        $tableHeader .= "#".$this->lf.$this->lf;
         // Generate DROP TABLE statement when client wants it to. 
         if ($this->droptables()) {
-          $tableHeader .= "DROP TABLE IF EXISTS `$table`;".$lf;
+          $tableHeader .= "DROP TABLE IF EXISTS `$table`;".$this->lf;
         }
-        $tableHeader .= $createTable[$table][0].";".$lf;
-        $tableHeader .= $lf;
+        $tableHeader .= $createTable[$table][0].";".$this->lf;
+        $tableHeader .= $this->lf;
         output("Table '$table' structure exported");
       }
       if (empty($this->options['noHeaders'])) $this->write($tableHeader);
-      if ($this->dumpData) {
-        output('Dumping data for '.$table.' table');
-        $tableDumpHeader = "#".$lf."# Dumping data for table `$table`".$lf."#".$lf;
-        if (empty($this->options['noHeaders'])) $this->write($tableDumpHeader);
-        $emptifyFieldNames = [];
-        if (isset($this->emptifyFieldTypes)) {
-          // Имена полей, значение которых нужно будет заменить на пустые строки
-          foreach ($this->db->colTypes($table) as $fieldName => $fieldType) if (in_array($fieldType, $this->emptifyFieldTypes)) $emptifyFieldNames[] = $fieldName;
-        }
-        if (in_array('id', $this->db->cols($table))) $this->cond->setOrder('id DESC');
-        if ($this->recordsLimit) $this->cond->setLimit($this->recordsLimit);
-        $q = "SELECT * FROM `$table`".$this->cond->all();
-        $result = mysql_query($q);
-        if ($result === false) throw new Exception(mysql_error());
-        $rowN = 0;
-        $insertDumpGroup = '';
-        $nn = 0; // Общий счетчик количества экспортируемых записей по текущей таблице
-        while (($row = mysql_fetch_assoc($result))) {
-          if ($rowN == 0) $insertDumpGroup = $lf."INSERT INTO `$table` VALUES";
-          $insertDump = $lf."(";
-          $this->processRow($row);
-          foreach ($row as $fieldName => $value) {
-            if (!empty($emptifyFieldNames) and in_array($fieldName, $emptifyFieldNames)) {
-              $value = 'dummy';
-            }
-            else {
-              $value = addslashes($value);
-              $value = str_replace("\n", '\r\n', $value);
-              $value = str_replace("\r", '', $value);
-            }
-            $insertDump .= is_numeric($value) ? "$value, " : "'$value', ";
-          }
-          $rowN++;
-          $nn++;
-          if ($rowN == $this->insertGroupLimit) {
-            $insertDump = rtrim($insertDump, ', ').");";
-            $insertDumpGroup .= $insertDump;
-            if ($this->separateGroupFiles and $this->toFile !== false) {
-              fclose($this->fp);
-              $this->fp = fopen($this->getFilename($this->toFile, $groupN), 'w');
-            }
-            $this->write($insertDumpGroup);
-            $insertDumpGroup = '';
-            $rowN = 0;
-            $groupN++;
-          }
-          else {
-            $insertDump = rtrim($insertDump, ', ')."),";
-            $insertDumpGroup .= $insertDump;
-          }
-        }
-        if ($insertDumpGroup) {
-          if ($this->separateGroupFiles and $this->toFile !== false) {
-            fclose($this->fp);
-            $this->fp = fopen($this->getFilename($this->toFile, $groupN), 'w');
-          }
-          $insertDumpGroup = rtrim($insertDumpGroup, ',').";";
-          $this->write($insertDumpGroup);
-        }
-        if ($nn == 0) output("There is no data to dump in table '$table'");
-        else
-          output("Table '$table' data exported ($nn records)");
-      }
+      if ($this->dumpData) $this->dataDump($table, $this->toFile);
     }
     if ($this->toFile !== false) fclose($this->fp);
   }
 
-  protected function processRow(array &$row) {}
+  function dataDump($table, $toFile = false) {
+    $this->toFile = $toFile;
+    if ($this->toFile and !isset($this->fp)) $this->fp = fopen($this->toFile, 'a');
+    $groupN = 1;
+    output('Dumping data for '.$table.' table');
+    $tableDumpHeader = "#".$this->lf."# Dumping data for table `$table`".$this->lf."#".$this->lf;
+    if (empty($this->options['noHeaders'])) $this->write($tableDumpHeader);
+    $emptifyFieldNames = [];
+    if (isset($this->emptifyFieldTypes)) {
+      // Имена полей, значение которых нужно будет заменить на пустые строки
+      foreach ($this->db->colTypes($table) as $fieldName => $fieldType) if (in_array($fieldType, $this->emptifyFieldTypes)) $emptifyFieldNames[] = $fieldName;
+    }
+    if (in_array('id', $this->db->cols($table))) $this->cond->setOrder('id DESC');
+    if ($this->recordsLimit) $this->cond->setLimit($this->recordsLimit);
+    $q = "SELECT * FROM `$table`".$this->cond->all();
+    $result = mysql_query($q);
+    if ($result === false) throw new Exception(mysql_error());
+    $rowN = 0;
+    $insertDumpGroup = '';
+    $nn = 0; // Общий счетчик количества экспортируемых записей по текущей таблице
+    while (($row = mysql_fetch_assoc($result))) {
+      if ($rowN == 0) $insertDumpGroup = $this->lf."INSERT INTO `$table` VALUES";
+      $insertDump = $this->lf."(";
+      $this->processRow($row);
+      foreach ($row as $fieldName => $value) {
+        if (!empty($emptifyFieldNames) and in_array($fieldName, $emptifyFieldNames)) {
+          $value = 'dummy';
+        }
+        else {
+          $value = addslashes($value);
+          $value = str_replace("\n", '\r\n', $value);
+          $value = str_replace("\r", '', $value);
+        }
+        $insertDump .= is_numeric($value) ? "$value, " : "'$value', ";
+      }
+      $rowN++;
+      $nn++;
+      if ($rowN == $this->insertGroupLimit) {
+        $insertDump = rtrim($insertDump, ', ').");";
+        $insertDumpGroup .= $insertDump;
+        if ($this->separateGroupFiles and $this->toFile !== false) {
+          fclose($this->fp);
+          $this->fp = fopen($this->getFilename($this->toFile, $groupN), 'w');
+        }
+        $this->write($insertDumpGroup);
+        $insertDumpGroup = '';
+        $rowN = 0;
+        $groupN++;
+      }
+      else {
+        $insertDump = rtrim($insertDump, ', ')."),";
+        $insertDumpGroup .= $insertDump;
+      }
+    }
+    if ($insertDumpGroup) {
+      if ($this->separateGroupFiles and $this->toFile !== false) {
+        fclose($this->fp);
+        $this->fp = fopen($this->getFilename($this->toFile, $groupN), 'w');
+      }
+      $insertDumpGroup = rtrim($insertDumpGroup, ',').";";
+      $this->write($insertDumpGroup);
+    }
+    if ($nn == 0) output("There is no data to dump in table '$table'");
+    else output("Table '$table' data exported ($nn records)");
+    return $toFile === false ? $this->write : null;
+  }
+
+  protected function processRow(array &$row) {
+  }
 
   protected $write = '';
 

@@ -6,7 +6,7 @@
 class SflmMtDependencies {
 use SflmMtDependenciesOrder;
 
-  protected $mootoolsReposRoot, $buildFolder, $files, $dependencies = [], $data = [];
+  public $mootoolsReposRoot, $buildFolder, $files, $dependencies = [], $data = [];
 
   function __construct() {
     $this->loadFiles('core');
@@ -28,7 +28,7 @@ use SflmMtDependenciesOrder;
     }
   }
 
-  protected $parsedPackages = [];
+  public $parsedPackages = [];
 
   /**
    * Анализирует JavaScript на наличие в нём MooTools библиотек и возвращает JavaScript-код с ними
@@ -40,7 +40,7 @@ use SflmMtDependenciesOrder;
   function parse($code) {
     $r = '';
     $r .= $this->addNamespace($code);
-    if (strstr($code, 'window.addEvent(')) {
+    if (strstr($code, '.addEvent(')) {
       $r .= $this->parseContentsR('Element.Event');
     }
     if (strstr($code, 'domready')) {

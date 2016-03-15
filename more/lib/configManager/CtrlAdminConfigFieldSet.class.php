@@ -3,7 +3,7 @@
 abstract class CtrlAdminConfigFieldSet extends CtrlAdmin {
 
   function action_default() {
-    $form = new ConfigForm($this->configKey(), $this->configFields());
+    $form = new ConfigSetForm($this->configKey(), $this->configFields());
     if (($firstLevelKey = $this->firstLevelKey())) $form->firstLevelKey = $firstLevelKey;
     if ($form->update()) {
       $this->redirect();

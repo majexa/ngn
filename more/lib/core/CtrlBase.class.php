@@ -273,7 +273,8 @@ abstract class CtrlBase {
     if (!strstr($html, '{sflm}')) return $html;
     if (!Sflm::$buildMode) {
       // режим, когда все нужные файлы уже существуют
-      $tags = Sflm::frontend('js')->getTags()."\n".Sflm::frontend('css')->getTags();
+      $tags = Sflm::frontend('js')->getTags()."\n". //
+        Sflm::frontend('css')->getTags();
       return str_replace('{sflm}', $tags, $html);
     }
     Sflm::frontend('js')->processHtml($html, 'page html post-process');

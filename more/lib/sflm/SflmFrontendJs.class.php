@@ -95,9 +95,7 @@ class SflmFrontendJs extends SflmFrontend {
     $tree = [];
     foreach ($classes as $i => $path) {
       if (!strstr($path, '.')) continue;
-      // ������� ��������� ����� � ������ (.Xxx)
       $parent = preg_replace('/(.+)\\.[^.]+/', '$1', $path);
-      // ������� ������ ��������
       if (($n = array_search($parent, $classes))) {
         $tree[$i] = [
           'index' => $i,

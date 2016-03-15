@@ -141,16 +141,12 @@ Ngn.Rainbow = new Class({
       rgb = color.hexToRgb();
       hsb = rgb.rgbToHsb();
     }
-
     this.sets = {
       rgb: rgb,
       hsb: hsb,
       hex: hex
     };
-
-    if (!$chk(this.pickerPos.x))
-      this.autoSet(hsb);
-
+    if (this.pickerPos.x == null) this.autoSet(hsb);
     this.RedInput.value = rgb[0];
     this.GreenInput.value = rgb[1];
     this.BlueInput.value = rgb[2];
@@ -158,9 +154,7 @@ Ngn.Rainbow = new Class({
     this.SatuInput.value = hsb[1];
     this.BrighInput.value = hsb[2];
     //this.hexInput.value = hex;
-
     this.currentColor = rgb;
-
     //this.chooseColor.setStyle('background-color', rgb.rgbToHex());
   },
 
@@ -180,7 +174,7 @@ Ngn.Rainbow = new Class({
     var lim, curH, curW, inputs;
     curH = this.snippet('curSize', 'int').h;
     curW = this.snippet('curSize', 'int').w;
-    //inputs = $A(this.arrRGB).concat(this.arrHSB, this.hexInput);
+    //inputs = Array.from(this.arrRGB).concat(this.arrHSB, this.hexInput);
     document.addEvent('click', function() {
       this.hide(this.layout);
     }.bind(this));
@@ -196,7 +190,6 @@ Ngn.Rainbow = new Class({
           e.preventDefault();
         },
         'keyup': function(e) {
-          e = new Event(e);
           if (e.key == 'esc' && this.visible) this.hide(this.layout);
         }.bind(this)
       }, this);
@@ -208,8 +201,7 @@ Ngn.Rainbow = new Class({
       y: [0 - curH, 80 - curH]
     };
     this.layout.addEvent('click', function(e) {
-      new Event(e).stop();
-      //c('Uuuu');
+      e.stop();
     });
     this.layout.drag = new Drag(this.layout.cursor, {
       limit: lim,
@@ -220,8 +212,6 @@ Ngn.Rainbow = new Class({
     });
 
     this.layout.overlay2.addEvent('mousedown', function(e) {
-      e = new Event(e);
-      // console.debug([e.page.x, this.layout.overlay.getLeft(), curW]);
       this.layout.cursor.setStyles({
         'top': e.page.y - this.layout.overlay.getTop() - curH,
         'left': e.page.x - this.layout.overlay.getLeft() - curW
@@ -279,7 +269,6 @@ Ngn.Rainbow = new Class({
     });
 
     this.layout.slider.addEvent('mousedown', function(e) {
-      e = new Event(e);
       this.layout.arrows.setStyle('top', e.page.y - this.layout.slider.getTop() + this.snippet('slider') - arwH);
       this.layout.sliderDrag.start(e);
     }.bind(this));
@@ -305,19 +294,26 @@ Ngn.Rainbow = new Class({
   },
 
   wheelEvents: function() {
-    var arrColors = $A(this.arrRGB).extend(this.arrHSB);
-
+    var arrColors = Object.append(Array.from(this.arrRGB), this.arrHSB);
     arrColors.each(function(el) {
       el.addEvents({
-        'mousewheel': this.eventKeys.bindWithEvent(this, el),
-        'keydown': this.eventKeys.bindWithEvent(this, el)
+        'mousewheel': function() {
+          this.eventKeys(el);
+        }.bind(this),
+        'keydown': function() {
+          this.eventKeys(el);
+        }.bind(this)
       });
     }, this);
 
     [this.layout.arrows, this.layout.slider].each(function(el) {
       el.addEvents({
-        'mousewheel': this.eventKeys.bindWithEvent(this, [this.arrHSB[0], 'slider']),
-        'keydown': this.eventKeys.bindWithEvent(this, [this.arrHSB[0], 'slider'])
+        'mousewheel': function() {
+          this.eventKeys([this.arrHSB[0], 'slider']);
+        }.bind(this),
+        'keydown': function() {
+          this.eventKeys([this.arrHSB[0], 'slider']);
+        }.bind(this)
       });
     }, this);
   },
@@ -380,15 +376,13 @@ Ngn.Rainbow = new Class({
 
   eventKeydown: function(e, el) {
     var n = e.code, k = e.key;
-
     if ((!el.className.test(/hexInput/) && !(n >= 48 && n <= 57)) && (k != 'backspace' && k != 'tab' && k != 'delete' && k != 'left' && k != 'right'))
       e.stop();
   },
 
   eventKeyup: function(e, el) {
     var n = e.code, k = e.key, pass, prefix, chr = el.value.charAt(0);
-
-    if (!$chk(el.value)) return;
+    if (el.value == null) return;
     if (el.className.test(/hexInput/)) {
       if (chr != "#" && el.value.length != 6) return;
       if (chr == '#' && el.value.length != 7) return;
@@ -435,13 +429,11 @@ Ngn.Rainbow = new Class({
     } else {
       pass = el.value.hexToRgb(true);
       if (isNaN(pass[0]) || isNaN(pass[1]) || isNaN(pass[2])) return;
-
-      if ($chk(pass)) {
+      if (pass != null) {
         this.manualSet(pass);
         this.fireEvent('onChange', [this.sets, this]);
       }
     }
-
   },
 
   doLayout: function() {

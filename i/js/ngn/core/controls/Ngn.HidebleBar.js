@@ -15,8 +15,8 @@ Ngn.HidebleBar = new Class({
     this.eHandlerShow = new Element('div', {'class': 'hidebleBarHandler'}).addClass(this.slideMode).addClass('show');
     var handleShowExtraClass = this.eBar.get('class').replace(/\s*dropRightMenu\s*/, '') || false;
     if (handleShowExtraClass) this.eHandlerShow.addClass(handleShowExtraClass);
-    Ngn.addHover(this.eHandlerHide, 'hover');
-    Ngn.addHover(this.eHandlerShow, 'hover');
+    Ngn.HidebleBar.addHover(this.eHandlerHide, 'hover');
+    Ngn.HidebleBar.addHover(this.eHandlerShow, 'hover');
     this.eHandlerHide.inject(this.eBar);
     this.eHandlerShow.inject(document.getElement('body'));
     this.positionHandlerShow();
@@ -110,3 +110,12 @@ Ngn.HidebleBar.V = new Class({
   positionProp: 'x'
 
 });
+
+Ngn.HidebleBar.addHover = function(el, hoverClass) {
+  el.addEvent('mouseover', function() {
+    this.addClass(hoverClass);
+  });
+  el.addEvent('mouseout', function() {
+    this.removeClass(hoverClass);
+  });
+};

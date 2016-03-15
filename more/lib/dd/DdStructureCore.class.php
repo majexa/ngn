@@ -90,8 +90,34 @@ class DdStructureCore {
     ]);
   }
 
-  static function asd() {
-    print "\n^^^\n";
+  /**
+   * @api
+   * Сохраняет структуру в SQL-файл PROJECT_PATH/strName.sql
+   *
+   * @param $strName
+   * @throws Exception
+   */
+  static function export($strName) {
+    $file = PROJECT_PATH."/$strName.sql";
+    $dumper = new DbDumper;
+    $dumper->cond->addF('strName', $strName);
+    $dumper->dataDump('dd_fields', $file);
+    $dumper = new DbDumper;
+    $dumper->cond->addF('name', $strName);
+    $dumper->dataDump('dd_structures', $file);
+    $dumper = new DbDumper;
+    $dumper->dataDump('dd_i_'.$strName, $file);
+  }
+
+  /**
+   * @api
+   * Импортирует структуру из SQL-файла PROJECT_PATH/strName.sql
+   *
+   * @param $strName
+   * @throws Exception
+   */
+  static function import($strName) {
+    db()->importFile(PROJECT_PATH."/$strName.sql");
   }
 
 }

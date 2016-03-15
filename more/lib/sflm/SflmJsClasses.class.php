@@ -116,14 +116,13 @@ class SflmJsClasses {
    */
   function processPath($path, $source = null, $name = null) {
     if (Misc::hasSuffix('', $path)) if (in_array($path, $this->frontend->pathsCache)) {
-      Sflm::log("Path '$path' in cache. Skipped");
+      Sflm::log("Path '$path' is in cache. Skipped");
       return;
     }
     if (in_array($path, $this->processedPaths)) throw new Exception("Path '$path' already processed. src: $source | $name!");
     //if (in_array($path, $this->processedPaths)) return;
     Sflm::log("Processing contents of '$path'");
     $this->processedPaths[] = $path;
-    // if ($path == 'i/js/ngn/form/Ngn.Form.Upload.js') die2(Sflm::getCode($this->frontend->base->getAbsPath($path)));
     $code = Sflm::getCode($this->frontend->base->getAbsPath($path));
     $this->processCode($code, $path, $name, $path);
   }
@@ -133,7 +132,7 @@ class SflmJsClasses {
   }
 
   function processCode($code, $source, $name = null, $path = null) {
-    $this->frontendClasses->processCode($code, $source); // ------ добавили класс
+    $this->frontendClasses->processCode($code, $source); // добавили класс
     $thisCodeValidClassesDefinition = SflmJsClasses::parseValidClassesDefinition($code);
     foreach (SflmJsClasses::parseValidPreloadClasses($code) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
@@ -143,7 +142,7 @@ class SflmJsClasses {
       $this->addSomething($class, "$path requiredBefore");
     }
     Sflm::log('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
-    if ($path) $this->frontend->_addPath($path); // -------------- добавили путь (!)
+    if ($path) $this->frontend->_addPath($path); // добавили путь
     Sflm::log("Processing valid-class patterns in '$source'");
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;

@@ -147,6 +147,13 @@ class Sflm {
   static $debugUrl;
   static $webPath;
   static $namespace = 'Default';
+
+  /**
+   * Выключен - все нужные файлы уже существуют
+   * Включен - происходит рантайм сборка JS/CSS файлов
+   *
+   * @var
+   */
   static $buildMode;
 
 }
@@ -157,6 +164,6 @@ Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 Sflm::$absBasePaths = [
   'i' => NGN_PATH.'/i'
 ];
-Sflm::$output = true; // set true to debug
+Sflm::$output = false; // set true to debug
 Sflm::$webPath = defined('WEBROOT_PATH') ? WEBROOT_PATH.'/'.UPLOAD_DIR : NGN_ENV_PATH.'/temp';
 Sflm::$buildMode = getConstant('BUILD_MODE');

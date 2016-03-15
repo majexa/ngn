@@ -3,7 +3,8 @@ Ngn.Dialog.Link = new Class({
 
   options: {
     width: 120,
-    ok: false,
+    title: '&nbsp;',
+    footer: false,
     linkTitle: 'Открыть',
     bindBuildMessageFunction: true
     //link: ''

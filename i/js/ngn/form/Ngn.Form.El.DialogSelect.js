@@ -20,6 +20,7 @@ Ngn.Form.El.DialogSelect = new Class({
   init: function() {
     this.eInitField = this.getInitField();
     this.value = this.eInitField.get('value');
+    console.debug(this.value);
     this.makeHiddenField();
     this.eSelectDialog = this.getSelectDialogEl();
     new Element('div', {'class': 'rightFading'}).inject(this.eSelectDialog);
@@ -37,7 +38,7 @@ Ngn.Form.El.DialogSelect = new Class({
   _setValue: function(value) {
     if (!value) return;
     this.value = value;
-    this.eInput.setValue(value);
+    this.eInput.set('value', value);
   },
   initControl: function() {
     this.eSelectDialog.addEvent('click', function() {
