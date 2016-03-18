@@ -99,13 +99,17 @@ class DdStructureCore {
    */
   static function export($strName) {
     $file = PROJECT_PATH."/$strName.sql";
+    file_put_contents($file, '');
     $dumper = new DbDumper;
+    file_put_contents($file, "\n# Cleanup structure fields\n\nDELETE FROM dd_fields WHERE strName='$strName';\n", FILE_APPEND);
     $dumper->cond->addF('strName', $strName);
     $dumper->dataDump('dd_fields', $file);
     $dumper = new DbDumper;
+    file_put_contents($file, "\n# Remove structure\n\nDELETE FROM dd_structures WHERE name='$strName';\n", FILE_APPEND);
     $dumper->cond->addF('name', $strName);
     $dumper->dataDump('dd_structures', $file);
     $dumper = new DbDumper;
+    $dumper->structureDump('dd_i_'.$strName, $file);
     $dumper->dataDump('dd_i_'.$strName, $file);
   }
 

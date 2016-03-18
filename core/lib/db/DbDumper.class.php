@@ -55,6 +55,8 @@ class DbDumper {
 
   protected $lf = "\n";
 
+  protected function createTableRecord() {}
+
   /**
    * Делает дамп базы
    *
@@ -69,10 +71,6 @@ class DbDumper {
     $result = mysql_query("SHOW TABLES", $this->db->link) or die(mysql_error());
     $tables = $this->result2Array(0, $result);
     $this->filterTables($tables);
-    foreach ($tables as $table) {
-      $result = mysql_query("SHOW CREATE TABLE `$table`");
-      $createTable[$table] = $this->result2Array(1, $result);
-    }
     if ($this->toFile !== false) {
       if (file_exists($this->toFile)) unlink($this->toFile);
       if (!$this->fp = fopen($this->toFile, 'a')) throw new Exception('Can not open file "'.$toFile.'"');
@@ -99,16 +97,7 @@ class DbDumper {
       }
       $tableHeader = $this->lf.$this->lf."# --------------------------------------------------------".$this->lf.$this->lf;
       if ($this->dumpStructure) {
-        if ($this->autoIncrementToNull) $createTable[$table][0] = preg_replace('/AUTO_INCREMENT=\d+ / ', '', $createTable[$table][0]);
-        $tableHeader .= "#".$this->lf."# Table structure for table `$table`".$this->lf;
-        $tableHeader .= "#".$this->lf.$this->lf;
-        // Generate DROP TABLE statement when client wants it to. 
-        if ($this->droptables()) {
-          $tableHeader .= "DROP TABLE IF EXISTS `$table`;".$this->lf;
-        }
-        $tableHeader .= $createTable[$table][0].";".$this->lf;
-        $tableHeader .= $this->lf;
-        output("Table '$table' structure exported");
+        $tableHeader .= $this->structureDump($table);
       }
       if (empty($this->options['noHeaders'])) $this->write($tableHeader);
       if ($this->dumpData) $this->dataDump($table, $this->toFile);
@@ -116,12 +105,34 @@ class DbDumper {
     if ($this->toFile !== false) fclose($this->fp);
   }
 
+  function structureDump($table, $toFile = false) {
+    $structureRecord = $this->result2Array(1, mysql_query("SHOW CREATE TABLE `$table`"))[0];
+    $r = '';
+    if ($this->autoIncrementToNull) {
+      $structureRecord = preg_replace('/AUTO_INCREMENT=\d+ / ', '', $structureRecord);
+    }
+    $r .= $this->lf."# Table structure for table `$table`";
+    $r .= "#".$this->lf.$this->lf;
+    // Generate DROP TABLE statement when client wants it to.
+    if ($this->droptables()) {
+      $r .= "DROP TABLE IF EXISTS `$table`;".$this->lf;
+    }
+    $r .= $structureRecord.";".$this->lf;
+    $r .= $this->lf;
+    output("Table '$table' structure exported");
+    if ($toFile) {
+      touch($toFile);
+      file_put_contents($toFile, $r, FILE_APPEND);
+    }
+    return $r;
+  }
+
   function dataDump($table, $toFile = false) {
     $this->toFile = $toFile;
     if ($this->toFile and !isset($this->fp)) $this->fp = fopen($this->toFile, 'a');
     $groupN = 1;
     output('Dumping data for '.$table.' table');
-    $tableDumpHeader = "#".$this->lf."# Dumping data for table `$table`".$this->lf."#".$this->lf;
+    $tableDumpHeader = $this->lf."# Dumping data for table `$table`".$this->lf;
     if (empty($this->options['noHeaders'])) $this->write($tableDumpHeader);
     $emptifyFieldNames = [];
     if (isset($this->emptifyFieldTypes)) {
@@ -180,6 +191,7 @@ class DbDumper {
     }
     if ($nn == 0) output("There is no data to dump in table '$table'");
     else output("Table '$table' data exported ($nn records)");
+    $this->write($this->lf);
     return $toFile === false ? $this->write : null;
   }
 
