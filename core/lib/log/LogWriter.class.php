@@ -42,6 +42,7 @@ class LogWriter {
     }
     $r['time'] = time();
     self::str('r_'.$name, json_encode($r), null, $force, true);
+    self::str('h_'.$name, print_r($r, true), null, $force, true);
   }
 
   /**

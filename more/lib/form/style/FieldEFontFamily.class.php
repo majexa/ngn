@@ -2,7 +2,7 @@
 
 class FieldEFontFamily extends FieldESelect {
 
-  static $title = 'Шрифт';
+  static $title = 'Font';
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [

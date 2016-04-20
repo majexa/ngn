@@ -2,11 +2,11 @@
 
 class FieldEFontSize extends FieldESelect {
 
-  static $title = 'Размер шрифт';
+  static $title = 'Font Size';
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
-      'options' => array_merge(['' => 'по умолчанию'], Arr::toOptions([
+      'options' => array_merge(['' => 'default'], Arr::toOptions([
         '9px',
         '10px',
         '11px',

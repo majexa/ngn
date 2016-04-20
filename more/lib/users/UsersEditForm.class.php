@@ -7,20 +7,28 @@ class UsersEditForm extends UserForm {
 
   function __construct($userId, array $options = []) {
     $this->userId = $userId;
-    if (!($data = DbModelCore::get('users', $this->userId))) {
+    if (!($user = DbModelCore::get('users', $this->userId))) {
       throw new Exception("User ID={$this->userId} does not exists");
     }
     parent::__construct($options);
     if (Config::getVarVar('userReg', 'extraData')) {
-      if (($r = DbModelCore::get(DdCore::table('users'), $this->userId)) !== false) {
-        $data['extra'] = Arr::unserialize($r->r);
+      if (($userExtra = DbModelCore::get(DdCore::table('users'), $this->userId)) !== false) {
+        $user['extra'] = Arr::unserialize($userExtra->r);
       }
     }
-    $this->setElementsData(Arr::dropK($data->r, 'pass'));
+    if (Config::getVarVar('userReg', 'nameEnable')) {
+      if (preg_match('/(.*) (.*)/', $user->r['name'], $m)) {
+        $user->r['firstName'] = $m[1];
+        $user->r['secondName'] = $m[2];
+      } else {
+        $user->r['firstName'] = $user->r['name'];
+      }
+    }
+    $this->setElementsData(Arr::dropK($user->r, 'pass'));
   }
 
   protected function defineOptions() {
-    return array_merge(parent::defineOptions(), ['submitTitle' => 'Сохранить']);
+    return array_merge(parent::defineOptions(), ['submitTitle' => Lang::get('save')]);
   }
 
   protected function _getFields() {
@@ -31,13 +39,13 @@ class UsersEditForm extends UserForm {
     $fields = Arr::injectAfter($fields, $n - 1, [
       [
         'name'  => 'passBegin',
-        'title' => 'Изменить пароль',
+        'title' => Lang::get('changePassword'),
         'type'  => 'headerToggle'
       ],
       [
         'name'  => 'pass',
         'title' => 'Пароль',
-        'help'  => 'Оставьте пустым, если не хотите менять',
+        'help'  => Lang::get('keepEmptyIfNotChanges'),
         'type'  => 'password'
       ],
       [

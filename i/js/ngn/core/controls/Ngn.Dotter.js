@@ -4,7 +4,7 @@ Ngn.Dotter = new Class({
   options: {
     delay: 500,
     dot: '.',
-    message: 'Загрузка',
+    message: 'Loading',
     numDots: 10,
     property: 'text',
     reset: false/*,

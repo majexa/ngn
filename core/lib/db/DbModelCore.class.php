@@ -7,11 +7,17 @@ class DbModelCore {
   /**
    * @api
    * Возвращает db-модель
+   *
+   * @param $table
+   * @param $value
+   * @param string $param
+   * @return bool
+   * @throws Exception
    */
   static function get($table, $value, $param = 'id') {
     if ($param == 'id' and !$value) return false;
     $class = self::getClass($table);
-    $o = new $class($table, $value, $param);
+    $o = O::get($class, $table, $value, $param);
     return empty($o->r) ? false : $o;
   }
 

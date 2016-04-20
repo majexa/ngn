@@ -55,6 +55,7 @@ class SflmJsClasses {
    * @throws Exception
    */
   function addClass($class, $source, $strict = true) {
+    if ($class == 'Ngn.sd.BlockBNew') die2('!');
     if (!SflmJsClasses::isValidClass($class)) {
       throw new Exception("Class '$class' is not valid. src: $source");
     }
@@ -94,6 +95,9 @@ class SflmJsClasses {
     $code = Sflm::getCode($this->frontend->base->getAbsPath($this->classPaths[$class]));
     // Проверяем всех предков, подключены ли они
     foreach ($namespaceParents as $parent) {
+      if (!SflmJsClasses::isClass($parent)) {
+        continue;
+      }
       // Если неймспейс не найден в файле класса и его нет в уже добавленных классах, то пытаемся добавить
       if (!$this->namespaceInitExists($code, $parent) and !$this->frontendClasses->exists($parent)) {
         $this->addClass($parent, "$class parent namespace");

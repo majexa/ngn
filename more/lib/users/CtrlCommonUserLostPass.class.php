@@ -1,13 +1,16 @@
 <?php
 
-class CtrlCommonUserLostPass extends CtrlCammon {
+class CtrlCommonUserLostPass extends CtrlBase {
+
+  protected function getParamActionN() {
+    return 2;
+  }
 
   protected function init() {
     $this->d['tpl'] = 'users/lostpass';
   }
 
-  function action_default() {
-    $this->setPageTitle('Забыли пароль?');
+  static function getLoasPassForm() {
     $form = new Form([
       [
         'name'     => 'email',
@@ -16,7 +19,14 @@ class CtrlCommonUserLostPass extends CtrlCammon {
         'required' => true
       ]
     ]);
-    $form->options['submitTitle'] = 'Выслать';
+    $form->action = '/default/userLostPass';
+    return $form;
+  }
+
+  function action_default() {
+    $this->setPageTitle(Lang::get('forgetPassword?'));
+    $form = self::getLoasPassForm();
+    $form->options['submitTitle'] = Lang::get('send');
     $this->d['form'] = $form->html();
     if ($form->isSubmittedAndValid()) {
       $r = UsersCore::sendLostPass($form->getData()['email']);
@@ -28,7 +38,7 @@ class CtrlCommonUserLostPass extends CtrlCammon {
   }
 
   function action_complete() {
-    $this->setPageTitle('Готово');
+    $this->setPageTitle(Lang::get('emailSent'));
   }
 
 }

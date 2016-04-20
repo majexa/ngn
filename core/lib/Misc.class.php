@@ -716,4 +716,8 @@ class Misc {
     return substr(strtolower(preg_replace('/[0-9_\/]+/', '', base64_encode(sha1($string)))), 0, 8);
   }
 
+  static function nameToTitle($t) {
+    return ucfirst(trim(str_replace('-', ' ', Misc::hyphenate($t))));
+  }
+
 }

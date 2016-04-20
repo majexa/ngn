@@ -1,6 +1,6 @@
 <?php
 
-class UserEditPhoneForm extends UserRegPhoneForm {
+class UserEditPhoneForm extends UserRegPhoneConfirmForm {
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [

@@ -1,12 +1,12 @@
 Ngn.Dialog = new Class({
   Implements: [Ngn.RequiredOptions, Events],
   options: {
-    id: 'dlg',
-    autoShow: true,
-    buttons: null,
+    id: 'dlg', // Уникальный идентификатор диалога. Если не задан, то формируется, как "dlg + random string"
+    autoShow: true, // Показывать диалог при создании класса. Иначе используется _Ngn.Dialog.show_
+    buttons: null, // Набор дополнительные кнопок в подвале. Формат объекта: {name: 'Name', text: 'Button text', class_name: 'CSS class', action: function() {}, tabindex: 1}
     cancel: null,
     cancelClass: 'cancel',
-    cancelText: 'Отмена',
+    cancelText: 'Cancel',
     cancelDestroy: true,
     callback: null,
     center: true,
@@ -33,7 +33,7 @@ Ngn.Dialog = new Class({
     titleBarClass: 'dialog-title',
     titleClose: true,
     titleCloseClass: 'icon-button md-closer',
-    titleCloseTitle: 'Закрыть окно',
+    titleCloseTitle: 'Close',
     titleTextClass: 'md-title-text move',
     url: null,
     useFx: !Browser.ie,
@@ -75,8 +75,8 @@ Ngn.Dialog = new Class({
   btns: {},
   status: null,
 
-  initialize: function(_opts) {
-    this.setOptions(_opts);
+  initialize: function(options) {
+    this.setOptions(options);
     // new Image().src = '/i/img/dialog/cross-pushed.png'; // preloading of hover cross
     if (this.options.id == 'dlg') {
       this.options.id = 'dlg' + Ngn.String.rand(5);

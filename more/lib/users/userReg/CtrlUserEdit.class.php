@@ -74,7 +74,7 @@ class CtrlUserEdit extends CtrlBase {
   function action_json_editPhone() {
     $this->json['title'] = 'Телнфон';
     $form = $this->userEditForm('phone');
-    $form->action = $this->req->path;
+    $form->action = '/'.$this->req->path;
     return $form;
   }
 

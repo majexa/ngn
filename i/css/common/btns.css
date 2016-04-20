@@ -15,6 +15,7 @@ outline: none;
 -moz-user-select: none;
 -ms-user-select: none;
 user-select: none;
+font-size: 12px;
 }
 .btn.basicBtn {
 padding: 3px 10px;
@@ -48,9 +49,10 @@ background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
 background: -webkit-linear-gradient(top, #d9d8c9, #cdccbe);
 box-shadow: inset 0 1px 2px rgba(121, 120, 112, 0.5);
 color: #87867C;
+}
+.btn:disabled {
 cursor: default !important;
 }
-
 .smIcons.btn {
 color: #000;
 height: auto;
@@ -59,7 +61,7 @@ margin-right: 7px !important;
 }
 
 .btn > span {
-padding: 2px 7px 0 7px;
+padding: 3px 7px 0 7px;
 display: block;
 }
 .btnFake > span {

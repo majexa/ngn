@@ -16,7 +16,7 @@ class SflmJsClassPaths extends ArrayAccesseble {
   protected function files() {
     $files = [];
     foreach (Sflm::$absBasePaths as $path) {
-      $files = array_merge($files, Dir::getFilesR($path.'/js', '[A-Z]*.js'));
+      $files = array_merge($files, Dir::getFilesR($path.'/js', '*.js'));
     }
     return $files;
   }

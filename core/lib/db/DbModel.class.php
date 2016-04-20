@@ -85,6 +85,9 @@ class DbModel extends ArrayAccesseble {
     self::addDefaultUpdateData($data);
     if ($filterByFields) $data = Arr::filterByKeys($data, db()->cols($table));
     db()->query("UPDATE $table SET ?a WHERE id=?", $data, $id);
+    $model = DbModelCore::get($table, $id);
+    //die2([$data['actCode'], $model['actCode']]);
+    $model->r = array_merge($model->r, $data);
     DbModelCore::cc($table, $id);
   }
 

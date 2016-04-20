@@ -5,7 +5,7 @@ class Form {
 
   public $templates = [
     'form'        => '{input}<div class="clear"></div>',
-    'headerOpen'  => '<div class="clearfix hgrp hgrp_{name}{class}">',
+    'headerOpen'  => '<div class="clear hgrp hgrp_{name}{class}">',
     'headerClose' => '</div>',
     'input'       => '<div class="element{rowClass}"{data}>{title}<div class="field-wrapper">{input}</div>{error}{help}</div>',
     'title'       => '<p class="label"><span class="ttl">{title}</span>{required}<span>:</span></p>',
@@ -35,6 +35,7 @@ class Form {
    * @var bool
    */
   public $htmlentities = true;
+
 
   /**
    * This will be true if throw new Exception() was called at least once
@@ -650,7 +651,7 @@ class Form {
     return [
       'dataParams' => [],
       'placeholders' => false,
-      'submitTitle'  => 'Сохранить',
+      'submitTitle'  => 'OK',
       'disableFormTag' => false,
       'disableSubmit' => false,
     ];

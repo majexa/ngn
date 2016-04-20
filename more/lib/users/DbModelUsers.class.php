@@ -40,6 +40,11 @@ class DbModelUsers extends DbModel {
       }
       unset($data['extra']);
     }
+    if (Config::getVarVar('userReg', 'nameEnable')) {
+      if (isset($data['firstName']) and isset($data['secondName'])) {
+        $data['name'] = ucfirst($data['firstName']).' '.ucfirst($data['secondName']);
+      }
+    }
     parent::update('users', $id, $data, true);
     if (!empty($data['pass'])) self::logout($id);
   }

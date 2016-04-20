@@ -76,8 +76,8 @@ class Tt {
    * @param string $path Путь до шаблона
    * @return bool|string
    */
-  function exists($path, $numbver = false) {
-    if ($numbver !== false) return "{Ngn::$basePaths[$numbver]}/tpl/$path.php";
+  function exists($path, $number = false) {
+    if ($number !== false) return Ngn::$basePaths[$number]."/tpl/$path.php";
     foreach (Ngn::$basePaths as $basePath) if (file_exists("$basePath/tpl/$path.php")) return "$basePath/tpl/$path.php";
     return false;
   }

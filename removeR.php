@@ -17,3 +17,5 @@ foreach ($objects as $name => $object) {
     file_put_contents($object, str_replace("\r\n", "\n", $c));
   }
 }
+
+pr();

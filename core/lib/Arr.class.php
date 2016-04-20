@@ -404,7 +404,6 @@ class Arr {
       return $v;
     }
     else {
-      //if (strstr($v, "\n")) return "<<<TEXT\n$v\nTEXT\n";
       $v = str_replace("'", "\\'", $v);
       if (strstr($v, "\n")) return "'$v'\n";
       return "'$v'";

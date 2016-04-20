@@ -33,7 +33,7 @@ Ngn.Form.El.DialogSelect = new Class({
     this._setValue(value);
   },
   setVisibleValue: function(value) {
-    this.eSelectDialog.set('html', value || 'не определён');
+    this.eSelectDialog.set('html', value || 'not defined');
   },
   _setValue: function(value) {
     if (!value) return;

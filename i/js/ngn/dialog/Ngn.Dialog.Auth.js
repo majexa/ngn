@@ -86,8 +86,8 @@ Ngn.Dialog.Auth = new Class({
     fromVkEnabled: false
   },
 
-  initialize: function(opts) {
-    this.parent(opts);
+  initialize: function(options) {
+    this.parent(options);
     if (this.options.completeUrl) this.options.reloadOnAuth = true;
     if (this.options.fromVkEnabled && Ngn.fromVk) this.options.selectedTab = 2;
   },

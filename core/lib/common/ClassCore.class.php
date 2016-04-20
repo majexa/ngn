@@ -222,7 +222,7 @@ class ClassCore {
     return $r;
   }
 
-  static protected function getDocBlocks($str, $debug = false) {
+  static function getDocBlocks($str) {
     // Выбираем doc-блоки
     preg_match_all('/\/\*\*(.*)\*\//msU', $str, $m);
     $docBlocks = [];
@@ -239,7 +239,7 @@ class ClassCore {
    * @return bool|string
    * @throws Exception
    */
-  static protected function getDocTag($docBlock, $_tag, $debug = false) {
+  static protected function getDocTag($docBlock, $_tag) {
     // В каждом из блоков ищем необходимый тэг
     if ($_tag == 'title') {
       $r = '';

@@ -74,14 +74,4 @@ var btn = new Ngn.Btn(eBtn, function(e) {
 JS;
   }
 
-  protected function initErrors() {
-    $phone = $this->getElement('phone');
-    if (!$phone->valueChanged) {
-      $phone->error('Телефон не изменился');
-      return;
-    }
-    parent::initErrors();
-    $this->initCodeError();
-  }
-
 }

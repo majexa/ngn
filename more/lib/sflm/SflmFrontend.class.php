@@ -27,7 +27,7 @@ abstract class SflmFrontend {
     $this->id = Misc::randString(5);
     $this->base = $base;
     $this->name = $name;
-    Misc::checkEmpty($this->name, 'Frontend name not defined');
+    Misc::checkEmpty($this->name, 'Frontend name not defined. Use Sflm::setFrontendName()');
     $this->base->version = $this->version();
     $this->pathsCache = $this->getPathsCache() ?: $this->getStaticPaths();
     $this->absPathsCache = $this->getAbsPathsCache();

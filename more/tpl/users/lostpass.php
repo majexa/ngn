@@ -1,7 +1,7 @@
-<? if ($d['params'][2] == 'complete') { ?>
-  <p>Пароль был отправлен на Ваш ящик</p>
-<? } elseif ($d['params'][2] == 'failed') { ?>
-  <p>Ошибка отправки</p>
+<? if ($d['action'] == 'complete') { ?>
+  <p><?= Lang::get('emailSent') ?></p>
+<? } elseif ($d['action'] == 'failed') { ?>
+  <p><?= Lang::get('sendError') ?></p>
 <? } else { ?>
   <div class="apeform"><?= $d['form'] ?></div>
 <? } ?>

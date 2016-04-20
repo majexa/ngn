@@ -2,7 +2,7 @@
 
 class FieldEColor extends FieldEText {
 
-  static $title = 'Цвет';
+  static $title = 'Color';
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [

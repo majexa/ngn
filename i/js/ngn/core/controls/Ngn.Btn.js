@@ -5,12 +5,14 @@ Ngn.Btn = new Class({
 
   options: {
     usePushed: false,
+    request: false,
     fileUpload: false
   },
 
   pushed: false,
 
   initialize: function(el, action, options) {
+    //if (options.request) this.request = options.request;
     this.setOptions(options);
     this.setAction(action);
     this.el = el;
@@ -28,11 +30,20 @@ Ngn.Btn = new Class({
     this.el.addEvent('mouseup', up);
     this.el.addEvent('mouseout', up);
     this.el.addEvent('click', function(e) {
+      e.stopPropagation();
       e.preventDefault();
       if (!this.enable) return;
+      //if (this.request) this.toggleDisabled(false);
       this.runAction();
     }.bind(this));
-    if (this.options.fileUpload) new Ngn.Btn.FileUpload(this, this.options.fileUpload);
+    //if (this.request) {
+    //  this.request.addEvent('complete', function() {
+    //    this.toggleDisabled(true);
+    //  }.bind(this));
+    //}
+    if (this.options.fileUpload) {
+      new Ngn.Btn.FileUpload(this, this.options.fileUpload);
+    }
     this.init();
   },
 
@@ -72,6 +83,7 @@ Ngn.Btn = new Class({
   _action: function() {
     this.action.action();
     if (this.options.usePushed) this.togglePushed(!this.pushed);
+    if (this.request) this.request.send();
   },
 
   init: function() {
@@ -227,7 +239,7 @@ Ngn.Btn.FileUpload = new Class({
       onProgress: function(event) {
         var loaded = event.loaded, total = event.total;
         var proc = parseInt(loaded / total * 100, 10).limit(0, 100);
-        //c('Загружено ' + proc + '%');
+        //c ('Загружено ' + proc + '%');
         //if (proc == 100) console.debug('Загрузка завершена');
       }.bind(this),
       onComplete: function(r) {
@@ -258,7 +270,7 @@ Ngn.Btn.opacity = function(eBtn, outOp, overOp) {
   var fx = new Fx.Morph(eBtn, { duration: 'short', link: 'cancel' });
   if (!outOp != undefined) outOp = 0.4;
   if (!overOp != undefined) overOp = 1;
-  eBtn.set('opacity', outOp);
+  eBtn.setStyle('opacity', outOp);
   eBtn.addEvent('mouseover', function() {
     fx.start({'opacity': [outOp, overOp]});
   });

@@ -18,12 +18,4 @@ class UserBaseForm extends Form {
     $this->uc->check('phone', 'Пользователь с таким телефоном уже существует');
   }
 
-  protected function initCodeError() {
-    if (!Config::getVarVar('userReg', 'phoneConfirm')) return;
-    $codeEl = $this->getElement('code');
-    if (getConstant('TESTING') and $codeEl->value() == '123') return;
-    $exists = db()->selectCell('SELECT id FROM userPhoneConfirm WHERE phone=? AND code=?', $this->getElement('phone')->value(), $codeEl->value());
-    if (!$exists) $codeEl->error('Неверный код подтверждения');
-  }
-
 }

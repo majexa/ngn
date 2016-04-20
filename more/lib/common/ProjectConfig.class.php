@@ -89,7 +89,7 @@ class ProjectConfig {
     else {
       if (serialize($defaultValue) != serialize($v)) $newValue = $v;
     }
-    if ($newValue) {
+    if ($newValue or $newValue === []) {
       unset(Config::$vars[$k]);
       Config::updateVar(self::$varsFolder."/$k.php", $newValue);
     }

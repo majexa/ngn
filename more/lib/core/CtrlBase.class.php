@@ -126,6 +126,7 @@ abstract class CtrlBase {
     $this->tt = new Tt($this->req);
     $this->d['controller'] = $this;
     $this->d['ctrlName'] = $this->getName();
+    $this->d['params'] = $this->req->params;
     if (!isset($this->defaultAction)) {
       if (method_exists($this, 'action_json_default')) $this->defaultAction = 'json_default';
       elseif (method_exists($this, 'action_ajax_default')) $this->defaultAction = 'ajax_default';
@@ -161,13 +162,17 @@ abstract class CtrlBase {
     $this->paramActionN = $this->getParamActionN();
     $this->addSubControllers();
     $this->initAction();
-    if (Auth::$postAuth and !$this->isAjax) redirect(Tt()->getPath(), true);
+    if (Auth::$postAuth and !$this->isAjax) redirect($this->postAuthRedirectPath(), true);
     $this->initPostAction();
     $this->setActionParams();
     $this->beforeInit();
     $this->init();
     $this->initSubControllers();
     $this->afterInit();
+  }
+
+  protected function postAuthRedirectPath() {
+    return Tt()->getPath();
   }
 
   protected function addSubControllers() {

@@ -5,7 +5,7 @@ Ngn.Form.El.Textarea = new Class({
 
   init: function() {
     if (this.form.options.dialog && this.form.options.dialog.options.vResize) return;
-    new Ngn.ResizableTextarea(this.eRow);
+    //new Ngn.ResizableTextarea(this.eRow); // реализовать настройку в Ngn.Form.ElInit...
   }
 
 });

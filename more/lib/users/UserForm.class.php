@@ -27,6 +27,18 @@ class UserForm extends UserBaseForm {
         'autocomplete' => 'off'
       ];
     }
+    if (Config::getVarVar('userReg', 'nameEnable')) {
+      $fields[] = [
+        'name'         => 'firstName',
+        'title'        => 'First Name',
+        'required'     => true,
+      ];
+      $fields[] = [
+        'name'         => 'secondName',
+        'title'        => 'Second Name',
+        'required'     => true,
+      ];
+    }
 //    if (Config::getVarVar('userReg', 'phoneEnable')) {
 //      $fields[] = [
 //        'name'     => 'phone',
