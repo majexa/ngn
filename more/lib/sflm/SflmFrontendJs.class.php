@@ -8,18 +8,16 @@ class SflmFrontendJs extends SflmFrontend {
   public $classes;
 
   /**
-   * @var SflmMtDependencies
-   */
-  protected $mtDependencies;
-
-  /**
    * @var string
    */
   protected $mtCode = '';
 
   protected function init() {
     $this->classes = new SflmJsClasses($this);
-    $this->mtDependencies = O::get('SflmMtDependencies');
+  }
+
+  protected function mtDependencies() {
+    return O::get('SflmMtDependencies');
   }
 
   protected function __addPath($path, $source = null) {
@@ -67,7 +65,7 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   function mtProcessCode($code) {
-    $this->mtCode .= $this->mtDependencies->parse($code);
+    $this->mtCode .= $this->mtDependencies()->parse($code);
   }
 
   function processHtml($html, $source) {
@@ -80,9 +78,9 @@ class SflmFrontendJs extends SflmFrontend {
   function _code() {
     $code = parent::_code();
     foreach ($this->debugPaths as $path) {
-      $this->mtCode .= $this->mtDependencies->parse(file_get_contents($this->base->getAbsPath($path)));
+      $this->mtCode .= $this->mtDependencies()->parse(file_get_contents($this->base->getAbsPath($path)));
     }
-    $this->mtCode .= $this->mtDependencies->parse($code);
+    $this->mtCode .= $this->mtDependencies()->parse($code);
     return $this->mtCode.$code;
   }
 

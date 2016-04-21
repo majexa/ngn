@@ -418,7 +418,9 @@ class Form {
     foreach (get_class_methods($this) as $method) {
       if ($method != 'js' and substr($method, 0, 2) == 'js') {
         if (($c = $this->$method()) != '') {
-          if (Sflm::frontendName()) Sflm::frontend('js')->processCode($c, get_class($this).'::'.$method);
+          if (Sflm::frontendName() and Sflm::$buildMode) {
+            Sflm::frontend('js')->processCode($c, get_class($this).'::'.$method);
+          }
           if (Misc::hasPrefix('jsInline', $method)) $this->jsInline .= "\n// -- $method -- \n".$c;
           else $this->js .= "\n// -- $method -- \n".$c;
         }
