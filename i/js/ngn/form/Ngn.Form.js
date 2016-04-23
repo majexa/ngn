@@ -423,7 +423,6 @@ Ngn.Form.El = new Class({
     this.form.els[this.name] = this;
     if (Ngn.Form.elOptions[this.name]) this.options = Ngn.Form.elOptions[this.name];
     this.init();
-    console.debug('Ngn.Form.El.' + Ngn.String.ucfirst(this.type) + ' initialized');
   },
   fireFormElEvent: function(event, value) {
     this.form.fireEvent('el' + Ngn.String.ucfirst(this.name) + Ngn.String.ucfirst(event), value);
