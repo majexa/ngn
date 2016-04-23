@@ -81,7 +81,7 @@ abstract class CtrlAdmin extends CtrlCp {
   }
 
   protected function initMainTpl() {
-    if ($this->req->isDebug()) {
+    if (Ngn::isDebug()) {
       parent::initMainTpl();
       return;
     }

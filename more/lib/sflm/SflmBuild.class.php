@@ -19,7 +19,10 @@ class SflmBuild {
     return $r;
   }
 
-  function run() {
+  function run($test = null) {
+    if (!empty(Sflm::$debugPaths['js']) or !empty(Sflm::$debugPaths['css'])) {
+      throw new Exception('Clean Sflm::$debugPaths before running build');
+    }
     if (!file_exists(PROJECT_PATH.'/config/constants/more.php')) {
       print "Creating SFLM-build skipped on '{$this->projectName}' project\n";
       return;
@@ -36,7 +39,11 @@ class SflmBuild {
     ProjectConfig::replaceConstant('more', 'BUILD_MODE', true);
     $v1 = Sflm::frontend('js', 'default')->version();
     foreach ($this->testNames() as $testName) {
-      $this->runTest($testName);
+      if (!$test) {
+        $this->runTest($testName);
+        continue;
+      }
+      if ($test == $testName) $this->runTest($testName);
     }
     $s = "SFLM-build created";
     $s .= "\nOrigin / Uglified sizes: ". //

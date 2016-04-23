@@ -46,4 +46,4 @@ class CtrlAdminDdStructure extends CtrlAdmin {
   
 }
 
-CtrlAdminDdStructure::$properties['title'] = Lang::get('adminModuleDdStructure');
+CtrlAdminDdStructure::$properties['title'] = Lang::get('ddStructure');

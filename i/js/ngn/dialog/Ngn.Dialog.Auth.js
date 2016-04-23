@@ -18,7 +18,7 @@ Ngn.Dialog.Auth.Vk = new Class({
     window.vkAsyncInit = function() {
       VK.init({apiId: Ngn.vkApiId});
       VK.Widgets.Auth('vkAuth', {
-        width: 398,
+        width: 287,
         onAuth: function(vkResult) {
           if (vkResultReceived) return;
           vkResultReceived = true;
@@ -81,7 +81,7 @@ Ngn.Dialog.Auth = new Class({
     selectedTab: 0,
     id: 'auth',
     url: '/default/auth/json_auth',
-    width: 300,
+    width: 299,
     completeUrl: null,
     fromVkEnabled: false
   },
@@ -97,9 +97,9 @@ Ngn.Dialog.Auth = new Class({
     this.tabs.addEvent('select', function(toggle, container, index) {
       if (container.get('id') == 'vkAuth') {
         this.vkInit();
-        this.footer.setStyle('display', 'none');
+        this.footer.getElement('.foot-wrap').setStyle('display', 'none');
       } else {
-        this.footer.setStyle('display', 'block');
+        this.footer.getElement('.foot-wrap').setStyle('display', 'block');
       }
     }.bind(this));
     if (Ngn.Dialog.Auth.requestActions.length)

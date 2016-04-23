@@ -12,3 +12,7 @@ padding: 0 2px;
 #auth_dialog .apeform .name_code input {
 width: 60px;
 }
+/* Высота блока авторизации Вконтакте */
+#auth_message {
+min-height: 93px;
+}

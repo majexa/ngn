@@ -101,4 +101,4 @@ class CtrlAdminUsers extends CtrlAdmin {
 
 }
 
-CtrlAdminUsers::$properties['title'] = Lang::get('adminModuleUsers');
+CtrlAdminUsers::$properties['title'] = Lang::get('users');

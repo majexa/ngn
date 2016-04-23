@@ -8,17 +8,17 @@ return [
   'auth.userNotActive' => 'Пользователь не активирован',
 
   // Свойства модулей администрирования
-  'adminModulePages' => 'Разделы сайта',
-  'adminModulePrivmsgs' => 'Сообщения',
-  'adminModuleProfile' => 'Профиль',
-  'adminModuleConfigManager' => 'Конфигурация',
-  'adminModuleDdField' => 'Поля',
-  'adminModuleDdStructure' => 'Структуры',
-  'adminModulePrivileges' => 'Привелегии',
-  'adminModuleSettings' => 'Настройки',
-  'adminModuleTags' => 'Тэги',
-  'adminModuleUsers' => 'Пользователи',
-  'adminModuleLogs' => 'Логи',
+  'pages' => 'Разделы сайта',
+  'privMsgs' => 'Сообщения',
+  'profile' => 'Профиль',
+  'configManager' => 'Конфигурация',
+  'ddField' => 'Поля',
+  'ddStructure' => 'Структуры',
+  'privileges' => 'Привелегии',
+  'settings' => 'Настройки',
+  'tags' => 'Тэги',
+  'users' => 'Пользователи',
+  'logs' => 'Логи',
 
   // Свойства модулей сайта
   'moduleAuthoritems' => 'Авторские записи',

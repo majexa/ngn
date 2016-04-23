@@ -2,9 +2,9 @@
 
 class CtrlCommonAuth extends CtrlDefault {
 
-    protected function getParamActionN() {
-        return 2;
-    }
+  protected function getParamActionN() {
+    return 2;
+  }
 
   protected function init() {
     $this->d['mainTpl'] = 'ajax';
@@ -22,6 +22,15 @@ class CtrlCommonAuth extends CtrlDefault {
         ('/'.Sflm::frontendName(true).'/userReg/json_form');
     }
     $this->processFormTabs($urls);
+    if (Config::getVarVar('userReg', 'vkAuthEnable')) {
+      $this->json['tabs'] .= <<<HTML
+  <h2 class="tab" title="Войти с помощью «Вконтакте»" data-name="vk">
+    <img src="/i/img/icons/vk.png" />
+  </h2>
+  <div id="vkAuth"></div>
+HTML;
+    }
+
   }
 
   function action_json_form() {

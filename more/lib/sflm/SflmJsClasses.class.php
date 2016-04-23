@@ -264,6 +264,14 @@ class SflmJsClasses {
     return $classes;
   }
 
+  /**
+   * requiresBefore/requiresAfter parser
+   * supports path by quote
+   *
+   * @param $code
+   * @param string $k
+   * @return array
+   */
   static function parseRequired($code, $k = '') {
     $r = [];
     if (preg_match_all('/@requires'.ucfirst($k).'\s+([0-9?=&A-Za-z.\\/, ]+)/', $code, $m)) {

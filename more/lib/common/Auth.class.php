@@ -242,8 +242,12 @@ class Auth {
   }
 
   static function get($param) {
-    if (!$param) throw new Exception('Use getAll');
-    if (!($auth = self::setAuth())) return null;
+    if (Ngn::isDebug()) {
+      $auth = DbModelCore::get('users', 1);
+    } else {
+      if (!$param) throw new Exception('Use getAll');
+      if (!($auth = self::setAuth())) return null;
+    }
     return isset($auth[$param]) ? $auth[$param] : null;
   }
 

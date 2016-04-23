@@ -231,7 +231,6 @@ class Req extends ArrayAccesseble {
   }
 
   function isDebug() {
-    return isset($_COOKIE['debugKey']) and ($k = Ngn::debugKey()) and $_COOKIE['debugKey'] == $k;
   }
 
   function forceAuth() {
