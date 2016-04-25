@@ -57,6 +57,7 @@ Ngn.Frm.phoneConfirm = function(method) {
     onComplete: function(r) {
       btn.toggleDisabled(true);
       if (r.validError) {
+      console.debug('...');
         var eInput = form.eForm.getElement('[name=phone]');
         form.validator.showNewAdvice('asd', eInput, r.validError);
       }

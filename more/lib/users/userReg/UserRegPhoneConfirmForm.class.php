@@ -15,32 +15,32 @@ abstract class UserRegPhoneConfirmForm extends Form {
 //      ];
 //    }
 //    else {
-      $fields = array_merge($fields, [
-        [
-          'type' => 'groupBlock',
-          'name' => 'ph'
-        ],
-        [
-          'title'    => 'Телефон для связи',
-          'name'     => 'phone',
-          'required' => true,
-          'type'     => 'phone'
-        ],
-        [
-          'type' => 'staticText',
-          'text' => '<p class="label">&nbsp;</p><a class="btn sendPass"><span>Отправить пароль</span></a>',
-        ],
-        [
-          'type' => 'groupBlock'
-        ],
-        [
-          'title'    => 'Пароль',
-          'name'     => 'code',
-          'required' => true,
-          'type'     => 'text',
-          'maxlength' => 4
-        ],
-      ]);
+    $fields = array_merge($fields, [
+      [
+        'type' => 'groupBlock',
+        'name' => 'ph'
+      ],
+      [
+        'title'    => 'Телефон для связи',
+        'name'     => 'phone',
+        'required' => true,
+        'type'     => 'phone'
+      ],
+      [
+        'type' => 'staticText',
+        'text' => '<p class="label">&nbsp;</p><a class="btn sendPass"><span>Отправить пароль</span></a>',
+      ],
+      [
+        'type' => 'groupBlock'
+      ],
+      [
+        'title'     => 'Пароль',
+        'name'      => 'code',
+        'required'  => true,
+        'type'      => 'text',
+        'maxlength' => 4
+      ],
+    ]);
 //    }
     parent::__construct($fields, $options);
   }
@@ -54,8 +54,7 @@ abstract class UserRegPhoneConfirmForm extends Form {
   protected function _initErrors() {
     if (($codeElement = $this->getElement('code'))) {
       $correctCode = db()->selectCell('SELECT code FROM userPhoneConfirm WHERE code=? AND phone=?', //
-        $codeElement->value(),
-        $this->getElement('phone')->value());
+        $codeElement->value(), $this->getElement('phone')->value());
       if (!$correctCode) $this->getElement('code')->error('Код введён не верно');
     }
   }
@@ -63,6 +62,7 @@ abstract class UserRegPhoneConfirmForm extends Form {
   protected function jsInlineConfirmedPhone() {
     if ($this->authorizedUser) return '';
     return <<<JS
+
 var form = Ngn.Form.forms.{$this->id()};
 new Ngn.Btn(form.eForm.getElement('.sendPass'), function() {
   var ePhoneField = form.eForm.getElement('.name_phone input');
@@ -76,8 +76,12 @@ new Ngn.Btn(form.eForm.getElement('.sendPass'), function() {
   this.toggleDisabled(false);
   new Ngn.Request.JSON({
     url: '/default/userRegPhone/json_sendSms',
-    onComplete: function() {
+    onComplete: function(r) {
       this.toggleDisabled(true);
+      if (r.validError) {
+        var eInput = form.eForm.getElement('[name=phone]');
+        form.validator.showNewAdvice('e' + Ngn.String.hashCode(r.validError), eInput, r.validError);
+      }
     }.bind(this)
   }).post({
       phone: ePhoneField.get('value')
@@ -88,8 +92,7 @@ JS;
 
   function html() {
     $html = parent::html();
-    $html .=
-      '
+    $html .= '
 <style>
 .hgrp_ph .element {
 float: left;
@@ -110,7 +113,7 @@ width: 50px;
     if (!$this->authorizedUser) {
       if (!($user = DbModelCore::get('users', $data['phone'], 'phone'))) {
         $id = DbModelCore::create('users', [
-          'role' => $this->userRole(),
+          'role'   => $this->userRole(),
           'phone'  => $data['phone'],
           'pass'   => $data['code'],
           'active' => 1

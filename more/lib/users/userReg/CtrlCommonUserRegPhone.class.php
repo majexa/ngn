@@ -28,10 +28,10 @@ class CtrlCommonUserRegPhone extends CtrlCammon {
       return;
     }
     $r = db()->selectRow('SELECT * FROM userPhoneConfirm WHERE dateCreate > ? AND phone=?', Date::db(time() - self::expireTime()), $phone);
-    $maxAttempts = 15;
+    $maxAttempts = 1;
     if ($r) {
       if ($r['attempts'] >= $maxAttempts) {
-        $this->json['validError'] = 'Вы исчерпали лимит попыток. Попробуйте ещё раз через час';
+        $this->json['validError'] = 'Вы исчерпали лимит попыток. Попробуйте ещё раз через некоторое время';
         return;
       }
       $code = $r['code'];
