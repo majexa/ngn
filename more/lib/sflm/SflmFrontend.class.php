@@ -110,7 +110,7 @@ abstract class SflmFrontend {
   function addFile($file) {
     if (in_array($file, $this->absPathsCache)) return;
     $this->absPathsCache[] = $file;
-      $this->newAbsPaths[] = $file;
+    $this->newAbsPaths[] = $file;
   }
 
   /**
@@ -129,7 +129,8 @@ abstract class SflmFrontend {
   }
 
   /**
-   * Возвращает HTML-тег ссылающийся на скомпилированый файл с указанием версии для clientSide-кэширования. Используется в режиме отладки
+   * Возвращает HTML-тег ссылающийся на скомпилированый файл с указанием версии для clientSide-кэширования.
+   * Так же добавляет отдельными тегами отладочные пути.
    *
    * @return string
    * @throws Exception
@@ -306,6 +307,10 @@ abstract class SflmFrontend {
 
   function getDeltaUrl() {
     if (!$this->newPaths) return false;
+    if (!Sflm::$buildMode) {
+      throw new Exception('newPaths can not be present if BUILD MODE off. newPaths:'. //
+        getPrr($this->newPaths));
+    }
     $this->checkStored();
     return $this->base->getUrl($this->name.'new', $this->base->extractCode($this->newPaths), true);
   }

@@ -16,6 +16,8 @@ class Form {
     'element'     => '' // используется в ф-ии html(), если флаг $this->isDdddTpl = true
   ];
 
+  public $customTemplates = [];
+
   /**
    * array containing all the web form elements.
    *
@@ -224,7 +226,11 @@ class Form {
   }
 
   protected function htmlElementInput(FieldEAbstract $el, $input) {
-    $input = str_replace('{input}', $input, $this->templates['input']);
+    if (isset($this->customTemplates[$el['name']])) {
+      $input = str_replace('{input}', $input, $this->customTemplates[$el['name']]['input']);
+    } else {
+      $input = str_replace('{input}', $input, $this->templates['input']);
+    }
     $input = str_replace('{required}', $el['required'] ? $this->templates['required'] : '', $input);
     $input = str_replace('{name}', $el['name'], $input);
     $input = str_replace('{value}', is_array($el['value']) ? '' : $el['value'], $input);
@@ -447,14 +453,6 @@ class Form {
     print $this->html();
   }
 
-  /*
-  function getValues() {
-    if (!$this->_rows) return false;
-    foreach ($this->_rows as $v) if ($v['value']) $values[$v['name']] = $v['value'];
-    return $values;
-  }
-  */
-
   /**
    * @api
    * Переопределите этот метод для определения кастомных ошибок формы
@@ -569,27 +567,26 @@ class Form {
     return $t."<!-- Open fields group depth={{$el['depth']}}, type={{$el->type}}, id={{$this->curHeaderId}} -->\n".$tt.$html;
   }
 
-  protected $n = 1;
-
   /**
    * @param array $d
    * @return FieldEAbstract
    * @throws Exception
    */
   function createElement(array $d) {
-    if (!empty($d['name']) and isset($this->nameArray)) $d['name'] = $this->nameArray.'['.$d['name'].']'; // check
     if (empty($d['type'])) $d['type'] = 'text';
-    if (empty($d['name'])) {
-      $d['name'] = 'el'.$this->n;
-      $this->n++;
-    }
     if ($this->options['placeholders'] and !empty($d['title'])) $d['placeholder'] = $d['title'];
-    if (isset($this->els[$d['name']])) {
-      throw new Exception('Field with name "'.$d['name'].'" already exists in <b>$this->els</b>. existing: '.getPrr($this->els[$d['name']]->options).', trying to create: '.getPrr($d));
-    }
     if (isset($d['maxlength']) and $d['maxlength'] == 0) unset($d['maxlength']);
-    if (isset($this->options['fieldOptions'][$d['name']])) $d = array_merge($d, $this->options['fieldOptions'][$d['name']]);
-    $this->els[$d['name']] = $el = FieldCore::get($d['type'], $d, $this);
+    $el = FieldCore::get($d['type'], $d, $this);
+    if (isset($this->options['fieldOptions'][$el['name']])) {
+      $el->options = array_merge($el->options, $this->options['fieldOptions'][$el['name']]);
+    }
+    if (!empty($el['name']) and isset($this->nameArray)) {
+      $el['name'] = $this->nameArray.'['.$el['name'].']';
+    }
+    if (isset($this->els[$el['name']])) {
+      throw new Exception('Field with name "'.$el['name'].'" already exists in <b>$this->els</b>. existing: '.getPrr($this->els[$d['name']]->options).', trying to create: '.getPrr($d));
+    }
+    $this->els[$el['name']] = $el;
     if (isset($el->inputType) and $el->inputType == 'file') $this->encType = 'multipart/form-data';
     return $el;
   }

@@ -127,11 +127,11 @@ width: 50px;
   }
 
   protected function initErrors() {
-    $phone = $this->getElement('phone');
-    if (!$phone->valueChanged) {
-      $phone->error('Телефон не изменился');
-      return;
-    }
+//    $phone = $this->getElement('phone');
+//    if (!$phone->valueChanged) {
+//      $phone->error('Телефон не изменился');
+//      return;
+//    }
     parent::initErrors();
     $this->initCodeError();
   }

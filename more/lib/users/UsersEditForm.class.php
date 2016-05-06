@@ -44,7 +44,7 @@ class UsersEditForm extends UserForm {
       ],
       [
         'name'  => 'pass',
-        'title' => 'Пароль',
+        'title' => Lang::get('password'),
         'help'  => Lang::get('keepEmptyIfNotChanges'),
         'type'  => 'password'
       ],
@@ -58,6 +58,7 @@ class UsersEditForm extends UserForm {
   protected function _update(array $data) {
     if (empty($data['pass'])) unset($data['pass']);
     DbModelCore::update('users', $this->userId, $data, true);
+    Auth::save(DbModelCore::get('users', $this->userId));
   }
 
 }

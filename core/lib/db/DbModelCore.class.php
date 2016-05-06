@@ -11,7 +11,7 @@ class DbModelCore {
    * @param $table
    * @param $value
    * @param string $param
-   * @return bool
+   * @return DbModel|bool
    * @throws Exception
    */
   static function get($table, $value, $param = 'id') {

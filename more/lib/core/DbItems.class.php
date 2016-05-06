@@ -99,7 +99,6 @@ class DbItems implements UpdatableItems, ArrayAccess {
   function update($id, array $data) {
     $data['dateUpdate'] = Date::db();
     if ($this->filterDataByColNames) $data = Arr::filterByKeys($data, db()->cols($this->table));
-//    die2($data);
     $this->db->query("UPDATE {$this->table} SET ?a WHERE id=?d", Arr::serialize($data), $id);
   }
 

@@ -180,8 +180,6 @@ class Auth {
   }
 
   static private function loginBySession() {
-    //phpinfo();
-    //die2($_SESSION);
     return isset($_SESSION['auth']) ? $_SESSION['auth'] : false;
   }
 

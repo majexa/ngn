@@ -24,6 +24,7 @@ Ngn.Form = new Class({
   els: {},
 
   initialize: function(eForm, options) {
+    console.debug(eForm);
     this.eForm = eForm;
     this.eOutsideContainer = new Element('div', { styles: {'display': 'none'}}).inject(this.eForm, 'after');
     if (this.eForm.get('data-init')) throw new Error('This form already initialized');
@@ -162,6 +163,7 @@ Ngn.Form = new Class({
     if (this.uploadType == 'html5') {
       this.submitHtml5();
     } else if (this.uploadType == 'default' && !this.options.ajaxSubmit) {
+      console.debug(this.eForm);
       this.eForm.submit();
     } else {
       this.submitAjax();

@@ -35,16 +35,16 @@ use Options;
 
   protected function defineOptions() {
     return [
-      //'inputValue' => false, // исходное значение поля. необходимо, если используется метод
-                               // formatValue()
-      'useTypeJs' => false,
-      'required' => false
+      'useTypeJs' => false, // Использовать typeJs
+      'required' => false // обязательное для заполнения
     ];
   }
 
   protected function &getArrayRef() {
     return $this->options;
   }
+
+  protected static $n;
 
   function __construct(array $options = [], Form $form = null) {
     $this->form = $form;
@@ -62,6 +62,10 @@ use Options;
       $this->options['value'] = $value;
     }
     $this->initDefaultValue();
+    if (empty($this->options['name'])) {
+      $this->options['name'] = 'el'.self::$n;
+      self::$n++;
+    }
   }
 
   /**
@@ -105,6 +109,9 @@ use Options;
   public $baseName;
 
   protected function init() {
+    if (!isset($this->options['name'])) {
+      die2($this->options);
+    }
     if (empty($this->options['id'])) {
       $this->options['id'] = Misc::name2id($this->options['name']);
     }

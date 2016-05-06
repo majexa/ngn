@@ -49,7 +49,7 @@ class UserForm extends UserBaseForm {
 //    }
     $fields[] = [
       'name'         => 'pass',
-      'title'        => 'Пароль',
+      'title'        => Lang::get('password'),
       'type'         => 'password',
       'required'     => true
     ];

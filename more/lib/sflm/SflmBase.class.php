@@ -285,6 +285,7 @@ abstract class SflmBase {
       return $t;
     }
     else {
+      if (!$code) return '';
       return $this->getTag($this->getUrl($package, $code));
     }
   }
