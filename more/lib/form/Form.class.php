@@ -135,7 +135,7 @@ class Form {
     if ($this->options['placeholders']) {
       if (Sflm::frontendName()) Sflm::frontend('js')->addClass('Ngn.PlaceholderSupport');
       $this->templates['input'] = str_replace('{title}', '', $this->templates['input']);
-      $this->templates['input'] = str_replace('{input}', '{required}{input}', $this->templates['input']);
+      $this->templates['input'] = str_replace('{input}', '{input}', $this->templates['input']);
       $this->templates['title'] = '';
     }
     $this->req = empty($this->options['req']) ? O::get('Req') : $this->options['req'];
@@ -276,6 +276,9 @@ class Form {
   }
 
   protected function htmlElementHelp(FieldEAbstract $el, $elHtml) {
+    if (!empty($this->options['placeholders'])) {
+      return str_replace('{help}', '', $elHtml);
+    }
     $elHtml = str_replace('{help}', $this->templates['help'], $elHtml);
     if (!empty($el['help'])) {
       $help = str_replace("\n", "<br />", $el['help']);
@@ -574,7 +577,10 @@ class Form {
    */
   function createElement(array $d) {
     if (empty($d['type'])) $d['type'] = 'text';
-    if ($this->options['placeholders'] and !empty($d['title'])) $d['placeholder'] = $d['title'];
+    if ($this->options['placeholders'] and !empty($d['title'])) {
+      $d['placeholder'] = (!empty($d['help']) ? $d['help'] : $d['title']) //
+        /*(!empty($d['required']) ? ' *' : '')*/;
+    }
     if (isset($d['maxlength']) and $d['maxlength'] == 0) unset($d['maxlength']);
     $el = FieldCore::get($d['type'], $d, $this);
     if (isset($this->options['fieldOptions'][$el['name']])) {

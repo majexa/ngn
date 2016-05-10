@@ -10,7 +10,7 @@ class CtrlCommonUserLostPass extends CtrlBase {
     $this->d['tpl'] = 'users/lostpass';
   }
 
-  static function getLoasPassForm() {
+  protected function getLostPassForm() {
     $form = new Form([
       [
         'name'     => 'email',
@@ -19,18 +19,18 @@ class CtrlCommonUserLostPass extends CtrlBase {
         'required' => true
       ]
     ]);
-    $form->action = '/default/userLostPass';
+    //$form->action = '/default/userLostPass';
     return $form;
   }
 
   function action_default() {
     $this->setPageTitle(Lang::get('forgetPassword?'));
-    $form = self::getLoasPassForm();
+    $form = $this->getLostPassForm();
     $form->options['submitTitle'] = Lang::get('send');
     $this->d['form'] = $form->html();
     if ($form->isSubmittedAndValid()) {
       $r = UsersCore::sendLostPass($form->getData()['email']);
-      $this->redirect($this->tt->getPath(2).'/'.($r ? 'complete' : 'failed'));
+      $this->redirect($this->tt->getPath($this->getParamActionN()).'/'.($r ? 'complete' : 'failed'));
     }
   }
 

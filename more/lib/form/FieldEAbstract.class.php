@@ -110,7 +110,8 @@ use Options;
 
   protected function init() {
     if (!isset($this->options['name'])) {
-      die2($this->options);
+      $this->options['name'] = 'el'.self::$n;
+      self::$n++;
     }
     if (empty($this->options['id'])) {
       $this->options['id'] = Misc::name2id($this->options['name']);
@@ -193,7 +194,7 @@ use Options;
 
   protected function validate1() {
     if (!empty($this->options['required']) and empty($this->options['value']) and empty($this->options['disabled'])) {
-      $this->error = "Поле «{$this->options['title']}» обязательно для заполнения";
+      $this->error = "Field «{$this->options['title']}» is required";
     }
   }
 

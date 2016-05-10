@@ -34,8 +34,8 @@ class UserForm extends UserBaseForm {
         'required'     => true,
       ];
       $fields[] = [
-        'name'         => 'secondName',
-        'title'        => 'Second Name',
+        'name'         => 'lastName',
+        'title'        => 'Last Name',
         'required'     => true,
       ];
     }

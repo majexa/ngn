@@ -5,7 +5,7 @@ class AuthForm extends Form {
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
       'name'        => 'auth',
-      'submitTitle' => 'Войти'
+      'submitTitle' => Lang::get('signIn')
     ]);
   }
 
@@ -16,7 +16,7 @@ class AuthForm extends Form {
       $loginField,
       [
         'name'     => 'authPass',
-        'title'    => 'Пароль',
+        'title'    => Lang::get('password'),
         'type'     => 'password',
         'required' => true
       ]

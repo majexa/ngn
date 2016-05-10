@@ -5,6 +5,18 @@ class UsersEditForm extends UserForm {
   public $create = false;
   public $userId;
 
+  static function splitName($name) {
+    $r = [];
+    if (preg_match('/(.*) (.*)/', $name, $m)) {
+      $r['firstName'] = $m[1];
+      $r['lastName'] = $m[2];
+    } else {
+      $r['firstName'] = $name;
+      $r['lastName'] = '';
+    }
+    return $r;
+  }
+
   function __construct($userId, array $options = []) {
     $this->userId = $userId;
     if (!($user = DbModelCore::get('users', $this->userId))) {
@@ -17,12 +29,7 @@ class UsersEditForm extends UserForm {
       }
     }
     if (Config::getVarVar('userReg', 'nameEnable')) {
-      if (preg_match('/(.*) (.*)/', $user->r['name'], $m)) {
-        $user->r['firstName'] = $m[1];
-        $user->r['secondName'] = $m[2];
-      } else {
-        $user->r['firstName'] = $user->r['name'];
-      }
+      $user->r = array_merge($user->r, self::splitName($user['name']));
     }
     $this->setElementsData(Arr::dropK($user->r, 'pass'));
   }

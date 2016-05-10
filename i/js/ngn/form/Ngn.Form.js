@@ -24,7 +24,6 @@ Ngn.Form = new Class({
   els: {},
 
   initialize: function(eForm, options) {
-    console.debug(eForm);
     this.eForm = eForm;
     this.eOutsideContainer = new Element('div', { styles: {'display': 'none'}}).inject(this.eForm, 'after');
     if (this.eForm.get('data-init')) throw new Error('This form already initialized');
@@ -163,7 +162,6 @@ Ngn.Form = new Class({
     if (this.uploadType == 'html5') {
       this.submitHtml5();
     } else if (this.uploadType == 'default' && !this.options.ajaxSubmit) {
-      console.debug(this.eForm);
       this.eForm.submit();
     } else {
       this.submitAjax();
@@ -206,7 +204,7 @@ Ngn.Form = new Class({
       var cls = eInput.get('multiple') ? 'multiUpload' : 'upload';
       var eInputValidator = new Element('input', {
         type: 'hidden'
-        //name: eInput.get('name') + '_helper',
+        // name: eInput.get('name') + '_helper',
       }).inject(eInput, 'after');
       var fileSaved = eInput.getParent('.element').getElement('.fileSaved');
       if (!fileSaved) eInputValidator.addClass(eInput.hasClass('required') ? 'validate-' + cls + '-required' : 'validate-' + cls);
@@ -340,6 +338,8 @@ Ngn.Form = new Class({
     new Ngn.Request.JSON({
       url: this.options.ajaxSubmitUrl || this.eForm.get('action'),
       onComplete: function(r) {
+        this.disable(false);
+        this.submiting = false;
         if (r && r.form) {
           this.fireEvent('failed', r);
           return;
