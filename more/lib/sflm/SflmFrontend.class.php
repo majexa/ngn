@@ -308,8 +308,10 @@ abstract class SflmFrontend {
   function getDeltaUrl() {
     if (!$this->newPaths) return false;
     if (!Sflm::$buildMode) {
-      throw new Exception('newPaths can not be present if BUILD MODE off. newPaths:'. //
-        getPrr($this->newPaths));
+      return false;
+      // todo: выяснить почему такая ситуация происходит на продакшене zukul
+      //throw new Exception('newPaths can not be present if BUILD MODE off. newPaths:'. //
+      //  getPrr($this->newPaths));
     }
     $this->checkStored();
     return $this->base->getUrl($this->name.'new', $this->base->extractCode($this->newPaths), true);

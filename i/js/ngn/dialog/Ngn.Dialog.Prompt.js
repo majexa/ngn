@@ -1,38 +1,32 @@
 Ngn.Dialog.Prompt = new Class({
   Extends: Ngn.Dialog,
 
-  initialize: function(_opts) {
-    var opts = Object.merge(_opts, {
-      cancel: false,
+  initialize: function(opts) {
+    this.parent(Object.merge(opts, {
       titleClose: false,
       bindBuildMessageFunction: true,
       ok: this.closeAction.bind(this),
       cancel: this.closeAction.bind(this, false),
       onComplete: function() {
-        var text_elem = this.dialogId + '_prompted';
         window.setTimeout(function() {
-          $(text_elem).focus();
+          document.getElement(this.dialogId + '_prompted').focus();
         }, 310);
       }
-    });
-    this.parent(opts);
+    }));
   },
 
   buildMessage: function(_msg) {
-    var message_box = new Element('div');
-    new Element('div', {'class': 'icon-button prompt-icon goleft'}).inject(message_box);
-    var msg_display = new Element('div', {'class': 'mav-alert-msg goleft'}).inject(message_box);
-
-    new Element('div', {'html': _msg}).inject(msg_display);
+    var eMessageBox = new Element('div');
+    new Element('div', {'class': 'icon-button prompt-icon goleft'}).inject(eMessageBox);
+    var eMsgDisplay = new Element('div', {'class': 'mav-alert-msg goleft'}).inject(eMessageBox);
+    new Element('div', {'html': _msg}).inject(eMsgDisplay);
     new Element('input', {
       'id': this.dialogId + '_prompted',
       'type': 'text',
       'class': 'mav-prompt-input'
-    }).inject(msg_display);
-
-    new Element('div', {'class': 'clear'}).inject(message_box);
-
-    return message_box;
+    }).inject(eMsgDisplay);
+    new Element('div', {'class': 'clear'}).inject(eMessageBox);
+    return eMessageBox;
   },
 
   closeAction: function(_canceled) {

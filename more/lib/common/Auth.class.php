@@ -48,7 +48,7 @@ class Auth {
     if (($user = DbModelCore::get('users', $login, 'login')) === false) {
       if (($user = DbModelCore::get('users', $login, 'email')) === false) {
         if (($user = DbModelCore::get('users', trim($login, '+'), 'phone')) === false) {
-          self::error(self::ERROR_AUTH_NO_LOGIN);
+          self::error(Lang::get('loginIsAbsent'));
           return false;
         }
       }
@@ -58,7 +58,7 @@ class Auth {
         return $user;
       }
       else {
-        self::error(self::ERROR_AUTH_USER_NOT_ACTIVE);
+        self::error(Lang::get('userIsNotActive'));
         return false;
       }
     }
@@ -67,7 +67,7 @@ class Auth {
     }
     // Если для всех перебраных пользователей пароль неверен
     if ($wrongPass) {
-      self::error(self::ERROR_AUTH_WRONG_PASS);
+      self::error(Lang::get('wrongPassword'));
       return false;
     }
   }
@@ -197,7 +197,7 @@ class Auth {
     if (!$pass and isset($_REQUEST[self::$passFieldName])) $pass = $_REQUEST[self::$passFieldName];
     if (!empty($login) and !empty($pass)) {
       if (!$login or !$pass) {
-        self::error(self::ERROR_EMPTY_LOGIN_OR_PASS);
+        self::error(Lang::get('wrongLoginOrPassword'));
         return false;
       }
       $r = self::login($login, self::cryptPass($pass));
@@ -255,9 +255,3 @@ class Auth {
 
 }
 
-Auth::$errorsText = [
-  Auth::ERROR_AUTH_NO_LOGIN        => "Пользователь с таким ".UserRegCore::getAuthLoginTitle()." не зарегистрирован",
-  Auth::ERROR_AUTH_WRONG_PASS      => 'Неверный пароль',
-  Auth::ERROR_AUTH_USER_NOT_ACTIVE => 'Пользователь не активирован',
-  Auth::ERROR_EMPTY_LOGIN_OR_PASS  => 'Пустой логин или пароль'
-];

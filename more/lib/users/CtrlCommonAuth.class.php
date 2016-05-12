@@ -25,7 +25,8 @@ class CtrlCommonAuth extends CtrlDefault {
     if (Config::getVarVar('userReg', 'vkAuthEnable')) {
       $this->json['tabs'] .= <<<HTML
   <h2 class="tab" title="Войти с помощью «Вконтакте»" data-name="vk">
-    <img src="/i/img/icons/vk.png" />
+    Через
+    <img src="/i/img/icons/vk.png" style="display:inline-block;margin-bottom:-3px" />
   </h2>
   <div id="vkAuth"></div>
 HTML;
