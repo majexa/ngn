@@ -1,11 +1,9 @@
 <?php
 
 return [
-
+  'keepEmptyIfNotChanges' => 'Keep empty if you don\'t wish to change your password'
+  /*
   'logout' => 'log out',
-  'auth.noLogin' => 'There is no user with such login',
-  'auth.userNotActive' => 'User is not activated',
-  'auth.wrongPass' => 'Wrong password',
 
   // Admin Modules Properties
   'adminModulePages' => 'Site Sections',
@@ -181,4 +179,5 @@ return [
   'datetimeCreate' => 'Creating date & time',
   'datetimeUpdate' => 'Updating date & time',
   'noFields' => 'No fields',
+  */
 ];

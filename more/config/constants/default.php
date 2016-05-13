@@ -9,3 +9,4 @@ setConstant('ALLOW_GOD_MODE', true);
 setConstant('FIRST_URL_PARAM_N', 0);
 setConstant('ALLOW_SEND', true);
 setConstant('JS_REDIRECT', false);
+setConstant('BUILD_MODE', false);
