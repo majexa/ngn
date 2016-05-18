@@ -10,7 +10,7 @@
 //     (Optional 2nd arg is animation pause in millis, overwrites the default.)
 // * favicon.defaultPause = 5000;
 
-Ngn.favicon = {
+Ngn.Favicon = {
 
   // -- "PUBLIC" ----------------------------------------------------------------
 
@@ -32,12 +32,12 @@ Ngn.favicon = {
     this.preloadIcons(iconSequence);
     this.iconSequence = iconSequence;
     this.sequencePause = (optionalDelay) ? optionalDelay : this.defaultPause;
-    Ngn.favicon.index = 0;
-    Ngn.favicon.change(iconSequence[0]);
+    Ngn.Favicon.index = 0;
+    Ngn.Favicon.change(iconSequence[0]);
     this.loopTimer = setInterval(function() {
-      Ngn.favicon.index = (Ngn.favicon.index + 1) % Ngn.favicon.iconSequence.length;
-      Ngn.favicon.replaceLink(Ngn.favicon.iconSequence[Ngn.favicon.index], false);
-    }, Ngn.favicon.sequencePause);
+      Ngn.Favicon.index = (Ngn.Favicon.index + 1) % Ngn.Favicon.iconSequence.length;
+      Ngn.Favicon.replaceLink(Ngn.Favicon.iconSequence[Ngn.Favicon.index], false);
+    }, Ngn.Favicon.sequencePause);
   },
 
   stop: function() {

@@ -257,6 +257,7 @@ abstract class CtrlBase {
     }
     else {
       if (isset($this->ajaxSuccess) or isset($this->ajaxOutput)) {
+        header("Content-type: text/html; charset=".CHARSET);
         if (isset($this->ajaxSuccess)) return $this->ajaxSuccess ? 'success' : 'failed';
         else
           return $this->ajaxOutput;

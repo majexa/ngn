@@ -9,7 +9,7 @@ return [
   'i/js/ngn/Ngn.Dialog.Queue.Request.js',
   'i/js/ngn/Ngn.Dialog.Queue.Request.Form.js',
   'i/js/ngn/Ngn.favicon.js',
-  'i/js/ngn/Ngn.faviconTimer.js',
+  'i/js/ngn/Ngn.FaviconTimer.js',
   'i/js/ngn/Ngn.Dialog.Loader.js',
   'i/js/ngn/Ngn.Dialog.RequestFormTabs.js',
   'i/js/ngn/Ngn.Dialog.Auth.js',

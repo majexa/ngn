@@ -28,9 +28,6 @@ class CtrlAdminUsers extends CtrlAdmin {
   }
 
   function action_default() {
-    Sflm::frontend('js')->addClass('Ngn.Grid', 'ctrl', function() {
-      die2('Oh Fuck =)');
-    });
     $this->d['grid'] = $this->getGrid();
     $this->setPageTitle('Общий список');
   }
@@ -43,7 +40,7 @@ class CtrlAdminUsers extends CtrlAdmin {
     $r = DbModelCore::pagination(400, 'users');
     if (Config::getVarVar('userReg', 'extraData')) {
       $exItems = (new DdItems('users'))->getItems();
-      $exFields = (new DdFields('users'))->fields;
+      $exFields = (new DdFields('users'))->getFieldsF();
       $exFieldsFilter = Config::getVar('users.exFieldsFilter');
       if (!empty($exFieldsFilter)) $exFields = Arr::filterByKeys($exFields, $exFieldsFilter);
     } else {

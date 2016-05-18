@@ -12,11 +12,11 @@ Ngn.Dialog.Loader = new Class({
   },
 
   start: function() {
-    if (this.options.hasFaviconTimer) Ngn.faviconTimer.start();
+    if (this.options.hasFaviconTimer) Ngn.FaviconTimer.start();
   },
 
   stop: function() {
-    if (this.options.hasFaviconTimer) Ngn.faviconTimer.stop();
+    if (this.options.hasFaviconTimer) Ngn.FaviconTimer.stop();
   },
 
   close: function() {

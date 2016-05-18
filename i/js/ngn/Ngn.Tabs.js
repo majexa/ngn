@@ -96,9 +96,10 @@ Ngn.Tabs = new Class({
    * Select the tab via tab-index
    *
    * @param {Number} Tab-index
+   * @param {Booleen} Select tab if it already selected
    */
-  select: function(index) {
-    if (this.selected === index || !this.tabs[index]) return this;
+  select: function(index, foreceSelected) {
+    if (!foreceSelected && (this.selected === index || !this.tabs[index])) return this;
     if (this.ajax) this.ajax.cancel().removeEvents();
     var tab = this.tabs[index];
     var params = [tab.toggle, tab.container, index];

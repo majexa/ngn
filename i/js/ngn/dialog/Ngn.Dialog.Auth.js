@@ -23,7 +23,7 @@ Ngn.Dialog.Auth.Vk = new Class({
           if (vkResultReceived) return;
           vkResultReceived = true;
           new Ngn.Request({
-            url: '/c/vkAuth/ajax_exists',
+            url: '/default/vkAuth/ajax_exists',
             onComplete: function(r) {
               this.vkRequest(vkResult, !(r == 'success'))
             }.bind(this)
@@ -47,13 +47,8 @@ Ngn.Dialog.Auth.Vk = new Class({
       uid: vkResult.uid,
       hash: vkResult.hash
     };
-    if (create) {
-      // Регистрация нового
-      data.pass = prompt('Введите пароль для вашего профиля на сайте ' + Ngn.siteTitle, '');
-      if (vkResult.photo) data.image = vkResult.photo;
-    }
     new Ngn.Request({
-      url: '/c/vkAuth' + (create ? '/ajax_reg' : ''),
+      url: '/c/vkAuth/' + (create ? 'ajax_reg' : 'ajax_auth'),
       onComplete: function(r) {
         if (r == 'success') {
           this.authComplete();
@@ -105,6 +100,7 @@ Ngn.Dialog.Auth = new Class({
     if (Ngn.Dialog.Auth.requestActions.length)
       for (var i = 0; i < Ngn.Dialog.Auth.requestActions.length; i++)
         Ngn.Dialog.Auth.requestActions[i].bind(this)();
+    this.tabs.select(this.options.selectedTab, true);
   },
 
   authComplete: function() {

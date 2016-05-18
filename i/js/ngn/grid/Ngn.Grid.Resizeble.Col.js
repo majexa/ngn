@@ -7,11 +7,11 @@ Ngn.Grid.Resizeble.Col = new Class({
     this.drag = new Drag(new Element('div'), {
       handle: eHandler,
       onStart: function(el, e) {
-        this.startPosition = new Event(e).page.x;
+        this.startPosition = e.page.x;
         this.startW = this.getElements(1)[0].getSize().x;
       }.bind(this),
       onDrag: function(el, e) {
-        var delta = this.startPosition - new Event(e).page.x;
+        var delta = this.startPosition - e.page.x;
         var els = this.getElements(1);
         for (var i = 0; i < els.length; i++) {
           var w = this.startW - delta;
