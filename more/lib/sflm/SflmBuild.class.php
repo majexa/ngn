@@ -24,7 +24,7 @@ class SflmBuild {
       throw new Exception('Clean Sflm::$debugPaths before running build');
     }
     if (!file_exists(PROJECT_PATH.'/config/constants/more.php')) {
-      print "Creating SFLM-build skipped on '{$this->projectName}' project\n";
+      print "Creating SFLM-build skipped on '{$this->projectName}' project. 'more.php' does not exists\n";
       return;
     }
     print "Creating SFLM-build on '{$this->projectName}' project\n";

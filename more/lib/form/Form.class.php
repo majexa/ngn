@@ -444,7 +444,7 @@ class Form {
 
   protected function getCachedJsUrl() {
     if ($this->js == '') return false;
-    Dir::make(UPLOAD_PATH.'/js/cache/form');
+    //Dir::make(UPLOAD_PATH.'/js/cache/form');
     $file = UPLOAD_PATH.'/js/cache/form/'.$this->id().'.js';
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
       file_put_contents($file, "Ngn.Frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
