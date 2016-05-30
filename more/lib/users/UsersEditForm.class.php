@@ -35,7 +35,7 @@ class UsersEditForm extends UserForm {
   }
 
   protected function defineOptions() {
-    return array_merge(parent::defineOptions(), ['submitTitle' => Lang::get('save')]);
+    return array_merge(parent::defineOptions(), ['submitTitle' => Locale::get('save')]);
   }
 
   protected function _getFields() {
@@ -46,13 +46,13 @@ class UsersEditForm extends UserForm {
     $fields = Arr::injectAfter($fields, $n - 1, [
       [
         'name'  => 'passBegin',
-        'title' => Lang::get('changePassword'),
+        'title' => Locale::get('changePassword'),
         'type'  => 'headerToggle'
       ],
       [
         'name'  => 'pass',
-        'title' => Lang::get('password'),
-        'help'  => Lang::get('keepEmptyIfNotChanges'),
+        'title' => Locale::get('password'),
+        'help'  => Locale::get('keepEmptyIfNotChanges'),
         'type'  => 'password'
       ],
       [

@@ -4,7 +4,7 @@ class UsersCore {
 
   static function sendLostPass($email) {
     if (($user = DbModelCore::get('users', $email, 'email')) === false) return false;
-    return (new SendEmail)->send($user['email'], Lang::get('passwordRecovery'), Lang::get('yourPassword').': '.$user['passClear']);
+    return (new SendEmail)->send($user['email'], Locale::get('passwordRecovery'), Locale::get('yourPassword').': '.$user['passClear']);
   }
 
   static function extendImageData(array &$users) {

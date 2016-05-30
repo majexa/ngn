@@ -3,14 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head> 
-  <title><?= SITE_TITLE.': '.Lang::get('enterToAdmin') ?></title>
+  <title><?= SITE_TITLE.': '.Locale::get('enterToAdmin') ?></title>
   <? $this->tpl('admin/headers', $d) ?>
 </head> 
 
 <body>
 <center>
   <div class="loginAdmin">
-    <h2><nobr><a href="<?= $this->getPath(0) ?>"><?= SITE_TITLE ?></a> — <?= Lang::get('administration') ?></nobr></h2>
+    <h2><nobr><a href="<?= $this->getPath(0) ?>"><?= SITE_TITLE ?></a> — <?= Locale::get('administration') ?></nobr></h2>
     <? if (Auth::check()) { ?>
       <p>Logged in as <b title="id=<?= Auth::get('id') ?>"><?= UsersCore::getTitle(Auth::get('id')) ?></b>.
         <a href="<?= $this->getPath() ?>?logout=1">Logout</a></p>
@@ -25,11 +25,11 @@
         <td nowrap><?= UserRegCore::getAuthLoginTitle() ?>:</td>
         <td width="100%"><input type="text" name="authLogin" id="authLogin" value="<?= isset($_REQUEST['authLogin']) ? htmlentities($_REQUEST['authLogin']) : '' ?>" style="width:90%" /></td>
       </tr><tr>
-        <td><?= Lang::get('password') ?>:</td>
+        <td><?= Locale::get('password') ?>:</td>
         <td><input type="password" name="authPass" id="authPass" style="width:90%"></td>
       </tr>
       </table>  
-      <input type="submit" value="<?= Lang::get('enterToAdmin') ?>" />
+      <input type="submit" value="<?= Locale::get('enterToAdmin') ?>" />
       </form>
       <? if ($d['msg']) { ?>
         <div class="error"><?= $d['msg'] ?></div>

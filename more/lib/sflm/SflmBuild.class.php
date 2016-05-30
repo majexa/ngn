@@ -62,7 +62,7 @@ class SflmBuild {
     output3("cst {$this->projectName} $testName");
     exec("cst {$this->projectName} $testName", $o, $code);
     $o = implode("\n", $o);
-    if ($code) throw new Exception($o);
+    //if ($code) throw new Exception('code:'.$code."\n".$o);
     print $o."\n";
     $this->effectedTests[] = str_replace(NGN_ENV_PATH.'/projects/', '', "cst: {$this->projectName}/$testName");
   }

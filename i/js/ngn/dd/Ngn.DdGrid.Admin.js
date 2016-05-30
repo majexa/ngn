@@ -1,4 +1,4 @@
-// @requiresBefore Ngn.DdFilterPath
+// @requiresBefore Ngn.DdFilterPath, Ngn.Url
 
 Ngn.DdGrid.Admin = new Class({
   Extends: Ngn.DdGrid,

@@ -37,4 +37,4 @@ class CtrlAdminLogs extends CtrlAdmin {
   
 }
 
-CtrlAdminLogs::$properties['title'] = Lang::get('logs');
+CtrlAdminLogs::$properties['title'] = Locale::get('logs');

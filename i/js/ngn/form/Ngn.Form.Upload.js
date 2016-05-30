@@ -10,6 +10,7 @@ Ngn.Form.Upload = new Class({
   },
 
   initialize: function(form, eInput, options) {
+    console.trace('***');
     this.form = form;
     this.eInput = document.id(eInput);
     this.eCaption = this.eInput.getParent('.element').getElement('.help');

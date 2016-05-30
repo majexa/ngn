@@ -11,19 +11,19 @@ class CtrlAdminProfile extends CtrlAdmin {
   function action_default() {
     $form = new Form(new Fields([
       [
-        'title'    => Lang::get('login'),
+        'title'    => Locale::get('login'),
         'name'     => 'login',
         'type'     => 'text',
         'required' => true
       ],
       [
-        'title'    => Lang::get('email'),
+        'title'    => Locale::get('email'),
         'name'     => 'email',
         'type'     => 'text',
         'required' => true
       ],
       [
-        'title' => Lang::get('password'),
+        'title' => Locale::get('password'),
         'help'  => 'Оставьте поле пустым, если не хотите менять пароль',
         'name'  => 'pass',
         'type'  => 'password',

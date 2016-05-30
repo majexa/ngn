@@ -146,6 +146,8 @@ class SflmJsClasses {
       $this->addSomething($class, "$path requiredBefore");
     }
     Sflm::log('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
+//    if (strstr($path, 'elementExtra')) die2('=');
+
     if ($path) $this->frontend->_addPath($path); // добавили путь
     Sflm::log("Processing valid-class patterns in '$source'");
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
@@ -207,22 +209,19 @@ class SflmJsClasses {
     return $classes;
   }
 
-  static function stripFunctionsAtTheEnd($class) {
+  static function stripFunctionsAtTheEnd($class, $code) {
     $classes = explode('.', $class);
-    $_classes = [];
-    for ($i = 0; $i < count($classes); $i++) {
-      if (!$classes[$i]) break;
-      if (!Misc::firstIsUpper($classes[$i])) break;
-      $_classes[] = $classes[$i];
+    if ($classes[count($classes)-1][0] == '_' or !Misc::firstIsUpper($classes[count($classes)-1])) {
+      array_pop($classes);
     }
-    return implode('.', $_classes);
+    return implode('.', $classes);
   }
 
   static function parseValidClassesUsage($code) {
     $classes = [];
-    if (preg_match_all('/(Ngn\.[A-Za-z.0-9]+)/', $code, $m)) {
+    if (preg_match_all('/(?<![\'"])(Ngn\.[A-Za-z.0-9_]+)/', $code, $m)) {
       foreach ($m[1] as $piece) {
-        $piece = self::stripFunctionsAtTheEnd($piece);
+        $piece = self::stripFunctionsAtTheEnd($piece, $code);
         if (in_array($piece, $classes)) continue;
         if (!SflmJsClasses::isValidClass($piece)) {
           if (SflmJsClasses::isValidClassMethod($piece)) {

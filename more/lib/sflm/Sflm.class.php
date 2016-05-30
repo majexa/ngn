@@ -40,6 +40,8 @@ class Sflm {
   static function clearCache() {
     Dir::clear(Sflm::$webPath.'/js/cache');
     Dir::clear(Sflm::$webPath.'/css/cache');
+    Dir::clear(Sflm::$webPath.'/js/origin');
+    Dir::clear(Sflm::$webPath.'/css/origin');
     SflmCache::clean();
     O::delete('SflmJs');
     O::delete('SflmCss');

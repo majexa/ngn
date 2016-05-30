@@ -65,9 +65,9 @@ class AdminRouter extends Router {
 
   protected function auth() {
     Auth::$errorsText = [
-      Auth::ERROR_AUTH_NO_LOGIN        => Lang::get('auth.noLogin'),
-      Auth::ERROR_AUTH_USER_NOT_ACTIVE => Lang::get('auth.userNotActive'),
-      Auth::ERROR_AUTH_WRONG_PASS      => Lang::get('auth.wrongPass')
+      Auth::ERROR_AUTH_NO_LOGIN        => Locale::get('auth.noLogin'),
+      Auth::ERROR_AUTH_USER_NOT_ACTIVE => Locale::get('auth.userNotActive'),
+      Auth::ERROR_AUTH_WRONG_PASS      => Locale::get('auth.wrongPass')
     ];
     parent::auth();
   }

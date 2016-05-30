@@ -18,7 +18,7 @@ class BracketName {
     return preg_replace('/(\w)\[.*/', '$1', $bracketName);
   }
 
-  static protected function getLastKey($bracketName) {
+  static function getLastKey($bracketName) {
     return preg_replace('/^.*\[([^\]]*)\]$/', '$1', $bracketName);
   }
 

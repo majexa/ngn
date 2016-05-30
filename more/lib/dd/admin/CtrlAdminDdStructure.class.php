@@ -32,7 +32,7 @@ class CtrlAdminDdStructure extends CtrlAdmin {
   }
   
   function action_new() {
-    $this->setPageTitle(Lang::get('structureCreating'));
+    $this->setPageTitle(Locale::get('structureCreating'));
     if ($this->im->requestCreate()) {
       $this->redirect($this->tt->getPath(2));
     }
@@ -46,4 +46,4 @@ class CtrlAdminDdStructure extends CtrlAdmin {
   
 }
 
-CtrlAdminDdStructure::$properties['title'] = Lang::get('ddStructure');
+CtrlAdminDdStructure::$properties['title'] = Locale::get('ddStructure');

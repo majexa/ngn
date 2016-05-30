@@ -4,20 +4,22 @@ abstract class FieldEFieldSetAbstract extends FieldEAbstract {
 
   static $requiredOptions = ['name'];
 
-  public $options = [
-    'noRowHtml'     => true,
-    'noValue'       => true,
-    'jsOptions'     => [],
-    // значит поле не создает само никаких данных (по его имени),
-    // но тем не менее может эти данные создавать и соответственно
-    // возвращаться функцией value()
-    'filterEmpties' => true,
-    'firstIndexNumber' => 0,
-
-    //'addTitle',
-    //'deleteTitle',
-    //'cleanupTitle'
-  ];
+  protected function defineOptions() {
+    return array_merge(parent::defineOptions(), [
+      'noRowHtml'     => true,
+      'noValue'       => true,
+      'jsOptions'     => [],
+      // значит поле не создает само никаких данных (по его имени),
+      // но тем не менее может эти данные создавать и соответственно
+      // возвращаться функцией value()
+      'filterEmpties' => true,
+      'firstIndexNumber' => 0,
+      'fieldSetJsClass' => 'Ngn.Frm.FieldSet',
+      //'addTitle',
+      //'deleteTitle',
+      //'cleanupTitle'
+    ]);
+  }
 
   protected $fields;
 
@@ -125,11 +127,11 @@ abstract class FieldEFieldSetAbstract extends FieldEAbstract {
 
   function _js() {
     $this->options['jsOptions']['rowElementSelector'] = '.hgrp';
-    Sflm::frontend('js')->addClass('Ngn.Frm.FieldSet');
+    Sflm::frontend('js')->addClass($this->options['fieldSetJsClass']);
     return "
 var id = '{$this->form->id()}';
 Ngn.Form.forms[id].eForm.getElements('.type_{$this->type}').each(function(el){
-  new Ngn.Frm.FieldSet(Ngn.Form.forms[id], el, ".Arr::jsObj($this->options['jsOptions']).");
+  new {$this->options['fieldSetJsClass']}(Ngn.Form.forms[id], el, ".Arr::jsObj($this->options['jsOptions']).");
 });
 ";
   }

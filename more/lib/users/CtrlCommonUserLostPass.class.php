@@ -24,9 +24,9 @@ class CtrlCommonUserLostPass extends CtrlBase {
   }
 
   function action_default() {
-    $this->setPageTitle(Lang::get('forgetPassword?'));
+    $this->setPageTitle(Locale::get('forgetPassword?'));
     $form = $this->getLostPassForm();
-    $form->options['submitTitle'] = Lang::get('send');
+    $form->options['submitTitle'] = Locale::get('send');
     $this->d['form'] = $form->html();
     if ($form->isSubmittedAndValid()) {
       $r = UsersCore::sendLostPass($form->getData()['email']);
@@ -38,7 +38,7 @@ class CtrlCommonUserLostPass extends CtrlBase {
   }
 
   function action_complete() {
-    $this->setPageTitle(Lang::get('emailSent'));
+    $this->setPageTitle(Locale::get('emailSent'));
   }
 
 }

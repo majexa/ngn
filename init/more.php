@@ -44,3 +44,5 @@ Sflm::$namespace = 'Ngn';
 Err::noticeSwitch(true);
 
 define('MORE_ENABLED', true);
+
+if (!defined('LOCALE')) define('LOCALE', 'ru-RU');

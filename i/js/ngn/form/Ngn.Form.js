@@ -201,17 +201,19 @@ Ngn.Form = new Class({
   initHtml5Upload: function() {
     this.uploadType = 'html5';
     this.eForm.getElements('input[type=file]').each(function(eInput) {
+      if (eInput.retrieve('uploadInitialized')) return;
+      eInput.store('uploadInitialized', true);
       var cls = eInput.get('multiple') ? 'multiUpload' : 'upload';
       var eInputValidator = new Element('input', {
         type: 'hidden'
-        // name: eInput.get('name') + '_helper',
+        //name: eInput.get('name') + '_helper'
       }).inject(eInput, 'after');
       var fileSaved = eInput.getParent('.element').getElement('.fileSaved');
       if (!fileSaved) eInputValidator.addClass(eInput.hasClass('required') ? 'validate-' + cls + '-required' : 'validate-' + cls);
       if (eInput.get('data-file')) eInputValidator.set('value', 1);
       var name = eInput.get('name');
       var uploadOptions = {
-        url: this.uploadOptions.url.replace('{fn}', name.replace(']', '').replace('[', '')),
+        url: this.uploadOptions.url.replace('{fn}', name),
         loadedFiles: this.uploadOptions.loadedFiles,
         fileEvents: {
           change: function() {
@@ -320,6 +322,7 @@ Ngn.Form = new Class({
     eRow.getElements('.element').each(function(el) {
       Ngn.Form.ElInit.factory(this, Ngn.Form.getElType(el));
     }.bind(this));
+    this.initHtml5Upload();
   },
 
   initFileNav: function() {

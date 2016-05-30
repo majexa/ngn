@@ -182,6 +182,5 @@ return [
   'datetimeUpdate' => 'Дата и время изменения',
   'noFields' => 'Нет полей',
 
-
   'keepEmptyIfNotChanges' => 'Оставьте пустым, если не хотите менять'
 ];

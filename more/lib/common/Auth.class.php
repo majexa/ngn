@@ -48,7 +48,7 @@ class Auth {
     if (($user = DbModelCore::get('users', $login, 'login')) === false) {
       if (($user = DbModelCore::get('users', $login, 'email')) === false) {
         if (($user = DbModelCore::get('users', trim($login, '+'), 'phone')) === false) {
-          self::error(Lang::get('loginIsAbsent'));
+          self::error(Locale::get('loginIsAbsent'));
           return false;
         }
       }
@@ -58,7 +58,7 @@ class Auth {
         return $user;
       }
       else {
-        self::error(Lang::get('userIsNotActive'));
+        self::error(Locale::get('userIsNotActive'));
         return false;
       }
     }
@@ -67,7 +67,7 @@ class Auth {
     }
     // Если для всех перебраных пользователей пароль неверен
     if ($wrongPass) {
-      self::error(Lang::get('wrongPassword'));
+      self::error(Locale::get('wrongPassword'));
       return false;
     }
   }
@@ -197,7 +197,7 @@ class Auth {
     if (!$pass and isset($_REQUEST[self::$passFieldName])) $pass = $_REQUEST[self::$passFieldName];
     if (!empty($login) and !empty($pass)) {
       if (!$login or !$pass) {
-        self::error(Lang::get('wrongLoginOrPassword'));
+        self::error(Locale::get('wrongLoginOrPassword'));
         return false;
       }
       $r = self::login($login, self::cryptPass($pass));

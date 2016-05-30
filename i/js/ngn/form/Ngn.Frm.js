@@ -247,6 +247,7 @@ Ngn.Frm.storable = function(eInput) {
   });
 }
 
+// @requiresBefore i/js/ngn/core/Ngn.elementExtras.js
 Ngn.Frm.virtualElement = {
   // abstract toggleDisabled: function(flag) {},
   parentForm: null,

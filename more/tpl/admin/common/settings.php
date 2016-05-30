@@ -17,10 +17,10 @@ $d = array(
 */?>
 <form action="<?= $this->getPath() ?>" method="post">
   <input type="hidden" name="action" value="setSettings" />
-  <h2><?= Lang::get('common') ?></h2>
+  <h2><?= Locale::get('common') ?></h2>
   <? $this->tpl('common/settings', [
     'structure' => $d['structure'],
     'values' => $d['values']
   ]) ?>
-  <p><input type="submit" value="<?= Lang::get('save') ?>" style="width:200px;height:30px;" /></p>
+  <p><input type="submit" value="<?= Locale::get('save') ?>" style="width:200px;height:30px;" /></p>
 </form>

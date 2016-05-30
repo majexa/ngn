@@ -3,7 +3,7 @@
 class DdFieldOptions {
   
   static function order($strName) {
-    $options = ['' => '— '.Lang::get('nothingSelected').' —'];
+    $options = ['' => '— '.Locale::get('nothingSelected').' —'];
     $o = new DdFields($strName, [
       'getSystem' => true,
       'getDisallowed' => true
@@ -11,7 +11,7 @@ class DdFieldOptions {
     $fields = $o->getFields();
     foreach ($fields as $v) {
       $options[$v['name']] = $v['title'];
-      $options[$v['name'].' DESC'] = $v['title'].' ['.Lang::get('reverseOrder').']';
+      $options[$v['name'].' DESC'] = $v['title'].' ['.Locale::get('reverseOrder').']';
     }
     $options['rand()'] = 'Случайным образом';
     return $options;
@@ -19,7 +19,7 @@ class DdFieldOptions {
   
   static function date($strName) {
     return array_merge(
-      ['' => '— '.Lang::get('nothingSelected').' —'],
+      ['' => '— '.Locale::get('nothingSelected').' —'],
       Arr::get(O::get('DdFields', $strName,
         [
           'getSystem' => true,
@@ -30,7 +30,7 @@ class DdFieldOptions {
   
   static function fields($strName) {
     return array_merge(
-      ['' => '— '.Lang::get('nothingSelected').' —'],
+      ['' => '— '.Locale::get('nothingSelected').' —'],
       Arr::get(O::get('DdFields', $strName,
         [
           'getSystem' => true,

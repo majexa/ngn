@@ -1,11 +1,9 @@
 <?php
 
-if (!defined('LANG')) define('LANG', 'ru');
-
-class Lang {
+class Locale {
 
   static function get($name) {
-    $lang = Config::getVar('lang/'.LANG);
+    $lang = Config::getVar('locale/'.LOCALE.'/core');
     if (isset($lang[$name])) {
       return $lang[$name];
     } else {

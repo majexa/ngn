@@ -19,7 +19,7 @@ class UserRegCore {
     if (Config::getVarVar('userReg', 'loginAsFullName')) {
       return [
         'name'      => 'login',
-        'title'     => Lang::get('fullName'),
+        'title'     => Locale::get('fullName'),
         'validator' => 'fullName',
         'required'  => true
       ];
@@ -39,7 +39,7 @@ class UserRegCore {
       }
       return [
         'name'     => 'login',
-        'title'    => Lang::get(UsersCore::titleName()),
+        'title'    => Locale::get(UsersCore::titleName()),
         'required' => true
       ];
     }

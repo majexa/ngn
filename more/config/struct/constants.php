@@ -56,10 +56,10 @@ return [
       'SITE_DOMAIN'              => [
         'title' => 'Домен',
       ],
-      'LANG'                     => [
+      'LOCALE'                     => [
         'title'   => 'Язык',
         'type'    => 'select',
-        'options' => ['ru', 'en']
+        'options' => ['ru-RU', 'en-US']
       ],
       'DEBUG_STATIC_FILES'       => [
         'title' => 'Отладка статических файлов (кеш выключен)',

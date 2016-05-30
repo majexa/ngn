@@ -8,3 +8,4 @@ Ngn.sflmFrontend = '<?= Sflm::frontendName(true) ?>';
 <? if (Config::getVarVar('userReg', 'vkAuthEnable')) { ?>
 Ngn.vkApiId = <?= Config::getVarVar('vk', 'appId') ?>
 <? } ?>
+Locale.use('<?= LOCALE ?>');

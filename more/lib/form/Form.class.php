@@ -12,7 +12,7 @@ class Form {
     'error'       => '<div class="advice-wrapper static-advice" style="z-index:300"><div class="corner"></div><div class="validation-advice">{error}</div></div>',
     'globalError' => '<div class="element errorRow padBottom"><div class="validation-advice">{error}</div></div>',
     'help'        => '<div class="help">{help}</div><div class="clear"></div>',
-    'required'    => '<b class="reqStar" title="Обязательно для заполнения" style="cursor:help">*</b>',
+    'required'    => '<b class="reqStar" title="Required" style="cursor:help">*</b>',
     'element'     => '' // используется в ф-ии html(), если флаг $this->isDdddTpl = true
   ];
 
@@ -444,7 +444,7 @@ class Form {
 
   protected function getCachedJsUrl() {
     if ($this->js == '') return false;
-    //Dir::make(UPLOAD_PATH.'/js/cache/form');
+    Dir::make(UPLOAD_PATH.'/js/cache/form');
     $file = UPLOAD_PATH.'/js/cache/form/'.$this->id().'.js';
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
       file_put_contents($file, "Ngn.Frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");

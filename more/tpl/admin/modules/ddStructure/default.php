@@ -91,11 +91,11 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
               <? foreach ($v['pages'] as $p) { ?>
                 <div>
                   <a href="<?= $this->getPath(1).'/pages/'.$p['pageId'].'/editContent' ?>" class="smIcons bordered edit"
-                     title="<?= Lang::get('edit') ?>"><i></i></a>
+                     title="<?= Locale::get('edit') ?>"><i></i></a>
                   <a href="<?= $this->getPath(1).'/pages/'.$p['pageId'].'/editPage' ?>"
-                     class="smIcons bordered settings" title="<?= Lang::get('setting') ?>"><i></i></a>
+                     class="smIcons bordered settings" title="<?= Locale::get('setting') ?>"><i></i></a>
                   <a href="/<?= $p['path'] ?>" target="_blank" class="smIcons bordered link"
-                     title="<?= Lang::get('show') ?>"><i></i></a>
+                     title="<?= Locale::get('show') ?>"><i></i></a>
                   <?php /* Сделать тут выпадающую подсказку на которой был бы написан путь */ ?>
                   <small class="tooltip"
                          title="<?= $this->enumDddd($p['pathData'], '$title', ' / ') ?>"><?= $p['title'] ?></small>

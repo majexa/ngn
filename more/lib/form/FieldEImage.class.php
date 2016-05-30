@@ -10,4 +10,6 @@ class FieldEImage extends FieldEFile {
     ]);
   }
 
+  protected $iconClass = 'image';
+
 }

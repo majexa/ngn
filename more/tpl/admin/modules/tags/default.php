@@ -33,8 +33,8 @@ background-image: url(./i/img/black/loader.gif);
   <? foreach ($str['items'] as $v) { ?>
   <tr id="<?= 'item_'.$v['id'].'_'.$v['oid'] ?>">
     <td class="tools loader">
-      <a href="<?= $this->getPath(2).'/'.$v['id'].'/list' ?>" class="iconBtn edit" title="<?= Lang::get('edit') ?>"><i></i></a>
-      <a href="<?= $this->getPath(2).'/'.$v['id'].'/list' ?>" class="iconBtn delete" title="<?= Lang::get('delete') ?>"><i></i></a>
+      <a href="<?= $this->getPath(2).'/'.$v['id'].'/list' ?>" class="iconBtn edit" title="<?= Locale::get('edit') ?>"><i></i></a>
+      <a href="<?= $this->getPath(2).'/'.$v['id'].'/list' ?>" class="iconBtn delete" title="<?= Locale::get('delete') ?>"><i></i></a>
       <div class="clear"><!-- --></div>
     </td>
     <td><small class="gray">Поле: </small><?= $v['title'] ? $v['title'] : '<i class="gray">{поле удалено}</i>' ?></td>

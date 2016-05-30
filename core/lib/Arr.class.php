@@ -35,7 +35,7 @@ class Arr {
     return $arr;
   }
 
-  static function dropN(array &$arr, $n) {
+  static function dropN(array $arr, $n) {
     unset($arr[$n]);
     return array_values($arr);
   }

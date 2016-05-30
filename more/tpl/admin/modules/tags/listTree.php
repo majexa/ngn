@@ -3,9 +3,9 @@
 <div class="tags">
   <div id="treeMenu" class="iconsSet">
     <small>
-      <a href="#" class="add gray"><i></i><?= Lang::get('create') ?></a>
-      <a href="#" class="rename gray"><i></i><?= Lang::get('rename') ?></a>
-      <a href="#" class="delete gray"><i></i><?= Lang::get('delete') ?></a>
+      <a href="#" class="add gray"><i></i><?= Locale::get('create') ?></a>
+      <a href="#" class="rename gray"><i></i><?= Locale::get('rename') ?></a>
+      <a href="#" class="delete gray"><i></i><?= Locale::get('delete') ?></a>
       <a href="#" class="toggle collapse gray"><i></i>Развернуть все</a>
     </small>
     <div class="clear"><!-- --></div>

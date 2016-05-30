@@ -1,3 +1,4 @@
+// @requiresBefore s2/js/locale/core
 /**
  *
  * <div id="mainElement">
@@ -11,7 +12,7 @@
  *   <div class="element">
  *     ...
  *   </div>
- *   <a href="#" class="add">Добавить</a>
+ *   <a href="#" class="add">Add</a>
  * </div>
  *
  */
@@ -29,15 +30,35 @@ Ngn.FieldSet = new Class({
     dragBoxSelector: 'div[class=dragBox]',
     removeExceptFirstRow: 'p.label',
     moveElementToRowStyles: ['border-bottom', 'padding-left'],
-    addTitle: 'Добавить',
-    cleanupTitle: 'Очистить поля строки',
-    deleteTitle: 'Удалить строку',
+    addTitle: Locale.get('Core.add'),
+    cleanupTitle: Locale.get('Core.clean'),
+    deleteTitle: Locale.get('Core.delete'),
     addRowNumber: false
   },
 
   changed: false,
   eSampleRow: null,
   buttons: [], // array of Ngn.Btn objects
+
+
+  initialize: function(eParent, options) {
+    this.eParent = eParent;
+    this.setOptions(options);
+    this.eContainer = this.getContainer();
+    this.eAddRow = this.eContainer.getElement(this.options.addRowBtnSelector);
+    if (!this.eAddRow) {
+      var eBottomBtns = new Element('div', {'class': 'bottomBtns'}).inject(this.eContainer, 'bottom');
+      this.eAddRow = Ngn.Btn.btn1(this.options.addTitle, 'btn add dgray').inject(eBottomBtns);
+      Elements.from('<div class="heightFix"></div>')[0].inject(this.eContainer, 'bottom');
+    }
+    this.buttons.push(new Ngn.Btn(this.eAddRow, function(btn) {
+      this.buttons.push(btn);
+      this.addRow();
+    }.bind(this)));
+    this.initRows();
+    //this.initSorting();
+    this.checkDeleteButtons();
+  },
 
   toggleDisabled: function(flag) {
     for (var i = 0; i < this.buttons.length; i++) {
@@ -66,25 +87,6 @@ Ngn.FieldSet = new Class({
     return eContainer.inject(this.eParent);
   },
 
-  initialize: function(eParent, options) {
-    this.eParent = eParent;
-    this.setOptions(options);
-    this.eContainer = this.getContainer();
-    this.eAddRow = this.eContainer.getElement(this.options.addRowBtnSelector);
-    if (!this.eAddRow) {
-      var eBottomBtns = new Element('div', {'class': 'bottomBtns'}).inject(this.eContainer, 'bottom');
-      this.eAddRow = Ngn.Btn.btn1(this.options.addTitle, 'btn add dgray').inject(eBottomBtns);
-      Elements.from('<div class="heightFix"></div>')[0].inject(this.eContainer, 'bottom');
-    }
-    this.buttons.push(new Ngn.Btn(this.eAddRow, function(btn) {
-      this.buttons.push(btn);
-      this.addRow();
-    }.bind(this)));
-    this.initRows();
-    //this.initSorting();
-    this.checkDeleteButtons();
-  },
-
   /*
    inputsEmpty: function(container) {
    var elements = container.getElements('input')
@@ -111,17 +113,18 @@ Ngn.FieldSet = new Class({
     }
     this.eSampleRow = this.esRows[0].clone();
     this.eSampleRow.getElements(this.options.cleanOnCloneSelector).dispose();
-    this.createCleanupButton(this.esRows[0]);
+    if (!this.esRows[0].getElement('input[type=file]')) {
+      this.createCleanupButton(this.esRows[0]);
+    }
     this.removeTrash(this.eSampleRow);
     for (var i = 0; i < this.esRows.length; i++) {
       if (this.options.addRowNumber) this.addRowNumber(this.esRows[i]);
       this.moveStyles(this.esRows[i]);
     }
-    return;
     if (this.esRows.length > 0) {
       for (var i = 1; i < this.esRows.length; i++) {
         this.removeTrash(this.esRows[i]);
-        this.createDeleteButton(this.esRows[i]);
+        this.createDeleteButton(this.esRows[i], i);
       }
     }
   },
@@ -139,15 +142,14 @@ Ngn.FieldSet = new Class({
   },
 
   moveStyles: function(eRow) {
-    return;
-    var style;
-    esEls = eRow.getElements(this.options.elementContainerSelector);
-    for (var j = 0; j < this.options.moveElementToRowStyles.length; j++) {
-      style = this.options.moveElementToRowStyles[j];
-      eRow.setStyles(esEls[0].getStyles(style));
-      for (var k = 0; k < esEls.length; k++)
-        esEls[k].setStyle(style, '0');
-    }
+    //var style;
+    //esEls = eRow.getElements(this.options.elementContainerSelector);
+    //for (var j = 0; j < this.options.moveElementToRowStyles.length; j++) {
+    //  style = this.options.moveElementToRowStyles[j];
+    //  eRow.setStyles(esEls[0].getStyles(style));
+    //  for (var k = 0; k < esEls.length; k++)
+    //    esEls[k].setStyle(style, '0');
+    //}
   },
 
   checkDeleteButtons: function() {
@@ -169,15 +171,15 @@ Ngn.FieldSet = new Class({
     var fieldSet = this;
     var eRowBtns = eRow.getElement('.rowBtns');
     this.buttons.push(new Ngn.Btn(// Вставляем кнопку после последнего элемента формы в этой строке
-      //Ngn.addTips(Ngn.Btn.btn(btn)).inject(els[els.length - 1], 'after'), function() {
-      //Ngn.Btn.btn(btn).inject(els[els.length - 1], 'after'), function() {
+      // Ngn.addTips(Ngn.Btn.btn(btn)).inject(els[els.length - 1], 'after'), function() {
+      // Ngn.Btn.btn(btn).inject(els[els.length - 1], 'after'), function() {
       Ngn.Btn.btn(btn).inject(eRowBtns), function() {
         fieldSet.fireEvent(btn.cls);
         action.bind(this)();
       }, options || {}));
   },
 
-  createDeleteButton: function(eRow) {
+  createDeleteButton: function(eRow, index) {
     var fieldSet = this;
     this.createRowButton(eRow, {
       caption: this.options.deleteTitle,
@@ -190,10 +192,6 @@ Ngn.FieldSet = new Class({
   },
 
   createCleanupButton: function(eRow) {
-    var els = eRow.getElements(this.options.elementContainerSelector);
-    //реализовать через css
-    //var eLabel = eRow.getElement(this.options.removeExceptFirstRow);
-    //if (eLabel) eBtn.setStyle('margin-top', (eBtn.getStyle('margin-top').toInt() + eLabel.getSizeWithMargin().y) + 'px');
     this.createRowButton(eRow, {
       caption: this.options.cleanupTitle,
       cls: 'cleanup'
@@ -216,8 +214,8 @@ Ngn.FieldSet = new Class({
     });
     eNewRow.getElements(Ngn.Frm.selector).each(function(eInput, i) {
       Ngn.Frm.emptify(eInput);
-      //if (eInput.get('value')) eInput.set('value', '');
-      //if (eInput.get('checked')) eInput.set('checked', false);
+      if (eInput.get('value')) eInput.set('value', '');
+      if (eInput.get('checked')) eInput.set('checked', false);
       //c(nextRowN);
       eInput.set('name', this.getInputName(eInput, nextRowN));
       //eInput.set('id', lastRowElements[i].get('id').replace('-' + lastRowN + '-', '-' + nextRowN + '-'));

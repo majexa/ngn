@@ -114,30 +114,31 @@ class FieldEFile extends FieldEFileBase {
   protected function validate1() {
     if (empty($this->options['value']) and empty($this->options['postValue']) and !empty($this->options['required'])
     ) {
-      $this->error = "Поле «".(empty($this->options['title']) ? $this->options['name'] : $this->options['title'])."» обязательно для заполнения";
+      $this->error = "Field «".(empty($this->options['title']) ? $this->options['name'] : $this->options['title'])."» is required";
     }
   }
 
+  protected $iconClass = 'file';
+
   protected function htmlNav() {
     $r = '<div class="iconsSet fileNav">';
-    if (($v = $this->dataValue())) {
+    if (($dataValue = $this->dataValue())) {
       $size = File::format2(filesize($this->dataRealValue()));
       if (!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) {
         $deleteHtml = '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].
-        '" class="iconBtn delete confirm" title="Удалить сохраненный файл"><i></i></a>';
+        '" class="iconBtn delete confirm" title="'.Locale::get('deleteSavedFile').'"><i></i></a>';
       } else {
         $deleteHtml = '';
       }
-      //$r .= "<a href=\"$v\" class=\"file fileSaved iconBtnCaption\" target=\"_blank\"><i></i>сохранён ($size)</a>$deleteHtml";
-      $r .= "<a href=\"$v\" class=\"file fileSaved iconBtn\" target=\"_blank\" title=\"сохранён ($size)\"><i></i></a>$deleteHtml";
+      $r .= "<a href=\"$dataValue\" class=\"".$this->iconClass." fileSaved iconBtn\" target=\"_blank\" title=\"".Locale::get('saved')." ($size)\"><i></i></a>$deleteHtml";
     }
-    if ($v = $this->postValue()) {
+    if ($postValue = $this->postValue()) {
       $r .= '<div class="clear"></div>';
       if ($this->options['multiple']) {
-        foreach ($v as $file) $r .= $this->htmlUploadedLink($file);
+        foreach ($postValue as $file) $r .= $this->htmlUploadedLink($file);
       }
       else {
-        $r .= $this->htmlUploadedLink($v);
+        $r .= $this->htmlUploadedLink($dataValue);
       }
     }
     $r .= '</div>';
@@ -146,7 +147,7 @@ class FieldEFile extends FieldEFileBase {
 
   protected function htmlUploadedLink(array $file) {
     if (!file_exists($file['tmp_name'])) return '';
-    return "<a class=\"file fileUploaded iconBtnCaption\"><i></i>загружен (".File::format2(filesize($file['tmp_name'])).")</a>";
+    return "<a class=\"file fileUploaded iconBtnCaption\"><i></i>".Locale::get('loaded')." (".File::format2(filesize($file['tmp_name'])).")</a>";
   }
 
   function isEmpty() {

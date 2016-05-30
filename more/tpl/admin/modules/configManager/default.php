@@ -52,7 +52,7 @@ if ($d['canUpdate']) {
   <div class="info">
     <div class="icon"></div>
     <? if ($d['saved']) { ?><b>Информация сохранена</b><? } ?>
-    <?= Lang::get('amConfigmanagerInfo') ?>
+    <?= Locale::get('amConfigmanagerInfo') ?>
   </div>
   <div class="info"><i></i><?= $d['isMaster'] ? 'MASTER' : 'SLAVE' ?>-конфиг</div>
   -->

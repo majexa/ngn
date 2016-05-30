@@ -36,7 +36,8 @@ abstract class FieldEInput extends FieldEAbstract {
   function _html() {
     return //
       '<input size="40" type="'.$this->inputType.'" '.'id="'.$this->inputId().'"'. //
-      Tt()->tagParams($this->getTagsParams()).$this->getClassAtr().' />';
+      Tt()->tagParams($this->getTagsParams()).
+      $this->getClassAtr().' />';
   }
 
 }

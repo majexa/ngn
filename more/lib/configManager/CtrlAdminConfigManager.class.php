@@ -55,4 +55,4 @@ class CtrlAdminConfigManager extends CtrlAdmin {
 
 }
 
-CtrlAdminConfigManager::$properties['title'] = Lang::get('configManager');
+CtrlAdminConfigManager::$properties['title'] = Locale::get('configManager');
