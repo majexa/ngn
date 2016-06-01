@@ -4,7 +4,10 @@ return [
   'keepEmptyIfNotChanges' => 'Keep empty if you don\'t wish to change your password',
   'add' => 'Add',
   'clean' => 'Clean',
-  'delete' => 'Delete'
+  'delete' => 'Delete',
+  'uploading' => 'Uploading',
+  'uploadComplete' => 'Upload complete',
+  'change' => 'Change',
   /*
   'logout' => 'log out',
 

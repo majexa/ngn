@@ -1,7 +1,7 @@
 Ngn.Form.El.DialogSelect = new Class({
   Extends: Ngn.Form.El,
   options: {
-    selectTitle: 'Нажмите, чтобы сменить',
+    selectTitle: Locale.get('Core.change'),
     selectClass: ''
   },
   baseName: 'defualt',
