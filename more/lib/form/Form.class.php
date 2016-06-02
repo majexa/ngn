@@ -942,6 +942,14 @@ Ngn.Frm.maxLength($('{$this->id()}'), ".FieldEInput::defaultMaxLength.");
     return $r;
   }
 
+  function getTitledText($html = true) {
+    $r = [];
+    foreach ($this->getTitledData() as $v) {
+      $r[] = ($html ? '<b>' : '').$v['title'].':'.($html ? '</b> ' : '').$v['value'];
+    }
+    return implode($html ? "<br>" : "\n", $r);
+  }
+
   function hasAttachebleWisiwig() {
     return Arr::getValueByKey($this->fields->fields, 'type', 'wisiwig') !== false;
   }
