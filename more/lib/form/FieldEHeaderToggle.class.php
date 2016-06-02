@@ -17,9 +17,9 @@ class FieldEHeaderToggle extends FieldEHeaderAbstract {
         '<h3>'.$this->options['title'].'</h3>';
 
     } else {
-      return '<h3>'.$this->options['title'].
-        '&nbsp;<input type="button" class="toggleBtn" data-name="'.$this->options['name'].
-        '" value="&nbsp;&nbsp;↓&nbsp;&nbsp;" /></h3>';
+      return '<h3>'.
+        '<a type="button" class="toggleBtn pseudoLink" data-name="'.$this->options['name'].
+        '">'.$this->options['title'].'</a></h3>';
     }
   }
   
