@@ -10,7 +10,8 @@ class UsersEditForm extends UserForm {
     if (preg_match('/(.*) (.*)/', $name, $m)) {
       $r['firstName'] = $m[1];
       $r['lastName'] = $m[2];
-    } else {
+    }
+    else {
       $r['firstName'] = $name;
       $r['lastName'] = '';
     }
@@ -64,6 +65,14 @@ class UsersEditForm extends UserForm {
 
   protected function _update(array $data) {
     if (empty($data['pass'])) unset($data['pass']);
+    if (isset($data['firstName'])) {
+      $data['name'] = $data['firstName'];
+      unset($data['firstName']);
+    }
+    if (isset($data['lastName'])) {
+      $data['name'] = (!empty($data['name']) ? $data['name'].' ' : '').$data['lastName'];
+      unset($data['lastName']);
+    }
     DbModelCore::update('users', $this->userId, $data, true);
     Auth::save(DbModelCore::get('users', $this->userId));
   }
