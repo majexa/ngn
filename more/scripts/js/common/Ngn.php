@@ -6,6 +6,7 @@ Ngn.fileSizeMax = <?= Misc::phpIniFileSizeToBytes(ini_get('upload_max_filesize')
 Ngn.siteTitle = '<?= defined('SITE_TITLE') ? SITE_TITLE : 'dummy' ?>';
 Ngn.sflmFrontend = '<?= Sflm::frontendName(true) ?>';
 <? if (Config::getVarVar('userReg', 'vkAuthEnable')) { ?>
-Ngn.vkApiId = <?= Config::getVarVar('vk', 'appId') ?>
+Ngn.vkApiId = <?= Config::getVarVar('vk', 'appId') ?>;
+
 <? } ?>
 Locale.use('<?= LOCALE ?>');

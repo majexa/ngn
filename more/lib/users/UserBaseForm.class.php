@@ -13,7 +13,7 @@ class UserBaseForm extends Form {
   }
 
   protected function initErrors() {
-    $this->uc->check('email', 'Такой имейл уже зарегистрирован');
+    $this->uc->check('email', Locale::get('suchEmailAlreadyRegistered'));
     $this->uc->check('login', Config::getVarVar('userReg', 'loginAsFullName') ? 'Такое Ф.И.О. уже зарегистрировано' : 'Такой логин уже зарегистрирован');
     $this->uc->check('phone', 'Пользователь с таким телефоном уже существует');
   }
