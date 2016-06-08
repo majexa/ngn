@@ -39,17 +39,19 @@ class Session {
   /**
    * Write the session
    * @param int session id
-   * @param string data of the session
+   * @param string Session data
    */
   static function write($id, $data) {
     if (!$data) return;
-    db()->query("REPLACE INTO sessions SET id=?, expires=?, data=?", $id, time() + self::$expires, $data);
-    if (!($id = db()->selectCell("SELECT id FROM sessions WHERE id=?", $id))) {
-      db()->query("INSERT INTO sessions SET id=?, expires=?, data=?", $id, time() + self::$expires, $data);
+    $row = [
+      'id' => $id,
+      'expires' => time() + self::$expires,
+      'data' => $data
+    ];
+    if (preg_match('/s:2:"id";s:\d+:"(\d+)";/', $data, $m)) {
+      $row['userId'] = $m[1];
     }
-    else {
-      db()->query("UPDATE sessions SET expires=?, data=? WHERE id=?", time() + self::$expires, $data, $id);
-    }
+    db()->insert('sessions', $row, Db::modeUpdateOnDuplicateKey);
   }
 
   /**

@@ -134,8 +134,12 @@ class Db extends DbSimple_Mysql {
   const modeInsert = 0;
   const modeReplace = 1;
   const modeInsertIgnore = 2;
+  const modeUpdateOnDuplicateKey = 3;
 
   function insert($table, array $data, $mode = 0) {
+    if ($mode === self::modeUpdateOnDuplicateKey) {
+      return $this->query("INSERT INTO $table SET ?a ON DUPLICATE KEY UPDATE ?a", $data, $data);
+    }
     $word = $mode == self::modeReplace ? 'REPLACE' : 'INSERT';
     return $this->query($word.(self::modeInsertIgnore == $mode ? ' IGNORE' : '')." INTO $table SET ?a", $data);
   }
