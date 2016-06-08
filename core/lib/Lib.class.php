@@ -26,11 +26,13 @@ class Lib {
    */
   static function required($_path, Req $req = null, $ext = '.php') {
     if (!in_array($_path, self::$cl)) self::$cl[] = $_path;
-    if (self::vendorAutoloader($_path) !== false) return false;
-    if (($path = self::getPath($_path, false, $ext)) == false) return false;
-    if ($req) $_REQUEST = $req->r;
-    require_once $path;
-    return true;
+    if (($path = self::getPath($_path, false, $ext))) {
+      if ($req) $_REQUEST = $req->r;
+      require_once $path;
+      return true;
+    } elseif (self::vendorAutoloader($_path) === false) {
+      return false;
+    }
   }
 
   static $paths = [];
@@ -137,11 +139,37 @@ class Lib {
    * @return bool
    */
   static protected function vendorAutoloader($class) {
+    $path = str_replace('\\', '/', $class);
+    foreach (self::$psr4Folders as $folder) {
+      if (file_exists($folder.'/'.$path.'.php')) {
+        require $folder.'/'.$path.'.php';
+        return true;
+      }
+    }
     if (($pos = strpos($class, '_')) === false) return false;
+    $path = str_replace('_', '/', $class);
+    foreach (self::$psr2Folders as $folder) {
+      if (file_exists($folder.'/'.$path.'.php')) {
+        require $folder.'/'.$path.'.php';
+        return true;
+      }
+    }
     $vendor = substr($class, 0, $pos);
     if (!isset(self::$vendorAutoloaders[$vendor])) return false;
     $autoloader = self::$vendorAutoloaders[$vendor];
     $autoloader($class);
+  }
+
+  static protected $psr4Folders = [];
+
+  static function addPsr4Folder($folder) {
+    self::$psr4Folders[] = $folder;
+  }
+
+  static protected $psr2Folders = [];
+
+  static function addPsr2Folder($folder) {
+    self::$psr2Folders[] = $folder;
   }
 
   static protected $vendorAutoloaders = [];

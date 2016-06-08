@@ -16,12 +16,14 @@ class UserRegForm extends UserForm {
     return 'formUserReg';
   }
 
+  public $createdId;
+
   protected function _update(array $data) {
     $data = Arr::filterByKeys($data, $this->filterFields);
     $data['active'] = $this->options['active'];
-    $id = DbModelCore::create('users', $data);
-    if (!empty($this->options['onCreate'])) $this->options['onCreate']($id);
-    Ngn::fireEvent('users.new', $id);
+    $this->createdId = DbModelCore::create('users', $data);
+    if (!empty($this->options['onCreate'])) $this->options['onCreate']($this->createdId);
+    Ngn::fireEvent('users.new', $this->createdId);
   }
 
 }

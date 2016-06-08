@@ -40,13 +40,19 @@ class DbModelUsers extends DbModel {
       }
       unset($data['extra']);
     }
-    if (Config::getVarVar('userReg', 'nameEnable')) {
-      if (isset($data['firstName']) and isset($data['secondName'])) {
-        $data['name'] = ucfirst($data['firstName']).' '.ucfirst($data['secondName']);
-      }
-    }
+    self::processName($data);
     parent::update('users', $id, $data, true);
     if (!empty($data['pass'])) self::logout($id);
+  }
+
+  static protected function processName(array &$data) {
+    if (Config::getVarVar('userReg', 'nameEnable')) {
+      if (isset($data['firstName']) and isset($data['lastName'])) {
+        $data['name'] = ucfirst($data['firstName']).' '.ucfirst($data['lastName']);
+        unset($data['firstName']);
+        unset($data['lastName']);
+      }
+    }
   }
 
   static protected function logout($userId) {
@@ -62,6 +68,7 @@ class DbModelUsers extends DbModel {
       unset($data['extra']);
     }
     $data['actCode'] = Misc::randString();
+    self::processName($data);
     $id = parent::create('users', $data);
     if (isset($extra) and Config::getVarVar('userReg', 'extraData')) {
       DbModelCore::replace(DdCore::table(UsersCore::extraStrName), $id, Arr::serialize($extra));

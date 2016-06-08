@@ -2,7 +2,7 @@
 
 class UserForm extends UserBaseForm {
 
-  protected $filterFields = ['login', 'user', 'pass', 'email', 'name', 'phone', 'extra', 'role'];
+  protected $filterFields = ['login', 'user', 'pass', 'email', 'name', 'firstName', 'lastName', 'phone', 'extra', 'role'];
   public $strName = UsersCore::extraStrName;
 
   protected function defineOptions() {
