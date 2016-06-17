@@ -40,6 +40,12 @@ abstract class SflmBase {
     return $this->packagesCache[$lib];
   }
 
+  /**
+   * @param $package
+   * @param bool $strict
+   * @returns array|false
+   * @throws Exception
+   */
   protected function getPackageLibs($package, $strict = false) {
     if (($r = Config::getVar("sfl/".$this->type."/$package", true, false)) !== false) return $r;
     $errText = "Package '$package' (sfl/".$this->type."/$package) does not exists";
@@ -142,7 +148,7 @@ abstract class SflmBase {
     $file = $this->cacheFile($package);
     if (!$code) $code = $this->getPackageCode($package);
     if (!$code) return false;
-    if (file_exists($file) and file_get_contents($file) == $code) return false; // Если размер кода не изменился, не сохраняем
+    if (file_exists($file) and strlen(file_get_contents($file)) == strlen($code)) return false; // Если размер кода не изменился, не сохраняем
     Dir::make(Sflm::$webPath.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
     return $file;

@@ -208,19 +208,14 @@ Ngn.FieldSet = new Class({
     var eLabel;
     var lastRowElements = eLastRow.getElements(Ngn.Frm.selector);
     eNewRow.getElements('.element').each(function(eElement, i) {
-      //c(eElement.get('class').replace('-' + curN + '-', '-' + nextN + '-'));
-      //c('(.*)-' + lastRowN + '-(.*)');
       eElement.set('class', eElement.get('class').replace(new RegExp('(.*)-0-(.*)'), '$1-' + nextRowN + '-$2'));
     });
     eNewRow.getElements(Ngn.Frm.selector).each(function(eInput, i) {
       Ngn.Frm.emptify(eInput);
       if (eInput.get('value')) eInput.set('value', '');
       if (eInput.get('checked')) eInput.set('checked', false);
-      //c(nextRowN);
       eInput.set('name', this.getInputName(eInput, nextRowN));
-      //eInput.set('id', lastRowElements[i].get('id').replace('-' + lastRowN + '-', '-' + nextRowN + '-'));
       eLabel = eInput.getNext('label');
-      //if (eLabel) eLabel.set('for', eInput.get('id'));
       this.initInput(eInput);
     }.bind(this));
     eNewRow.inject(eLastRow, 'after');
@@ -276,7 +271,6 @@ Ngn.FieldSet = new Class({
     ST.addEvent('complete', function(el, clone) {
       el.removeClass('move');
     }.bind(this));
-
     this.eContainer.getElements(this.options.dragBoxSelector).each(function(el) {
       el.addEvent('mouseover', function() {
         el.addClass('over');

@@ -144,7 +144,7 @@ class Sflm {
 
   static $absBasePaths;
   static $baseFolders = [];
-  static $log = true; // set true for debug
+  static $log = false; // set true for debug
   static $debugPaths = [];
   static $debugUrl;
   static $webPath;

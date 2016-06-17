@@ -199,6 +199,7 @@ Ngn.Form = new Class({
   },
 
   initHtml5Upload: function() {
+    if (!this.hasFilesFields()) return;
     this.uploadType = 'html5';
     this.eForm.getElements('input[type=file]').each(function(eInput) {
       if (eInput.retrieve('uploadInitialized')) return;
@@ -353,7 +354,6 @@ Ngn.Form = new Class({
   },
 
   _submit: function() {
-    //c('_submit');
     this.eForm.submit();
   }
 
