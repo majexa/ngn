@@ -1,9 +1,10 @@
+// @requiresBefore s2/js/locale/core
 Ngn.Dialog.Confirm = new Class({
   Extends: Ngn.Dialog.Msg,
 
   options: {
     width: 300,
-    message: 'Вы уверены?'
+    message: Locale.get('Core.areYouSure')
   },
 
   initialize: function(_opts) {

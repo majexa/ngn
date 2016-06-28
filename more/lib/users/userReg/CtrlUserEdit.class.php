@@ -78,15 +78,15 @@ class CtrlUserEdit extends CtrlBase {
     return $form;
   }
 
-  function action_editName() {
-    if (!Config::getVarVar('mysite', 'enable')) throw new Exception('Mysite is disabled');
-    if (empty($this->conf['allowNameEdit'])) throw new Exception('Name change not allowed');
-    $this->wrapProcessForm('name');
-    $this->setPageTitle("Изменение e-mail'а");
+  function action_json_editName() {
+    $this->json['title'] = 'Имя';
+    $form = $this->userEditForm('name');
+    $form->action = '/'.$this->req->path;
+    return $form;
   }
 
   protected function processFieldEditForm($fieldName, $fieldTitle, $fieldType = 'text') {
-    $form = new Form(new Fields([
+    $form = new UserFormPartial(new Fields([
       [
         'name'     => 'pass',
         'title'    => 'Ваш пароль',
@@ -164,7 +164,7 @@ class CtrlUserEdit extends CtrlBase {
   }
 
   protected function processNameEditForm() {
-    return $this->processFieldEditForm('name', 'Домен');
+    return $this->processFieldEditForm('name', 'Имя');
   }
 
 }

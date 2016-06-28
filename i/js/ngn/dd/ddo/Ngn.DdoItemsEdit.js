@@ -7,7 +7,6 @@ Ngn.DdoItemsEdit = new Class({
   },
 
   initItem: function(eItem) {
-    console.debug('!');
     new Ngn.DdoItemEditBtns( //
       eItem.get('data-id'), //
       new Element('div', {'class': 'btns'}).inject(eItem, 'top'), //
@@ -26,7 +25,8 @@ Ngn.DdoItemsEdit = new Class({
               'margin-right': 0,
               opacity: 0
             });
-        }.bind(this)
+        }.bind(this),
+        movable: true
       }
     );
   },

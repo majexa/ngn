@@ -10,6 +10,7 @@ Ngn.Form.El.Color = new Class({
     });
     new Ngn.Rainbow(eInput, {
       eParent: eInput.getParent(),
+      eColor: eColor,
       id: 'rainbow_' + eInput.get('name'),
       //styles: { // и так работает
       //  'z-index': this.options.dialog.dialog.getStyle('z-index').toInt() + 1

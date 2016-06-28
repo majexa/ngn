@@ -4,6 +4,7 @@ return [
   'activation' => '',
   'authorizeAfterReg' => true,
   'vkAuthEnable' => false,
+  'nameEnable' => false,
   'loginEnable' => false,
   'emailEnable' => true,
   'phoneEnable' => false,

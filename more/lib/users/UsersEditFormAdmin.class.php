@@ -1,6 +1,6 @@
 <?php
 
-class UsersEditFormAdmin extends UsersEditForm {
+class UsersEditFormAdmin extends UsersEditFormAbstract {
 
   protected function init() {
     parent::init();

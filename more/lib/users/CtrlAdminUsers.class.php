@@ -52,9 +52,16 @@ class CtrlAdminUsers extends CtrlAdmin {
     if ($config['loginEnable']) $head[] = UserRegCore::getLoginTitle();
     if ($config['emailEnable']) $head[] = 'E-mail';
     if ($config['phoneEnable']) $head[] = 'Телефон';
+    if ($config['nameEnable']) $head[] = 'Имя';
+    if ($config['roleEnable']) {
+      $head[] = 'Тип профиля';
+      $roles = Config::getVar('userRoles');
+    } else {
+      $roles = [];
+    }
     return [
       'head' => Arr::append($head, Arr::get($exFields, 'title')),
-      'body' => array_map(function($item) use ($exItems, $exFields, $config) {
+      'body' => array_map(function($item) use ($exItems, $exFields, $config, $roles) {
         // @todo эту вещь нужно реализовать через DDO
         $exItem = isset($exItems[$item['id']]) ? Arr::filterByKeys($exItems[$item['id']], array_keys($exFields)) : [];
         foreach ($exFields as $f) {
@@ -66,11 +73,12 @@ class CtrlAdminUsers extends CtrlAdmin {
             }
           }
         }
-
         $data = [$item['id']];
         if ($config['loginEnable']) $data[] = $item['login'];
         if ($config['emailEnable']) $data[] = $item['email'];
         if ($config['phoneEnable']) $data[] = $item['phone'];
+        if ($config['nameEnable']) $data[] = $item['name'];
+        if ($config['roleEnable']) $data[] = $roles[$item['role']];
         return [
           'id'        => $item['id'],
           'active'    => $item['active'],

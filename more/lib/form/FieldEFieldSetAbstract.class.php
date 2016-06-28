@@ -53,7 +53,7 @@ abstract class FieldEFieldSetAbstract extends FieldEAbstract {
     }
     $this->form->createElement([
       'type' => 'html',
-      'html' => '<div class="fieldSet type_'.$this->type.'">'
+      'html' => '<div class="fieldSet type_'.$this->type.' fieldSet_'.$this->options['name'].'">'
     ]);
     $oFields = new Fields($this->options['fields']);
     // Генерируем поля по данным, если значение определено

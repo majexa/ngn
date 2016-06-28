@@ -16,6 +16,9 @@ class FieldEFieldList extends FieldEFieldSetAbstract {
         'type' => empty($this->options['fieldsType']) ? 'text' : $this->options['fieldsType']
       ]
     ];
+    if (isset($this->options['placeholder'])) {
+      $this->options['fields'][0]['placeholder'] = $this->options['placeholder'];
+    }
     parent::init();
   }
 

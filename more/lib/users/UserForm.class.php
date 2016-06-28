@@ -7,6 +7,7 @@ class UserForm extends UserBaseForm {
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
+      'id' => 'user',
       'active' => !(bool)Config::getVarVar('userReg', 'activation')
     ]);
   }
@@ -39,14 +40,14 @@ class UserForm extends UserBaseForm {
         'required'     => true,
       ];
     }
-//    if (Config::getVarVar('userReg', 'phoneEnable')) {
-//      $fields[] = [
-//        'name'     => 'phone',
-//        'title'    => 'Телефон',
-//        'type'     => 'phone',
-//        'required' => true
-//      ];
-//    }
+    if (Config::getVarVar('userReg', 'phoneEnable')) {
+      $fields[] = [
+        'name'     => 'phone',
+        'title'    => 'Телефон',
+        'type'     => 'phone',
+        'required' => true
+      ];
+    }
     $fields[] = [
       'name'         => 'pass',
       'title'        => Locale::get('password'),

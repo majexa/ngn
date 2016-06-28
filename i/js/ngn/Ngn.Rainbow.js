@@ -10,7 +10,8 @@ Ngn.Rainbow = new Class({
     wheel: false,
     onComplete: Function.from(),
     onChange: Function.from(),
-    eParent: null
+    eParent: null,
+    eColor: null
   },
 
   initialize: function(el, options) {
@@ -36,10 +37,13 @@ Ngn.Rainbow = new Class({
     this.element.addEvent('click', function(e) {
       this.closeAll().toggle(e);
     }.bind(this));
-
+    if (this.options.eColor) {
+      this.options.eColor.addEvent('click', function(e) {
+        this.closeAll().toggle(e);
+      }.bind(this));
+    }
     this.layout.overlay.setStyle('background-color', this.options.startColor.rgbToHex());
     //this.layout.backup.setStyle('background-color', this.backupColor.rgbToHex());
-
     this.pickerPos.x = this.snippet('curPos').l + this.snippet('curSize', 'int').w;
     this.pickerPos.y = this.snippet('curPos').t + this.snippet('curSize', 'int').h;
 

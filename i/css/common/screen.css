@@ -79,8 +79,11 @@ background: #fff;
 font-family: Verdana, Tahoma, "Helvetica Neue", Helvetica, sans-serif;
 }
 
-body, input {
+body {
 font-size: 12px;
+}
+input {
+font-size: 14px;
 }
 
 /* Headings

@@ -217,6 +217,7 @@ class Form {
       if ($this->options['dataParams']) $html .= Html::dataParams($this->options['dataParams']);
       if (!empty($this->encType)) $html .= ' enctype="'.$this->encType.'"';
       if (!empty($this->options['name'])) $html .= ' name="'.$this->options['name'].'"';
+      if (!empty($this->options['class'])) $html .= ' class="'.$this->options['class'].'"';
       $html .= ' id="'.$this->id().'" method="'.($this->methodPost ? 'post' : 'get').'">';
       return $html;
     }

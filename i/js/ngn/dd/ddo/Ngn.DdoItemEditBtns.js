@@ -2,17 +2,25 @@ Ngn.DdoItemEditBtns = new Class({
   Implements: [Options, Events],
   
   options: {
-    baseUrl: window.location.pathname
+    baseUrl: window.location.pathname,
+    movable: false
   },
 
   initialize: function(id, btnsContainer, options) {
     this.id = id;
     this.btnsContainer = btnsContainer;
     this.setOptions(options);
+    console.debug(this.options);
     this.init();
   },
 
   init: function() {
+    console.log('+++');
+    if (this.options.movable) {
+      Ngn.Btn.btn2('Пеедвинуть', 'drag').inject(this.btnsContainer).addEvent('click', function() {
+        //...
+      }.bind(this));
+    }
     Ngn.Btn.btn2('Редактировать', 'edit').inject(this.btnsContainer).addEvent('click', function() {
       new Ngn.Dialog.RequestForm({
         title: 'Редактирование',

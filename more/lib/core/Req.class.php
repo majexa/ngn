@@ -183,7 +183,7 @@ class Req extends ArrayAccesseble {
    * @throws NotLoggableError
    */
   function param($n) {
-    if (empty($this->params[$n])) throw new NotLoggableError("params[$n] is empty");
+    if (!isset($this->params[$n])) throw new NotLoggableError("params[$n] not defined");
     return $this->params[$n];
   }
 
