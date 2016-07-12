@@ -8,7 +8,6 @@
 
 Misc::checkEmpty($_REQUEST, ['name', 'path']);
 if (isset($_REQUEST['controller'])) {
-  LogWriter::str('ddddd', 'http://'.SITE_DOMAIN.'/'.ltrim($_REQUEST['controller'], '/'));
   //...
   //try {
   $html = (new Curl)->get('http://'.SITE_DOMAIN.'/'.ltrim($_REQUEST['controller'], '/'));

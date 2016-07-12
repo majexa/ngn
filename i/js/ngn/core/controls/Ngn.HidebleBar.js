@@ -22,38 +22,41 @@ Ngn.HidebleBar = new Class({
     this.positionHandlerShow();
     this.init();
     window.addEvent('resize', this.position.bind(this));
-    var fxHide = new Fx.Slide(this.eBar, {
-      mode: this.slideMode,
-      duration: 100,
-      onComplete: function() {
-        this.hide();
-        Ngn.Storage.set('hidebleBar' + this.id, false);
-      }.bind(this)
-    });
-    var state = Ngn.Storage.bget('hidebleBar' + this.id);
-    if (!state) {
-      (function() {
-        fxHide.hide();
-        this.hide();
-      }).delay(1, this);
-    } else {
-      this.eHandlerShow.setStyle('visibility', 'hidden');
-    }
+    //var fxHide = new Fx.Slide(this.eBar, {
+    //  mode: this.slideMode,
+    //  duration: 100,
+    //  onComplete: function() {
+    //    this.hide();
+    //    Ngn.Storage.set('hidebleBar' + this.id, false);
+    //  }.bind(this)
+    //});
+    //var state = Ngn.Storage.bget('hidebleBar' + this.id);
+    //console.debug(state);
+    //if (!state) {
+    //  (function() {
+    //    fxHide.hide();
+    //    this.hide();
+    //  }).delay(1, this);
+    //} else {
+    //  //this.eHandlerShow.setStyle('visibility', 'hidden');
+    //}
     var fxShow = new Fx.Slide(this.eBar, {
       mode: this.slideMode,
-      duration: 100,
-      onComplete: function() {
-        window.fireEvent('resize');
-        Ngn.Storage.set('hidebleBar' + this.id, true);
-        this.eHandlerShow.setStyle('visibility', 'hidden');
-      }.bind(this)
+      duration: 100
+      //onComplete: function() {
+      //  window.fireEvent('resize');
+      //  Ngn.Storage.set('hidebleBar' + this.id, true);
+      //  this.eHandlerShow.setStyle('visibility', 'hidden');
+      //}.bind(this)
     });
-    this.eHandlerHide.addEvent('click', function() {
-      fxHide.slideOut();
-    });
-    this.eHandlerShow.addEvent('click', function() {
-      fxShow.slideIn();
-    }.bind(this));
+    fxShow.show();
+    //fxShow.slideOut();
+    //this.eHandlerHide.addEvent('click', function() {
+    //  fxHide.slideOut();
+    //});
+    //this.eHandlerShow.addEvent('click', function() {
+    //  fxShow.slideIn();
+    //}.bind(this));
   },
 
   hide: function() {

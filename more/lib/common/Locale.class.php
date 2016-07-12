@@ -2,8 +2,8 @@
 
 class Locale {
 
-  static function get($name) {
-    $lang = Config::getVar('locale/'.LOCALE.'/core');
+  static function get($name, $section = 'core') {
+    $lang = Config::getVar('locale/'.LOCALE.'/'.$section);
     if (isset($lang[$name])) {
       return $lang[$name];
     } else {

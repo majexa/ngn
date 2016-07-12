@@ -135,10 +135,14 @@ abstract class SflmFrontend {
    * @return string
    * @throws Exception
    */
-  function getTagsDebug() {
-    $html = $this->base->getTags($this->name, $this->_code());
-    $html .= $this->addDebugTags();
-    return $html;
+  function getTagsFinal() {
+    if (Sflm::$buildMode) {
+      $html = $this->base->getTags($this->name, $this->_code());
+      $html .= $this->addDebugTags();
+      return $html;
+    } else {
+      return $this->base->getTags($this->name);
+    }
   }
 
   function getTags() {
@@ -308,13 +312,15 @@ abstract class SflmFrontend {
   function getDeltaUrl() {
     if (!$this->newPaths) return false;
     if (!Sflm::$buildMode) {
-      return false;
-      // todo: выяснить почему такая ситуация происходит на продакшене zukul
-      //throw new Exception('newPaths can not be present if BUILD MODE off. newPaths:'. //
-      //  getPrr($this->newPaths));
+      throw new Exception('newPaths can not be present if BUILD MODE off. newPaths:'. //
+        getPrr($this->newPaths));
     }
     $this->checkStored();
-    return $this->base->getUrl($this->name.'new', $this->base->extractCode($this->newPaths), true);
+    return $this->base->getUrl( //
+      $this->name.'Delta', //
+      $this->base->extractCode($this->newPaths, $this->name.'Delta'), //
+      true //
+    );
   }
 
   protected function versionCacheKey() {

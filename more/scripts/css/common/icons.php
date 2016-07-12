@@ -273,3 +273,11 @@ foreach ($cords as $class => $c)
   print ".tools .$class i { background-position: $c[0]px $c[1]px }\n";
       
 ?>
+
+.smIcons.drag i {
+background-image: none;
+}
+.smIcons.drag  {
+background-image: url(/i/img/black/drag-bg.gif);
+cursor: url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur) 4 4, move;
+}

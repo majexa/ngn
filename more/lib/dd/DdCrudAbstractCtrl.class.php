@@ -22,11 +22,12 @@ use ObjectProcessorCtrl;
   abstract protected function getStrName();
 
   /**
+   * @param array $options
    * @return DdItems
    */
-  protected function items() {
+  protected function items(array $options = []) {
     if (isset($this->items)) return $this->items;
-    $this->items = $this->_items();
+    $this->items = $this->_items($options);
     $this->items->isPagination = true;
     return $this->objectProcess($this->items, 'items');
   }

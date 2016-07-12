@@ -72,7 +72,7 @@ class Sflm {
   }
 
   static function getTags() {
-    return Sflm::frontend('js')->getTagsDebug()."\n".Sflm::frontend('css')->getTagsDebug();
+    return Sflm::frontend('js')->getTagsFinal()."\n".Sflm::frontend('css')->getTagsFinal();
   }
 
   static function frontendName($strict = false) {
@@ -166,6 +166,6 @@ Sflm::$forceCache = getConstant('FORCE_STATIC_FILES_CACHE');
 Sflm::$absBasePaths = [
   'i' => NGN_PATH.'/i'
 ];
-Sflm::$output = false; // set true to debug
+Sflm::$output = true; // set true to debug
 Sflm::$webPath = defined('WEBROOT_PATH') ? WEBROOT_PATH.'/'.UPLOAD_DIR : NGN_ENV_PATH.'/temp';
 Sflm::$buildMode = getConstant('BUILD_MODE');

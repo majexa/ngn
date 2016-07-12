@@ -134,13 +134,13 @@ abstract class CtrlAdmin extends CtrlCp {
     $links[] = [
       'link'   => $this->tt->getPathRoot(),
       'class'  => 'site',
-      'title'  => Locale::get('site'),
+      'title'  => Locale::get('site', 'admin'),
       'target' => '_blank'
     ];
     $links[] = [
       'link'  => $this->tt->getPath().'?logout=1',
       'class' => 'logout',
-      'title' => Locale::get('exit')
+      'title' => Locale::get('exit', 'admin')
     ];
     $this->setTopLinks($links);
   }

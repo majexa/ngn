@@ -13,4 +13,4 @@ FileCache::c()->clean();
 UrlCache::clearCache();
 DdiCache::cleanAll();
 Sflm::clearCache();
-output("cleared");
+output('cache cleared');

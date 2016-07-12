@@ -110,11 +110,12 @@ abstract class SflmBase {
     return !Misc::hasPrefix('m/', $path);
   }
 
-  function extractCode(array $paths) {
-    $cacheKey = 'sflmExtract'.md5(serialize($paths));
-    if (($code = FileCache::c()->load($cacheKey)) !== false) {
-      return $code;
-    }
+  function extractCode(array $paths, $key = null) {
+//    $cacheKey = 'sflmCode'.$this->type.($key ?: md5(serialize($paths)));
+//    if (($code = FileCache::c()->load($cacheKey)) !== false) {
+//      return $code;
+//    }
+//    LogWriter::v($cacheKey, $paths, null);
     $code = '';
     foreach ($paths as $path) {
       $absPath = $this->getAbsPath($path);
@@ -128,7 +129,7 @@ abstract class SflmBase {
         $code .= $this->getFileContents($absPath, $this->isStrictPath($path));
       }
     }
-    FileCache::c()->save($code, $cacheKey);
+//    FileCache::c()->save($code, $cacheKey);
     return $code;
   }
 
@@ -302,9 +303,12 @@ abstract class SflmBase {
   }
 
   function getUrl($package, $code = null, $force = false) {
-    if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$webPath.'/'.$this->filePath($package))) {
-      // Если идёт отладка статических файлов или собранного файла не существует
-      $this->storeLib($package, $code);
+    // Если BUILD_MODE выключен, ничего не сторим
+    if (Sflm::$buildMode) {
+      if ($force or Sflm::$debug or Sflm::$forceCache or !file_exists(Sflm::$webPath.'/'.$this->filePath($package))) {
+        // Если идёт отладка статических файлов или собранного файла не существует
+        $this->storeLib($package, $code);
+      }
     }
     return '/'.UPLOAD_DIR.'/'.$this->filePath($package).'?'.$this->version;
   }

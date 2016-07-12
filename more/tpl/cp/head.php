@@ -5,8 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html;charset=<?= CHARSET ?>">
   <base href="<?= $d['base'] ?>/" />
   <link rel="icon" href="./i/img/ngn/favicon.ico" type="image/x-icon" />
-  <?= Sflm::frontend('css')->getTagsDebug('cp') ?>
-  <?= Sflm::frontend('js')->getTagsDebug('cp') ?>
+  <?= Sflm::frontend('css')->getTagsFinal('cp') ?>
+  <?= Sflm::frontend('js')->getTagsFinal('cp') ?>
   <script type="text/javascript">
   window.addEvent('domready', function() {
     Ngn.cp.init();

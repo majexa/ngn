@@ -8,7 +8,8 @@ return [
   'uploading' => 'Uploading',
   'uploadComplete' => 'Upload complete',
   'change' => 'Change',
-  'areYouSure' => 'Are you sure?'
+  'areYouSure' => 'Are you sure?',
+  'loading' => 'Loading'
   /*
   'logout' => 'log out',
 

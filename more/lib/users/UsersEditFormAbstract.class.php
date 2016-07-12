@@ -47,13 +47,13 @@ class UsersEditFormAbstract extends UserForm {
     $fields = Arr::injectAfter($fields, $n - 1, [
       [
         'name'  => 'passBegin',
-        'title' => Locale::get('changePassword'),
+        'title' => Locale::get('changePassword', 'users'),
         'type'  => 'headerToggle'
       ],
       [
         'name'  => 'pass',
-        'title' => Locale::get('password'),
-        'help'  => Locale::get('keepEmptyIfNotChanges'),
+        'title' => Locale::get('password', 'users'),
+        'help'  => Locale::get('keepEmptyIfNotChanges', 'users'),
         'type'  => 'password'
       ],
       [

@@ -31,19 +31,19 @@ class UserForm extends UserBaseForm {
     if (Config::getVarVar('userReg', 'nameEnable')) {
       $fields[] = [
         'name'         => 'firstName',
-        'title'        => 'First Name',
+        'title'        => Locale::get('firstName', 'users'),
         'required'     => true,
       ];
       $fields[] = [
         'name'         => 'lastName',
-        'title'        => 'Last Name',
+        'title'        => Locale::get('lastName', 'users'),
         'required'     => true,
       ];
     }
     if (Config::getVarVar('userReg', 'phoneEnable')) {
       $fields[] = [
         'name'     => 'phone',
-        'title'    => 'Телефон',
+        'title'    => Locale::get('phone', 'users'),
         'type'     => 'phone',
         'required' => true
       ];

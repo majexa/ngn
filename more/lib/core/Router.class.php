@@ -111,7 +111,7 @@ abstract class Router {
   }
 
   protected function sflmInject() {
-    $tags = Sflm::frontend('js')->getTagsDebug()."\n".Sflm::frontend('css')->getTagsDebug();
+    $tags = Sflm::frontend('js')->getTagsFinal()."\n".Sflm::frontend('css')->getTagsFinal();
     $this->html = str_replace('{sflm}', $tags, $this->html);
   }
 

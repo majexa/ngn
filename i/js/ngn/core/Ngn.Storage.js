@@ -5,7 +5,13 @@ Ngn.Storage = {
     } else {
       var v = Cookie.read(key);
     }
-    if (v == 'false') return false; else if (v == 'true') return true; else return v;
+    if (v == 'false') {
+      return false;
+    } else if (v == 'true') {
+      return true;
+    } else {
+      return v;
+    }
   },
   set: function(key, value) {
     if (localStorage) {

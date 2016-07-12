@@ -75,6 +75,7 @@ class Req extends ArrayAccesseble {
     if (!trim($this->options['uri'], '/')) {
       $path = '/';
     } else {
+      output();
       $uriData = parse_url($this->options['uri']);
       if (empty($uriData['path'])) $uriData['path'] = '/';
       $path = $uriData['path'];

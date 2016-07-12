@@ -106,4 +106,4 @@ class CtrlAdminUsers extends CtrlAdmin {
 
 }
 
-CtrlAdminUsers::$properties['title'] = Locale::get('users');
+CtrlAdminUsers::$properties['title'] = Locale::get('users', 'admin');

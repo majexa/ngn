@@ -1,4 +1,4 @@
--- version: 1600
+-- version: 1610
 
 CREATE TABLE IF NOT EXISTS `dd_fields` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -143,7 +143,9 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `id` varchar(255) NOT NULL DEFAULT '',
   `expires` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text,
-  PRIMARY KEY (`id`)
+  `userId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `settings` (

@@ -1,6 +1,7 @@
 .hidebleBarHandler {
 cursor: pointer;
 position: absolute;
+left: 50%;
 opacity: 0.7;
 }
 .hidebleBarHandler.hover {

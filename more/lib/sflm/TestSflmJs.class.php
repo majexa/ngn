@@ -124,7 +124,7 @@ Ngn.aaa
 <script src="abc/i/js/ngn/test/Ngn.Sub.A.js" type="text/javascript"></script>
 <script src="abc/i/js/ngn/test/Ngn.Sub.B.js" type="text/javascript"></script>
 TAGS;
-    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTagsDebug(), $tags));
+    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTagsFinal(), $tags));
   }
 
   function testDebugPathOnAddingClass() {
@@ -138,13 +138,13 @@ TAGS;
     Sflm::frontend('js')->addClass('Ngn.Sub.B');
     // получаем теги
     Sflm::frontend('js')->store();
-    Sflm::frontend('js')->getTagsDebug();
+    Sflm::frontend('js')->getTagsFinal();
     Sflm::setFrontend('js');
     // добавляем класс, но он уже в кэше. до добавления пути, где проверяются отладочные пути не доходит
     Sflm::frontend('js')->addClass('Ngn.Sub.B');
     Sflm::frontend('js')->store();
     // тег есть
-    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTagsDebug(), 'Ngn.Sub.B'));
+    $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTagsFinal(), 'Ngn.Sub.B'));
     // класса не должно быть в основном файле
     $this->assertFalse((bool)strstr(Sflm::frontend('js')->_code(), 'Ngn.Sub.B'));
     // зато там должен быть Ngn.Sub.A от которого наследуется Ngn.Sub.B и которого нет в отладочных путях

@@ -1,10 +1,10 @@
+// @requiresBefore s2/js/locale/core
 Ngn.Dotter = new Class({
   Implements: [Options,Events],
 
   options: {
     delay: 500,
     dot: '.',
-    message: 'Loading',
     numDots: 10,
     property: 'text',
     reset: false/*,
@@ -16,6 +16,7 @@ Ngn.Dotter = new Class({
 
   initialize: function(container, options) {
     this.setOptions(options);
+    this.options.message = Locale.get('Core.loading');
     this.container = document.id(container);
     this.dots = 0;
     this.running = false;

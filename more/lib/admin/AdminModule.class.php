@@ -34,7 +34,7 @@ class AdminModule {
     if (!empty($module['alwaysOnMenu'])) return true;
     if (empty($module['onMenu'])) return false;
     if (O::get('Req')->params[0] == 'god') return true;
-    return false;
+    return self::_isAllowed($module['name']);
   }
 
   static protected function _isAllowed($moduleName) {

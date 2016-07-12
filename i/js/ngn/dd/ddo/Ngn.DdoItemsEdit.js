@@ -6,7 +6,19 @@ Ngn.DdoItemsEdit = new Class({
     items: '.ddItems .item'
   },
 
+  initialize: function(options) {
+    this.parent(options);
+    //console.debug(this.esItems);
+    //new Sortables(this.esItems, {
+    //  handle: '.grag',
+    //  clone: false
+    //});
+  },
+
+  //esItems: [],
+
   initItem: function(eItem) {
+    //this.esItems.push(eItem);
     new Ngn.DdoItemEditBtns( //
       eItem.get('data-id'), //
       new Element('div', {'class': 'btns'}).inject(eItem, 'top'), //

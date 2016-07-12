@@ -150,7 +150,7 @@ class UsersCore {
     return BracketName::getValue($user->r, $titleName) ?: "no&nbsp;$titleName";
   }
 
-  static $staticTitleNames = ['login', 'email', 'phone'];
+  static $staticTitleNames = ['login', 'email', 'phone', 'name'];
 
   static function getTitleNames() {
     $names = [];
