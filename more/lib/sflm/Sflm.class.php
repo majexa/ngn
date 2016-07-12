@@ -158,6 +158,11 @@ class Sflm {
    */
   static $buildMode;
 
+  static $uglify = [
+    'js' => false,
+    'css' => false
+  ];
+
 }
 
 Sflm::$strictMode = IS_DEBUG;

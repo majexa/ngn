@@ -170,11 +170,6 @@ abstract class SflmFrontend {
   function store($source = 'root') {
     $this->checkNotStored();
     $this->storeBacktrace = getBacktrace(false);
-//    if (!$this->newPaths and !$this->newAbsPaths) {
-//      $this->stored = true;
-//      $this->log("No new paths. Storing skipped");
-//      return;
-//    }
     $this->log("Update collected '{$this->name}.{$this->base->type}' file after adding lib ".($source ? "from '$source' source" : ''));
     $this->storePaths();
     $this->storeAbsPaths();
@@ -182,11 +177,13 @@ abstract class SflmFrontend {
       $originFolder = dirname(dirname($file)).'/origin';
       Dir::make($originFolder);
       $originFile = $originFolder.'/'.basename($file);
-      if (!file_exists($originFile) or filesize($originFile) != filesize($file)) {
-        copy($file, $originFile);
-        $this->uglify($file);
-        $this->incrementVersion();
+      if (Sflm::$uglify[$this->base->type]) {
+        if (!file_exists($originFile) or filesize($originFile) != filesize($file)) {
+          copy($file, $originFile);
+          $this->uglify($file);
+        }
       }
+      $this->incrementVersion();
       $this->stored = true;
     }
   }
@@ -316,11 +313,7 @@ abstract class SflmFrontend {
         getPrr($this->newPaths));
     }
     $this->checkStored();
-    return $this->base->getUrl( //
-      $this->name.'Delta', //
-      $this->base->extractCode($this->newPaths, $this->name.'Delta'), //
-      true //
-    );
+    return $this->base->getUrl($this->name.'Delta', $this->base->extractCode($this->newPaths), true);
   }
 
   protected function versionCacheKey() {
