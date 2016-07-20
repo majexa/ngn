@@ -48,6 +48,12 @@ class DdStructureCore {
       if ($strict) throw $e;
     }
     $fieldsManager = new DdFieldsManager($strName);
+    foreach ((new DdFields($strName))->getFieldsF() as $existingField) {
+      if (!Arr::subValueExists($strFields, 'name', $existingField['name'])) {
+        $fieldsManager->deleteByName($existingField['name']);
+        output($existingField['name'].' removed');
+      }
+    }
     foreach ($strFields as $strField) {
       if (($existingField = $fieldsManager->items->getItemByField('name', $strField['name']))) {
         $strFieldKeys = array_keys($strField);

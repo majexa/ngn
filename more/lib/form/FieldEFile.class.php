@@ -122,7 +122,8 @@ class FieldEFile extends FieldEFileBase {
 
   protected function htmlNav() {
     $r = '<div class="iconsSet fileNav">';
-    if (($dataValue = $this->dataValue())) {
+    $dataValue = $this->dataValue();
+    if ($dataValue) {
       $size = File::format2(filesize($this->dataRealValue()));
       if (!empty($this->form->options['deleteFileUrl']) and empty($this->options['required'])) {
         $deleteHtml = '<a href="'.$this->form->options['deleteFileUrl'].'&fieldName='.$this->options['name'].
@@ -133,12 +134,13 @@ class FieldEFile extends FieldEFileBase {
       $r .= "<a href=\"$dataValue\" class=\"".$this->iconClass." fileSaved iconBtn\" target=\"_blank\" title=\"".Locale::get('saved')." ($size)\"><i></i></a>$deleteHtml";
     }
     if ($postValue = $this->postValue()) {
+      //die2($postValue);
       $r .= '<div class="clear"></div>';
       if ($this->options['multiple']) {
         foreach ($postValue as $file) $r .= $this->htmlUploadedLink($file);
       }
       else {
-        $r .= $this->htmlUploadedLink($dataValue);
+        $r .= $this->htmlUploadedLink($postValue);
       }
     }
     $r .= '</div>';

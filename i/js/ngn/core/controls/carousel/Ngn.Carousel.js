@@ -4,6 +4,7 @@ Ngn.Carousel = new Class({
   options: {
     mode: 'horizontal',
     id: 'carousel',
+    changeContainerWidth: true,
     childSelector: false,
     loopOnScrollEnd: true,
     periodical: false
@@ -12,13 +13,13 @@ Ngn.Carousel = new Class({
   initialize: function(element, options) {
     this.parent(element, options);
     this.cacheElements();
-    if (!this.elements[0]) throw new Error('No elements was found');
+    this.element = this.element.getParent();
     for (var i = 0; i < this.elements.length; i++) {
       this.elements[i].store('initIndex', i);
     }
     this.currentIndex = 0;
-    this.elementWidth = this.elements[0].getSize().x;
-    this.visibleElementsN = Math.round(this.element.getSize().x / this.elementWidth);
+    //this.elementWidth = this.elements[0].getSize().x;
+    //this.visibleElementsN = Math.round(this.element.getSize().x / this.elementWidth);
     if (this.options.periodical) this.toNext.periodical(this.options.periodical, this);
     if (this.elements) this.toElementForce(this.elements[this.currentIndex]);
   },
@@ -32,10 +33,15 @@ Ngn.Carousel = new Class({
     } else {
       els = this.element.getChildren();
     }
-    if (els[0] && this.options.changeContainerWidth && this.options.elementsOnPage) {
-      this.element.setStyle('width', (els[0].getSize().x * this.options.elementsOnPage) + 'px');
-      this.element.getFirst().setStyle('width', (els[0].getSize().x * els.length) + 'px');
-    }
+    if (!els[0]) throw new Error('No elements was found');
+    //console.debug(els[0].getSizeWithMargin());
+    this.element.setStyle('width', (els.length * 200) + 'px')
+    new Element('div', {
+      'class': (this.element.get('class') || this.element.get('id')) + 'Wrapper',
+      styles: {
+        'overflow': 'hidden'
+      }
+    }).wraps(this.element);
     this.elements = els;
     return this;
   },
@@ -71,10 +77,10 @@ Ngn.Carousel = new Class({
     this.fireEvent('toElement');
   },
 
-  toElementForce: function(el){
+  toElementForce: function(el) {
     var axes = ['x', 'y'];
     var scroll = this.element.getScroll();
-    var position = Object.map(document.id(el).getPosition(this.element), function(value, axis){
+    var position = Object.map(document.id(el).getPosition(this.element), function(value, axis) {
       return axes.contains(axis) ? value + scroll[axis] : false;
     });
     this.set(this.calculateScroll(position.x, position.y));
@@ -94,7 +100,6 @@ Ngn.Carousel = new Class({
     } else {
       return this.currentIndex;
     }
-    ;
   },
 
   getPreviousIndex: function() {
@@ -119,13 +124,14 @@ Ngn.Carousel = new Class({
   },
 
   checkScroll: function() {
+    var scroll, total;
     if (!this.options.loopOnScrollEnd) return false;
     if (this.options.mode == 'horizontal') {
-      var scroll = this.element.getScroll().x;
-      var total = this.element.getScrollSize().x - this.element.getSize().x;
+      scroll = this.element.getScroll().x;
+      total = this.element.getScrollSize().x - this.element.getSize().x;
     } else {
-      var scroll = this.element.getScroll().y;
-      var total = this.element.getScrollSize().y - this.element.getSize().y;
+      scroll = this.element.getScroll().y;
+      total = this.element.getScrollSize().y - this.element.getSize().y;
     }
     return (scroll == total);
   },
