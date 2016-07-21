@@ -1,3 +1,4 @@
+// @requiresBefore i/js/ngn/core/Ngn.elementExtras.js
 Ngn.Carousel = new Class({
   Extends: Fx.Scroll,
 
@@ -7,7 +8,9 @@ Ngn.Carousel = new Class({
     changeContainerWidth: true,
     childSelector: false,
     loopOnScrollEnd: true,
-    periodical: false
+    periodical: false,
+    btnPrevious: null,
+    btnNext: null
   },
 
   initialize: function(element, options) {
@@ -22,6 +25,28 @@ Ngn.Carousel = new Class({
     //this.visibleElementsN = Math.round(this.element.getSize().x / this.elementWidth);
     if (this.options.periodical) this.toNext.periodical(this.options.periodical, this);
     if (this.elements) this.toElementForce(this.elements[this.currentIndex]);
+    //console.debug([this.element, this.element.getSize().x, this.wrapper.getSize().x]);
+    if (this.original.getSize().x < this.wrapper.getSize().x) {
+      if (this.options.btnPrevious) {
+        this.options.btnPrevious.setStyle('display', 'none');
+      }
+      if (this.options.btnNext) {
+        this.options.btnNext.setStyle('display', 'none');
+      }
+    } else {
+      if (this.options.btnPrevious) {
+        this.options.btnPrevious.addEvent('click', function() {
+          this.toPrevious();
+          return false;
+        }.bind(this));
+      }
+      if (this.options.btnNext) {
+        this.options.btnNext.addEvent('click', function() {
+          this.toNext();
+          return false;
+        }.bind(this));
+      }
+    }
   },
 
   cacheElements: function() {
@@ -34,15 +59,21 @@ Ngn.Carousel = new Class({
       els = this.element.getChildren();
     }
     if (!els[0]) throw new Error('No elements was found');
-    //console.debug(els[0].getSizeWithMargin());
-    this.element.setStyle('width', (els.length * 200) + 'px')
-    new Element('div', {
+    this.wrapper = new Element('div', {
       'class': (this.element.get('class') || this.element.get('id')) + 'Wrapper',
       styles: {
         'overflow': 'hidden'
       }
     }).wraps(this.element);
+    var w = 0;
+    for (var i = 0; i < els.length; i++) {
+      //if (!els[i].getSizeWithMargin()) console.debug(els[i]);
+      w += els[i].getSizeWithMargin().x;
+    }
+    //w += eWrapper.getSize().x;
+    this.element.setStyle('width', w + 'px');
     this.elements = els;
+    this.original = this.element;
     return this;
   },
 
