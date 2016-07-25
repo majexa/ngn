@@ -5,11 +5,13 @@ return [
   'add' => 'Add',
   'clean' => 'Clean',
   'delete' => 'Delete',
+  'cancel' => 'Cancel',
   'uploading' => 'Uploading',
   'uploadComplete' => 'Upload complete',
   'change' => 'Change',
   'areYouSure' => 'Are you sure?',
-  'loading' => 'Loading'
+  'loading' => 'Loading',
+
   /*
   'logout' => 'log out',
 

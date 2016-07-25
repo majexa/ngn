@@ -77,6 +77,7 @@ Ngn.Dialog = new Class({
 
   initialize: function(options) {
     this.setOptions(options);
+    this.options.cancelText = Locale.get('Core.cancel');
     // new Image().src = '/i/img/dialog/cross-pushed.png'; // preloading of hover cross
     if (this.options.id == 'dlg') {
       this.options.id = 'dlg' + Ngn.String.rand(5);

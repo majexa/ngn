@@ -2,7 +2,7 @@
 
 class FieldEFontFamily extends FieldESelect {
 
-  static $title = 'Font';
+  static $title;
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
@@ -21,3 +21,5 @@ class FieldEFontFamily extends FieldESelect {
   }
 
 }
+
+FieldEFontFamily::$title = Locale::get('font');

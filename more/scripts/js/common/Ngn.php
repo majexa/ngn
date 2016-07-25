@@ -9,4 +9,6 @@ Ngn.sflmFrontend = '<?= Sflm::frontendName(true) ?>';
 Ngn.vkApiId = <?= Config::getVarVar('vk', 'appId') ?>;
 
 <? } ?>
+
+Locale.define('<?= LOCALE ?>', 'Dummy', 'dummy', 'dummy');
 Locale.use('<?= LOCALE ?>');

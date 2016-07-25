@@ -2,7 +2,7 @@
 
 class FieldEColor extends FieldEText {
 
-  static $title = 'Color';
+  static $title;
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
@@ -21,3 +21,5 @@ class FieldEColor extends FieldEText {
   }
   
 }
+
+FieldEColor::$title = Locale::get('color');

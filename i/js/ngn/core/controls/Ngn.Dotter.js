@@ -1,4 +1,4 @@
-// @requiresBefore s2/js/locale/core
+// @requiresBefore s2/js/locale?key=core
 Ngn.Dotter = new Class({
   Implements: [Options,Events],
 

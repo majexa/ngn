@@ -2,7 +2,7 @@
 
 class FieldEFontSize extends FieldESelect {
 
-  static $title = 'Font Size';
+  static $title;
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
@@ -35,3 +35,5 @@ class FieldEFontSize extends FieldESelect {
   }
 
 }
+
+FieldEFontSize::$title = Locale::get('fontSize');
