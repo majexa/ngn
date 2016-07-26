@@ -1,5 +1,5 @@
 <script>
   setTimeout(function() {
-    window.location = '<?= $d['redirect'] ?>';
+    window.location = '<?= $_REQUEST['r'] ?>';
   }, 100);
 </script>

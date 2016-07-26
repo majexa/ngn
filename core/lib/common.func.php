@@ -191,7 +191,7 @@ function redirect($path, $forceHttp = false) {
 }
 
 function jsRedirect($path) {
-  header('Location: /default/jsRedirect?r='.urlencode($path));
+  header('Location: /s2/jsRedirect?r='.urlencode($path));
 }
 
 function set_time_limit_q($n) {

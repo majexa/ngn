@@ -20,7 +20,8 @@ class CtrlScripts extends CtrlBase {
     else {
       header("Content-type: text/html; charset=".CHARSET);
     }
-    throw new Error404("path '$path' not found");
+    if (!Lib::exists("scripts/$path")) throw new Error404("path '$path' not found");
+    Lib::required("scripts/$path");
   }
 
 }
