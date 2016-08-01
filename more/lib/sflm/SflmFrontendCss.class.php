@@ -10,6 +10,12 @@ class SflmFrontendCss extends SflmFrontend {
     $this->_addPath($path);
   }
 
+  function addPathNonStrict($path) {
+    if ($this->base->exists($path)) {
+      $this->_addPath($path);
+    }
+  }
+
   function _addPath($path) {
     $file = $this->base->getAbsPath($path);
     if (file_exists($file) and preg_match_all('/@import (.*)/', file_get_contents($file), $m)) {

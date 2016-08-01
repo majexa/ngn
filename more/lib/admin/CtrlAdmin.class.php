@@ -61,6 +61,7 @@ abstract class CtrlAdmin extends CtrlCp {
     $this->d['god'] = $this->god = $this->req->params[0] == 'god' ? true : false;
     foreach (Hook::paths('admin/moduleInit/'.$this->getName()) as $path) include $path;
     Sflm::frontend('js')->addLib('cp');
+    //Sflm::frontend('css')->addPathNonStrict('i/css/admin/module/'.$this->getName());
   }
 
   protected function prepareMainFormTpl() {

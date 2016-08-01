@@ -140,7 +140,8 @@ class DbItems implements UpdatableItems, ArrayAccess {
   }
 
   function getPagination() {
-    if (!isset($this->itemsTotal)) throw new Exception('Use DbItems::prepareItemsConds() before');
+    if (!$this->hasPagination) throw new Exception('Pagination was not enabled');
+    if (!isset($this->itemsTotal)) throw new Exception('Use DbItems::prepareItemsConds() before calling getPagination()');
     return [
       'itemsTotal' => $this->itemsTotal,
       'pagesTotal' => $this->pagesTotal,
@@ -160,7 +161,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
    *
    * @var bool
    */
-  public $isPagination = false;
+  public $hasPagination = false;
 
   /**
    * HTML код со ссылками на страницы
@@ -196,7 +197,7 @@ class DbItems implements UpdatableItems, ArrayAccess {
   }
 
   protected function _prepareItemsConds() {
-    if ($this->isPagination) {
+    if ($this->hasPagination) {
       list($this->pNums, $offset, $this->itemsTotal, $this->pagesTotal, $this->pNext, $this->pPrev) = //
         (new Pagination($this->options['paginationOptions']))->get($this->table, $this->cond, $this->filterSelectCond);
       $this->cond->setLimit($offset);

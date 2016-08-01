@@ -34,7 +34,7 @@ abstract class UserRegPhoneConfirmForm extends Form {
         'type' => 'groupBlock'
       ],
       [
-        'title'     => 'Пароль',
+        'title'     => 'Код',
         'name'      => 'code',
         'required'  => true,
         'type'      => 'text',

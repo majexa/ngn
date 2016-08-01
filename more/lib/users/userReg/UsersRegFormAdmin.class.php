@@ -4,8 +4,8 @@ class UsersRegFormAdmin extends UserRegForm {
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
-      'title' => 'Создание пользователя',
-      'submitTitle' => 'Создать',
+      'title' => Locale::get('userCreation', 'users'),
+      'submitTitle' => Locale::get('create'),
     ]);
   }
 

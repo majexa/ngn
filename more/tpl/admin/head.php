@@ -12,5 +12,4 @@
     });
   });
   </script>
-  <link rel="stylesheet" type="text/css" href="/i/css/admin/module/<?= $d['adminModule'] ?>.css" media="screen, projection" />
 </head>

@@ -473,14 +473,6 @@ width: 200px;
 height: 30px;
 }
 
-a.gray, .gray, .gray a {
-color: #7F7F7F;
-text-decoration: none;
-}
-a:hover.gray, .gray a:hover {
-color: #000000;
-text-decoration: underline;
-}
 
 a.thmb {
 border: 1px solid #CCCCCC;

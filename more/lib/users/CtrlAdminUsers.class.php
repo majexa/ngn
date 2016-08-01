@@ -29,79 +29,129 @@ class CtrlAdminUsers extends CtrlAdmin {
 
   function action_default() {
     $this->d['grid'] = $this->getGrid();
-    $this->setPageTitle('Общий список');
   }
 
   function action_json_getItems() {
     $this->json = $this->getGrid();
+    $this->json['pagination'] = $this->items()->getPagination();
   }
 
-  function getGrid() {
-    $r = DbModelCore::pagination(400, 'users');
-    if (Config::getVarVar('userReg', 'extraData')) {
-      $exItems = (new DdItems('users'))->getItems();
-      $exFields = (new DdFields('users'))->getFieldsF();
-      $exFieldsFilter = Config::getVar('users.exFieldsFilter');
-      if (!empty($exFieldsFilter)) $exFields = Arr::filterByKeys($exFields, $exFieldsFilter);
-    } else {
-      $exItems = [];
-      $exFields = [];
+  function action_json_search() {
+    $keyword = '%'.$this->req->rq('word').'%';
+    $this->items()->cond->addLikeFilter([
+      'login',
+      'email',
+      'name',
+      'role'
+    ], $keyword);
+    $this->json = $this->getGrid();
+    $this->json['pagination'] = $this->items()->getPagination();
+  }
+
+  protected $roles;
+
+  protected $config;
+
+  protected function init() {
+    $this->config = Config::getVar('userReg');
+    if ($this->config['roleEnable']) {
+      $this->roles = Config::getVar('userRoles');
     }
+    else {
+      $this->roles = [];
+    }
+  }
+
+  protected $items;
+
+  protected function items() {
+    if (isset($this->items)) return $this->items;
+    $this->items = new DbItems('users', [
+      'paginationOptions' => [
+        'n' => 20
+      ]
+    ]);
+    $this->items->hasPagination = true;
+    return $this->items;
+  }
+
+  protected function getHead() {
     $head = ['id'];
     $config = Config::getVar('userReg');
     if ($config['loginEnable']) $head[] = UserRegCore::getLoginTitle();
     if ($config['emailEnable']) $head[] = 'E-mail';
-    if ($config['phoneEnable']) $head[] = 'Телефон';
-    if ($config['nameEnable']) $head[] = 'Имя';
+    if ($config['phoneEnable']) $head[] = Locale::get('phone', 'users');
+    if ($config['nameEnable']) $head[] = Locale::get('name', 'users');
     if ($config['roleEnable']) {
-      $head[] = 'Тип профиля';
-      $roles = Config::getVar('userRoles');
-    } else {
-      $roles = [];
+      $head[] = Locale::get('profileType', 'users');
     }
+    Arr::append($head, Arr::get($this->getExFields(), 'title'));
+    return $head;
+  }
+
+  protected $exFields;
+
+  protected function getExFields() {
+    if (isset($this->exFields)) return $this->exFields;
+    if (!Config::getVarVar('userReg', 'extraData')) {
+      return $this->exFields = [];
+    }
+    $exFields = (new DdFields('users'))->getFieldsF();
+    $exFieldsFilter = Config::getVar('users.exFieldsFilter');
+    if (!empty($exFieldsFilter)) $exFields = Arr::filterByKeys($exFields, $exFieldsFilter);
+    return $this->exFields = $exFields;
+  }
+
+  protected function getData($item) {
+    $data = [$item['id']];
+    if ($this->config['loginEnable']) $data[] = $item['login'];
+    if ($this->config['emailEnable']) $data[] = $item['email'];
+    if ($this->config['phoneEnable']) $data[] = $item['phone'];
+    if ($this->config['nameEnable']) $data[] = $item['name'];
+    if ($this->config['roleEnable']) $data[] = $this->roles[$item['role']];
+    return $data;
+  }
+
+  function getGrid() {
+    $r = ['items' => $this->items()->getItems()];
+    if (Config::getVarVar('userReg', 'extraData')) {
+      $exItems = (new DdItems('users'))->getItems();
+    }
+    else {
+      $exItems = [];
+    }
+    $exFields = $this->getExFields();
     return [
-      'head' => Arr::append($head, Arr::get($exFields, 'title')),
-      'body' => array_map(function($item) use ($exItems, $exFields, $config, $roles) {
+      'pagination' => $this->items()->getPagination(),
+      'head'       => $this->getHead(),
+      'body'       => array_map(function ($item) use ($exItems, $exFields) {
         // @todo эту вещь нужно реализовать через DDO
         $exItem = isset($exItems[$item['id']]) ? Arr::filterByKeys($exItems[$item['id']], array_keys($exFields)) : [];
         foreach ($exFields as $f) {
           if (isset($exItem[$f['name']]) and FieldCore::hasAncestor($f['type'], 'select')) {
             if (is_array($exItem[$f['name']])) {
               $exItem[$f['name']] = implode(', ', $exItem[$f['name']]);
-            } else {
+            }
+            else {
               $exItem[$f['name']] = '';
             }
           }
         }
-        $data = [$item['id']];
-        if ($config['loginEnable']) $data[] = $item['login'];
-        if ($config['emailEnable']) $data[] = $item['email'];
-        if ($config['phoneEnable']) $data[] = $item['phone'];
-        if ($config['nameEnable']) $data[] = $item['name'];
-        if ($config['roleEnable']) $data[] = $roles[$item['role']];
         return [
-          'id'        => $item['id'],
-          'active'    => $item['active'],
-          'tools'     => [
-            'delete' => 'Удалить',
+          'id'     => $item['id'],
+          'active' => $item['active'],
+          'tools'  => [
+            'delete' => Locale::get('delete'),
             'active' => [
               'type' => 'switcher',
               'on'   => $item['active']
             ],
-            'edit'   => 'Редактировать'
+            'edit'   => Locale::get('edit')
           ],
-          'data'      => Arr::append($data, array_values(Arr::sortAssoc($exItem, array_keys($exFields))))
+          'data'   => Arr::append($this->getData($item), array_values(Arr::sortAssoc($exItem, array_keys($exFields))))
         ];
       }, $r['items'])
     ];
-  }
-
-  function action_search() {
-    $this->d['items'] = db()->select("
-      SELECT id, login, active, email FROM users 
-      WHERE login LIKE ? OR email LIKE ? LIMIT 10", $this->req->r['searchLogin'].'%', $this->req->r['searchLogin'].'%');
-    $this->d['searchLogin'] = htmlentities($this->req->r['searchLogin'], ENT_QUOTES, CHARSET);
-    $this->setPageTitle('Результаты поиска по фрагменту «'.$this->d['searchLogin'].'»');
   }
 
 }

@@ -28,7 +28,7 @@ use ObjectProcessorCtrl;
   protected function items(array $options = []) {
     if (isset($this->items)) return $this->items;
     $this->items = $this->_items($options);
-    $this->items->isPagination = true;
+    $this->items->hasPagination = true;
     return $this->objectProcess($this->items, 'items');
   }
 
@@ -92,7 +92,7 @@ use ObjectProcessorCtrl;
 
   function action_json_getItems() {
     $this->json = $this->getGrid();
-    if ($this->items()->isPagination) $this->json['pagination'] = $this->items()->getPagination();
+    if ($this->items()->hasPagination) $this->json['pagination'] = $this->items()->getPagination();
   }
 
   function action_json_search() {

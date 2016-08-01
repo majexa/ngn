@@ -111,11 +111,6 @@ abstract class SflmBase {
   }
 
   function extractCode(array $paths, $key = null) {
-//    $cacheKey = 'sflmCode'.$this->type.($key ?: md5(serialize($paths)));
-//    if (($code = FileCache::c()->load($cacheKey)) !== false) {
-//      return $code;
-//    }
-//    LogWriter::v($cacheKey, $paths, null);
     $code = '';
     foreach ($paths as $path) {
       $absPath = $this->getAbsPath($path);
@@ -129,7 +124,6 @@ abstract class SflmBase {
         $code .= $this->getFileContents($absPath, $this->isStrictPath($path));
       }
     }
-//    FileCache::c()->save($code, $cacheKey);
     return $code;
   }
 
@@ -208,6 +202,8 @@ abstract class SflmBase {
     }
     throw new Exception("Unexpected prefix '$prefix' in path '$path'. Use Sflm::\$absBasePaths[prefix] = '/path/to/files' to register it in your init.php file.");
   }
+
+
 
   /**
    * Возвращает абсолютный путь до скрипта

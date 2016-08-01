@@ -1,7 +1,7 @@
 /**
  * Компонент для вывода и редактирования табличных данных
  */
-Ngn.Grid = new Class({
+Ngn.GridOld = new Class({
   Extends: Ngn.Items.Table,
 
   options: {
@@ -24,8 +24,7 @@ Ngn.Grid = new Class({
     listAjaxAction: 'json_getItems',
     valueContainerClass: 'v',
     basePath: window.location.pathname,
-    resizeble: false,
-    search: false
+    resizeble: false
   },
 
   btns: {},
@@ -36,8 +35,7 @@ Ngn.Grid = new Class({
     if (this.options.basePath && !this.options.id) this.options.id = Ngn.String.hashCode(this.options.basePath);
     this.eParent = $(this.options.eParent);
     this.initMenu();
-    console.debug('>>>' + this.options.search);
-    if (this.options.search) new Ngn.Grid.Search(this);
+    new Ngn.Grid.Search(this);
     this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable' + (this.options.resizeble ? ' resizeble' : '') + '"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
     this.eHeadTr = this.options.eItems.getElement('thead tr');
     if (this.options.checkboxes) {
@@ -195,10 +193,23 @@ Ngn.Grid = new Class({
           addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
         n++;
       }
-      var tools = Object.merge(row.tools || {}, this.options.tools);
-      row.tools = Ngn.Object.fromArray(tools);
-      for (var toolName in row.tools) {
-        this.createToolBtn(toolName, row);
+      row.tools = Object.merge(row.tools || {}, this.options.tools);
+      for (var toolName in Ngn.Object.fromArray(row.tools)) {
+        if (typeOf(row.tools[toolName]) == 'object') {
+          if (!row.tools[toolName].type) throw new Error('row.tools[toolName].type must be defined');
+          if (Ngn.Items.toolActions[row.tools[toolName].type]) {
+            Ngn.Items.toolActions[row.tools[toolName].type].init(this, row.tools[toolName].cls || toolName, row);
+          } else {
+            throw new Error(row.tools[toolName].type + ' toolAction not defined');
+          }
+        } else {
+          if (Ngn.Items.toolActions[toolName]) {
+            Ngn.Items.toolActions[toolName].init(this, toolName, row);
+          } else {
+            console.debug(toolName);
+            this.createToolBtn(toolName, row);
+          }
+        }
       }
     }
     return this;
@@ -246,18 +257,14 @@ Ngn.Grid = new Class({
     return v.replace(new RegExp(this.options.listAjaxAction, 'g'), this.options.listAction);
   },
 
-  createToolBtn: function(toolName, row, action) {
-    var tool = row.tools[toolName];
-    action = action || this.options.toolActions[toolName] || false;
+  createToolBtn: function(cls, row, action) {
+    action = action || this.options.toolActions[cls] || false;
     var el = new Element('a', {
-      'href': this.options.toolLinks[toolName] ? this.options.toolLinks[toolName](row) : '#',
-      'class': 'iconBtn ' + ((typeOf(tool) == 'object' && tool.cls) ? tool.cls : toolName),
+      'href': this.options.toolLinks[cls] ? this.options.toolLinks[cls](row) : '#',
+      'class': 'iconBtn ' + cls,
       'html': '<i></i>',
-      'title': typeOf(tool) == 'object' ? tool.title : tool
+      'title': row.tools[cls]
     }).inject(new Element('td').inject(row.eTools));
-    if (typeOf(tool) == 'object' && tool.target) {
-      el.set('target', tool.target);
-    }
     if (action) {
       // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
       action = action.bind(this);

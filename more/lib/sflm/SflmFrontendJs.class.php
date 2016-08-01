@@ -53,8 +53,12 @@ class SflmFrontendJs extends SflmFrontend {
   }
 
   function store($source = 'root') {
-    parent::store($source);
-    $this->classes->frontendClasses->store();
+    parent::store($source); // string static libs
+    $this->classes->frontendClasses->store(); // storing classes cache
+  }
+
+  function getStored() {
+
   }
 
   function processCode($code, $source) {

@@ -94,7 +94,7 @@ class Items extends DbItems {
   }
 
   function setPagination($flag) {
-    $this->isPagination = $flag;
+    $this->hasPagination = $flag;
     return $this;
   }
 

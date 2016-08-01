@@ -55,7 +55,6 @@ class SflmJsClasses {
    * @throws Exception
    */
   function addClass($class, $source, $strict = true) {
-    if ($class == 'Ngn.sd.BlockBNew') die2('!');
     if (!SflmJsClasses::isValidClass($class)) {
       throw new Exception("Class '$class' is not valid. src: $source");
     }
@@ -124,11 +123,10 @@ class SflmJsClasses {
       return;
     }
     if (in_array($path, $this->processedPaths)) throw new Exception("Path '$path' already processed. src: $source | $name!");
-    //if (in_array($path, $this->processedPaths)) return;
     Sflm::log("Processing contents of '$path'");
     $this->processedPaths[] = $path;
     $code = Sflm::getCode($this->frontend->base->getAbsPath($path));
-    $this->processCode($code, $path, $name, $path);
+    $this->processCode($code, $path." (in source: $source)", $name, $path);
   }
 
   function getAbsPath($class) {
@@ -140,7 +138,7 @@ class SflmJsClasses {
     $thisCodeValidClassesDefinition = SflmJsClasses::parseValidClassesDefinition($code);
     foreach (SflmJsClasses::parseValidPreloadClasses($code) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
-      $this->addClass($class, ($name ?: $path ?: '').' preload');
+      $this->addClass($class, ($name ?: $path ?: '').' preload...'.$source);
     }
     foreach (SflmJsClasses::parseRequired($code, 'before') as $class) {
       $this->addSomething($class, "$path requiredBefore");
@@ -171,7 +169,11 @@ class SflmJsClasses {
   // --
 
   static function validName($name) {
-    return $name[strlen($name) - 1] != '.';
+    return ( //
+      $name[strlen($name) - 1] != '.' and //
+      Misc::hasPrefix('Ngn.', $name) //
+      //and !self::isClass($name) //
+    );
   }
 
   static function isClass($class) {
@@ -190,6 +192,7 @@ class SflmJsClasses {
   static function isValidClassMethod($class) {
     if (!Misc::hasPrefix(Sflm::$namespace.'.', $class)) return false;
     if (!SflmJsClasses::validName($class)) return false;
+    if (SflmJsClasses::isClass($class))return false;
     return true;
   }
 
@@ -211,7 +214,7 @@ class SflmJsClasses {
 
   static function stripFunctionsAtTheEnd($class, $code) {
     $classes = explode('.', $class);
-    if ($classes[count($classes)-1][0] == '_' or !Misc::firstIsUpper($classes[count($classes)-1])) {
+    if ($classes[count($classes) - 1][0] == '_' or !Misc::firstIsUpper($classes[count($classes) - 1])) {
       array_pop($classes);
     }
     return implode('.', $classes);
@@ -243,9 +246,9 @@ class SflmJsClasses {
 
   static function parseValidPreloadClasses($code) {
     $classes = [];
-    if (preg_match_all('/[A-Za-z0-9]:\s*(.+)/', $code, $m)) {
-//    if (preg_match_all('/[A-Za-z0-9]:\s*([A-Za-z0-9._]+)/', $code, $m)) { // problem with "a: [b, c]" patterns
+    if (preg_match_all('/[A-Za-z0-9]:\s*([A-Za-z0-9._\[\], ]+)/', $code, $m)) {
       foreach ($m[1] as $pattern) {
+        if (!trim($pattern)) continue;
         $pattern = trim($pattern);
         $pattern = trim($pattern, ',');
         if ($pattern[0] == '[') {
@@ -255,11 +258,23 @@ class SflmJsClasses {
           foreach ($pattern as $class) {
             if (SflmJsClasses::isValidClass($class)) $classes[] = $class;
           }
-        } else {
+        }
+        else {
+          // remove method brackets
+          $pattern = preg_replace('/([A-Za-z0-9._]+)\(.*\)/', '$1', $pattern);
+          if (SflmJsClasses::isValidClassMethod($pattern)) {
+            $fullPattern = $pattern;
+            $pattern = SflmJsClasses::cutClassMethod($pattern);
+            if ($pattern != 'Ngn' and SflmJsClasses::isClass($pattern)) {
+              $classes[] = $pattern;
+            }
+            continue;
+          }
           if (SflmJsClasses::isValidClass($pattern)) $classes[] = $pattern;
         }
       }
     }
+//    if ($classes) prr($classes);
     return $classes;
   }
 

@@ -10,7 +10,7 @@ class DdXls extends LongJobAbstract {
    */
   function __construct($strName, DdItems $items) {
     $this->items = $items;
-    $this->items->isPagination = false; // переопределяем, т.к. объект может быть получен уже сформированным
+    $this->items->hasPagination = false; // переопределяем, т.к. объект может быть получен уже сформированным
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');
     $this->ddo = new Ddo($this->items->strName, 'xls', ['fieldOptions' => ['getAll' => true]]);
     $this->longJobId = 'i'.(session_id() ? : 'ddxls');

@@ -124,6 +124,9 @@ Ngn.aaa
 <script src="abc/i/js/ngn/test/Ngn.Sub.A.js" type="text/javascript"></script>
 <script src="abc/i/js/ngn/test/Ngn.Sub.B.js" type="text/javascript"></script>
 TAGS;
+    $tags = str_replace("\r", '', $tags);
+    output2(Sflm::frontend('js')->getTagsFinal());
+    output3($tags);
     $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTagsFinal(), $tags));
   }
 
@@ -164,6 +167,12 @@ TAGS;
   function testParseClassFunctionUsage() {
     $classes = SflmJsClasses::parseValidClassesUsage('Ngn.A1.aaa.bbb');
     $this->assertTrue($classes[0] == 'Ngn.A1');
+  }
+
+  function testPreloadDefinition() {
+    Sflm::frontend('js')->addClass('Ngn.F1');
+    $code = Sflm::frontend('js')->code();
+    $this->assertTrue(strpos($code, 'Ngn.A1 = {') < strpos($code, 'Ngn.F1 = {'));
   }
 
 }

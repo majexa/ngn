@@ -66,9 +66,11 @@ class CtrlUserEdit extends CtrlBase {
     $this->setPageTitle("Изменение e-mail'а");
   }
 
-  function action_editPhone() {
-    $this->wrapProcessForm('phone');
-    $this->setPageTitle("Изменение телефона");
+  function action_json_editEmail() {
+    $this->json['title'] = 'E-mail';
+    $form = $this->userEditForm('email');
+    $form->action = '/'.$this->req->path;
+    return $form;
   }
 
   function action_json_editPhone() {

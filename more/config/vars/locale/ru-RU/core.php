@@ -4,6 +4,7 @@ return [
   'add' => 'Добавить',
   'clean' => 'Очистить',
   'delete' => 'Удалить',
+  'edit' => 'Редактировать',
   'cancel' => 'Отмена',
   'uploading' => 'Загрузка',
   'uploadComplete' => 'Загрузка завершена',
@@ -13,7 +14,11 @@ return [
   'save' => 'Сохранить',
   'fontSize' => 'Размер шрифта',
   'color' => 'Цвет',
-  'font' => 'Шрифт'
+  'font' => 'Шрифт',
+  'create' => 'Создать',
+  'totalItemsCount' => 'Всего записей',
+  'doNotAskMeSomeTimeAboutThat' => 'Не спрашивать меня об этом какое-то время',
+  'doNotAskMeAnymoreAboutThat' => 'Больше не спрашивать по этому поводу'
   /*
   'logout' => 'выход',
   'auth.noLogin' => 'Пользователь с таким логином не зарегистрирован',

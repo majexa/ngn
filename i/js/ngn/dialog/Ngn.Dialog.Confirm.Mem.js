@@ -3,7 +3,7 @@ Ngn.Dialog.Confirm.Mem = new Class({
 
   options: {
     width: 250,
-    okText: 'Удалить',
+    okText: Ngn.Locale.get('core.delete'),
     bindBuildMessageFunction: true,
     notAskSomeTime: false
   },
@@ -27,11 +27,11 @@ Ngn.Dialog.Confirm.Mem = new Class({
   },
 
   buildMessage: function(_msg) {
-    var eMessageCont = new Element('div');
+    var eMessageCont = new Element('div'), checkboxCaption;
     if (this.options.notAskSomeTime) {
-      var checkboxCaption = 'Неспрашивать меня об этом какое-то время';
+      checkboxCaption = Ngn.Locale.get('core.doNotAskMeSomeTimeAboutThat');
     } else {
-      var checkboxCaption = 'Больше не спрашивать по этому поводу';
+      checkboxCaption = Ngn.Locale.get('core.doNotAskMeAnymoreAboutThat');
     }
     new Element('div', {'html': '<h3 style="margin-top:0px">' + _msg + '</h3>'}).inject(eMessageCont);
     Elements.from('<span class="checkbox"><input type="checkbox" id="confirmMem' + this.options.id + '" class="confirmMem" /><label for="confirmMem' + this.options.id + '">' + checkboxCaption + '</label></span>')[0].inject(eMessageCont);
