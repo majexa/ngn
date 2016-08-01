@@ -1,4 +1,4 @@
-Вы находитесь в панели управления сайтом <b><?= SITE_TITLE ?></b>
+<?= Locale::get('welcomeMsg', 'admin') ?> <b><?= SITE_TITLE ?></b>
 
 <?= Config::getVarVar('adminExtras', 'homeHtml', true) ?>
 
