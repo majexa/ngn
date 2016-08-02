@@ -112,8 +112,12 @@ class CtrlAdminUsers extends CtrlAdmin {
     return $data;
   }
 
+  protected function getItems() {
+    return $this->items()->getItems();
+  }
+
   function getGrid() {
-    $r = ['items' => $this->items()->getItems()];
+    $items = $this->getItems();
     if (Config::getVarVar('userReg', 'extraData')) {
       $exItems = (new DdItems('users'))->getItems();
     }
@@ -150,7 +154,7 @@ class CtrlAdminUsers extends CtrlAdmin {
           ],
           'data'   => Arr::append($this->getData($item), array_values(Arr::sortAssoc($exItem, array_keys($exFields))))
         ];
-      }, $r['items'])
+      }, $items)
     ];
   }
 
