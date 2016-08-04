@@ -87,30 +87,6 @@ Ngn.Items.Table = new Class({
 
 });
 
-Ngn.ColResizer = new Class({
-
-  initialize: function(eHandler, n, grid) {
-    var initW;
-    var eWidth = grid.esTh[n - 1];
-    if (!eWidth) return;
-    new Drag(eHandler, {
-      modifiers: {
-        x: 'left'
-      },
-      snap: 0,
-      onStart: function() {
-        eWidth.store('initW', eWidth.getSize().x);
-        grid.initThSizes();
-      },
-      onDrag: function() {
-        var offset = parseInt(eHandler.getStyle('left'));
-        eWidth.setStyle('width', (eWidth.retrieve('initW') + offset) + 'px');
-      }.bind(this)
-    });
-  }
-
-});
-
 Ngn.Items.toolActions = {
 
   switcher: {

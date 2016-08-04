@@ -180,18 +180,19 @@ Ngn.Grid = new Class({
       }
       if (this.options.isSorting) Elements.from('<td><div class="dragBox"></div></td>')[0].inject(eTools);
       var n = 0;
-      for (var name in Ngn.Object.fromArray(row.data)) {
+      for (var index in Ngn.Object.fromArray(row.data)) {
+        var scalar = !(typeOf(row.data[index]) == 'object' || typeOf(row.data[index]) == 'array');
         var prop = {};
-        if (typeOf(row.data[name]) == 'object') {
-          var value = row.data[name][0];
-          prop['class'] = row.data[name][1];
+        if (!scalar) {
+          var value = row.data[index][0];
+          prop['class'] = row.data[index][1];
         } else {
-          value = row.data[name];
+          value = row.data[index];
         }
-        if (this.options.formatters[name]) value = this.options.formatters[name]();
+        if (this.options.formatters[index]) value = this.options.formatters[index]();
         prop.html = this.replaceHtmlValue(value);
         new Element('td', prop).
-          addClass('n_' + name).
+          addClass('n_' + index).
           addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
         n++;
       }
