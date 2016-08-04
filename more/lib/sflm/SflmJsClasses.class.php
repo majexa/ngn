@@ -261,9 +261,9 @@ class SflmJsClasses {
         }
         else {
           // remove method brackets
+          $pattern = preg_replace('/([A-Za-z0-9._]+)\[.*/', '$1', $pattern); // replace brackets and stuff in it
           $pattern = preg_replace('/([A-Za-z0-9._]+)\(.*\)/', '$1', $pattern);
           if (SflmJsClasses::isValidClassMethod($pattern)) {
-            $fullPattern = $pattern;
             $pattern = SflmJsClasses::cutClassMethod($pattern);
             if ($pattern != 'Ngn' and SflmJsClasses::isClass($pattern)) {
               $classes[] = $pattern;
