@@ -73,9 +73,8 @@ use ObjectProcessorCtrl;
   abstract protected function id();
 
   function action_json_new() {
-    //if (!Auth::get('id')) throw new AccessDenied;
     $im = $this->getIm();
-    $im->form->options['submitTitle'] = 'Создать';
+    $im->form->options['submitTitle'] = Locale::get('create');
     $im->form->action = $this->req->options['uri'];
     if (($id = $im->requestCreate())) return $id;
     $this->jsonFormAction($im->form);

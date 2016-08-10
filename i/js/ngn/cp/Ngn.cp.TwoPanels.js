@@ -15,15 +15,35 @@ Ngn.cp.TwoPanels = new Class({
     this.eLeft = eLeft;
     this.eRight = eRight;
     this.eHandler = eHandler;
-    if (this.options.addLeftWrapper) this.eLeft = Ngn.addWrapper(this.eLeft, 'panelWrapper');
-    if (this.options.addRightWrapper) this.eRight = Ngn.addWrapper(this.eRight, 'panelWrapper');
+    if (this.options.addLeftWrapper) this.eLeft = this.addWrapper(this.eLeft, 'panelWrapper');
+    if (this.options.addRightWrapper) this.eRight = this.addWrapper(this.eRight, 'panelWrapper');
     this.options.dragOptions.onDrag = this.resize.bind(this);
-    Ngn.hHandler(this.eHandler, this.eLeft, this.options.storeId, this.options.dragOptions);
+    this.hHandler(this.eHandler, this.eLeft, this.options.storeId, this.options.dragOptions);
     this.handlerW = this.eHandler.getSize().x;
     // Элементы, высоты которых нужно вычитать не успевают отрендериться, поэтому ставим задержку
     (function() {
       this.init();
     }).delay(100, this);
+  },
+
+  hHandler: function(eHandler, eContainer, wId, dragOptions) {
+    var w = Ngn.Storage.get(wId);
+    dragOptions = dragOptions || {};
+    if (w) eContainer.setStyle('width', w);
+    new Drag(eContainer, Object.merge({
+      handle: eHandler,
+      modifiers: {x: 'width', y: false},
+      snap: 0,
+      onComplete: function(el) {
+        Ngn.Storage.set(wId, el.getStyle('width'));
+      }
+    }, dragOptions));
+  },
+
+  addWrapper: function(el, wrapperClass) {
+    var wrapper = new Element('div', {'class': wrapperClass}).inject(el, 'before');
+    el.inject(wrapper);
+    return wrapper;
   },
   
   leftMinusH: 0,

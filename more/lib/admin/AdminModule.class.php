@@ -8,7 +8,7 @@ class AdminModule {
     $modules = [];
     $order = [];
     $hideAdminModules = Config::getVarVar('adminPriv', 'hideAdminModules');
-    $adminClassMap = Config::getVar('adminClassMap');
+    $adminClassMap = Config::getVar('adminClassMap', true) ?: [];
     foreach (ClassCore::getClassesByPrefix('CtrlAdmin') as $k => $class) {
       if (($prop = $class::getProperties()) === false) continue;
       $name = ClassCore::classToName('CtrlAdmin', $class);
@@ -43,7 +43,7 @@ class AdminModule {
   static protected function _isAllowed($moduleName) {
     // Модуль 'default' по умолчанию разрешен
     if ($moduleName == 'default') return true;
-    $flippedClassMap = array_flip(Config::getVar('adminClassMap'));
+    $flippedClassMap = array_flip(Config::getVar('adminClassMap', true) ?: []);
     if (isset($flippedClassMap[$moduleName])) $moduleName = $flippedClassMap[$moduleName];
     return in_array($moduleName, self::getAllowedModules());
   }

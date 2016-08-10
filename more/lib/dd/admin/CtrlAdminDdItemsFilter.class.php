@@ -19,9 +19,8 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
     return O::di('DdXls', $this->items()->strName, $this->items());
   }
 
-  protected function init() {
-    parent::init();
-    $this->initFilterByParams();
+  function action_default() {
+    parent::action_default();
     $filters = [];
     foreach (Hook::paths('dd/admin/beforeInitFilters') as $path) include $path;
     $filters = Arr::append($filters, DdGridFilters::getAll($this->getStrName()));
@@ -29,10 +28,15 @@ class CtrlAdminDdItemsFilter extends CtrlAdminDdItems {
     $this->d['bodyClass'] = 'noOverflow';
   }
 
-  function action_HARD_VIGRUZKA() {
-    $longJob = O::di('DdXls', $this->items()->strName, $this->items());
-    $longJob->cycle();
-    $this->redirect($longJob->result());
+  function action_json_getItems() {
+    $this->initFilterByParams();
+    parent::action_json_getItems();
   }
+
+//  function action_HARD_VIGRUZKA() {
+//    $longJob = O::di('DdXls', $this->items()->strName, $this->items());
+//    $longJob->cycle();
+//    $this->redirect($longJob->result());
+//  }
 
 }

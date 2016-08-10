@@ -140,9 +140,9 @@ class DdCore {
     return new $class(new DdItems($strName), new DdForm(new DdFields($strName), $strName, isset($options['formOptions']) ? $options['formOptions'] : []), $options);
   }
 
-  static function exportItems($strName, DbCond $cond) {
+  static function exportItems($strName, DbCond $cond = null) {
     $items = new DdItems($strName);
-    $items->cond = $cond;
+    if ($cond) $items->cond = $cond;
     $dumper = new DbDumper(null, ['noHeaders' => true]);
     $ids = $items->ids();
     $dumper->cond->addF('id', $ids);

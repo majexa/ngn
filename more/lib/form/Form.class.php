@@ -108,6 +108,8 @@ class Form {
 
   static $counter = 1;
 
+//  public $randomId; // for debug
+
   /**
    * @param array|Fields $fields
    * @param array $options
@@ -116,6 +118,7 @@ class Form {
   function __construct($fields, array $options = []) {
     if (is_array($fields)) $fields = new Fields($fields);
     if (!is_a($fields, 'Fields')) throw new Exception("\$fields is not Fields type (".get_class($fields).")");
+//    $this->randomId = Misc::randString(5);
     $this->fields = $fields;
     self::$counter++;
     $this->setOptions($options);

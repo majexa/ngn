@@ -11,4 +11,8 @@ class Locale {
     }
   }
 
+  static function striped() {
+    return substr(LOCALE, 0, 2);
+  }
+
 }

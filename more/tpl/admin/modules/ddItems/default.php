@@ -4,11 +4,11 @@
     var menu = Ngn.Grid.defaultMenu;
     <? if (Misc::isGod()) { ?>
     menu.push({
-      title: 'Настройки',
+      title: Ngn.Locale.get('Core.settings'),
       cls: 'settings',
       action: function() {
         new Ngn.Dialog.RequestForm({
-          url: Ngn.Url.getPath(1) + '/ddItems/' + Ngn.getParam(2) + '/json_settings',
+          url: Ngn.Url.getPath(1) + '/ddItems/' + Ngn.Url.getParam(2) + '/json_settings',
           onOkClose: function() {
             window.location.reload();
           }

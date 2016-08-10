@@ -36,7 +36,6 @@ Ngn.Grid = new Class({
     if (this.options.basePath && !this.options.id) this.options.id = Ngn.String.hashCode(this.options.basePath);
     this.eParent = $(this.options.eParent);
     this.initMenu();
-    console.debug('>>>' + this.options.search);
     if (this.options.search) new Ngn.Grid.Search(this);
     this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable' + (this.options.resizeble ? ' resizeble' : '') + '"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
     this.eHeadTr = this.options.eItems.getElement('thead tr');
@@ -322,7 +321,7 @@ Ngn.GridBtnAction.New = new Class({
 });
 
 Ngn.Grid.menu['new'] = {
-  title: 'Создать',
+  title: Ngn.Locale.get('Core.create'),
   cls: 'add',
   action: Ngn.GridBtnAction.New
 };

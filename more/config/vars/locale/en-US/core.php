@@ -11,7 +11,7 @@ return [
   'change' => 'Change',
   'areYouSure' => 'Are you sure?',
   'loading' => 'Loading',
-
+  'at' => 'at'
   /*
   'logout' => 'log out',
 

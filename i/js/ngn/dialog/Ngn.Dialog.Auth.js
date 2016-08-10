@@ -63,8 +63,6 @@ Ngn.Dialog.Auth.Vk = new Class({
 
 if (!Ngn.sflmFrontend) throw new Error('Ngn.sflmFrontend not defined');
 
-// @requiresBefore s2/js/common/Ngn
-
 Ngn.Dialog.Auth = new Class({
   Extends: Ngn.Dialog.RequestFormTabs,
   Implements: [Ngn.Dialog.Auth.Vk],

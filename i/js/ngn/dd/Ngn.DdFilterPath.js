@@ -1,3 +1,5 @@
+// @requiresBefore s2/js/locale?key=dd
+
 Ngn.DdFilterPath = new Class({
 
   // "/path/to/page/param1/param2" - здесь n=3
@@ -95,7 +97,11 @@ Ngn.DdFilterPath.Interface = new Class({
     if (!this.grid.options.filterPath) throw new Error('Grid must be initialized with filterPath option');
     this.filterPath = this.grid.options.filterPath;
     this.filtersForm = filtersForm;
-    new Element('input', {type: 'reset', value: ' Сбросить фильтры ', 'class': 'resetAll'}).inject(this.filtersForm.eForm, 'top').addEvent('click', function(e) {
+    new Element('input', {
+      type: 'reset',
+      value: Ngn.Locale.get('Dd.clearFilters'),
+      'class': 'resetAll'
+    }).inject(this.filtersForm.eForm, 'top').addEvent('click', function(e) {
       this.filterPath.reset();
       this.grid.reload();
       this.resetMarkers();

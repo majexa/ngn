@@ -1,3 +1,4 @@
+// @requiresBefore s2/js/locale?key=core
 Ngn.Dialog = new Class({
   Implements: [Ngn.RequiredOptions, Events],
   options: {
@@ -6,7 +7,7 @@ Ngn.Dialog = new Class({
     buttons: null, // Набор дополнительные кнопок в подвале. Формат объекта: {name: 'Name', text: 'Button text', class_name: 'CSS class', action: function() {}, tabindex: 1}
     cancel: null,
     cancelClass: 'cancel',
-    cancelText: 'Cancel',
+    cancelText: Ngn.Locale.get('Core.cancel'),
     cancelDestroy: true,
     callback: null,
     center: true,
@@ -77,7 +78,6 @@ Ngn.Dialog = new Class({
 
   initialize: function(options) {
     this.setOptions(options);
-    this.options.cancelText = Locale.get('Core.cancel');
     // new Image().src = '/i/img/dialog/cross-pushed.png'; // preloading of hover cross
     if (this.options.id == 'dlg') {
       this.options.id = 'dlg' + Ngn.String.rand(5);

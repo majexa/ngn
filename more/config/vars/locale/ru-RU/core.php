@@ -16,9 +16,16 @@ return [
   'color' => 'Цвет',
   'font' => 'Шрифт',
   'create' => 'Создать',
+  'search' => 'Поиск',
   'totalItemsCount' => 'Всего записей',
   'doNotAskMeSomeTimeAboutThat' => 'Не спрашивать меня об этом какое-то время',
-  'doNotAskMeAnymoreAboutThat' => 'Больше не спрашивать по этому поводу'
+  'doNotAskMeAnymoreAboutThat' => 'Больше не спрашивать по этому поводу',
+  'creationDate' => 'Дата создания',
+  'updateDate' => 'Дата изменения',
+  'author' => 'Автор',
+  'yes' => 'Да',
+  'no' => 'Нет',
+  'at' => 'в',
   /*
   'logout' => 'выход',
   'auth.noLogin' => 'Пользователь с таким логином не зарегистрирован',

@@ -43,9 +43,9 @@ class CtrlAdminDdItems extends CtrlAdmin {
 
   protected function _getIm() {
     return new DdItemsManager($this->items(), $this->objectProcess(new DdForm(new DdFields($this->getStrName(), [
-      'forceShow'     => ['userId'],
+      //'forceShow'     => ['userId'],
       'getDisallowed' => true
-    ]), $this->getStrName()), 'form'));
+     ]), $this->getStrName()), 'form'));
   }
 
   protected function getParamActionN() {

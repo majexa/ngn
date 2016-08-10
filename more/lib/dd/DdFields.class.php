@@ -42,21 +42,21 @@ class DdFields extends Fields {
     ]);
     $this->addFields(DbModelCore::collection('dd_fields', DbCond::get()->addF('strName', $this->strName)->setOrder('oid')));
     $this->addField([
-      'title'           => 'Дата создания',
+      'title'           => Locale::get('creationDate'),
       'name'            => 'dateCreate',
       'type'            => 'datetime',
       'system'          => true,
       'defaultDisallow' => false
     ]);
     $this->addField([
-      'title'           => 'Дата изменения',
+      'title'           => Locale::get('updateDate'),
       'name'            => 'dateUpdate',
       'type'            => 'datetime',
       'system'          => true,
       'defaultDisallow' => false
     ]);
     $this->addField([
-      'title'           => 'Автор',
+      'title'           => Locale::get('author'),
       'name'            => 'userId',
       'type'            => 'user',
       'system'          => true,

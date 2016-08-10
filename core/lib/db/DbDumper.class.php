@@ -98,8 +98,8 @@ class DbDumper {
       $tableHeader = $this->lf.$this->lf."# --------------------------------------------------------".$this->lf.$this->lf;
       if ($this->dumpStructure) {
         $tableHeader .= $this->structureDump($table);
+        $this->write($tableHeader);
       }
-      if (empty($this->options['noHeaders'])) $this->write($tableHeader);
       if ($this->dumpData) $this->dataDump($table, $this->toFile);
     }
     if ($this->toFile !== false) fclose($this->fp);

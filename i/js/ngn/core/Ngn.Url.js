@@ -11,3 +11,13 @@ Ngn.Url.getPath = function(n) {
   }
   return s;
 };
+
+
+Ngn.Url.getParam = function(n, zeroOnUndefined) {
+  return Ngn.Url._getParam(window.location.pathname, n + 1, zeroOnUndefined);
+};
+
+Ngn.Url._getParam = function(url, n, zeroOnUndefined) {
+  var p = url.split('/');
+  return p[n] != undefined ? p[n] : (zeroOnUndefined != undefined ? 0 : false);
+};

@@ -62,7 +62,7 @@ class DdoFields {
       'authorId'      => [
         'name'         => 'authorId',
         'oid'          => 400,
-        'title'        => 'Автор',
+        'title'        => Locale::get('author'),
         'type'         => 'user',
         'extraVirtual' => true
       ]

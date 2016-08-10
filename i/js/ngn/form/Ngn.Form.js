@@ -578,6 +578,8 @@ Ngn.getReadableFileSizeString = function(fileSizeInBytes) {
   return Math.max(fileSizeInBytes, 0.1).toFixed(0) + byteUnits[i];
 };
 
+// @requiresBefore s2/js/locale?key=form
+
 Form.Validator.addAllThese([['should-be-changed', {
   errorMsg: 'значение этого поля должно быть изменено',
   test: function(element) {
@@ -662,7 +664,7 @@ Form.Validator.addAllThese([['should-be-changed', {
     return element.get('value') == 'complete' ? true : false;
   }
 }], ['validate-upload-required', {
-  errorMsg: 'Файл не выбран',
+  errorMsg: Ngn.Locale.get('Form.fileNotChosen'),
   test: function(element) {
     return element.get('value') ? true : false;
   }

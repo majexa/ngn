@@ -13,7 +13,7 @@ class DdGridFilters {
       'pathFilterType' => 'v'
     ];
     $filters[] = [
-      'title' => 'Дата создания',
+      'title' => Locale::get('creationDate'),
       'name'  => 'dateCreate',
       'pathFilterType' => 'd',
       'date'  => true
@@ -36,9 +36,17 @@ class DdGridFilters {
           'title'          => $v['title'],
           'name'           => $v['name'],
           'options'        => Html::defaultOption() + [
-            1 => 'Да',
-            0 => 'Нет'
+            1 => Locale::get('yes'),
+            0 => Locale::get('no')
           ],
+          'pathFilterType' => 'v'
+        ];
+      }
+      elseif ($v['type'] == 'configSelect') {
+        $filters[] = [
+          'title'          => $v['title'],
+          'name'           => $v['name'],
+          'options'        => array_merge(['' => ' - '], Config::getVar('fieldE/'.$v['name'])),
           'pathFilterType' => 'v'
         ];
       }
@@ -46,7 +54,7 @@ class DdGridFilters {
         $filters[] = [
           'title'          => $v['title'],
           'name'           => $v['name'],
-          'options'        => UsersCore::getUserOptions(),
+          'options'        => array_merge(['' => '-'], UsersCore::getUserOptions()),
           'pathFilterType' => 'v'
         ];
       }
@@ -93,6 +101,7 @@ class DdGridFilters {
       $v['dataParams']['name'] = isset($v['filterName']) ? $v['filterName'] : $v['name'];
     }
     $this->form = new DdForm($fields, $strName, [
+      'id' => 'filter_'.$strName,
       'disableSubmit' => true
     ]);
   }
