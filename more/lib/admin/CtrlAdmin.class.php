@@ -19,6 +19,14 @@ abstract class CtrlAdmin extends CtrlCp {
     return static::$properties;
   }
 
+  static function getAdminModuleName() {
+    return Misc::removePrefix('CtrlAdmin', get_called_class());
+  }
+
+  static function setAdminModuleTitle($title) {
+    static::$properties[self::getAdminModuleName()] = $title;
+  }
+
   public $userId;
 
   public $settings;
@@ -53,10 +61,13 @@ abstract class CtrlAdmin extends CtrlCp {
     parent::beforeInit();
     $this->d['name'] = 'admin';
     if (!isset($this->d['tpl'])) $this->d['tpl'] = 'default';
+
+    $this->d['adminModule'] = static::getName();
+    $this->setModuleTitle(static::getName());
+
     $this->initPrivMsgs();
     $this->initModules();
     $this->initTopLinks();
-    $this->setModuleTitle($this->d['adminModuleTitle']);
     $this->d['msg'] = Auth::get('msg');
     $this->d['god'] = $this->god = $this->req->params[0] == 'god' ? true : false;
     foreach (Hook::paths('admin/moduleInit/'.$this->getName()) as $path) include $path;
@@ -119,9 +130,10 @@ abstract class CtrlAdmin extends CtrlCp {
     if (isset($this->d['adminModules']['privMsgs']) and !empty($this->d['newMsgsCount'])) {
       $this->d['adminModules']['privMsgs']['title'] .= ' (<b>'.$this->d['newMsgsCount'].'</b>)';
     }
-    $this->d['adminModuleTitle'] = AdminModule::getProperty($this->getName(), 'title');
-    $this->d['adminModule'] = $this->getName();
-    if (!$this->d['adminModuleTitle']) $this->d['adminModuleTitle'] = Locale::get('home');
+    //$this->d['adminModuleTitle'] = AdminModule::getProperty($this->getName(), 'title');
+    //$this->d['adminModule'] = $this->getName();
+    //die2($this->d['adminModule']);
+    //if (!$this->d['adminModuleTitle']) $this->d['adminModuleTitle'] = Locale::get('home');
   }
 
   protected function initTopLinks() {

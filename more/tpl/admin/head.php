@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><?=
-    ($d['adminModuleTitle'] ? $d['adminModuleTitle'] : ''). 
+    ($d['adminModuleTitle'] ? $d['adminModuleTitle'] : '').
     ($d['pageTitle'] ? ' / '.strip_tags($d['pageTitle']) : '').' — '.SITE_TITLE ?></title>
   <? $this->tpl('admin/headers', $d) ?>
   <script type="text/javascript">
