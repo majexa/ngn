@@ -96,7 +96,7 @@ class DdStructuresManager extends DbItemsManager {
     db()->query("
     CREATE TABLE $table (
       id INT(11) NOT NULL,
-      oid INT(11) NOT NULL,
+      oid INT(11) NOT NULL DEFAULT 0,
       pageId INT(11) NULL,
       active INT(1) NOT NULL DEFAULT 1,
       dateCreate DATETIME NULL,

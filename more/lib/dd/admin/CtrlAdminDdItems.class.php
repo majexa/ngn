@@ -1,31 +1,15 @@
 <?php
 
-class AdminDdItemsSettingsForm extends Form {
 
-  protected $structureId;
+class AsdForm extends Form {
 
-  function __construct($structureId) {
-    $this->structureId = $structureId;
-    parent::__construct([
-      [
-        'title' => 'Включить ручную сортировку',
-        'name'  => 'enableManualOrder',
-        'type'  => 'bool'
-      ],
-      [
-        'title' => 'Показывать отключенные записи',
-        'name'  => 'getNonActive',
-        'type'  => 'bool'
-      ],
-    ]);
-  }
-
-  protected function init() {
-    $this->setElementsData((new DdStructureItems)->getItem($this->structureId)['settings'] ?: []);
-  }
-
-  function _update(array $data) {
-    (new DdStructureItems)->updateField($this->structureId, 'settings', $data);
+  function __construct() {
+    parent::__construct([[
+      'title' => 'asd',
+      'name' => 'image',
+      'type' => 'image',
+      'multiple' => true
+    ]]);
   }
 
 }
@@ -73,6 +57,10 @@ class CtrlAdminDdItems extends CtrlAdmin {
 
   function action_default() {
     $this->d['settings'] = $this->structure['settings'];
+    $fields = DdCore::imDefault($this->getStrName())->form->fields->getFieldsF();
+    if (count($fields) == 1 and isset($fields['image'])) {
+      $this->d['enableImageMultiUpload'] = true;
+    }
     $this->req->param(2); // required
   }
 
@@ -84,6 +72,19 @@ class CtrlAdminDdItems extends CtrlAdmin {
   function action_json_settings() {
     $this->json['title'] = 'Настройки записей';
     return $this->jsonFormActionUpdate(new AdminDdItemsSettingsForm($this->structure['id']));
+  }
+
+  function action_json_imageMultiUpload() {
+    return $this->jsonFormActionUpdate(new MultiImageUploadForm([
+      'baseUrl' => '/admin/ddItems/' . $this->req->param(2)
+    ]));
+  }
+
+  function action_json_upload() {
+    $im = DdCore::imDefault($this->req->param(2));
+    foreach ($this->req->files['images'] as $file) {
+      $im->create(['image' => $file]);
+    }
   }
 
   function processForm(DdForm $form) {

@@ -1,5 +1,6 @@
 <?php
 
 return [
-  'fileNotChosen' => 'Файл не выбран'
+  'fileNotChosen' => 'Файл не выбран',
+  'images' => 'Изображения'
 ];

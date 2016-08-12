@@ -4,7 +4,8 @@ class MultiImageUploadForm extends Form {
 
   protected function defineOptions() {
     return array_merge(parent::defineOptions(), [
-      'baseUrl' => null
+      'idByClass'   => true,
+      'jsClassById' => true
     ]);
   }
 
@@ -19,8 +20,6 @@ class MultiImageUploadForm extends Form {
       ]
     ], array_merge($options, [
       'submitTitle' => 'Загрузить',
-      'idByClass'   => true,
-      'jsClassById' => true
     ]));
     UploadTemp::extendFormOptions($this, ($this->options['baseUrl'] ?: '').'/json_upload');
   }

@@ -6,6 +6,7 @@ return [
   'delete' => 'Удалить',
   'edit' => 'Редактировать',
   'cancel' => 'Отмена',
+  'upload' => 'Загрузить',
   'uploading' => 'Загрузка',
   'uploadComplete' => 'Загрузка завершена',
   'change' => 'Изменить',

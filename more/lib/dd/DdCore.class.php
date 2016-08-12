@@ -141,28 +141,20 @@ class DdCore {
   }
 
   static function exportItems($strName, DbCond $cond = null) {
+    // structure
+    $r = DdStructureCore::export($strName);
+    // items
     $items = new DdItems($strName);
     if ($cond) $items->cond = $cond;
     $dumper = new DbDumper(null, ['noHeaders' => true]);
     $ids = $items->ids();
     $dumper->cond->addF('id', $ids);
-    $r = $dumper->getDump(self::table($strName));
-
+    $r .= $dumper->getDump(self::table($strName));
+    // tags
     $dumper = new DbDumper(null, ['noHeaders' => true]);
     $dumper->cond->addF('itemId', $ids);
     $dumper->dumpStructure = false;
     $r .= $dumper->getDump('tagItems');
-
-    $dumper = new DbDumper(null, ['noHeaders' => true]);
-    $dumper->cond->addF('strName', $strName);
-    $dumper->dumpStructure = false;
-    $r .= $dumper->getDump('dd_fields');
-
-    $dumper = new DbDumper(null, ['noHeaders' => true]);
-    $dumper->cond->addF('name', $strName);
-    $dumper->dumpStructure = false;
-    $r .= $dumper->getDump('dd_structures');
-
     return $r;
   }
 

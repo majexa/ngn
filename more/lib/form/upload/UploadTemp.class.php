@@ -56,15 +56,15 @@ class UploadTemp extends Options2 {
     Dir::make($this->tempFolder);
     $fileName = Misc::randString(10, true);
     copy($file['tmp_name'], $this->tempFolder.'/'.$fileName);
-    db()->query('INSERT INTO uploadTemp SET ?a', [
-      'formId'     => $this->formId,
-      'tempId'     => $this->tempId,
-      'fieldName'  => $fieldName,
-      'fileName'   => $fileName,
-      'name'       => $file['name'],
-      'multiple'   => $this->options['multiple'],
-      'dateCreate' => Date::db()
-    ]);
+    db()->query('INSERT INTO uploadTemp SET formId=?, tempId=?, fieldName=?, fileName=?, name=?, multiple=?d, dateCreate=?',
+      $this->formId,
+      $this->tempId,
+      $fieldName,
+      $fileName,
+      $file['name'],
+      $this->options['multiple'],
+      Date::db()
+    );
   }
 
   function delete() {

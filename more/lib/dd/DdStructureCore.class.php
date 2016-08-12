@@ -98,25 +98,25 @@ class DdStructureCore {
 
   /**
    * @api
-   * Сохраняет структуру в SQL-файл PROJECT_PATH/strName.sql
+   * Возвращает структуру в SQL-формате
    *
    * @param $strName
-   * @throws Exception
+   * @return string
    */
   static function export($strName) {
-    $file = PROJECT_PATH."/$strName.sql";
-    file_put_contents($file, '');
-    $dumper = new DbDumper;
-    file_put_contents($file, "\n# Cleanup structure fields\n\nDELETE FROM dd_fields WHERE strName='$strName';\n", FILE_APPEND);
-    $dumper->cond->addF('strName', $strName);
-    $dumper->dataDump('dd_fields', $file);
-    $dumper = new DbDumper;
-    file_put_contents($file, "\n# Remove structure\n\nDELETE FROM dd_structures WHERE name='$strName';\n", FILE_APPEND);
+    // structure
+    $r = "# Remove structure\n\nDELETE FROM dd_structures WHERE name='$strName';\n";
+    $dumper = new DbDumper(null, ['noHeaders' => true]);
     $dumper->cond->addF('name', $strName);
-    $dumper->dataDump('dd_structures', $file);
-    $dumper = new DbDumper;
-    $dumper->structureDump('dd_i_'.$strName, $file);
-    $dumper->dataDump('dd_i_'.$strName, $file);
+    $dumper->dumpStructure = false;
+    $r .= $dumper->getDump('dd_structures');
+    // fields
+    $r .= "\n# Cleanup structure fields\n\nDELETE FROM dd_fields WHERE strName='$strName';\n";
+    $dumper = new DbDumper(null, ['noHeaders' => true]);
+    $dumper->cond->addF('strName', $strName);
+    $dumper->dumpStructure = false;
+    $r .= $dumper->getDump('dd_fields');
+    return $r;
   }
 
   /**

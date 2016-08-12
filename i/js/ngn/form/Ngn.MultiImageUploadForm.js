@@ -1,4 +1,4 @@
-Ngn.MultiImageUploadForm = new Class({
+Ngn.MultiImageUploadWizardForm = new Class({
   Extends: Ngn.Form,
 
   submitedAndUploaded: function(r) {

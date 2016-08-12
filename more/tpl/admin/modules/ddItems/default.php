@@ -3,12 +3,26 @@
   (function() {
     var menu = Ngn.Grid.defaultMenu;
     <? if (Misc::isGod()) { ?>
+//    menu.push({
+//      title: Ngn.Locale.get('Core.settings'),
+//      cls: 'settings',
+//      action: function() {
+//        new Ngn.Dialog.RequestForm({
+//          url: Ngn.Url.getPath(1) + '/ddItems/' + Ngn.Url.getParam(2) + '/json_settings',
+//          onOkClose: function() {
+//            window.location.reload();
+//          }
+//        });
+//      }
+//    });
+    <? } ?>
+    <? if ($d['enableImageMultiUpload']) { ?>
     menu.push({
-      title: Ngn.Locale.get('Core.settings'),
-      cls: 'settings',
+      title: 'Multi upload',
+      cls: 'add',
       action: function() {
         new Ngn.Dialog.RequestForm({
-          url: Ngn.Url.getPath(1) + '/ddItems/' + Ngn.Url.getParam(2) + '/json_settings',
+          url: Ngn.Url.getPath(1) + '/ddItems/' + Ngn.Url.getParam(2) + '/json_imageMultiUpload',
           onOkClose: function() {
             window.location.reload();
           }
