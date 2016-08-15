@@ -150,7 +150,11 @@ abstract class SflmFrontend {
   }
 
   protected function addDebugTags() {
-    return '';
+    $html = '';
+    foreach ($this->debugPaths as $path) {
+      $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
+    }
+    return $html;
   }
 
   function getTag() {
