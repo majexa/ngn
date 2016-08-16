@@ -71,6 +71,7 @@ Ngn.Carousel = new Class({
       w += els[i].getSizeWithMargin().x;
     }
     //w += eWrapper.getSize().x;
+    //console.debug(w);
     this.element.setStyle('width', w + 'px');
     this.elements = els;
     this.original = this.element;

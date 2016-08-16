@@ -1,7 +1,6 @@
 <?php
 
 return [
-  'keepEmptyIfNotChanges' => 'Keep empty if you don\'t wish to change your password',
   'add' => 'Add',
   'clean' => 'Clean',
   'delete' => 'Delete',
