@@ -619,7 +619,7 @@ class Form {
       if ($el['disabled']) continue;
       // Если в элементе или форме есть флаг 'filterEmpties' и значение элемента пусто
       if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties'])) and $el->isEmpty()) continue;
-      $value = $el->value();
+      $value = htmlspecialchars($el->value());
       BracketName::setValue($r, $name, $value === null ? '' : $value);
     }
     return $r;
