@@ -248,7 +248,7 @@ class Auth {
   }
 
   static function initGuest() {
-    if ($_REQUEST['guest']) {
+    if (!empty($_REQUEST['guest'])) {
       $_SESSION['guest'] = 1;
     }
     if (!empty($_SESSION['guest'])) {

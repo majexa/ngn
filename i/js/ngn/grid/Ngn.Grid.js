@@ -267,11 +267,7 @@ Ngn.Grid = new Class({
       if (tool.target) el.set('target', tool.target);
     }
 
-    //if (toolName == 'active') console.trace('not correct');
-
     action = action || this.options.toolActions[toolName] || false;
-
-    console.debug([action, toolName]);
 
     if (action) {
       // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
