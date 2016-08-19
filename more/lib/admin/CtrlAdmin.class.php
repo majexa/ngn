@@ -61,10 +61,8 @@ abstract class CtrlAdmin extends CtrlCp {
     parent::beforeInit();
     $this->d['name'] = 'admin';
     if (!isset($this->d['tpl'])) $this->d['tpl'] = 'default';
-
     $this->d['adminModule'] = static::getName();
     $this->setModuleTitle(static::getName());
-
     $this->initPrivMsgs();
     $this->initModules();
     $this->initTopLinks();

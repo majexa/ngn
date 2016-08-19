@@ -313,41 +313,6 @@ return [
         'type'       => 'fieldList',
         'fieldsType' => 'adminModules'
       ],
-      ['type' => 'col'],
-      [
-        'name'   => 'allowedPageModules',
-        'title'  => 'Доступные модули разделов сайта',
-        'type'   => 'fieldSet',
-        'fields' => [
-          [
-            'title' => 'Модуль',
-            'name'  => 'module',
-            'type'  => 'pageModules'
-          ]
-        ]
-      ],
-      /*
-      array(
-        'name' => 'allowedPageConstructors',
-        'title' => 'Доступные контроллеры разделов',
-        'type' => 'fieldSet',
-        'fields' => array(array(
-          'title' => 'Контроллер',
-          'name' => 'module',
-          'type' => 'pageControllers'
-        ))
-      ),
-      array(
-        'name' => 'allowedConfigVars',
-        'title' => 'Доступные секции конфигурации',
-        'type' => 'fieldSet',
-        'fields' => array(array(
-          'title' => 'Имя секции',
-          'name' => 'module',
-          'type' => 'configVarNames'
-        ))
-      )
-      */
     ]
   ],
   'tiny'                   => [
