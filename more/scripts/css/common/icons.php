@@ -1,7 +1,6 @@
 <?
 
 $cords = array(
-
   'folder' => array(-250, -103),
   'page' => array(-20, -442),
   'link' => array(-158, -234),
@@ -125,7 +124,8 @@ $cords = array(
   'phone' => array(-20, -416),
   'xls' => array(-367, -494),
   'money' => array(-66, -234),
-  'copy' => array(2, -54)
+  'copy' => array(2, -54),
+  'guestAuth' => array(-296, 0),
 );
 
 ?>

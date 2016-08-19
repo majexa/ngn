@@ -32,6 +32,8 @@ class Auth {
 
   static $errorsText;
 
+  static $sessionKey = 'auth';
+
   static function cryptPass($pass) {
     return md5(md5(md5($pass)));
   }
@@ -39,9 +41,9 @@ class Auth {
   /**
    * Проверяет логин-закриптованый пароль в БД
    *
-   * @param   string  Логин
-   * @param   string  Закриптованиый пароль
-   * @return  bool|DbModelUsers
+   * @param string $login Логин
+   * @param string $encryptedPass Закриптованиый пароль
+   * @return bool
    */
   static function checkLoginPass($login, $encryptedPass) {
     $login = trim($login);
@@ -79,7 +81,6 @@ class Auth {
     ];
   }
 
-
   /**
    * Кол-во раз, которое проводилась авторизация
    *
@@ -92,10 +93,10 @@ class Auth {
    * прошла проверка, заполняет глобальный массив $_AUTH данными текущего
    * авторизованого пользователя
    *
-   * @param   string  Логин
-   * @param   string  Закриптованиый пароль
-   * @param   bool    Если авторизация происходит после начала вывода
-   * @return  bool|DbModelUsers
+   * @param string $login Логин
+   * @param string $encryptedPass Закриптованиый пароль
+   * @param bool $afterOutput Если авторизация происходит после начала вывода
+   * @return bool|DbModelUsers
    */
   static function login($login, $encryptedPass, $afterOutput = false) {
     self::$n++;
@@ -131,7 +132,7 @@ class Auth {
 
   static private function saveSession($user) {
     Session::init();
-    $_SESSION['auth'] = $user;
+    $_SESSION[self::$sessionKey] = $user;
   }
 
   static function relogin() {
@@ -152,7 +153,9 @@ class Auth {
 
   static function logout() {
     Session::init();
-    $_SESSION['auth'] = null;
+    self::initGuest();
+    $_SESSION[self::$sessionKey] = null;
+    if (isset($_SESSION['guest'])) unset($_SESSION['guest']);
   }
 
   static function clear() {
@@ -164,23 +167,8 @@ class Auth {
     }
   }
 
-  /**
-   * Производит авторизацию по данным из cookie
-   *
-   * @return bool|DbModelUsers
-   */
-  static private function loginByCookie() {
-    if (isset($_COOKIE['auth'])) {
-      $_COOKIE['auth'] = self::unpack($_COOKIE['auth']);
-      return self::login($_COOKIE['auth']['login'], $_COOKIE['auth']['pass']);
-    }
-    else {
-      return false;
-    }
-  }
-
   static private function loginBySession() {
-    return isset($_SESSION['auth']) ? $_SESSION['auth'] : false;
+    return isset($_SESSION[self::$sessionKey]) ? $_SESSION[self::$sessionKey] : false;
   }
 
   static $postAuth = false;
@@ -195,11 +183,13 @@ class Auth {
   static function loginByRequest($login = null, $pass = null) {
     if (!$login and isset($_REQUEST[self::$loginFieldName])) $login = $_REQUEST[self::$loginFieldName];
     if (!$pass and isset($_REQUEST[self::$passFieldName])) $pass = $_REQUEST[self::$passFieldName];
+
     if (!empty($login) and !empty($pass)) {
       if (!$login or !$pass) {
         self::error(0, Locale::get('wrongLoginOrPassword'));
         return false;
       }
+
       $r = self::login($login, self::cryptPass($pass));
       if ($r) self::$postAuth = true;
       return $r;
@@ -221,8 +211,16 @@ class Auth {
     return $r;
   }
 
+  /**
+   * @api
+   * Поднимает сессию авторизации, если она существует для текущего sessionId.
+   * Если в массиве $_REQUEST есть параметры 'authLogin' и 'authPass' создаёт новую сессию.
+   *
+   * @return bool|DbModelUsers
+   */
   static function setAuth() {
     if (isset(self::$auth)) return self::$auth;
+    self::initGuest();
     self::$expires = self::$doNotSavePass ? 0 : 60 * 60 * 24 * 10;
     if (($auth = self::loginPage())) {
       //
@@ -247,6 +245,21 @@ class Auth {
 
   static function getAll() {
     return (($r = self::setAuth())) ? Arr::filterByKeys($r->r, ['id', 'login', 'email']) : false;
+  }
+
+  static function initGuest() {
+    if ($_REQUEST['guest']) {
+      $_SESSION['guest'] = 1;
+    }
+    if (!empty($_SESSION['guest'])) {
+      //unset(self::$auth);
+      self::$sessionKey = 'authGuest';
+    }
+  }
+
+  static function enableGuest() {
+    $_SESSION['guest'] = 1;
+    self::$sessionKey = 'authGuest';
   }
 
 }

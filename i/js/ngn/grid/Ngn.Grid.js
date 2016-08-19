@@ -249,6 +249,8 @@ Ngn.Grid = new Class({
   createToolBtn: function(toolName, row, action) {
     var tool = row.tools[toolName];
 
+
+
     if (tool.type) {
       Ngn.Items.toolActions[tool.type].init(this, toolName, row);
       return;
@@ -265,9 +267,12 @@ Ngn.Grid = new Class({
       if (tool.target) el.set('target', tool.target);
     }
 
-    if (toolName == 'active') console.trace('not correct');
+    //if (toolName == 'active') console.trace('not correct');
 
     action = action || this.options.toolActions[toolName] || false;
+
+    console.debug([action, toolName]);
+
     if (action) {
       // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
       action = action.bind(this);

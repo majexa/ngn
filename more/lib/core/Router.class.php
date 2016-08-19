@@ -71,13 +71,14 @@ abstract class Router {
   }
 
   /**
+   * @api
    * Авторизация
    */
   protected function auth() {
+    if (!empty($_GET['asd'])) die2($_SESSION);
     if (isset($this->req->g['logout'])) {
       Auth::logout();
-      $url = 'http://'.SITE_DOMAIN.Tpl::removeUrlGetParams($_SERVER['REQUEST_URI'], ['logout']);
-      jsRedirect($url);
+      jsRedirect('http://'.SITE_DOMAIN.Tpl::removeUrlGetParams($_SERVER['REQUEST_URI'], ['logout']));
     }
     elseif (isset($this->req->g['clear'])) {
       Auth::clear();

@@ -34,6 +34,11 @@ Ngn.Admin.UsersGrid = new Class({
           }.bind(this)
         });
       }
+    },
+    toolLinks: {
+      guestAuth: function(row) {
+        return '/admin/users/guestAuth/' + row.id;
+      }
     }
   }
 

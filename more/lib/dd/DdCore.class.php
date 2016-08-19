@@ -140,7 +140,7 @@ class DdCore {
     return new $class(new DdItems($strName), new DdForm(new DdFields($strName), $strName, isset($options['formOptions']) ? $options['formOptions'] : []), $options);
   }
 
-  static function exportItems($strName, DbCond $cond = null) {
+  static function export($strName, DbCond $cond = null) {
     // structure
     $r = DdStructureCore::export($strName);
     // items

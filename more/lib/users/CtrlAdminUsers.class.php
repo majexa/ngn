@@ -48,6 +48,12 @@ class CtrlAdminUsers extends CtrlAdmin {
     $this->json['pagination'] = $this->items()->getPagination();
   }
 
+  function action_guestAuth() {
+    Auth::enableGuest();
+    Auth::loginById($this->req->param(3));
+    $this->redirect('/admin/users');
+  }
+
   protected $roles;
 
   protected $config;
@@ -150,7 +156,8 @@ class CtrlAdminUsers extends CtrlAdmin {
               'type' => 'switcher',
               'on'   => $item['active']
             ],
-            'edit'   => Locale::get('edit')
+            'edit'   => Locale::get('edit'),
+            'guestAuth' => Locale::get('guestLogin', 'users'),
           ],
           'data'   => Arr::append($this->getData($item), array_values(Arr::sortAssoc($exItem, array_keys($exFields))))
         ];
