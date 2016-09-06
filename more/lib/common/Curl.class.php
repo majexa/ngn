@@ -142,6 +142,12 @@ class Curl {
     return $this->getObj($url)->getAllHeaders()[0]['Code'] == 200 ? true : false;
   }
 
+  function check200AndThrow($url) {
+    if (!$this->check200($url)) {
+      throw new Exception("Unavailable url '$url'");
+    }
+  }
+
   protected function convert($text) {
     return $text;
     // return $this->detectUTF8($this->getParsed($text, '<title>', '</title>')) ? $text : iconv($this->defaultInputEncoding, $this->encoding.'//IGNORE', $text);
