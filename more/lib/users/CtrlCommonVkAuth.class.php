@@ -12,6 +12,7 @@ class CtrlCommonVkAuth extends CtrlBase {
 
   function action_ajax_reg() {
     $id = DbModelCore::create('users', [
+      'active' => 1,
       'login' => $this->req->rq('login')
     ]);
     Auth::loginById($id);
