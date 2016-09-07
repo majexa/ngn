@@ -450,7 +450,12 @@ class Form {
     if ($this->js == '') return false;
     Dir::make(UPLOAD_PATH.'/js/cache/form');
     $file = UPLOAD_PATH.'/js/cache/form/'.$this->id().'.js';
-    if (getConstant('FORCE_STATIC_FILES_CACHE') or !file_exists($file)) {
+    $fileExists = file_exists($file);
+    if (!$fileExists and !getConstant('BUILD_MODE')) {
+      // При выключеном режиме сборки, запрещается создавать кэш
+      throw new Exception('Enable BUILD_MODE to generate nonexistent cache file');
+    }
+    if (getConstant('FORCE_STATIC_FILES_CACHE') or !$fileExists) {
       file_put_contents($file, "Ngn.Frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");
     }
     return '/'.UPLOAD_DIR.'/js/cache/form/'.$this->id().'.js?'.(getConstant('FORCE_STATIC_FILES_CACHE') ? Misc::randString() : filemtime($file));
@@ -619,7 +624,8 @@ class Form {
       if ($el['disabled']) continue;
       // Если в элементе или форме есть флаг 'filterEmpties' и значение элемента пусто
       if ((!empty($this->options['filterEmpties']) or !empty($el['filterEmpties'])) and $el->isEmpty()) continue;
-      $value = htmlspecialchars($el->value());
+      $value = $el->value();
+      htmlspecialcharsR($value);
       BracketName::setValue($r, $name, $value === null ? '' : $value);
     }
     return $r;
