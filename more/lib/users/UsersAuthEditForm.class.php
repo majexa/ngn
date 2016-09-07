@@ -1,6 +1,6 @@
 <?php
 
-class UsersEditForm extends UsersEditFormAbstract {
+class UsersAuthEditForm extends UsersEditFormAbstract {
 
   protected function _update(array $data) {
     parent::_update($data);
