@@ -43,6 +43,9 @@ use SflmMtDependenciesOrder;
     if (strstr($code, '.addEvent(')) {
       $r .= $this->parseContentsR('Element.Event');
     }
+    if (strstr($code, '.getComputedSize(') or strstr($code, '.getDimensions(') or strstr($code, '.measure(')) {
+      $r .= $this->parseContentsR('Element.Measure');
+    }
     if (strstr($code, 'domready')) {
       $r .= $this->parseContentsR('DOMReady');
     }
