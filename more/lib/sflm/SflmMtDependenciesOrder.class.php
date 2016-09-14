@@ -3,7 +3,7 @@
 trait SflmMtDependenciesOrder {
 
   /**
-   * @param string $require Имя пакета
+   * @param string $require О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
    * @return int
    * @throws Exception
    */

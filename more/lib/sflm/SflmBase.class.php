@@ -98,8 +98,12 @@ abstract class SflmBase {
     }
     else {
       // Иначе это статика
-      return "\n/*--|$path|--*/\n".file_get_contents($path);
+      return "\n/*--|$path|--*/\n".$this->getContents($path);
     }
+  }
+
+  protected function getContents($path) {
+    return file_get_contents($path);
   }
 
   function getPackageCode($package) {
