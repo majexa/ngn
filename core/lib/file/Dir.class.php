@@ -376,12 +376,12 @@ class Dir {
   }
 
   static function move($from, $to, $replace = true) {
-    if ($replace) {
-      output("Replace folder '$to' by '$from'");
-    }
-    else {
-      output("Move folder '$from' by '$to'");
-    }
+//    if ($replace) {
+//      output("Replace folder '$to' by '$from'");
+//    }
+//    else {
+//      output("Move folder '$from' by '$to'");
+//    }
     if ($replace and file_exists($to)) {
       if ($to == '.' or $to == '') throw new Exception("Try to remove current dir '$to'");
       self::remove($to);
