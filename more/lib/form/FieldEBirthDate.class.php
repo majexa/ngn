@@ -6,8 +6,16 @@ class FieldEBirthDate extends FieldEDate {
     return date('Y') - 18;
   }
 
-  //protected function validate3() {
-  //  if ($this->m[3] > date('Y')-7) $this->error = 'Вы слишком молоды';
-  //}
+  protected function validate1() {
+    if (empty($this->options['value'][0])) {
+      $this->error = "Field «{$this->options['title']}» is required";
+    }
+    if (empty($this->options['value'][1])) {
+      $this->error = "Field «{$this->options['title']}» is required";
+    }
+    if (empty($this->options['value'][2])) {
+      $this->error = "Field «{$this->options['title']}» is required";
+    }
+  }
 
 }
