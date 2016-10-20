@@ -22,7 +22,6 @@ Ngn.Dialog.RequestFormBase = new Class({
     }
     this.parent(options);
     this.toggle('ok', false);
-    this.iframeUpload = true;
     window.addEvent('keypress', function(e) {
       if (e.key != 'enter' || e.target.get('tag') == 'textarea') return;
       e.preventDefault();

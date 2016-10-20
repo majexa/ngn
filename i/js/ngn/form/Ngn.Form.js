@@ -227,10 +227,14 @@ Ngn.Form = new Class({
         },
         onComplete: function(r) {
           if (this.allUploadsIsEmpty() && this.oneFileCompleteEventFired) {
+            // try to submit if no uploads, but one complete event already fired
             return;
           }
           this.oneFileCompleteEventFired = true;
-          if (this.hasUploadsInProgress()) return;
+          if (this.hasUploadsInProgress()) {
+            // try to submit, but there are uploads in progress
+            return;
+          }
           this.submitedAndUploaded(r);
         }.bind(this)
       };

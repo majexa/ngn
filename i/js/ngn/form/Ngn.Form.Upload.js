@@ -83,7 +83,10 @@ Ngn.Form.Upload.Single = new Class({
 
   send: function() {
     if (!this.file) {
-      this.fireEvent('complete');
+      // need to wait til one of non-empty uploads starts
+      (function() {
+        this.fireEvent('complete');
+      }).delay(1, this);
       return;
     }
     this.requestFile.append(this.eInput.get('name'), this.file);
