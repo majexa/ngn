@@ -451,9 +451,12 @@ class Form {
     Dir::make(UPLOAD_PATH.'/js/cache/form');
     $file = UPLOAD_PATH.'/js/cache/form/'.$this->id().'.js';
     $fileExists = file_exists($file);
+    if (!$fileExists) {
+      LogWriter::str('form', 'gen file '.$file);
+    }
     if (!$fileExists and !getConstant('BUILD_MODE')) {
       // При выключеном режиме сборки, запрещается создавать кэш
-      throw new Exception('Enable BUILD_MODE to generate nonexistent cache file');
+      throw new Exception('Enable BUILD_MODE to generate nonexistent cache file. Form ID='.$this->id());
     }
     if (getConstant('FORCE_STATIC_FILES_CACHE') or !$fileExists) {
       file_put_contents($file, "Ngn.Frm.init.{$this->id()} = function() {\n{$this->js}\n};\n");

@@ -4,6 +4,7 @@
  * Коллекцианирует и кэширует пути к статическим файлам во время выполнения приложения
  */
 abstract class SflmFrontend {
+  use Options;
 
   /**
    * @var string Имя фронтенда
@@ -23,10 +24,11 @@ abstract class SflmFrontend {
 
   public $newPaths = [], $newAbsPaths = [];
 
-  function __construct(SflmBase $base, $name) {
+  function __construct(SflmBase $base, $name, array $options = []) {
     $this->id = Misc::randString(5);
     $this->base = $base;
     $this->name = $name;
+    $this->setOptions($options);
     Misc::checkEmpty($this->name, 'Frontend name not defined. Use Sflm::setFrontendName()');
     $this->base->version = $this->version();
     $this->pathsCache = $this->getPathsCache() ?: $this->getStaticPaths();
@@ -68,6 +70,15 @@ abstract class SflmFrontend {
    */
   function getPathsCache() {
     return SflmCache::c()->load($this->pathsCacheKey()) ?: [];
+  }
+
+  function cleanPathsCache() {
+    SflmCache::c()->remove($this->pathsCacheKey());
+    $this->pathsCache = $this->getStaticPaths();
+  }
+
+  function cleanAbsPathsCache() {
+    SflmCache::c()->remove($this->absPathsCacheKey());
   }
 
   protected function init() {
@@ -175,7 +186,6 @@ abstract class SflmFrontend {
    * Сохраняет все новые пути кэш данных и создаёт веб-кэш. После выполнения этого метода в фронтенд уже нельзя добавлять ничего
    *
    * @param string $source
-   * @return $this
    * @throws Exception
    */
   function store($source = 'root') {

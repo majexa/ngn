@@ -8,5 +8,8 @@ return [
   'i/css/common/hidebleBar.css',
   'i/css/common/interface.css',
   'i/css/common/itemsTable.css', // grid
-  'icons'
+  'icons',
+  'dialog',
+  'i/css/common/btns.css',
+  'i/css/cp/pNums.css',
 ];

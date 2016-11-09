@@ -20,14 +20,15 @@ class Sflm {
    * @return SflmFrontend
    * @throws Exception
    */
-  static function frontend($type, $name = null) {
+  static function frontend($type, $name = null, array $options = []) {
     if (!preg_match('/js|css/', $type)) throw new Exception("Unknown type '$type'");
     $name = $name ? : self::$frontendName;
     if (isset(self::$cache[$name][$type])) return self::$cache[$name][$type];
     Sflm::log("Generate frontend [$type::$name] instance");
     $class = 'SflmFrontend'.ucfirst($type);
     /* @var $frontend SflmFrontend */
-    $frontend = new $class(self::lib($type), $name);
+    //die2($options);
+    $frontend = new $class(self::lib($type), $name, $options);
     if (!isset(self::$cache[$name])) self::$cache[$name] = [];
     return self::$cache[$name][$type] = $frontend;
   }
@@ -93,16 +94,16 @@ class Sflm {
    * @return SflmFrontend
    * @throws Exception
    */
-  static function setFrontend($type, $name = null) {
+  static function setFrontend($type, $name = null, array $options = []) {
     if ($name) self::$frontendName = $name;
     if (self::$frontendName) {
       if (!isset(self::$cache[self::$frontendName][$type])) {
-        return self::frontend($type, $name);
+        return self::frontend($type, $name, $options);
       }
       Sflm::log("Delete Frontend [$type::".self::$frontendName."] instance");
       unset(self::$cache[self::$frontendName][$type]);
     }
-    return self::frontend($type, $name);
+    return self::frontend($type, $name, $options);
   }
 
   static function stripCommentsExceptMeta($c) {

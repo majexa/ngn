@@ -12,9 +12,6 @@ Ngn.Form.El.Color = new Class({
       eParent: eInput.getParent(),
       eColor: eColor,
       id: 'rainbow_' + eInput.get('name'),
-      //styles: { // и так работает
-      //  'z-index': this.options.dialog.dialog.getStyle('z-index').toInt() + 1
-      //},
       imgPath: '/i/img/rainbow/small/',
       wheel: true,
       startColor: eInput.value ? new Color(eInput.value).rgb : [255, 255, 255],

@@ -84,7 +84,7 @@ abstract class SflmBase {
 
   public $type, $version = 1;
 
-  protected function getFileContents($path, $strict = true, $r = []) {
+  function getFileContents($path, $strict = true, $r = []) {
     Misc::checkEmpty($path);
     if (!is_file($path)) {
       $error = "File '$path' does not exists";
@@ -266,7 +266,7 @@ abstract class SflmBase {
   }
 
   function getPackagePath($package) {
-    return Arr::last(Config::getFilePaths("sfl/".$this->type."/$package", 'vars'));
+    return Arr::last(Config::getFilePaths("sfl/".$this->type."/$package", 'vars') ?: []);
   }
 
   public $packagesCache = [];

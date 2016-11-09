@@ -64,7 +64,7 @@ Ngn.Items = new Class({
             var g = {};
             g[this.options.idParam] = id;
             new Request({
-              url: this.getLink() + '?a=ajax_' + this.options.deleteAction,
+              url: this.getLink() + '/ajax_' + this.options.deleteAction,
               onComplete: function() {
                 this.options.reloadOnDelete ? this.reload() : eItem.destroy();
               }.bind(this)

@@ -162,7 +162,7 @@ Ngn.Dialog = new Class({
       this.request.options.url = this.options.url;
       this.startupLoading(true);
       (function() {
-        this.request.send()
+        this.request.get()
       }).delay(100, this);
       if (this.options.autoShow) this.delayedShow = true;
     } else if (this.options.message != undefined) {

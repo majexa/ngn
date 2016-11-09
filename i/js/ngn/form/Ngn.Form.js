@@ -251,7 +251,6 @@ Ngn.Form = new Class({
     this.submitAjax();
   },
 
-
   /**
    * @property upload Ngn.Form.Upload
    */

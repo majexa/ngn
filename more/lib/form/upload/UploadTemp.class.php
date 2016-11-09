@@ -47,7 +47,10 @@ class UploadTemp extends Options2 {
   }
 
   function upload(array $files, $fieldName) {
-    if ($this->options['multiple']) $files = $files[$fieldName];
+    if ($this->options['multiple']) {
+      $fieldName = BracketName::getPureName($fieldName);
+      $files = BracketName::getValue($files, $fieldName);
+    }
     foreach ($files as $v) $this->uploadFile($v, $fieldName);
   }
 
@@ -89,6 +92,7 @@ class UploadTemp extends Options2 {
     if (!$uploadUrl) $uploadUrl = '/c2/uploadTemp';
     $uploadUrl = Url::addParam($uploadUrl, 'formId', $form->id());
     $uploadUrl = Url::addParam($uploadUrl, 'tempId', $ut->tempId);
+    $uploadUrl = Url::addParam($uploadUrl, 'multiple', true);
     $uploadUrl = Url::addParam($uploadUrl, 'fn', '{fn}');
     $form->options['uploadOptions'] = [
       'url'         => $uploadUrl,

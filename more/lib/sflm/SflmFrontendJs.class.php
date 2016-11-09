@@ -12,12 +12,23 @@ class SflmFrontendJs extends SflmFrontend {
    */
   protected $mtCode = '';
 
-  protected function init() {
-    $this->classes = new SflmJsClasses($this);
+  protected function defineOptions() {
+    return [
+      'jsClassesClass' => 'SflmJsClasses',
+      'mtDependenciesClass' => 'SflmMtDependencies'
+    ];
   }
 
-  protected function mtDependencies() {
-    return O::get('SflmMtDependencies');
+  protected function init() {
+    $this->classes = new $this->options['jsClassesClass']($this);
+  }
+
+  /**
+   * @return SflmMtDependencies
+   * @throws Exception
+   */
+  function mtDependencies() {
+    return O::get($this->options['mtDependenciesClass']);
   }
 
   protected function __addPath($path, $source = null) {
@@ -37,7 +48,7 @@ class SflmFrontendJs extends SflmFrontend {
 
   function addClass($name, $source = 'root', $strict = false) {
     $this->checkNotStored();
-    return $this->classes->addClass($name, $source, $strict);
+    return $this->classes->addClass($name, $source, 'root', $strict);
   }
 
   /**
@@ -85,7 +96,11 @@ class SflmFrontendJs extends SflmFrontend {
       $this->mtCode .= $this->mtDependencies()->parse(file_get_contents($this->base->getAbsPath($path)));
     }
     $this->mtCode .= $this->mtDependencies()->parse($code);
-    return $this->mtCode.$code;
+    return $this->mtCode.$this->preNgnCode().$code;
+  }
+
+  protected function preNgnCode() {
+    return '';
   }
 
   protected function orderDebugPaths() {

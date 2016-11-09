@@ -36,6 +36,10 @@ class SflmJsFrontendClasses extends ArrayAccesseble {
       $this->r = $r;
       return;
     }
+    $this->load();
+  }
+
+  protected function load() {
     $this->r = [];
     foreach ($this->frontend->getPaths() as $path) {
       $classes = SflmJsClasses::parseValidClassesDefinition(Sflm::getCode($this->frontend->base->getAbsPath($path)));
@@ -50,6 +54,11 @@ class SflmJsFrontendClasses extends ArrayAccesseble {
   function store() {
     if (!$this->r) Sflm::log('Storing existing objects. Nothing to store. Skipped');
     SflmCache::c()->save($this->r, 'sflmJsFrontendClasses'.$this->frontend->key());
+  }
+
+  function clean() {
+    FileCache::c()->remove('sflmJsFrontendClasses'.$this->frontend->key());
+    $this->r = [];
   }
 
 }

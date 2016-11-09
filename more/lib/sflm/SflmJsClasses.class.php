@@ -54,7 +54,7 @@ class SflmJsClasses {
    * @return bool
    * @throws Exception
    */
-  function addClass($class, $source, $strict = true) {
+  function addClass($class, $source, $parent = null, $strict = true) {
     if (!SflmJsClasses::isValidClass($class)) {
       throw new Exception("Class '$class' is not valid. src: $source");
     }
@@ -85,8 +85,10 @@ class SflmJsClasses {
     return true;
   }
 
-  function addSomething($something, $source) {
-    strstr($something, '/') ? $this->processPath($something, $source) : $this->addClass($something, $source);
+  function addSomething($something, $source, $parent = null) {
+    strstr($something, '/') ? //
+      $this->processPath($something, $source) : //
+      $this->addClass($something, $source, $parent);
   }
 
   protected function processNamespaceParents($class, $source) {
@@ -99,7 +101,7 @@ class SflmJsClasses {
       }
       // Если неймспейс не найден в файле класса и его нет в уже добавленных классах, то пытаемся добавить
       if (!$this->namespaceInitExists($code, $parent) and !$this->frontendClasses->exists($parent)) {
-        $this->addClass($parent, "$class parent namespace");
+        $this->addClass($parent, "$class parent namespace", $class);
       }
     }
   }
@@ -138,7 +140,7 @@ class SflmJsClasses {
     $thisCodeValidClassesDefinition = SflmJsClasses::parseValidClassesDefinition($code);
     foreach (SflmJsClasses::parseValidPreloadClasses($code) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
-      $this->addClass($class, ($name ?: $path ?: '').' preload...'.$source);
+      $this->addClass($class, ($name ?: $path ?: '').' preload...'.$source, $name);
     }
     foreach (SflmJsClasses::parseRequired($code, 'before') as $class) {
       $this->addSomething($class, "$path requiredBefore");
@@ -150,14 +152,14 @@ class SflmJsClasses {
     Sflm::log("Processing valid-class patterns in '$source'");
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {
       if (in_array($class, $thisCodeValidClassesDefinition)) continue;
-      $this->addClass($class, "$source valid-class pattern");
+      $this->addClass($class, "$source valid-class pattern", $name);
     }
     foreach (SflmJsClasses::parseRequired($code, 'after') as $class) {
       $this->addSomething($class, "$path requiredAfter");
     }
     // the same as previous
     foreach (SflmJsClasses::parseRequired($code) as $class) {
-      $this->addSomething($class, "$path requiredAfter");
+      $this->addSomething($class, "$path requiredAfter", $name);
     }
   }
 
@@ -192,7 +194,7 @@ class SflmJsClasses {
   static function isValidClassMethod($class) {
     if (!Misc::hasPrefix(Sflm::$namespace.'.', $class)) return false;
     if (!SflmJsClasses::validName($class)) return false;
-    if (SflmJsClasses::isClass($class))return false;
+    if (SflmJsClasses::isClass($class)) return false;
     return true;
   }
 

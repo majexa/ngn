@@ -110,7 +110,7 @@ Ngn.Grid = new Class({
         Ngn.Request.Iface.loading(false);
         this.rowFlash(itemId);
       }.bind(this)
-    }).send();
+    }).get();
     return this;
   },
 
@@ -274,7 +274,7 @@ Ngn.Grid = new Class({
       action = action.bind(this);
       new Ngn.Btn(el, function() {
         action(row, this);
-      });8
+      });
     }
     return el;
   },
@@ -332,7 +332,7 @@ Ngn.Grid.toolActions = {};
 Ngn.Grid.toolActions.edit = function(row, opt) {
   new Ngn.Dialog.RequestForm(Object.merge({
     id: 'CHANGE_ME',
-    url: this.options.basePath + '?a=json_edit&id=' + row.id,
+    url: this.options.basePath + '/json_edit?id=' + row.id,
     width: 500,
     height: 300,
     title: false,
