@@ -25,7 +25,8 @@ Ngn.Grid = new Class({
     valueContainerClass: 'v',
     basePath: window.location.pathname,
     resizeble: false,
-    search: false
+    search: false,
+    requestOptions: {} // [Object] Опции AJAX запроса
   },
 
   btns: {},
@@ -92,16 +93,20 @@ Ngn.Grid = new Class({
 
   getLink: function(ajax) {
     var action = ajax ? this.options.listAjaxAction : this.options.listAction;
-    if (!action) if (ajax) throw new Ngn.EmptyError('action');
     return this.options.basePath + (action ? '/' + action : '') + (this.options.filterPath ? this.options.filterPath.toPathString() : '') + (this.currentPage == 1 ? '' : '/pg' + this.currentPage);
+  },
+
+  prepareListResult: function(r) {
+    return r;
   },
 
   reload: function(itemId, skipLoader) {
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.Request.Iface.loading(true);
-    new Ngn.Request.JSON({
+    new Ngn.Request.JSON(Object.merge({
       url: this.getLink(true),
       onComplete: function(r) {
+        r = this.prepareListResult(r);
         if (!this.options.fromDialog) {
           if (window.history.pushState) window.history.pushState(null, null, this.getLink(false));
         }
@@ -110,7 +115,7 @@ Ngn.Grid = new Class({
         Ngn.Request.Iface.loading(false);
         this.rowFlash(itemId);
       }.bind(this)
-    }).get();
+    }, this.options.requestOptions)).get();
     return this;
   },
 
@@ -189,7 +194,8 @@ Ngn.Grid = new Class({
           value = row.data[index];
         }
         if (this.options.formatters[index]) value = this.options.formatters[index]();
-        prop.html = this.replaceHtmlValue(value);
+        // prop.html = this.replaceHtmlValue(value);
+        prop.html = value;
         new Element('td', prop).
           addClass('n_' + index).
           addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
@@ -229,13 +235,13 @@ Ngn.Grid = new Class({
       el.addEvent('click', function(e) {
         Ngn.Request.Iface.loading(true);
         this.currentPage = el.get('href').replace(/.*pg(\d+)/, '$1');
-        new Ngn.Request.JSON({
+        new Ngn.Request.JSON(Object.merge({
           url: el.retrieve('href'),
           onComplete: function(r) {
             Ngn.Request.Iface.loading(false);
             this.initInterface(r, true);
           }.bind(this)
-        }).send();
+        }, this.options.requestOptions)).send();
         return false;
       }.bind(this));
     }.bind(this));

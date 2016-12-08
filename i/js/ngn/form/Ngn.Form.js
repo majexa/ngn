@@ -18,7 +18,8 @@ Ngn.Form = new Class({
     dialog: null, // [null|Ngn.Dialog] Диалог, из которого была создана форма
     focusFirst: false, // [boolean] Делать фокус на первом элементе
     ajaxSubmit: false, // [boolean] Сабмитить форму ajax-ом
-    disableInit: false // [boolean] Не производить инициализацию в формы в конструкторе
+    disableInit: false, // [boolean] Не производить инициализацию в формы в конструкторе
+    requestOptions: {} // [Object] Опции AJAX запроса
   },
 
   els: {},
@@ -355,7 +356,7 @@ Ngn.Form = new Class({
   },
 
   _submitAjax: function() {
-    new Ngn.Request.JSON({
+    new Ngn.Request.JSON(Object.JSON({
       url: this.options.ajaxSubmitUrl || this.eForm.get('action'),
       onComplete: function(r) {
         this.disable(false);
@@ -366,7 +367,7 @@ Ngn.Form = new Class({
         }
         this.fireEvent('complete', r);
       }.bind(this)
-    }).post(Ngn.Frm.toObj(this.eForm));
+    }, this.options.requestOptions)).post(Ngn.Frm.toObj(this.eForm));
   },
 
   _submit: function() {

@@ -52,6 +52,7 @@ Ngn.Dialog = new Class({
     vResize: false,
     fixed: false,
     //maxHeight: null,
+    requestOptions: {}, // [Object] Опции AJAX запроса
     onComplete: Function.from(),
     onClose: Function.from(),
     onOkClose: Function.from(),
@@ -94,11 +95,11 @@ Ngn.Dialog = new Class({
       return null;
     }
     if (this.options.bindBuildMessageFunction) this.options.message = this.buildMessage.bind(this, this.options.message);
-    this.request = new (this.options.jsonRequest ? Ngn.Request.JSON : Ngn.Request)({
+    this.request = new (this.options.jsonRequest ? Ngn.Request.JSON : Ngn.Request)(Object.merge({
       evalScripts: true,
       onSuccess: this.urlResponse.bind(this),
       onFailure: this.errorMessage.bind(this)
-    });
+    }, this.options.requestOptions));
     this.dialogId = this.options.id + '_dialog';
     this.dialogN = Ngn.Dialog.dialogs.getLength() + 1;
     Ngn.Dialog.dialogs[this.dialogId] = this;
