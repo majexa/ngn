@@ -356,7 +356,7 @@ Ngn.Form = new Class({
   },
 
   _submitAjax: function() {
-    new Ngn.Request.JSON(Object.JSON({
+    new Ngn.Request.JSON(Object.merge({
       url: this.options.ajaxSubmitUrl || this.eForm.get('action'),
       onComplete: function(r) {
         this.disable(false);

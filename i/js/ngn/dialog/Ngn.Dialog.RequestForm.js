@@ -50,11 +50,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     if (this.options.formRequestOptions) {
       formOptions.requestOptions = this.options.formRequestOptions;
     }
-    this.form = Ngn.Form.factory(this.message.getElement('form'), {
-      ajaxSubmit: true,
-      ajaxSubmitUrl: this.options.submitUrl,
-      disableInit: true
-    });
+    this.form = Ngn.Form.factory(this.message.getElement('form'), formOptions);
     this.form.options.dialog = this; // Важно передавать объект Диалога в объект
     // Формы после выполнения конструктура, иначе объект
     // Даилога не будет содержать созданого объекта Формы
