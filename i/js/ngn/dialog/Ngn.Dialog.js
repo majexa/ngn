@@ -162,9 +162,7 @@ Ngn.Dialog = new Class({
       this.dotter.start();
       this.request.options.url = this.options.url;
       this.startupLoading(true);
-      (function() {
-        this.request.get()
-      }).delay(100, this);
+      this.makeStartupRequest();
       if (this.options.autoShow) this.delayedShow = true;
     } else if (this.options.message != undefined) {
       if (this.options.setMessageDelay) {
@@ -231,6 +229,12 @@ Ngn.Dialog = new Class({
       this.show();
     }
     window.document.currentDialog = this;
+  },
+
+  makeStartupRequest: function() {
+    (function() {
+      this.request.get()
+    }).delay(100, this);
   },
 
   initSavedPosition: function() {

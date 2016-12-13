@@ -8,6 +8,7 @@ Ngn.Dialog.RequestFormBase = new Class({
     getFormData: function() {
       return Ngn.Frm.toObj(this.form.eForm);
     },
+    formOptions: null,
     formRequestOptions: null, // [null|Object] Опции AJAX запроса к форме
     onFormResponse: Function.from(),
     onFormRequest: Function.from(),
@@ -47,6 +48,9 @@ Ngn.Dialog.RequestFormBase = new Class({
       ajaxSubmitUrl: this.options.submitUrl,
       disableInit: true
     };
+    if (this.options.formOptions) {
+      formOptions = Object.merge(formOptions, this.options.formOptions);
+    }
     if (this.options.formRequestOptions) {
       formOptions.requestOptions = this.options.formRequestOptions;
     }
@@ -60,10 +64,7 @@ Ngn.Dialog.RequestFormBase = new Class({
       this.fireEvent('formRequest');
       this.loading(true);
     }.bind(this));
-    this.form.addEvent('failed', function(r) {
-      this.urlResponse(r);
-      this.loading(false);
-    }.bind(this));
+    this.initFailedEvent();
     this.form.addEvent('complete', function(r) {
       this.response = r;
       this.okClose();
@@ -79,6 +80,13 @@ Ngn.Dialog.RequestFormBase = new Class({
     this.initEvents();
     this.formInit();
     this.initPosition();
+  },
+
+  initFailedEvent: function() {
+    this.form.addEvent('failed', function(r) {
+      this.urlResponse(r);
+      this.loading(false);
+    }.bind(this));
   },
 
   // abstract

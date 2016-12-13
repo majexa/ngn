@@ -22,6 +22,7 @@ Ngn.Grid = new Class({
     fromDialog: false,
     listAction: null,
     listAjaxAction: 'json_getItems',
+    addAjaxAction: '/json_new',
     valueContainerClass: 'v',
     basePath: window.location.pathname,
     resizeble: false,
@@ -318,7 +319,7 @@ Ngn.GridBtnAction.New = new Class({
     return Object.merge({
       id: 'CHANGE_ME',
       dialogClass: 'dialog fieldFullWidth',
-      url: this.grid.options.basePath + '/json_new',
+      url: this.grid.options.basePath + this.options.addAjaxAction,
       title: false,
       onOkClose: function() {
         this.grid.reload();

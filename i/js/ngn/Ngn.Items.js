@@ -63,12 +63,12 @@ Ngn.Items = new Class({
             this.loading(id, true);
             var g = {};
             g[this.options.idParam] = id;
-            new Request({
+            new Request(Object.merge({
               url: this.getLink() + '/ajax_' + this.options.deleteAction,
               onComplete: function() {
                 this.options.reloadOnDelete ? this.reload() : eItem.destroy();
               }.bind(this)
-            }).GET(g);
+            }, this.options.requestOptions)).post(g);
           }.bind(this)
         });
       }.bind(this)],

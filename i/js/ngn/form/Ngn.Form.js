@@ -351,27 +351,36 @@ Ngn.Form = new Class({
     });
   },
 
-  submitAjax: function() {
-    this.options.ajaxSubmit ? this._submitAjax() : this._submit();
-  },
-
   _submitAjax: function() {
+    var failed = false;
     new Ngn.Request.JSON(Object.merge({
       url: this.options.ajaxSubmitUrl || this.eForm.get('action'),
+      onFailure: function(r) {
+        this.fireEvent('failed', JSON.decode(r.responseText));
+        failed = true;
+      }.bind(this),
       onComplete: function(r) {
-        this.disable(false);
-        this.submiting = false;
-        if (r && r.form) {
-          this.fireEvent('failed', r);
-          return;
-        }
-        this.fireEvent('complete', r);
+        setTimeout(function() {
+          this.disable(false);
+          this.submiting = false;
+          if (failed) return;
+          if (r && (r.error || r.form)) {
+            this.fireEvent('failed', r);
+            return;
+          }
+          this.fireEvent('complete', r);
+        }.bind(this), 1);
       }.bind(this)
     }, this.options.requestOptions)).post(Ngn.Frm.toObj(this.eForm));
   },
 
   _submit: function() {
     this.eForm.submit();
+  },
+
+  addGlobalError: function(message) {
+    var html = '<div class="element errorRow padBottom"><div class="validation-advice">' + message + '</div></div>';
+    this.eGlobalError = new Element('h2', {html: html}).inject(this.eForm, 'top');
   }
 
 });
