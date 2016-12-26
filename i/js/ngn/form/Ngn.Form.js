@@ -351,6 +351,10 @@ Ngn.Form = new Class({
     });
   },
 
+  submitAjax: function() {
+    this.options.ajaxSubmit ? this._submitAjax() : this._submit();
+  },
+
   _submitAjax: function() {
     var failed = false;
     new Ngn.Request.JSON(Object.merge({
@@ -378,9 +382,10 @@ Ngn.Form = new Class({
     this.eForm.submit();
   },
 
-  addGlobalError: function(message) {
+  showGlobalError: function(message) {
+    if (this.eGlobalError) this.eGlobalError.dispose();
     var html = '<div class="element errorRow padBottom"><div class="validation-advice">' + message + '</div></div>';
-    this.eGlobalError = new Element('h2', {html: html}).inject(this.eForm, 'top');
+    this.eGlobalError = Elements.from(html)[0].inject(this.eForm, 'top');
   }
 
 });
