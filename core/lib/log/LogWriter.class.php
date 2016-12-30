@@ -61,9 +61,7 @@ class LogWriter {
     $str = $disableTime ? $str."\n" : date('d.m.Y H:i:s').": $str\n";
     $dir = $logsPath ? $logsPath : LOGS_PATH;
     if (!is_dir($dir)) die("Error: Logs dir '$dir' does not exists. Define LOGS_PATH constant");
-    $exists = file_exists("$dir/$name.log");
     file_put_contents("$dir/$name.log", $str, FILE_APPEND);
-    if (!$exists) `sudo chmod 0666 $dir/$name.log`;
   }
 
 }
