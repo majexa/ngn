@@ -49,6 +49,7 @@ class FieldEFile extends FieldEFileBase {
   }
 
   protected function dataRealValue() {
+    if (!defined('WEBROOT_PATH')) return null;
     return WEBROOT_PATH.$this->dataValue();
   }
 

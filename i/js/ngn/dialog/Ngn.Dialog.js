@@ -140,7 +140,7 @@ Ngn.Dialog = new Class({
 
       this.titleText = new Element('span', {'class': this.options.titleTextClass, 'html': this.options.title}).inject(this.titlebar);
 
-      if (this.options.titleClose != false) {
+      if (this.options.titleClose !== false) {
         this.btnClose = Ngn.Btn.opacity(new Element('span', {
           'id': this.options.id + '_closer',
           'class': this.options.titleCloseClass
