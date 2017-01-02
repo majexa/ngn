@@ -18,16 +18,14 @@ Ngn.Grid = new Class({
     id: null,
     toolActions: {},
     toolLinks: {},
-    eParent: 'table',
+    eParent: '#table',
     fromDialog: false,
     listAction: null,
     listAjaxAction: 'json_getItems',
-    addAjaxAction: '/json_new',
     valueContainerClass: 'v',
     basePath: window.location.pathname,
     resizeble: false,
-    search: false,
-    requestOptions: {} // [Object] Опции AJAX запроса
+    search: false
   },
 
   btns: {},
@@ -36,7 +34,7 @@ Ngn.Grid = new Class({
     if (!this.options.eParent) throw new Ngn.EmptyError('this.options.eParent');
     if (this.options.basePath == '/') this.options.basePath = '';
     if (this.options.basePath && !this.options.id) this.options.id = Ngn.String.hashCode(this.options.basePath);
-    this.eParent = $(this.options.eParent);
+    this.eParent = document.getElement(this.options.eParent);
     this.initMenu();
     if (this.options.search) new Ngn.Grid.Search(this);
     this.options.eItems = Elements.from('<table width="100%" cellpadding="0" cellspacing="0" class="items itemsTable' + (this.options.resizeble ? ' resizeble' : '') + '"><thead><tr></tr></thead><tbody></tbody></table>')[0].inject(this.eParent);
@@ -94,29 +92,26 @@ Ngn.Grid = new Class({
 
   getLink: function(ajax) {
     var action = ajax ? this.options.listAjaxAction : this.options.listAction;
+    if (!action) if (ajax) throw new Ngn.EmptyError('action');
     return this.options.basePath + (action ? '/' + action : '') + (this.options.filterPath ? this.options.filterPath.toPathString() : '') + (this.currentPage == 1 ? '' : '/pg' + this.currentPage);
-  },
-
-  prepareListResult: function(r) {
-    return r;
   },
 
   reload: function(itemId, skipLoader) {
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.Request.Iface.loading(true);
-    new Ngn.Request.JSON(Object.merge({
+    new Ngn.Request.JSON({
       url: this.getLink(true),
       onComplete: function(r) {
-        r = this.prepareListResult(r);
-        if (!this.options.fromDialog) {
-          if (window.history.pushState) window.history.pushState(null, null, this.getLink(false));
-        }
+        // todo: bad support. remove temporary
+        //if (!this.options.fromDialog) {
+        //  if (window.history.pushState) window.history.pushState(null, null, this.getLink(false));
+        //}
         this.initInterface(r, true);
         this.fireEvent('reloadComplete', r);
         Ngn.Request.Iface.loading(false);
         this.rowFlash(itemId);
       }.bind(this)
-    }, this.options.requestOptions)).get();
+    }).get();
     return this;
   },
 
@@ -194,9 +189,8 @@ Ngn.Grid = new Class({
         } else {
           value = row.data[index];
         }
-        if (this.options.formatters[index]) value = this.options.formatters[index]();
-        // prop.html = this.replaceHtmlValue(value);
-        prop.html = value;
+        if (this.options.formatters[index]) value = this.options.formatters[index](value);
+        prop.html = this.replaceHtmlValue(value);
         new Element('td', prop).
           addClass('n_' + index).
           addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
@@ -236,13 +230,13 @@ Ngn.Grid = new Class({
       el.addEvent('click', function(e) {
         Ngn.Request.Iface.loading(true);
         this.currentPage = el.get('href').replace(/.*pg(\d+)/, '$1');
-        new Ngn.Request.JSON(Object.merge({
+        new Ngn.Request.JSON({
           url: el.retrieve('href'),
           onComplete: function(r) {
             Ngn.Request.Iface.loading(false);
             this.initInterface(r, true);
           }.bind(this)
-        }, this.options.requestOptions)).send();
+        }).send();
         return false;
       }.bind(this));
     }.bind(this));
@@ -319,7 +313,7 @@ Ngn.GridBtnAction.New = new Class({
     return Object.merge({
       id: 'CHANGE_ME',
       dialogClass: 'dialog fieldFullWidth',
-      url: this.grid.options.basePath + this.options.addAjaxAction,
+      url: this.grid.options.basePath + '/json_new',
       title: false,
       onOkClose: function() {
         this.grid.reload();

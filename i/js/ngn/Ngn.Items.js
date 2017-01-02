@@ -4,7 +4,7 @@ Ngn.Items = new Class({
   options: {
     idParam: 'id',
     mainElementSelector: '.mainContent',
-    eItems: 'items',
+    eItems: '#items',
     itemElementSelector: '.item',
     deleteAction: 'delete',
     isSorting: false,
@@ -37,7 +37,7 @@ Ngn.Items = new Class({
   },
   
   initItems: function() {
-    this.eItems = $(this.options.eItems);
+    this.eItems = document.getElement(this.options.eItems);
     var esItems = this.eItems.getElements(this.options.itemElementSelector);
     this.esItems = {};
     for (var i=0; i<esItems.length; i++) {
@@ -63,12 +63,12 @@ Ngn.Items = new Class({
             this.loading(id, true);
             var g = {};
             g[this.options.idParam] = id;
-            new Request(Object.merge({
+            new Request({
               url: this.getLink() + '/ajax_' + this.options.deleteAction,
               onComplete: function() {
                 this.options.reloadOnDelete ? this.reload() : eItem.destroy();
               }.bind(this)
-            }, this.options.requestOptions)).post(g);
+            }).GET(g);
           }.bind(this)
         });
       }.bind(this)],
