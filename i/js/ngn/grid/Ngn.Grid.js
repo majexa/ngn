@@ -257,10 +257,20 @@ Ngn.Grid = new Class({
       return;
     }
 
-    var el = new Element('a', {
+    var cls = ((typeOf(tool) == 'object' && tool.cls) ? tool.cls : toolName);
+    // fa fix
+    var faCls = cls;
+    if (faCls == 'delete') {
+      faCls = 'trash';
+      var colorCls = 'danger';
+    } else {
+      colorCls = 'primary';
+    }
+    // ---
+    var el = new Element('button', {
       'href': this.options.toolLinks[toolName] ? this.options.toolLinks[toolName](row) : '#',
-      'class': 'iconBtn ' + ((typeOf(tool) == 'object' && tool.cls) ? tool.cls : toolName),
-      'html': '<i></i>',
+      'class': 'btn btn-' + colorCls + ' btn-sm  ' + cls,
+      'html': '<i class="fa fa-' + faCls + '"></i>',
       'title': typeOf(tool) == 'object' ? tool.title : tool
     }).inject(new Element('td').inject(row.eTools));
 
