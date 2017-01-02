@@ -176,7 +176,7 @@ Ngn.Grid = new Class({
       if (this.options.checkboxes) {
         Elements.from('<td><input type="checkbox" name="itemIds[]" value="' + row.id + '"/></td>')[0].inject(eTools);
       } else {
-        Elements.from('<td></td>')[0].inject(eTools);
+        //Elements.from('<td></td>')[0].inject(eTools);
       }
       if (this.options.isSorting) Elements.from('<td><div class="dragBox"></div></td>')[0].inject(eTools);
       var n = 0;
