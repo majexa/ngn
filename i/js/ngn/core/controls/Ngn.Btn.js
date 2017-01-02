@@ -111,7 +111,7 @@ Ngn.Btn.btn = function(opt) {
   if (!opt) opt = {};
   if (!opt.cls) opt.cls = '';
   if (!opt.title && !opt.cls.contains('btn')) opt.cls = 'bordered ' + opt.cls;
-  var a = new Element('a', Object.merge({
+  var a = new Element('button', Object.merge({
     'class': (opt.cls.contains('icon') ? '' : 'smIcons ') + opt.cls,
     html: opt.title || ''
   }, opt.prop || {}));
@@ -119,7 +119,8 @@ Ngn.Btn.btn = function(opt) {
     a.set('title', opt.caption);
     //Ngn.Element.setTip(a, opt.caption);
   }
-  new Element('i').inject(a, 'top');
+  var i = new Element('i').inject(a, 'top');
+  if (opt.icon) i.addClass('fa fa-' + opt.icon);
   return a;
 };
 
