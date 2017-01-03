@@ -347,6 +347,7 @@ Ngn.Grid.toolActions.edit = function(row, btn) {
     width: 500,
     height: 300,
     title: false,
+    dialogClass: 'dialog fieldFullWidth',
     onOkClose: function() {
       this.reload(row.id);
     }.bind(this)
