@@ -90,7 +90,7 @@ Ngn.Dialog = new Class({
     }
     if (this.options.noPadding) this.options.messageAreaClass += ' dialog-nopadding';
     if (this.options.reduceHeight) this.options.messageAreaClass += ' dialog-scroll';
-    if ($(this.options.id + '_dialog')) {
+    if (document.getElement('#' + this.options.id + '_dialog')) {
       console.debug('Dialog with id=' + this.options.id + ' already opened. Aborted');
       return null;
     }
@@ -103,7 +103,7 @@ Ngn.Dialog = new Class({
     this.dialogId = this.options.id + '_dialog';
     this.dialogN = Ngn.Dialog.dialogs.getLength() + 1;
     Ngn.Dialog.dialogs[this.dialogId] = this;
-    this.parentElement = $((this.options.parent || document.body));
+    this.parentElement = document.getElement(this.options.parent || document.body);
     var dialog_styles = Object.merge({
       'display': 'none',
       'width': this.options.width.toInt() + 'px',
@@ -117,7 +117,7 @@ Ngn.Dialog = new Class({
     }).inject(this.parentElement);
     if (this.options.fixed) this.dialog.setStyle('position', 'fixed');
     this.fx = this.options.useFx ? new Fx.Tween(this.dialog, Object.merge({
-      duration: 300
+      duration: 200
     }, this.options.fxOptions)) : null;
     if (this.fx) this.fx.set('opacity', 0);
 
@@ -333,7 +333,7 @@ Ngn.Dialog = new Class({
 
   toggle: function(name, flag) {
     if (!this.btns[name]) return;
-    this.btns[name].setStyle('display', flag ? 'block' : 'none');
+    this.btns[name].setStyle('display', flag ? 'inline-block' : 'none');
   },
 
   errorMessage: function(xhr) {
@@ -357,15 +357,19 @@ Ngn.Dialog = new Class({
   },
 
   createButton: function(name, id, text, cls, action, unforceClose, tabindex, okClose) {
-    var self = this;
-    var eButton = new Element('div', { 'class': 'goright image-button ' + cls });
-    var eLink = new Element('a', {
+    var eLink = new Element('button', {
       id: id + '_' + name,
       href: 'javascript:void(0)',
       'class': 'btn',
       tabindex: (tabindex != undefined ? tabindex : (++this.tab_index)),
       html: this.getButtonInnerHtml(text)
-    }).inject(eButton);
+    });
+    if (this.options.buttonExtraClass) {
+      var buttonExtraClass = this.options.buttonExtraClass(name);
+      if (buttonExtraClass) {
+        eLink.addClass(buttonExtraClass);
+      }
+    }
     if (action && action instanceof Function) {
       eLink.addEvent('click', action);
     }
@@ -376,8 +380,7 @@ Ngn.Dialog = new Class({
      okClose ? this.okClose.bind(this) : this.close.bind(this);
      }.bind(this));
      */
-    this.btns[name] = eButton;
-    return eButton;
+    return this.btns[name] = eLink;
   },
 
   openShade: function() {

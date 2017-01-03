@@ -56,7 +56,7 @@ Ngn.Items = new Class({
   initToolActions: function() {
     this.addBtnsActions([
       ['.delete', function(id, eBtn, eItem) {
-        new Ngn.Dialog.Confirm.Mem({
+        new Ngn.Dialog.Confirm.Mem(Object.merge({
           id: 'itemsDelete',
           notAskSomeTime: true,
           onOkClose: function() {
@@ -70,7 +70,7 @@ Ngn.Items = new Class({
               }.bind(this)
             }).GET(g);
           }.bind(this)
-        });
+        }, Ngn.Grid.defaultDialogOpts));
       }.bind(this)],
       ['a[class~=flagOn],a[class~=flagOff]', function(id, eBtn) {
         /*

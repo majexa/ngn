@@ -321,7 +321,7 @@ Ngn.GridBtnAction.New = new Class({
   },
   getDialogOptions: function() {
     return Object.merge({
-      id: 'CHANGE_ME',
+      id: 'dlgNew',
       dialogClass: 'dialog fieldFullWidth',
       url: this.grid.options.basePath + '/json_new',
       title: false,
@@ -340,9 +340,9 @@ Ngn.Grid.menu['new'] = {
 Ngn.Grid.defaultMenu = [Ngn.Grid.menu['new']];
 
 Ngn.Grid.toolActions = {};
-Ngn.Grid.toolActions.edit = function(row, opt) {
+Ngn.Grid.toolActions.edit = function(row, btn) {
   new Ngn.Dialog.RequestForm(Object.merge({
-    id: 'CHANGE_ME',
+    id: 'dlgEdit' + row.id,
     url: this.options.basePath + '/json_edit?id=' + row.id,
     width: 500,
     height: 300,

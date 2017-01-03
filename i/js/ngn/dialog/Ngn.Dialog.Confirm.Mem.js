@@ -5,12 +5,14 @@ Ngn.Dialog.Confirm.Mem = new Class({
     width: 250,
     okText: Ngn.Locale.get('core.delete'),
     bindBuildMessageFunction: true,
-    notAskSomeTime: false
+    notAskSomeTime: false,
+    title: false
   },
 
   timeoutId: null,
 
   initialize: function(_opts) {
+    if (_opts) _opts.title = false; // force title disabling
     this.setOptions(_opts);
     this.options.dialogClass += ' dialog-confirm';
     if (this.options.notAskSomeTime) {
