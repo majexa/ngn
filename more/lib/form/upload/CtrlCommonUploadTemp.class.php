@@ -10,7 +10,7 @@ class CtrlCommonUploadTemp extends CtrlCommon {
       'formId' => $this->req->reqNotEmpty('formId'),
       'tempId' => $this->req->reqNotEmpty('tempId'),
       'multiple' => !empty($this->req->r['multiple'])
-    ]))->upload($this->req->files, $this->req->reqNotEmpty('fn'));
+    ]))->upload($this->req->files[$this->req->reqNotEmpty('fn')], $this->req->reqNotEmpty('fn'));
   }
   
   function action_deleteOld() {

@@ -2,7 +2,7 @@
 
 abstract class UserRegPhoneConfirmForm extends Form {
 
-  protected $authorizedUser = null;
+  public $registeredUser = null;
 
   function __construct(array $fields = [], array $options = []) {
 //    if (($userId = Auth::get('id'))) {
@@ -51,16 +51,8 @@ abstract class UserRegPhoneConfirmForm extends Form {
     ]);
   }
 
-  protected function _initErrors() {
-    if (($codeElement = $this->getElement('code'))) {
-      $correctCode = db()->selectCell('SELECT code FROM userPhoneConfirm WHERE code=? AND phone=?', //
-        $codeElement->value(), $this->getElement('phone')->value());
-      if (!$correctCode) $this->getElement('code')->error('Код введён не верно');
-    }
-  }
-
   protected function jsInlineConfirmedPhone() {
-    if ($this->authorizedUser) return '';
+    if ($this->registeredUser) return '';
     return <<<JS
 
 var form = Ngn.Form.forms.{$this->id()};
@@ -110,7 +102,7 @@ width: 50px;
   }
 
   protected function _update(array $data) {
-    if (!$this->authorizedUser) {
+    if (!$this->registeredUser) {
       if (!($user = DbModelCore::get('users', $data['phone'], 'phone'))) {
         $id = DbModelCore::create('users', [
           'role'   => $this->userRole(),
@@ -119,20 +111,18 @@ width: 50px;
           'active' => 1
         ]);
         $user = DbModelCore::get('users', $id);
+        $this->registeredUser = $user;
       }
-      $this->authorizedUser = $user;
-      Auth::loginById($user['id']);
     }
     DdCore::imDefault('profile')->create($data);
   }
 
-  protected function initErrors() {
+  protected function _initErrors() {
 //    $phone = $this->getElement('phone');
 //    if (!$phone->valueChanged) {
 //      $phone->error('Телефон не изменился');
 //      return;
 //    }
-    parent::initErrors();
     $this->initCodeError();
   }
 
