@@ -17,6 +17,9 @@ outline: none;
 user-select: none;
 font-size: 12px;
 }
+button.btn {
+padding: 0;
+}
 .btn.basicBtn {
 padding: 3px 10px;
 }

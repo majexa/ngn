@@ -28,7 +28,7 @@ abstract class UserRegPhoneConfirmForm extends Form {
       ],
       [
         'type' => 'staticText',
-        'text' => '<p class="label">&nbsp;</p><a class="btn sendPass"><span>Отправить пароль</span></a>',
+        'text' => '<p class="label">&nbsp;</p> <a class="btn sendPass icon ok"><span><i></i>Отправить пароль</span></a>',
       ],
       [
         'type' => 'groupBlock'

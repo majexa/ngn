@@ -41,21 +41,17 @@ background-image: url(../../../i/img/dialog/info.png);
 background-image: url(../../../i/img/dialog/info.png);
 }
 
-.image-button {
+.dialog {
 cursor: pointer;
-background: transparent none no-repeat left center;
-margin-right: 10px;
+margin-left: 10px;
 }
-.image-button.cancel {
-margin-right: 0;
+.dialog-footer {
+text-align: right;
 }
-.image-button i {
-margin-top: -1px;
+.dialog-footer .btn {
+margin: 0 5px;
 }
-.image-button .btn span {
-display: block;
-padding: 4px 7px 0 7px;
-}
+
 /* advanced button 
 .image-button a {
 display: block;
