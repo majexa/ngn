@@ -7,7 +7,7 @@
   width: 185px;
   height: 158px;
   padding: 4px;
-  background: url(../../../i/img/datepicker/jqui/frame.png) no-repeat;
+  background: url(/i/img/datepicker/jqui/frame.png) no-repeat;
 }
 
 /* header
@@ -39,7 +39,7 @@
   width: 16px;
   height: 16px;
   top: 4px;
-  background-image: url(../../../i/img/datepicker/jqui/arrows.png);
+  background-image: url(/i/img/datepicker/jqui/arrows.png);
   background-position: left top;
   background-repeat: no-repeat;
 }

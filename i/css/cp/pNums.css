@@ -9,10 +9,10 @@ border-bottom: 1px solid #F1EDED;
 .itemsTableMenu .pNums a,
 .itemsTableMenu .pNums b {
 display: inline-block;
-margin-right: 0px !important; /* conflict with ".iconsSet a" margin */
 border: 1px solid #CCCCCC;
 border-radius: 15px 15px 0 0;
 border-bottom: none;
+margin-left: -1px;
 }
 .itemsTableMenu .pNums a,
 .itemsTableMenu .pNums b,

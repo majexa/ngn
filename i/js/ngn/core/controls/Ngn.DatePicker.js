@@ -1,5 +1,5 @@
 Ngn.DatePicker = new Class({
-  Extends: Picker.Date,
+  Extends: Ngn.Picker.Date,
   
   options: {
     draggable: false,

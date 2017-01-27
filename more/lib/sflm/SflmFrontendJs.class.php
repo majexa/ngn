@@ -75,7 +75,7 @@ class SflmFrontendJs extends SflmFrontend {
   function processCode($code, $source) {
     $this->checkNotStored();
     R::set('code', $code);
-    $this->classes->processCode($code, $source);
+    $this->classes->processCode($code, $source, 'root');
     $this->mtProcessCode($code);
   }
 

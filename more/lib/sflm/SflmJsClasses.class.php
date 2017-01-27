@@ -120,6 +120,7 @@ class SflmJsClasses {
    * @throws Exception
    */
   function processPath($path, $source = null, $name = null) {
+    output2($path.' --- '.$name);
     if (Misc::hasSuffix('', $path)) if (in_array($path, $this->frontend->pathsCache)) {
       Sflm::log("Path '$path' is in cache. Skipped");
       return;
@@ -146,8 +147,6 @@ class SflmJsClasses {
       $this->addSomething($class, "$path requiredBefore");
     }
     Sflm::log('Adding '.($source ? SflmJsClasses::captionPrefix($source, $name).' ' : '').($path ? "PATH $path" : 'CODE'));
-//    if (strstr($path, 'elementExtra')) die2('=');
-
     if ($path) $this->frontend->_addPath($path); // добавили путь
     Sflm::log("Processing valid-class patterns in '$source'");
     foreach (SflmJsClasses::parseValidClassesUsage(Sflm::stripComments($code)) as $class) {

@@ -1,5 +1,7 @@
 <?php
 
+if (!ini_get('short_open_tag')) die("Change the value of php.ini short_open_tag = On");
+
 if (!defined('NGN_PATH')) define('NGN_PATH', dirname(__DIR__));
 define('CORE_PATH', NGN_PATH . '/core');                  // @LibStorageRemove
 require_once CORE_PATH.'/lib/common.func.php';

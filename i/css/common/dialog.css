@@ -30,15 +30,15 @@ height: 26px;
 }
 
 .alert-icon {
-background-image: url(../../../i/img/dialog/alert.png);
+background-image: url(/i/img/dialog/alert.png);
 }
 
 .confirm-icon {
-background-image: url(../../../i/img/dialog/info.png);
+background-image: url(/i/img/dialog/info.png);
 }
 
 .prompt-icon {
-background-image: url(../../../i/img/dialog/info.png);
+background-image: url(/i/img/dialog/info.png);
 }
 
 .image-button {
@@ -323,7 +323,7 @@ margin: 3px 10px 0px 10px;
 .dialog-progress {
 height: 19px;
 margin: 7px 0px 5px 0px;
-background: url(../../../i/img/loader-flat.gif) no-repeat bottom center;
+background: url(/i/img/loader-flat.gif) no-repeat bottom center;
 }
 .dialog-progress.stopped {
 background: none;

@@ -236,7 +236,7 @@ Ngn.Grid = new Class({
             Ngn.Request.Iface.loading(false);
             this.initInterface(r, true);
           }.bind(this)
-        }).send();
+        }).get();
         return false;
       }.bind(this));
     }.bind(this));

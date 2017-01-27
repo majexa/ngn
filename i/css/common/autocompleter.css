@@ -47,7 +47,7 @@ color: #FFC500;
 /* ------------ Autocompleter ----------- */
 input.ac {
 display: block;
-background: url(../../../i/img/black/search.gif) no-repeat;
+background: url(/i/img/black/search.gif) no-repeat;
 background-position: 214px 5px;
 width: 230px;
 }

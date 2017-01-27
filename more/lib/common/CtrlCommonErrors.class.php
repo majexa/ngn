@@ -6,6 +6,10 @@ class CtrlCommonErrors extends CtrlCommon {
     return new Errors;
   }
 
+  protected function getParamActionN() {
+    return 2;
+  }
+
   function action_default() {
     $this->hasOutput = false;
     print '<html><head><meta http-equiv="refresh" content="10"></head>';

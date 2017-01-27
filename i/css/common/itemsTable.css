@@ -71,7 +71,7 @@ padding-right: 10px;
 }
 .itemsTableMenu .pNums a {
 background-color: #fff;
-margin: 0px !important;
+margin: 0;
 }
 .itemsTable.valign td {
 vertical-align: top;

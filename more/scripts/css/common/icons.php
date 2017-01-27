@@ -161,10 +161,10 @@ width: 16px;
 height: 16px;
 float: left;
 margin-right: 5px;
-background: url(../../../i/img/icons/pack1.png) no-repeat;
+background: url(/i/img/icons/pack1.png) no-repeat;
 }
 a.iconBtn i {
-background: url(../../../i/img/icons/pack1.png) no-repeat;
+background: url(/i/img/icons/pack1.png) no-repeat;
 cursor: pointer; /* for IE */
 }
 .iconsSet a i, a.iconsSet i, a.iconBtn i {

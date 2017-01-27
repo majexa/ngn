@@ -128,11 +128,11 @@ height: 11px;
 overflow: hidden;
 clear: both;
 width: 100%;
-background: #F1F0DF url(../../../i/img/handler/hHandler.png) no-repeat 50% 2px;
+background: #F1F0DF url(/i/img/handler/hHandler.png) no-repeat 50% 2px;
 }
 .vHandler {
 cursor: w-resize;
-background: #F1F0DF url(../../../i/img/handler/vHandler.png) no-repeat center center;
+background: #F1F0DF url(/i/img/handler/vHandler.png) no-repeat center center;
 width: 7px;
 height: 100px;
 }
