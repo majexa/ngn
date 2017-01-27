@@ -85,14 +85,14 @@ class UploadTemp extends Options2 {
     if (!isset($form->fields)) throw new Exception('Call constructor first');
     $ut = new self([
       'formId'   => $form->id(),
-      'multiple' => true
+      'multiple' => false
     ]);
     $files = Req::convertFiles($ut->getFiles());
     if (!empty($files)) $form->options['files'] = $files;
     if (!$uploadUrl) $uploadUrl = '/c2/uploadTemp';
     $uploadUrl = Url::addParam($uploadUrl, 'formId', $form->id());
     $uploadUrl = Url::addParam($uploadUrl, 'tempId', $ut->tempId);
-    $uploadUrl = Url::addParam($uploadUrl, 'multiple', true);
+    $uploadUrl = Url::addParam($uploadUrl, 'multiple', false);
     $uploadUrl = Url::addParam($uploadUrl, 'fn', '{fn}');
     $form->options['uploadOptions'] = [
       'url'         => $uploadUrl,

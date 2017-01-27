@@ -176,13 +176,16 @@ background-position: 3px -237px; /* Иконка по умолчанию */
 a.iconBtn,
 a.icon,
 .dummyIconBtn {
+/*
 display: block;
+
 float: left;
 width: 18px;
 height: 18px;
 //width: 20px;
 //height: 20px;
 margin: 0px 5px 2px 0px;
+*/
 }
 
 a.iconBtnCaption {

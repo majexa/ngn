@@ -181,11 +181,11 @@ Ngn.Dialog = new Class({
         'class': this.options.footerClass
       }).inject(this.eMessage);
       new Element('div', {'class': 'foot-wrap'}).inject(this.footer);
-      if (this.options.ok !== false) {
-        this.createButton('ok', this.options.id, this.options.okText, this.options.okClass, this.options.ok, !this.options.okDestroy, undefined, true).inject(this.footer.firstChild, 'top');
-      }
       if (this.options.cancel !== false) {
         this.createButton('cancel', this.options.id, this.options.cancelText, this.options.cancelClass, this.options.cancel, !this.options.cancelDestroy).inject(this.footer.firstChild, 'top');
+      }
+      if (this.options.ok !== false) {
+        this.createButton('ok', this.options.id, this.options.okText, this.options.okClass, this.options.ok, !this.options.okDestroy, undefined, true).inject(this.footer.firstChild, 'top');
       }
       this.status = new Element('div', {'class': 'foot-status'}).inject(this.footer.firstChild, 'top');
       if (typeOf(this.options.buttons) == 'object') {
@@ -318,7 +318,7 @@ Ngn.Dialog = new Class({
 
   setOkText: function(text) {
     if (!this.btns.ok) return;
-    this.btns.ok.getElement('a').set('html', this.getButtonInnerHtml(text));
+    this.btns.ok.set('html', this.getButtonInnerHtml(text));
   },
 
   setWidth: function(width) {
@@ -360,7 +360,7 @@ Ngn.Dialog = new Class({
     var eLink = new Element('button', {
       id: id + '_' + name,
       href: 'javascript:void(0)',
-      'class': 'btn',
+      'class': 'btn ' + cls,
       tabindex: (tabindex != undefined ? tabindex : (++this.tab_index)),
       html: this.getButtonInnerHtml(text)
     });
