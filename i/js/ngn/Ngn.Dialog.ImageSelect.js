@@ -1,5 +1,5 @@
 /**
- * Usage example:
+ * @example
  *
  *     new Ngn.Dialog.ImageSelect({
  *       images: [
