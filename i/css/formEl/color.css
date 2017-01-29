@@ -1,1 +1,5 @@
 @import "/i/css/rainbow/small.css";
+
+.type_color input {
+text-transform: uppercase;
+}

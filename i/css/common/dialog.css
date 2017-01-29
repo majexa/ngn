@@ -42,7 +42,6 @@ background-image: url(/i/img/dialog/info.png);
 }
 
 .dialog {
-cursor: pointer;
 margin-left: 10px;
 }
 .dialog-footer {
