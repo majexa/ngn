@@ -160,8 +160,10 @@ display: block;
 width: 16px;
 height: 16px;
 float: left;
-margin-right: 5px;
 background: url(/i/img/icons/pack1.png) no-repeat;
+}
+.tools i {
+margin: 3px;
 }
 a.iconBtn i {
 background: url(/i/img/icons/pack1.png) no-repeat;

@@ -1,7 +1,7 @@
 /*-------- common buttons -----------*/
 .btn {
 box-sizing: border-box;
-color: #000 !important;
+color: #000;
 border: 1px solid #999;
 border-radius: 3px;
 box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
@@ -36,12 +36,16 @@ margin-right: 0;
 }
 .btn:hover, b.btn {
 color: #000;
-text-decoration: none !important;
+text-decoration: none;
 }
 
 .btn {
+cursor: pointer;
 border-color: #a9a89c;
 background: -webkit-linear-gradient(top, #f6f5e9, #d9d8c9);
+}
+button {
+cursor: pointer;
 }
 .btn:hover:not(.nonActive):not(.pushed):not(:active):not(:disabled),b.btn {
 background: -webkit-linear-gradient(top, #fbfbf6, #F1F0DF);
@@ -72,7 +76,7 @@ display: block;
 margin: 3px 7px 0 7px;
 }
 b.btn {
-color: #FFF !important;
+color: #FFF;
 }
 a.btn, b.btn, .btnFake {
 height: 22px;

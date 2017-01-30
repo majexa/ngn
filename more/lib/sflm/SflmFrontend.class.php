@@ -163,13 +163,6 @@ abstract class SflmFrontend {
   protected function addDebugTags() {
     $html = '';
     foreach ($this->debugPaths as $path) {
-      $file = $this->base->getAbsPath($path);
-      if (Misc::hasSuffix('.scss', $file)) {
-        $cssFile = UPLOAD_PATH.'/css/cache/scss/'.Misc::removeSuffix('.scss', $path).'.css';
-        Dir::make(dirname($cssFile));
-        file_put_contents($cssFile, O::get('Scssc')->compile(file_get_contents($file)));
-        $path = UPLOAD_DIR.'/css/cache/scss/'.Misc::removeSuffix('.scss', $path).'.css';
-      }
       $html .= $this->base->getTag((isset(Sflm::$debugUrl) ? Sflm::$debugUrl : '').'/'.ltrim($path, '/'));
     }
     return $html;
