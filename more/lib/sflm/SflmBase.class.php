@@ -134,6 +134,7 @@ abstract class SflmBase {
   }
 
   function cacheFile($package) {
+    Dir::make(Sflm::$webPath.'/'.$this->type.'/cache');
     return Sflm::$webPath.'/'.$this->filePath($package);
   }
 
@@ -150,7 +151,6 @@ abstract class SflmBase {
     if (!$code) $code = $this->getPackageCode($package);
     if (!$code) return false;
     if (file_exists($file) and strlen(file_get_contents($file)) == strlen($code)) return false; // Если размер кода не изменился, не сохраняем
-    Dir::make(Sflm::$webPath.'/'.$this->type.'/cache');
     file_put_contents($file, $code);
     return $file;
   }
