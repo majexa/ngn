@@ -11,5 +11,5 @@ return [
   'icons',
   'dialog',
   'i/css/common/btns.css',
-  'i/css/cp/pNums.css',
+  'i/css/common/pNums.css',
 ];

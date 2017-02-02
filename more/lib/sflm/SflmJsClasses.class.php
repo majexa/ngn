@@ -120,7 +120,6 @@ class SflmJsClasses {
    * @throws Exception
    */
   function processPath($path, $source = null, $name = null) {
-    output2($path.' --- '.$name);
     if (Misc::hasSuffix('', $path)) if (in_array($path, $this->frontend->pathsCache)) {
       Sflm::log("Path '$path' is in cache. Skipped");
       return;

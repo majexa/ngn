@@ -2,4 +2,13 @@
 
 .type_color input {
 text-transform: uppercase;
+width: 70px;
+}
+.type_color .color {
+border: 1px solid #CCCCCC;
+width: 18px;
+height: 18px;
+float: left;
+margin-right: 5px;
+cursor: pointer;
 }

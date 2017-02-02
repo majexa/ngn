@@ -78,15 +78,17 @@ vertical-align: top;
 padding-top: 5px;
 padding-bottom: 5px;
 }
-
+.itemsTable .noItems {
+text-align: center;
+}
 
 /*---------------resizeble---------------*/
 
 .itemsTable table td {
-padding: 0px;
+padding: 0;
 }
 .itemsTable.resizeble table {
-margin: 3px 0px;
+margin: 3px 0;
 }
 
 .itemsTable.resizeble {

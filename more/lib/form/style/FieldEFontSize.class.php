@@ -36,4 +36,4 @@ class FieldEFontSize extends FieldESelect {
 
 }
 
-FieldEFontSize::$title = Locale::get('fontSize');
+FieldEFontSize::$title = Locale::get('size');

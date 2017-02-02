@@ -47,7 +47,9 @@ abstract class SflmBase {
    * @throws Exception
    */
   protected function getPackageLibs($package, $strict = false) {
-    if (($r = Config::getVar("sfl/".$this->type."/$package", true, false)) !== false) return $r;
+    if (($r = Config::getVar("sfl/".$this->type."/$package", true, false)) !== false) {
+      return $r;
+    }
     $errText = "Package '$package' (sfl/".$this->type."/$package) does not exists";
     if (!$strict) {
       Sflm::log($errText);

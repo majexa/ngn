@@ -21,7 +21,7 @@ Ngn.Picker = new Class({
 
 		pickerClass: 'datepicker',
 		inject: null,
-		animationDuration: 400,
+		animationDuration: 100,//
 		useFadeInOut: true,
 		positionOffset: {x: 0, y: 0},
 		pickerPosition: 'bottom',
