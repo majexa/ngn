@@ -73,7 +73,7 @@ Ngn.Picker.Attach = new Class({
 			return function(event){
 				var tag = event.target.get('tag');
 				if (tag == 'input' && event.type == 'click' && !element.match(':focus') || (self.opened && self.input == element)) return;
-				if (tag == 'a') event.stop();
+				event.stop();
 				self.position(element);
 				self.open();
 				self.fireEvent('attached', [event, element]);
