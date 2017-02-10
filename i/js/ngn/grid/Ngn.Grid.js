@@ -237,13 +237,13 @@ Ngn.Grid = new Class({
       el.addEvent('click', function (e) {
         Ngn.Request.Iface.loading(true);
         this.currentPage = el.get('href').replace(/.*pg(\d+)/, '$1');
-        new Ngn.Request.JSON({
-          url: el.retrieve('href'),
+        new Ngn.Request.JSON(Object.merge({
+          url: this.getLink(true).replace(/pg(\d+)/, 'pg' + this.currentPage),
           onComplete: function (r) {
             Ngn.Request.Iface.loading(false);
             this.initInterface(r, true);
           }.bind(this)
-        }).get();
+        }, this.options.requestOptions)).get();
         return false;
       }.bind(this));
     }.bind(this));

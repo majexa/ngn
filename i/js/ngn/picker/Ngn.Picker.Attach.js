@@ -8,7 +8,6 @@ provides: Picker.Attach
 ...
 */
 
-
 Ngn.Picker.Attach = new Class({
 
 	Extends: Ngn.Picker,
@@ -18,6 +17,7 @@ Ngn.Picker.Attach = new Class({
 
 		toggleElements: null, // deprecated
 		toggle: null, // When set it deactivate toggling by clicking on the input */
+		togglesOnly: true, // set to false to always make calendar popup on input element, if true, it depends on the toggles elements set.
 		showOnInit: false, // overrides the Picker option
 		blockKeydown: true
 	},
@@ -71,10 +71,9 @@ Ngn.Picker.Attach = new Class({
 
 		var getOpenEvent = function(element){
 			return function(event){
-                console.log(event.target);
 				var tag = event.target.get('tag');
 				if (tag == 'input' && event.type == 'click' && !element.match(':focus') || (self.opened && self.input == element)) return;
-				event.stop();
+				if (tag == 'a') event.stop();
 				self.position(element);
 				self.open();
 				self.fireEvent('attached', [event, element]);
@@ -88,7 +87,7 @@ Ngn.Picker.Attach = new Class({
 			};
 		};
 
-		allElements.each(function(element) {
+		allElements.each(function(element){
 
 			// The events are already attached!
 			if (self.attachedElements.contains(element)) return;
@@ -101,7 +100,7 @@ Ngn.Picker.Attach = new Class({
 
 			if (tag == 'input'){
 				// Fix in order to use togglers only
-				if (!toggles.length){
+				if (!self.options.togglesOnly || !toggles.length){
 					events = {
 						focus: openEvent,
 						click: openEvent,
@@ -117,7 +116,6 @@ Ngn.Picker.Attach = new Class({
 					events.click = openEvent;
 				}
 			}
-			window.pickerOpenEvent = openEvent;
 			element.addEvents(events);
 			self.attachedElements.push(element);
 			self.attachedEvents.push(events);

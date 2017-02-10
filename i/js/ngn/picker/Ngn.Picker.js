@@ -8,7 +8,6 @@ provides: Picker
 ...
 */
 
-
 Ngn.Picker = new Class({
 
 	Implements: [Options, Events],
@@ -21,7 +20,7 @@ Ngn.Picker = new Class({
 
 		pickerClass: 'datepicker',
 		inject: null,
-		animationDuration: 100,//
+		animationDuration: 400,
 		useFadeInOut: true,
 		positionOffset: {x: 0, y: 0},
 		pickerPosition: 'bottom',
@@ -94,21 +93,19 @@ Ngn.Picker = new Class({
 			duration: options.animationDuration,
 			transition: Fx.Transitions.Quad.easeInOut
 		}).inject(body);
-		
-    this.oldContents = new Element('div', {
-      styles: {
-        position: 'absolute',
-        top: 0,
-        'z-index': 1010
-      }
-    }).inject(slider);
-    
+
 		this.newContents = new Element('div', {
 			styles: {
 				position: 'absolute',
 				top: 0,
-				left: 0,
-				'z-index': 1000
+				left: 0
+			}
+		}).inject(slider);
+
+		this.oldContents = new Element('div', {
+			styles: {
+				position: 'absolute',
+				top: 0
 			}
 		}).inject(slider);
 
@@ -130,11 +127,15 @@ Ngn.Picker = new Class({
 	open: function(noFx){
 		if (this.opened == true) return this;
 		this.opened = true;
-		var picker = this.picker.setStyle('display', 'block').set('aria-hidden', 'false')
+		var self = this,
+			picker = this.picker.setStyle('display', 'block').set('aria-hidden', 'false')
 		if (this.shim) this.shim.show();
 		this.fireEvent('open');
 		if (this.options.useFadeInOut && !noFx){
-			picker.fade('in').get('tween').chain(this.fireEvent.pass('show', this));
+			picker.get('tween').start('opacity', 1).chain(function(){
+				self.fireEvent('show');
+				this.callChain();
+			});
 		} else {
 			picker.setStyle('opacity', 1);
 			this.fireEvent('show');
@@ -156,7 +157,7 @@ Ngn.Picker = new Class({
 			self.fireEvent('hide');
 		};
 		if (this.options.useFadeInOut && !noFx){
-			picker.fade('out').get('tween').chain(hide);
+			picker.get('tween').start('opacity', 0).chain(hide);
 		} else {
 			picker.setStyle('opacity', 0);
 			hide();
@@ -284,7 +285,7 @@ Ngn.Picker = new Class({
 			this.fx(fx);
 		} else {
 			this.slider.setStyle('left', 0);
-			this.oldContents.setStyles({left: 0, opacity: 0});
+			this.oldContents.setStyles({left: this.bodysize.x, opacity: 0});
 			this.newContents.setStyles({left: 0, opacity: 1});
 		}
 		return this;

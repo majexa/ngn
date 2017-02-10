@@ -3,8 +3,6 @@
  */
 Ngn.FilterPath = new Class({
 
-
-
   /**
    * "/path/to/page/param1/param2" - здесь n=3
    */
