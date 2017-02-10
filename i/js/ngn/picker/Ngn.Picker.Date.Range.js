@@ -68,7 +68,7 @@ Ngn.Picker.Date.Range = new Class({
 		};
 
 		var startInput = this.startInput = new Element('input', {events: events}).inject(footer);
-		new Element('span', {text: ' - '}).inject(footer);
+		new Element('span', {text: ' — '}).inject(footer);
 		var endInput = this.endInput = new Element('input', {events: events}).inject(footer);
 
 		this.applyButton = new Element('button.apply', {
@@ -119,7 +119,6 @@ Ngn.Picker.Date.Range = new Class({
 			if (el.time >= start && el.time <= end) el.element.addClass('selected');
 			else el.element.removeClass('selected');
 		}
-
 		var formattedFirst = start.format(this.options.format)
 			formattedEnd = end.format(this.options.format);
 

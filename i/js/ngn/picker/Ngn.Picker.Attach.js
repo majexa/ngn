@@ -71,9 +71,10 @@ Ngn.Picker.Attach = new Class({
 
 		var getOpenEvent = function(element){
 			return function(event){
+                console.log(event.target);
 				var tag = event.target.get('tag');
 				if (tag == 'input' && event.type == 'click' && !element.match(':focus') || (self.opened && self.input == element)) return;
-				if (tag == 'a') event.stop();
+				event.stop();
 				self.position(element);
 				self.open();
 				self.fireEvent('attached', [event, element]);
@@ -87,7 +88,7 @@ Ngn.Picker.Attach = new Class({
 			};
 		};
 
-		allElements.each(function(element){
+		allElements.each(function(element) {
 
 			// The events are already attached!
 			if (self.attachedElements.contains(element)) return;
@@ -97,7 +98,7 @@ Ngn.Picker.Attach = new Class({
 				openEvent = getOpenEvent(element),
 				// closeEvent does not have a depency on element
 				toggleEvent = getToggleEvent(openEvent, closeEvent);
-	
+
 			if (tag == 'input'){
 				// Fix in order to use togglers only
 				if (!toggles.length){
@@ -116,6 +117,7 @@ Ngn.Picker.Attach = new Class({
 					events.click = openEvent;
 				}
 			}
+			window.pickerOpenEvent = openEvent;
 			element.addEvents(events);
 			self.attachedElements.push(element);
 			self.attachedEvents.push(events);

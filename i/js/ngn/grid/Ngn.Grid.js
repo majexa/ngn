@@ -15,13 +15,15 @@ Ngn.Grid = new Class({
     toolActions: {},
     toolLinks: {},
     eParent: '#table',
-    fromDialog: false,
+    replaceLocation: false,
     listAction: null,
     listAjaxAction: 'json_getItems',
     valueContainerClass: 'v',
     basePath: window.location.pathname,
+    basicBasePath: '',
     resizeble: false,
-    search: false
+    search: false,
+    requestOptions: {}
   },
 
   btns: {},
@@ -86,31 +88,31 @@ Ngn.Grid = new Class({
     });
   },
 
-  getLink: function (ajax) {
+  getLink: function (ajax, forceBase) {
     var action = ajax ? this.options.listAjaxAction : this.options.listAction;
     if (!action) if (ajax) throw new Ngn.EmptyError('action');
-    return this.options.basePath + //
+    return (forceBase ? '' : this.options.basePath) + //
+      (ajax ? this.options.ajaxBasePath : this.options.basicBasePath) + //
       (action ? '/' + action : '') + //
-      //('/pg' + this.currentPage) + //
       (this.options.filterPath ? this.options.filterPath.toPathString() : '');
   },
 
   reload: function (itemId, skipLoader) {
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.Request.Iface.loading(true);
-    new Ngn.Request.JSON({
+    new Ngn.Request.JSON(Object.merge({
       url: this.getLink(true),
       onComplete: function (r) {
         // todo: bad support. remove temporary
-        //if (!this.options.fromDialog) {
-        //  if (window.history.pushState) window.history.pushState(null, null, this.getLink(false));
-        //}
+        if (this.options.replaceLocation && window.history.pushState) {
+          window.history.pushState(null, '', this.getLink(false, true));
+        }
         this.initInterface(r, true);
         this.fireEvent('reloadComplete', r);
         Ngn.Request.Iface.loading(false);
-        this.rowFlash(itemId);
+        if (itemId) this.rowFlash(itemId);
       }.bind(this)
-    }).get();
+    }, this.options.requestOptions)).get();
     return this;
   },
 
@@ -126,7 +128,7 @@ Ngn.Grid = new Class({
     fx.start('background-color', '#FFB900');
   },
 
-  initInterface: function (data, fromAjax) {
+  initInterface: function (_data, fromAjax) {
     if (data.head) this.initHead(data.head);
     if (data.body) this.initBody(data.body);
     if (data.pagination) this.initPagination(data.pagination, fromAjax);

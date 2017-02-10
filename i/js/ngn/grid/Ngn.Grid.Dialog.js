@@ -27,10 +27,8 @@ Ngn.Grid.Dialog.Request = new Class({
   Extends: Ngn.Grid.Dialog,
 
   beforeInitRequest: function() {
-    console.trace(this.options.gridOpts);
     this.grid = new this.options.gridClass(Object.merge(this.options.gridOpts, {
       eParent: this.message,
-      fromDialog: true,
       disableInit: true,
       debug: true
     }));
