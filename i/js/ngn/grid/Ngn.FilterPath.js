@@ -60,7 +60,7 @@ Ngn.FilterPath = new Class({
   },
 
   removeFilter: function(type, name) {
-    if (!this.filters[type][name]) return;
+    if (!this.filters[type] || !this.filters[type][name]) return;
     this.addFilter(type, name, '');
   },
 
