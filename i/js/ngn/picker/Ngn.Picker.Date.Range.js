@@ -94,7 +94,7 @@ Ngn.Picker.Date.Range = new Class({
 		}).inject(footer);
 
     this.resetButton = new Element('button.reset', {
-      text: 'Reset',
+      text: Locale.get('DatePicker.reset'),
       events: {click: self.reset.pass(false, self)}
     }).inject(footer);
 	},
