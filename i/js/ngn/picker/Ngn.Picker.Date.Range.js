@@ -20,6 +20,10 @@ Ngn.Picker.Date.Range = new Class({
 			}).clean();
 		},
 		setStartEndDate: function(input, dates){
+			if (!dates[0] && !dates[1]) {
+        input.set('value', ['', '']);
+        return;
+			}
 			input.set('value', dates.map(function(date){
 				return date.format(this.options.format);
 			}, this).join(' - '));
@@ -32,6 +36,11 @@ Ngn.Picker.Date.Range = new Class({
 		if (!input) return;
 
 		var dates = input.retrieve('datepicker:value');
+		if (!dates) {
+      this.date = this.startDate = this.endDate = new Date();
+      return;
+		}
+
 		if (dates && dates.length) dates = dates.map(Date.parse);
 		if (!dates || !dates.length || dates.some(function(date){
 			return !Date.isValid(date);
@@ -41,7 +50,10 @@ Ngn.Picker.Date.Range = new Class({
 				return Date.isValid(date);
 			})) dates = [this.date];
 		}
-		if (dates.length == 1) this.date = this.startDate = this.endDate = dates[0];
+
+		if (dates.length == 1) {
+			this.date = this.startDate = this.endDate = dates[0];
+    }
 		else if (dates.length == 2){
 			this.date = this.startDate = dates[0];
 			this.endDate = dates[1];
@@ -80,6 +92,19 @@ Ngn.Picker.Date.Range = new Class({
 			text: Locale.get('DatePicker.cancel'),
 			events: {click: self.close.pass(false, self)}
 		}).inject(footer);
+
+    this.resetButton = new Element('button.reset', {
+      text: 'Reset',
+      events: {click: self.reset.pass(false, self)}
+    }).inject(footer);
+	},
+
+	reset: function() {
+    this.startDate = false;
+    this.endDate = false;
+    //this.select(new Date()); // set visual picker element to current date
+    this.selectRange(); // cleanup selection
+		this.close();
 	},
 
 	renderDays: function(){
@@ -97,28 +122,44 @@ Ngn.Picker.Date.Range = new Class({
 	},
 
 	selectRange: function(){
-		this.date = this.startDate;
-		var dates = [this.startDate, this.endDate], input = this.input;
+    var input = this.input;
 
+    if (!this.startDate && !this.endDate) {
+    	// reset
+      input.store('datepicker:value', null);
+      this.fireEvent('select', false, input);
+      this.close();
+      return this;
+		}
+
+    var dates = [this.startDate, this.endDate];
+		this.date = this.startDate;
 		this.options.setStartEndDate.call(this, input, dates);
 		input.store('datepicker:value', dates.map(function(date){
 			return date.strftime();
 		})).fireEvent('change');
-
 		this.fireEvent('select', dates, input);
 		this.close();
 		return this;
 	},
 
 	updateRangeSelection: function(){
-		var start = this.startDate,
-			end = this.endDate || start;
-
-		if (this.dateElements) for (var i = this.dateElements.length; i--;){
-			var el = this.dateElements[i];
-			if (el.time >= start && el.time <= end) el.element.addClass('selected');
-			else el.element.removeClass('selected');
+		if (!this.startDate && !this.endDate) {
+      start = end = new Date();
+		} else {
+      var start = this.startDate,
+        end = this.endDate || start;
 		}
+
+
+
+		if (this.dateElements) {
+			for (var i = this.dateElements.length; i--;) {
+        var el = this.dateElements[i];
+        if (el.time >= start && el.time <= end) el.element.addClass('selected');
+        else el.element.removeClass('selected');
+      }
+    }
 
 		var formattedFirst = start.format(this.options.format),
 			formattedEnd = end.format(this.options.format);
