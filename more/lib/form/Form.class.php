@@ -420,7 +420,7 @@ class Form {
     foreach ($this->els as $el) {
       /* @var $el FieldEAbstract */
       if (($js = $el->jsInline()) != '') $this->jsInline .= $js;
-      if (($js = $el->js())) $this->js .= $js;
+      if (($js = $el->js())) $this->jsInline .= $js;
       if (($js = $el->typeCssAndJs()) and !in_array($el->type, $jsTypesAdded)) {
         $jsTypesAdded[] = $el->type;
         $typeJs .= $js;
@@ -440,7 +440,7 @@ class Form {
       }
     }
     $r = '';
-    if (($url = $this->getCachedJsUrl()) !== false) $r .= "\n<div id=\"{$this->id()}js\" style=\"display:none\">$url</div>";
+    //if (($url = $this->getCachedJsUrl()) !== false) $r .= "\n<div id=\"{$this->id()}js\" style=\"display:none\">$url</div>";
     if ($this->jsInlineDynamic) $this->jsInline .= "\n".$this->jsInlineDynamic;
     if ($this->jsInline) $r .= "\n<div id=\"{$this->id()}jsInline\" style=\"display:none\">{$this->jsInline}</div>";
     return $r;
@@ -448,8 +448,8 @@ class Form {
 
   protected function getCachedJsUrl() {
     if ($this->js == '') return false;
-    Dir::make(UPLOAD_PATH.'/js/cache/form');
-    $file = UPLOAD_PATH.'/js/cache/form/'.$this->id().'.js';
+    Dir::make(Form::$jsCacheBaseFolder.'/js/cache/form');
+    $file = Form::$jsCacheBaseFolder.'/js/cache/form/'.$this->id().'.js';
     $fileExists = file_exists($file);
     if (!$fileExists) {
       LogWriter::str('form', 'gen file '.$file);
@@ -967,4 +967,8 @@ Ngn.Frm.maxLength($('{$this->id()}'), ".FieldEInput::defaultMaxLength.");
     return Arr::getValueByKey($this->fields->fields, 'type', 'wisiwig') !== false;
   }
 
+  static $jsCacheBaseFolder;
+
 }
+
+Form::$jsCacheBaseFolder = defined('FORM_JS_CACHE_FOLDER') ? FORM_JS_CACHE_FOLDER : UPLOAD_PATH;

@@ -58,6 +58,7 @@ abstract class FieldEFieldSetAbstract extends FieldEAbstract {
     $oFields = new Fields($this->options['fields']);
     // Генерируем поля по данным, если значение определено
     if (!empty($this->options['value'])) {
+      if (!is_array($this->options['value'])) die2($this->options);
       // $this->options['value'] - значение взятое из поста
       $itemKeys = array_keys($this->options['value']);
     }
