@@ -103,6 +103,9 @@ border: none !important;
 .smIcons a:hover, a:hover.smIcons, .smIcons a.over, a.over.smIcons {
 text-decoration: underline;
 }
+.btn i {
+margin-right: 3px;
+}
 .smIcons i {
 margin-right: 3px;
 display: block;

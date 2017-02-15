@@ -210,10 +210,8 @@ padding-bottom: 0px;
 .fieldSet .element input[type=text] {
 width: 150px;
 }
-.fieldSet .bottomBtns a {
-float: none !important;
-display: inline-block;
-margin: 10px 10px 5px 5px;
+.fieldSet .bottomBtns button.smIcons {
+margin: 5px 10px 7px 7px;
 }
 .fieldSet a.bordered {
 /*position: absolute;
@@ -229,6 +227,9 @@ position: relative;
 padding-right: 25px;
 }
 */
+.fieldSet .rowBtns {
+padding-top: 5px;
+}
 .fieldSet .rowElement {
 position: relative;
 }
