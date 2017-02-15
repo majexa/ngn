@@ -349,7 +349,7 @@ Ngn.Grid.toolActions = {};
 Ngn.Grid.toolActions.edit = function (row, btn) {
   new Ngn.Dialog.RequestForm(Object.merge({
     id: 'dlgEdit' + row.id,
-    url: this.options.basePath + '/json_edit?id=' + row.id,
+    url: this.options.basePath + this.options.ajaxBasePath + '/json_edit?id=' + row.id,
     width: 500,
     height: 300,
     title: false,

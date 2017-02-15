@@ -43,6 +43,10 @@ float: none;
 .itemsTable td.tools {
 padding-left: 5px;
 }
+.itemsTable .tools .btn {
+margin-right: 3px;
+}
+
 .itemsTable .iconBtn {
 margin-bottom: 0px;
 }
