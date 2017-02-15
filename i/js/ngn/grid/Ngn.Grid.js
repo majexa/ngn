@@ -128,7 +128,7 @@ Ngn.Grid = new Class({
     fx.start('background-color', '#FFB900');
   },
 
-  initInterface: function (_data, fromAjax) {
+  initInterface: function (data, fromAjax) {
     if (data.head) this.initHead(data.head);
     if (data.body) this.initBody(data.body);
     if (data.pagination) this.initPagination(data.pagination, fromAjax);
