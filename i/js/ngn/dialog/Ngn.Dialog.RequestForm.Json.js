@@ -10,7 +10,7 @@ Ngn.Dialog.RequestForm.Json = new Class({
   },
   urlResponse: function (data) {
     this.parent({
-      form: dot.template(this.options.formTmpl)(data)
+      form: Ngn.Tmpl(this.options.formTmpl, data)
     });
     this.form.eForm.set('action', this.options.url);
     this.toggle('ok', true);
