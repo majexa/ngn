@@ -7,7 +7,9 @@ class Form {
     'form'        => '{input}<div class="clear"></div>',
     'headerOpen'  => '<div class="clear hgrp hgrp_{name}{class}">',
     'headerClose' => '</div>',
-    'input'       => '<div class="element{rowClass}"{data}>{title}<div class="field-wrapper">{input}</div>{error}{help}</div>',
+    'input'       => '<div class="element{rowClass}"{data}>{title}<div class="field-wrapper">'. //
+      "\n".'{input}'."\n". //
+      '</div>{error}{help}</div>',
     'title'       => '<p class="label"><span class="ttl">{title}</span>{required}<span>:</span></p>',
     'error'       => '<div class="advice-wrapper static-advice" style="z-index:300"><div class="corner"></div><div class="validation-advice">{error}</div></div>',
     'globalError' => '<div class="element errorRow padBottom"><div class="validation-advice">{error}</div></div>',
@@ -232,7 +234,8 @@ class Form {
   protected function htmlElementInput(FieldEAbstract $el, $input) {
     if (isset($this->customTemplates[$el['name']])) {
       $input = str_replace('{input}', $input, $this->customTemplates[$el['name']]['input']);
-    } else {
+    }
+    else {
       $input = str_replace('{input}', $input, $this->templates['input']);
     }
     $input = str_replace('{required}', $el['required'] ? $this->templates['required'] : '', $input);
@@ -241,7 +244,7 @@ class Form {
     $input = str_replace('{id}', $el['id'], $input);
     $input = str_replace('{rowClass}', $this->htmlGetRowClassAtr($el), $input);
     if ($el['useTypeJs']) $input = str_replace('{data}', Html::dataParams([
-      'name' => $el['name'],
+      'name'   => $el['name'],
       'typejs' => true
     ]), $input);
     else $input = str_replace('{data}', '', $input);
@@ -510,7 +513,8 @@ class Form {
         if (empty($el->error)) throw new Exception('error is empty. $el: '.getPrr($el));
         if (isset($el->inputType) and $el->inputType == 'hidden') {
           $this->globalError($el->error);
-        } else {
+        }
+        else {
           $this->lastError = $el->error;
           $this->lastErrorElement = $el;
           $this->hasErrors = true;
@@ -591,7 +595,8 @@ class Form {
     if (empty($d['type'])) $d['type'] = 'text';
     if ($this->options['placeholders'] and !empty($d['title'])) {
       $d['placeholder'] = (!empty($d['help']) ? $d['help'] : $d['title']) //
-        /*(!empty($d['required']) ? ' *' : '')*/;
+        /*(!empty($d['required']) ? ' *' : '')*/
+      ;
     }
     if (isset($d['maxlength']) and $d['maxlength'] == 0) unset($d['maxlength']);
     $el = FieldCore::get($d['type'], $d, $this);
@@ -667,11 +672,11 @@ class Form {
 
   protected function defineOptions() {
     return [
-      'dataParams' => [],
-      'placeholders' => false,
-      'submitTitle'  => 'OK',
+      'dataParams'     => [],
+      'placeholders'   => false,
+      'submitTitle'    => 'OK',
       'disableFormTag' => false,
-      'disableSubmit' => false,
+      'disableSubmit'  => false,
     ];
   }
 

@@ -1,4 +1,3 @@
-
 <?php
 
 class Fields extends ArrayAccesseble {
@@ -38,7 +37,12 @@ class Fields extends ArrayAccesseble {
 
   protected function defineOptions() {
     return [
-      'errorOnTypeNotExists' => false
+      'errorOnTypeNotExists' => false,
+      'forceShow'     => [],
+      'getHidden'     => false,
+      'getSystem'     => false,
+      'getDisallowed' => false,
+      'getVirtual'    => false
     ];
   }
 
@@ -56,7 +60,21 @@ class Fields extends ArrayAccesseble {
    * @return array
    */
   function getFieldsF() {
-    return $this->getFields();
+    $fields = [];
+    foreach ($this->getFields() as $f) {
+      if (!in_array($f['name'], $this->options['forceShow'])) {
+        if (!empty($f['disableUpdate'])) continue;
+        if (!empty($f['system']) and !$this->options['getSystem']) continue;
+        if (!empty($f['defaultDisallow']) and !$this->options['getDisallowed']) continue;
+        if (!empty($f['virtual']) and !$this->options['getVirtual']) continue;
+      }
+      $fields[$f['name']] = $f;
+    }
+    //if (!$this->options['getSystem']) $fields = Arr::filterByValue($fields, 'system', 0, true);
+    //if (!$this->options['getDisallowed']) $fields = Arr::filterByValue($fields, 'defaultDisallow', 0, true);
+    //if (!$this->options['getVirtual']) $fields = Arr::filterByValue($fields, 'virtual', 0, true, true);
+    //foreach ($fields as &$v) $v = Arr::filterEmptyStrings($v);
+    return $fields;
   }
 
   function getInputFields() {
