@@ -90,6 +90,10 @@ Ngn.Grid = new Class({
 
   getLink: function (ajax, forceBase) {
     var action = ajax ? this.options.listAjaxAction : this.options.listAction;
+<<<<<<< HEAD
+=======
+    //if (!action) if (ajax) throw new Ngn.EmptyError('action');
+>>>>>>> c797a3ef3280686ff9be9f3600d2f2c208f3ce16
     return (forceBase ? '' : this.options.basePath) + //
       (ajax ? this.options.ajaxBasePath : this.options.basicBasePath) + //
       (action ? '/' + action : '') + //
@@ -198,7 +202,8 @@ Ngn.Grid = new Class({
           value = row.data[index];
         }
         if (this.options.formatters[index]) value = this.options.formatters[index](value);
-        prop.html = this.replaceHtmlValue(value);
+        //prop.html = this.replaceHtmlValue(value);
+        prop.html = value;
         new Element('td', prop).addClass('n_' + index).addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
         n++;
       }
