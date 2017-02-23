@@ -16,8 +16,8 @@ Ngn.Grid = new Class({
     toolLinks: {},
     eParent: '#table',
     replaceLocation: false,
-    listAction: null,
-    listAjaxAction: 'json_getItems',
+    listAction: null, // используется как путь к странице со списком записей относительно базовых `basePath` + `basicbBasePath` путей
+    listAjaxAction: null, // используется как путь к JSON-запросу на получения записей, относительно базовых `basePath` + `basicbBasePath` путей
     valueContainerClass: 'v',
     basePath: window.location.pathname,
     basicBasePath: '',
@@ -90,7 +90,6 @@ Ngn.Grid = new Class({
 
   getLink: function (ajax, forceBase) {
     var action = ajax ? this.options.listAjaxAction : this.options.listAction;
-    if (!action) if (ajax) throw new Ngn.EmptyError('action');
     return (forceBase ? '' : this.options.basePath) + //
       (ajax ? this.options.ajaxBasePath : this.options.basicBasePath) + //
       (action ? '/' + action : '') + //
