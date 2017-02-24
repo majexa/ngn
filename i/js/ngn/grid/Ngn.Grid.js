@@ -88,27 +88,46 @@ Ngn.Grid = new Class({
     });
   },
 
-  getLink: function (ajax, forceBase) {
-    var action = ajax ? this.options.listAjaxAction : this.options.listAction;
-<<<<<<< HEAD
-=======
-    //if (!action) if (ajax) throw new Ngn.EmptyError('action');
->>>>>>> c797a3ef3280686ff9be9f3600d2f2c208f3ce16
-    return (forceBase ? '' : this.options.basePath) + //
-      (ajax ? this.options.ajaxBasePath : this.options.basicBasePath) + //
-      (action ? '/' + action : '') + //
-      (this.options.filterPath ? this.options.filterPath.toPathString() : '');
+  getLink: function (ajax) {
+    return this.options.basePath + this._getLink(ajax);
   },
 
+  _getLink: function (ajax) {
+    if (!ajax) {
+      throw new Error('non ajax part is not realized');
+    }
+    return this.options.restBasePath + '/' + this.options.basicBasePath;
+  },
+
+  getListLink: function (ajax) {
+    return this.options.basePath + this._getListLink(ajax);
+  },
+
+  _getListLink: function (ajax) {
+    if (!ajax) {
+      throw new Error('non ajax part is not realized');
+    }
+    return this.options.restBasePath + '/' + this.options.basicBasePath + 's';
+  },
+
+  // OLD LOGGICMUST DIE!!!!
+  // var action = ajax ? this.options.listAjaxAction : this.options.listAction;
+  // return (forceBase ? '' : this.options.basePath) + //
+  //   (ajax ? this.options.ajaxBasePath : this.options.basicBasePath) + //
+  //   (action ? '/' + action : '') + //
+  //   (this.options.filterPath ? this.options.filterPath.toPathString() : '');
+
+
   reload: function (itemId, skipLoader) {
+    console.log(this.getListLink(true));
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.Request.Iface.loading(true);
     new Ngn.Request.JSON(Object.merge({
-      url: this.getLink(true),
+      url: this.getListLink(true),
       onComplete: function (r) {
         // todo: bad support. remove temporary
         if (this.options.replaceLocation && window.history.pushState) {
-          window.history.pushState(null, '', this.getLink(false, true));
+          window.history.pushState(null, '', this._getLink(false));
         }
         this.initInterface(r, true);
         this.fireEvent('reloadComplete', r);
@@ -241,8 +260,17 @@ Ngn.Grid = new Class({
       el.addEvent('click', function (e) {
         Ngn.Request.Iface.loading(true);
         this.currentPage = el.get('href').replace(/.*pg(\d+)/, '$1');
+        console.log([this.currentPage, this.getLink(true)]);
+        var link = this.getListLink(true);
+        if (link.match(/pg(\d+)/)) {
+          link = link.replace(/pg(\d+)/, 'pg' + this.currentPage)
+        } else {
+          link += '/pg' + this.currentPage;
+        }
+
+
         new Ngn.Request.JSON(Object.merge({
-          url: this.getLink(true).replace(/pg(\d+)/, 'pg' + this.currentPage),
+          url: link,
           onComplete: function (r) {
             Ngn.Request.Iface.loading(false);
             this.initInterface(r, true);

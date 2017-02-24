@@ -9,11 +9,17 @@ define('MORE_PATH', NGN_PATH . '/more');
 // Новый базовый путь в папке "more"
 Ngn::addBasePath(MORE_PATH, 1);
 
-if (!defined('PROJECT_PATH')) die('Error: PROJECT_PATH not defined'."\n".getBacktrace(false));
+if (!defined('PROJECT_PATH')) {
+  print('Error: PROJECT_PATH not defined'."\n".getBacktrace(false));
+  exit(1);
+}
 
 Lib::requireIfExists(PROJECT_PATH.'/config/constants/more.php');
 
-if (!is_writable(PROJECT_PATH.'/'.DATA_DIR.'/cache')) die('Error: "'.PROJECT_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
+if (!is_writable(PROJECT_PATH.'/'.DATA_DIR.'/cache')) {
+  print('Error: "'.PROJECT_PATH.'/'.DATA_DIR.'/cache" is not writable'."\n".getBacktrace(false));
+  exit(1);
+}
 
 if (!defined('DATA_PATH')) define('DATA_PATH', PROJECT_PATH.'/'.DATA_DIR);
 if (!defined('TEMP_PATH')) define('TEMP_PATH', PROJECT_PATH.'/temp');
