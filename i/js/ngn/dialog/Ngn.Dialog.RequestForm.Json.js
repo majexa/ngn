@@ -12,6 +12,11 @@ Ngn.Dialog.RequestForm.Json = new Class({
     this.parent({
       form: Ngn.Tmpl(this.options.formTmpl, data)
     });
+    for (var i in data) {
+      var input = this.form.eForm.getElement('*[name='+i+']');
+      if (!input) continue;
+      input.set('value', data[i]);
+    }
     this.form.eForm.set('action', this.options.url);
     this.toggle('ok', true);
   },

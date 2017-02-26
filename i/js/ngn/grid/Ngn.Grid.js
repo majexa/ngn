@@ -107,7 +107,7 @@ Ngn.Grid = new Class({
     if (!ajax) {
       throw new Error('non ajax part is not realized');
     }
-    return this.options.restBasePath + '/' + this.options.basicBasePath + 's';
+    return this.options.restBasePath + '/' + this.options.basicBasePath + '/items';
   },
 
   // OLD LOGGICMUST DIE!!!!
@@ -119,7 +119,6 @@ Ngn.Grid = new Class({
 
 
   reload: function (itemId, skipLoader) {
-    console.log(this.getListLink(true));
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.Request.Iface.loading(true);
     new Ngn.Request.JSON(Object.merge({
