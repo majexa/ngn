@@ -437,8 +437,10 @@ class Form {
           if (Sflm::frontendName() and Sflm::$buildMode) {
             Sflm::frontend('js')->processCode($c, get_class($this).'::'.$method);
           }
-          if (Misc::hasPrefix('jsInline', $method)) $this->jsInline .= "\n// -- $method -- \n".$c;
-          else $this->js .= "\n// -- $method -- \n".$c;
+          if (Misc::hasPrefix('jsInline', $method)) $this->jsInline .= "\n$c";
+          //if (Misc::hasPrefix('jsInline', $method)) $this->jsInline .= "\n// -- $method -- \n".$c;
+          //else $this->js .= "\n// -- $method -- \n".$c;
+          else $this->js .= "\n".$c;
         }
       }
     }

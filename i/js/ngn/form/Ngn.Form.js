@@ -99,6 +99,7 @@ Ngn.Form = new Class({
 
   initInlineJs: function() {
     var js = $(this.eForm.get('id') + 'jsInline');
+    console.log(js.get('html'));//
     if (js) {
       try {
         eval(js.get('html'));
@@ -181,6 +182,7 @@ Ngn.Form = new Class({
   uploadOptions: null,
 
   initUpload: function(opt) {
+    console.log('initUpload');
     if (!this.hasFilesFields()) return;
     if (!opt || !opt.url) throw Error("$options['uploadOptions']['url'] of php Form object must be defined. Use UploadTemp::extendFormOptions to add this option to Form object");
     this.uploadOptions = opt;

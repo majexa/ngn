@@ -89,6 +89,7 @@ Ngn.Grid = new Class({
   },
 
   getLink: function (ajax) {
+    if (!ajax) ajax = true;
     return this.options.basePath + this._getLink(ajax);
   },
 
