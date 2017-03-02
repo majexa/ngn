@@ -10,7 +10,7 @@ Ngn.Dialog.RequestForm.Json = new Class({
   },
   urlResponse: function (data) {
     this.parent({
-      form: Ngn.Tmpl(this.options.formTmpl, data)
+      form: this.options.formTmpl
     });
     for (var i in data) {
       var input = this.form.eForm.getElement('*[name='+i+']');

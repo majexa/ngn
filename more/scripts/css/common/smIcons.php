@@ -16,6 +16,7 @@ $cords = array(
   'dynamic' => array(-251, -469),
   'variant' => array(-457, -287 ),
   'edit' => array(-320, -30),
+  'logout' => array(-112, -416),
   'add' => array(-365, -316),
   'delete' => array(2, -264),
   'move' => array(-90, -290),
