@@ -36,8 +36,13 @@ use Options;
   protected function defineOptions() {
     return [
       'useTypeJs' => false, // Использовать typeJs
-      'required' => false // обязательное для заполнения
+      'required' => false, // обязательное для заполнения
+      'sflmFrontendJs' => false
     ];
+  }
+
+  protected function sflmFrontendJs() {
+    return !empty($this->options['sflmFrontendJs']) ? $this->options['sflmFrontendJs'] : Sflm::frontend('js');
   }
 
   protected function &getArrayRef() {
@@ -250,9 +255,9 @@ use Options;
     if (empty($this->options['noTypeCss'])) Sflm::frontend('css')->addStaticLib("formEl/$this->type.css");
     if (!isset($this->options['useTypeJs'])) throw new Exception(get_class($this).'::defineOptions does not extends parent');
     if (!$this->options['useTypeJs']) return '';
-    Sflm::frontend('js')->addLib("formEl/$this->type", false);
-    Sflm::frontend('js')->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
-    Sflm::frontend('js')->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
+    $this->sflmFrontendJs()->addLib("formEl/$this->type", false);
+    $this->sflmFrontendJs()->addClass('Ngn.Form.ElInit.'.ucfirst($this->type), "$this->type field init");
+    $this->sflmFrontendJs()->addClass('Ngn.Form.El.'.ucfirst($this->type), "$this->type field init");
     if (!$this->form) return '';
     return "\n// -- type: {$this->type} --\nnew Ngn.Form.ElInit.factory(Ngn.Form.forms.{$this->form->id()}, '{$this->type}');\n";
   }

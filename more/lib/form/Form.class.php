@@ -423,7 +423,7 @@ class Form {
     foreach ($this->els as $el) {
       /* @var $el FieldEAbstract */
       if (($js = $el->jsInline()) != '') $this->jsInline .= $js;
-      if (($js = $el->js())) $this->jsInline .= $js;
+      if (($js = $el->js())) $this->js .= $js;
       if (($js = $el->typeCssAndJs()) and !in_array($el->type, $jsTypesAdded)) {
         $jsTypesAdded[] = $el->type;
         $typeJs .= $js;
@@ -445,7 +445,7 @@ class Form {
       }
     }
     $r = '';
-    //if (($url = $this->getCachedJsUrl()) !== false) $r .= "\n<div id=\"{$this->id()}js\" style=\"display:none\">$url</div>";
+    if (($url = $this->getCachedJsUrl()) !== false) $r .= "\n<div id=\"{$this->id()}js\" style=\"display:none\">$url</div>";
     if ($this->jsInlineDynamic) $this->jsInline .= "\n".$this->jsInlineDynamic;
     if ($this->jsInline) $r .= "\n<div id=\"{$this->id()}jsInline\" style=\"display:none\">{$this->jsInline}</div>";
     return $r;
@@ -594,6 +594,9 @@ class Form {
    * @throws Exception
    */
   function createElement(array $d) {
+    if (!empty($this->options['commonElementOptions'])) {
+      $d = array_merge($d, $this->options['commonElementOptions']);
+    }
     if (empty($d['type'])) $d['type'] = 'text';
     if ($this->options['placeholders'] and !empty($d['title'])) {
       $d['placeholder'] = (!empty($d['help']) ? $d['help'] : $d['title']) //

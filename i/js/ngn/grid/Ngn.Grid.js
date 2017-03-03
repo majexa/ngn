@@ -221,7 +221,7 @@ Ngn.Grid = new Class({
         } else {
           value = row.data[index];
         }
-        if (this.options.formatters[index]) value = this.options.formatters[index](value);
+        if (this.options.formatters[index]) value = this.options.formatters[index](value, row.id);
         //prop.html = this.replaceHtmlValue(value);
         prop.html = value;
         new Element('td', prop).addClass('n_' + index).addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);

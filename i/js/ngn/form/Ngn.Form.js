@@ -85,6 +85,7 @@ Ngn.Form = new Class({
   },
 
   initDynamicJs: function() {
+    console.log('init_Dynamic_Js');
     var js = $(this.eForm.get('id') + 'js');
     if (js) {
       Asset.javascript(js.get('html'), {
