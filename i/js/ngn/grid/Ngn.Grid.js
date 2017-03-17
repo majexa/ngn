@@ -5,6 +5,12 @@ Ngn.Grid = new Class({
   Extends: Ngn.Items.Table,
 
   options: {
+    basePath: window.location.pathname, // Пример: `http://localhost:8080`
+    restBasePath: '', // Пример: `/api/v1`
+    basicBasePath: '', // Пример: `/user`. Для запросов получения записей к этому пути прибаыляется `s` на конце
+
+    listAction: null, // используется для замены прямых ссылок на страницы пагинации на listAjaxAction
+    listAjaxAction: null, //
     isSorting: false,
     tools: {},
     formatters: {},
@@ -16,11 +22,7 @@ Ngn.Grid = new Class({
     toolLinks: {},
     eParent: '#table',
     replaceLocation: false,
-    listAction: null, // используется как путь к странице со списком записей относительно базовых `basePath` + `basicbBasePath` путей
-    listAjaxAction: null, // используется как путь к JSON-запросу на получения записей, относительно базовых `basePath` + `basicbBasePath` путей
     valueContainerClass: 'v',
-    basePath: window.location.pathname,
-    basicBasePath: '',
     resizeble: false,
     search: false,
     requestOptions: {}
@@ -28,7 +30,7 @@ Ngn.Grid = new Class({
 
   btns: {},
 
-  init: function () {
+  init: function() {
     if (!this.options.eParent) throw new Ngn.EmptyError('this.options.eParent');
     if (this.options.basePath == '/') this.options.basePath = '';
     if (this.options.basePath && !this.options.id) this.options.id = Ngn.String.hashCode(this.options.basePath);
@@ -45,12 +47,12 @@ Ngn.Grid = new Class({
     if (this.options.data) this.initInterface(this.options.data);
   },
 
-  initMenu: function () {
+  initMenu: function() {
     var grid = this, action;
     this.eMenu = Elements.from('<div class="itemsTableMenu dgray"><div class="clear"></div></div>')[0].inject(this.eParent);
     if (!this.options.menu) return;
     for (var i = 0; i < this.options.menu.length; i++) {
-      (function () {
+      (function() {
         var v = grid.options.menu[i];
         var keys = Object.keys(v.action);
         if (keys.length && Ngn.Arr.inn('$constructor', keys)) {
@@ -76,56 +78,49 @@ Ngn.Grid = new Class({
     }
   },
 
-  dataLoaded: function (data) {
+  dataLoaded: function(data) {
     this.options.data = data;
     this.init();
     this.initInterface(this.options.data);
   },
 
-  initThSizes: function () {
-    this.eHeadTr.getElements('th').each(function (el) {
+  initThSizes: function() {
+    this.eHeadTr.getElements('th').each(function(el) {
       el.setStyle('width', el.getSize().x + 'px');
     });
   },
 
-  getLink: function (ajax) {
+  getLink: function(ajax) {
     if (!ajax) ajax = true;
     return this.options.basePath + this._getLink(ajax);
   },
 
-  _getLink: function (ajax) {
+  _getLink: function(ajax) {
     if (!ajax) {
-      throw new Error('non ajax part is not realized');
+      throw new Error('non-ajax part is not realized');
     }
     return this.options.restBasePath + '/' + this.options.basicBasePath;
   },
 
-  getListLink: function (ajax) {
+  _getListLink: function(ajax) {
+    if (!ajax) {
+      throw new Error('non-ajax part is not realized');
+    }
+    return this.options.restBasePath + '/' + //
+      this.options.basicBasePath + 's' + //
+      ((this.options.filterPath ? this.options.filterPath.toPathString() : ''));
+  },
+
+  getListLink: function(ajax) {
     return this.options.basePath + this._getListLink(ajax);
   },
 
-  _getListLink: function (ajax) {
-    if (!ajax) {
-      throw new Error('non ajax part is not realized');
-    }
-    return this.options.restBasePath + '/' + this.options.basicBasePath + 's';
-  },
-
-  // OLD LOGGICMUST DIE!!!!
-  // var action = ajax ? this.options.listAjaxAction : this.options.listAction;
-  // return (forceBase ? '' : this.options.basePath) + //
-  //   (ajax ? this.options.ajaxBasePath : this.options.basicBasePath) + //
-  //   (action ? '/' + action : '') + //
-  //   (this.options.filterPath ? this.options.filterPath.toPathString() : '');
-
-
-  reload: function (itemId, skipLoader) {
+  reload: function(itemId, skipLoader) {
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.Request.Iface.loading(true);
-    console.log(this.getListLink(true));//
     new Ngn.Request.JSON(Object.merge({
       url: this.getListLink(true),
-      onComplete: function (r) {
+      onComplete: function(r) {
         // todo: bad support. remove temporary
         if (this.options.replaceLocation && window.history.pushState) {
           window.history.pushState(null, '', this._getLink(false));
@@ -139,11 +134,11 @@ Ngn.Grid = new Class({
     return this;
   },
 
-  rowFlash: function (itemId) {
+  rowFlash: function(itemId) {
     if (!this.esItems[itemId]) return;
     var fx = new Fx.Tween(this.esItems[itemId], {
       duration: 200,
-      onComplete: function () {
+      onComplete: function() {
         fx.setOptions({duration: 3000});
         fx.start('background-color', '#FFFFFF');
       }
@@ -151,7 +146,7 @@ Ngn.Grid = new Class({
     fx.start('background-color', '#FFB900');
   },
 
-  initInterface: function (data, fromAjax) {
+  initInterface: function(data, fromAjax) {
     if (data.head) this.initHead(data.head);
     if (data.body) this.initBody(data.body);
     if (data.pagination) this.initPagination(data.pagination, fromAjax);
@@ -159,13 +154,13 @@ Ngn.Grid = new Class({
     if (this.options.resizeble) {
       if (!this.options.id) throw new Ngn.EmptyError('this.options.id');
       this.resizeble = new Ngn.Grid.Resizeble(this);
-      window.addEvent('resize', function () {
+      window.addEvent('resize', function() {
         this.resizeble.resizeLastCol();
       }.bind(this));
     }
   },
 
-  initHead: function (head) {
+  initHead: function(head) {
     head = Ngn.Object.fromArray(head);
     this.esTh = [];
     this.eHeadTr.set('html', '');
@@ -177,7 +172,7 @@ Ngn.Grid = new Class({
     return this;
   },
 
-  initBody: function (rows) {
+  initBody: function(rows) {
     if (!rows) throw new Ngn.EmptyError('rows');
     rows = Ngn.Object.fromArray(rows);
     var eBody = this.options.eItems.getElement('tbody');
@@ -222,7 +217,6 @@ Ngn.Grid = new Class({
           value = row.data[index];
         }
         if (this.options.formatters[index]) value = this.options.formatters[index](value, row.id);
-        //prop.html = this.replaceHtmlValue(value);
         prop.html = value;
         new Element('td', prop).addClass('n_' + index).addClass(this.options.valueContainerClass).set('data-n', n).inject(eRow);
         n++;
@@ -238,7 +232,7 @@ Ngn.Grid = new Class({
 
   currentPage: 1,
 
-  replaceLink: function (link, ajax) {
+  replaceLink: function(link, ajax) {
     if (ajax) {
       return link.replace(new RegExp('/' + this.options.listAjaxAction + '/', 'g'), this.options.listAction ? '/' + this.options.listAction + '/' : '/');
     } else {
@@ -246,7 +240,7 @@ Ngn.Grid = new Class({
     }
   },
 
-  initPagination: function (data, fromAjax) {
+  initPagination: function(data, fromAjax) {
     if (this.ePagination) this.ePagination.dispose();
     this.ePagination = Elements.from('<div class="pNums"><div class="bookmarks">' + data.pNums + '</div></div>')[0].inject(this.eMenu, 'top');
     new Element('div', {
@@ -254,11 +248,11 @@ Ngn.Grid = new Class({
       title: Ngn.Locale.get('core.totalItemsCount'),
       html: data.itemsTotal
     }).inject(this.ePagination);
-    this.ePagination.getElements('a').each(function (el) {
+    this.ePagination.getElements('a').each(function(el) {
       if (!fromAjax) return;
       el.store('href', el.get('href'));
       el.set('href', this.replaceLink(el.get('href'), fromAjax));
-      el.addEvent('click', function (e) {
+      el.addEvent('click', function(e) {
         Ngn.Request.Iface.loading(true);
         this.currentPage = el.get('href').replace(/.*pg(\d+)/, '$1');
         console.log([this.currentPage, this.getLink(true)]);
@@ -272,7 +266,7 @@ Ngn.Grid = new Class({
 
         new Ngn.Request.JSON(Object.merge({
           url: link,
-          onComplete: function (r) {
+          onComplete: function(r) {
             Ngn.Request.Iface.loading(false);
             this.initInterface(r, true);
           }.bind(this)
@@ -282,12 +276,7 @@ Ngn.Grid = new Class({
     }.bind(this));
   },
 
-  replaceHtmlValue: function (v) {
-    if (typeof(v) != 'string') return v;
-    return v.replace(new RegExp(this.options.listAjaxAction, 'g'), this.options.listAction);
-  },
-
-  createToolBtn: function (toolName, row, action) {
+  createToolBtn: function(toolName, row, action) {
     var tool = row.tools[toolName];
 
 
@@ -322,14 +311,14 @@ Ngn.Grid = new Class({
     if (action) {
       // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
       action = action.bind(this);
-      new Ngn.Btn(el, function () {
+      new Ngn.Btn(el, function() {
         action(row, this);
       });
     }
     return el;
   },
 
-  idP: function (id) {
+  idP: function(id) {
     var p = {};
     p[this.options.idParam] = id;
     return p;
@@ -347,7 +336,7 @@ Ngn.Grid.menu = {};
 
 Ngn.GridBtnAction = new Class({
   Extends: Ngn.Btn.Action,
-  initialize: function (grid) {
+  initialize: function(grid) {
     this.grid = grid;
     this.classAction = true;
   }
@@ -355,16 +344,16 @@ Ngn.GridBtnAction = new Class({
 
 Ngn.GridBtnAction.New = new Class({
   Extends: Ngn.GridBtnAction,
-  action: function () {
+  action: function() {
     new Ngn.Dialog.RequestForm(this.getDialogOptions());
   },
-  getDialogOptions: function () {
+  getDialogOptions: function() {
     return Object.merge({
       id: 'dlgNew',
       dialogClass: 'dialog fieldFullWidth',
       url: this.grid.options.basePath + '/json_new',
       title: false,
-      onOkClose: function () {
+      onOkClose: function() {
         this.grid.reload();
       }.bind(this)
     }, Ngn.Grid.defaultDialogOpts)
@@ -379,7 +368,7 @@ Ngn.Grid.menu['new'] = {
 Ngn.Grid.defaultMenu = [Ngn.Grid.menu['new']];
 
 Ngn.Grid.toolActions = {};
-Ngn.Grid.toolActions.edit = function (row, btn) {
+Ngn.Grid.toolActions.edit = function(row, btn) {
   new Ngn.Dialog.RequestForm(Object.merge({
     id: 'dlgEdit' + row.id,
     url: this.options.basePath + this.options.ajaxBasePath + '/json_edit?id=' + row.id,
@@ -387,7 +376,7 @@ Ngn.Grid.toolActions.edit = function (row, btn) {
     height: 300,
     title: false,
     dialogClass: 'dialog fieldFullWidth',
-    onOkClose: function () {
+    onOkClose: function() {
       this.reload(row.id);
     }.bind(this)
   }, Ngn.Grid.defaultDialogOpts));

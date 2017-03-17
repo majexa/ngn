@@ -70,9 +70,9 @@ class SflmJsClasses {
       Sflm::log("Class '$class' exists. Skipped. src: $source");
       if ($this->frontend->addDebugPath($this->classPaths[$class])) {
         if (($namespaceParents = $this->namespaceParents($class))) {
-          foreach ($namespaceParents as $parent) {
-            if (isset($this->classPaths[$parent])) {
-              $this->frontend->addDebugPath($this->classPaths[$parent]);
+          foreach ($namespaceParents as $_parent) {
+            if (isset($this->classPaths[$_parent])) {
+              $this->frontend->addDebugPath($this->classPaths[$_parent]);
             }
           }
         }
