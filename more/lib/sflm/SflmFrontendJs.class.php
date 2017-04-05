@@ -95,8 +95,10 @@ class SflmFrontendJs extends SflmFrontend {
     foreach ($this->debugPaths as $path) {
       $this->mtCode .= $this->mtDependencies()->parse(file_get_contents($this->base->getAbsPath($path)));
     }
+    $preNgnCode = $this->preNgnCode();
+    $this->mtCode .= $this->mtDependencies()->parse($preNgnCode);
     $this->mtCode .= $this->mtDependencies()->parse($code);
-    return $this->mtCode.$this->preNgnCode().$code;
+    return $this->mtCode.$preNgnCode.$code;
   }
 
   protected function preNgnCode() {
