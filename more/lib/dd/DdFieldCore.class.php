@@ -31,10 +31,6 @@ class DdFieldCore {
     return FieldCore::hasAncestor($type, 'file') and !empty($class::$multi);
   }
 
-  static function isBoolType($type) {
-    return FieldCore::hasAncestor($type, 'bool') or FieldCore::hasAncestor($type, 'boolCheckbox');
-  }
-
   static function isRangeType($type) {
     return in_array($type, ['numberRange']);
   }

@@ -34,4 +34,8 @@ class FieldCore {
     return false;
   }
 
+  public static function isBoolType($type) {
+    return FieldCore::hasAncestor($type, 'bool') or FieldCore::hasAncestor($type, 'boolCheckbox');
+  }
+
 }

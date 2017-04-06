@@ -531,7 +531,7 @@ class Ddo {
 
   static function getGrid($items, Ddo $ddo) {
     $grid['head'] = Arr::get(array_map(function ($v) {
-      if (DdFieldCore::isBoolType($v['type'])) $v['title'] = '';
+      if (FieldCore::isBoolType($v['type'])) $v['title'] = '';
       return $v;
     }, $ddo->initFields()->fields), 'title');
     $grid['fieldNames'] = Arr::get($ddo->initFields()->fields, 'name');

@@ -107,7 +107,7 @@ Ngn.Grid = new Class({
       throw new Error('non-ajax part is not realized');
     }
     return this.options.restBasePath + '/' + //
-      this.options.basicBasePath + 's' + //
+      (this.options.basicBasePath ? this.options.basicBasePath + 's' : '') + //
       ((this.options.filterPath ? this.options.filterPath.toPathString() : ''));
   },
 

@@ -26,17 +26,22 @@ trait CrudAbstractCtrl {
   abstract protected function items(array $options = []);
 
   /**
-   * @var DataManagerAbstract
+   * @return GridData
    */
-  protected $im;
+  abstract protected function getGrid();
 
-  protected function getIm() {
-    if (isset($this->im)) return $this->im;
-    $this->im = $this->_getIm();
-    return $this->im;
-  }
+//  /**
+//   * @var DataManagerAbstract
+//   */
+//  protected $im;
 
-  abstract protected function _getIm();
+//  protected function getIm() {
+//    if (isset($this->im)) return $this->im;
+//    $this->im = $this->_getIm();
+//    return $this->im;
+//  }
+//
+//  abstract protected function _getIm();
 
   function action_json_new() {
     $im = $this->getIm();
@@ -47,17 +52,22 @@ trait CrudAbstractCtrl {
     return false;
   }
 
-  function action_json_edit() {
-    $im = $this->getIm();
-    $im->form->action = $this->req->options['uri']; // TODO xss
-    if ($im->requestUpdate($this->id())) return true;
-    $this->jsonFormAction($im->form);
-    return false;
+//  function action_json_edit() {
+//    $im = $this->getIm();
+//    $im->form->action = $this->req->options['uri']; // TODO xss
+//    if ($im->requestUpdate($this->id())) return true;
+//    $this->jsonFormAction($im->form);
+//    return false;
+//  }
+
+  function action_json_default() {
+    $this->action_json_getItems();
   }
 
   function action_json_getItems() {
-    $this->json = $this->getGrid();
-    if ($this->items()->hasPagination) $this->json['pagination'] = $this->items()->getPagination();
+    $grid = $this->getGrid();
+    $this->json = is_object($grid) ? $grid->r : $grid;
+    if (isset($this->items()->hasPagination)) $this->json['pagination'] = $this->items()->getPagination();
   }
 
   function action_json_search() {

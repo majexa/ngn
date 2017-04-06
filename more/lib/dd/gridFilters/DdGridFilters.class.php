@@ -31,7 +31,7 @@ class DdGridFilters {
           'pathFilterType' => 't2'
         ];
       }
-      elseif (DdFieldCore::isBoolType($v['type'])) {
+      elseif (FieldCore::isBoolType($v['type'])) {
         $filters[] = [
           'title'          => $v['title'],
           'name'           => $v['name'],

@@ -8,7 +8,6 @@ define('NGN_PATH', dirname(__DIR__));
 
 // web init
 define('PROJECT_PATH', WEBROOT_PATH.'/site');
-define('IS_DEBUG', true);
 define('LOGS_PATH', PROJECT_PATH.'/logs');
 
 require_once NGN_PATH.'/init/core.php';

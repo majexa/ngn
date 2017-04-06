@@ -21,7 +21,7 @@ class FieldEDdFieldType extends FieldESelect {
         $type['disable'][] = 'defaultDisallow';
         $type['disable'][] = 'system';
       }
-      if (empty($type['tags']) and !DdFieldCore::isBoolType($k)) $type['disable'][] = 'filterable';
+      if (empty($type['tags']) and !FieldCore::isBoolType($k)) $type['disable'][] = 'filterable';
       if (!empty($type['notList'])) $type['disable'][] = 'notList';
       $s .= '<tr>'.'<td><input type="radio" name="type" value="'.$k.'"'.($checked == $k ? ' checked' : '').' />'."\n<script type=\"text/javascript\">Ngn.cp.ddFieldType.types.$k = ".Arr::jsObj($type)."</script>\n".'</td>'.'<td><img src="'.DdFieldCore::getIconPath($k).'" title="'.$k.'" /></td>'.'<td>'.$v.'</td>'.'</tr>';
     }
