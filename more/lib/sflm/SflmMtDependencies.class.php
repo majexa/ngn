@@ -130,7 +130,9 @@ use SflmMtDependenciesOrder;
   }
 
   /**
-   * @param $name
+   * Ищет пакет в кэше метаданных MooTools
+   *
+   * @param string $name Пакет
    * @throws Exception
    * @return array
    */
