@@ -23,12 +23,13 @@ class GridData extends ArrayAccesseble {
   }
 
   protected function body() {
-    $r = [];
+    $items = [];
     foreach ($this->items() as $data) {
-      $r['id'] = $data[$this->options['id']];
-      $r['data'] = $data;
+      $item['id'] = $data[$this->options['id']];
+      $item['data'] = $data;
+      $items[] = $item;
     }
-    return $r;
+    return $items;
   }
 
   protected function fields() {

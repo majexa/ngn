@@ -64,6 +64,10 @@ trait CrudAbstractCtrl {
     $this->action_json_getItems();
   }
 
+  function action_json_getItem() {
+    $this->json = $this->items()->getItem($this->id());
+  }
+
   function action_json_getItems() {
     $grid = $this->getGrid();
     $this->json = is_object($grid) ? $grid->r : $grid;
