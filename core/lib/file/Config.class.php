@@ -166,7 +166,8 @@ class Config {
       foreach ($filePaths as $filePath) include_once $filePath;
     }
     else {
-      throw new Exception('"config/constants/'.$name.'.php" not found');
+      throw new Exception('"config/constants/'.$name.'.php" not found in base paths:'."\n".
+        implode("\n", self::$basePaths));
     }
   }
 

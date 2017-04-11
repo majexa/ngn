@@ -22,7 +22,9 @@ function logSql($db, $sql) {
 class DbSite extends Db {
 
   function __construct() {
-    if (!defined('DB_USER')) Config::loadConstants('database');
+    if (!defined('DB_USER')) {
+      Config::loadConstants('database');
+    }
     parent::__construct(DB_USER, DB_PASS, DB_HOST, DB_NAME, DB_CHARSET);
     // Блокирует модификацию базы
     if (defined('DB_BLOCK_MODIF') and DB_BLOCK_MODIF === true) $this->blockModification = true;

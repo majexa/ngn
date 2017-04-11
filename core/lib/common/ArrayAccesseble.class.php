@@ -2,7 +2,7 @@
 
 abstract class ArrayAccesseble implements ArrayAccess, IteratorAggregate, Countable {
 
-  public $r;
+  public $r = [];
 
   protected function &getArrayRef() {
     return $this->r;

@@ -3,7 +3,15 @@
 require_once VENDORS_PATH.'/DbSimple/Mysql.php';
 
 if (!defined('DB_NAME')) {
-  if (file_exists(NGN_ENV_PATH.'/config/database.php')) require NGN_ENV_PATH.'/config/database.php';
+  if (file_exists(NGN_ENV_PATH.'/config/database.php')) {
+    require NGN_ENV_PATH.'/config/database.php';
+    if (!defined('DB_NAME')) {
+      throw new Exception('DB_NAME still ont defined after including '.NGN_ENV_PATH.'/config/database.php');
+    }
+    if (!defined('DB_USER')) {
+      throw new Exception('DB_USER still ont defined after including '.NGN_ENV_PATH.'/config/database.php');
+    }
+  }
 }
 
 class Db extends DbSimple_Mysql {
