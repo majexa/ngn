@@ -390,6 +390,10 @@ class Form {
     return $html;
   }
 
+  function __toString() {
+    return $this->html();
+  }
+
   protected function initElementsInlineJs() {
     $jsTypesAdded = [];
     $elsHtml = '';

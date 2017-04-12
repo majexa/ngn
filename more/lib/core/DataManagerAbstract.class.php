@@ -27,18 +27,28 @@ abstract class DataManagerAbstract extends Options2 {
   abstract protected function _create();
 
   /**
-   * Изменяет текущую запись
+   * Изменяет текущую запись ($this->data)
    *
    * @return mixed
    */
   abstract protected function _update();
 
   /**
-   * Удаляет текущую запись
+   * Удаляет текущую запись ($this->id)
    *
    * @return mixed
    */
   abstract protected function _delete();
+
+  /**
+   * Изменяет поле записи
+   *
+   * @param $id
+   * @param $fieldName
+   * @param $value
+   * @return mixed
+   */
+  abstract function _updateField($id, $fieldName, $value);
 
   /**
    * @var Form
@@ -363,8 +373,6 @@ abstract class DataManagerAbstract extends Options2 {
     $this->afterUpdate();
     $this->afterCreateUpdate();
   }
-
-  abstract function _updateField($id, $fieldName, $value);
 
   function updateField($id, $fieldName, $value) {
     $this->form->fields->fields = Arr::filterByKeys($this->form->fields->fields, $fieldName);
