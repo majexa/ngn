@@ -19,7 +19,7 @@ class CtrlAdminDdStructure extends CtrlAdmin {
   }
   
   function action_default() {
-    $this->d['items'] = $this->im->items->getItems();
+    $this->d['DbItemsExtended'] = $this->im->items->getItems();
   }
 
   function action_edit() {

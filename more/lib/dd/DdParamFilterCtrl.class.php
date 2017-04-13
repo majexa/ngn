@@ -22,7 +22,7 @@ trait DdParamFilterCtrl {
   protected $paramFilterItems;
 
   /**
-   * @return DdItems
+   * @return DdDbItemsExtended
    */
   protected function paramFilterItems() {
     if (isset($this->paramFilterItems)) return $this->paramFilterItems;
@@ -31,7 +31,7 @@ trait DdParamFilterCtrl {
 
   /**
    * @abstract
-   * @return DdItems
+   * @return DdDbItemsExtended
    */
   abstract protected function _paramFilterItems();
 

@@ -36,8 +36,8 @@ abstract class ArrayAccesseble implements ArrayAccess, IteratorAggregate, Counta
     return isset($this->getArrayRef()[$offset]) ? $this->getArrayRef()[$offset] : null;
   }
 
-  function __get($k) {
-    return $this->getArrayRef()[$k];
+  function __get($offset) {
+    return $this->offsetGet($offset);
   }
 
 }

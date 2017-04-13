@@ -1,5 +1,5 @@
-<? if ($d['items']) { ?>
-  <?= Html::select($d['name'], $d['items'], null, ['tagId', $d['name']]); ?>
+<? if ($d['DbItemsExtended']) { ?>
+  <?= Html::select($d['name'], $d['DbItemsExtended'], null, ['tagId', $d['name']]); ?>
 <? } else { ?>
   Ничего не найдено
 <? } ?>

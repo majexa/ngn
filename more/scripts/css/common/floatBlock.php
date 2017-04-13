@@ -3,7 +3,7 @@
 $r = [];
 $smW = Config::getVarVar('dd', 'smW');
 foreach (DbModelCore::collection('pages', DbCond::get()->addNullFilter('strName', false)) as $page) {
-  if (!PageControllersCore::hasAncestor($page['controller'], 'items')) continue;
+  if (!PageControllersCore::hasAncestor($page['controller'], 'DbItemsExtended')) continue;
   $layoutN = PageLayoutN::get($page->id);
   $cWidth = PageLayout::getContentColWidth($page->id);
   if (!empty($page->settings['smW']))

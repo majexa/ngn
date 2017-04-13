@@ -1,7 +1,7 @@
 <form action="<?= $this->getPath() ?>" method="post">
 <input type="hidden" name="action" value="<?= $d['action']?>" />
 <ul>
-<? foreach ($d['items'] as $name => $v) { ?>
+<? foreach ($d['DbItemsExtended'] as $name => $v) { ?>
   <li>
     <h2><?= $d['descr']['vars'][$name] ? "<b>{$d['descr']['vars'][$name]}</b> $name" : "$name" ?>:</h2>
     <ul>

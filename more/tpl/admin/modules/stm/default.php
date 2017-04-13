@@ -5,7 +5,7 @@
 <?
 
 /* @var $v StmData */
-foreach ($d['items'] as $v) {
+foreach ($d['DbItemsExtended'] as $v) {
   $link = '/?theme[location]='.$v->source->options['location'].'&theme[design]='.
     $v->source->options['design'].'&theme[n]='.$v->n;
     $a = $v->source->options['location'].'/'.

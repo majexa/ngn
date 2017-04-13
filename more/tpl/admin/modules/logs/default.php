@@ -5,7 +5,7 @@
   </tr>
 </thead>
 <tbody>
-<? foreach ($d['items'] as $k => $v) { ?>
+<? foreach ($d['DbItemsExtended'] as $k => $v) { ?>
   <tr>
     <td nowrap><small><?= Date::datetimeStr($v['time']) ?></small></td>
     <td>

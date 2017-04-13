@@ -1,28 +1,7 @@
 <?php
 
-class DbItems implements UpdatableItems, ArrayAccess {
+class DbItems extends AbstractItems {
   use Options;
-
-  public $r = [];
-
-  function offsetSet($offset, $value) {
-    throw new Exception('not realized');
-  }
-
-  function offsetExists($offset) {
-    return (bool)$this->offsetGet($offset);
-  }
-
-  function offsetUnset($offset) {
-    throw new Exception('not realized');
-  }
-
-  protected $cache;
-
-  function offsetGet($offset) {
-    if (isset($this->cache[$offset])) return $this->cache[$offset];
-    return $this->cache[$offset] = $this->getItem($offset);
-  }
 
   public $table;
 
@@ -139,55 +118,14 @@ class DbItems implements UpdatableItems, ArrayAccess {
     return $this->db->ids($this->table, $this->cond);
   }
 
-  function getPagination() {
-    if (!$this->hasPagination) throw new Exception('Pagination was not enabled');
-    if (!isset($this->itemsTotal)) throw new Exception('Use DbItems::prepareItemsConds() before calling getPagination()');
-    return [
-      'itemsTotal' => $this->itemsTotal,
-      'pagesTotal' => $this->pagesTotal,
-      'pNums'      => $this->pNums,
-      'pNext'      => $this->pNext,
-      'pPrev'      => $this->pPrev,
-    ];
-  }
-
   // ---------------------- items select conditions -----------------
 
   protected $selectCond;
   protected $filterSelectCond = '';
 
-  /**
-   * Есть ли постраничная выборка
-   *
-   * @var bool
-   */
-  public $hasPagination = false;
 
-  /**
-   * HTML код со ссылками на страницы
-   *
-   * @var strgin
-   */
-  public $pNums;
-
-  public $pNext;
-  public $pPrev;
 
   protected $itemsCondsPrepared = false;
-
-  /**
-   * Общее кол-во записей не учитывая страничные лимиты
-   *
-   * @var integer
-   */
-  public $itemsTotal;
-
-  /**
-   * Общее кол-во записей не учитывая страничные лимиты
-   *
-   * @var integer
-   */
-  public $pagesTotal;
 
   function prepareItemsConds() {
     if ($this->itemsCondsPrepared) return $this;

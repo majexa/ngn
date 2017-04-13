@@ -91,7 +91,7 @@ class CtrlAdminDdItems extends CtrlAdmin {
     $form->options['deleteFileUrl'] = $this->tt->getPath(2).'/'.$this->req->param(2).'/deleteFile?id='.$this->req['id'];
   }
 
-  function oProcessItemsAdmin(DdItems $items) {
+  function oProcessItemsAdmin(DdDbItemsExtended $items) {
     $items->getNonActive = true;
   }
 

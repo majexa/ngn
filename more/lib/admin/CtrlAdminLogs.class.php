@@ -21,7 +21,7 @@ class CtrlAdminLogs extends CtrlAdmin {
 
   function action_default() {
     $this->d['logName'] = $this->logName;
-    $this->d['items'] = LogReader::get($this->logName);
+    $this->d['DbItemsExtended'] = LogReader::get($this->logName);
     $this->d['tpl'] = 'logs/default';
   }
   

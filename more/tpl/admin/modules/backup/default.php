@@ -4,11 +4,11 @@
 </p>
 <a href="<?= $this->getPath(2).'?a=make' ?>" class="btn" id="btnMakeBackup"><span>Сделать резервную копию</span></a>
 
-<? if ($d['items']) { ?>
+<? if ($d['DbItemsExtended']) { ?>
 <hr />
 <h2>Существующие резервные копии:</h2>
 <table id="itemsTable" class="backups" cellspacing="0">
-<? $n=0; foreach ($d['items'] as $v) { $n++; ?>
+<? $n=0; foreach ($d['DbItemsExtended'] as $v) { $n++; ?>
 <tr>
   <td><h2><?= $n ?>.</h2></td>
   <td>

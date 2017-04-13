@@ -39,4 +39,21 @@ trait DdCrudAbstractCtrl {
     return $this->objectProcess(new DdItemsManager($this->items(), $this->objectProcess($form, 'form')), 'im');
   }
 
+  function action_json_search() {
+    $this->items()->cond->addSearchFilter('%'.$this->req->rq('word').'%');
+    $this->action_json_getItems();
+  }
+
+  function action_ajax_activate() {
+    $this->items()->activate($this->id());
+  }
+
+  function action_ajax_deactivate() {
+    $this->items()->deactivate($this->id());
+  }
+
+  function action_ajax_reorder() {
+    $this->items()->reorderItems($this->req->rq('ids'));
+  }
+
 }

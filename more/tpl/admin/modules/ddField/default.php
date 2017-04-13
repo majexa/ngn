@@ -8,10 +8,10 @@
 
 <?
 
-$d['items'] = array_filter($d['items'], function ($v) {
+$d['DbItemsExtended'] = array_filter($d['DbItemsExtended'], function ($v) {
     return $v['editable'];
   });
-$d['items'] = array_values($d['items']);
+$d['DbItemsExtended'] = array_values($d['DbItemsExtended']);
 $d['grid'] = [
   'head' => ['Название', 'Имя', 'Тип', '', 'Описание'],
   'body' => array_map(function ($v) use ($d) {
@@ -35,7 +35,7 @@ $d['grid'] = [
       }
     }
     return $r;
-  }, $d['items'])
+  }, $d['DbItemsExtended'])
 ];
 
 if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];

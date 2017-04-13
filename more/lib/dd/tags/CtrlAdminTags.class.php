@@ -74,9 +74,9 @@ SQL
     $items = [];
     foreach ($r as $v) {
       $items[$v['strName']]['title'] = $v['strTitle'];
-      $items[$v['strName']]['items'][$v['id']] = $v;
+      $items[$v['strName']]['DbItemsExtended'][$v['id']] = $v;
     }
-    $this->d['items'] = $items;
+    $this->d['DbItemsExtended'] = $items;
     $this->setPageTitle('Редактирование тэгов');
   }
 
@@ -87,7 +87,7 @@ SQL
 
   protected function getGrid() {
     $group = DdTagsGroup::getById($this->groupId);
-    return Items::grid([
+    return DbItemsExtended::grid([
       'head' => ['ID', 'Тэг', 'Кол-во записей'],
       'body' => array_map(function ($v) {
         return [
@@ -147,7 +147,7 @@ SQL
   function action_json_pageSearch() {
     $this->json['html'] = $this->tt->getTpl('common/searchResults', [
       'name'  => 'pageId',
-      'items' => Pages::searchPage($this->req->rq('mask'))
+      'DbItemsExtended' => Pages::searchPage($this->req->rq('mask'))
     ]);
   }
 

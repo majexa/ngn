@@ -1,6 +1,6 @@
 <?php
 return [
   0 => 'item',
-  1 => 'items',
+  1 => 'DbItemsExtended',
   2 => 'tpl',
 ];

@@ -2,12 +2,9 @@
 
 class ItemsManager extends DataManagerAbstract {
   
-  /**
-   * @var UpdatableItems
-   */
   public $items;
   
-  function __construct(UpdatableItems $items, Form $form, array $options = []) {
+  function __construct(AbstractItems $items, Form $form, array $options = []) {
     $this->items = $items;
     parent::__construct($form, $options);
   }

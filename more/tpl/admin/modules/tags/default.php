@@ -21,16 +21,16 @@ background-image: url(./i/img/black/loader.gif);
 
 </style>
 
-<? if ($d['items']) { ?>
+<? if ($d['DbItemsExtended']) { ?>
 <table cellpadding="0" cellspacing="0" id="itemsTable">
-<? foreach ($d['items'] as $str) { ?>
+<? foreach ($d['DbItemsExtended'] as $str) { ?>
   <thead>
   <tr>
     <th colspan="2"><p style="margin-top: 7px; margin-bottom: 5px"><small class="gray"><b>Структура:</b></small> <?= $str['title'] ?></p></th>
   </tr>
   </thead>
   <tbody>
-  <? foreach ($str['items'] as $v) { ?>
+  <? foreach ($str['DbItemsExtended'] as $v) { ?>
   <tr id="<?= 'item_'.$v['id'].'_'.$v['oid'] ?>">
     <td class="tools loader">
       <a href="<?= $this->getPath(2).'/'.$v['id'].'/list' ?>" class="iconBtn edit" title="<?= Locale::get('edit') ?>"><i></i></a>

@@ -7,7 +7,7 @@ class DdItemsGrouped {
 
   function __construct($strName, $groupedFieldName, Db $db = null) {
     $this->groupedFieldName = $groupedFieldName;
-    $this->items = new DdItems($strName, $db);
+    $this->items = new DdDbItemsExtended($strName, $db);
   }
 
   function getItems() {

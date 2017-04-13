@@ -18,7 +18,7 @@ trait DbCrudCtrl {
    * @return DbItems
    */
   protected function _items(array $options = []) {
-    return DbItems($this->table(), $options);
+    return new DbItems($this->table(), $options);
   }
 
   /**
@@ -29,7 +29,7 @@ trait DbCrudCtrl {
     if (isset($this->items)) return $this->items;
     $this->items = $this->_items($options);
     $this->items->hasPagination = true;
-    return $this->objectProcess($this->items, 'items');
+    return $this->objectProcess($this->items, 'DbItemsExtended');
   }
 
 }

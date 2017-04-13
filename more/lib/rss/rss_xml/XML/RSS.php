@@ -85,7 +85,7 @@ class XML_RSS extends XML_Parser {
    * @var array
    */
   var $channelTags = [
-    'TITLE', 'LINK', 'DESCRIPTION', 'IMAGE', 'ITEMS', 'TEXTINPUT'
+    'TITLE', 'LINK', 'DESCRIPTION', 'IMAGE', 'DbItemsExtended', 'TEXTINPUT'
   ];
 
   /**

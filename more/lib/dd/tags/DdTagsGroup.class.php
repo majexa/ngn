@@ -138,12 +138,12 @@ SQL
   }
 
   /**
-   * @return DdItems|false
+   * @return DdDbItemsExtended|false
    */
   function getRelatedItems() {
     if (DdTags::isDdItems($this->p['fieldType'])) {
       $strName = O::get('DdFields', $this->p['strName'], ['getHidden' => true])->getField($this->p['name'])['settings']['strName'];
-      return new DdItems($strName);
+      return new DdDbItemsExtended($strName);
     }
     return false;
   }

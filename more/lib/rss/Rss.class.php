@@ -51,7 +51,7 @@ class Rss {
   function getXml($data) {
     $xml = $this->parseTemplateArray($data['header'], $this->resolveTplFile('header.xml'), $this->header_tags);
     if (isset($data['images'])) $xml .= $this->parseTemplateArray($data['images'], $this->resolveTplFile('image.xml'), $this->images_tags);
-    foreach ($data['items'] as $x) {
+    foreach ($data['DbItemsExtended'] as $x) {
       $xml .= $this->parseTemplateArray($x, $this->resolveTplFile('body.xml'), $this->body_tags);
     }
     $xml .= $this->fetchTemplate($this->resolveTplFile('footer.xml'));
@@ -103,7 +103,7 @@ class Rss {
       $array['header'] = $x->getChannelInfo();
       $image = $x->getImages();
       $array['images'] = $image[0];
-      $array['items'] = $x->getItems();
+      $array['DbItemsExtended'] = $x->getItems();
 
       return $array;
     }

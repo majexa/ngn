@@ -212,7 +212,7 @@ class DbModelCore {
     list($pNums, $limit) = (new Pagination(['n' => $n]))->get($table, $cond);
     if (!$cond) $cond = DbCond::get();
     return [
-      'items'      => DbModelCore::collection('users', $cond->setLimit($limit)),
+      'DbItemsExtended' => DbModelCore::collection('users', $cond->setLimit($limit)),
       'pagination' => [
         'pNums' => $pNums
       ]

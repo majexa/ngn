@@ -2,7 +2,7 @@
 
 <?
 
-$d['items'] = array_values($d['items']);
+$d['DbItemsExtended'] = array_values($d['DbItemsExtended']);
 $d['grid'] = [
   'head' => ['Название', 'Имя', 'Тип', '', 'Описание'],
   'body' => array_map(function ($v) use ($d) {
@@ -30,7 +30,7 @@ $d['grid'] = [
       }
     }
     return $r;
-  }, $d['items'])
+  }, $d['DbItemsExtended'])
 ];
 
 if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
@@ -40,7 +40,7 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
 <div id="asd"></div>
 <script></script>
 
-<? if ($d['items']) { ?>
+<? if ($d['DbItemsExtended']) { ?>
   <table cellpadding="0" cellspacing="0" id="itemsTable" class="itemsTable valign structures">
     <tr>
       <th>&nbsp;</th>
@@ -49,7 +49,7 @@ if (($paths = Hook::paths('dd/fieldsGrid'))) include $paths[0];
       <th>&nbsp;</th>
       <th>Описание</th>
     </tr>
-    <? foreach ($d['items'] as $k => $v) { ?>
+    <? foreach ($d['DbItemsExtended'] as $k => $v) { ?>
       <tr>
         <td class="tools">
           <a class="iconBtn delete confirm" title="Удалить структуру"

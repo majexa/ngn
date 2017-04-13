@@ -42,7 +42,7 @@ class CtrlAdminDdField extends CtrlAdmin {
 
   function action_default() {
     $this->im->items->cond->addF('strName', $this->strName);
-    $this->d['items'] = $this->im->items->getItems();
+    $this->d['DbItemsExtended'] = $this->im->items->getItems();
     $this->setPageTitle('Структуа «'.$this->d['strData']['title'].'»');
   }
 

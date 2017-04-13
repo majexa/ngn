@@ -133,7 +133,7 @@ class PHP_CodeCoverage_Report_HTML_Renderer_File extends PHP_CodeCoverage_Report
 
         $template->setVar(
           [
-            'items'      => $this->renderItems($node),
+            'DbItemsExtended' => $this->renderItems($node),
             'source'     => $source,
             'yuiPanelJS' => $yuiTemplate
           ]

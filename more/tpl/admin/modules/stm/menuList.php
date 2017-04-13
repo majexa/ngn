@@ -41,7 +41,7 @@ href="./i/css/common/hMenu.css" media="screen, projection" />
 
 $i = 0;
 /* @var $v StmData */
-foreach ($d['items'] as $v) {
+foreach ($d['DbItemsExtended'] as $v) {
   $i++;
   $o = new StmMenuCss($v);
   ?>

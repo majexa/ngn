@@ -710,7 +710,7 @@ abstract class CtrlBase {
     print
       (new Rss('default'))->getXml([
         'header' => $header,
-        'items'  => $items
+        'DbItemsExtended' => $items
       ]);
   }
 

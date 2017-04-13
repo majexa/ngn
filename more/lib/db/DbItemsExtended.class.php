@@ -4,7 +4,7 @@
 /**
  * реализация с комментариями и голосованиями. до того как они были вырезаны
  */
-class Items extends DbItems {
+class DbItemsExtended extends DbItems {
 
   protected $id;
 
@@ -212,8 +212,6 @@ class Items extends DbItems {
     $d['body'] = array_values($d['body']);
     return $d;
   }
-
-  ////////////// Events /////////////
 
   public $disableEvents = false;
 

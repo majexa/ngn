@@ -1,6 +1,6 @@
-<? if ($d['items']) { ?>
+<? if ($d['DbItemsExtended']) { ?>
   <table>
-    <? foreach ($d['items'] as $k => $v) {
+    <? foreach ($d['DbItemsExtended'] as $k => $v) {
       if (!$d['titles'][$k] or !$v) continue; ?>
       <tr>
         <td><b><?= $d['titles'][$k] ?></b>:</td>

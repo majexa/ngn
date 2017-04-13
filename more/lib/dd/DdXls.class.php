@@ -6,9 +6,9 @@ class DdXls extends LongJobAbstract {
 
   /**
    * @param string Используется для переопределения класса в O::replaceInjection
-   * @param DdItems $items
+   * @param DdDbItemsExtended $items
    */
-  function __construct($strName, DdItems $items) {
+  function __construct($strName, DdDbItemsExtended $items) {
     $this->items = $items;
     $this->items->hasPagination = false; // переопределяем, т.к. объект может быть получен уже сформированным
     Dir::make(UPLOAD_PATH.'/temp/admin/xls');

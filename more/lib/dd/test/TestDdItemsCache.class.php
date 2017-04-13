@@ -16,7 +16,7 @@ class TestDdItemsCache extends ProjectTestCase {
       'type'  => 'text',
       'name'  => 'first'
     ]);
-    $items = new DdItems('asd');
+    $items = new DdDbItemsExtended('asd');
     //
     $items->create([
       'first' => 'Abc',
@@ -48,7 +48,7 @@ class TestDdItemsCache extends ProjectTestCase {
     ]);
     $this->assertFalse((bool)DdiCache::c(['strName' => 'asd'])->load('i1'), 'dd items cache is clean on dd structure rename');
     //
-    $items = new DdItems('bsd');
+    $items = new DdDbItemsExtended('bsd');
     $items->getItem_cache(1);
     $structureManager->delete($structureId);
     $this->assertFalse((bool)DdiCache::c(['strName' => 'bsd'])->load('i1'), 'dd items cache is clean on dd structure delete');

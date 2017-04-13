@@ -111,7 +111,7 @@ class Zend_Feed_Rss extends Zend_Feed_Abstract
         switch ($var) {
             case 'item':
                 // fall through to the next case
-            case 'items':
+            case 'DbItemsExtended':
                 return $this;
 
             default:

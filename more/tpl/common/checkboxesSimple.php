@@ -1,4 +1,4 @@
-<? $i = 0; foreach ($d['items'] as $k => $v) { ?>
+<? $i = 0; foreach ($d['DbItemsExtended'] as $k => $v) { ?>
   <label for="<?= $d['name'].$k ?>">
     <input type="checkbox" id="<?= $d['name'].$k ?>"
       name="<?= $d['name']."[$i]" ?>" value="<?= $k ?>"

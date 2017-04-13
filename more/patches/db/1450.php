@@ -11,7 +11,7 @@ foreach ($items->getItems() as $v) {
   $r['strName'] = $v['strName'];
   $r['name'] = $v['name'];
   db()->insert('tags_groups', $r);
-  $subItems = new DdItems($v['settings']['strName']);
+  $subItems = new DdDbItemsExtended($v['settings']['strName']);
   foreach (db()->select("SELECT id AS itemId, {$v['name']} AS tagId FROM dd_i_{$v['strName']} WHERE {$v['name']}!=0") as $vv) {
     $vv['groupName'] = $v['name'];
     $vv['strName'] = $v['strName'];
