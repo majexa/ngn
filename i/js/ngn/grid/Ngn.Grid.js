@@ -255,15 +255,12 @@ Ngn.Grid = new Class({
       el.addEvent('click', function(e) {
         Ngn.Request.Iface.loading(true);
         this.currentPage = el.get('href').replace(/.*pg(\d+)/, '$1');
-        console.log([this.currentPage, this.getLink(true)]);
         var link = this.getListLink(true);
         if (link.match(/pg(\d+)/)) {
           link = link.replace(/pg(\d+)/, 'pg' + this.currentPage)
         } else {
           link += '/pg' + this.currentPage;
         }
-
-
         new Ngn.Request.JSON(Object.merge({
           url: link,
           onComplete: function(r) {
@@ -278,13 +275,10 @@ Ngn.Grid = new Class({
 
   createToolBtn: function(toolName, row, action) {
     var tool = row.tools[toolName];
-
-
     if (tool.type) {
       Ngn.Items.toolActions[tool.type].init(this, toolName, row);
       return;
     }
-
     var cls = ((typeOf(tool) == 'object' && tool.cls) ? tool.cls : toolName);
     // fa fix
     var faCls = cls;
@@ -305,9 +299,7 @@ Ngn.Grid = new Class({
     if (typeOf(tool) == 'object') {
       if (tool.target) el.set('target', tool.target);
     }
-
     action = action || this.options.toolActions[toolName] || false;
-
     if (action) {
       // Только если экшн определён, биндим на элемент клик (new Ngn.Btn)
       action = action.bind(this);
@@ -322,7 +314,87 @@ Ngn.Grid = new Class({
     var p = {};
     p[this.options.idParam] = id;
     return p;
-  }
+  },
+
+  // from Items
+
+  getDeleteLink: function(id) {
+    return this.getLink(true) + 'json_delete/' + id;
+  },
+
+  initToolActions: function () {
+    this.addBtnsActions([
+      ['.delete', function (id, eBtn, eItem) {
+        new Ngn.Dialog.Confirm.Mem(Object.merge({
+          id: 'itemsDelete',
+          notAskSomeTime: true,
+          onOkClose: function () {
+            this.loading(id, true);
+            new Ngn.Request.JSON({
+              url: this.getDeleteLink(id),
+              onComplete: function () {
+                eItem.destroy();
+                //this.options.reloadOnDelete ? this.reload() :
+              }.bind(this)
+            }).get();
+          }.bind(this)
+        }, Ngn.Grid.defaultDialogOpts));
+      }.bind(this)],
+      ['a[class~=flagOn],a[class~=flagOff]', function (id, eBtn) {
+        /*
+         var eFlagName = eBtn.getElement('i');
+         var flagName = eFlagName.get('title');
+         eFlagName.removeProperty('title');
+         el.addEvent('click', function(e){
+         var flag = eBtn.get('class').match(/flagOn/) ? true : false;
+         e.preventDefault();
+         //eLoading.addClass('loading');
+         var post = {};
+         post[this.options.idParam] = id;
+         post.k = flagName;
+         post.v = flag ? 0 : 1;
+         new Request({
+         url: window.location.pathname + '?a=ajax_updateDirect',
+         onComplete: function() {
+         eBtn.removeClass(flag ? 'flagOn' : 'flagOff');
+         eBtn.addClass(flag ? 'flagOff' : 'flagOn');
+         //eLoading.removeClass('loading');
+         }
+         }).GET(post);
+         }.bind(this));
+         */
+      }.bind(this)]
+    ]);
+    this.addBtnAction();
+  },
+
+  switcherClasses: [],
+
+  _addBtnAction: function (eItem, selector, action) {
+    if (!eItem) return;
+    var eBtn = eItem.getElement(selector);
+    if (!eBtn) return;
+    eBtn.addEvent('click', function (e) {
+      e.preventDefault();
+      action(eItem.retrieve('itemId'), eBtn, eItem);
+    }.bind(this));
+  },
+
+  addBtnAction: function (selector, action) {
+    Object.every(this.esItems, function (eItem) {
+      this._addBtnAction(eItem, selector, action);
+    }.bind(this));
+  },
+
+  addBtnsActions: function (actions) {
+    for (var i in this.esItems) {
+      var eItem = this.esItems[i];
+      for (var j = 0; j < actions.length; j++) {
+        this._addBtnAction(eItem, actions[j][0], actions[j][1]);
+      }
+    }
+  },
+
 
 });
 

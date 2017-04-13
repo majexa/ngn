@@ -209,7 +209,9 @@ class Arr {
   }
 
   static function getKeyByValue(array $arr, $subK, $subV) {
-    foreach ($arr as $k => $v) if (isset($v[$subK]) and $v[$subK] == $subV) return $k;
+    foreach ($arr as $k => $v) {
+      if (isset($v[$subK]) and $v[$subK] == $subV) return $k;
+    }
     return false;
   }
 
