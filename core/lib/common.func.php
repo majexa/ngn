@@ -65,12 +65,12 @@ function getPr($v, $html = true) {
 }
 
 function output($str, $output = false, $forcePlain = true) {
-  if (LOG_OUTPUT === true or $output) {
+  if (!R::get('disableOutput') and $output) {
     print ((R::get('plainText') or $forcePlain) ? "<" : "<p>") //
       .$str. //
       ((R::get('plainText') or $forcePlain) ? ">\n" : "</p>");
   }
-  LogWriter::str('output', $str);
+  if (LOG_OUTPUT === true) LogWriter::str('output', $str);
 }
 
 function output2($str, $output = false, $forcePlain = true) {

@@ -148,7 +148,7 @@ Ngn.Grid = new Class({
 
   initInterface: function(data, fromAjax) {
     if (data.head) this.initHead(data.head);
-    if (data.body) this.initBody(data.body);
+    if (data.body) this.initBody(data.body, data.head || null);
     if (data.pagination) this.initPagination(data.pagination, fromAjax);
     this.initItems();
     if (this.options.resizeble) {
@@ -172,7 +172,7 @@ Ngn.Grid = new Class({
     return this;
   },
 
-  initBody: function(rows) {
+  initBody: function(rows, head) {
     if (!rows) throw new Ngn.EmptyError('rows');
     rows = Ngn.Object.fromArray(rows);
     var eBody = this.options.eItems.getElement('tbody');
