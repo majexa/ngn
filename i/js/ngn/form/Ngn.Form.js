@@ -306,12 +306,13 @@ Ngn.Form = new Class({
     });
   },
 
+  // @requiresBefore Ngn.Frm.VisibilityCondition.Header
   initVisibilityConditions: function() {
     var vc = this.eForm.getElement('.visibilityConditions');
     if (!vc) return;
     vc = JSON.decode(vc.get('html'));
     for (var i = 0; i < vc.length; i++) {
-      var cls = eval('Ngn.Frm.VisibilityCondition.' + Ngn.String.ucfirst(vc[i][3]));
+      var cls = Ngn.Frm.VisibilityCondition[Ngn.String.ucfirst(vc[i][3])];
       this.visibilityConditions[vc[i][0]] = new cls(this.eForm, vc[i][0], vc[i][1], vc[i][2]);
     }
   },

@@ -25,7 +25,7 @@ Ngn.Frm.getValue = function(el) {
   var r = null;
   var res = [];
   var i = 0;
-  elements.each(function(el) {
+  Array.each(elements, function(el) {
     var type = el.get('type');
     if (type == 'checkbox') {
       if (el.get('checked')) res[i] = el.get('value');
@@ -91,11 +91,11 @@ Ngn.Frm.disable = function(eForm, flag) {
 
 // формат callback ф-ии должен быть следующим:
 // function (fieldValue, args) {}
-Ngn.Frm.addEvent = function(event, name, callback, args) {
-  var elements = Ngn.Frm.getElements(name);
+Ngn.Frm.addEvent = function(event, name, callback, parent) {
+  var elements = Ngn.Frm.getElements(name, parent);
   elements.each(function(el) {
     el.addEvent(event, function(e) {
-      callback.run([Ngn.Frm.getValue(elements), args], el);
+      callback(el.get('value'));
     });
   });
 }

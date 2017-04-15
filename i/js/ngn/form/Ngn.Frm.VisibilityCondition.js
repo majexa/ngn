@@ -8,14 +8,7 @@ Ngn.Frm.VisibilityCondition = new Class({
       console.debug('Element "' + this.sectionSelector + '" does not exists');
       return;
     }
-    /*
-     this.fx = new Fx.Slide(this.eSection, {
-     duration: 200,
-     transition: Fx.Transitions.Pow.easeOut
-     });
-     this.fx.hide();
-     */
-    var toggleSection = function(v, isFx) {
+    var toggleSection = function(v) {
       // v необходима для использования в условии $d['cond']
       var flag = (eval(cond));
       if (!flag) {
@@ -30,26 +23,14 @@ Ngn.Frm.VisibilityCondition = new Class({
           el.addClass('required');
         });
       }
-      if (isFx && 0) {
-        // если нужно завернуть не развёрнутую до конца секцию,
-        // нужно просто скрыть её
-        if (flag == this.fx.open)
-          flag ? (function() {
-            this.fx.show();
-          }).delay(200, this) : (function() {
-            this.fx.hide();
-          }).delay(200, this); else
-          flag ? this.fx.slideIn() : this.fx.slideOut();
-      } else {
-        this.eSection.setStyle('display', flag ? 'block' : 'none');
-        this.eSection.getElements(Ngn.Frm.selector).each(function(el) {
-          el.set('disabled', !flag);
-        });
-      }
+      this.eSection.setStyle('display', flag ? 'block' : 'none');
+      this.eSection.getElements(Ngn.Frm.selector).each(function(el) {
+        el.set('disabled', !flag);
+      });
     }.bind(this);
-    toggleSection(Ngn.Frm.getValueByName(condFieldName), false);
-    Ngn.Frm.addEvent('change', condFieldName, toggleSection, true);
-    Ngn.Frm.addEvent('focus', condFieldName, toggleSection, true);
+    toggleSection(Ngn.Frm.getValueByName(condFieldName, eForm));
+    Ngn.Frm.addEvent('change', condFieldName, toggleSection, eForm);
+    Ngn.Frm.addEvent('focus', condFieldName, toggleSection, eForm);
   }
 
 });
