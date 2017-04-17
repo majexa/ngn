@@ -59,8 +59,8 @@ abstract class CliAccessArgs extends CliAccess {
         }
       } else {
         // action
-        die2($args->params);
         $constructorParams = array_slice($args->params, 0, count($_constructorParams));
+
         $params = array_slice($args->params, count($_constructorParams));
         $obj = $refl->newInstanceArgs($constructorParams);
         return call_user_func_array([$obj, $args->method], $params);
