@@ -382,7 +382,7 @@ Ngn.Picker.Date = new Class({
 });
 
 
-// Renderers only output elements and calculate the limits!
+// Renders only output elements and calculate the limits!
 
 var timesSelectors = {
 
