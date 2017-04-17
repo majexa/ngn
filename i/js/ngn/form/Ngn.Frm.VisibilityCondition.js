@@ -28,9 +28,14 @@ Ngn.Frm.VisibilityCondition = new Class({
         el.set('disabled', !flag);
       });
     }.bind(this);
+
     toggleSection(Ngn.Frm.getValueByName(condFieldName, eForm));
     Ngn.Frm.addEvent('change', condFieldName, toggleSection, eForm);
     Ngn.Frm.addEvent('focus', condFieldName, toggleSection, eForm);
+  },
+
+  show: function() {
+    this.eSection.setStyle('display', 'block');
   }
 
 });

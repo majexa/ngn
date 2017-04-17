@@ -149,11 +149,14 @@ class ClassCore {
     return $classes;
   }
 
-  static function getNames($prefix) {
+  static function getNames($prefix, $ancestor = null) {
     return array_map(function ($class) use ($prefix) {
       return ClassCore::classToName($prefix, $class);
-    }, array_filter(self::getClassesByPrefix($prefix), function ($class) {
+    }, array_filter(self::getClassesByPrefix($prefix), function ($class) use ($ancestor) {
       $refl = new ReflectionClass($class);
+      if (!empty($ancestor)) {
+        return self::hasAncestor($class, $ancestor) && !$refl->isAbstract();
+      }
       return !$refl->isAbstract();
     }));
   }

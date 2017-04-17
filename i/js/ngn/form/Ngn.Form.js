@@ -323,7 +323,7 @@ Ngn.Form = new Class({
     var headerName = eHgrp.get('class').replace(/.* hgrp_(\w+) .*/, '$1');
     if (headerName && this.visibilityConditions[headerName])
       (function() {
-        this.visibilityConditions[headerName].fx.show();
+        this.visibilityConditions[headerName].show();
       }).delay(500, this);
   },
 

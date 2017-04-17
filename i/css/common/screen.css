@@ -82,11 +82,8 @@ body, textarea, input {
 font-family: "DejaVu Sans", Tahoma, Helvetica, sans-serif;
 }
 
-body {
+body, input {
 font-size: 12px;
-}
-input {
-font-size: 14px;
 }
 
 /* Headings

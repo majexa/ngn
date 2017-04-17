@@ -426,6 +426,7 @@ Ngn.GridBtnAction.New = new Class({
       url: this.grid.options.basePath + '/json_new',
       title: false,
       onOkClose: function() {
+        console.log('RELOAD');
         this.grid.reload();
       }.bind(this)
     }, Ngn.Grid.defaultDialogOpts)
