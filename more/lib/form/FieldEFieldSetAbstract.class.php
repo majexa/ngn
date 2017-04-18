@@ -31,9 +31,9 @@ abstract class FieldEFieldSetAbstract extends FieldEAbstract {
 
   protected function init() {
     parent::init();
+    if (!$this->form) return;
     $files = BracketName::getValue($this->form->req->files, $this->options['name']);
     if (empty($this->options['value']) and $files === null) {
-
       // Создаем значение по умолчанию
       foreach (Arr::get($this->options['fields'], 'name') as $key) $emptyValue[$key] = '';
       $this->options['value'][$this->options['firstIndexNumber']] = $emptyValue;

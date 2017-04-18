@@ -208,25 +208,11 @@ padding-right: 0px;
 padding-bottom: 0px;
 }
 .fieldSet .element input[type=text] {
-width: 150px;
+width: 100px;
 }
 .fieldSet .bottomBtns button.smIcons {
 margin: 5px 10px 7px 7px;
 }
-.fieldSet a.bordered {
-/*position: absolute;
-bottom: 0px;
-right: 0px;
-*/
-}
-/*
-.fieldSet .hgrp {
-clear: both;
-float: left;
-position: relative;
-padding-right: 25px;
-}
-*/
 .fieldSet .rowBtns {
 padding-top: 5px;
 }
@@ -236,6 +222,15 @@ position: relative;
 .fieldSet .rowNumber {
 display: inline-block;
 padding-right: 5px;
+}
+.fieldSet .ttl {
+font-size: 10px;
+}
+.fieldSet button {
+padding: 0;
+}
+.dialog .apeform .fieldSet .element {
+padding-right: 0;
 }
 
 .type_submit:after {
