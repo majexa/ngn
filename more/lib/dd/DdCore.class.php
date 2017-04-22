@@ -25,7 +25,7 @@ class DdCore {
   }
 
   static function isItemsController($name) {
-    return PageControllersCore::hasAncestor($name, 'DdDbItemsExtended');
+    return PageControllersCore::hasAncestor($name, 'DdItems');
   }
 
   /**
@@ -129,22 +129,29 @@ class DdCore {
    */
   static function imSystem($strName) {
     $class = self::imClass($strName);
-    return new $class(new DdDbItemsExtended($strName), new DdForm(new DdFields($strName, ['getHidden' => true]), $strName));
+    return new $class(new DdItems($strName), new DdForm(new DdFields($strName, ['getHidden' => true]), $strName));
   }
 
   /**
+   * @param $strName
+   * @param array $options
    * @return DdItemsManager
    */
   static function imDefault($strName, array $options = []) {
     $class = self::imClass($strName);
-    return new $class(new DdDbItemsExtended($strName), new DdForm(new DdFields($strName), $strName, isset($options['formOptions']) ? $options['formOptions'] : []), $options);
+    return new $class( //
+      new DdItems($strName), //
+      new DdForm(new DdFields($strName), //
+      $strName, //
+      isset($options['formOptions']) ? $options['formOptions'] : []), $options //
+    );
   }
 
   static function export($strName, DbCond $cond = null) {
     // structure
     $r = DdStructureCore::export($strName);
     // items
-    $items = new DdDbItemsExtended($strName);
+    $items = new DdItems($strName);
     if ($cond) $items->cond = $cond;
     $dumper = new DbDumper(null, ['noHeaders' => true]);
     $ids = $items->ids();

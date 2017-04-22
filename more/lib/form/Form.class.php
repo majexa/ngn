@@ -463,7 +463,7 @@ class Form {
     if (!$fileExists) {
       LogWriter::str('form', 'gen file '.$file);
     }
-    if (!$fileExists and !getConstant('BUILD_MODE')) {
+    if (!Sflm::$disable and !$fileExists and !getConstant('BUILD_MODE')) {
       // При выключеном режиме сборки, запрещается создавать кэш
       throw new Exception('Enable BUILD_MODE to generate nonexistent cache file. Form ID='.$this->id());
     }

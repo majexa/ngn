@@ -10,6 +10,7 @@ abstract class TestDd extends ProjectTestCase {
   static $strName = 'a';
 
   static function setUpBeforeClass() {
+    Sflm::$disable = true;
     Sflm::$output = false;
     $_FILES = [
       'image' => TestCore::tempImageFixture()

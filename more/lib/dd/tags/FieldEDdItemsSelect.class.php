@@ -7,7 +7,7 @@ use DdElement;
 
   protected function init() {
     if (isset($this->options['settings'])) {
-      $this->options['options'] = Arr::get(O::get('DdDbItemsExtended', $this->options['settings']['strName'])->getItemsSimple(), 'title', 'id');
+      $this->options['options'] = Arr::get(O::get('DdItems', $this->options['settings']['strName'])->getItemsSimple(), 'title', 'id');
     } else {
       $this->options['options'] = [];
     }

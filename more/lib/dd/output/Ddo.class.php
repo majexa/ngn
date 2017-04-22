@@ -321,7 +321,7 @@ class Ddo {
   function itemsBegin() {
     if ($this->text) return '';
     return St::dddd($this->ddddItemsBegin, [
-      'mainCssClass' => ($this->list ? 'DdDbItemsExtended' : 'ddItem').' '.$this->gridMode,
+      'mainCssClass' => ($this->list ? 'DdItems' : 'ddItem').' '.$this->gridMode,
       'strName'      => $this->strName,
       'layoutName'   => $this->layoutName
     ]);

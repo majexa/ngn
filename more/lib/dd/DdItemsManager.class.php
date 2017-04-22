@@ -22,7 +22,7 @@ class DdItemsManager extends DbItemsManager {
   public $image;
 
   /**
-   * @var DdDbItemsExtended
+   * @var DdItems
    */
   public $items;
 
@@ -31,7 +31,7 @@ class DdItemsManager extends DbItemsManager {
    */
   public $form;
 
-  function __construct(DdDbItemsExtended $items, Form $form, array $options = []) {
+  function __construct(DdItems $items, Form $form, array $options = []) {
     parent::__construct($items, $form, $options);
     $config = Config::getVar('dd/itemsManager.'.$items->strName, true) ?: Config::getVar('dd/itemsManager');
     $this->imageSizes = array_merge($this->imageSizes, //

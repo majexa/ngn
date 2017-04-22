@@ -164,6 +164,8 @@ class Sflm {
     'css' => false
   ];
 
+  static $disable = false;
+
 }
 
 Sflm::$strictMode = IS_DEBUG;

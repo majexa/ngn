@@ -9,6 +9,7 @@ use Options;
   }
 
   protected function &getArrayRef() {
+    die2('===');
     return $this->options;
   }
 

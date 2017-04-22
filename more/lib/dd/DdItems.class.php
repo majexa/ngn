@@ -3,7 +3,7 @@
 /**
  * Служит только для получения записей без указания конкретного раздела
  */
-class DdDbItemsExtended extends DbItemsExtended {
+class DdItems extends DbItemsExtended {
 
   public $strName;
 

@@ -167,7 +167,7 @@ class Config {
     }
     else {
       throw new Exception('"config/constants/'.$name.'.php" not found in base paths:'."\n".
-        implode("\n", self::$basePaths));
+        St::enum( self::$basePaths, "\n", '`☯️ `.$v'));
     }
   }
 

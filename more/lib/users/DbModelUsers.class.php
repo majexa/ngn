@@ -24,7 +24,7 @@ class DbModelUsers extends DbModel {
   protected function getModelData() {
     if (!($r = parent::getModelData())) return [];
     if (Config::getVarVar('userReg', 'extraData')) {
-      $r['extra'] = (new DdDbItemsExtended(UsersCore::extraStrName))->getItem($r['id']);
+      $r['extra'] = (new DdItems(UsersCore::extraStrName))->getItem($r['id']);
     } else {
       $r['extra'] = [];
     }

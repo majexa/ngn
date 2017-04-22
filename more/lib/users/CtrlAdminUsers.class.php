@@ -125,7 +125,7 @@ class CtrlAdminUsers extends CtrlAdmin {
   function getGrid() {
     $items = $this->getItems();
     if (Config::getVarVar('userReg', 'extraData')) {
-      $exItems = (new DdDbItemsExtended('users'))->getItems();
+      $exItems = (new DdItems('users'))->getItems();
     }
     else {
       $exItems = [];

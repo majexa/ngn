@@ -64,7 +64,7 @@ function getPr($v, $html = true) {
   return $c;
 }
 
-function output($str, $output = false, $forcePlain = true) {
+function output($str, $output = true, $forcePlain = true) {
   if (!R::get('disableOutput') and $output) {
     print ((R::get('plainText') or $forcePlain) ? "<" : "<p>") //
       .$str. //

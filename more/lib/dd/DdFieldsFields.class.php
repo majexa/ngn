@@ -6,7 +6,7 @@
 class DdFieldsFields extends Fields {
 
   function __construct() {
-    $this->addFields([
+    parent::__construct([
       [
         'type' => 'col'
       ],

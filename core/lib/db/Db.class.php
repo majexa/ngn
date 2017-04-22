@@ -409,7 +409,8 @@ class Db extends DbSimple_Mysql {
   }
 
   static function deleteDb($user, $pass, $host, $name) {
-    if (!mysql_connect($host, $user, $pass)) throw new Exception("Can not connect. User='$user', Pass='$pass', Host='$host'");
+    //if (!@mysql_connect($host, $user, $pass)) throw new Exception("Could not connect. User='$user', Pass='$pass', Host='$host'");
+    if (!@mysql_connect($host, $user, $pass)) throw new Exception(mysql_errno() .":".mysql_error());
     mysql_query('DROP DATABASE '.$name);
   }
 
