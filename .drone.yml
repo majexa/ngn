@@ -4,6 +4,7 @@ pipeline:
     image: majexa/ngn
     commands:
       - su user ci onlyUpdate
+      - su user ci updateBin
       - /etc/init.d/mysql start
       - su user pm localServer createDatabaseConfig
       - su user tst proj g test
