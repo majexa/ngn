@@ -1,4 +1,3 @@
-#.
 pipeline:
   test:
     image: majexa/ngn
