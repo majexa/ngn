@@ -3,6 +3,7 @@
 class TestSflmJs extends ProjectTestCase {
 
   protected function setUp() {
+    Sflm::$buildMode = true;
     Sflm::clearCache();
     Sflm::setFrontend('js', 'default');
   }
@@ -125,8 +126,6 @@ Ngn.aaa
 <script src="abc/i/js/ngn/test/Ngn.Sub.B.js" type="text/javascript"></script>
 TAGS;
     $tags = str_replace("\r", '', $tags);
-    output2(Sflm::frontend('js')->getTagsFinal());
-    output3($tags);
     $this->assertTrue((bool)strstr(Sflm::frontend('js')->getTagsFinal(), $tags));
   }
 

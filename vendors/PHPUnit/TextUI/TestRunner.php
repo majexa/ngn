@@ -101,6 +101,7 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
      * @param  mixed $test
      * @param  array $arguments
      * @throws PHPUnit_Framework_Exception
+     * @return PHPUnit_Framework_TestResult
      */
     public static function run($test, array $arguments = [])
     {
@@ -315,8 +316,6 @@ class PHPUnit_TextUI_TestRunner extends PHPUnit_Runner_BaseTestRunner
               $arguments['timeoutForLargeTests']
             );
         }
-
-//      die2(get_class($suite));
 
         $suite->run(
           $result,

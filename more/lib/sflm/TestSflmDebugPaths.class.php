@@ -2,6 +2,11 @@
 
 class TestSflmDebugPaths extends ProjectTestCase {
 
+  static function enable() {
+    // temporary disable debug paths functionality
+    return false;
+  }
+
   protected function setUp() {
     Sflm::clearCache();
     Sflm::setFrontend('js', 'default');
