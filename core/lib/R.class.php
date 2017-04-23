@@ -13,7 +13,6 @@ class R {
   }
   
   static function set($k, $v) {
-    if ($k === 'disableOutput') die('2222');
     self::$vars[$k] = $v;
     return $v;
   }

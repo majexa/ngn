@@ -5,7 +5,7 @@ Ngn. The fullstack client-server web-framework
 ##Установка на Ubuntu/Debian
 
     # не забудьте сменить пароль your_password_here
-    wget --no-check-certificate -O - https://raw.githubusercontent.com/majexa/sman/master/web/run.sh | sed -e 's/CHANGE_PASS/"your_password_here"/g' | bash
+    wget http://doc.majexa.ru/install/default.sh | sed -e 's/CHANGE_IT/"your_password_here"/g' | bash
     
 После установки Вас попросят ввести 2 значения: базовый домен и email администратора.
 
