@@ -1,6 +1,8 @@
-# Фреймфорк Ngn и дополнительные пакеты входящие в состав Ngn-env#
+# Фреймфорк Ngn и дополнительные пакеты входящие в состав Ngn-env
 
 Ngn. The fullstack client-server web-framework
+
+[![Build Status](http://t.majexa.ru/api/badges/majexa/ngn/status.svg)](http://t.majexa.ru/majexa/ngn)
 
 ## Установка на Ubuntu/Debian
 
