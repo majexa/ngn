@@ -123,8 +123,6 @@ class DbItems extends AbstractItems {
   protected $selectCond;
   protected $filterSelectCond = '';
 
-
-
   protected $itemsCondsPrepared = false;
 
   function prepareItemsConds() {

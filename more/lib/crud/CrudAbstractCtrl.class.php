@@ -11,7 +11,7 @@ trait CrudAbstractCtrl {
   use ObjectProcessorCtrl;
 
   /**
-   * @var DbItems
+   * @var AbstractItems
    */
   protected $items;
 
@@ -26,16 +26,21 @@ trait CrudAbstractCtrl {
    * @param array $options
    * @return AbstractItems
    */
-  abstract protected function items(array $options = []);
+  abstract protected function _items(array $options = []);
+
+  protected function items() {
+    if (isset($this->items)) return $this->items;
+    return $this->items = $this->_items();
+  }
 
   /**
    * @return GridData
    */
   abstract protected function getGrid();
 
-  function action_json_default() {
-    $this->action_json_getItems();
-  }
+//  function action_json_default() {
+//    $this->action_json_getItems();
+//  }
 
   function action_json_getItem() {
     $this->json = $this->items()->getItem($this->id());

@@ -112,7 +112,7 @@ Ngn.Grid = new Class({
   },
 
   getListLink: function(ajax) {
-    return this.options.basePath + this._getListLink(ajax);
+    return this.options.basePath + (this.options.listPath || this._getListLink(ajax));
   },
 
   reload: function(itemId, skipLoader) {

@@ -1,6 +1,6 @@
 <?php
 
-abstract class AbstractItems implements UpdatableItems, ArrayAccess {
+abstract class AbstractItems implements UpdatableItems, ArrayAccess, IteratorAggregate {
 
   function offsetSet($offset, $value) {
     throw new Exception('not realized');
@@ -20,6 +20,19 @@ abstract class AbstractItems implements UpdatableItems, ArrayAccess {
     if (isset($this->cache[$offset])) return $this->cache[$offset];
     return $this->cache[$offset] = $this->getItem($offset);
   }
+
+  protected function &getArrayRef() {
+    if (!isset($this->cache)) $this->cache = $this->getItems();
+    return $this->cache;
+  }
+
+  // Iteration
+
+  function getIterator() {
+    return new ArrayIterator($this->getArrayRef());
+  }
+
+  // ---------
 
   abstract function updateField($id, $fieldName, $value);
 
