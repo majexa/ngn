@@ -13,6 +13,15 @@ trait DdCrudAbstractCtrl {
    */
   abstract protected function getStrName();
 
+  abstract protected function _items(array $options = []);
+
+  protected $_items;
+
+  protected function items(array $options = []) {
+    if (isset($this->_items)) return $this->_items;
+    return $this->_items = $this->_items($options);
+  }
+
   protected function getDdLayout() {
     return 'siteItems';
   }
