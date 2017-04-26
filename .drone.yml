@@ -3,6 +3,6 @@ pipeline:
     image: majexa/ngn
     commands:
       - /etc/init.d/mysql start
-      - su user pm localServer createDatabaseConfig
-      - su user tst proj g test
+      - pm localServer createDatabaseConfig
+      - tst proj g test
 
