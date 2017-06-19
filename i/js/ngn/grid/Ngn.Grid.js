@@ -9,6 +9,7 @@ Ngn.Grid = new Class({
     restBasePath: '', // Пример: `/api/v1`
     basicBasePath: '', // Пример: `/user`. Для запросов получения записей к этому пути прибаыляется `s` на конце
 
+    listPath: null,
     listAction: null, // используется для замены прямых ссылок на страницы пагинации на listAjaxAction
     listAjaxAction: null, //
     isSorting: false,
@@ -25,7 +26,8 @@ Ngn.Grid = new Class({
     valueContainerClass: 'v',
     resizeble: false,
     search: false,
-    requestOptions: {}
+    requestOptions: {},
+    rowFlashColor: '#FFB900'
   },
 
   btns: {},
@@ -118,6 +120,21 @@ Ngn.Grid = new Class({
   reload: function(itemId, skipLoader) {
     if (itemId && !skipLoader) this.loading(itemId, true); // показываем, что строчка обновляется
     Ngn.Request.Iface.loading(true);
+
+    var r = Object.merge({
+        url: this.getListLink(true),
+        onComplete: function(r) {
+            // todo: bad support. remove temporary
+            if (this.options.replaceLocation && window.history.pushState) {
+                window.history.pushState(null, '', this._getLink(false));
+            }
+            this.initInterface(r, true);
+            this.fireEvent('reloadComplete', r);
+            Ngn.Request.Iface.loading(false);
+            if (itemId) this.rowFlash(itemId);
+        }.bind(this)
+    }, this.options.requestOptions);
+
     new Ngn.Request.JSON(Object.merge({
       url: this.getListLink(true),
       onComplete: function(r) {
@@ -143,7 +160,7 @@ Ngn.Grid = new Class({
         fx.start('background-color', '#FFFFFF');
       }
     });
-    fx.start('background-color', '#FFB900');
+    fx.start('background-color', this.options.rowFlashColor);
   },
 
   initInterface: function(data, fromAjax) {

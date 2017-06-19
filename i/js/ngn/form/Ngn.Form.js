@@ -365,13 +365,21 @@ Ngn.Form = new Class({
         failed = true;
       }.bind(this),
       onComplete: function(r) {
+        console.log();
         setTimeout(function() {
           this.disable(false);
           this.submiting = false;
           if (failed) return;
-          if (r && (r.error || r.form)) {
-            this.fireEvent('failed', r);
-            return;
+          if (r) {
+            if (r.validError) {
+              this.showGlobalError(r.validError);
+              this.fireEvent('failed', r);
+              return;
+            }
+            if (r.form) {
+              this.fireEvent('failed', r);
+              return;
+            }
           }
           this.fireEvent('complete', r);
         }.bind(this), 1);

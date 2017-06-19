@@ -9,17 +9,16 @@ class Asterisk {
   /**
    * by hang up running class AgiAction$project
    *
-   * @param $context
    * @param $phone
-   * @param int $id
+   * @param $id
    * @param array $data
    */
   function addOutgoingCall($phone, $id, array $data = []) {
     if (empty($data['project'])) $data['project'] = PROJECT_KEY;
     if (empty($data['actionName'])) $data['actionName'] = $data['project'];
     //if (!ALLOW_SEND) return;
-    $class = AgiAction::getClass($data['actionName']);
-    if ($class::recall()) $this->addStartCalling($data['project'], $phone, $id);
+    //$class = AgiAction::getClass($data['actionName']);
+    //if ($class::recall()) $this->addStartCalling($data['project'], $phone, $id);
     //$t = "Channel: SIP/{$phone}@80.75.130.136:5060";
     $t = "Channel: SIP/sipnet/$phone";
     $s = <<<CALL
@@ -35,9 +34,9 @@ CALL;
     $data['id'] = $id;
     foreach ($data as $k => $v) $s .= "Set: $k=$v\n";
     $tmpFile = '/tmp/'.rand(10, 10000);
-    LogWriter::str('addCall', $s);
+    //LogWriter::str('addCall', $s);
     file_put_contents($tmpFile, $s);
-    chown($tmpFile, 'user');
+    //chown($tmpFile, 'user');
     $file = '/var/spool/asterisk/outgoing/'.time().'-'.rand(100, 999).'.call';
     rename($tmpFile, $file);
   }
