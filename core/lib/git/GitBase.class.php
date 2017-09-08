@@ -18,6 +18,9 @@ class GitBase {
     if (!isset($this->server['branch'])) $this->server['branch'] = 'master';
     $this->cwd = getcwd();
     $home = dirname(NGN_ENV_PATH);
+    if (basename(NGN_ENV_PATH) !== 'ngn-env') {
+      throw new Exception('Wrong ngn-env structure. Ngn-env folder must be named as ngn-env');
+    }
     $this->paths = [
       "$home",
       "$home/ngn-env/projects",
