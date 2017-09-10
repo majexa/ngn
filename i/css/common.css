@@ -58,18 +58,6 @@ label {
 -ms-user-select: none;
 user-select: none;
 }
-.gray, .gray a {
-color: #AFAFAF;
-}
-.gray a:hover {
-color: #555555;
-}
-.dgray, .dgray a {
-color: #666 !important;
-}
-.dgray a:hover:not(.nonActive), a.dgray:hover:not(.nonActive) {
-color: #000 !important;
-}
 input {
 box-sizing: border-box;
 -webkit-box-sizing: border-box;
