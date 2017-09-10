@@ -150,7 +150,8 @@ abstract class SflmBase {
     $file = $this->cacheFile($package);
     if (!$code) $code = $this->getPackageCode($package);
     if (!$code) return false;
-    if (file_exists($file) and strlen(file_get_contents($file)) == strlen($code)) return false; // Если размер кода не изменился, не сохраняем
+    // Если код не изменился, не сохраняем
+    if (file_exists($file) and md5(file_get_contents($file)) == md5($code)) return false;
     file_put_contents($file, $code);
     return $file;
   }
